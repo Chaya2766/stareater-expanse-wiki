@@ -1,0 +1,34 @@
+@startuml
+usecase 210Po as "210Po (138.376d)"
+usecase 209Po as "209Po (124y)"
+usecase 209Bi as "209Bi (2.018e19y)"
+usecase 208Po as "208Po (2.898y)"
+usecase 208Bi as "208Bi (3.684e5y)"
+usecase 208Pb as "208Pb (stable)"
+usecase 206Po as "206Po (8.8d)"
+usecase 206Bi as "206Bi (6.2433d)"
+usecase 206Pb as "206Pb (stable)"
+usecase 205Pb as "205Pb (1.709e7y)"
+usecase 205Tl as "205Tl (stable)"
+usecase 204Pb as "204Pb (stable)"
+usecase 202Pb as "202Pb (52528y)"
+usecase 202Tl as "202Tl (12.318d)"
+usecase 202Hg as "202Hg (stable)"
+
+210Po --> 206Pb : α
+209Po --> 209Bi : β⁺
+209Po --> 205Pb : α
+208Po --> 208Bi : β⁺
+208Po --> 204Pb : α
+206Po --> 206Bi : β⁺
+206Po --> 202Pb : α
+
+209Bi --> 205Tl : α
+208Bi --> 208Pb : β⁺
+206Bi --> 206Pb : β⁺
+
+205Pb --> 205Tl : EC
+202Pb --> 202Tl : EC
+
+202Tl --> 202Hg : EC
+@enduml

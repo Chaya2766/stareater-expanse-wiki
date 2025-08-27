@@ -1,0 +1,94 @@
+<head>
+ <link rel="stylesheet" href="../index.css"></link>
+</head>
+<html class="background2" id="page">
+<a style="float: right;" target="_blank" href="../index.html?page=pages/testpage.html">link to this page</a>
+
+<h1>test page, also used as "doesn't exist yet" page</h1>
+<hr>
+
+<img src="../images/card_placeholder.png" class="basics"></img>
+<article class="basics">
+Basics - put basic info here.
+
+The image located on the right comes from the img element above, swap it to whatever illustration you want.
+
+The image will always be rescaled to match the one you see here in height (400px) and I highly recommend making it square.
+</article>
+
+  <div>
+  <h3>table of contents</h3>
+  <ol>
+   <li><a href="#thread">thread class</a></li>
+   <li><a href="#cards">cards</a></li>
+   <li><a href="#gallery">Gallery</a></li>
+  </ol>
+  </div>
+
+  <table class="styled-table">
+      <tr><th colspan=2>stylized table</th></tr>
+      <tr><td> cell </td> <td> cell </td></tr>
+      <tr><td>cell</td> <td>cell</td></tr>
+  </table>
+
+<article class="warning">warning sign</article>
+<article class="oocnote">OOC note, as "look at this later"</article>
+<article class="soft">soft sci-fi marker</article>
+<article class="external">external content marker</article>
+<article class="abandoned">abandoned content marker.</article>
+<input type="checkbox" class="spoiler">
+ <div class="spoiler">
+ <article>spoilered content is inside a (any tag) inside a ("div" tag with "spoiler" class) inside a ("input" tag with "spoiler" class and "checkbox" type) </article>
+ </div>
+</input>
+
+<h3 class="thread" id="thread">thread class</h3>
+<div class="thread">
+<article>Thread contents appear with this line on the left, I don't know why exactly I made this but it does appear to be an easy way to ensure people understand a bunch of various media are related to the same thing.</article>
+<img src="../images/card_placeholder.png"></img>
+<article>As you can see, this works even when you insert images in the middle. Try also moving to it via the table of contents to see that the line on the left also lights up together with the heading.</article>
+</div>
+
+
+
+<h2 id="cards">cards</h2>
+
+<div class="card">
+ <img src="../images/card_placeholder.png"></img>
+ <a target="IM" href="testpage.html">testpage</a>
+</div>
+
+<div class="card soft">
+ <img src="../images/card_placeholder.png"></img>
+ <a target="IM" href="testpage.html">testpage</a>
+</div>
+
+<div class="card external">
+ <img src="../images/card_placeholder.png"></img>
+ <a target="IM" href="testpage.html">testpage</a>
+</div>
+
+<div class="card abandoned">
+ <img src="../images/card_placeholder.png"></img>
+ <a target="IM" href="testpage.html">testpage</a>
+</div>
+
+<h1 class="division">division class helps separate things</h1>
+
+<article>You must use either division or &lt;hr&gt; after placing cards or else they will wreck the arrangement of whatever is below them. The division class can also be used in other ways, it has effectively the same properties as &lt;hr&gt; but with the addition of having text on it.</article>
+
+<hr>
+
+
+<h1 id="gallery">Gallery</h1>
+<article>all pictures related to [thing]</article>
+<table class="gallery">
+  <tr>
+    <td>
+      <a href="../images/card_placeholder.png">card placeholder<br>
+      <img src="../images/card_placeholder.png"></img></a>
+    </td>
+  </tr>
+</table>
+
+</html>

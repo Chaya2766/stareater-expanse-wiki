@@ -1,0 +1,55 @@
+<head>
+	<title>Eternity of Everything wiki</title>
+	<link rel="stylesheet" href="index.css"></link>
+	<link rel="icon" href="favicon.png" type="image"></link>
+</head>
+
+<html class="background1">
+
+<!--
+<div class="titlebox">
+<div class="title"><img src="strange_matters_text.png"></img></div>
+</div>
+-->
+<div class="navbox">
+<div class="first_navbar strangelet">
+ <a href="pages/home.html" target="IM" class="nava">home</a>
+ <a href="navbars/setting.html" target="Inav" class="nava">setting</a>
+ <a href="navbars/stories.html" target="Inav" class="nava">stories</a>
+ <a href="navbars/characters.html" target="Inav" class="nava">characters</a>
+ <a href="navbars/extras.html" target="Inav" class="nava">extras</a>
+</div>
+<iframe name="Inav" class="navframe" src="navbars/setting.html"></iframe>
+</div>
+<iframe name="IM" id="IM" class="mainframe" src="pages/home.html"></iframe>
+
+</html>
+
+<!the entire script below just redirects users to the exact page >
+
+<script>
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  const page = params.get('page');
+  if (!page) return;
+
+  const s = page.trim();
+
+  // Reject scheme-prefixed values (e.g. "http:", "javascript:", "data:")
+  if (/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(s)) return;
+
+  // Only allow relative or absolute paths on same origin that end with .html or .htm
+  if (!/^\/?[\w\-./%]+\.html?(\?.*)?(#.*)?$/i.test(s)) return;
+
+  // Set iframe (assumes iframe[name="IM"] exists)
+  document.querySelector('iframe[name="IM"]').src = s;
+
+  // Remove only the 'page' parameter from the URL without reloading
+  params.delete('page');
+  const newSearch = params.toString();
+  const newUrl = window.location.pathname + (newSearch ? '?' + newSearch : '') + window.location.hash;
+  history.replaceState(null, '', newUrl);
+})();
+</script>
+
+

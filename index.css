@@ -1,0 +1,476 @@
+/*
+CONTENTS BY BEGINNING LINE NUMBER
+8 - adjustments
+19 - classes defining common elements of pages & interface
+152 - classes defining elements that are never mandatory in a page
+*/
+
+/*colorblind compatibility adjustments must be at the top so that anything below overwrites them*/
+a{
+ color: #69C;
+}
+/* commented out bc tbh I think I don't need to distinguish between visited & unvisited
+a:visited{
+ color: #ACE;
+}
+*/
+
+h3{
+ margin-bottom: 3px;
+}
+
+/*PAGE-PART CLASSES START HERE*/
+html{
+ color: white;
+ font-family: sans-serif;
+ /*font-family: monospace; there's no good reason for it, I just like the look of monospace fonts*/
+}
+.background1{
+ background-image: url('background.png');
+ background-repeat: vertical;
+ background-size: cover;
+}
+.background2{
+ background-color: #111B;
+ /*padding-bottom: 40px;*/ /*uncomment bottom padding for freeWHA*/
+}
+.background2:target{
+ background-color: #111F;
+ /*padding-bottom: 40px;*/ /*uncomment bottom padding for freeWHA*/
+}
+.titlebox{
+ width: 100%;
+ height: 200px;
+ color: blue;
+}
+.title{
+ text-align: center;
+ vertical-align: middle;
+ margin: 0 auto;
+ height: 200px;
+ width: 500px;
+ background-image: url('navbar_image.png');
+}
+.first_navbar{
+ width: 100%;
+ height: 50px;
+ /*background-color: #8800FF10;*/
+ border-bottom: 3px solid #FFF5;
+ margin: none;
+ font-size: 30px;
+ overflow: hidden; /*discovered I need this when resising comic page & navbars took up whole screen*/
+ max-height: 10vh;
+}
+.second_navbar{
+ width: 100%;
+ height: 30px;
+ /*background-color: #8800FF10;*/
+ /*border-bottom: 3px solid #FFF5;*/
+ margin: none;
+}
+.second_navbar ~ *{
+ visibility: hidden;
+}
+.strangelet{
+ background-image: url('shooting_stranglet.png');
+ background-position: center;
+ background-repeat: no-repeat;
+}
+.nava{
+ display: inline-block;
+ padding-top: 5px;
+ padding-left: 10px;
+ padding-right: 10px;
+ padding-bottom: 9px;
+ font-size: 30px;
+ border-right: 3px solid #FFF5;
+ /*background-color: #8800FF10;*/
+ color: white;
+ float: left;
+ text-decoration: none;
+}
+.nava:nth-child(1){border-left: 3px solid #FFF5;}
+.navb{
+ display: inline-block;
+ padding-top: 3px;
+ padding-left: 10px;
+ padding-right: 10px;
+ padding-bottom: 3px;
+ font-size: 20px;
+ border-left: 3px solid #FFF5;
+ border-bottom: 3px solid #FFF5;
+ /*background-color: #8800FF10;*/
+ color: white;
+ float: left;
+ text-decoration: none;
+}
+.navb:nth-child(1){ border-radius: 0px 0px 0px 16px; }
+.navb:nth-last-child(1){ border-radius: 0px 0px 16px 0px; border-right: 3px solid #FFF5; }
+.navframe{
+ width: calc(100% + 7px);
+ height: 50px; /*set to 90px for freeWHA*/
+ border: none;
+ position: relative;
+ right: 8px;
+ top: -8px;
+ max-height: 10vh; /*discovered I need this when resising comic page & navbars took up whole screen*/
+}
+.mainframe{
+ width: 100%;
+ height: calc(100vh - 120px); /*set to - 160px for freeWHA*/
+ border: none;
+ /*overflow-y: visible;*/
+}
+.mainframe ~ *{
+ visibility: hidden;
+}
+
+.card{
+ float: left;
+ border: 5px solid white;
+ border-radius: 20px;
+ background-color: #111;
+ width: 200px;
+ height: 250px;
+ margin: 5px;
+}
+.card img{
+ width: 200px;
+ height: 200px;
+ object-fit: cover;
+ object-position: center;
+ border-radius: 15px 15px 0px 0px;
+ /*background-image: url('images/card_placeholder.png');*/
+}
+.card a{
+ display: inline-block;
+ width: 200px;
+ height: 45px;
+ padding-top: 5px;
+ text-align: center;
+ font-weight: bold;
+ color: white;
+}
+img.basics{
+ float: right;
+ /*max-height: 400px;*/
+ height: 400px;
+ border-left: 1px solid #FFFF;
+ max-width: 50vw;
+ margin-left: 3px;
+}
+article.basics{
+ min-height: 400px;
+}
+
+img.pixelated{
+ image-rendering: crisp-edges;
+}
+
+/*NEVER-MANDATORY PAGE PARTS START HERE*/
+hr{
+ clear: both;
+}
+
+.warning{
+ color: black;
+ background-color: #FB0;
+ border: 5px dashed black;
+ border-radius: 15px;
+ padding-left: 10px;
+ /*font-size: 30px;*/
+ font-weight: bold;
+ text-align: center;
+}
+
+.division{
+ clear: both;
+ margin: 0px;
+ padding: 0px;
+ width: 100%;
+ text-align: center;
+ border-top: 1px solid white;
+}
+
+.oocnote{
+ /*background-color:#ABF1;*/
+ color: #DEF;
+ text-decoration: underline overline #48D;
+ margin: 10px;
+}
+
+nsfw{
+ display: none;
+}
+
+/*spoiler is click to reveal, complicated, there is a note lower on how to make one*/
+input.spoiler{
+ width: 100%;
+ height: 50px;
+ z-index: 1;
+ opacity: 0; /*the process of discovering that this property exists was frustrating*/
+}
+input.spoiler:checked{
+ visibility: hidden;
+}
+
+input.spoiler ~ div.spoiler {
+ z-index: -1;
+ position: relative;
+ top: -50px;
+ padding-top: 50px;
+ min-height: 0px;
+ width: 100%;
+ background-color: #0008;
+ background-image: url('spoiler.png');
+ background-position: top;
+ background-repeat: no-repeat;
+ overflow: hidden;
+}
+input.spoiler:checked ~ div.spoiler {
+ z-index: 1;
+ padding-top: 0px;
+ /*min-height: none;*/
+ width: 100%;
+ background-image: none;
+}
+input.spoiler ~ div.spoiler * {
+ opacity: 0.5;
+ filter: blur(15px);
+ position: relative;
+ top: -50px;
+}
+input.spoiler:checked ~ div.spoiler * {
+ opacity: 1;
+ filter: blur(0px);
+ position: relative;
+ top: 0px;
+}
+/*
+STRUCTURE OF A SPOILER
+
+<input type="checkbox" class="spoiler">
+ <div class="spoiler">
+ 
+ [SPOILERED CONTENTS. CAN BE MULTIPLE TAGS, ANY, EVEN PICTURES, BUT NOT TEXT WITHOUT ANY TAG]
+ <article>example</article>
+ 
+ </div>
+</input>
+*/
+
+.styled-table{
+ border: 1px solid white;
+ background-color: black;
+ margin: 5px;
+}
+.styled-table th{
+ border-bottom: 1px solid white;
+ border-right: 1px solid white;
+}
+.styled-table th:nth-last-child(1){
+ border-right: none;
+}
+.styled-table tr td{
+ border-bottom: 1px dashed white;
+ border-right: 1px dotted white;
+ padding: 5px;
+}
+.styled-table tr td:nth-last-child(1){
+ border-right: none;
+}
+.styled-table tr:nth-last-child(1) *{
+ border-bottom: none;
+}
+
+table.gallery * {
+ max-width: 400px;
+}
+table.gallery img {
+ max-height: 400px;
+}
+table.gallery td {
+ float: left;
+}
+
+.darkquote{
+ color: #8AF6;
+ font-style: italic;
+}
+
+.darkquote::selection{
+ color: #000F;
+ font-style: italic;
+ background-color: #4FBF;
+}
+
+.darkquote:hover{
+ color: #DAFA;
+ transition-duration: 3s;
+}
+
+.hiddensection{
+ opacity: 0;
+ /*overflow: hidden;*/
+ transition-duration: 5s;
+ transition-delay: 4s;
+ /*max-height: 100px;*/ /*set max height manually in the page, with transition delay*/
+}
+
+.hiddensection:hover{
+ opacity: 1;
+ overflow: visible;
+ max-height: none;
+ transition-duration: 5s;
+ transition-delay: 1s;
+}
+
+.smallcard{
+ float: left;
+ /*border: 3px solid white;
+ border-radius: 12px;*/
+ background-color: #111;
+ width: 50px;
+ height: 50px;
+ margin: 5px;
+}
+.smallcard img{
+ width: 50px;
+ height: 50px;
+ border-radius: 12px;
+ border: 3px solid white;
+ background-image: url('images/card_placeholder.png');
+}
+
+dt{
+ font-weight: bold;
+ color: #ACF;
+ font-size: 130%;
+}
+dd{
+ margin-bottom: 10px;
+ padding-left: 5px;
+ border-left: 1px solid white;
+}
+
+div.thread{
+ padding-left: 5px;
+ border-left: 1px solid white;
+}
+
+.soft, .card.soft a{
+ /*background-color: #0fe1;*/
+ color: #0fa;
+}
+
+.card.soft{
+ border-color: #0fa;
+ background-color: #002520ff;
+}
+
+.external, .card.external a{
+ /*background-color: #0fe1;*/
+ color: #f0a;
+}
+
+.card.external{
+ border-color: #f8c;
+ background-color: #401020ff;
+}
+
+
+.unfinished,.wip{
+ /*display: none;*/
+}
+
+.card.unfinished,.card.wip{
+ border-color: #FB0;
+ border-style: dashed;
+}
+
+.abandoned, .card.abandoned a{
+ color: #888;
+}
+
+.card.abandoned{
+ border-color: #444;
+}
+
+.card.abandoned img{
+ filter: saturate(20%);
+ transition-duration: 1s;
+}
+.card.abandoned:hover img{
+ filter: saturate(100%);
+ transition-duration: 1s;
+}
+
+/*COLOR CODING CHARACTERS & STUFF*/
+c1{
+ color: #F80;
+}
+c2{
+ color: #80F;
+}
+c3{
+ color: #8F0;
+}
+c4{
+ color: #F08;
+}
+
+/*TARGET DEFINITIONS*/
+
+
+h1:target,h2:target,h3:target{
+ color: #FA0;
+ text-decoration: underline;
+}
+
+h3.thread:target + .thread{
+ border-left: 1px solid #FA0;
+}
+
+li:target,article:target{
+ color: #FA0;
+}
+
+
+.card:target{
+ float: left;
+ border-color: #FA0;
+}
+.card:target a{
+ color: #FA0;
+ text-decoration: underline;
+}
+
+/*MATH*/
+
+frac{
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    letter-spacing: 0.001em;
+    text-align: center;
+}
+frac  frac:nth-child(1) {
+    display: block;
+    padding: 0.1em;
+    border-bottom: 1px solid white;
+}
+frac frac:nth-child(2) {
+    border-top: 1px solid white;
+    position: relative;
+    top: -1px;
+}
+
+/*text colors*/
+red{ color: red; }
+orange{ color: orange; }
+yellow{ color: yellow; }
+green{ color: green; }
+cyan{ color: cyan; }
+blue{ color: blue; }
+magenta{ color: magenta; }
+pink{ colour: pink; }
