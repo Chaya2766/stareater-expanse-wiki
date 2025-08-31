@@ -140,7 +140,7 @@ html{
  object-fit: cover;
  object-position: center;
  border-radius: 15px 15px 0px 0px;
- /*background-image: url('images/card_placeholder.png');*/
+ background-image: url('images/card_placeholder.png');
 }
 .card a{
  display: inline-block;
