@@ -1,0 +1,11 @@
+@startuml
+usecase Reminiscence
+usecase Felicity
+usecase Serendipity
+usecase Epiphany
+
+Reminiscence --> Felicity : "Reminiscence copied herself via nondestructive mind uploading.\nDigital copy changed name to Felicity\nCentis is Felicity's source\nFelicity is Centis's derivant"
+Felicity --> Felicity : "copied herself but maintained identity via synchronization\nFelicity and her copies are each other's convergents"
+Felicity --> Serendipity : "Felicity copied herself, copy changed name to Serendipity\nSerendipity is Reminiscence's derivant\nFelicity is Serendipity's source\nReminiscence is Serendipity's grand source"
+Serendipity --> Epiphany : "Serendipity copied herself, copy changed name to Epiphany\nEpiphany is Serendipity's derivant\nSerendipity is Epiphany's source\nSerendipity is Epiphany's grand source\nReminiscence is Epiphany's great grand source"
+@enduml
