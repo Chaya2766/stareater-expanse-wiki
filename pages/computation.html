@@ -1,0 +1,47 @@
+<head>
+ <link rel="stylesheet" href="../index.css"></link>
+</head>
+<html class="background2" id="page">
+<a style="float: right;" target="_blank" href="../index.html?page=pages/hyperintellect.html">link to this page</a>
+
+<h1>Computers, bulk computation and computronium</h1>
+<hr>
+
+<img src="../images/card_placeholder.png" class="basics"></img>
+<article class="basics">
+When computers first emerged they were tools for specific jobs, to be used as needed among an array of other tools. Gradually however, as civilization became more and more reliant on them, requiring more and more computation to be done, the view of computation shifted from that of a tool, to that of a utility much like electricity is.
+<br><br>
+Advances in encryption first made it possible to store data on untrusted hardware without risking it being read by the untrusted parties in control of it, then later development of fully homomorphic encryption enabled performing operations on data you don't have the decryption keys to, eventually going so far as to allow running full programs doing useful computation on untrusted hardware without granting the parties that own it the ability to read the data being processed.
+<br><br>
+Now civilization relies on it's computational grid so extensively that growing it is sometimes even considered the main goal of civilization at large.
+</article>
+<hr>
+
+<h2>Homomorphic encryption</h2>
+<article>
+<a href="https://en.wikipedia.org/wiki/Homomorphic_encryption">Homomorphic encryption</a> is a special encryption scheme which provides a set of data structures and operations that can be performed on those structures, such that encryption and decryption will not change the fact the operation had been performed, or the result of that operation. For instance in this scheme you could encrypt 4 and 6, and send them off to a malicious party, who then performs addition and returns the encrypted result, that you then decrypt into 10, and the malicious party which performed the computation would have no way of knowing what the two numbers they got were, what the actual number they gave back to you was, and depending on the scheme you used might not even know what operation they performed.
+<br><br>
+For those interested in low-level management of such systems whole programming languages exist, made such that programs they compile into can be sent away to untrusted parties in encrypted form, and computed while encrypted, though they always either leak some information that has to be accounted for and judged for risk, or introduce severe tradeoffs in computational overhead, or a combination of both. For example, one can either specify operations to be performed on the data by the untrusted party in which case they will know what they are doing to the data even if they don't know what the data is, or introduce some kind of universal operation which abstracts two or more different operations into one and from the untrusted party's perspective looks like they are performing all these operations every time.
+<br><br>
+As far as most people are concerned, this balancing act is usually elegantly abstracted behind a nice and simple user interface and/or AI assistant, preventing them from making critical mistakes (at least most of the time) and leaving them free to rent and lend computation without much need for technical understanding of what is happening below the surface. Alternatively those more concerned may simply opt for the fullest Homomorphic Encryption scheme available and accept the computational overheads as just the cost of their peace of mind.
+</article>
+
+<h2>Computronium, general and specialized hardware</h2>
+<article>What can't be argued is that one cannot avoid complexity when seeking to create better computers, but many people do want to avoid the specifics of how the hardware works by focusing on just 3 parameters: <b>computation rate</b> (bit flips per second), <b>memory</b> (bits total) and <b>efficiency</b> (joules per bit flip), which gives rise to the term <b>computronium</b> now being used as a generalization for any system, piece of hardware or substance which is capable of general computation and can be approximately characterized by those 3 metrics, even though they don't always tell the full story.
+<br><br>
+In terms of distinction between general and specialized hardware, what most people mean when they say general computing hardware is <a href="https://en.wikipedia.org/wiki/Field-programmable_gate_array">FPGA chips</a> since those can be rewired on the fly to behave as practically any processor, ASIC or logical circuit as necessary, enabling a "hardware defined in software" type of scheme to be used. On the opposite end there is specialized hardware, which is only capable of pre-defined operations and usually (but not always) comes with some benefits in terms of efficiency, size, mass or whatever other metric it was optimized for, as well as unusual tradeoffs such as for example having some uncertainty in multiplication operations because they are performed with analog measurements of currents sent through tuned resistors rather than through a series of discrete bit flips. Perhaps the ultimate form of such weirdness of specialized hardware is the biological neuron, widely praised for its energy efficiency.</article>
+
+<table class="styled-table" style="margin: 10 auto;">
+  <tr><th colspan=2>computronium examples</th></tr>
+  <tr><td> Civic-12 FPGA chip </td> <td> Civic-14 FPGA chip </td></tr>
+  <tr><td>image not added yet</td> <td>image not added yet</td></tr>
+</table>
+
+<h1 class="division">relevant pages</h1>
+
+<div class="card">
+ <img src="../images/Catalict.png"></img>
+ <a target="IM" href="hyperintellect.html">hyperintellects</a>
+</div>
+
+</html>
