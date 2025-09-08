@@ -2,7 +2,7 @@
  <link rel="stylesheet" href="../index.css"></link>
 </head>
 <html class="background2" id="page">
-<a style="float: right;" target="_blank" href="../index.html?page=pages/hyperintellect.html">link to this page</a>
+<a style="float: right;" target="_blank" href="../index.html?page=pages/computation.html">link to this page</a>
 
 <h1>Computers, bulk computation and computronium</h1>
 <hr>
@@ -27,21 +27,36 @@ As far as most people are concerned, this balancing act is usually elegantly abs
 </article>
 
 <h2>Computronium, general and specialized hardware</h2>
-<article>What can't be argued is that one cannot avoid complexity when seeking to create better computers, but many people do want to avoid the specifics of how the hardware works by focusing on just 3 parameters: <b>computation rate</b> (bit flips per second), <b>memory</b> (bits total) and <b>efficiency</b> (joules per bit flip), which gives rise to the term <b>computronium</b> now being used as a generalization for any system, piece of hardware or substance which is capable of general computation and can be approximately characterized by those 3 metrics, even though they don't always tell the full story.
+<article>Computronium is a term born from the desire to avoid the overwhelming complexity of computing systems, and denotes a theoretical substance which is optimized to perform computation. In practice it is used more like a marketing term for any sufficiently general system, piece of hardware, or occasionally indeed a substance, which performs computation and can be mostly described by just 3 parameters: <b>computation rate</b> (bit flips per second), <b>memory</b> (bits total) and <b>efficiency</b> (joules per bit flip). What most people mean when they say general computing hardware is <a href="https://en.wikipedia.org/wiki/Field-programmable_gate_array">FPGA chips</a> since those can be rewired on the fly to behave as practically any processor, ASIC or logical circuit as necessary, enabling a "hardware defined in software" type of scheme to be used.
 <br><br>
-In terms of distinction between general and specialized hardware, what most people mean when they say general computing hardware is <a href="https://en.wikipedia.org/wiki/Field-programmable_gate_array">FPGA chips</a> since those can be rewired on the fly to behave as practically any processor, ASIC or logical circuit as necessary, enabling a "hardware defined in software" type of scheme to be used. On the opposite end there is specialized hardware, which is only capable of pre-defined operations and usually (but not always) comes with some benefits in terms of efficiency, size, mass or whatever other metric it was optimized for, as well as unusual tradeoffs such as for example having some uncertainty in multiplication operations because they are performed with analog measurements of currents sent through tuned resistors rather than through a series of discrete bit flips. Perhaps the ultimate form of such weirdness of specialized hardware is the biological neuron, widely praised for its energy efficiency.</article>
+In contrast to that, there is specialized hardware, which is only capable of pre-defined operations and usually (but not always) comes with some benefits in terms of efficiency, size, mass or whatever other metric it was optimized for, and sometimes unusual tradeoffs such as for example having some inaccuracy in multiplication operations because they are performed with analog measurements of currents sent through tuned resistors rather than through a series of discrete bit flips. Perhaps the ultimate form of such weirdness of specialized hardware is the biological neuron, widely praised for its energy efficiency.</article>
 
 <table class="styled-table" style="margin: 10 auto;">
   <tr><th colspan=2>computronium examples</th></tr>
-  <tr><td> Civic-12 FPGA chip </td> <td> Civic-14 FPGA chip </td></tr>
-  <tr><td>image not added yet</td> <td>image not added yet</td></tr>
+  <tr><td> Civic-2 FPGA chip </td> <td> Civic-3 FPGA chip </td></tr>
+  <tr><td><img src="../images/civic2.png" style="max-width: 20vw; max-height: 400px;"></img></td> <td><img src="../images/civic3.png" style="max-width: 20vw; max-height: 400px;"></td></tr>
+  <tr><td>
+    computation rate: 5e16 bits/s<br>
+    memory: 2e15 bits<br>
+    efficiency: 2e-16J/bit
+  </td>
+  <td>
+    computation rate: 8e18 bits/s<br>
+    memory: 2e15 bits<br>
+    efficiency: 1.25e-18 J/bit
+  </td></tr>
 </table>
 
 <h1 class="division">relevant pages</h1>
 
 <div class="card">
- <img src="../images/Catalict.png"></img>
+ <img src="../images/card_placeholder.png"></img>
  <a target="IM" href="hyperintellect.html">hyperintellects</a>
+</div>
+
+<div class="card">
+ <img src="../images/civic3.png"></img>
+ <a target="IM" href="civic_chips.html">civic chips</a>
 </div>
 
 </html>
