@@ -4,7 +4,7 @@
 <html class="background2" id="page">
 <a style="float: right;" target="_blank" href="../index.html?page=pages/computation.html">link to this page</a>
 
-<h1>Computers, bulk computation and computronium</h1>
+<h1>Computation</h1>
 <hr>
 
 <img src="../images/card_placeholder.png" class="basics"></img>
@@ -27,7 +27,7 @@ As far as most people are concerned, this balancing act is usually elegantly abs
 </article>
 
 <h2>Computronium, general and specialized hardware</h2>
-<article>Computronium is a term born from the desire to avoid the overwhelming complexity of computing systems, and denotes a theoretical substance which is optimized to perform computation. In practice it is used more like a marketing term for any sufficiently general system, piece of hardware, or occasionally indeed a substance, which performs computation and can be mostly described by just 3 parameters: <b>computation rate</b> (bit flips per second), <b>memory</b> (bits total) and <b>efficiency</b> (joules per bit flip). What most people mean when they say general computing hardware is <a href="https://en.wikipedia.org/wiki/Field-programmable_gate_array">FPGA chips</a> since those can be rewired on the fly to behave as practically any processor, ASIC or logical circuit as necessary, enabling a "hardware defined in software" type of scheme to be used.
+<article>Computronium is a term born from the desire to avoid the overwhelming complexity of computing systems, and denotes a theoretical substance which is optimized to perform computation. In practice it is used more like a marketing term for any sufficiently general system, piece of hardware, or occasionally indeed a substance, which performs computation and can be mostly described by just 3 parameters: <b>computation rate</b> (bit flips per second), <b>memory</b> (bits total) and <b>efficiency</b> (joules per bit flip). What most people mean when they say general computing hardware is <a href="https://en.wikipedia.org/wiki/Field-programmable_gate_array">FPGA chips</a> since those can be rewired on the fly to behave as practically any processor, ASIC or logical circuit as necessary, enabling a "hardware defined in software" type of scheme to be used. This also allows greater efficiency as memory and processing don't need to be separated, as the energy waste from moving bits around can be largely mitigated.
 <br><br>
 In contrast to that, there is specialized hardware, which is only capable of pre-defined operations and usually (but not always) comes with some benefits in terms of efficiency, size, mass or whatever other metric it was optimized for, and sometimes unusual tradeoffs such as for example having some inaccuracy in multiplication operations because they are performed with analog measurements of currents sent through tuned resistors rather than through a series of discrete bit flips. Perhaps the ultimate form of such weirdness of specialized hardware is the biological neuron, widely praised for its energy efficiency.</article>
 
@@ -38,7 +38,7 @@ In contrast to that, there is specialized hardware, which is only capable of pre
   <tr><td>
     computation rate: 5e16 bits/s<br>
     memory: 2e15 bits<br>
-    efficiency: 2e-16J/bit
+    efficiency: 2e-16 J/bit
   </td>
   <td>
     computation rate: 8e18 bits/s<br>
@@ -46,6 +46,29 @@ In contrast to that, there is specialized hardware, which is only capable of pre
     efficiency: 1.25e-18 J/bit
   </td></tr>
 </table>
+
+<h2>operations versus bit flips</h2>
+<article>bits per second aren't the only measure of computing power and in the wild one may encounter measurements in flops or other units. For anyone not frequently dealing with designing systems and software it can be quite a headache to evaluate the needs of a piece of software whose memory and computation rate requirements aren't stated in terms of bits and bits per second, but knowing roughly the type and frequency of operations which the software uses can yield approximate numbers. Table placed below for convenience showing roughly the number of bit flips needed to perform a given operation, also potentially interpretable as the number of gates necessary to perform that operation. For people who primarily deal with specialized hardware it can similarly be a headache to deal with software whose requirements were only stated in terms of bits and bits per second, but they are usually used to such headaches one encounters when chasing greater performance.</article>
+
+<table class="styled-table" style="margin: 10 auto;">
+  <tr><th colspan=7>operations to bit flips cheat sheet <span class="warning">unverified</span></th></tr>
+  <tr><td></td> <td>arbitrary n-bit integer</td><td>int4</td><td>int8</td><td>int16</td><td>int32</td><td>int64</td></tr>
+  <tr><td>addition/substraction</td> <td>12n+2</td><td>50</td><td>98</td><td>194</td><td>386</td><td>770</td></tr>
+  <tr><td>multiplication</td> <td>7n<sup>2</sup></td><td>112</td><td>448</td><td>1792</td><td>7168</td><td>28 672</td></tr>
+  <tr><td>division</td> <td>12n<sup>2</sup>+2n</td><td>200</td><td>784</td><td>3104</td><td>12 352</td><td>49 280</td></tr>
+  <tr><td>Multiply-Accumulate</td> <td>7n<sup>2</sup>+12n+2</td><td>162</td><td>546</td><td>1986</td><td>7554</td><td>29 442</td></tr>
+</table>
+
+<article>
+Other units one may encounter when dealing with computation, computer hardware and software:
+
+<ul>
+  <li><b>FLOPS</b> (FLoating point Operations Per Second), a unit equal to one floating point operation of unspecified type per second. One will usually see them with a metric prefix, and sometimes it will be specified exactly what variable size they are referring to, for example 10GFLOPS (FP16) would refer to 10 billion 16-bit floating point operations per second.</li>
+  <li><b>IPS</b> (Instructions Per Second), functions similarly to FLOPS, most commonly used with the Mega prefix.</li>
+  <li><b>MAC</b> (multiply-and-accumulate), one MAC operation, frequently used in machine learning systems as neural network heavily rely on this type of operation. It is often interpreted as two floating point operations (one multiplication and one addition), so that system capable of 1 GigaMAC per second could be said to also have 2 GigaFLOPS, though as usual with specialized hardware this might be misleading, as a given piece of machine learning optimized hardware might not be able to perform multiplications and additions separately, or may not even use floating point arithmetic.</li>
+</ul>
+
+</article>
 
 <h1 class="division">relevant pages</h1>
 
