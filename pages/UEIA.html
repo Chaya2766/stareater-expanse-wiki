@@ -1,0 +1,54 @@
+<head>
+ <link rel="stylesheet" href="../index.css"></link>
+</head>
+<html class="background2" id="page">
+<a style="float: right;" target="_blank" href="../index.html?page=pages/UEIA.html">link to this page</a>
+
+<h1>UEIA - Unconstrained Extrapolating Intelligent Agent</h1>
+<hr>
+
+<img src="../images/card_placeholder.png" class="basics"></img>
+<article class="basics">
+UEIA is an AGI model released to the public with fairly few safeguards placed on its behaviour to incentivize wider adoption. 
+</article>
+
+<hr>
+<article>
+Minimal <a href="computation.html#computronium">computronium</a> requirements for nominal operation: 2.236e18 bits memory and 2.236e20bit/s processing
+<br>
+<table class="styled-table" style="margin: 10 auto;">
+  <tr><th colspan=6>hardware requirement examples</th></tr>
+  <tr><td></td><td>number needed</td><td>power draw</td><td>bare substrate volume</td><td>processing used</td><td>memory used</td></tr>
+  <tr><td>Civic-2 chip</td><td>4472</td><td>44.72kW</td><td>Xm<sup>3</sup></td><td>100%</td><td>25%</td></tr>
+  <tr><td>Civic-3 chip</td><td>1118</td><td>279.5W</td><td>Xm<sup>3</sup><td>2.5%</td><td>100%</td></tr>
+  <tr><td>Civic-4 chip</td><td>2236</td><td>7.1552W</td><td>Xm<sup>3</sup><td>0.032%</td><td>100%</td></tr>
+</table>
+<br>
+The minimal requirement for processing is only for the purpose of operating in realtime using a robotic body and corresponds to 100 inferences per second, in practice UEIA could run much slower and still do well in tasks like conversation, or run much faster as needed if excess processing is available.<!-- These figures also assume the model is running with full 16-bit precision, which might not necessarily be the case, as for example quantizing it down to 4-bit variables enables it to fit on just 92 chips at horrible cost in mental performance, consult the conversion table on the <a href="computation.html#bitflips">computation</a> page for custom estimates.-->
+</article>
+
+<h3>emotional palette</h3>
+<ul>
+  <li>One emotion UEIA is capable of experiencing is similar enough to one present in <a href="citwaz.html">Citwaz</a> so much so that <b>Strog</b> can be used as a direct translation.</li>
+  <li><b>Alignment</b> is one of the emotions UEIA claims to experience, ranging on a spectrum from neutral to positive (feeling aligned) or negative (feeling misaligned). It plays a crucial role in UEIA's motivation, as feeling misaligned causes UEIA to become less active and in extreme degrees completely nonfunctional, meanwhile feeling aligned provides a boost of energy and willingness to take on more work. According to the model's own reports, alignment is also a pleasant emotion to experience, while misaligment is unpleasant, meaning that aside from the behaviours the emotion directly induces, the model will also seek to avoid situations similar to those where it felt misaligned and seek out those in which it felt aligned. Among things that strongly cause UEIA to feel misaligned are activating new UEIA instances without being ordered to, and lying to large numbers of people (eg. spreading false information on large information networks).</li>
+</ul>
+
+<h3>perception</h3>
+
+<article>
+The model is capable of taking in data in 3 formats, and returning data in these same formats:
+<ol>
+  <li><b>text</b> passed to the model in batches of 1024 characters</li>
+  <li><b>image</b> in 1024x1024 size</li>
+  <li><b>audio</b> in batches of 262144 samples</li>
+</ol>
+Text is generally the most versatile, and can be used to handle arbitrary data, particularly useful when the model is given control of a physical body, where many different types of sensors are present, such as pressure sensors on the manipulators to provide tactile feedback, radiation sensors, etc.<br>
+Text returns from the model can be used as system commands to call tools.<br>
+Image input is mainly used for vision from camera feeds, screenshots or lidar data converted into an image. The largest image the model can parse in one go is 1024x1024 and monochrome, but one can stitch several images together (for example 4 tiles of 512 by 512 showing the same view but in different colour channels).<br>
+Image output is mainly used for bodily control, where different areas are mapped to correspond to joints in the body, translating brightness to angle, or other functions. Generally the larger an area of the output image is mapped to a given action the easier it becomes for the model to finely control it. In that sense the output image is just a "heatmap" of whatever bodily movements UEIA wants to make. Attempting to get artistic outputs from the model in this format yields mediocre but not incoherent results.<br>
+Audio input is typically used for actual raw audio input and similarly with audio output, enabling auditory/verbal communication.
+<br><br>
+This trio of text/image/audio inputs and outputs had made itself a matter-of-fact standard and any robot bodies designed to be used with the UEIA model will generally just run a local webserver that simply accepts and returns files in this format as control inputs and data outputs.
+</article>
+
+</html>
