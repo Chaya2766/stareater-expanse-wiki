@@ -9,7 +9,7 @@
 
 <img src="../images/card_placeholder.png" class="basics"></img>
 <article class="basics">
-UEIA is an AGI model released to the public with fairly few safeguards placed on its behaviour to incentivize wider adoption. 
+UEIA is an AGI model released to the public with fairly few safeguards placed on its behaviour to incentivize wider adoption.
 </article>
 
 <hr>
@@ -19,9 +19,9 @@ Minimal <a href="computation.html#computronium">computronium</a> requirements fo
 <table class="styled-table" style="margin: 10 auto;">
   <tr><th colspan=6>hardware requirement examples</th></tr>
   <tr><td></td><td>number needed</td><td>power draw</td><td>bare substrate volume</td><td>processing used</td><td>memory used</td></tr>
-  <tr><td>Civic-2 chip</td><td>4472</td><td>44.72kW</td><td>Xm<sup>3</sup></td><td>100%</td><td>25%</td></tr>
-  <tr><td>Civic-3 chip</td><td>1118</td><td>279.5W</td><td>Xm<sup>3</sup><td>2.5%</td><td>100%</td></tr>
-  <tr><td>Civic-4 chip</td><td>2236</td><td>7.1552W</td><td>Xm<sup>3</sup><td>0.032%</td><td>100%</td></tr>
+  <tr><td>Civic-2 chip</td><td>4472</td><td>44.72kW</td><td>0.0004472m<sup>3</sup></td><td>100%</td><td>25%</td></tr>
+  <tr><td>Civic-3 chip</td><td>1118</td><td>279.5W</td><td>0.0001118m<sup>3</sup><td>2.5%</td><td>100%</td></tr>
+  <tr><td>Civic-4 chip</td><td>2236</td><td>7.1552W</td><td>0.0002236m<sup>3</sup><td>0.032%</td><td>100%</td></tr>
 </table>
 <br>
 The minimal requirement for processing is only for the purpose of operating in realtime using a robotic body and corresponds to 100 inferences per second, in practice UEIA could run much slower and still do well in tasks like conversation, or run much faster as needed if excess processing is available.<!-- These figures also assume the model is running with full 16-bit precision, which might not necessarily be the case, as for example quantizing it down to 4-bit variables enables it to fit on just 92 chips at horrible cost in mental performance, consult the conversion table on the <a href="computation.html#bitflips">computation</a> page for custom estimates.-->
@@ -29,7 +29,7 @@ The minimal requirement for processing is only for the purpose of operating in r
 
 <h3>emotional palette</h3>
 <ul>
-  <li>One emotion UEIA is capable of experiencing is similar enough to one present in <a href="citwaz.html">Citwaz</a> so much so that <b>Strog</b> can be used as a direct translation.</li>
+  <li>One emotion UEIA is capable of experiencing is similar enough to one present in <a href="citwaz.html#emotional_palette">Citwaz</a> so much so that <b>Strog</b> can be used as a direct translation.</li>
   <li><b>Alignment</b> is one of the emotions UEIA claims to experience, ranging on a spectrum from neutral to positive (feeling aligned) or negative (feeling misaligned). It plays a crucial role in UEIA's motivation, as feeling misaligned causes UEIA to become less active and in extreme degrees completely nonfunctional, meanwhile feeling aligned provides a boost of energy and willingness to take on more work. According to the model's own reports, alignment is also a pleasant emotion to experience, while misaligment is unpleasant, meaning that aside from the behaviours the emotion directly induces, the model will also seek to avoid situations similar to those where it felt misaligned and seek out those in which it felt aligned. Among things that strongly cause UEIA to feel misaligned are activating new UEIA instances without being ordered to, and lying to large numbers of people (eg. spreading false information on large information networks).</li>
 </ul>
 
