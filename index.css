@@ -378,6 +378,28 @@ div.thread{
  background-color: #401020ff;
 }
 
+.meta, .card.meta a{
+ /*background-color: #0fe1;*/
+ color: #828;
+ transition: 1s;
+}
+
+.meta:hover, .card.meta:hover a{
+ /*background-color: #0fe1;*/
+ color: #f4f;
+ transition: 1s;
+}
+
+.card.meta{
+ border-color: #848;
+ background-color: #20102088;
+}
+
+.card.meta:hover{
+ border-color: #f4f;
+ background-color: #20102088;
+}
+
 
 .unfinished,.wip{
  /*display: none;*/
