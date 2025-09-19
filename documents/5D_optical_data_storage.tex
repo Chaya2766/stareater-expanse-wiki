@@ -1,0 +1,253 @@
+\documentclass[a4paper]{article}
+\usepackage[margin=3cm]{geometry}
+
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=cyan,
+	hyperindex=true,
+	linktocpage=true,%makes the page number be the link in the index
+}
+
+\title{examination of 5D optical data storage}
+
+\author{Chaya2766}
+
+\begin{document}
+	\sffamily
+	\sloppy
+	
+	\maketitle
+	
+	\vfill
+	
+	\begin{abstract}
+		A number of example devices using 5D optical data storage technology are considered for the needs of the Stareater Expanse setting.
+		
+		\medskip
+		
+		By pushing the technology to the limits, one can make a device small enough to carry in one's pocket, capable of storing whole exabytes of data with write speeds of nearly a petabyte per second, and for larger portable devices the limits are raised to hundreds of exabytes in capacity and tens of petabytes per second in write speed.
+		
+		\medskip
+		
+		More reasonable limits push the capacity of a pocketable device down to tens or hundreds of petabytes, with write speeds in tens of terabytes per second, and for larger portable devices potentially tens of exabytes with hundreds of terabytes per second write speeds.
+		
+		\medskip
+		
+		The most significant problem presents itself in write speed, requiring the assumption that femtosecond lasers could be miniaturized to the same degree as typical laser diodes, as the high write speeds require many lasers working in paralel. If this assumption is not fulfilled and at most one laser can be used, the achievable write speeds instead drop down to the range between tens of megabytes to single gigabytes per second.
+	\end{abstract}
+	
+	%\noindent \rule{\linewidth}{1pt}
+	\vfill
+	
+	\tableofcontents
+	
+	\pagebreak
+	
+	\section{Equations and constraints}
+	
+	$$ L = \frac{\pi (R^2 - r^2)}{t} $$
+	
+	$$ A = L \cdot w $$
+	
+	$$ C = A \cdot d $$
+	
+	where:
+	
+	\begin{itemize}
+		\item $L$ is the length of tape on the spool
+		
+		\item $R$ is the external radius of the spool, tape included
+		
+		\item $r$ is the internal radius of the spool, ie. only the core around which the tape is spooled
+		
+		\item $t$ is the thickness of the tape = thickness of one layer of tape when spooled onto the spool
+		
+		\item $A$ is the total area of tape on the spool
+		
+		\item $w$ is the width of the tape, which may also be the height of the spool
+		
+		\item $C$ is the total data capacity of the spool
+		
+		\item $d$ is data density on the tape, constant, a limit on how much data can be stored per area
+	\end{itemize}
+	
+	\medskip
+	
+	\noindent \rule{\linewidth}{1pt}
+	
+	\medskip
+	
+	Data density (d) is limited to a maximum of 2.5869e13bits/cm$^2$.
+	
+	\bigskip
+	
+	Thickness of tape (t) is limited on the low end by the need to have enough material for the data-encoding defects to actually fit within the tape and on the high end by the need to be flexible.
+	
+	\medskip
+	
+	Shortest wavelength lasers currently in use operate at 13.5nm (\href{https://en.wikipedia.org/wiki/Extreme_ultraviolet_lithography}{see wikipedia for extreme ultraviolet lithography}) so no smaller spot size is achievable and I will assume the actual amount of material needed would be closer to 100nm.
+	
+	\medskip
+	
+	A fused quartz ribbon that is too thick would become inflexible and break, in my experience glass phone screen protectors which are 0.33mm thick are just a bit too thick to be reasonably rolled up into a tube, meanwhile some are 0.1mm thick and flexible enough to be bent so much that the top and bottom parts can touch, which makes me think that is roughly where the limit sits, I will assume 0.1mm maximum.
+	
+	\medskip
+	
+	I will also consider 1 and 10 micrometres as intermediate tape thicknesses. This is comparable to the thickness of tape used in old magnetic audio tapes.
+	
+	\bigskip
+	
+	Inner radius of the spool will be set as 1cm, related to the flexibility of the tape.
+	
+	\pagebreak
+	
+	\section{Pocketable size}
+	
+	The device as a whole would be 2cm by 6cm by 12cm in size. The spool itself, to fit inside, would in that case be 1cm wide, with an inner radius of 1cm and outer radius of 2.5cm. 
+	
+	\vfill
+	
+	If 0.1mm tape is used then 16.49m of tape would fit on the spool, corresponding to 1649cm$^2$ of area, resulting in a total capacity of 5.333 Petabytes.
+	
+	$$ \frac{\pi ((2.5cm)^2 - (1cm)^2)}{0.1mm} =  16.493361m$$
+	
+	$$ 16.493361m \cdot 1cm =  1649.3361cm^2 $$
+	
+	$$ 1649.3361cm^2 \cdot 2.5869e13bits/cm^2 = 4.266667557e16 bits \approx 5.333PB $$
+	
+	\vfill
+	
+	If 100nm tape is used then 16.49km of tape would fit on the spool, corresponding to 164.9m$^2$ of area, resulting in a total capacity of 5.333 Exabytes.
+	
+	$$ \frac{\pi ((2.5cm)^2 - (1cm)^2)}{100nm} =  16493.36143m$$
+	
+	$$ 16493.36143m \cdot 1cm =  1649336.143cm^2 $$
+	
+	$$ 1649336.143cm^2 \cdot 2.5869e13bits/cm^2 = 4.266667557e19 bits \approx 5.333EB $$
+	
+	\vfill
+	
+	
+	If 10$\mu$m tape is used then 16.49km of tape would fit on the spool, corresponding to 164.9m$^2$ of area, resulting in a total capacity of 53.33 Petabytes.
+	
+	$$ \frac{\pi ((2.5cm)^2 - (1cm)^2)}{10\mu m} =  164.9336143m$$
+	
+	$$ 164.9336143m \cdot 1cm =  16493.36143cm^2 $$
+	
+	$$ 16493.36143cm^2 \cdot 2.5869e13bits/cm^2 = 4.266667557e17 bits \approx 53.33PB $$
+	
+	\vfill
+	
+	
+	If 1$\mu$m tape is used then 164.9km of tape would fit on the spool, corresponding to 1649m$^2$ of area, resulting in a total capacity of 533.3 Petabytes.
+	
+	$$ \frac{\pi ((2.5cm)^2 - (1cm)^2)}{1\mu m} =  1649.336143m$$
+	
+	$$ 1649.336143m \cdot 1cm =  164933.6143cm^2 $$
+	
+	$$ 164933.6143cm^2 \cdot 2.5869e13bits/cm^2 = 4.266667557e18 bits \approx 533.3PB $$
+	
+	\pagebreak
+	
+	\section{Semi-portable size}
+	
+	The device as a whole would be 12cm by 12cm by 24cm in size. The spool itself, to fit inside, would in that case be 10cm wide, with an inner radius of 1cm and outer radius of 5cm.
+	
+	\vfill
+	
+	If 0.1mm tape is used then 75.4m of tape would fit on the spool, corresponding to 7540m$^2$ of area, resulting in a total capacity of 243.8 Petabytes.
+	
+	$$ \frac{\pi ((5cm)^2 - (1cm)^2)}{0.1mm} =  75.39822369 m$$
+	
+	$$ 75.39822369 m \cdot 10cm =  75398.22369 cm^2 $$
+	
+	$$ 75398.22369 cm^2 \cdot 2.5869e13bits/cm^2 =  1.950476649e18 bits \approx 243.8PB $$
+	
+	\vfill
+	
+	If 100nm tape is used then 75.4km of tape would fit on the spool, corresponding to 7540m$^2$ of area, resulting in a total capacity of 243.8 Exabytes.
+	
+	$$ \frac{\pi ((5cm)^2 - (1cm)^2)}{100nm} =  75398.22369 m$$
+	
+	$$ 75398.22369 m \cdot 10cm =  75398223.69 cm^2 $$
+	
+	$$ 75398223.69 cm^2 \cdot 2.5869e13bits/cm^2 = 1.950476649e21 bits \approx 243.8EB $$
+	
+	\vfill
+	
+	If 10$\mu$m tape is used then 754m of tape would fit on the spool, corresponding to 75.4m$^2$ of area, resulting in a total capacity of 2438 Petabytes.
+	
+	$$ \frac{\pi ((5cm)^2 - (1cm)^2)}{10\mu m} = 753.9822369 m $$
+	
+	$$ 753.9822369 m \cdot 10cm =  753982.2369 cm^2 $$
+	
+	$$ 753982.2369 cm^2 \cdot 2.5869e13bits/cm^2 = 1.950476649e19 bits \approx 2438PB $$
+	
+	\vfill
+	
+	If 1$\mu$m tape is used then 7.54km of tape would fit on the spool, corresponding to 754m$^2$ of area, resulting in a total capacity of 24.38 Exabytes.
+	
+	$$ \frac{\pi ((5cm)^2 - (1cm)^2)}{1\mu m} = 7539.822369 m $$
+	
+	$$ 7539.822369 m \cdot 10cm =  7539822.369 cm^2 $$
+	
+	$$ 7539822.369 cm^2 \cdot 2.5869e13bits/cm^2 = 1.950476649e20 bits \approx 24.38EB $$
+	
+	\pagebreak
+	
+	\section{Write speeds}
+	
+	With data density of 2.5869e13bits/cm$^2$ and known width of tape, the speed at which the tape has to move and maximum write speed can be related to each other.
+	
+	\medskip
+	
+	\begin{center}
+		\textbf{Case 1: speed of the tape is the limiting factor}
+	\end{center}
+	
+	\medskip
+	
+	I've decided by intuition that audio casette tapes are a reasonable reference to use, considering that they would too be subject to limitations of speed as dictated by the need to not destroy the tape and used tape that was around 10 micrometre thickness.
+	
+	\medskip
+	
+	The usual tape speed was 9.53cm/s while some devices could operate at up to 304.8cm/s. (see \href{https://en.wikipedia.org/wiki/Audio_tape_specifications#Tape_speeds}{Audio tape specifications wikipedia page}).
+	
+	\medskip
+	
+	For simplicity I'll run the calculations only for 1cm wide tape, and the result can simply be multiplied accordingly for wider tapes.
+	
+	$$ 2.5869e13bits/cm^2 \cdot 1cm = 2.5869e13 bits/cm $$
+	
+	$$ 2.5869e13 bits/cm \cdot  9.53cm/s = 2.4653157e14bits/s \approx 30.82TB/s $$
+	
+	$$ 2.5869e13 bits/cm \cdot  304.8cm/s = 2.4653157e14bits/s \approx 985.6TB/s $$
+	
+	\medskip
+	
+	\begin{center}
+		\textbf{Case 2: laser pulse rate is the limiting factor}
+	\end{center}
+	
+	\medskip
+	
+	Femtosecond laser is required to produce the defects that encode data in the fused quartz tape. This is a lesser limitation than tape speed since one can simply coordinate multiple lasers to write faster.
+	
+	\medskip
+	
+	From unconfirmed sources I got that femtosecond pulse lasers can have a pulse rate of up to 100MHz (meaning time between pulses is 10 000 to 10 000 000 longer than the pulse itself). I don't know the amount of data written per pulse, since it isn't simply one bit - a single pulse produces a defect with polarization and transparency characteristics that encode additional data. My best guess would be 10 to 100 bits per spot but I will consider 1 bit as a conservative estimate.
+	
+	\medskip
+	
+	$$ 100MHz \cdot 1bit = 1e8bits/s = 	12.5MB/s $$
+	
+	$$ 100MHz \cdot 100bit = 1e10bits/s = 1.25GB/s $$
+	
+	\medskip
+	
+	At the high estimate one would need 24 656 lasers to write at the 9.53cm/s tape speed and 788 480 lasers to write at the 304.8cm/s tape speed. This is not a problem \underline{if} one can miniaturize femtosecond lasers to the point that they can be installed in electronics just like regular laser diodes and other such components.
+	
+\end{document}
