@@ -1,0 +1,170 @@
+\documentclass[a4paper]{article}
+\usepackage[margin=3cm]{geometry}
+
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=cyan,
+	hyperindex=true,
+	linktocpage=true,%makes the page number be the link in the index
+}
+
+\title{Equations for rotating habitats\\and some of their implications}
+
+\author{Chaya2766}
+
+\begin{document}
+	\sffamily
+	\sloppy
+	
+	\maketitle
+	
+	\vfill
+	
+	\begin{abstract}
+		a
+	\end{abstract}
+	
+	%\noindent \rule{\linewidth}{1pt}
+	\vfill
+	
+	\tableofcontents
+	
+	\pagebreak
+	
+	\section{Centrifugal gravity}
+	
+	Due to my observation that people tend to end up wrong by a factor of pi when running calculations for broadly anything rotation-dependend (including myself the first few times I tried to tackle rotating habitats), I had converted the formulas into additional forms which rely on time to complete one full rotation instead of angular velocity.
+	
+	\begin{center}
+		\textbf{equations for centrifugal gravity}
+	\end{center}
+	
+	$$ t = 2\pi\omega = \frac{2 \pi}{\sqrt{\frac{a}{r}}} $$
+	
+	$$ \omega = \frac{2 \pi}{t} = \sqrt{\frac{r}{a}} $$
+	
+	$$ r = a \cdot \omega^2 = a \cdot ( \frac{t}{2 \pi} )^2 = \frac{v^2}{a}$$
+	
+	$$ a = \frac{r}{\omega^2} = \frac{r}{( \frac{t}{2 \pi} )^2} = \frac{v^2}{r}$$
+	
+	$$ v = \omega \cdot r = r \cdot \frac{2 \pi}{t} = \sqrt{a \cdot r}$$
+	
+	where:
+	
+	\begin{itemize}
+		\item $t$ is time to complete a full rotation
+		
+		\item $a$ is the centrifugal acceleration felt on the inside
+		
+		\item $r$ is the radius of the station
+		
+		\item $\omega$ is the angular velocity
+		
+		\item $v$ is tangential velocity
+	\end{itemize}
+	
+	\pagebreak
+	
+	\section{Maximum habitat radius}
+	
+	The final equation is presented first and the reasoning behind it follows afterwards.
+	
+	\begin{center}
+		\textbf{Maximum radius of a rotating habitat}
+	\end{center}
+	
+	$$ R_{max} = \frac{\sigma_{max}}{s \cdot g \cdot \rho} $$
+	
+	$$ s = \frac{\sigma_{max}}{R_{max} \cdot g \cdot \rho} $$
+	
+	where:
+	
+	\begin{itemize}
+		\item $\sigma_{max}$ is the maximum tensile stress the building material can handle
+		
+		\item $R_{max}$ is the largest achievable radius of the cylinder
+		
+		\item $s$ is the safety factor (eg. 2 means the actual stress on the habitat wall would have to double for it to break, you can interpret it to mean how many times stronger the wall material is than necessary)
+		
+		\item $g$ is the surface gravity felt in the habitat
+		
+		\item $\rho$ is the density of the material from which the habitat is made
+	\end{itemize}
+	
+	\noindent \rule{\linewidth}{1pt}
+	
+	\medskip
+	
+	Safety factor must always be larger than 1, if the safety factor is exactly 1 then the habitat is operating exactly at its theoretical breaking point, where the centrifugal force acting on the mass of its walls is just enough to overpower the tensile strength of the walls.
+	
+	\pagebreak
+	
+	The equation comes from combining hoop stress with centrifugal gravity. Hoop stress is the stress that appears in the walls of a container as a result of its presurized contents pushing out on the walls from the inside. For a cylindrical container it is usually formulated as this:
+	
+	$$ \sigma_\theta \approx \frac{R_c \cdot P}{t_d} $$
+	
+	where:
+	
+	\begin{itemize}
+		\item $\sigma_\theta$ is the hoop stress in the cylinder wall
+		
+		\item $R_c$ is the radius of the cylinder
+		
+		\item $P$ is the pressure pushing out on the cylinder wall
+		
+		\item $t_d$ is the thickness of the cylinder wall
+	\end{itemize}
+	
+	The approximation is due to "thin-walled" assumption, that the thickness of the wall is insignificant compared to the size of the whole container, usually specified as the thickness being no more than 1/20 of the whole container's diameter. This is nearly guaranteed to be the case for O'Neill cylinders and similar rotating habitats.
+	
+	\medskip
+	
+	For a rotating habitat, the centrifugal gravity will be the "pressure" pushing out on it from the inside. Take note of the similarity, that for any given internal surface along the wall, a cylindrical container with pressurized contents is experiencing a force pushing out on it directed outwards from the central axis of the container. In a rotating habitat, the centrifugal acceleration also points away from the central axis, which creates a similar force due to the mass of the walls of the habitat. This force can be divided by the total area of the walls to calculate the equivalent pressure:
+	
+	$$ P \approx \frac{g \cdot m_{wall}}{a_{wall}} $$
+	
+	where:
+	
+	\begin{itemize}
+		\item $P$ is the pressure pushing out on the cylinder wall
+		
+		\item $g$ is the surface gravity in the cylinder
+		
+		\item $m_{wall}$ is the total mass of the cylinder wall
+		
+		\item $a_{wall}$ is the surface area of the cylinder wall
+	\end{itemize}
+	
+	Plugging in this "pressure" into the hoop stress equation transforms it into a new form:
+	
+	$$ \sigma_\theta \approx \frac{R_c \cdot g \cdot m_{wall}}{t_d \cdot a_{wall}} $$
+	
+	The mass of the habitat is a function of the wall thickness and density of the material it is made from, and can also be approximately related to the floor area:
+	
+	$$ m_{wall} \approx t_d \cdot a_{wall} \cdot \rho_{wall}$$
+	
+	where:
+	
+	\begin{itemize}
+		\item $\rho_{wall}$ is the density of the wall material
+		
+		\item $t_d$ is the thickness of the cylinder wall
+		
+		\item $m_{wall}$ is the mass of the cylinder wall
+		
+		\item $a_{floor}$ is the surface area of the habitat floor
+	\end{itemize}
+	
+	Plugging in this equation for the mass of the wall into our equation cancels out the area and thickness of the wall further transforms it into the finally useable form:
+	
+	$$ \sigma_\theta \approx R_c \cdot g \cdot \rho_{wall} $$
+	
+	Formulated like this, it gives us the stress experienced by the habitat wall as a function of the habitat's radius, internal gravity and density of the material the wall is made from, and can be used to judge what material is required for given habitat specifications.
+	
+	\pagebreak
+	
+	a
+\end{document}
