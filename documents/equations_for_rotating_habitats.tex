@@ -11,7 +11,7 @@
 	linktocpage=true,%makes the page number be the link in the index
 }
 
-\title{Equations for rotating habitats\\and some of their implications}
+\title{Equations for rotating habitats}
 
 \author{Chaya2766}
 
@@ -36,7 +36,7 @@
 	
 	\section{Centrifugal gravity}
 	
-	Due to my observation that people tend to end up wrong by a factor of pi when running calculations for broadly anything rotation-dependend (including myself the first few times I tried to tackle rotating habitats), I had converted the formulas into additional forms which rely on time to complete one full rotation instead of angular velocity.
+	Due to my observation that people tend to end up wrong by a factor of pi when running calculations for broadly anything rotation-dependent (including myself the first few times I tried to tackle rotating habitats), I had converted the formulas into additional forms which rely on time to complete one full rotation instead of angular velocity.
 	
 	\begin{center}
 		\textbf{equations for centrifugal gravity}
@@ -46,9 +46,9 @@
 	
 	$$ \omega = \frac{2 \pi}{t} = \sqrt{\frac{r}{a}} $$
 	
-	$$ r = a \cdot \omega^2 = a \cdot ( \frac{t}{2 \pi} )^2 = \frac{v^2}{a}$$
+	$$ r = a \cdot \omega^2 = a \cdot \left( \frac{t}{2 \pi} \right)^2 = \frac{v^2}{a}$$
 	
-	$$ a = \frac{r}{\omega^2} = \frac{r}{( \frac{t}{2 \pi} )^2} = \frac{v^2}{r}$$
+	$$ a = \frac{r}{\omega^2} = \frac{r}{\left( \frac{t}{2 \pi} \right)^2} = \frac{v^2}{r}$$
 	
 	$$ v = \omega \cdot r = r \cdot \frac{2 \pi}{t} = \sqrt{a \cdot r}$$
 	
@@ -68,9 +68,13 @@
 	
 	\pagebreak
 	
+	\section{Coriolis force}
+	
+	\pagebreak
+	
 	\section{Maximum habitat radius}
 	
-	The final equation is presented first and the reasoning behind it follows afterwards.
+	The final equation is presented here first and the reasoning behind it is on the next page.
 	
 	\begin{center}
 		\textbf{Maximum radius of a rotating habitat}
@@ -94,11 +98,41 @@
 		\item $\rho$ is the density of the material from which the habitat is made
 	\end{itemize}
 	
+	Safety factor must always be larger than 1, if the safety factor is exactly 1 then the habitat is operating exactly at its theoretical breaking point, where the centrifugal force acting on the mass of its walls is just enough to overpower the tensile strength of the walls.
+	
+	\bigskip
+	
 	\noindent \rule{\linewidth}{1pt}
 	
-	\medskip
+	\bigskip
 	
-	Safety factor must always be larger than 1, if the safety factor is exactly 1 then the habitat is operating exactly at its theoretical breaking point, where the centrifugal force acting on the mass of its walls is just enough to overpower the tensile strength of the walls.
+	Example of a rotating habitat with safety factor 2 and internal gravity 1g, made from mild steel of density $\rho = 7850kg/m^3$ and tensile strength $\sigma = 300MPa$:
+	
+	$$ R_{max} = \frac{300MPa}{2 \cdot 9.807m/s^2 \cdot 7850kg/m^3} = 1948m $$
+	
+	This means the habitat as a whole could be 3.896km in diameter, potentially a bit less than 8km in diameter if a lower safety factor were acceptable.
+	
+	\bigskip
+	
+	Several other materials using the same assumptions of 1g internal gravity and safety factor of 2:
+	
+	\begin{enumerate}
+		\item Pure aluminium ($\rho = 2699kg/m^3$, $\sigma = 47MPa$): 887.8m
+		
+		\item fully annealed \href{https://en.wikipedia.org/wiki/SAE_304_stainless_steel#Mechanical_properties}{SAE 304 stainless steel} ($\rho = 7900kg/m^3$, $\sigma = 210MPa$): 1355m
+		
+		\item Pure titanium ($\rho = 4110kg/m^3$, $\sigma = 434MPa$): 5384m
+		
+		\item fully hardened \href{https://en.wikipedia.org/wiki/SAE_304_stainless_steel#Mechanical_properties}{SAE 304 stainless steel} ($\rho = 7900kg/m^3$, $\sigma = 1050MPa$): 6776m
+		
+		\item \href{https://en.wikipedia.org/wiki/7034_aluminium_alloy}{7034 aluminium alloy} ($\rho = 2890kg/m^3$, $\sigma = 730MPa$): 12.88km
+		
+		\item Carbon fiber ($\rho = 1800kg/m^3$, $\sigma = 4GPa$): 113.3km
+		
+		\item Low end carbon nanotubes ($\rho = 1400kg/m^3$, $\sigma = 11GPa$): 400.6km
+		
+		\item High end carbon nanotubes ($\rho = 1400kg/m^3$, $\sigma = 63GPa$): 2294km
+	\end{enumerate}
 	
 	\pagebreak
 	
@@ -166,5 +200,60 @@
 	
 	\pagebreak
 	
-	a
+	\section{Habitat mass}
+	
+	Calculating a habitat's mass is very straightforward:
+	
+	$$ M = \rho_a \cdot (2\pi \cdot R_c \cdot L + 2 \pi \cdot R_c^2) $$
+	
+	where:
+	
+	\begin{itemize}
+		\item $M$ is the total mass of the habitat
+		
+		\item $\rho_a$ is the aerial density of the habitat wall (mass per area, typically set to 10t/m$^2$)
+		
+		\item $R_c$ is the radius of the habitat
+		
+		\item $L$ is the length of the habitat
+	\end{itemize}
+	
+	It is really just multiplying the aerial density by the surface area of a cylinder. That equation also assumes flat end caps, so if one uses hemispherical end caps instead (which is generally preferable) there would be one slight change:
+	
+	$$ M = \rho_a \cdot (2\pi \cdot R_c \cdot L + 4 \pi \cdot R_c^2) $$
+	
+	\medskip
+	
+	Taking as example the classic \href{https://en.wikipedia.org/wiki/O%27Neill_cylinder#Islands}{Island Three} design, 8km diameter, 32.2km length plus hemispherical caps, and 10t/m$^2$ aerial density:
+	
+	$$ M = 10t/m^2 \cdot (2\pi \cdot 4km \cdot 32.2km + 4\pi \cdot (4km)^2) =  1.010336e13kg $$
+	
+	\noindent \rule{\linewidth}{1pt}
+	
+	\medskip
+	
+	Considerations for deciding a habitat's aerial density:
+	
+	\begin{enumerate}
+		\item Radiation shielding - a commonly quoted figure is 10 tonnes per square metre to achieve good shielding. This commonly quoted figure most likely comes from the fact that \href{https://en.wikipedia.org/wiki/Atmosphere_of_Earth}{earth's atmosphere} masses 5.15e18kg, and when divided over earth's 5.1e14m$^2$ of surface area gives almost exactly that aerial density.
+		
+		\medskip
+		
+		If radiation shielding is not quite as needed for whatever reason, the aerial density could be lowered to proportionally decrease the habitat's mass.
+		
+		\item Support of internal structures - this depends on the "safety factor" mentioned earlier in the maximum habitat radius section. If a habitat fulfills the quoted 10 tonnes per square metre figure and is built such that it's own centrifugal gravity stresses the walls to only half their yield strength, then every square metre of the wall will be able to support at most 10 tonnes of additional buildings on top of it.
+		
+		\medskip
+		
+		Generally any reasonably small section of habitat wall will be able to support s-1 times it's own mass worth of buildings and other structure built on top of it inside the habitat (s is the safety factor the habitat was built with) so the more mass per area you give the wall, the more you can build inside the habitat.
+	\end{enumerate}
+	
+	\medskip
+	
+	In any case it should be notable that earth itself, while providing 10 tonnes per square metre of radiation shielding, does not actually provide one square metre of living area per 10 tonnes of mass. Most of \href{https://en.wikipedia.org/wiki/Earth_mass}{earth's 5.9722e24kg of mass} is practically useless, and would give it an aerial density of 11~708~543.11t/m$^2$ if one counts the whole surface area, or worse yet 40~098~026.05t/m$^2$ if one only counts the land area.
+	
+	\medskip
+	
+	This means that at baseline any rotating habitat adhering to the 10 tonnes per square metre rule will be a roughly 11 to 40 million times better than an earthlike planet at providing the most living area with the available mass, hinting at what you could do if you took apart the planets in a star system for their building material.
+	
 \end{document}

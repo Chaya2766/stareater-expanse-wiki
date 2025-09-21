@@ -1,0 +1,6 @@
+stars from lorewiki/*
+push.sh
+
+documents/**
+!documents/**.tex
+!documents/**.pdf
