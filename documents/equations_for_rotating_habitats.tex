@@ -24,7 +24,23 @@
 	\vfill
 	
 	\begin{abstract}
-		a
+		Equations for centrifugal force are provided in multiple forms, including those which rely on time taken to complete a full rotation instead of angular velocity.
+		
+		\medskip
+		
+		An equation for maximum radius of a rotating habitat is also provided, as well as an explanation of how it was constructed from centrifugal force and hoop stress equations.
+		
+		\medskip
+		
+		Equations for sideways acceleration experienced by people climbing staircases or riding elevators is given, based on my own derivation of the coriolis force, which is notably less general than the commonly given equations for it and in disagreement with them by a factor of 2, but is explained in terms of the change in tangential velocity which is not visible in the rotating frame of reference.
+		
+		\medskip
+		
+		A way to calculate the mass of a rotating habitat is also provided, with considerations for radiation shielding and ability to add buildings inside the habitat.
+		
+		\medskip
+		
+		In all 4 cases, one or more examples for results of the calculations are provided as reference.
 	\end{abstract}
 	
 	%\noindent \rule{\linewidth}{1pt}
@@ -44,7 +60,7 @@
 	
 	$$ t = 2\pi\omega = \frac{2 \pi}{\sqrt{\frac{a}{r}}} $$
 	
-	$$ \omega = \frac{2 \pi}{t} = \sqrt{\frac{r}{a}} $$
+	$$ \omega = \frac{2 \pi}{t} = \sqrt{\frac{a}{r}} $$
 	
 	$$ r = a \cdot \omega^2 = a \cdot \left( \frac{t}{2 \pi} \right)^2 = \frac{v^2}{a}$$
 	
@@ -66,9 +82,143 @@
 		\item $v$ is tangential velocity
 	\end{itemize}
 	
+	\medskip
+	
+	\noindent \rule{\linewidth}{1pt}
+	
+	\medskip
+	
+	For a simple example, a habitat 200m in radius, which completes one rotation every 28.099 seconds would have an internal gravity (a) of 10m/s$^2$ at the floor. It would also have an angular velocity of 0.2236 rad/s and tangential velocity of 44.72m/s at the floor.
+	
 	\pagebreak
 	
+	\section{Sideways coriolis force}
+	
+	Be warned that this is my own derivation of the effect, and it notably does not match the formulas for "coriolis force" shown elsewhere. My attempts to research the coriolis force so far failed to let me make sense of the factor of two commonly included in the formula for it. My interpretation of it is also evidently different, as I focussed on accelerations that are parallel to the floor, instead of generalizing it for any direction. For this reason I had opted to title the section as "sideways coriolis force" instead of simply "coriolis force" as to not lead others into a mistake. I still believe that the effect I am describing makes physical sense, as explained after the equations, even if it is different from the general "coriolis~force".
+	
+	\medskip
+	
+	\begin{center}
+		\textbf{sideways acceleration caused by coriolis force}
+	\end{center}
+	
+	$$ a_c = \omega \cdot v_v = \frac{2 \pi}{t} \cdot v_v $$
+	
+	$$ \Delta v_h = \omega \cdot \Delta r = \frac{2 \pi}{t} \cdot \Delta r $$
+	
+	where:
+	
+	\begin{itemize}
+		\item $a_c$ is the acceleration caused by the coriolis force
+		
+		\item $v_v$ is vertical component of the object's velocity\\(meaning velocity with which the object is moving towards the axis of rotation)
+		
+		\item $t$ is time in which the habitat completes one full rotation
+		
+		\item $\omega$ is the angular velocity
+		
+		\item $\Delta v_t$ is the change in an object's tangential velocity \underline{as measured in the rotating frame of reference}\\an object sitting on the floor in any part of the habitat is considered to have a velocity of 0m/s in this understanding
+		
+		\item $\Delta r$ is the change in an object's distance from the axis of rotation
+	\end{itemize}
+	
+	\medskip
+	
+	\noindent\rule{\linewidth}{1pt}
+	
+	\medskip
+	
+	For the numbers in the following example I will be using a habitat 200m in radius with a full rotation time of 28.099s, the same as in the centrifugal force example.
+	
+	\medskip
+	
+	The effect can be conceptualized like this: think of standing at the bottom of a staircase 200m away from the axis of rotation - you consider yourself stationary even though you know that in reality you and the floor you are standing on are both moving around the station's axis of rotation at 44.72m/s.
+	
+	\medskip
+	
+	When you take the first step onto the staircase, your foot will be stationary on the first step, which is 20cm higher, placing it at 199.8m away from the axis of rotation, meaning that its tangential velocity is 44.677m/s, which is less than the floor you were standing on. As such your foot must have accelerated by 0.0447m/s as you raised it to match the new tangential velocity.
+	
+	$$ \Delta v_h = \frac{2pi}{28.099s} \cdot 0.2m = 0.04472m/s $$
+	
+	You would have felt this as a force accelerating your foot in the direction of the station's spin, which you would have to counteract. Since tangential velocity is proportional to distance from the axis of rotation, you will have to counteract the same velocity change for every next step.
+	
+	\medskip
+	
+	This same effect would cause you to experience a sideways pull if you were in an elevator, in an example if you are moving upwards at 10m/s then you would be feeling an apparent sideways acceleration of 2.236m/s$^2$
+	
+	$$ a_c = \frac{2pi}{28.099s} \cdot 10m/s = 2.236m/s^2 $$
+	
+	\pagebreak
+	
+	\iffalse
+	
 	\section{Coriolis force}
+	
+	Coriolis force is another strange force that has to be accounted for in some cases, such as when deciding the direction of staircases and speeds of elevators.
+	
+	\begin{center}
+		\textbf{strength of acceleration caused by coriolis force}
+	\end{center}
+	
+	$$ a_c = 2 \cdot v_r \cdot \omega $$
+	
+	where:
+	
+	\begin{itemize}
+		\item $t$ is time to complete a full rotation
+		
+		\item $a$ is the acceleration caused by the coriolis force
+		
+		\item $\omega$ is the angular velocity
+		
+		\item $v_r$ is the velocity of the object as \underline{measured in the rotating frame of reference}
+		
+		(in simple terms, velocity relative to a point on the floor)
+	\end{itemize}
+	
+	\medskip
+	
+	\noindent\rule{\linewidth}{1pt}
+	
+	\medskip
+	
+	Understanding where the "2" in that equation comes from had been a problem for me for the longest time, so I will provide here the thought experiment I constructed which clarified it to me.
+	
+	\medskip
+	
+	Consider the example habitat described at the bottom of the previous section. A person standing on the floor has a tangential velocity of 44.72m/s in the non-rotating view, but in their own view they have a velocity of 0m/s.
+	
+	\medskip
+	
+	Now consider that they throw a ball exactly in the oposite of the station's spin direction, at exactly 44.72m/s. In that case the ball will have 0m/s of velocity in the non-rotating view, and as such should experience no centrifugal acceleration pulling it downwards to the floor.
+	
+	\medskip
+	
+	The coriolis force equation cares for the velocity as measured in the rotating frame of reference, so in the rotating frame of reference the person is stationary and the ball is moving at 44.72m/s. The equation provided says the ball should be experiencing 20m/s$^2$ of acceleration due to coriolis force (and due to the direction of its movement, that acceleration would be directed upwards).
+	
+	\medskip
+	
+	$$ 2 \cdot 44.72m/s \cdot 0.2236rad/s = 19.99878m/s \approx 20m/s $$
+	
+	\medskip
+	
+	Looking at the problem from the view of the rotating frame of reference only, you can think of the centrifugal acceleration as constant regardless of object motion, and in that case it would be the job of the coriolis force to perfectly cancel it out for an object which is moving against the spin like that. Take note of the fact the station is curved, and if the acceleration were perfectly cancelled out the ball would still hit the floor, so as seen by the person inside the station it must actually be constantly accelerating upwards to avoid hitting the floor - this explains why the equation needs the factor of 2. This is ofcourse an illusion, which comes clear when you consider the situation from the non-rotating point of view.
+	
+	\pagebreak
+	
+	This approach of setting the centrifugal acceleration as constant and using the coriolis force instead also works for running people, as it returns the same values as simply changing the tangential velocity in the centrifugal acceleration formula. See in example for the person running in the direction of the spin at 15m/s:
+	
+	$$ a_{stationary} = \frac{(44.72m/s)^2}{200m} = 10m/s^2 $$
+	
+	$$ a_{coriolis} = 2 \cdot 15m/s \cdot 0.2236rad/s = 6.708m/s^2 $$
+	
+	$$ a_{running} = \frac{(44.72m/s + 15m/s)^2}{200m} = 17.832m/s^2 $$
+	
+	$$ a_{stationary} + a_{coriolis} = 10m/s^2 + 6.708m/s^2 = 16.708m/s^2 \neq 17.832m/s^2 $$
+	
+	I had briefly achieved enlightenment and then taken it away from myself :(
+	
+	\fi
 	
 	\pagebreak
 	
