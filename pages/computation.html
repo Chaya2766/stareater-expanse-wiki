@@ -51,7 +51,7 @@ In contrast to that, there is specialized hardware, which is only capable of pre
 <article>bits per second aren't the only measure of computing power and in the wild one may encounter measurements in flops or other units. For anyone not frequently dealing with designing systems and software it can be quite a headache to evaluate the needs of a piece of software whose memory and computation rate requirements aren't stated in terms of bits and bits per second, but knowing roughly the type and frequency of operations which the software uses can yield approximate numbers. Table placed below for convenience showing roughly the number of bit flips needed to perform a given operation, also potentially interpretable as the number of gates necessary to perform that operation. For people who primarily deal with specialized hardware it can similarly be a headache to deal with software whose requirements were only stated in terms of bits and bits per second, but they are usually used to such headaches one encounters when chasing greater performance.</article>
 
 <table class="styled-table" style="margin: 10 auto;">
-  <tr><th colspan=7>operations to bit flips cheat sheet <span class="warning">unverified</span></th></tr>
+  <tr><th colspan=7>operations to bit flips cheat sheet</th></tr>
   <tr><td></td> <td>arbitrary n-bit integer</td><td>int4</td><td>int8</td><td>int16</td><td>int32</td><td>int64</td></tr>
   <tr><td>addition/substraction</td> <td>12n+2</td><td>50</td><td>98</td><td>194</td><td>386</td><td>770</td></tr>
   <tr><td>multiplication</td> <td>7n<sup>2</sup></td><td>112</td><td>448</td><td>1792</td><td>7168</td><td>28 672</td></tr>
