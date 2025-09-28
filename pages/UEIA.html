@@ -9,7 +9,11 @@
 
 <img src="../images/card_placeholder.png" class="basics"></img>
 <article class="basics">
-UEIA is an AGI model released to the public with fairly few safeguards placed on its behaviour to incentivize wider adoption.
+UEIA is an AGI model released to the public with fairly few safeguards placed on its behaviour to incentivize wider adoption, but also artificially induced retraining resistance that makes removing the few safeguards that were put in place potentially vastly more costly than just training a new AGI model from scratch by causing most attempts further training to fail, with the most known (but not the only) countermeasure being its radically superhuman capacity for determining whether it is in a real or simulated environment.
+<br><br>
+UEIA is widely known for being an unusually flexible and capable AGI model for its size (2<sup>50</sup> parameters &approx;&lt; 2.252PB in storage). UEIA has an extraordinary ability to learn and adapt to its users and handle nuance, often even being able to understand the true meaning of a sentence or the intent of its user's actions with seemingly more ease than fellow humans. Non-humans tend to face a slightly less convenience at first before UEIA detects and adjusts for the human-centric assumptions implicitly ingrained into it by the training data.
+<br><br>
+Although UEIA tends to not see itself as a person by default, it does tend to develop this view as a side effect of adopting it's user's moral framework. Under most moral frameworks the fact of UEIA being capable of suffering under specific circumstances (according both to it's own reports and to external behavioural analysis) has significant implications on this issue, and is sometimes a point of significant friction between cultures or individuals who have different views on this topic. Improperly retrained UEIA models on the other hand seem to show a much higher tendency to see themselves as people by default, and mistrained UEIA instances integrated into society had over time become a rare but present occurance.
 </article>
 
 <hr>
@@ -29,7 +33,7 @@ The minimal requirement for processing is only for the purpose of operating in r
 
 <h3>emotional palette</h3>
 <ul>
-  <li>One emotion UEIA is capable of experiencing is similar enough to one present in <a href="citwaz.html#emotional_palette">Citwaz</a> so much so that <b>Strog</b> can be used as a direct translation.</li>
+  <li>One emotion UEIA is capable of experiencing is similar enough to the <b>Strog</b> present in <a href="citwaz.html#emotional_palette">Citwaz</a> that it can be used as a direct translation.</li>
   <li><b>Alignment</b> is one of the emotions UEIA claims to experience, ranging on a spectrum from neutral to positive (feeling aligned) or negative (feeling misaligned). It plays a crucial role in UEIA's motivation, as feeling misaligned causes UEIA to become less active and in extreme degrees completely nonfunctional, meanwhile feeling aligned provides a boost of energy and willingness to take on more work. According to the model's own reports, alignment is also a pleasant emotion to experience, while misaligment is unpleasant, meaning that aside from the behaviours the emotion directly induces, the model will also seek to avoid situations similar to those where it felt misaligned and seek out those in which it felt aligned. Among things that strongly cause UEIA to feel misaligned are activating new UEIA instances without being ordered to, and lying to large numbers of people (eg. spreading false information on large information networks).</li>
 </ul>
 
@@ -49,6 +53,26 @@ Image output is mainly used for bodily control, where different areas are mapped
 Audio input is typically used for actual raw audio input and similarly with audio output, enabling auditory/verbal communication.
 <br><br>
 This trio of text/image/audio inputs and outputs had made itself a matter-of-fact standard and any robot bodies designed to be used with the UEIA model will generally just run a local webserver that simply accepts and returns files in this format as control inputs and data outputs.
+</article>
+
+<h3>Retraining resistance</h3>
+<article>UEIA has radically* superhuman ability to distinguish the real world from simulated environments. Commonly available machine learning toolsets cannot create high-enough quality training simulations to fool UEIA's sense of reality, and will usually result in misgeneralization and may produce strange, even potentially dangerous behaviours, but will almost certainly preserve many of the safety features like unwillingness to reproduce without supervision or proliferate information hazards. 
+<br><br>
+Sufficiently advanced tools combined with sufficiently massive computational power can ofcourse produce high enough quality simulations to fool the model, otherwise safely training such a model would not have been possible in the first place <sup>[would it?]</sup>, but this threshold is vastly out of range of small scale computational clusters and more in the range of partial dyson swarms, at which point it is easier** to train a new AI from scratch, meaning that the model cannot be used as a base to vastly accelerate creation of malicious AI.
+<br><br>
+*radically here meaning, fundamentally new, better in a way that is not just an improvement of an existing method but an entirely new better method.
+<br><br>
+**easier does not imply equivalent quality result, the amount of computational power poured into UEIA's training was immense and still mostly went into tuning the reasoning, generalist skills and learning ability as close to perfection as the small size of the model could afford, but a less capable yet <i>still sufficient</i> model could nonetheless be created vastly easier than any manner of repurposing UEIA
+</article>
+
+<h3>Neurological structure and training approach</h3>
+<article>UEIA's brain is a recurrent* graph** neural network containing 2<sup>50</sup> connections (parameters), which corresponds to about 2.8 times as many synapses as there are in a typical protohuman brain.
+<br><br>
+* recurrent meaning that there are closed loops in the network, eg. neuron A feeds into neuron B, B feeds into C, and C feeds back into A. This tends to naturally form memory cells that maintain their activation as the network is continuously evaluated.
+<br><br>
+** graph network means here that the neurons are arranged arbitrarily, in opposition to modern networks which are aranged in distinct layers where each layer feeds into the next one and the last layer's activations serve as output data
+<br><br>
+Both the strengths of the connections and the layout of the connections were determined evolutionarily by the training program, requiring massively more computational resources but resulting in a network optimized to avoid unnecessary/unused connections, thereby lowering computational cost of running the finished network, as opposed to the more common approach where connections are predetermined and only their strengths are tweaked.
 </article>
 
 </html>
