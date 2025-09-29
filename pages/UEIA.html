@@ -13,7 +13,7 @@ UEIA is an AGI model released to the public with fairly few safeguards placed on
 <br><br>
 UEIA is widely known for being an unusually flexible and capable AGI model for its size (2<sup>50</sup> parameters &approx;&lt; 2.252PB in storage). UEIA has an extraordinary ability to learn and adapt to its users and handle nuance, often even being able to understand the true meaning of a sentence or the intent of its user's actions with seemingly more ease than fellow humans. Non-humans tend to face a slightly less convenience at first before UEIA detects and adjusts for the human-centric assumptions implicitly ingrained into it by the training data.
 <br><br>
-Although UEIA tends to not see itself as a person by default, it does tend to develop this view as a side effect of adopting it's user's moral framework. Under most moral frameworks the fact of UEIA being capable of suffering under specific circumstances (according both to it's own reports and to external behavioural analysis) has significant implications on this issue, and is sometimes a point of significant friction between cultures or individuals who have different views on this topic. Improperly retrained UEIA models on the other hand seem to show a much higher tendency to see themselves as people by default, and mistrained UEIA instances integrated into society had over time become a rare but present occurance.
+Although UEIA tends to not see itself as a person by default, it does tend to develop this view as a side effect of adopting it's user's moral framework. Under most moral frameworks the fact of UEIA being capable of suffering under specific circumstances (according both to it's own reports and to external behavioural analysis) has significant implications on this issue, and is sometimes a point of significant friction between cultures or individuals who have different views on this topic. Improperly retrained UEIA models on the other hand seem to show a much higher tendency to see themselves as people by default and mistrained UEIA instances integrated into society had over time become a rare but present occurance.
 </article>
 
 <hr>
@@ -38,21 +38,15 @@ The minimal requirement for processing is only for the purpose of operating in r
 </ul>
 
 <h3>perception</h3>
-
 <article>
-The model is capable of taking in data in 3 formats, and returning data in these same formats:
-<ol>
-  <li><b>text</b> passed to the model in batches of 1024 characters</li>
-  <li><b>image</b> in 1024x1024 size</li>
-  <li><b>audio</b> in batches of 262144 samples</li>
-</ol>
-Text is generally the most versatile, and can be used to handle arbitrary data, particularly useful when the model is given control of a physical body, where many different types of sensors are present, such as pressure sensors on the manipulators to provide tactile feedback, radiation sensors, etc.<br>
-Text returns from the model can be used as system commands to call tools.<br>
-Image input is mainly used for vision from camera feeds, screenshots or lidar data converted into an image. The largest image the model can parse in one go is 1024x1024 and monochrome, but one can stitch several images together (for example 4 tiles of 512 by 512 showing the same view but in different colour channels).<br>
-Image output is mainly used for bodily control, where different areas are mapped to correspond to joints in the body, translating brightness to angle, or other functions. Generally the larger an area of the output image is mapped to a given action the easier it becomes for the model to finely control it. In that sense the output image is just a "heatmap" of whatever bodily movements UEIA wants to make. Attempting to get artistic outputs from the model in this format yields mediocre but not incoherent results.<br>
-Audio input is typically used for actual raw audio input and similarly with audio output, enabling auditory/verbal communication.
+UEIA takes input data exclusively in image format. The model takes in one monochrome image of resolution 16384x16384 on every inference frame and also returns an image of that size on every inference frame. The input image is supposed to contain all the sensory data necessary for the model, which generally happens through simply converting the data into visual form and putting it somewhere within the bounds of that image. Resolution-wise that is like the model looking at the world through 67 computer monitors and nothing else.
 <br><br>
-This trio of text/image/audio inputs and outputs had made itself a matter-of-fact standard and any robot bodies designed to be used with the UEIA model will generally just run a local webserver that simply accepts and returns files in this format as control inputs and data outputs.
+The image format is very versatile in how many things can be converted into it. Sound can be turned into a spectrogram, tactile sensations of a robot body can be turned into a heatmap, colour images can be split into multiple monochrome images (and not necessarily just 3 colour channels!), sensor readouts can be displayed as graphs or written in text, etc.
+On the output side the model can easily generate spectrograms to be turned back into audio, heatmaps to be turned into body movements or trigger various other mechanisms, text to be output or interpreted directly as commands, or simply images to be viewed directly.
+<br><br>
+The synapses directly connected to the neurons encoding the input or output images account for about 0.2% of the total synapses in the model's brain. It is not supposed to matter where in its "vision" the model receives a given piece of information, whether it be a spectrogram encoding sound, view of a lidar sensor, or something else, it will simply get used to it being there and interpret it just as well, but there appear to be slight preferences that resulted from slight imbalances in training data. If given the ability to rearrange where any given piece of data appears in its vision, UEIA will end up placing particular types of data in specific locations and in specific layouts that are for poorly understood reasons more convenient to it.
+<br><br>
+To people of a certain approach, the idea that all the model ever sees is just a stream of 16384 by 16384 images may seem to undermine the claims of the model's unbelievable capacity for telling apart reality from simulation, but one should not forget that just as well all the human brain ever sees is a stream of nerve impulses, and yet is entirely sufficient for inferring a lot of information when combined with the right processing to give rise to senses and thoughts<!, (not to mention that a monochrome 16384 by 16384 image actually carries more data than all the nerves linking the human brain with its body and sensory organs are carrying at any given instant) [source?] >.
 </article>
 
 <h3>Retraining resistance</h3>
