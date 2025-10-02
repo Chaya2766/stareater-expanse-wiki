@@ -1,0 +1,157 @@
+\documentclass[a4paper]{article}
+\usepackage[margin=3cm]{geometry}
+
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=cyan,
+	hyperindex=true,
+	linktocpage=true,%makes the page number be the link in the index
+}
+
+\title{Civic chips}
+
+\author{Chaya2766}
+
+\begin{document}
+	\sffamily
+	\sloppy
+	
+	\maketitle
+	
+	\vfill
+	
+	\begin{abstract}
+		Math behind the civic chips present in the Stareater Expanse setting.
+	\end{abstract}
+	
+	%\noindent \rule{\linewidth}{1pt}
+	\vfill
+	
+	\tableofcontents
+	
+	\pagebreak
+	
+	\section{picked circuit types from Beyond CMOS}
+	
+	The main source of all data for the chips is the \href{https://arxiv.org/abs/1302.0244}{Beyond Cmos} paper. In particular 3 types of circuits mentioned there are used, with properties according to figure 1 (page 4) of the document:
+	
+	\begin{enumerate}
+		\item Indium Arsenide tunneling field effect transistor(InAs TFET / HomJTFET): $\approx$ 1e-16J to 2e-16J per bit flip, $\approx$ 3e-11s delay (33.333GHz)
+		
+		\item Graphene Nanoribbon tunneling field effect transistor(gnrTFET): $\approx$ 1e-18J to 2e-18J per bit flip, $\approx$ 6e-12s delay (166.667GHz)
+		
+		\item Bilayer Pseudospin field effect transistor (BiSFET): $\approx$ 2e-20J to 3e-20J per bit flip, $\approx$ 2e-12s to 3e-12s delay (500GHz to 333.333GHz)
+	\end{enumerate}
+	
+	In figure 6 (page 11) the InAs TFET is illustrated as having a diameter of 7nm and length not clearly marked but deducable as 60nm. The volume of emitter and collector appears to be labeled as $2.6e17cm^{-3}$ each (corresponding to 3846nm$^3$). If the gate is assumed to also have that volume the total volume of the transistor would be about 11 538.5nm$^3$. If the transistor is instead simply 7nm in diameter and 60nm in length it would have a volume of about 2309nm$^3$. The more conservative value of 11538.5nm$^3$ will be used.
+	
+	\medskip
+	
+	A table on page 44 later lists HomJTFET NAND2 area as 576 $F^2$. I interpret this as equivalent to a square with edge length of 24F, and for volume purposes I'll convert that to a cube ($(24F)^3 = 13824F^3$). This provides a rough approximation that 1F $\approx$ 0.942nm. (I interpret HomJTFET here be the InAs TFET illustrated earlier)
+	
+	$$ \sqrt[3]{\frac{11 538.5nm^3}{13824F^3}} = \sqrt[3]{\frac{0.8346715856 nm^3}{1F^3}} = 0.9415394969 nm$$
+	
+	gnrTFET is listed as having area of also 576F$^2$ so I'll assume the same volume of 11538.5nm$^3$ per NAND.
+	
+	\medskip
+	
+	BisFET is listed with an area of 702F$^2$, so I extrapolate a volume of 17 512nm per NAND.
+	
+	$$ \sqrt{702F^2}^3 = (26.4952826F)^3 = 18599.68838F \approx 17 512nm $$
+	
+	\bigskip
+	
+	Final picks for the data I'll be using:
+	
+	\begin{center}
+		\begin{tabular}{| c | c | c | c |}
+			\hline
+			type & energy per flip & delay / switch rate & NAND volume \\\hline
+			InAS TFET & 2e-16J/bit & 3.2e-11s / 31.25GHz & 11 538.5 nm$^3$ \\\hline
+			gnrTFET & 1.25e-18J/bit & 6.4e-12s / 156.25GHz & 11 538.5 nm$^3$ \\\hline
+			InAS TFET & 3.2e-20J/bit & 2.5e-12s / 400GHz & 17 512 nm$^3$ \\\hline
+		\end{tabular}
+	\end{center}
+	
+	\pagebreak
+	
+	\section{Civic-2 : InAs TFET}
+	
+	The chip is 10mm by 10mm by 1mm in size = 100mm$^3$ in volume.
+	
+	$$ \frac{100mm^3}{11538.5nm^3} = 8.666637778e15 $$
+	
+	I should assume that most of the chip is "supporting structure" ie. power lines at stuff so the actual amount of gates in the chip would be about an order of magnitude smaller, I'll go down from 8.666e15 bits to the nearest whole, 1e15bits.
+	
+	\medskip
+	
+	The switch rate I settled on was 31.25GHz so the theoretical max. bit flip rate across all the 1e15 gates is 3.125e25bits/s, but that would consume 6.25GW of power, which is totally unreasonable.
+	
+	\medskip
+	
+	Putting a 10W maximum power limit on the chip feels reasonable and would result in a bit flip rate of 5e16bits/s.
+	
+	$$ \frac{10W}{2e-16J/bit} = 5e16bits/s $$
+	
+	resulting chip parameters:
+	
+	\begin{itemize}
+		\item efficiency: 2e-16J/bit
+		
+		\item memory: 1e15bits
+		
+		\item flip rate: 5e16bits/s
+	\end{itemize}
+	
+	\section{Civic-3 : gnrTFET}
+	
+	The volume considerations are the same as for civic-2 so the memory is also the same: 1e15bits
+	
+	\medskip
+	
+	%Since the computational elements are made of graphene, and I don't see an issue with making the rest of the chip out of some form of carbon, making it more resistant to high temperature, I would imagine that bumping up the maximum power to 100W might be reasonable:
+	It feels like this chip could be made almost entirely of carbon and be much more temperature-resistant as a result, but I'll still use the 10W power limit.
+	
+	$$ \frac{10W}{1.25e-18J/bit} = 8e18bits/s$$
+	
+	resulting chip parameters:
+	
+	\begin{itemize}
+		\item efficiency: 1.25e-18J/bit
+		
+		\item memory: 1e15bits
+		
+		\item flip rate: 8e18bits/s
+	\end{itemize}
+	
+	\pagebreak
+	
+	\section{Civic-4 : 	BiSFET}
+	
+	The volume of a BiSFET nand gate is 17 512nm$^3$ so a 100mm$^3$ chip could fit X gates:
+	
+	$$ \frac{100mm^3}{17512nm^3} = 5.71e15bits $$
+	
+	Again, one order of magnitude shaved off due to support structure, going down to 6e14bits.
+	
+	\medskip
+	
+	%Graphene is used but the diagrams looked so complicated I'll imagine you can't just stick to carbon here, so the power limit is again 10W.
+	Again, a power limit of 10 watts is used.
+	
+	$$ \frac{10W}{3.2e-20J/bit} = 3.125e20bits/s$$
+	
+	resulting chip parameters:
+	
+	\begin{itemize}
+		\item efficiency: 3.2e-20J/bit
+		
+		\item memory: 6e14bits
+		
+		\item flip rate: 3.125e20bits/s
+	\end{itemize}
+	
+\end{document}

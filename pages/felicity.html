@@ -15,16 +15,24 @@ Felicity is a mind upload, member of the <a href="reminiscence_divergency.html">
 </article>
 <hr>
 <article>
-Minimal <a href="computation.html#computronium">computronium</a> requirements for nominal operation: 5.738e22 bits memory and 5.738e25bit/s processing
-<br>
+Minimal <a href="computation.html#computronium">computronium</a> requirements for nominal operation: 4.623e20 bits memory and 5.738e25bit/s processing
+<br><!--
 <table class="styled-table" style="margin: 10 auto;">
-  <tr><th colspan=6>hardware requirement examples</th></tr>
+  <tr><th colspan=6>hardware requirement examples <span class="warning">outdated</span></th></tr>
   <tr><td></td> <td>number needed</td><td>power draw</td><td>bare substrate volume</td><td>main constraint</td><td>general?</td></tr>
   <tr><td>Civic-2 chip</td><td>1 147 600 000</td><td>11.476 GW</td><td>114.76m<sup>3</sup></td><td>processing</td><td>yes</td></tr>
   <tr><td>Civic-3 chip</td><td>28 690 000</td><td>71.725 MW</td><td>2.869m<sup>3</sup></td><td>memory</td><td>yes</td></tr>
   <tr><td>Civic-4 chip</td><td>57 380 000</td><td>1.83616 MW</td><td>5.738m<sup>3</sup></td><td>memory</td><td>yes</td></tr>
-  <!--<tr><td>Civic-5 chip <sub class="warning">(wip)</sub></td><td>6</td><td>5.738 W</td><td>0.000 000 6m<sup>3</sup></td><td>memory</td><td>yes</td></tr>-->
+  <tr><td>Civic-5 chip <sub class="warning">(wip)</sub></td><td>6</td><td>5.738 W</td><td>0.000 000 6m<sup>3</sup></td><td>memory</td><td>yes</td></tr>
   <tr><td>custom photonic core</td><td>25 477</td><td>8 MW</td><td>305.724m<sup>3</sup></td><td>memory</td><td>no</td></tr>
+</table>-->
+
+<table class="styled-table" style="margin: 10 auto;">
+  <tr><th colspan=6>hardware requirement examples</th></tr>
+  <tr><td></td><td>number needed</td><td>power draw</td><td>bare substrate volume</td><td>processing used</td><td>memory used</td></tr>
+  <tr><td>Civic-2 chip</td><td>1 147 600 000</td><td>11.476 GW</td><td>114.76m<sup>3</sup></td><td>100%</td><td>0.04%</td></tr>
+  <tr><td>Civic-3 chip</td><td>7 172 500</td><td>71.725 MW</td><td>0.71725m<sup>3</sup><td>100%</td><td>6.445%</td></tr>
+  <tr><td>Civic-4 chip</td><td>770 500</td><td>1.83616 MW</td><td>0.07705m<sup>3</sup><td>23.83%</td><td>100%</td></tr>
 </table>
 
 Felicity is a memory hog due to the structure of her mind. Each bit of it is processed only 1000 times per second when her mind runs at realtime speed, massively under-utilizing the available computation rate of most substrates.

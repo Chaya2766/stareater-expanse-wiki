@@ -18,14 +18,14 @@ Although UEIA tends to not see itself as a person by default, it does tend to de
 
 <hr>
 <article>
-Minimal <a href="computation.html#computronium">computronium</a> requirements for nominal operation: 2.236e18 bits memory and 2.236e20bit/s processing
+Minimal <a href="computation.html#computronium">computronium</a> requirements for nominal operation: 1.81e16 bits memory and 2.236e20bit/s processing
 <br>
 <table class="styled-table" style="margin: 10 auto;">
   <tr><th colspan=6>hardware requirement examples</th></tr>
   <tr><td></td><td>number needed</td><td>power draw</td><td>bare substrate volume</td><td>processing used</td><td>memory used</td></tr>
-  <tr><td>Civic-2 chip</td><td>4472</td><td>44.72kW</td><td>0.0004472m<sup>3</sup></td><td>100%</td><td>25%</td></tr>
-  <tr><td>Civic-3 chip</td><td>1118</td><td>279.5W</td><td>0.0001118m<sup>3</sup><td>2.5%</td><td>100%</td></tr>
-  <tr><td>Civic-4 chip</td><td>2236</td><td>7.1552W</td><td>0.0002236m<sup>3</sup><td>0.032%</td><td>100%</td></tr>
+  <tr><td>Civic-2 chip</td><td>4472</td><td>44.72kW</td><td>447.2cm<sup>3</sup></td><td>100%</td><td>0.405%</td></tr>
+  <tr><td>Civic-3 chip</td><td>28</td><td>279.5W</td><td>2.8cm<sup>3</sup><td>64.34%</td><td>99.82%</td></tr>
+  <tr><td>Civic-4 chip</td><td>31</td><td>7.1552W</td><td>3.1cm<sup>3</sup><td>2.3%</td><td>96.85%</td></tr>
 </table>
 <br>
 The minimal requirement for processing is only for the purpose of operating in realtime using a robotic body and corresponds to 100 inferences per second, in practice UEIA could run much slower and still do well in tasks like conversation, or run much faster as needed if excess processing is available.<!-- These figures also assume the model is running with full 16-bit precision, which might not necessarily be the case, as for example quantizing it down to 4-bit variables enables it to fit on just 92 chips at horrible cost in mental performance, consult the conversion table on the <a href="computation.html#bitflips">computation</a> page for custom estimates.-->

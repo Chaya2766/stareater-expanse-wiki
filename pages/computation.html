@@ -60,6 +60,12 @@ In contrast to that, there is specialized hardware, which is only capable of pre
 </table>
 
 <article>
+In terms of memory, any n-bit variable will generally just take up n bits, for example a neural network program might have a million 16-bit weights but in theory only really needs one MAC circuit, in practice will likely have several of them, so for most of the program each weight simply takes up 16 bits, and the small overhead from the actual software-defined circuits that also need to be loaded into memory to process them can be accounted for by a little upwards rounding at the second or third decimal place.
+</article>
+
+<br><br>
+
+<article>
 Other units one may encounter when dealing with computation, computer hardware and software:
 
 <ul>
