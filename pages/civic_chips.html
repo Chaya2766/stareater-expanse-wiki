@@ -84,6 +84,88 @@ max. power consumption: 10W
 
 </div>
 
+<hr>
+<div class="meta">
+
+<h1 id="calculator">Required chip number calculator</h1>
+
+<article>If you know the memory and flip rate requirements you can plug them in here and you'll get the table below tailored to the minimum number of chips needed. Checking "focus on memory" will disregard the flip rate requirement when calculating the number of chips needed, and may consequently result in processing use above 100%, which may be interpreted as the program running that many times slower.</article>
+
+<div style="margin-top: 30;"><article>
+memory: <input type="number" value="1.81e16" id="mem_req" onchange="recalculate_table()"></input>bits, flip rate: <input type="number" value="2.236e20" id="flip_req" onchange="recalculate_table()"></input> bits/s (<input type="checkbox" checled=false id="mem_focus" onchange="recalculate_table()"></input> only focus on memory)
+</article></div>
+
+<table class="styled-table" style="margin: 10 auto;">
+  <tr><th colspan=6>civic chip requirements</th></tr>
+  <tr><td></td><td>number needed</td><td>power draw</td><td>bare substrate volume</td><td id="processing">processing used</td><td>memory used</td></tr>
+  <tr><td>Civic-2 chip</td><td id="num_c2">4472</td><td id="pow_use_c2">44.72kW</td><td id="vol_c2">447.2cm<sup>3</sup></td><td id="flip_use_c2">100%</td><td id="mem_use_c2">0.405%</td></tr>
+  <tr><td>Civic-3 chip</td><td id="num_c3">28</td><td id="pow_use_c3">279.5W</td><td id="vol_c3">2.8cm<sup>3</sup><td id="flip_use_c3">64.34%</td><td id="mem_use_c3">99.82%</td></tr>
+  <tr><td>Civic-4 chip</td><td id="num_c4">31</td><td id="pow_use_c4">7.1552W</td><td id="vol_c4">3.1cm<sup>3</sup><td id="flip_use_c4">2.3%</td><td id="mem_use_c4">96.85%</td></tr>
+</table>
+
+<script>
+function recalculate_table(){
+  mem_req = document.getElementById("mem_req").value;
+  flip_req = document.getElementById("flip_req").value;
+  memory_focus = document.getElementById("mem_focus").checked;
+  console.log("recalculating table based on flip rate "+mem_req+"bits and flip rate "+flip_req+"bits/s, memory focus "+memory_focus);
+  
+  c2_mem = 1e15;  c3_mem = 1e15;    c4_mem = 6e14;
+  c2_flip = 5e16; c3_flip = 8e18;   c4_flip = 3.125e20;
+  c2_eff = 2e-16; c3_eff = 1.25e-18;c4_eff = 3.2e-20;
+  
+  c2_flip_need = Math.ceil(flip_req/c2_flip);
+  c3_flip_need = Math.ceil(flip_req/c3_flip);
+  c4_flip_need = Math.ceil(flip_req/c4_flip);
+  
+  c2_mem_need = Math.ceil(mem_req/c2_mem);
+  c3_mem_need = Math.ceil(mem_req/c3_mem);
+  c4_mem_need = Math.ceil(mem_req/c4_mem);
+  
+  if(memory_focus == true){
+    c2_need = c2_mem_need;
+    c3_need = c3_mem_need;
+    c4_need = c4_mem_need;
+    //document.getElementById("processing").innerHTML = "underclock factor";
+  } else {
+    c2_need = Math.max(c2_flip_need,c2_mem_need);
+    c3_need = Math.max(c3_flip_need,c3_mem_need);
+    c4_need = Math.max(c4_flip_need,c4_mem_need);
+    //document.getElementById("processing").innerHTML = "processing used";
+  }
+  
+  document.getElementById("num_c2").innerHTML = c2_need;
+  document.getElementById("num_c3").innerHTML = c3_need;
+  document.getElementById("num_c4").innerHTML = c4_need;
+  
+  c2_flip_available = c2_need * c2_flip;  c2_mem_available = c2_need * c2_mem;
+  c3_flip_available = c3_need * c3_flip;  c3_mem_available = c3_need * c3_mem;
+  c4_flip_available = c4_need * c4_flip;  c4_mem_available = c4_need * c4_mem;
+  
+  c2_flip_use = flip_req/c2_flip_available; c2_mem_use = mem_req/c2_mem_available;
+  document.getElementById("flip_use_c2").innerHTML = (c2_flip_use*100).toFixed(2) + "%";
+  document.getElementById("mem_use_c2").innerHTML = (c2_mem_use*100).toFixed(2) + "%";
+  document.getElementById("vol_c2").innerHTML = (c2_need * 1e-7).toExponential(3) + "m<sup>3</sup>";
+  document.getElementById("pow_use_c2").innerHTML = (c2_flip_use * c2_flip_available * c2_eff).toExponential(3) + "W";
+  //if(memory_focus == true){document.getElementById("flip_use_c2").innerHTML = 1/c2_flip_use;}
+  
+  c3_flip_use = flip_req/c3_flip_available; c3_mem_use = mem_req/c3_mem_available;
+  document.getElementById("flip_use_c3").innerHTML = (c3_flip_use*100).toFixed(2) + "%";
+  document.getElementById("mem_use_c3").innerHTML = (c3_mem_use*100).toFixed(2) + "%";
+  document.getElementById("vol_c3").innerHTML = (c3_need * 1e-7).toExponential(3) + "m<sup>3</sup>";
+  document.getElementById("pow_use_c3").innerHTML = (c3_flip_use * c3_flip_available * c3_eff).toExponential(3) + "W";
+  //if(memory_focus == true){document.getElementById("flip_use_c3").innerHTML = 1/c3_flip_use;}
+  
+  c4_flip_use = flip_req/c4_flip_available; c4_mem_use = mem_req/c4_mem_available;
+  document.getElementById("flip_use_c4").innerHTML = (c4_flip_use*100).toFixed(2) + "%";
+  document.getElementById("mem_use_c4").innerHTML = (c4_mem_use*100).toFixed(2) + "%";
+  document.getElementById("vol_c4").innerHTML = (c4_need * 1e-7).toExponential(3) + "m<sup>3</sup>";
+  document.getElementById("pow_use_c4").innerHTML = (c4_flip_use * c4_flip_available * c4_eff).toExponential(3) + "W";
+  //if(memory_focus == true){document.getElementById("flip_use_c4").innerHTML = 1/c4_flip_use;}
+}
+</script>
+
+</div>
 <h1 class="division">relevant pages</h1>
 
 <div class="card">
