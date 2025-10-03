@@ -36,7 +36,7 @@
 	
 	\section{picked circuit types from Beyond CMOS}
 	
-	The main source of all data for the chips is the \href{https://arxiv.org/abs/1302.0244}{Beyond Cmos} paper. In particular 3 types of circuits mentioned there are used, with properties according to figure 1 (page 4) of the document:
+	The main source of all data for the chips is the \href{https://arxiv.org/abs/1302.0244}{Beyond Cmos} paper. Properties of the picked circuit types according to figure 1 (page 4) of the document:
 	
 	\begin{enumerate}
 		\item Indium Arsenide tunneling field effect transistor(InAs TFET / HomJTFET): $\approx$ 1e-16J to 2e-16J per bit flip, $\approx$ 3e-11s delay (33.333GHz)
@@ -44,6 +44,8 @@
 		\item Graphene Nanoribbon tunneling field effect transistor(gnrTFET): $\approx$ 1e-18J to 2e-18J per bit flip, $\approx$ 6e-12s delay (166.667GHz)
 		
 		\item Bilayer Pseudospin field effect transistor (BiSFET): $\approx$ 2e-20J to 3e-20J per bit flip, $\approx$ 2e-12s to 3e-12s delay (500GHz to 333.333GHz)
+		
+		\item Spin Torque Majority Gate (SMG): $\approx$ 8e-14J/bit, $\approx$ 3e-9s delay (333.333MHz)
 	\end{enumerate}
 	
 	In figure 6 (page 11) the InAs TFET is illustrated as having a diameter of 7nm and length not clearly marked but deducable as 60nm. The volume of emitter and collector appears to be labeled as $2.6e17cm^{-3}$ each (corresponding to 3846nm$^3$). If the gate is assumed to also have that volume the total volume of the transistor would be about 11 538.5nm$^3$. If the transistor is instead simply 7nm in diameter and 60nm in length it would have a volume of about 2309nm$^3$. The more conservative value of 11538.5nm$^3$ will be used.
@@ -52,15 +54,21 @@
 	
 	A table on page 44 later lists HomJTFET NAND2 area as 576 $F^2$. I interpret this as equivalent to a square with edge length of 24F, and for volume purposes I'll convert that to a cube ($(24F)^3 = 13824F^3$). This provides a rough approximation that 1F $\approx$ 0.942nm. (I interpret HomJTFET here be the InAs TFET illustrated earlier)
 	
-	$$ \sqrt[3]{\frac{11 538.5nm^3}{13824F^3}} = \sqrt[3]{\frac{0.8346715856 nm^3}{1F^3}} = 0.9415394969 nm$$
+	$$ \sqrt[3]{\frac{11 538.5nm^3}{13824F^3}} = \sqrt[3]{\frac{0.8346715856 nm^3}{1F^3}} = 0.9415394969 nm/F$$
+	
+	1F = 0.9415394969 nm , 1F$^2$ = 0.8864966242 nm$^2$ , 1F$^3$ = 0.8346715856 nm$^3$
+	
+	\medskip
 	
 	gnrTFET is listed as having area of also 576F$^2$ so I'll assume the same volume of 11538.5nm$^3$ per NAND.
 	
 	\medskip
 	
-	BisFET is listed with an area of 702F$^2$, so I extrapolate a volume of 17 512nm per NAND.
+	BisFET is listed with an area of 702F$^2$, so I extrapolate a volume of 15 524.6nm$^3$ per NAND.
 	
-	$$ \sqrt{702F^2}^3 = (26.4952826F)^3 = 18599.68838F \approx 17 512nm $$
+	$$ \sqrt{702F^2}^3 = (26.4952826F)^3 = 18599.68838F^3 \approx 15 524.63140 nm^3 $$
+	
+	By the same method SMG (listed as 64F$^2$) gets a volume of 427.352 nm$^3$
 	
 	\bigskip
 	
@@ -72,7 +80,8 @@
 			type & energy per flip & delay / switch rate & NAND volume \\\hline
 			InAS TFET & 2e-16J/bit & 3.2e-11s / 31.25GHz & 11 538.5 nm$^3$ \\\hline
 			gnrTFET & 1.25e-18J/bit & 6.4e-12s / 156.25GHz & 11 538.5 nm$^3$ \\\hline
-			InAS TFET & 3.2e-20J/bit & 2.5e-12s / 400GHz & 17 512 nm$^3$ \\\hline
+			InAS TFET & 3.2e-20J/bit & 2.5e-12s / 400GHz & 15 524.6nm$^3$ \\\hline
+			SMG & 8e-14J/bit & 3.2e-9s / 312.5MHz & 427.352 nm$^3$ \\\hline
 		\end{tabular}
 	\end{center}
 	
@@ -131,9 +140,9 @@
 	
 	\section{Civic-4 : 	BiSFET}
 	
-	The volume of a BiSFET nand gate is 17 512nm$^3$ so a 100mm$^3$ chip could fit X gates:
+	The volume of a BiSFET nand gate is 15 524.6nm$^3$ so a 100mm$^3$ chip could fit 6.441e15 gates:
 	
-	$$ \frac{100mm^3}{17512nm^3} = 5.71e15bits $$
+	$$ \frac{100mm^3}{15 524.6nm^3/bit} = 6.441389794e15 bits $$
 	
 	Again, one order of magnitude shaved off due to support structure, going down to 6e14bits.
 	
@@ -152,6 +161,30 @@
 		\item memory: 6e14bits
 		
 		\item flip rate: 3.125e20bits/s
+	\end{itemize}
+	
+	\section{Civic-5 : SMG}
+	
+	The volume of an SMG nand gate is 427.352 nm$^3$ so a 100mm$^3$ chip could fit 2.339e17 gates.
+	
+	$$ \frac{100mm^3}{427.352nm^3/bit} = 2.339991389e17 bits $$
+	
+	\noindent Just as before, one order of magnitude shaved off by the support structure, going down to 2.4e16 bits.
+	
+	\medskip
+	
+	The switching rate of this type of gate is just 312.5MHz, given 2e16 gates that would correspond to a flip rate of 6.25e24bits/s. Given the efficiency of 8e-14J/bit this flip rate would take 500GW to achieve. A 10 watt limit is used again for simplicity.
+	
+	$$ \frac{10W}{8e-14J/bit} = 1.25e14bits/s$$
+	
+	resulting chip parameters:
+	
+	\begin{itemize}
+		\item efficiency: 8e-14J/bit
+		
+		\item memory: 2.4e16bits
+		
+		\item flip rate: 1.25e14bits/s
 	\end{itemize}
 	
 \end{document}

@@ -17,9 +17,9 @@ module civic5(pins=true,cover=true){
         }
         color([0.6,0.6,0.6]){translate([0,0,1.1]){linear_extrude(0.01){
             translate([1,6.5,1]){text("Civic5",size=2);}
-            translate([1,5.25,1]){text("1e26bit/s",size=0.75);}
-            translate([1,4.25,1]){text("1e22bit",size=0.75);}
-            translate([1,3.25,1]){text("1e-25J/bit",size=0.75);}
+            translate([1,5.25,1]){text("1.25e14bit/s",size=0.75);}
+            translate([1,4.25,1]){text("2.4e16bit",size=0.75);}
+            translate([1,3.25,1]){text("8e-14J/bit",size=0.75);}
             //translate([1,2.25,1]){text("I/O 2.07e13bit/s",size=0.75);}
             //translate([1,1.25,1]){text("16GHz",size=0.75);}
         }}}

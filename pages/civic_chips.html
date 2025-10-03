@@ -67,29 +67,28 @@ max. power consumption: 10W
 </article>
 
 <hr>
-<div class="soft">
 
-<h1>Civic 5 <span class="warning">work in progress</span></h1>
+<h1>Civic 5</h1>
 <img src="../images/civic5.png" style="max-width: 50%; max-height: 600px; float: right;"></img>
 <article>
-(Civic 5 is to be written based on theoretical technologies pushed to their limits.)
+Civic 5 is a departure from chasing ever higher efficiency, instead focusing on memory. The Civic 5 makes use of spintronic gates that can be made much smaller than the ones used in previous chips, allowing massively more of them to be packed into a single chip.
+For practical uses the Civic 5 is closer to a solid state hard drive, as the previous chips dwarf it by orders of magnitude in flip rate and efficiency, though that may be the case it still provides the ability to load arbitrary circuits into it and perform computation, delivering computing power and efficiency roughly on par with the ancient GPUs the early terran artificial intelligences were trained and ran on.
+Due to the relatively low efficiency and large memory of the chip, completely filling its memory with data or software-defined circuitry will consume no less than 1920 joules of energy. On the plus side, as spintronic circuits tend to not be volatile, the chip can greatly decrease space requirements when used with other civic chips and delegated for storing data which is rarely accessed.
+The chip is also potentially useful for programs which have immense memory requirements yet fairly small processing requirements, such as among other things intelligences wishing to run themselves in smallest possible form factor for extreme lengths of time.
+For example, the chip can on its own fit the entire <a href="UEIA.html">UEIA</a> model and run it, at the cost of running 1 788 800 times slower than the recommended inference rate.
 <br><br>
-Civic 5 appeared as the newest addition to the civic chip family after the project had already been dormant for a couple centuries, with the chips 1 through 4 largely thought of as optimal designs. It is an especially odd addition as it appears to have been a completely different project that was pulled in and adapted for compatibility with the previous chips. The internals of the Civic-5 require assembly with nearly perfect precision placement of single atoms, particularly due to the extensive use of precisely tuned quantum dots, mostly ruling out any known methods to mass-produce the chip, which makes it one of the few goods worth trading across interstellar distances.
-<br><br>
-computation rate: 1e26 bit/s<br>
-memory: 1e22 bit<br>
-efficiency: 1e-25 J/bit<br>
+computation rate: 1.25e14 bit/s<br>
+memory: 2.4e16 bit<br>
+efficiency: 8e-14J/bit<br>
 max. power consumption: 10W
 </article>
 
-</div>
 
 <hr>
-<div class="meta">
 
 <h1 id="calculator">Required chip number calculator</h1>
 
-<article>If you know the memory and flip rate requirements you can plug them in here and you'll get the table below tailored to the minimum number of chips needed. Checking "focus on memory" will disregard the flip rate requirement when calculating the number of chips needed, and may consequently result in processing use above 100%, which may be interpreted as the program running that many times slower.</article>
+<article>If you know the memory and flip rate requirements you can plug them in here and you'll get the table below tailored to the minimum number of chips needed. Checking "focus on memory" will disregard the flip rate requirement and use the smallest number of chips required to fit the whole program, which may consequently result in processing use above 100%, which will be converted to underclock, ie. how many times slower the program has to run to fit within the computational power delivered by the chip. If the underclock is 1, the program can run at full speed.</article>
 
 <div style="margin-top: 30;"><article>
 memory: <input type="number" value="1.81e16" id="mem_req" onchange="recalculate_table()"></input>bits, flip rate: <input type="number" value="2.236e20" id="flip_req" onchange="recalculate_table()"></input> bits/s (<input type="checkbox" checled=false id="mem_focus" onchange="recalculate_table()"></input> only focus on memory)
@@ -101,6 +100,7 @@ memory: <input type="number" value="1.81e16" id="mem_req" onchange="recalculate_
   <tr><td>Civic-2 chip</td><td id="num_c2">4472</td><td id="pow_use_c2">44.72kW</td><td id="vol_c2">447.2cm<sup>3</sup></td><td id="flip_use_c2">100%</td><td id="mem_use_c2">0.405%</td></tr>
   <tr><td>Civic-3 chip</td><td id="num_c3">28</td><td id="pow_use_c3">279.5W</td><td id="vol_c3">2.8cm<sup>3</sup><td id="flip_use_c3">64.34%</td><td id="mem_use_c3">99.82%</td></tr>
   <tr><td>Civic-4 chip</td><td id="num_c4">31</td><td id="pow_use_c4">7.1552W</td><td id="vol_c4">3.1cm<sup>3</sup><td id="flip_use_c4">2.3%</td><td id="mem_use_c4">96.85%</td></tr>
+  <tr><td>Civic-5 chip</td><td id="num_c5">-</td><td id="pow_use_c5">-</td><td id="vol_c5">-<td id="flip_use_c5">-</td><td id="mem_use_c5">-</td></tr>
 </table>
 
 <script>
@@ -110,62 +110,75 @@ function recalculate_table(){
   memory_focus = document.getElementById("mem_focus").checked;
   console.log("recalculating table based on flip rate "+mem_req+"bits and flip rate "+flip_req+"bits/s, memory focus "+memory_focus);
   
-  c2_mem = 1e15;  c3_mem = 1e15;    c4_mem = 6e14;
-  c2_flip = 5e16; c3_flip = 8e18;   c4_flip = 3.125e20;
-  c2_eff = 2e-16; c3_eff = 1.25e-18;c4_eff = 3.2e-20;
+  c2_mem = 1e15;    c2_flip = 5e16;     c2_eff = 2e-16;
+  c3_mem = 1e15;    c3_flip = 8e18;     c3_eff = 1.25e-18;
+  c4_mem = 6e14;    c4_flip = 3.125e20; c4_eff = 3.2e-20;
+  c5_mem = 2.4e16;  c5_flip = 1.25e14;  c5_eff = 8e-14;
   
   c2_flip_need = Math.ceil(flip_req/c2_flip);
   c3_flip_need = Math.ceil(flip_req/c3_flip);
   c4_flip_need = Math.ceil(flip_req/c4_flip);
+  c5_flip_need = Math.ceil(flip_req/c5_flip);
   
   c2_mem_need = Math.ceil(mem_req/c2_mem);
   c3_mem_need = Math.ceil(mem_req/c3_mem);
   c4_mem_need = Math.ceil(mem_req/c4_mem);
+  c5_mem_need = Math.ceil(mem_req/c5_mem);
   
   if(memory_focus == true){
     c2_need = c2_mem_need;
     c3_need = c3_mem_need;
     c4_need = c4_mem_need;
-    //document.getElementById("processing").innerHTML = "underclock factor";
+    c5_need = c5_mem_need;
+    document.getElementById("processing").innerHTML = "underclock";
   } else {
     c2_need = Math.max(c2_flip_need,c2_mem_need);
     c3_need = Math.max(c3_flip_need,c3_mem_need);
     c4_need = Math.max(c4_flip_need,c4_mem_need);
-    //document.getElementById("processing").innerHTML = "processing used";
+    c5_need = Math.max(c5_flip_need,c5_mem_need);
+    document.getElementById("processing").innerHTML = "processing used";
   }
   
   document.getElementById("num_c2").innerHTML = c2_need;
   document.getElementById("num_c3").innerHTML = c3_need;
   document.getElementById("num_c4").innerHTML = c4_need;
+  document.getElementById("num_c5").innerHTML = c5_need;
   
   c2_flip_available = c2_need * c2_flip;  c2_mem_available = c2_need * c2_mem;
   c3_flip_available = c3_need * c3_flip;  c3_mem_available = c3_need * c3_mem;
   c4_flip_available = c4_need * c4_flip;  c4_mem_available = c4_need * c4_mem;
+  c5_flip_available = c5_need * c5_flip;  c5_mem_available = c5_need * c5_mem;
   
-  c2_flip_use = flip_req/c2_flip_available; c2_mem_use = mem_req/c2_mem_available;
+  c2_flip_use = Math.min(1,flip_req/c2_flip_available); c2_mem_use = mem_req/c2_mem_available;
   document.getElementById("flip_use_c2").innerHTML = (c2_flip_use*100).toFixed(2) + "%";
   document.getElementById("mem_use_c2").innerHTML = (c2_mem_use*100).toFixed(2) + "%";
   document.getElementById("vol_c2").innerHTML = (c2_need * 1e-7).toExponential(3) + "m<sup>3</sup>";
   document.getElementById("pow_use_c2").innerHTML = (c2_flip_use * c2_flip_available * c2_eff).toExponential(3) + "W";
-  //if(memory_focus == true){document.getElementById("flip_use_c2").innerHTML = 1/c2_flip_use;}
+  if(memory_focus == true){document.getElementById("flip_use_c2").innerHTML = Math.max(1,(flip_req/c2_flip_available).toFixed(2));}
   
-  c3_flip_use = flip_req/c3_flip_available; c3_mem_use = mem_req/c3_mem_available;
+  c3_flip_use = Math.min(1,flip_req/c3_flip_available); c3_mem_use = mem_req/c3_mem_available;
   document.getElementById("flip_use_c3").innerHTML = (c3_flip_use*100).toFixed(2) + "%";
   document.getElementById("mem_use_c3").innerHTML = (c3_mem_use*100).toFixed(2) + "%";
   document.getElementById("vol_c3").innerHTML = (c3_need * 1e-7).toExponential(3) + "m<sup>3</sup>";
   document.getElementById("pow_use_c3").innerHTML = (c3_flip_use * c3_flip_available * c3_eff).toExponential(3) + "W";
-  //if(memory_focus == true){document.getElementById("flip_use_c3").innerHTML = 1/c3_flip_use;}
+  if(memory_focus == true){document.getElementById("flip_use_c3").innerHTML = Math.max(1,(flip_req/c3_flip_available).toFixed(2));}
   
-  c4_flip_use = flip_req/c4_flip_available; c4_mem_use = mem_req/c4_mem_available;
+  c4_flip_use = Math.min(1,flip_req/c4_flip_available); c4_mem_use = mem_req/c4_mem_available;
   document.getElementById("flip_use_c4").innerHTML = (c4_flip_use*100).toFixed(2) + "%";
   document.getElementById("mem_use_c4").innerHTML = (c4_mem_use*100).toFixed(2) + "%";
   document.getElementById("vol_c4").innerHTML = (c4_need * 1e-7).toExponential(3) + "m<sup>3</sup>";
   document.getElementById("pow_use_c4").innerHTML = (c4_flip_use * c4_flip_available * c4_eff).toExponential(3) + "W";
-  //if(memory_focus == true){document.getElementById("flip_use_c4").innerHTML = 1/c4_flip_use;}
+  if(memory_focus == true){document.getElementById("flip_use_c4").innerHTML = Math.max(1,(flip_req/c4_flip_available).toFixed(2));}
+  
+  c5_flip_use = Math.min(1,flip_req/c5_flip_available); c5_mem_use = mem_req/c5_mem_available;
+  document.getElementById("flip_use_c5").innerHTML = (c5_flip_use*100).toFixed(2) + "%";
+  document.getElementById("mem_use_c5").innerHTML = (c5_mem_use*100).toFixed(6) + "%";
+  document.getElementById("vol_c5").innerHTML = (c5_need * 1e-7).toExponential(3) + "m<sup>3</sup>";
+  document.getElementById("pow_use_c5").innerHTML = (c5_flip_use * c5_flip_available * c5_eff).toExponential(3) + "W";
+  if(memory_focus == true){document.getElementById("flip_use_c5").innerHTML = Math.max(1,(flip_req/c5_flip_available).toFixed(2));}
 }
 </script>
 
-</div>
 <h1 class="division">relevant pages</h1>
 
 <div class="card">
