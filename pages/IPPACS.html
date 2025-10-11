@@ -1,0 +1,46 @@
+<head>
+ <link rel="stylesheet" href="../index.css"></link>
+</head>
+<html class="background2" id="page">
+<a style="float: right;" target="_blank" href="../index.html?page=pages/IPPACS.html">link to this page</a>
+
+<h1>InterPlanetary Positioning And Communication System</h1>
+<hr>
+
+<img src="../images/card_placeholder.png" class="basics"></img>
+<article class="basics">
+IPPACS is a self-configuring network that enables position-finding, communication and to a limited extent also timekeeping.
+<br><br>
+The self-configuring nature of the network makes it a common tool among explorers going where nobody had gone before, be it distant space, underground, underwater or through wreckage of formerly functional infrastructure, but there is little argument that it could rival actual intelligently laid out and configured, dedicated positioning and communication systems in terms of accuracy and bandwidth.
+<br><br>
+<span class="meta">I am heavily inspired by the modern, real world <a href="https://ipfs.tech/" target="_blank">InterPlanetary File System</a>.</span>
+</article>
+
+<hr>
+
+<h3>Location and Timekeeping</h3>
+<article>
+IPPACS system uses spacetime coordinates instead of describing locations or moments in time separately. The system has a protocolized method for deriving location from time reported by other nodes.
+<br><br>
+As a basis, the system relies on naturally occurring pulsars for timekeeping, which is not as accurate as using purpose-made artificial clocks, but reliably allows different nodes to achieve consensus on where and when they are in relation to each other. Since light takes time to travel, moving away from a clock inherently causes it to appear to be late, which forms the basis of how IPPACS nodes locate themselves. By having a number of clocks at different points in space, and noting down the times each of them appear to have from your position, you can determine your distance from each of them and derive your own location. If you also assume all these clocks are synchronized, through this same method you could derive your moment in time. This forms the spacetime coordinates used in IPPACS, which have a very useful property that when two events are recorded with a spacetime location, it is very easy to derive whether or not the two events could have influenced each other, as well as the exact amount of time separation accounted for light lag between them.
+<br><br>
+Under the surface the IPPACS nodes actually create a model of the cosmically significant objects such as planets, stars, black holes, etc., their orbits, gravitational fields and relativistic effects to be able to maintain consensus on what is where and when. Otherwise the locations and times reported by the system would be off or completely nonsensical due to these influences, not to mention severe difficulty bootstrapping to the system. A trick borrowed by the GPS system that IPPACS also uses, is that whenever a node broadcasts its time, location, dilation and other information necessary to derive your own location and time relative to it, it also includes a packet of data specifying the location of one other randomly picked nearby IPPACS node that it knows about, allowing you to gradually gather connections to other nodes and build a picture of the whole system.
+<br><br>
+Even though the system is specifically referred to as "interplanetary", there is nothing stopping the system from being expanded across numerous star systems, especially in case of 2 star systems with present and overlapping oort clouds. The system will adapt just fine and can even handle being split into separate networks for long times before being joined back together. The critical requirement is that the networks being joined must have originally been part of the same network, or at least initiated with similar data, or else they might simply think all of the nodes making up the other network are malfunctioning and refuse to synchronize. In the general case, two separate networks can be joined together and their reported times will initially stay different, but over a long time simply gradually drift towards a consensus.
+</article>
+
+<h3>bandwidth with different communication media</h3>
+<article>
+bits per second that can be achieved with commonly available hardware and the IPPACS protocols at various distances.
+</article>
+<ul>
+  <li><b>Fiber-optic connection</b>: 4e14 bits/s (50TB/s) per fiber at up to 50km distance.</li>
+  <li><b>short-range Laser communication</b>: 2e11 bits/s (25GB/s) per discernable beam at ranges up to 1000km. Potentially enables surface-orbit communication but presence of a dense atmosphere or certain atmospheric conditions might make it ineffective.</li>
+  <li><b>long-range Laser communication</b>: 8e6 bits/s (1MB/s) per discernable beam at ranges around 2.25e11 metres (&approx; 750 lightseconds). The "discernable" requirement becomes significant here as even a swarm of satelites around an entire planet might be too close together to appear as separate beam sources at such huge distances.</li>
+  <li><b>short-range Radio communication</b>: 1e10 bits/s (1.25GB/s) at ranges around 10 metres. Bandwidth decreases with each device trying to communicate in the same area at the same time, since it is difficult to isolate radio signals at such distances.</li>
+  <li><b>long-range Radio communication</b>: 2e8 bits/s (25MB/s) at ranges around 10km, 2e7bits/s (2.5MB/s) at 100km, 2e6 bits/s (250kB/s) at 1000km. Potentially good surface-orbit communication option when laser comms not available, as it is much less vulnerable to being blocked by bad atmospheric conditions.</li>
+  <li><b>electrical conductor communication</b>: 1e9 bits/s (125MB/s) at or below 1km. The electrical conductor in question could also be carrying useful quantities of DC or low frequency AC electricity at the same time as the signal without interfering with the data transmission, so IPPACS can be easily integrated into power grids as a method of communication between power grid devices. The bandwidth will be divided between all the devices attempting to use the same continuous conductor for communication.</li>
+  <li><b>sonic data transmission</b>: 2e5 bits/s (25kB/s) at 1km in water. Bandwidth will be divided between devices trying to communicate since sonic data transmission is so notorious for interfering with one another.</li>
+</ul>
+
+</html>
