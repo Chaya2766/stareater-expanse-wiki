@@ -13,7 +13,7 @@ IPPACS is a self-configuring network that enables position-finding, communicatio
 <br><br>
 The self-configuring nature of the network makes it a common tool among explorers going where nobody had gone before, be it distant space, underground, underwater or through wreckage of formerly functional infrastructure, but there is little argument that it could rival actual intelligently laid out and configured, dedicated positioning and communication systems in terms of accuracy and bandwidth.
 <br><br>
-<span class="meta">I am heavily inspired by the modern, real world <a href="https://ipfs.tech/" target="_blank">InterPlanetary File System</a>.</span>
+<span class="meta">I am strongly inspired by the <a href="https://ipfs.tech/" target="_blank">InterPlanetary File System</a> as well as the <a href="https://wiki.bitmessage.org/">Bitmessage</a> protocol.</span>
 </article>
 
 <hr>
@@ -29,6 +29,25 @@ Under the surface the IPPACS nodes actually create a model of the cosmically sig
 Even though the system is specifically referred to as "interplanetary", there is nothing stopping the system from being expanded across numerous star systems, especially in case of 2 star systems with present and overlapping oort clouds. The system will adapt just fine and can even handle being split into separate networks for long times before being joined back together.
 The critical requirement is that the networks being joined must have originally been part of the same network, or at least initiated with similar data, or else they might simply think all of the nodes making up the other network are malfunctioning and refuse to synchronize.
 In general the time drift between IPPACS networks across different systems in the spider cluster is small enough that low-bandwidth interstellar laser communication is enough to keep the networks synchronized, much helped by the presence of pulsars within the cluster itself.
+</article>
+
+<h3>communication protocols</h3>
+<article>
+IPPACS packages all data into file-like containers addressed by either the hash of their contents, or a public key and the fitting cryptographic signatures.
+This is mostly a result of the system having originally been designed exclusively for file sharing and not realtime communication, and having ended up used in this way merely as a result of faster and faster computers allowing the computational overhead to become unnoticeable to people who took note of the extreme reliability of the system and decided to use it for realtime communication.
+<br><br>
+The hash of a file is entirely determined by the bits that make it up, and cannot be easily back-calculated other than by brute force.
+Creating two files with an identical hash in a reasonable time by simple brute force methods would require vastly more computing power than can be attained within the observable universe, so when a file is requested from the network by a hash, it is practically guaranteed that anyone, anywhere, anytime, who requests that file, will get the exact identical file (as long as it is available anywhere in the network).
+<br><br>
+The cryptographic signature is determined by the hash as well as by the key. Conventionally, a file can be identified by a public key, in which case, requesting a file for that public key will yield the most "recently"* signed file that has a signature valid for that key. Forging a cryptographic signature is similarly not easy, and would take vastly more computing power than the observable universe can provide, but the issue of verifying authenticity is more nuanced due to the possibility of signing keys being stolen. Although the software itself is technically free of exploits, one still has to consider the possibility of user error.
+<br><br>
+Whether a file is shared or requested, it has to be paired with a "proof of work", which is just a string of bits that, when added to the file, result in a much smaller hash value, combined with spacetime coordiantes to convey the age of the proof. The real value of the proof of work is weighed against the age of the file, so that a newer file with the same proof of work value has higher priority to be kept in the node's cache. This naturally results in more important files being more available, since when many devices are requesting a given file they will naturally end up updating its proof of work such that it is more likely to stay available in the nearby nodes. It also prevents people from clogging the network by flooding it with requests, as file requests with low proof of work will be given less priority and eventually be discarded by nodes when space is needed for other, newer requests. If the request does reach a node that has the requested file, and by chance it has a higher proof of work than that which is already attached to the file, it will become the new proof of work, thereby increasing the priority of that file.
+<br><br>
+In both cases, nodes that downloaded a given file, whether for their own use or because they were used as an intermediate between other nodes, will store a copy of that file if it has the storage space to do so. This means the network won't be crippled by someone repeatedly requesting large files, since the data will only have to traverse the network once before the closest nodes have their own copies. It also increases the availability of files where they are most relevant.
+<br><br>
+The priority of which files get transferred first is decided by their size as well as the attached proof of work - the smaller the file the higher priority it has, and also the bigger the attached proof of work the higher priority the file has. In practice this means that if someone wants a file to propagate across the network faster, they can easily do so at the cost of spending extra computing power. This creates competition in areas where demand for bandwidth is much larger than the available network througput, as people will perform more computation to ensure their most important messages are transferred first.
+<br><br>
+* "recently" is in quotes since determining simultaneity, order of events and exact chronology becomes difficult when dealing with astronomical distances and nontrivial fractions of light speed. The notion of "recently" here refers to time separation accounting for light lag, ie. if you sign a file right now, and 5 years ago in a location 5 light years away somebody else signs their file, the signatures of these files would have very different spacetime coordinates, but as far as your local viewpoint is concerned, these files would have been signed "at the same time" because the light lag across 5 light years exactly counteracts the time difference of 5 years.
 </article>
 
 <h3>bandwidth with different communication media</h3>
