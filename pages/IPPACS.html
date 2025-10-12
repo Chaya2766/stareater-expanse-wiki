@@ -7,7 +7,7 @@
 <h1>InterPlanetary Positioning And Communication System</h1>
 <hr>
 
-<img src="../images/card_placeholder.png" class="basics"></img>
+<img src="../images/IPPACS.png" class="basics"></img>
 <article class="basics">
 IPPACS is a self-configuring network that enables position-finding, communication and to a limited extent also timekeeping.
 <br><br>
@@ -26,7 +26,9 @@ As a basis, the system relies on naturally occurring pulsars for timekeeping, wh
 <br><br>
 Under the surface the IPPACS nodes actually create a model of the cosmically significant objects such as planets, stars, black holes, etc., their orbits, gravitational fields and relativistic effects to be able to maintain consensus on what is where and when. Otherwise the locations and times reported by the system would be off or completely nonsensical due to these influences, not to mention severe difficulty bootstrapping to the system. A trick borrowed by the GPS system that IPPACS also uses, is that whenever a node broadcasts its time, location, dilation and other information necessary to derive your own location and time relative to it, it also includes a packet of data specifying the location of one other randomly picked nearby IPPACS node that it knows about, allowing you to gradually gather connections to other nodes and build a picture of the whole system.
 <br><br>
-Even though the system is specifically referred to as "interplanetary", there is nothing stopping the system from being expanded across numerous star systems, especially in case of 2 star systems with present and overlapping oort clouds. The system will adapt just fine and can even handle being split into separate networks for long times before being joined back together. The critical requirement is that the networks being joined must have originally been part of the same network, or at least initiated with similar data, or else they might simply think all of the nodes making up the other network are malfunctioning and refuse to synchronize. In the general case, two separate networks can be joined together and their reported times will initially stay different, but over a long time simply gradually drift towards a consensus.
+Even though the system is specifically referred to as "interplanetary", there is nothing stopping the system from being expanded across numerous star systems, especially in case of 2 star systems with present and overlapping oort clouds. The system will adapt just fine and can even handle being split into separate networks for long times before being joined back together.
+The critical requirement is that the networks being joined must have originally been part of the same network, or at least initiated with similar data, or else they might simply think all of the nodes making up the other network are malfunctioning and refuse to synchronize.
+In general the time drift between IPPACS networks across different systems in the spider cluster is small enough that low-bandwidth interstellar laser communication is enough to keep the networks synchronized, much helped by the presence of pulsars within the cluster itself.
 </article>
 
 <h3>bandwidth with different communication media</h3>
