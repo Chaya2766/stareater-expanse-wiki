@@ -1,0 +1,151 @@
+\documentclass[a4paper]{article}
+\usepackage[margin=3cm]{geometry}
+
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=cyan,
+	hyperindex=true,
+	linktocpage=true,%makes the page number be the link in the index
+}
+
+\title{Computational bio-engineering}
+
+\author{Chaya2766}
+
+\begin{document}
+	\sffamily
+	\sloppy
+	
+	\maketitle
+	
+	\vfill
+	
+	\begin{abstract}
+		Approximation of the computational power required for in-software simulation of effects of genetic engineering on reasonable timescales for the needs of the Stareater Expanse setting.
+		
+		\medskip
+		
+		3 levels of abstraction are considered: cellular, molecular and subatomic.
+		
+		\medskip
+		
+		Cellular-level abstraction is estimated to require 1.24e10 bits of memory and 6.075e19 bits/s of flip rate per cell for a realtime simulation. This is far too much for any useful simulation size to be performed within a person's cybernetic implants, but likely enough for larger computational clusters to make useful predictions on matters such as organ rejection.
+	\end{abstract}
+	
+	%\noindent \rule{\linewidth}{1pt}
+	\vfill
+	
+	\tableofcontents
+	
+	\pagebreak
+	
+	\section{Possible levels of abstraction}
+	
+	The required detail of simulation may differ, here are some main possibilities I forsee and how likely I rate them:
+	
+	\begin{enumerate}
+		\item One can decide on the changes they want made to an organism and then elegantly solve for the genetic modifications needed to achieve them. To me this is extremely unlikely, but may be possible in a scenario where a database already exists that can tell you what genetic modification results in what changes to the organism. My very limited knowledge of bio-engineering pushes me to believe that even the smallest change to an organism's genome will result in a cascade of differences showing up in interactions between that particular gene and every other existing gene, and in turn countless cascades of changes resulting from those slightly different interactions themselves interacting with one another to produce new results.
+		
+		\item Abstracting entire cells as the smallest unit needed to be simulated may be sufficient. I can't write this off as a possibility, especially in the case where one works with known, pre-tested gene combinations rather than exploring entirely new arrangements. It might be possible to produce an abstract model of a cell that behaves as expected within known boundaries, but I don't have a good idea of how one might approximate the computational power required for simulations running on this level.
+		
+		\item Simulating every molecule may be necessary for accurate results. This would not require any advanced understanding of how biological systems behave, but merely how the system is structured and how the individual molecules behave. To me this seems like the most promising approach in terms of asking "would it work?" as we already use molecule simulations to develop medicine in the modern day.
+		
+		\item Subatomic details may be required for the system to function. Life has a tendency to incorporate every possible effect into it, looking only for whether or not it is useful rather than any other considerations. It is not out of question that effects such as quantum tunneling would have found themselves used by some system somewhere in biology, and in such a way that trying to remove them would be like balancing a jenga tower, eg. removing the effect makes one enzyme somewhere work ever so slightly differently and through the messy web of relations that biological pathways are somehow breaks everything. In that case it would be necessary to simulate everything down to the level of subatomic particles, which would be a huge step up on computational complexity.
+	\end{enumerate}
+	
+	\medskip
+	
+	\noindent\rule{\linewidth}{1pt}
+	
+	\medskip
+	
+	For the needs of the Stareater Expanse setting, as of writing this document my stance is this:
+	
+	\begin{enumerate}
+		\item Solving for necessary genetic changes or for the effects of said changes with simple calculations or lookup tables is possible and reliable for thoroughly tested gene combinations, but only works within that limited scope, and does not allow for predicting effects of new combinations ahead of time.
+		
+		\item Cell-level abstraction is available and can predict problems before implementing changes, but does not guarantee accuracy for new genetic combinations. This model would be useful for example in determining whether an artificial organ with slight genetic differences will be rejected by a patient's body or not, ie. medical environments working with already known genetics. It can however be used to search for promising pathways for novel genetic designs before they are proven with more computationally demanding simulations.
+		
+		\item Subatomic-level abstraction can guarantee accuracy for new genetic combinations. This model suffers in the ethics aspect, as it would be sufficient to fully simulate neurological activity in the case that a full-body simulation of a person is made.
+	\end{enumerate}
+	
+	An additional consideration is that finding viable genetic modifications might take thousands to billions of simulations, but once found and recorded they could likely be verified with even just one simulation.
+	
+	\pagebreak
+	
+	\section{Cell-level abstraction}
+	
+	I suspect the complexity of the computational model to be well described like this:
+	
+	$$ C = n \cdot G^2 \cdot f \cdot t $$
+	
+	Where:
+	
+	\begin{itemize}
+		\item $C$ is the total number of operations necessary to perform the simulation
+		
+		\item $n$ is the number of events that happen in or to the cell in one frame
+		
+		\item $G$ is the number of genes the cell carries. Squaring it just means that every interaction of two genes is considered, including the interaction of every gene with itself.
+		
+		\item $f$ is the frequency of updates, ie. "frames per second" of the simulation
+		
+		\item $t$ is the length of the simulation.
+	\end{itemize}
+	
+	For some rough bounds on the numbers:
+	
+	\medskip
+	
+	The human genome contains around 19 000 to 20 000 protein-coding genes, around 13 000 inactive pseudogenes, and an number I couldn't determine of non-coding genes that don't produce protein yet are still critical to celular function. This adds up to a total of 32 000 to 33 000 genes plus the non-coding ones, I'll assume a total of around \textbf{45 000}. (\href{https://en.wikipedia.org/wiki/Human_genome#Molecular_organization_and_gene_content}{source: wikipedia})
+	
+	\medskip
+	
+	Transcription of genes happens surprisingly slowly in cells: "RNA polymerase builds the pre-mRNA molecule at a rate of 20 nucleotides per second enabling the production of thousands of pre-mRNA molecules from the same gene in an hour." - Based on this and my intuition, as a rough approximation I'll assume that a framerate of one frame per microsecond is sufficient. (\href{https://en.wikipedia.org/wiki/Protein_biosynthesis#Transcription}{source: wikipedia})
+	
+	\medskip
+	
+	Number of events involving the cell that might happen within one frame is a parameter I have no idea how to pin down, so I will arbitrarily assume it to be 1 as that gives a result which can later be simply multiplied if a new reasonable value is found.
+	
+	\medskip
+	
+	Time of simulation is easier to approximate but I would expect it to vary wildly per use case, so I will leave it at one second for now for similar reasons.
+	
+	$$ 1 \cdot (45 000)^2 \cdot (1\mu s)^-1 \cdot 1s = 2.025 \cdot 10^{15} $$
+	
+	Given these assumptions, simulation of one cell requires 2.025e15 operations per second. Given that there are about 40 trillion cells in the human body, a full-body simulation would require about 8.1e28 operations per second.
+	
+	\medskip
+	
+	\noindent\rule{\linewidth}{1pt}
+	
+	\medskip
+	
+	Roughly assuming 30 000 bit flips per operation to bring it into units more commonly used in the Stareater Expanse setting, that would translate to flip rates of 6.075e19 bits/s per cell, and 2.43e33 bits/s for a full body simulation.
+	
+	\medskip
+	
+	Memory use would be more complicated but I expect it somewhere between 720 kilobits per cell (16 bits per gene) and 12.4 gigabits (4 bits per base pair) per cell. For a full body that is between 28.8e19~bits and 4.96e23 bits.
+	
+	\medskip
+	
+	In either case as of the current state of computational hardware in the Stareater Expanse setting, for full body simulations those are computational requirements warranting a large computing cluster, even more massive than those used to run uploaded human minds. It is still well within the bounds of what a person might privately own for personal use, but also well past the point where one may want to simply rent the computing power instead of building out a privately owned cluster to that level.
+	
+	\medskip
+	
+	Typical household computational hardware would be better suited for very local simulations involving perhaps a million cells or less, but the computational capacity of cybernetic implants would not be sufficient for pretty much any useful level of cellular simulation without cooking the owner with waste heat in the process.
+	
+	\pagebreak
+	
+	\section{Molecular-level abstraction (todo)}
+	
+	"Molecular" would have to actually mean atomic, just without considering the internal states of atoms, since molecules aren't cleanly separable objects, they bind together, break apart, gain and lose tiny pieces occasionally, which would likely be even more computationally expensive to abstract away than just giving up and tracking every single atom and its interaction with the closest atoms around it.
+	
+	\pagebreak
+	
+	\section{Subatimic-level abstraction (todo)}
+	
+\end{document}

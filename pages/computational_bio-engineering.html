@@ -1,0 +1,66 @@
+<head>
+ <link rel="stylesheet" href="../index.css"></link>
+</head>
+<html class="background2" id="page">
+<a style="float: right;" target="_blank" href="../index.html?page=pages/computational_bio-engineering.html">link to this page</a>
+
+<h1>Computational bio-engineering</h1>
+<hr>
+
+<img src="../images/card_placeholder.png" class="basics"></img>
+<article class="basics">
+In-software design and simulation of biological systems.
+Primarily of importance to genetic augmentation, medicine and nanotechnology.
+<br><br>
+Frameworks for computational bio-engineering tend to be divided by the level at which they abstract the smallest element of the system. Commonly these are:
+<ol>
+  <li><b>cellular-scale</b> abstraction</li>
+  <li><b>molecular-scale</b> abstraction</li>
+  <li><b>subatomic-scale</b> abstraction</li>
+</ol>
+Generally, at smaller levels of abstraction more computational power is required, but the behaviour will remain close to reality for a broader range of cases, so for larger projects it is common to run mostly high-abstraction-level simulations alongside far fewer more detailed simulations that verify the findings made that way.
+<br><br>
+<span class="meta">Source material for the numbers cited on this page can be found <a href="../documents/computational_bio-engineering.pdf">here</a> (still work in progress at this time).</span>
+</article>
+
+<h3>cellular-level abstraction</h3>
+<article>
+Cellular-scale models are practically guaranteed to be unable to have edge cases where the simulated biological system behaves wildly differently than the real-world counterpart.
+They are best used for exploring biological systems that had already been sufficiently studied in reality and through more detailed models, as those are the systems for which sufficient data had already been gathered to build accurate cellular-level abstractions.
+<br><br>
+In one example, a cellular model focused on human cells, capable of accurately simulating the behaviour of cells with a wide range of genetic makeup, and even interactions between cells with different genetic makeup, requires 1.24e10 bits of information and 6.075e19 bits/s of flip rate on common <a href="computation.html#computronium">computronium</a> to simulate a single cell at realtime speed.
+<br><br>
+It is commonly used to produce sped-up small local simulations of wound healing in reaction to different treatments so that the best one can be applied to the actual patient, or to screen for undesirable interactions between a patient's existing genes and some given biological augmentation they wish to subject themselves to.
+<br><br>
+It is noted as insufficient to judge the effects of various modifications on the central nervous system, as the abstraction is not capable of recreating neurological activity, which is other times noted as a good thing as it largely circumvents the ethics of full-body simulations.
+A real-time full-body simulation made with this model typically requires around 4.96e23 bits of memory and 2.43e33 bits/s of flip rate on common computronium.
+
+<table class="styled-table" style="margin: 10 auto;">
+  <tbody><tr><th colspan="6">civic chip requirements for full body cellular simulation</th></tr>
+  <tr><td></td><td>number needed</td><td>power draw</td><td>bare substrate volume</td><td id="processing">processing used</td><td>memory used</td></tr>
+  <tr><td>Civic-2 chip</td><td id="num_c2">48600000000000000</td><td id="pow_use_c2">486 PW</td><td id="vol_c2">4.860e+9m<sup>3</sup> ≈ (1693.865m)<sup>3</sup></td><td id="flip_use_c2">100.00%</td><td id="mem_use_c2">0.00%</td></tr>
+  <tr><td>Civic-3 chip</td><td id="num_c3">303750000000000</td><td id="pow_use_c3">3.038 PW</td><td id="vol_c3">3.038e+7m<sup>3</sup> ≈ (312.013m)<sup>3</sup></td><td id="flip_use_c3">100.00%</td><td id="mem_use_c3">0.00%</td></tr>
+  <tr><td>Civic-4 chip</td><td id="num_c4">7776000000000</td><td id="pow_use_c4">77.76 TW</td><td id="vol_c4">7.776e+5m<sup>3</sup> ≈ (91.957m)<sup>3</sup></td><td id="flip_use_c4">100.00%</td><td id="mem_use_c4">0.01%</td></tr>
+</tbody></table>
+
+</article>
+
+<h3>molecular-level abstraction</h3>
+<article>
+Molecular models track every atom in the system and rely on interactions between neighboring atoms, which makes them useful not just for biological applications but also novel chemical compounds with complex behaviours.
+They are used where cellular models aren't sufficient, and are commonly used as a baseline to which said cellular models are calibrated.
+</article>
+
+<h3>subatomic-level abstraction</h3>
+<article>
+Subatomic models are similar to molecular models, but keep track of even smaller aspects of reality, and can account for even such effects as quantum tunneling, for the occasion that it plays a significant role somewhere in the system. This category of models is often said to be "indistinguishable from reality".
+</article>
+
+<h1 class="division">relevant pages</h1>
+
+<div class="card">
+ <img src="../images/card_placeholder.png"></img>
+ <a target="IM" href="computation.html">computation</a>
+</div>
+
+</html>
