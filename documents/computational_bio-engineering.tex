@@ -24,15 +24,19 @@
 	\vfill
 	
 	\begin{abstract}
-		Approximation of the computational power required for in-software simulation of effects of genetic engineering on reasonable timescales for the needs of the Stareater Expanse setting.
+		Approximation of the computational power required for in-software simulation of effects of biological engineering on reasonable timescales for the needs of the Stareater Expanse setting.
 		
 		\medskip
 		
-		3 levels of abstraction are considered: cellular, molecular and subatomic.
+		2 levels of abstraction are inspected: cellular and molecular.
 		
 		\medskip
 		
 		Cellular-level abstraction is estimated to require 1.24e10 bits of memory and 6.075e19 bits/s of flip rate per cell for a realtime simulation. This is far too much for any useful simulation size to be performed within a person's cybernetic implants, but likely enough for larger computational clusters to make useful predictions on matters such as organ rejection.
+		
+		\medskip
+		
+		Molecular-level abstraction is estimated to require on average 3.6756e23 bits/s of flip rate for every atom in the simulation, corresponding to 1.106e38 bits/s for a typical fibroblast cell, and 3.687e46 bits/s for a whole milliliter of biological tissue. This limits the ability to perform such simulations with reasonable amounts of time, energy and hardware to biological systems below the size of single cells or at most small groups of cells.
 	\end{abstract}
 	
 	%\noindent \rule{\linewidth}{1pt}
@@ -47,13 +51,13 @@
 	The required detail of simulation may differ, here are some main possibilities I forsee and how likely I rate them:
 	
 	\begin{enumerate}
-		\item One can decide on the changes they want made to an organism and then elegantly solve for the genetic modifications needed to achieve them. To me this is extremely unlikely, but may be possible in a scenario where a database already exists that can tell you what genetic modification results in what changes to the organism. My very limited knowledge of bio-engineering pushes me to believe that even the smallest change to an organism's genome will result in a cascade of differences showing up in interactions between that particular gene and every other existing gene, and in turn countless cascades of changes resulting from those slightly different interactions themselves interacting with one another to produce new results.
+		\item Can someone decide on the changes they want made to an organism and then elegantly solve for the genetic modifications needed to achieve them? My limited knowledge of how life works pushes me to believe that even the smallest change to an organism's genome will result in a cascade of differences showing up in interactions between that particular gene and every other existing gene, and in turn countless cascades of changes resulting from those slightly different interactions themselves interacting with one another to produce new results, making it a brute-force problem. Looking at it this way, the only simple solution that allows this may be a database that can tell you what genetic modification results in what changes to the organism in past experiments.
 		
 		\item Abstracting entire cells as the smallest unit needed to be simulated may be sufficient. I can't write this off as a possibility, especially in the case where one works with known, pre-tested gene combinations rather than exploring entirely new arrangements. It might be possible to produce an abstract model of a cell that behaves as expected within known boundaries, but I don't have a good idea of how one might approximate the computational power required for simulations running on this level.
 		
-		\item Simulating every molecule may be necessary for accurate results. This would not require any advanced understanding of how biological systems behave, but merely how the system is structured and how the individual molecules behave. To me this seems like the most promising approach in terms of asking "would it work?" as we already use molecule simulations to develop medicine in the modern day.
+		\item Simulating every molecule may be necessary for accurate results. This would not require any advanced understanding of how biological systems behave, but merely how the system is structured and how the individual molecules behave. To me this seems like the most promising approach in terms of asking "would it work?" as we already use molecule simulations to develop medicine in the modern day, the question is just what it would take in terms of computing.
 		
-		\item Subatomic details may be required for the system to function. Life has a tendency to incorporate every possible effect into it, looking only for whether or not it is useful rather than any other considerations. It is not out of question that effects such as quantum tunneling would have found themselves used by some system somewhere in biology, and in such a way that trying to remove them would be like balancing a jenga tower, eg. removing the effect makes one enzyme somewhere work ever so slightly differently and through the messy web of relations that biological pathways are somehow breaks everything. In that case it would be necessary to simulate everything down to the level of subatomic particles, which would be a huge step up on computational complexity.
+		\item Subatomic details may be required for the system to function. Life has a tendency to incorporate every possible effect into it, looking only for whether or not it is useful rather than any other considerations. It is not out of question that effects such as quantum tunneling would have found themselves used by some system somewhere in biology, eg. removing the effect makes one enzyme somewhere work ever so slightly differently and through the messy web of relations that biological pathways are somehow breaks everything. In that case it would be necessary to simulate everything down to the level of subatomic particles or waves, which would be a huge step up on computational complexity.
 	\end{enumerate}
 	
 	\medskip
@@ -69,10 +73,12 @@
 		
 		\item Cell-level abstraction is available and can predict problems before implementing changes, but does not guarantee accuracy for new genetic combinations. This model would be useful for example in determining whether an artificial organ with slight genetic differences will be rejected by a patient's body or not, ie. medical environments working with already known genetics. It can however be used to search for promising pathways for novel genetic designs before they are proven with more computationally demanding simulations.
 		
-		\item Subatomic-level abstraction can guarantee accuracy for new genetic combinations. This model suffers in the ethics aspect, as it would be sufficient to fully simulate neurological activity in the case that a full-body simulation of a person is made.
+		\item molecular-level abstraction can reasonably guarantee accuracy for new genetic combinations. This model suffers in the ethics aspect, as it would be sufficient to fully simulate neurological activity in the case that embryos are simulated to validate reproductive stability of the new genome.
+		
+		\item subatomic-level simulation of cellular-scale biological systems to account for all physical effects is not plausible with classical computing at the kardashev-2 scale
 	\end{enumerate}
 	
-	An additional consideration is that finding viable genetic modifications might take thousands to billions of simulations, but once found and recorded they could likely be verified with even just one simulation.
+	An additional consideration is that finding viable genetic modifications might involve running thousands to billions of simulations, but once found and recorded they could likely be verified with even just one simulation.
 	
 	\pagebreak
 	
@@ -140,12 +146,128 @@
 	
 	\pagebreak
 	
-	\section{Molecular-level abstraction (todo)}
+	\section{Molecular-level abstraction}
 	
 	"Molecular" would have to actually mean atomic, just without considering the internal states of atoms, since molecules aren't cleanly separable objects, they bind together, break apart, gain and lose tiny pieces occasionally, which would likely be even more computationally expensive to abstract away than just giving up and tracking every single atom and its interaction with the closest atoms around it.
 	
+	\medskip
+	
+	\noindent A basic approximation of the amount of computation needed for a given simulation would be as such:
+	
+	$$ C = a \cdot d \cdot i \cdot f \cdot t$$
+	
+	where:
+	
+	\begin{itemize}
+		\item $C$ is the total number of operations
+		
+		\item $a$ is the number of atoms in the simulation
+		
+		\item $d$ is the number of atoms that any given atom is interacting with at one time (ie. number of neighbours it is in some type of contact with)
+		
+		\item $i$ is the number of different interactions that have to be considered every time two atoms are in contact
+		
+		\item $f$ is the framerate of the simulation
+		
+		\item $t$ is the length of the simulation
+	\end{itemize}
+	
+	\textbf{bounds on $a$:} Given that the topic here is biology and cellular simulations, most of the human body could likely be fairly well approximated by water in terms of how many atoms there are in any given volume. 1 mole of water is about 18.015 milliliters and contains 6.022e23 molecules, which is 18.066e23 atoms. This means that there are roughly 1.003e23 atoms in each cubic centimeter of water.
+	
+	\medskip
+	
+	Here is a table with cell volumes sourced from [\href{https://book.bionumbers.org/how-big-is-a-human-cell/}{source}] with added atom numbers calculated using the approximation of 1.003e23 atoms per cm$^3$:
+	
+	\begin{center}
+		\begin{tabular}{|l|c|c|}
+			\hline
+			\textbf{cell type} & \textbf{average volume (\textmu m$^3$)} & \textbf{num. of atoms} \\
+			\hline
+			sperm cell & 30 & 3.009e12 \\
+			red blood cell & 100 & 1.003e13 \\
+			lymphocyte & 130 & 1.3039e13 \\
+			neutrophil & 300 & 3.009e13 \\
+			beta cell & 1 000 & 1.003e14 \\
+			enterocyte & 2 000 & 2.006e14 \\
+			fibroblast & 3 000 & 3.009e14 \\
+			HeLa, cervix & 4 000 & 4.012e14 \\
+			hair cell (ear) & 4 000 & 4.012e14 \\
+			osteoblast & 5,000 & 5.015e14 \\
+			alveolar macrophage & 5 000 & 5.015e14 \\
+			cardiomyocyte & 15 000 & 1.5045e15 \\
+			megakaryocyte & 30 000 & 3.009e15 \\
+			fat cell & 600 000 & 6.018e16 \\
+			oocyte & 4 000 000 & 4.012e17 \\
+			\hline
+		\end{tabular}
+	\end{center}
+	
+	For a whole-body simulation (even though it is not an expected use case) I would assume a 75L of volume, and correspondingly 7.5225e27 atoms.
+	
 	\pagebreak
 	
-	\section{Subatimic-level abstraction (todo)}
+	\textbf{bounds on $d$:} It may be expected for an atom to influence in some meaningful way every other atom with which it forms a molecule. The average mass of molecules in eukaryotic organisms is 49 kilodalton (\href{https://en.wikipedia.org/wiki/Protein#Biosynthesis}{source, "The average size of a protein increases from Archaea to Bacteria to Eukaryote (283, 311, 438 residues and 31, 34, 49 kDa respectively)"}).
+	
+	\medskip
+	
+	Without detailed analysis, 49kDa is roughly the mass of 4084 carbon atoms, so I will approximate $d$ as 4084.
+	
+	\medskip
+	
+	\textbf{bounds on $i$:} here are distinct influences I can come up with for each atom: atom's own innertia, electrostatic attraction to nearby atoms, electric attraction or repulsion between charged atoms. As such, without knowing any better, I'm approximating $i$ to be 3.
+	
+	\medskip
+	
+	\textbf{bounds on $f$:} Having ran the "folding at home" software to volunteer my computing power to medical research, I noticed the time length of a single simulation frame is given in femtoseconds, so I will set $f$ to 1fs$^-1$
+	
+	\medskip
+	
+	\textbf{bounds on $t$}: protein can take whole milliseconds to fold into the right shape, which is the low end of what could be usefully achieved with such a simulation. I fail to see any upper bound, it will likely vary wildly with use case, but the time factor can be simply removed in favour of calculating operations per second instead of total operations so that's what we'll do.
+	
+	\medskip
+	
+	Finally this results in an equation with one variable, the number of atoms or alternatively volume of biological tissue:
+	
+	$$ C = a \cdot 4084 \cdot 3 \cdot (1fs)^-1 = a \cdot 1.2252e19 Hz $$
+	
+	$$ a = V \cdot \frac{1.003e23}{1ml} = V \cdot 1.003e29m^{-3} $$
+	
+	where:
+	
+	\begin{itemize}
+		\item $C$ is the computational power needed (operations per second) for a realtime simulation
+		
+		\item $a$ is the number of atoms in the simulation
+		
+		\item $V$ is the volume of tissue to be simulated
+	\end{itemize}
+	
+	\medskip
+	
+	One operation will also be treated as 30 000 bit flips for the sake of bringing it closer to the units commonly used in the Stareater Expanse setting.
+	
+	\medskip
+	
+	Here are some relevant results:
+	
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			object of simulation & number of atoms & computing power & flip rate \\\hline
+			per 1 atom on average & 1 & 1.2252e19 op/s & 3.6756e23 bits/s \\
+			per 1ml of biological tissue & 1.003e23 & 1.2288756e42 op/s & 3.6866268e46 bit/s \\\hline
+			ribosome & 300 000 & 3.6756e24 op/s & 1.10268e29 bits/s \\
+			common cold virus (0.001$\mu m^3$) & 100 300 000 & 1.12288756e27 op/s & 3.6866268e31 bits/s \\
+			mitochondrion (9$\mu m^3$) & 9.027e11 & 1.10598804e31 op/s & 3.31796412e35 bits/s \\
+			fibroblast & 3.009e14 & 3.6866268e33 op/s & 1.10598804e38 bits/s \\
+			oocyte & 4.012e17 & 4.9155024e36 op/s & 1.47465072e41 bits/s \\
+			human embryo (week 8, 16ml) & 1.6048e24 & 1.96620096e43 op/s & 5.89860288e47 bits/s \\
+			average adult human body (75L) & 7.5225e27 & 9.216567e46 op/s & 2.7649701e51 bits/s \\\hline
+		\end{tabular}
+	\end{center}
+	
+	For a bit of context, an analysis by Isaac Arthur [\href{https://www.youtube.com/embed/Ef-mxjYkllw?t=1116}{source}] puts the flip rate of a full matrioska brain built around the sun at around 1.45e49 bits/s, which is notably 2 orders of magnitude smaller than my estimation of what would be required to simulate a full human body.
+	%Which may feel like a bit of relief for those who noticed how morally horrifying the last 2 options listed in the table are given the level of precision of the simulation likely being sufficient to simulate neurological activity.
+	%Naturally some others will conclude that it's more practical to simply test outside of a simulation instead.
 	
 \end{document}

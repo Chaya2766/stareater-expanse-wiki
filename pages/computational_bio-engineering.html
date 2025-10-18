@@ -16,9 +16,8 @@ Frameworks for computational bio-engineering tend to be divided by the level at 
 <ol>
   <li><b>cellular-scale</b> abstraction</li>
   <li><b>molecular-scale</b> abstraction</li>
-  <li><b>subatomic-scale</b> abstraction</li>
 </ol>
-Generally, at smaller levels of abstraction more computational power is required, but the behaviour will remain close to reality for a broader range of cases, so for larger projects it is common to run mostly high-abstraction-level simulations alongside far fewer more detailed simulations that verify the findings made that way.
+Generally, at smaller levels of abstraction more computational power is required, but the behaviour will remain close to reality for a broader range of cases, so for larger projects it is common to run mostly cellular-level simulations alongside far fewer more detailed simulations that verify the findings made that way.
 <br><br>
 <span class="meta">Source material for the numbers cited on this page can be found <a href="../documents/computational_bio-engineering.pdf">here</a> (still work in progress at this time).</span>
 </article>
@@ -38,9 +37,9 @@ A real-time full-body simulation made with this model typically requires around 
 <table class="styled-table" style="margin: 10 auto;">
   <tbody><tr><th colspan="6">civic chip requirements for full body cellular simulation</th></tr>
   <tr><td></td><td>number needed</td><td>power draw</td><td>bare substrate volume</td><td id="processing">processing used</td><td>memory used</td></tr>
-  <tr><td>Civic-2 chip</td><td id="num_c2">48600000000000000</td><td id="pow_use_c2">486 PW</td><td id="vol_c2">4.860e+9m<sup>3</sup> ≈ (1693.865m)<sup>3</sup></td><td id="flip_use_c2">100.00%</td><td id="mem_use_c2">0.00%</td></tr>
-  <tr><td>Civic-3 chip</td><td id="num_c3">303750000000000</td><td id="pow_use_c3">3.038 PW</td><td id="vol_c3">3.038e+7m<sup>3</sup> ≈ (312.013m)<sup>3</sup></td><td id="flip_use_c3">100.00%</td><td id="mem_use_c3">0.00%</td></tr>
-  <tr><td>Civic-4 chip</td><td id="num_c4">7776000000000</td><td id="pow_use_c4">77.76 TW</td><td id="vol_c4">7.776e+5m<sup>3</sup> ≈ (91.957m)<sup>3</sup></td><td id="flip_use_c4">100.00%</td><td id="mem_use_c4">0.01%</td></tr>
+  <tr><td>Civic-2 chip</td><td id="num_c2">48600000000000000</td><td id="pow_use_c2">486 PW</td><td id="vol_c2">4.86km<sup>3</sup> ≈ (1693.865m)<sup>3</sup></td><td id="flip_use_c2">100.00%</td><td id="mem_use_c2">0.00%</td></tr>
+  <tr><td>Civic-3 chip</td><td id="num_c3">303750000000000</td><td id="pow_use_c3">3.038 PW</td><td id="vol_c3">30 375 125m<sup>3</sup> ≈ (312.013m)<sup>3</sup></td><td id="flip_use_c3">100.00%</td><td id="mem_use_c3">0.00%</td></tr>
+  <tr><td>Civic-4 chip</td><td id="num_c4">7776000000000</td><td id="pow_use_c4">77.76 TW</td><td id="vol_c4">777 597m<sup>3</sup> ≈ (91.957m)<sup>3</sup></td><td id="flip_use_c4">100.00%</td><td id="mem_use_c4">0.01%</td></tr>
 </tbody></table>
 
 </article>
@@ -49,12 +48,23 @@ A real-time full-body simulation made with this model typically requires around 
 <article>
 Molecular models track every atom in the system and rely on interactions between neighboring atoms, which makes them useful not just for biological applications but also novel chemical compounds with complex behaviours.
 They are used where cellular models aren't sufficient, and are commonly used as a baseline to which said cellular models are calibrated.
+<br><br>
+A full-body simulation with molecular precision would require a flip rate somewhere around 2.765e51 bits/s, which is beyond even the theoretical capability of all but the biggest of matrioska brains.
+<br><br>
+Real use cases rarely go beyond the simulation of a single whole cell or a small group of cells, potentially for uses such as simulating the infection of a cell with a newly found virus or pathogen, studying the process and developing a cure, which itself would likely invoke molecular simulation at the level of just several protein.
+<br><br>
+Here are some flip rates required for realtime simulation of various biologically relevant objects using a reference molecular simulation system common across the Stareater Expanse:
+<ul>
+  <li>ribosome - 1.103e29 bits/s</li>
+  <li>rhinovirus particle - 3.687e31 bits/s</li>
+  <li>mitochondrion - 3.318e35 bits/s</li>
+  <li>fibroblast cell - 1.106e38 bits/s</li>
+  <li>human egg cell - 1.475e41 bits/s</li>
+  <li>1ml of biological tissue - 3.687e46 bits/s</li>
+</ul>
+The last item on the list is only included as a context reference, as that amount of computation, given hardware that operates right at the landauer limit for room temperature computing, would require roughly the power throughput of a kardashev-2 civilization.
 </article>
 
-<h3>subatomic-level abstraction</h3>
-<article>
-Subatomic models are similar to molecular models, but keep track of even smaller aspects of reality, and can account for even such effects as quantum tunneling, for the occasion that it plays a significant role somewhere in the system. This category of models is often said to be "indistinguishable from reality".
-</article>
 
 <h1 class="division">relevant pages</h1>
 
