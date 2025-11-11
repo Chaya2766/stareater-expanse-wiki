@@ -117,11 +117,13 @@ module aneuron(history=8,instreams=5,layers=[5,5,3],sep_neurons=5,sep_layers=20,
     
 }
 
-aneuron(8,5,[4,4,4,2],sep_layers=100,neuron_size=20,synapse_size=1,sep_neurons=50);
-//small example felicity neuron
-//aneuron(205,[700,128,128,128,128,128,128,128,2],sep_layers=1000,neuron_size=20,synapse_size=1,sep_neurons=50);
-//full felicity neuron
-//aneuron(205,[7000,128,128,128,128,128,128,128,2],sep_layers=1000,neuron_size=20,synapse_size=1,sep_neurons=50);
+aneuron(4,8,[4,4,4,2],sep_layers=100,neuron_size=20,synapse_size=1,sep_neurons=50);
+
+//aneuron(205,200,[128,128,128,128,128,128,128,2],sep_layers=1000,neuron_size=20,synapse_size=1,sep_neurons=50);
+//small example real neuron with the full body size and history length but only 200 synapses - WARNING this requires at least 62GB of memory to render, and produces a CSG tree with 5388458 elements so you have to increase the limit (--csglimit=6000000) or rendering will fail. For me the rendering time was 4 hours and 32 minutes
+
+//aneuron(205,7000,[28,128,128,128,128,128,128,2],sep_layers=1000,neuron_size=20,synapse_size=1,sep_neurons=50);
+//full felicity neuron, WARNING I recommend you don't uncomment this, you might need a supercomputer to render this and your OpenSCAD will probably freeze if you accidentally start rendering it. But also, even if you did render it, the input stream block is so massive that you can barely see the main body of the neuron and can pretty much not see the individual artifficial neurons in the net at any reasonable resolution
 
 //use openscad mimic_neuron.scad -o mimic_neuron.png --imgsize=1000,1000 --colorscheme=Starnight --viewall --autocenter --projection=o
-// if running for massive networks like the example neuron of Felicity's brain also use --csglimit=5000000 but WARNING THAT WILL FILL A LOT OF RAM don't do it lightly, attempting to render aneuron(205,[7000,128,128,128,128,128,128,128,2]) took up an additional 21GB of swap space on top of my 8GB of ram, I also made changes since that render after I noticed my code was not actually producing all the connections there should be, so it is now probably even worse
+// for documents --colorscheme=Nature may be better since it has white background

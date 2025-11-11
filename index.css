@@ -168,6 +168,11 @@ img.pixelated{
  image-rendering: crisp-edges;
 }
 
+img.centered{
+ margin: 0 auto;
+ display: block;
+}
+
 /*NEVER-MANDATORY PAGE PARTS START HERE*/
 hr{
  clear: both;

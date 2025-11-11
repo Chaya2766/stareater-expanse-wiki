@@ -1,6 +1,13 @@
 stars from lorewiki/*
 push.sh
 
+# ignore everything under documents
 documents/**
-!documents/**.tex
-!documents/**.pdf
+
+# un-ignore directories so Git can see files inside them
+!documents/**/
+
+# un-ignore tex and pdf files anywhere under documents
+!documents/**/*.tex
+!documents/**/*.pdf
+
