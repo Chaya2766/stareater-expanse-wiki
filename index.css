@@ -396,6 +396,15 @@ div.thread{
  transition: 1s;
 }
 
+.meta a{
+ color: #286;
+ transition: 1s;
+}
+.meta:hover a{
+ color: #4fb;
+ transition: 1s;
+}
+
 .card.meta{
  border-color: #848;
  background-color: #20102088;
