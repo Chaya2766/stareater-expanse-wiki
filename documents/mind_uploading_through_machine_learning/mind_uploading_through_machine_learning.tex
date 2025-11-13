@@ -26,7 +26,7 @@
 
 \renewcommand{\arraystretch}{1.2}
 
-\title{Mind uploading through machine learning approximation of single neurons}
+\title{Mind uploading through machine learning approximation of single neurons: structure and computational cost}
 
 \author{Chaya2766}
 
@@ -49,7 +49,11 @@
 		
 		\medskip
 		
-		I make some additional suggestions for how the data necessary might be acquired in the first place, as well as guesses as to what important considerations there might be to such a process.
+        I present a way to emulate a human brain based on my interpretation of the paper, and calculate the costs of both creating and running such a brain emulation. Some additional suggestions as to how such a system would work are made based on my own understanding of human brain function.
+        
+        \medskip
+        
+        The question of how the necessary data would be gathered from a living brain remains untouched as a subject for exploration at another time.
 	\end{abstract}
 	
 	%\noindent \rule{\linewidth}{1pt}
@@ -87,7 +91,7 @@
 	
 	\medskip
 	
-	Just for visualization sake, such a mimic neuron with 100 input streams, 205 miliseconds of history in each input stream, and a main body consisting of 5 layers each having 128 neurons, would look like this:
+	\noindent Just for visualization sake, such a mimic neuron with 100 input streams, 205 miliseconds of history in each input stream, and a main body consisting of 5 layers each having 128 neurons, would look like~this:
 	
 	\begin{center}
 		\includegraphics[width=0.5\linewidth]{mimic_neuron_real_100.png}
@@ -151,7 +155,9 @@
 	
 	\medskip
 	
-	Assuming 16-bit weights, the mimic neuron would require \textbf{274.37312 MB} to store. Here's a summary:
+	Assuming 16-bit weights, the mimic neuron would require \textbf{274.37312 MB} to store.
+    
+    Here's a summary:
 	
 	\medskip
 	
@@ -313,7 +319,7 @@
 	
 	\pagebreak
 	
-	\section{Main problem with this model}
+	\section{Memory problem in mimic neuron brain emulation}
 	
 	Important vocabulary piece:
 	
@@ -326,7 +332,7 @@
 	\noindent\rule{\linewidth}{0.5pt}
 	
 	\begin{center}
-		\textbf{The model is static}
+		\textbf{The model needs to be dynamic, but the mimic neurons are static}
 	\end{center}
 	
 	A healthy human brain is constantly rewiring itself, but the mimic neurons have no ability to grow new connections, and in a brain made from them they will never die, nor will new ones be born without intervention. This concern would be surpassed if two assumptions turn out to be true:
@@ -345,7 +351,7 @@
 	
 	\medskip
 	
-	Assumption 2 is not trivial but much more believable, but it would require data of the neuron's activity spanning a long period of time, such that it captures how its function changed in response to the strengthening and weakening of connections. Another issue here is knowing how the connections should be strengthened, and the workaround I see is adding a third output to the mimic neuron, which signals whether or not the neuron is currently receptive to becoming part of an engram*. This third output would be monitored by an external mechanism that somehow detects when nearby mimic neurons should form an engram and strengthens connections between them.
+	Assumption 2 is not trivial but much more believable, but it would require data of the neuron's activity spanning a long period of time, such that it captures how its function changed in response to the strengthening and weakening of connections. Another issue here is knowing how the connections should be strengthened, and the workaround I see is adding a third output to the mimic neuron, which signals whether or not the neuron is currently receptive to becoming part of an engram. This third output would be monitored by an external mechanism that somehow detects when nearby mimic neurons should form an engram and strengthens connections between them.
 	
 	\medskip
     
@@ -359,6 +365,8 @@
         \end{center}
     \end{minipage}
 	
+    This would mean that spiking outputs of mimic neurons are not just copied along the connections, but the output is multiplied, effectively making each such connection another parameter in the system for which a multiply-and-accumulate operation has to be performed on every inference. Additionally the engram detection would likely add some overhead but at the moment I don't know how to speculate about the exact amount of computation it would add to the system.
+    
 	\pagebreak
 	
 	\section{Summary of computational costs}
@@ -400,9 +408,16 @@
 	
 	\vfill
 	
+    \iffalse
+    %in the end I decided that I should take a hint from why I'm making this a whole separate document
+    %I have great affinity for endless scope creep
+    %The part of the document which describes the brain emulation structure and function, and estimates the computational costs, is practically done
+    %If I try to go into how the required data could be extracted from a brain, that will start another thread that I might never finish
+    %this text will stay here for now, but I will take it out later once I start writing a document going into how the information on neuron activity could be pulled from a functioning brain
+    
 	\pagebreak
 	
-	\section{A suggestion on gathering the data}
+	\section{A suggestion on gathering the data (WIP)}
 	
 	The method I propose for gathering data is to infiltrate the brain with roughly 86 billion probes made from nested carbon (conductive) and boron nitride (insulating) nanotubes, which are to act as data cables directly transmitting the neuron potential to measurement devices. The probes would be tipped with microscopic machines capable of swimming through the brain and navigating around its structures using power supplied to them through the probes, and at the end of their journey hooking directly into the neuron membrane, thereby gaining access to the membrane potential.
 	
@@ -429,6 +444,8 @@
 		
 		\item \textbf{safety:} It is difficult to know ahead of time if neurons will not react negatively to having a probe stuck in their membrane, but it could likely be tested ahead of time on a small number of neurons which are not too important to the patient. There also exists the possibility that something could pull on the probe (movement of the implant within the body due to external forces?), but the probe tips could likely be designed to maintain a weak enough interface with the neuron that in such a case they harmlessly detach from the neuron.
 	\end{itemize}
+    
+    \fi
 	
 	\pagebreak
 	
@@ -439,6 +456,10 @@
     \medskip
     
     By default the code produces the example neuron, you can edit parameters in the aneuron function near the bottom of the file (not inside the modules, that will likely just break it all) but do not go too wild on them or your computer might freeze, this code will produce literal millions of individual objects to render if you try to visualize a network that has the actual numbers of neurons and layers that a real one would have.
+    
+    \medskip
+    
+    Sorry for the code so awkwardly split across pages, but it should be easy enough to copy into a single text file. Use search and replace to turn all the "visible space characters" into actual spaces, it should be easy enough to put together, I've decided against splitting the code manually as I could not do so without also making it unclear how the two code blocks should be combined into one file, and no matter how I tried I also couldn't get it to fit onto a single page.
     
 	\begin{lstlisting}
 neuron_color=[1,0,0];
