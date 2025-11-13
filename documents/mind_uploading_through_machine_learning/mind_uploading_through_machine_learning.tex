@@ -11,6 +11,18 @@
 	hyperindex=true,
 	linktocpage=true,%makes the page number be the link in the index
 }
+\usepackage{listings}
+\lstset{
+	basicstyle=\tiny\ttfamily,
+	columns=fullflexible,
+	keepspaces=true,
+	breaklines=true,
+	frame=single,
+	showstringspaces=true,
+	tabsize=4,
+	showspaces=true,
+	showtabs=true,
+}
 
 \renewcommand{\arraystretch}{1.2}
 
@@ -24,6 +36,11 @@
 	\sloppy
 	
 	\maketitle
+	
+	\textbf{
+		\sloppy
+		\hyphenchar\font=-1
+		}
 	
 	\vfill
 	
@@ -70,12 +87,7 @@
 	
 	\medskip
 	
-	Just for visualization sake, such a mimic neuron with 100 input streams, 205 miliseconds of history in each input stream, and a main body consisting of 7 layers each having 128 neurons, would look like this:
-	%TODO wrong number of layers
-	%I said 7 layers but that's a mistake, I should have said 5 layers like the network from the study that I'm talking about
-	%I also rendered it with 7 layers so both that sentence and the render are wrong
-	%this took 1.5 hours to render, but no matter, I sink more time than that into the calculator, the render at least makes itself alone while I'm away
-	%if you ever calculated for hours only to realize that somewhere along the way you accidentally started using the diameter of an object as its radius, you know
+	Just for visualization sake, such a mimic neuron with 100 input streams, 205 miliseconds of history in each input stream, and a main body consisting of 5 layers each having 128 neurons, would look like this:
 	
 	\begin{center}
 		\includegraphics[width=0.5\linewidth]{mimic_neuron_real_100.png}
@@ -146,13 +158,49 @@
 	\begin{center}
 		\begin{tabular}{| c | c |}
 			\hline
-			\multicolumn{2}{|c|}{Mimic neuron} \\\hline
+			\multicolumn{2}{|c|}{Mimic neuron operational characteristics} \\\hline
 			accuracy to real human neuron & 99.11\% \\\hline
 			number of parameters: & 137 186 560 \\\hline
-			computation requirement: & 137 186 560 000 MAC/s \\
-			& 274 373 120 000 FLOPS \\
+			& 137 186 560 000 MAC/s \\
+			computation requirement: & 274 373 120 000 FLOPS \\
 			& 274 373 120 000 000 bits/s \\\hline
 			size on disk or in memory: & 274.37312 MB \\\hline
+		\end{tabular}
+	\end{center}
+	
+	\pagebreak
+	
+	\section{To train a mimic neuron}
+	
+	(DNN = Deep Neural Network | the DNNs mentioned here are the same as the "mimic neurons" I had been talking about)
+	
+	\medskip
+	
+	The paper speaks about the training: "we trained many networks with different hyperparameters and trained each network for 2-14 days on a GPU cluster consisting of several V100, K80 and 2080Ti Nvidia GPUs", and "The total amount of single GPU years needed	to fit all DNNs throughout the entire study was ~3.4 years", as well as that "we trained a total of 137 DNNs" (though in the paper as far as I can tell this referred only to a specific part of the experiment, so the total might have been more, but that was the only exact count I found).
+	
+	\medskip
+	
+	3.4 years is 107 295 840 seconds. Divided by the 137 trained DNNs that gives 783 183 seconds per DNN.
+	
+	\medskip
+	
+	Out of the GPUs mentioned, the V100 seems to be most powerful (\href{https://images.nvidia.com/content/technologies/volta/pdf/volta-v100-datasheet-update-us-1165301-r5.pdf}{link to spec sheet}) and is capable of 7 to 8.2 TeraFLOPS when using double precision floating point variables, which I assume was used. This provides an estimate of how much computing power would have been needed per DNN:
+	
+	$$ 783 183s \cdot 8.2TFLOPS = 6.4221006 ExaFLOPS\cdot s $$
+	
+	Roughly $6.4221\cdot10^{18}$ floating point operations to train a single DNN. However, the DNNs described would have represented neurons with only 100 synapses, whereas an average real human neuron has 7000 synapses. I am simply multiplying by 70 to close that gap, which yields $4.4955 \cdot 10^{20}$ floating point operations.
+	
+	\bigskip
+	
+	As such to create one mimic neuron, total computation needed is \textbf{4.4955E+20~floating~point~operations}, which given the previous assumptions would be equivalent to \textbf{2.24775E+20~MAC~operations}, and assuming 2000bit flips per MAC or 1000 per floating point operation, \textbf{4.4955E+23~bit~flips}.
+	
+	\begin{center}
+		\begin{tabular}{| c | c |}
+			\hline
+			\multicolumn{2}{|c|}{Mimic neuron training costs} \\\hline
+			& 2.24775E+20~MAC~operations \\
+			Training cost: & 4.4955E+20~floating~point~operations \\
+			& 4.4955E+23~bit~flips \\\hline
 		\end{tabular}
 	\end{center}
 	
@@ -163,14 +211,14 @@
 	There are about 86 billion neurons in the human brain. A simple multiplication of the mimic neuron's requirements by that many neurons would yield these numbers:
 	
 	\begin{center}
-		\begin{tabular}{| c | c |}
+		\begin{tabular}{| c | c | l |}
 			\hline
-			\multicolumn{2}{|c|}{Human brain emulation via mimic neurons} \\\hline
-			number of parameters: & 11 798 044 160 000 000 000 \\\hline
-			computation requirement: & 11 798 044 160 000 000 000 000 MAC/s \\
-			& 23 596 088 320 000 000 000 000 FLOPS \\
-			& 23 596 088 320 000 000 000 000 000 bits/s \\\hline
-			size on disk or in memory: & 23.59608832 EB \\\hline
+			\multicolumn{3}{|c|}{Human brain emulation operational characteristics} \\\hline
+			number of parameters: & 11 798 044 160 000 000 000 & $\approx$1.1798E+19 \\\hline
+			& 11 798 044 160 000 000 000 000 MAC/s & $\approx$1.798E+22 MAC/s \\
+			computation requirement: & 23 596 088 320 000 000 000 000 FLOPS & $\approx$2.360E+22 FLOPS \\
+			& 23 596 088 320 000 000 000 000 000 bits/s & $\approx$2.360E+25 bits/s \\\hline
+			size on disk or in memory: & 23.59608832 EB & $\approx$1.888E+20 bits \\\hline
 		\end{tabular}
 	\end{center}
 	
@@ -200,7 +248,8 @@
 		
 		\item Orion's Arm \href{https://www.orionsarm.com/eg-article/48507b746e356}{Ultimate Chip} (fictional): 5.09911 E21 bits/s per device at 100W $\approx$ 1.96112655~E-20~J/bit
 		
-		%\item Landauer core (fictional) - perform computation exactly at landauer's limit
+		\item Landauer's limit - $9.569929617 E-24 J/K \times Temperature$ per bit flip\newline
+		$\approx$ 2.871E-21J/bit @ room temp, 2.613E-23J/bit @ cosmic microwave background temp.
 	\end{itemize}
 	
 	\medskip
@@ -220,18 +269,136 @@
 			Nvidia H100 & 5.458GW & 271 852 \\ \hline
 			Lightmatter experimental card & 28.1GW & 360 245 623.2 \\ \hline
 			Ultimate Chip (fictional) & 462.75kW & 4627.5 \\ \hline%V
-			%Landauer's limit (room temp 300K) & 164 727.23W & - \\ \hline
-			%Landauer's limit (cosmic background 2.73K) & 1499.02W & -
+			Landauer's limit (room temp 300K) & 67.744kW & - \\ \hline%V
+			Landauer's limit (cosmic background 2.73K) & 616.47W & -%V
 		\end{tabular}
 	\end{center}
 	
 	\pagebreak
 	
-	Problems with this approach:
+	Similarly, simply multiplying the cost of training a single mimic neuron by the 86 billion neurons expected in the human brain yields these training costs:
+	
+	\begin{center}
+		\begin{tabular}{| c | l |}
+			\hline
+			\multicolumn{2}{|c|}{Human brain emulation training costs} \\\hline
+			& 1.933065E+31~MAC~operations \\
+			Training cost: & 3.86613E+31~floating~point~operations \\
+			& 3.86613E+34 bits \\\hline
+		\end{tabular}
+	\end{center}
+	
+	And I've also gone ahead and calculated how much time and energy would be needed to train all the mimic neurons on the devices from the list presented on the previous page.
 	
 	\medskip
 	
-	\textbf{1. static structure}: A healthy human brain is constantly rewiring itself, but the mimic neurons have no ability to grow new connections, and in a brain made from them they will never die, nor will new ones be born without intervention.
+	The time assumes a single device is used for the training, which could be decreased by dividing it across multiple devices, but the total energy should in principle remain the same regardless of whether one or multiple devices are used.
+	
+	\begin{center}
+		\begin{tabular}{c | r | r}
+			device & total energy & time \\ \hline
+			Alveo V70 & 1.436E+19J & 1.914E+17s \\ \hline%V
+			Halio-8 & 3.717E+18J & 1.487E+18s \\ \hline%V
+			Epiphany V & 5.155E+20J & ? \\ \hline%V
+			JUPITER & 5.316E+20J & 8.591E+15s \\ \hline%V
+			Frontier & 7.304E+20J & \textbf{3.206E+13s} \\ \hline%V
+			PTC & \textbf{4.833E+15J} & 2.416E+15s \\ \hline%V
+			Nvidia H100 & 8.943E+18J & 2.555E+16s \\ \hline%V
+			Lightmatter experimental card & 4.604E+19J & 5.902E+17s \\ \hline%V
+			Ultimate Chip (fictional) & 7.582E+14J & 7.582E+12s \\ \hline%V
+			Landauer's limit (room temp 300K) & 1.110E+14J & - \\ \hline%V
+			Landauer's limit (cosmic background 2.73K) & 1.010E+12J & -%V
+		\end{tabular}
+	\end{center}
+	
+	\pagebreak
+	
+	\section{Main problem with this model}
+	
+	Important vocabulary piece:
+	
+	\textbf{Engram} - a group of neurons whose connections with each other became strengthened such that firing of one or more of them has a significant chance to cause the whole group to fire. Engrams are thought to be the fundamental building block of memories, as their manipulation was shown to directly affect the ability of rats to recall events or associate stimuli.
+	
+	\medskip
+	
+	Neurons naturally form engrams based on their own state and activity as well as the activity of nearby neurons. A neuron shows distinct physiological activity when it is receptive to becoming a part of a new engram, as illustrated by an experiment where the neurons in a rat's brain were genetically modified to produce a specific marker during engram formation.
+	
+	\noindent\rule{\linewidth}{0.5pt}
+	
+	\begin{center}
+		\textbf{The model is static}
+	\end{center}
+	
+	A healthy human brain is constantly rewiring itself, but the mimic neurons have no ability to grow new connections, and in a brain made from them they will never die, nor will new ones be born without intervention. This concern would be surpassed if two assumptions turn out to be true:
+	
+	\medskip
+	
+	1. the human brain can form memories even when restricted to only modifying the strength of existing connections, but not creating new ones
+	
+	\medskip
+	
+	2. the mimic neurons can be trained to respond accurately to these changes in connection strength
+	
+	\bigskip
+	
+	Assumption 1 could be wrong completely, but I would expect that at the very least the flexibility of such a brain would be stunted, such as a complete inability to acquire new skills. One plausible workaround would be to rely on assumption 2 and attempt to substitute creation of new connections by adding even more connections right from the start, and adjusting them as needed.
+	
+	\medskip
+	
+	Assumption 2 is not trivial but much more believable, but it would require data of the neuron's activity spanning a long period of time, such that it captures how its function changed in response to the strengthening and weakening of connections. Another issue here is knowing how the connections should be strengthened, and the workaround I see is adding a third output to the mimic neuron, which signals whether or not the neuron is currently receptive to becoming part of an engram*. This third output would be monitored by an external mechanism that somehow detects when nearby mimic neurons should form an engram and strengthens connections between them.
+	
+	\medskip
+    
+	\noindent
+	\begin{minipage}{0.5\linewidth}
+        I imagine that a monitoring system added to the simulation could detect and calculate such engrams, then store them in a simple SQL database as the IDs of the neurons and the amount of adjustment to the connections between them. The database could be periodically processed to decrease the strength in these entries based on their age, which would provide a rough approximation of forgetting, which is likely also necessary for normal brain function, and eventually remove the entries where the strength dropped down to 0. Another mechanism would periodically go through the database and apply the connection strength modifiers to the brain emulation, keeping it consistent with the database.
+    \end{minipage}
+    \begin{minipage}{0.5\linewidth}
+        \begin{center}
+            \includegraphics[width=0.9\linewidth]{mimic_neuron_memory_system.png}
+        \end{center}
+    \end{minipage}
+	
+	\pagebreak
+	
+	\section{Summary of computational costs}
+	
+	\vfill
+	
+	\begin{center}
+		\begin{tabular}{| c | c |}
+			\hline
+			\multicolumn{2}{|c|}{Mimic neuron} \\\hline
+			accuracy to real human neuron & 99.11\% \\\hline
+			number of parameters: & 137 186 560 \\\hline
+			& 137 186 560 000 MAC/s \\
+			computation requirement: & 274 373 120 000 FLOPS \\
+			& 274 373 120 000 000 bits/s \\\hline
+			size on disk or in memory: & 274.37312 MB \\\hline
+			& 2.24775E+20~MAC~operations \\
+			Training cost: & 4.4955E+20~floating~point~operations \\
+			& 4.4955E+23~bit~flips \\\hline
+		\end{tabular}
+	\end{center}
+	
+	\vfill
+	
+	\begin{center}
+		\begin{tabular}{| c | c | l |}
+			\hline
+			\multicolumn{3}{|c|}{Human brain emulation on mimic neurons} \\\hline
+			number of parameters: & 11 798 044 160 000 000 000 & $\approx$1.1798E+19 \\\hline
+			real-time simulation & 11 798 044 160 000 000 000 000 MAC/s & $\approx$1.798E+22 MAC/s \\
+			computation requirement: & 23 596 088 320 000 000 000 000 FLOPS & $\approx$2.360E+22 FLOPS \\
+			& 23 596 088 320 000 000 000 000 000 bits/s & $\approx$2.360E+25 bits/s \\\hline
+			size on disk or in memory: & 23.59608832 EB & $\approx$1.888E+20 bits \\\hline
+			& \multicolumn{2}{|l|}{1.933065E+31~MAC~operations} \\
+			Total training cost: & \multicolumn{2}{|l|}{3.86613E+31~floating~point~operations} \\
+			& \multicolumn{2}{|l|}{3.86613E+34 bits} \\\hline
+		\end{tabular}
+	\end{center}
+	
+	\vfill
 	
 	\pagebreak
 	
@@ -262,5 +429,146 @@
 		
 		\item \textbf{safety:} It is difficult to know ahead of time if neurons will not react negatively to having a probe stuck in their membrane, but it could likely be tested ahead of time on a small number of neurons which are not too important to the patient. There also exists the possibility that something could pull on the probe (movement of the implant within the body due to external forces?), but the probe tips could likely be designed to maintain a weak enough interface with the neuron that in such a case they harmlessly detach from the neuron.
 	\end{itemize}
+	
+	\pagebreak
+	
+	\section{OpenSCAD code for illustrations}
+	
+    This should all go into one file. The software needed is OpenSCAD, an open source cad program you can download for free, which will compile the code into a 3d model, assuming you put it together correctly.
+    
+    \medskip
+    
+    By default the code produces the example neuron, you can edit parameters in the aneuron function near the bottom of the file (not inside the modules, that will likely just break it all) but do not go too wild on them or your computer might freeze, this code will produce literal millions of individual objects to render if you try to visualize a network that has the actual numbers of neurons and layers that a real one would have.
+    
+	\begin{lstlisting}
+neuron_color=[1,0,0];
+synapse_color=[0.5,0.5,1];
+
+module bilayer(num_first, num_second,draw_first=true,sep_neurons=5,sep_layers=20,neuron_size=2,synapse_size=0.25){
+    
+    //connections first so that neurons are drawn over them rather than under
+    for(a = [1:1:num_first]){
+        a_offset = [
+        0,
+        (a * sep_neurons)+((-1-num_first) * sep_neurons/2),
+        0
+        ];
+        for(b = [1:1:num_second]){
+            b_offset = [
+            sep_layers,
+            (b * sep_neurons)+((-1-num_second) * sep_neurons/2),
+            0
+            ];
+            color(synapse_color){
+                hull(){
+                    translate(a_offset){sphere(synapse_size);}
+                    translate(b_offset){sphere(synapse_size);}
+                }
+            }
+        }
+    }
+    
+    if(draw_first){
+        for(a = [1:1:num_first]){
+            a_offset = [
+            0,
+            (a * sep_neurons)+((-1-num_first) * sep_neurons/2),
+            0
+            ];
+            color(neuron_color){
+                translate(a_offset){sphere(neuron_size);}
+            }
+        }
+    }
+    for(b = [1:1:num_second]){
+        b_offset = [
+        sep_layers,
+        (b * sep_neurons)+((-1-num_second) * sep_neurons/2),
+        0
+        ];
+        color(neuron_color){
+            translate(b_offset){sphere(neuron_size);}
+        }
+    }
+    
+    
+    
+}
+
+module multilayer(layers=[5,5,3],sep_neurons=5,sep_layers=20,neuron_size=2,synapse_size=0.25){
+    num_layers = len(layers);
+    for(i = [num_layers-1:-1:2]){
+        layer_offset = (i-1)*sep_layers;
+        translate([layer_offset,0,0]){
+            bilayer(layers[i-1],layers[i],false,sep_neurons,sep_layers,neuron_size,synapse_size);
+        }
+    }
+    bilayer(layers[0],layers[1],true,sep_neurons,sep_layers,neuron_size,synapse_size);
+}
+
+module aneuron(history=8,instreams=5,layers=[5,5,3],sep_neurons=5,sep_layers=20,neuron_size=2,synapse_size=0.25){
+    num_layers = len(layers);
+    for(i = [num_layers-1:-1:1]){
+        layer_offset = (i-1)*sep_layers;
+        translate([layer_offset,0,0]){
+            bilayer(layers[i-1],layers[i],false,sep_neurons,sep_layers,neuron_size,synapse_size);
+        }
+    }
+    //draw neurons
+    for(h = [1:1:history]){
+        for(s = [1:1:instreams]){
+            stream_offset = [
+            -sep_layers,
+            (s * sep_neurons)+((-1-instreams) * sep_neurons/2),
+            (h * sep_neurons)+((-1-history) * sep_neurons/2)
+            ];
+            translate(stream_offset){rotate([90,0,0]){
+                    color(neuron_color){sphere(neuron_size);}
+            }}
+    }}
+    for(i = [1:1:layers[0]]){
+        input_offset = [
+        0,
+        (i * sep_neurons)+((-1-layers[0]) * sep_neurons/2),
+        0
+        ];
+        translate(input_offset){
+            color(neuron_color){sphere(neuron_size);}
+        }
+    }
+    //draw connections between neurons
+    for(i = [1:1:layers[0]]){
+        input_offset = [
+        0,
+        (i * sep_neurons)+((-1-layers[0]) * sep_neurons/2),
+        0
+        ];
+        for(h = [1:1:history]){
+            for(s = [1:1:instreams]){
+                stream_offset = [
+                -sep_layers,
+                (s * sep_neurons)+((-1-instreams) * sep_neurons/2),
+                (h * sep_neurons)+((-1-history) * sep_neurons/2)
+                ];
+                color(synapse_color){hull(){
+                        translate(stream_offset){sphere(synapse_size);}
+                        translate(input_offset){sphere(synapse_size);}
+                    }
+                }
+        }}
+    }
+    
+}
+
+//example illustration mimic neuron
+aneuron(4,8,[4,4,4,2],sep_layers=100,neuron_size=20,synapse_size=1,sep_neurons=50);
+
+//mimic neuron using the real history, stream and layer numbers
+//aneuron(205,100,[128,128,128,128,128,2],sep_layers=1000,neuron_size=20,synapse_size=1,sep_neurons=50);
+//WARNING this requires a lot of memory, I recommend at least 64GB of memory total (ie. sum of your RAM and swap memory). The CSG tree for this model has 2710934 elements which surpasses the default limit for automatically canceling rendering. If you uncomment it while viewing the model directly in OpenSCAD, it will freeze the program.
+//If you want to produce an image from this, my recomended way of doing that is to use the command line:
+// openscad mimic_neuron.scad -o mimic_neuron.png --imgsize=1000,1000 --colorscheme=Starnight --viewall --autocenter --projection=o --csglimit=6000000
+//using this method, the rendering lasted a little over 1 hour for me (likely because most of the memory was swap space on my SSD rather than actual RAM) but actually succeeded, producing the image you saw in the document (except that I manually removed the black background)
+	\end{lstlisting}
 	
 \end{document}
