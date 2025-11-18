@@ -1,0 +1,101 @@
+\documentclass[a4paper]{article}
+\usepackage[margin=3cm]{geometry}
+\usepackage{graphicx}
+
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=cyan,
+	hyperindex=true,
+	linktocpage=true,%makes the page number be the link in the index
+}
+\usepackage{listings}
+\lstset{
+	basicstyle=\tiny\ttfamily,
+	columns=fullflexible,
+	keepspaces=true,
+	breaklines=true,
+	frame=single,
+	showstringspaces=true,
+	tabsize=4,
+	showspaces=true,
+	showtabs=true,
+}
+
+\renewcommand{\arraystretch}{1.2}
+
+\title{Recording brain activity using\\tiny probes on thin cables}
+
+\author{Chaya2766}
+
+\begin{document}
+	\sffamily
+	\hyphenchar\font=-1
+	\sloppy
+	
+	\maketitle
+	
+	\textbf{
+		\sloppy
+		\hyphenchar\font=-1
+		}
+	
+	\vfill
+	
+	\begin{abstract}
+        \hyphenchar\font=-1
+        \sloppy
+        
+        This document is a companion to another: "Mind uploading through machine learning approximation of single neurons: structure and computational cost".
+        
+        \medskip
+        
+        I propose a method to record the activity of every single neuron in the brain by implanting probes that directly interface with the neurons and transmit the collected information to external devices through wired connections.
+        
+        \medskip
+        
+        I make estimates regarding the cost of equipment, process of implantation, and function of the device once implanted.
+	\end{abstract}
+	
+	%\noindent \rule{\linewidth}{1pt}
+	\vfill
+	
+	\tableofcontents
+	
+	\pagebreak
+	
+	\section{Overview}
+	
+	The method I propose for gathering data is to infiltrate the brain with roughly 86 billion probes made from nested carbon (conductive) and boron nitride (insulating) nanotubes, which are to act as data cables directly transmitting the neuron potential to measurement devices. The probes would be tipped with microscopic machines capable of swimming through the brain and navigating around its structures using power supplied to them through the probes, and at the end of their journey hooking directly into the neuron membrane, thereby gaining access to the membrane potential.
+    
+    \medskip
+    
+    In the case that no scanning technology exists that can produce sufficiently high quality scans to build the needed map of connections from, the probe tips could also act as mapping devices while they make their journey. Since neurons modify their connections during their life, having the probe tips act as mapping devices even after they are embedded into the neurons would also provide a relatively convenient way of keeping track of these changes.
+    
+    \medskip
+    
+    [illustration here]
+    
+    \medskip
+    
+    Here are a number of considerations that I acknowledge to various degrees:
+    
+    \begin{itemize}
+        \item \textbf{size:} by using nested nanotubes the probes can be made thin enough that the volume of material added to the brain is not a concern
+        
+        \item the computation required for navigation through the brain tissue can be handled by external computers, as such is not an issue
+        
+        \item \textbf{cost:} producing the cables is likely to be extremely costly, as it requires not only growing pristene nanotubes of carbon or boron nitride which are multiple centimetres long (which is known to be possible and had already been demonstrated in the modern day) but also assembling them together into these cables - it is also not clear how one would assemble multiple independent nanotubes into one cable. The surgery itself would also require massive amounts of computing power to actively guide each of the 86 billion probes on their journey through the brain.
+        
+        \item \textbf{operation time:} implanting 86 billion nanoscopically thin probes into a brain is likely to be an extremely time consuming process, but at the lower bound, the probes likely can't be implanted any faster than a microbe could swim the equivalent distance, which merely rivals modern brain surgeries in time duration.
+        
+        \item \textbf{safety:} It is difficult to know ahead of time if neurons will not react negatively to having a probe stuck in their membrane, but it could likely be tested ahead of time on a small number of neurons which are not too important to the patient. There also exists the possibility that something could pull on the probe (movement of the implant within the body due to external forces?), but the probe tips could likely be designed to maintain a weak enough interface with the neuron that in such a case they harmlessly detach from the neuron.
+    \end{itemize}
+	
+    \pagebreak
+    
+    \section{Structure of the probe}
+    
+\end{document}

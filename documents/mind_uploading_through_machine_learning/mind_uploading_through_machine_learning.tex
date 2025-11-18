@@ -290,7 +290,7 @@
 			\multicolumn{2}{|c|}{Human brain emulation training costs} \\\hline
 			& 1.933065E+31~MAC~operations \\
 			Training cost: & 3.86613E+31~floating~point~operations \\
-			& 3.86613E+34 bits \\\hline
+			& 3.86613E+34 bit flips \\\hline
 		\end{tabular}
 	\end{center}
 	
@@ -402,7 +402,7 @@
 			size on disk or in memory: & 23.59608832 EB & $\approx$1.888E+20 bits \\\hline
 			& \multicolumn{2}{|l|}{1.933065E+31~MAC~operations} \\
 			Total training cost: & \multicolumn{2}{|l|}{3.86613E+31~floating~point~operations} \\
-			& \multicolumn{2}{|l|}{3.86613E+34 bits} \\\hline
+			& \multicolumn{2}{|l|}{3.86613E+34 bit flips} \\\hline
 		\end{tabular}
 	\end{center}
 	
@@ -415,38 +415,6 @@
     %If I try to go into how the required data could be extracted from a brain, that will start another thread that I might never finish
     %this text will stay here for now, but I will take it out later once I start writing a document going into how the information on neuron activity could be pulled from a functioning brain
     
-	\pagebreak
-	
-	\section{A suggestion on gathering the data (WIP)}
-	
-	The method I propose for gathering data is to infiltrate the brain with roughly 86 billion probes made from nested carbon (conductive) and boron nitride (insulating) nanotubes, which are to act as data cables directly transmitting the neuron potential to measurement devices. The probes would be tipped with microscopic machines capable of swimming through the brain and navigating around its structures using power supplied to them through the probes, and at the end of their journey hooking directly into the neuron membrane, thereby gaining access to the membrane potential.
-	
-	\medskip
-	
-	In the case that no scanning technology exists that can produce sufficiently high quality scans to build the needed map of connections from, the probe tips could also act as mapping devices while they make their journey. Since neurons modify their connections during their life, having the probe tips act as mapping devices even after they are embedded into the neurons would also provide a relatively convenient way of keeping track of these changes.
-	
-	\medskip
-	
-	[illustration here]
-	
-	\medskip
-	
-	Here are a number of considerations that I acknowledge to various degrees:
-	
-	\begin{itemize}
-		\item \textbf{size:} by using nested nanotubes the probes can be made thin enough that the volume of material added to the brain is not a concern (see calculations on next page)
-		
-		\item the computation required for navigation through the brain tissue can be handled by external computers, as such is not an issue
-		
-		\item \textbf{cost:} producing the cables is likely to be extremely costly, as it requires not only growing pristene nanotubes of carbon or boron nitride which are multiple centimetres long (which is known to be possible and had already been demonstrated in the modern day) but also assembling them together into these cables - it is also not clear how one would assemble multiple independent nanotubes into one cable. The surgery itself would also require massive amounts of computing power to actively guide each of the 86 billion probes on their journey through the brain.
-		
-		\item \textbf{operation time:} implanting 86 billion nanoscopically thin probes into a brain is likely to be an extremely time consuming process, but at the lower bound, the probes likely can't be implanted any faster than a microbe could swim the equivalent distance, which merely rivals modern brain surgeries in time duration.
-		
-		\item \textbf{safety:} It is difficult to know ahead of time if neurons will not react negatively to having a probe stuck in their membrane, but it could likely be tested ahead of time on a small number of neurons which are not too important to the patient. There also exists the possibility that something could pull on the probe (movement of the implant within the body due to external forces?), but the probe tips could likely be designed to maintain a weak enough interface with the neuron that in such a case they harmlessly detach from the neuron.
-	\end{itemize}
-    
-    \fi
-	
 	\pagebreak
 	
 	\section{OpenSCAD code for illustrations}
