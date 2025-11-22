@@ -173,6 +173,13 @@ img.centered{
  display: block;
 }
 
+img.right{
+ float: right;
+ max-height: 400px;
+ max-width: 50%;
+ /*border: 1px solid white;*/
+}
+
 /*NEVER-MANDATORY PAGE PARTS START HERE*/
 hr{
  clear: both;
