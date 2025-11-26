@@ -1,0 +1,347 @@
+<head>
+ <link rel="stylesheet" href="../index.css"></link>
+</head>
+<html class="background2" id="page">
+<a style="float: right;" target="_blank" href="../index.html?page=pages/steganographic_social_networks.html">link to this page</a>
+
+<h1>Steganographic social networks</h1>
+<hr>
+
+<img src="../images/card_placeholder.png" class="basics"></img>
+<article class="basics">
+Steganographic social networks are second layer social networks which secretly use the more open social networks and more broadly other types of information as their medium.
+They operate by embedding hidden messages within openly visible things, most often text, images, audio or binary files.
+A message can be hidden within another message such that only those with a special key can tell it apart from natural noise and read it.
+These networks typically rely on unknowing participants sharing the plainly visible message in which the hidden message is embedded, and/or their other users re-encoding the hidden message into a completely different public message or even a completely different format while preserving the hidden data.
+<br><br>
+Steganographic social networks enable communication that cannot be detected by outside parties, as such they are commonly used by the criminal and the oppressed alike, as well as those who simply don't want others to prod at their secrets (which to be fair are largely all the same thing).
+Exchanging public keys to be used for such communication before parting ways with your loved ones can help you keep them safe under some circumstances, but is also illegal in some areas.
+Mutually trusted parties with membership to an organization can also use these types of schemes to recognize each other and coordinate without displaying any signs that a non-member could detect.
+Unknowing participants can also get caught in the crossfire of investigations by sharing messages containing data they could not have possibly known about.
+</article>
+
+<hr>
+
+<h2>Hidden message mediums</h2>
+<article>
+Here are just a few examples of the ways that additional messages get invisibly encoded into public content:
+</article>
+<ol>
+  <li>Encoding scheme which converts the message into a series of algorithmically made natural-looking typos across the length of a large text article or numerous, potentially even thousands of shorter chronologically ordered text posts.</li>
+  <li>Encoding the message into the least significant colour bit of pixels in an image, mimicking the natural noise of camera sensors.</li>
+  <li>Encoding the message into the least significant bit of audio samples in a recording or music file.</li>
+  <li>Acquiring a vocal implant capable of subtly modulating the tone of your voice in an unrelated conversation to encode digital data.</li>
+  <li>Arranging items in a physical environment such that when analyzed with the right decoding scheme their arrangement could be interpreted as unambiguous digital data, which could also include their arrangement in the temporal dimension, ie. specific timing of events.</li>
+</ol>
+
+<article>
+Truly sophisticated steganographic communication schemes can be completely indistinguishable from noise to outsiders, but history is full of schemes that were thought to be unbreakable up until someone did find a way to detect them, and some of those are even still used in the present, as even though the tools to detect them exist, it is still so difficult that they are deemed "safe enough" by the people that use them.
+<br>
+As of the year 3000 these schemes are so sophisticated and all-encompassing that if you truly wanted to not just mitigate them but actually completely eliminate them you would have to contend with the fact that, if you look far enough, merely existing and being observable is sufficient for a suspicion that you are trying to secretly communicate something, and if you think even harder you could even come up with circumstances where not existing could be interpreted as such.
+</article>
+
+<hr>
+
+<h2>Proof of Work "boosting"</h2>
+<article>
+Although not strictly steganographic, there is also a common trend of using proof of work to convey the importance of a message, which usually means that when someone makes a post whose text has an unnaturally low hash number it is likely to be passed on further. This behaviour had spilled over into some of the openly visible social networks where various other social behaviours had attached themselves to this mechanism. Among others there is a vague common belief that a message that carries the mark of massive computational power is also more trustworthy, or at the very least important, thus it is often used for "boosting" your posts so that they are more likely to be shared. Some users of the networks where this became habitual had also taken to applying proof of work to their username as a way of showing off how long they had been around, or flexing about what kinds of computational power they have access to. These networks then ofcourse, mostly unknowingly, had become great mediums for carrying hidden messages, and some even speak proudly of having normalized this otherwise conspicuous behaviour.-49021788
+<br><br>
+In the context of steganographic social networks this has an additional function of clarifying that given piece of data was intentionally constructed, as in some schemes it is possible to encounter false positives, ie. your key detected and decoded a hidden message where in reality there was none and you are left trying to look for meaning in actual random noise.
+It is incredibly unlikely (on the order of 1 in 1 048 576) that if you put such random noise through a hash function you will get 20 leading zero bits, or 5 leading zeros in hexadecimal encoding.
+</article>
+
+<h1>example SHA-256 PoW worker</h1>
+<article>
+Here's an example PoW worker that you can use to both generate and check proof of work, it just appends a dash and a number onto the end of the text, which results in an unnaturally low SHA-256 hash value.
+You can check the text above if you're curious to see that it has a hash value with 6 zeros at the front.
+Beware of high processor usage since this is a brute force process, it just keeps trying higher numbers and replaces the one in the text field with a new one whenever it finds one with a lower hash, but this one is only single-threaded.
+<br>
+<span class="meta">This will also work with any of the sites you might find if you look up "SHA-256 online" as long as they encode text the same way, just beware of any tools you might feel like testing this with automatically adding a newline marker at the end.</span>
+</article>
+
+  <textarea id="text" style="width: 50vw; height: 200px;"></textarea>
+
+  <div class="controls">
+    <label style="display:flex; align-items:center; gap:0.5rem; width:auto;">
+      <input id="powToggle" type="checkbox"/> <span>do PoW</span>
+    </label>
+    <button id="resetBtn" type="button" style="width:auto;">Reset LowestHash</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><strong>Current hash:</strong><pre id="hash" style="flex:1">—</pre></div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><strong>Lowest hash:</strong><pre id="lowestHash" style="flex:1">—</pre></div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><strong>Status:</strong></div>
+    <pre id="status" style="width:120px">idle</pre>
+    <div class="stat"><strong>Hashes/s:</strong></div>
+    <pre id="hps" style="width:120px">0</pre>
+  </div>
+
+<h1 class="division">relevant pages</h1>
+
+<div class="card">
+ <img src="../images/card_placeholder.png"></img>
+ <a target="IM" href="computation.html">Computation</a>
+</div>
+
+<script>
+    // This code was generated by GPT-5 mini
+    // Get references to DOM elements used by the UI.
+    const textInput = document.getElementById('text');
+    const hashEl = document.getElementById('hash');
+    const lowestEl = document.getElementById('lowestHash');
+    const statusEl = document.getElementById('status');
+    const powToggle = document.getElementById('powToggle');
+    const resetBtn = document.getElementById('resetBtn');
+    const hpsEl = document.getElementById('hps');
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Crypto helpers
+    ///////////////////////////////////////////////////////////////////////////
+    // Convert a JS string to a Uint8Array using UTF-8 encoding for hashing.
+    function strToUint8(str) { return new TextEncoder().encode(str); }
+
+    // Convert an ArrayBuffer (or buffer) to a lowercase hex string.
+    function bufferToHex(buf) { return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join(''); }
+
+    // Convert a hex string into a BigInt (for numeric comparison of hashes).
+    // Prefix '0x' so BigInt parses as hex.
+    function hexToBigInt(hex) { return BigInt('0x' + hex); }
+
+    // Compute SHA-256 of a string and return a hex string representation.
+    // Uses the Web Crypto API (async).
+    async function sha256Hex(message) {
+      const data = strToUint8(message);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+      return bufferToHex(hashBuffer);
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Input formatting helpers
+    ///////////////////////////////////////////////////////////////////////////
+    // Ensure the input string ends with "-<number>". If not, append "-0".
+    // Example: "test" => "test-0"; "test-5" => "test-5".
+    function ensureSuffixNumber(s) { return s.match(/^(.*)-(\d+)$/) ? s : s + '-0'; }
+
+    // Split "base-number" into [base, BigInt(number)].
+    // If pattern doesn't match, returns [s, 0n] as fallback.
+    function splitBaseAndNumber(s) {
+      const m = s.match(/^(.*)-(\d+)$/);
+      if (m) return [m[1], BigInt(m[2])];
+      return [s, 0n];
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // UI: show current hash for whatever's in the input (debounced)
+    ///////////////////////////////////////////////////////////////////////////
+    // We debounce to avoid hashing on every keystroke immediately.
+    let computeTimer = null;
+    async function updateCurrentHash() {
+      clearTimeout(computeTimer);
+      const v = textInput.value;
+      if (!v) { hashEl.textContent = '—'; return; }
+      // Delay a little so typing remains snappy.
+      computeTimer = setTimeout(async () => {
+        try {
+          hashEl.textContent = await sha256Hex(v);
+        } catch (e) {
+          hashEl.textContent = 'error';
+        }
+      }, 100);
+    }
+    // Update UI when user types into the input.
+    textInput.addEventListener('input', updateCurrentHash);
+
+    ///////////////////////////////////////////////////////////////////////////
+    // PoW state variables
+    ///////////////////////////////////////////////////////////////////////////
+    // Flag indicating whether PoW loop should be running.
+    let powRunning = false;
+    // Lowest hash seen so far (as BigInt). Used to compare candidate hashes.
+    let LowestHash = null;
+    // Unique id per run used to ignore stale loops if toggled multiple times.
+    let loopRunId = 0;
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Hashes-per-second (H/s) tracking
+    ///////////////////////////////////////////////////////////////////////////
+    // Number of hashes computed in the current 1-second window.
+    let hashesCount = 0;
+    // Interval id used to update the displayed H/s once per second.
+    let hpsIntervalId = null;
+
+    // Start the H/s counter: reset counters and start a 1s interval that
+    // writes the current count to the UI and then resets it.
+    function startHpsCounter() {
+      hashesCount = 0;
+      hpsEl.textContent = '0';
+      if (hpsIntervalId) clearInterval(hpsIntervalId);
+      hpsIntervalId = setInterval(() => {
+        // Show number of hashes completed during last second.
+        hpsEl.textContent = Math.round(hashesCount).toString();
+        // Reset counter for next second.
+        hashesCount = 0;
+      }, 1000);
+    }
+
+    // Stop the H/s counter and clear the interval.
+    function stopHpsCounter() {
+      if (hpsIntervalId) clearInterval(hpsIntervalId);
+      hpsIntervalId = null;
+      hpsEl.textContent = '0';
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Initialization of LowestHash from the current input value
+    ///////////////////////////////////////////////////////////////////////////
+    // Reads the input, ensures it has a numeric suffix, computes its hash,
+    // and stores that hash as the initial LowestHash.
+    async function initializeLowestHashFromInput() {
+      let v = textInput.value || '';
+      if (v === '') v = '0-0';           // reasonable default if empty
+      v = ensureSuffixNumber(v);         // append -0 if missing
+      if (v !== textInput.value) {
+        // Write normalized value back to input so UI reflects it.
+        textInput.value = v;
+        updateCurrentHash();
+      }
+      const h = await sha256Hex(v);      // compute hash of normalized value
+      LowestHash = hexToBigInt(h);       // store numeric value for comparisons
+      lowestEl.textContent = h;          // display hex of LowestHash
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // PoW loop (local state)
+    //
+    // Important design: when the PoW toggle starts, the script reads the input
+    // exactly once to capture the "base" string and the starting counter.
+    // The loop then increments and tests candidates using those local
+    // variables — it does NOT re-read the input each iteration.
+    //
+    // The input field is only written when a new LowestHash is found.
+    ///////////////////////////////////////////////////////////////////////////
+    async function powLoopLocal(myId, base, startCounter) {
+      // Set status so the UI knows the loop is active.
+      statusEl.textContent = 'running';
+      // Use a BigInt counter so very large numbers are supported.
+      let counter = startCounter;
+
+      // Continue looping while the global flag says to run and the run id
+      // matches (this prevents stale loops from continuing after restarts).
+      while (powRunning && myId === loopRunId) {
+        // Increment the counter and form the candidate string to hash.
+        counter = counter + 1n;
+        const candidate = base + '-' + counter.toString();
+
+        try {
+          // Compute the candidate's SHA-256 hash (hex string).
+          const h = await sha256Hex(candidate);
+
+          // Each successful hash increments the H/s counter.
+          hashesCount++;
+
+          // Convert the hex hash to a BigInt for numerical comparison.
+          const hBig = hexToBigInt(h);
+
+          // If this hash is lower (numerically) than the previous lowest,
+          // update LowestHash and write the candidate back to the input.
+          // The loop does NOT stop — it continues searching for even lower.
+          if (LowestHash === null || hBig < LowestHash) {
+            LowestHash = hBig;
+            lowestEl.textContent = h;
+            // Update the input field to show the new best candidate.
+            textInput.value = candidate;
+            // Update "current hash" display for the UI (debounced).
+            updateCurrentHash();
+          }
+        } catch (e) {
+          // On any hashing error, log it and continue. The loop should be
+          // robust and keep running unless user stops it.
+          console.error('hash error', e);
+        }
+
+        // Yield back to the event loop briefly so the page remains responsive.
+        // This also gives the browser a chance to repaint and handle UI events.
+        await new Promise(resolve => setTimeout(resolve, 0));
+      }
+
+      // When loop exits, update status to stopped (unless another run started).
+      if (!powRunning || myId !== loopRunId) statusEl.textContent = 'stopped';
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Toggle handler — starts or stops the PoW run
+    //
+    // When starting:
+    // - mark running flag,
+    // - capture a unique run id,
+    // - read input once (normalize and split),
+    // - initialize LowestHash from that input,
+    // - start H/s counter,
+    // - call powLoopLocal with captured base and counter.
+    //
+    // When stopping:
+    // - clear running flag and stop H/s counter.
+    ///////////////////////////////////////////////////////////////////////////
+    powToggle.addEventListener('change', async () => {
+      if (powToggle.checked) {
+        // Start a new run
+        powRunning = true;
+        loopRunId += 1; // unique identifier for this run
+
+        // Read and normalize input exactly once at start.
+        let v = textInput.value || '';
+        if (v === '') v = '0-0';
+        v = ensureSuffixNumber(v);
+        if (v !== textInput.value) {
+          textInput.value = v;
+          updateCurrentHash();
+        }
+
+        // Capture base and starting counter locally.
+        const [base, num] = splitBaseAndNumber(v);
+
+        // Initialize LowestHash from the normalized input value.
+        const h = await sha256Hex(v);
+        LowestHash = hexToBigInt(h);
+        lowestEl.textContent = h;
+
+        // Start the H/s counter and begin the local PoW loop.
+        startHpsCounter();
+        powLoopLocal(loopRunId, base, num);
+
+      } else {
+        // Stop the run; the loop will exit cooperatively.
+        powRunning = false;
+        stopHpsCounter();
+      }
+    });
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Reset button: recompute LowestHash from the current input value.
+    // Useful if you manually edited the input and want the algorithm to use
+    // the new input as the baseline without starting the PoW loop.
+    ///////////////////////////////////////////////////////////////////////////
+    resetBtn.addEventListener('click', async () => {
+      await initializeLowestHashFromInput();
+      statusEl.textContent = 'reset lowest';
+    });
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Initial setup: populate sample input, update current hash display,
+    // and initialize LowestHash without starting the PoW loop.
+    ///////////////////////////////////////////////////////////////////////////
+    textInput.value = 'test-168289';
+    updateCurrentHash();
+    (async () => { await initializeLowestHashFromInput(); statusEl.textContent = 'idle'; })();
+
+    // End of script.
+  </script>
+
+</html>

@@ -196,6 +196,17 @@ hr{
  text-align: center;
 }
 
+.warning.meta{
+  background-color: black;
+  color: #F8F;
+  border: 5px dashed #F8F;
+}
+.warning.meta:hover{
+  background-color: black;
+  color: #F8F;
+  border: 5px dashed #F8F;
+}
+
 .division{
  clear: both;
  margin: 0px;
