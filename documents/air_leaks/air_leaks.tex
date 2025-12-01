@@ -1,0 +1,377 @@
+\documentclass[a4paper]{article}
+\usepackage[margin=3cm]{geometry}
+\usepackage{graphicx}
+
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=cyan,
+	hyperindex=true,
+	linktocpage=true,%makes the page number be the link in the index
+}
+\usepackage{listings}
+\lstset{
+	basicstyle=\tiny\ttfamily,
+	columns=fullflexible,
+	keepspaces=true,
+	breaklines=true,
+	frame=single,
+	showstringspaces=true,
+	tabsize=4,
+	showspaces=true,
+	showtabs=true,
+}
+
+\renewcommand{\arraystretch}{1.2}
+
+\title{Air leak through a hull breach}
+
+\author{Chaya2766}
+
+\begin{document}
+	\sffamily
+	\hyphenchar\font=-1
+	\sloppy
+	
+	\maketitle
+	
+	\textbf{
+		\sloppy
+		\hyphenchar\font=-1
+	}
+	
+	\vfill
+	
+	\begin{abstract}
+		A collection of equations and examples for precise accurate depiction of hull breaches on spacecraft.
+		
+		\medskip
+		
+		In the first part of the document the focus is on the air velocity at various distances in the immediate surroundings of a hole leading directly from a pressurized interior to the vacuum of space.
+		
+		\medskip
+		
+		In the second part, the focus is on how quickly pressure will be lost from the breached pressurized interior given its volume and the size of the hole.
+	\end{abstract}
+	
+	%\noindent \rule{\linewidth}{1pt}
+	\vfill
+	
+	\tableofcontents
+	
+	\pagebreak
+	
+	\section{Air mass flow equation}
+	
+	The entire rest of the document relies on the equations provided in this section.
+	
+	\medskip
+	
+	The equation provided below had been sourced from the paper "International space station leak localization using attitude disturbance estimation" by Jong-Woo Kim, Adam Dershowitz and John Crassidis. It is numbered 17 in the paper and located on the 5th page.
+	
+	\medskip
+	
+	$$ \dot{m} = \frac{AP\sqrt{\gamma}}{\sqrt{RT}} \left(\frac{2}{1+\gamma}\right)^\frac{1+\gamma}{2(\gamma-1)} $$
+	
+	where:
+	
+	\begin{itemize}
+		\item $\dot{m}$ is the mass flow [kg/s]
+		
+		\item $A$ is the area of the hole [m$^2$]
+		
+		\item $P$ is the pressure inside the vessel [Pa]
+		
+		\item $\gamma$ is the \href{https://en.wikipedia.org/wiki/Heat_capacity_ratio}{specific heat ratio} ($\gamma = 1.4$ for dry air at 20$^oC$)
+		
+		\item $R$ is the \href{https://en.wikipedia.org/wiki/Gas_constant#Specific_gas_constant}{specific gas constant} of the atmosphere inside the vessel [$\frac{J}{kg\cdot K}$]
+		
+		($R = 287.052874J/kgK$ for dry air)
+		
+		\item $T$ is the temperature of air on the interior [K]
+	\end{itemize}
+	
+	\noindent\rule{\linewidth}{0.5pt}
+	\medskip
+	
+	I would expect "dry air" to be an extremely common assumption, ie. that the pressurized interior is filled with air at typical earth composition. This would set the constants $R = 287.052874J/kgK$ and $\gamma = 1.4$, allowing the equation to be simplified.
+	
+	\medskip
+	
+	Assuming $\gamma = 1.4$, the whole end of the equation can be combined into one number:
+	
+	$$ \sqrt{1.4} \left(\frac{2}{1+1.4}\right)^\frac{1+1.4}{2(1.4-1)} = 0.6847314564 $$
+	
+	That simplifies the original equation down to the following:
+	
+	$$ \dot{m} = \frac{AP}{\sqrt{RT}} \cdot 0.6847314564 $$
+	
+	\medskip
+	
+	$R = 287.052874J/kgK$ can also be set and combined into the constant at the end, resulting in the following equation:
+	
+	$$ \dot{m} = \frac{AP}{\sqrt{T}} \cdot 0.04041469727\sqrt{kgK/J} $$
+	
+	\begin{itemize}
+		\item $\dot{m}$ is the mass flow [kg/s]
+		
+		\item $A$ is the area of the hole [m$^2$]
+		
+		\item $P$ is the pressure inside the vessel [Pa]
+		
+		\item $T$ is the temperature of air on the interior [K]
+	\end{itemize}
+	
+	\medskip
+	
+	It must be remembered that this equation, after such simplification, is only valid for dry air. If one is using a different atmosphere such as for example pure oxygen, then the more complicated equation shown first should be used instead, or the simplification steps should be repeated using the $\gamma$ and $R$ for that gas instead to get a simplified equation which works for that atmospheric composition.
+	
+	\pagebreak
+	
+	\section{Air velocity equation}
+	
+	The density of dry air at room temperature and atmospheric pressure is 1.2kg/$m^3$, and stays quite close to that for any temperature humans may reasonably inhabit.
+	
+	\medskip
+	
+	The volume flow can be calculated from that, but it is only instantaineous, since the pressure and density will change as the air escapes. If the internal volume is huge you could assume that the flow will not change significantly over short times.
+	
+	\medskip
+	
+	Even further simplifying the previous equation by assuming room temperature ($21^oC = 294.15K$) and atmospheric pressure ($1atm = 101325Pa$), the mass flow becomes a function of only the area of the hole:
+	
+	$$ \dot{m} = A \frac{101325Pa}{\sqrt{294.15K}} \cdot 0.04041469727\sqrt{kgK/J} = A \cdot 238.7654679 Pa \cdot s/m $$
+	
+	To find the velocity of the air at some distance from the hole, consider that the air is moving in from all around it, which assuming that the hole is in a flat surface, means half a sphere. The volume of air being sucked in is constant, but it is being sucked through a larger and larger area (the surface of a sphere surrounding the hole) so it is moving slower the larger the distance is.
+	
+	\medskip
+	
+	Assuming air density of 1.2kg/$m^3$, the following equations describe this:
+	
+	$$ \dot{V} = \frac{\dot{m}}{1.2kg/m^3} = A \cdot 198.9712233m/s $$
+	
+	$$ v = \frac{\dot{V}}{4\pi r^2 \cdot 0.5 } = \frac{A}{r^2} \cdot 31.66725372m/s$$
+	
+	where:
+	
+	\begin{itemize}
+		\item $\dot{V}$ is volume flow [$m^3/s$]
+		
+		\item $\dot{m}$ is mass flow [kg/s]
+		
+		\item $A$ is area of the hole [$m^2$]
+		
+		\item $v$ is velocity of the air [$m/s$]
+		
+		\item $r$ is distance from the hole [m]
+	\end{itemize}
+	
+	\pagebreak
+	
+	\section{Pressure loss equation}
+	
+	This equation is derived using a simulation, where I simply set a big room with a given mass of air and a hole of a given size, then iterate through these 3 steps:
+	
+	\begin{enumerate}
+		\item Calculate the pressure in the room in accordance with the ideal gas law (ie. assuming that air density and air pressure are proportional to each other if the volume, temperature and air composition are constant)
+		
+		\item Calculate the mass flow through the hole
+		
+		\item Calculate the amount of mass lost during a small amount of time
+		
+		\item Substract the mass lost from the air mass of the room
+	\end{enumerate}
+	
+	\noindent It is explained in more detail on the next page, conclusion first.
+	
+	\bigskip
+	
+	\bigskip
+	    
+	The results I observed from the simulation are well approximated by these two equations:
+	    
+	$$ P_{now} = P_{start} \cdot 2^{-(\frac{t}{\lambda})} $$
+		
+	where:
+	
+	\begin{itemize}
+		\item $P_{now}$ is pressure at the current moment
+		    
+		\item $P_{start}$ is pressure at the moment the hole appeared
+		
+		\item $t$ is the time that had passed since the hole appeared
+		
+		\item $\lambda$ is the halving time of the pressure in the room
+	\end{itemize}
+	
+	$$ \lambda = \frac{V \cdot P_{start}}{A \cdot \sqrt{T}} \cdot 0.000000002004645164\frac{s \cdot \sqrt{K}}{m \cdot Pa} $$
+	    
+	where:
+	    
+	\begin{itemize}
+		\item $\lambda$ is the halving time of the pressure in the room
+	    
+	    \item $V$ is the volume of the pressurized interior space
+	    
+	    \item $A$ is the area of the hole
+	            
+	    \item $T$ is the air temperature
+	\end{itemize}
+	
+	\pagebreak
+	
+	The equation for mass flow is set as this:
+	
+	$$ \dot{m} = \frac{AP}{\sqrt{T}} \cdot 0.04041469727\sqrt{kgK/J} $$
+	
+	\begin{itemize}
+		\item $\dot{m}$ is the mass flow [kg/s]
+		
+		\item $A$ is the area of the hole [m$^2$]
+		
+		\item $P$ is the pressure inside the vessel [Pa]
+		
+		\item $T$ is the temperature of air on the interior [K]
+	\end{itemize}
+	
+    \bigskip
+    
+	Here is python code which I used to make my observations:
+	
+	\begin{lstlisting}
+import math
+
+def mass_flow_equation(A,P,T):
+    mass_flow = A * P * math.sqrt(T) * 0.04041469727
+    return mass_flow
+
+def room_air_density(V,M):
+    return M/V
+
+def room_air_pressure(V,M):
+    return 101325*(M/V)/1.2#Pascals
+    #I am assuming that if air density drops by half, the pressure also drops by half
+
+room_volume = 1000#cubic metres
+starting_room_air_mass = room_volume * 1.2#multiply volume by 1.2kg/m^3 to get the air mass at 1 bar
+hole_size = 0.0001#square metres, 0.0001m^2 = 1cm^2
+step_size = 0.001#seconds, by default I have it set to 0.001 which is 1 millisecond
+temperature = 293.15#Kelvins, 293.15K = 20 Celsius
+starting_air_pressure = room_air_pressure(starting_room_air_mass,room_volume)
+
+#start simulation
+
+pressure = starting_air_pressure
+mass = starting_room_air_mass
+mass_flow = 0
+mass_lost = 0
+time_passed = 0
+density = room_air_density(room_volume,mass)
+
+while density / 1.2 > 0.5:
+    mass_flow = mass_flow_equation(hole_size,pressure,temperature)
+    mass_lost = mass_flow * step_size#mass lost during one physics step
+    mass -= mass_lost
+    time_passed += step_size
+    density = room_air_density(room_volume,mass)
+    pressure = room_air_pressure(room_volume,mass)
+    print(pressure,time_passed)
+
+print(f"lost half of air pressure in {time_passed} seconds")
+	\end{lstlisting}
+	
+    Observations:
+    
+    \begin{itemize}
+        \item A room of volume=$1000m^3$ at 1 atmosphere with a hole of area=$0.0001m^2$ takes $\approx$118.634 seconds to drop down to 50\% of the starting pressure
+        
+        \item That same room takes $\approx$237.266 seconds to drop down to 25\% of the starting pressure, which is twice as long - this seems to confirm my assumption that the pressure loss will be well approximated by a halving time
+        
+        \item If the volume of the room is increased by 10 times, time to lose half pressure also grows by a factor of 10.
+        
+        \item If the area of the hole is decreased by a factor of 10, time to lose pressure grows by a factor of 10.
+        
+        \item If the temperature is lowered by a factor of 4, the time to lose pressure grows by a factor of 2.
+    \end{itemize}
+    
+    
+    
+	\pagebreak
+	
+	\section{Example scenario}
+	
+	Situation: viewing port on a space station is broken, it's size was 30cm by 30cm. The station was filled with standard air at room temperature and full atmospheric pressure, so the most simplified equation can be used:
+	
+	$$ v = \frac{A}{r^2} \cdot 31.66725372m/s$$
+	
+	where:
+	
+	\begin{itemize}
+		\item $v$ is velocity of the air [$m/s$]
+		
+		\item $A$ is area of the hole [$m^2$]
+		
+		\item $r$ is distance from the hole [m]
+	\end{itemize}
+	
+	Let's check air speed at various distances in increments of 10cm:
+	
+	$$ A = 0.3m \cdot 0.3m = 0.09m $$
+	
+	$$ v_{10} = \frac{0.09m^2}{(0.1m)^2} \cdot 31.66725372m/s = 285m/s $$
+	
+	$$ v_{20} = \frac{0.09m^2}{(0.2m)^2} \cdot 31.66725372m/s = 71.25m/s $$
+	
+	$$ v_{30} = \frac{0.09m^2}{(0.3m)^2} \cdot 31.66725372m/s = 31.67m/s $$
+	
+	$$ v_{40} = \frac{0.09m^2}{(0.4m)^2} \cdot 31.66725372m/s = 17.81m/s $$
+	
+	$$ v_{50} = \frac{0.09m^2}{(0.5m)^2} \cdot 31.66725372m/s = 11.4m/s $$
+	
+	$$ v_{60} = \frac{0.09m^2}{(0.6m)^2} \cdot 31.66725372m/s = 7.92m/s $$
+	
+	$$ v_{70} = \frac{0.09m^2}{(0.7m)^2} \cdot 31.66725372m/s = 5.82m/s $$
+	
+	$$ v_{80} = \frac{0.09m^2}{(0.8m)^2} \cdot 31.66725372m/s = 4.45m/s $$
+	
+	$$ v_{90} = \frac{0.09m^2}{(0.9m)^2} \cdot 31.66725372m/s = 3.52m/s $$
+	
+	$$ v_{100} = \frac{0.09m^2}{(1m)^2} \cdot 31.66725372m/s = 2.85m/s $$
+	
+	At distances closer than 30cm the air speed is equivalent to a huricane, by 50cm it drops to a strong breeze, and by 100cm it drops off to a light breeze.
+	
+	\pagebreak
+	
+	\begin{center}
+		{\Huge \textbf{work in progress}}
+	\end{center}
+	
+	Let's say that room was a cube 10m by 10m by 10m. In that case the time it takes for the pressure in that room to drop to 30\% (a bit past the limit of what is unbreathable) would be a bit less than 56 seconds.
+	
+	$$ t_{0.3} = \frac{V}{A} \cdot 0.005025854 s/m $$
+	
+	where:
+	
+	\begin{itemize}
+		\item $t_{0.3}$ is time till air pressure drops by 70\% [s]
+		
+		\item $V$ is volume of the room [$m^3$]
+		
+		\item $A$ is area of the hole [$m^2$]
+	\end{itemize}
+	
+	$$ t_{0.3} = \frac{1000m^3}{0.09m^2} \cdot 0.005025854 s/m = 55.843s $$
+	
+	\pagebreak
+	
+	\section{section}
+	
+	\section{section}
+	
+	\section{section}
+	
+	
+	
+\end{document}
