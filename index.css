@@ -177,7 +177,11 @@ img.right{
  float: right;
  max-height: 400px;
  max-width: 50%;
- /*border: 1px solid white;*/
+}
+
+img.styled{
+ border: 1px solid white;
+ margin: 6px;
 }
 
 /*NEVER-MANDATORY PAGE PARTS START HERE*/

@@ -8,4 +8,4 @@ documents/**/*.out
 documents/**/*.synctex.gz
 documents/**/*.toc
 
-
+rendering_zone/*.png
