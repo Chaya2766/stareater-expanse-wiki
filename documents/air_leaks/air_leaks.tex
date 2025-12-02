@@ -48,19 +48,28 @@
 	\vfill
 	
 	\begin{abstract}
-		A collection of equations and examples for precise accurate depiction of hull breaches on spacecraft.
+		A collection of equations and examples for precise accurate depiction of air leaks and hull breaches on spacecraft.
 		
 		\medskip
 		
-		In the first part of the document the focus is on the air velocity at various distances in the immediate surroundings of a hole leading directly from a pressurized interior to the vacuum of space.
+		Section 1 presents the mass flow equation which forms the basis for the entire document, and explains how I simplified it using the assumption that the gas used is dry air.
 		
 		\medskip
 		
-		In the second part, the focus is on how quickly pressure will be lost from the breached pressurized interior given its volume and the size of the hole.
+		Section 2 presents an equation for air velocity at given distance from the hole, and provides reasoning based on ideal gas law for why it is valid for air at any pressure rather than only the originally assumed atmospheric pressure.
 		
 		\medskip
 		
-		This document in particular could really benefit from experimental verification or future validation against other sources and potential rewrite, as the process had been particularly chaotic with this one.
+		Section 3 presents a set of 2 equations which describe how the pressure in a given presurized volume will drop over time as a result of the puncture. I also present a simple simulation of air leakage written in python, and my observations from running it, based on which these equations were constructed.
+		
+		\medskip
+		
+		Section 4 simply collects the 3 most important equations valid for dry air.
+		
+		\medskip
+		
+		Section 5 applies the equations from section 4 to an example scenario, where a pressurized airtight container is left floating in a vacuum and then punctured, providing a reference use of the equations. Charts of remaining air pressure over time and air velocity at given distance from the hole are also shown.
+		
 	\end{abstract}
 	
 	%\noindent \rule{\linewidth}{1pt}
@@ -174,6 +183,16 @@
 		
 		\item $r$ is distance from the hole [m]
 	\end{itemize}
+	
+	According to the ideal gas law, if all other parameters stay constant, lowering the pressure of the gas by a given factor should also decrease the density of that gas by the same factor.
+	
+	\medskip
+	
+	In the presented equation for mass flow, decreasing the pressure x times also decreases the mass flow x times. In the later presented equation for velocity based on the assumption that air has a density of 1.2kg/m$^3$, the density is presented as a hardcoded constant, but in reality decreasing the pressure by x times should also decrease the density by x times.
+	
+	\medskip
+	
+	Since to get the velocity equation, mass flow is divided by density, and lowering the pressure decreases both of them x times, the effect actually cancels out and the velocity of the air should not change. This means that the air velocity equation is valid for air at any pressure rather than only the exact case of air at atmospheric pressure.
 	
 	\pagebreak
 	
@@ -317,8 +336,6 @@ print(f"lost half of air pressure in {time_passed} seconds")
     
     The velocity of air near a hole in a flat wall directly to vacuum:
     
-    (WARNING: valid only for full atmospheric pressure)
-    
     $$ v = \frac{A}{r^2} \cdot 31.66725372m/s$$
     	
     where:
@@ -399,7 +416,7 @@ print(f"lost half of air pressure in {time_passed} seconds")
 				ytick={0,10000,...,100000},%forces every multiple of 10 000 to be shown
 				xtick={0,15,...,150},
 				yticklabel style={font=\scriptsize},%makes axis numbers tiny
-				%xticklabel style={font=\scriptsize},%makes axis numbers tiny
+				xticklabel style={font=\scriptsize},%makes axis numbers tiny
 				%ymode=log,
 				%xmin=1, xmax=100,
 				%ymin=0, ymax=10,
@@ -408,13 +425,15 @@ print(f"lost half of air pressure in {time_passed} seconds")
 				major grid style={gray!50},
 				]
 				\addplot[blue, thick, domain=0:150, samples=100]  {101325*pow(2,-(x/34.778))};
+				\addplot[green, thick, domain=0:150, samples=100]
+				{35600};
 				\addplot[red, thick, domain=0:150, samples=100]
 				{6250};
 			\end{axis}
 		\end{tikzpicture}
 	\end{center}
 	
-	The armstrong limit (ie, pressure low enough that the boiling points of bodily fluids drops below typical human body temperature) is marked as a horizontal red line.
+	The climber's "death zone" (minimum air pressure needed to maintain consciousness without supporting equipment) is marked as a green horizontal line, and the armstrong limit (ie, pressure low enough that the boiling points of bodily fluids drops below typical human body temperature, necessitating full pressure suits) is marked as a horizontal red line.
 	
 	\medskip
 	
@@ -423,7 +442,7 @@ print(f"lost half of air pressure in {time_passed} seconds")
 	$$ v = \frac{0.0001m^2}{(5cm)^2} \cdot 31.66725372m/s = 1.266690149 m/s $$
 	
 	\begin{center}
-		Graphed with X axis as distance from the hole in centimetres and Y axis as velocity in metres per second:
+		Graphed with X axis as distance from the hole in centimetres and Y axis as velocity in m/s:
 		
 		\begin{tikzpicture}
 			\begin{axis}[
