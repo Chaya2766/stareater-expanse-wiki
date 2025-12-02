@@ -54,6 +54,10 @@
 		\medskip
 		
 		In the second part, the focus is on how quickly pressure will be lost from the breached pressurized interior given its volume and the size of the hole.
+		
+		\medskip
+		
+		This document in particular could really benefit from experimental verification or future validation against other sources and potential rewrite, as the process had been particularly chaotic with this one.
 	\end{abstract}
 	
 	%\noindent \rule{\linewidth}{1pt}
@@ -206,7 +210,7 @@
 		\item $\lambda$ is the halving time of the pressure in the room
 	\end{itemize}
 	
-	$$ \lambda = \frac{V \cdot P_{start}}{A \cdot \sqrt{T}} \cdot 0.000000002004645164\frac{s \cdot \sqrt{K}}{m \cdot Pa} $$
+	$$ \lambda = \frac{V \cdot P_{start}}{A \cdot \sqrt{T}} \cdot 0.0000005876692139\frac{s \cdot \sqrt{K}}{m \cdot Pa} $$
 	    
 	where:
 	    
@@ -244,8 +248,9 @@
 import math
 
 def mass_flow_equation(A,P,T):
-    mass_flow = A * P * math.sqrt(T) * 0.04041469727
+    mass_flow = A * P * 0.04041469727 / math.sqrt(T)
     return mass_flow
+    #sanity check - if given A=0.0001 P=101325, T=293.15 it should return 0.02391682359 or something close
 
 def room_air_density(V,M):
     return M/V
@@ -253,13 +258,15 @@ def room_air_density(V,M):
 def room_air_pressure(V,M):
     return 101325*(M/V)/1.2#Pascals
     #I am assuming that if air density drops by half, the pressure also drops by half
+    #if this gets volume of 1 and mass of 1.2 it should return 101325
 
-room_volume = 1000#cubic metres
+room_volume = 1#cubic metres
 starting_room_air_mass = room_volume * 1.2#multiply volume by 1.2kg/m^3 to get the air mass at 1 bar
 hole_size = 0.0001#square metres, 0.0001m^2 = 1cm^2
 step_size = 0.001#seconds, by default I have it set to 0.001 which is 1 millisecond
 temperature = 293.15#Kelvins, 293.15K = 20 Celsius
 starting_air_pressure = room_air_pressure(starting_room_air_mass,room_volume)
+#given these start
 
 #start simulation
 
@@ -277,7 +284,8 @@ while density / 1.2 > 0.5:
     time_passed += step_size
     density = room_air_density(room_volume,mass)
     pressure = room_air_pressure(room_volume,mass)
-    print(pressure,time_passed)
+    if math.fmod(time_passed,1) <= step_size:
+        print(pressure,time_passed)
 
 print(f"lost half of air pressure in {time_passed} seconds")
 	\end{lstlisting}
@@ -285,15 +293,15 @@ print(f"lost half of air pressure in {time_passed} seconds")
     Observations:
     
     \begin{itemize}
-        \item A room of volume=$1000m^3$ at 1 atmosphere with a hole of area=$0.0001m^2$ takes $\approx$118.634 seconds to drop down to 50\% of the starting pressure
+        \item A room of volume=$1m^3$ at 1 atmosphere (101325 pascals) with a hole of area=$0.0001m^2$ takes $\approx$34.778 seconds to drop down to 50\% of the starting pressure
         
-        \item That same room takes $\approx$237.266 seconds to drop down to 25\% of the starting pressure, which is twice as long - this seems to confirm my assumption that the pressure loss will be well approximated by a halving time
+        \item That same room takes $\approx$69.555 seconds to drop down to 25\% of the starting pressure, which is twice as long - this seems to confirm my assumption that the pressure loss will be well approximated by a halving time
         
-        \item If the volume of the room is increased by 10 times, time to lose half pressure also grows by a factor of 10.
+        \item If the volume of the room is increased by a factor of 10, time to lose half pressure also grows by a factor of 10.
         
-        \item If the area of the hole is decreased by a factor of 10, time to lose pressure grows by a factor of 10.
+        \item If the area of the hole is increased by a factor of 10, time to lose pressure drops by a factor of 10.
         
-        \item If the temperature is lowered by a factor of 4, the time to lose pressure grows by a factor of 2.
+        \item If the temperature is increased by a factor of 4, the time to lose pressure grows by a factor of 2. Something feels wrong about this, but it agrees with the equation.
     \end{itemize}
     
     
