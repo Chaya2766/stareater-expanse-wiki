@@ -24,6 +24,9 @@
 	showtabs=true,
 }
 
+\usepackage{pgfplots}
+
+
 \renewcommand{\arraystretch}{1.2}
 
 \title{Air leak through a hull breach}
@@ -304,82 +307,144 @@ print(f"lost half of air pressure in {time_passed} seconds")
         \item If the temperature is increased by a factor of 4, the time to lose pressure grows by a factor of 2. Something feels wrong about this, but it agrees with the equation.
     \end{itemize}
     
+    \pagebreak
     
+    \section{Final equations for dry air}
+    
+    Here I'm just collecting the equations for convenience.
+    
+    \bigskip
+    
+    The velocity of air near a hole in a flat wall directly to vacuum:
+    
+    (WARNING: valid only for full atmospheric pressure)
+    
+    $$ v = \frac{A}{r^2} \cdot 31.66725372m/s$$
+    	
+    where:
+    	
+    \begin{itemize}
+    	\item $\dot{V}$ is volume flow [$m^3/s$]
+    		
+    	\item $\dot{m}$ is mass flow [kg/s]
+    		
+    	\item $A$ is area of the hole [$m^2$]
+    		
+    	\item $v$ is velocity of the air [$m/s$]
+    		
+    	\item $r$ is distance from the hole [m]
+   	\end{itemize}
+   	
+   	\bigskip
+   	
+	Halving time of pressure in a punctured pressurized space:
+	
+	$$ \lambda = \frac{V \cdot P_{start}}{A \cdot \sqrt{T}} \cdot 0.0000005876692139\frac{s \cdot \sqrt{K}}{m \cdot Pa} $$
+	    
+	where:
+	    
+	\begin{itemize}
+		\item $\lambda$ is the halving time of the pressure in the room
+	    
+	    \item $V$ is the volume of the pressurized interior space
+	    
+	    \item $A$ is the area of the hole
+	            
+	    \item $T$ is the air temperature
+	\end{itemize}
+	
+	Interior pressure at given time since the punctured appeared:
+	
+	$$ P_{now} = P_{start} \cdot 2^{-(\frac{t}{\lambda})} $$
+		
+	where:
+	
+	\begin{itemize}
+		\item $P_{now}$ is pressure at the current moment
+		    
+		\item $P_{start}$ is pressure at the moment the hole appeared
+		
+		\item $t$ is the time that had passed since the hole appeared
+		
+		\item $\lambda$ is the halving time of the pressure in the room
+	\end{itemize}
     
 	\pagebreak
 	
 	\section{Example scenario}
 	
-	Situation: viewing port on a space station is broken, it's size was 30cm by 30cm. The station was filled with standard air at room temperature and full atmospheric pressure, so the most simplified equation can be used:
+	A completely airtight container is left floating in a vacuum, which has one cubic metre of volume on the inside. It is full of dry air at atmospheric pressure and room temperature. It then gets punctured, with the area of the hole being one square centimetre.
 	
-	$$ v = \frac{A}{r^2} \cdot 31.66725372m/s$$
+	\bigskip
 	
-	where:
+	Pressure halving time:
 	
-	\begin{itemize}
-		\item $v$ is velocity of the air [$m/s$]
-		
-		\item $A$ is area of the hole [$m^2$]
-		
-		\item $r$ is distance from the hole [m]
-	\end{itemize}
+	$$ \lambda = \frac{1m^3 \cdot 101325Pa}{0.0001m^2 \cdot \sqrt{293.15 K}} \cdot 0.0000005876692139\frac{s \cdot \sqrt{K}}{m \cdot Pa} = 34.778s $$
 	
-	Let's check air speed at various distances in increments of 10cm:
+	Pressure will drop by half after 34.778 seconds, after twice that time it will be one quarter, after thrice that time it will be one eighth, etc.
 	
-	$$ A = 0.3m \cdot 0.3m = 0.09m $$
+	Example, what will the pressure be at exactly 15 seconds since the container was punctured:
 	
-	$$ v_{10} = \frac{0.09m^2}{(0.1m)^2} \cdot 31.66725372m/s = 285m/s $$
-	
-	$$ v_{20} = \frac{0.09m^2}{(0.2m)^2} \cdot 31.66725372m/s = 71.25m/s $$
-	
-	$$ v_{30} = \frac{0.09m^2}{(0.3m)^2} \cdot 31.66725372m/s = 31.67m/s $$
-	
-	$$ v_{40} = \frac{0.09m^2}{(0.4m)^2} \cdot 31.66725372m/s = 17.81m/s $$
-	
-	$$ v_{50} = \frac{0.09m^2}{(0.5m)^2} \cdot 31.66725372m/s = 11.4m/s $$
-	
-	$$ v_{60} = \frac{0.09m^2}{(0.6m)^2} \cdot 31.66725372m/s = 7.92m/s $$
-	
-	$$ v_{70} = \frac{0.09m^2}{(0.7m)^2} \cdot 31.66725372m/s = 5.82m/s $$
-	
-	$$ v_{80} = \frac{0.09m^2}{(0.8m)^2} \cdot 31.66725372m/s = 4.45m/s $$
-	
-	$$ v_{90} = \frac{0.09m^2}{(0.9m)^2} \cdot 31.66725372m/s = 3.52m/s $$
-	
-	$$ v_{100} = \frac{0.09m^2}{(1m)^2} \cdot 31.66725372m/s = 2.85m/s $$
-	
-	At distances closer than 30cm the air speed is equivalent to a huricane, by 50cm it drops to a strong breeze, and by 100cm it drops off to a light breeze.
-	
-	\pagebreak
+	$$ P_{now} = 101325Pa \cdot 2^{-(\frac{15s}{34.778s})} = 75141.56 Pa $$
 	
 	\begin{center}
-		{\Huge \textbf{work in progress}}
+		Graphed with X axis as time in seconds and Y axis as pressure in pascals:
+		
+		\begin{tikzpicture}
+			\begin{axis}[
+				width=0.5\linewidth,
+				xlabel=time (seconds),
+				ylabel=pressure (pascals),
+				scaled ticks=false,%disables scientific notation
+				ytick={0,10000,...,100000},%forces every multiple of 10 000 to be shown
+				xtick={0,15,...,150},
+				yticklabel style={font=\scriptsize},%makes axis numbers tiny
+				%xticklabel style={font=\scriptsize},%makes axis numbers tiny
+				%ymode=log,
+				%xmin=1, xmax=100,
+				%ymin=0, ymax=10,
+				grid=both,
+				minor grid style={gray!25},
+				major grid style={gray!50},
+				]
+				\addplot[blue, thick, domain=0:150, samples=100]  {101325*pow(2,-(x/34.778))};
+				\addplot[red, thick, domain=0:150, samples=100]
+				{6250};
+			\end{axis}
+		\end{tikzpicture}
 	\end{center}
 	
-	Let's say that room was a cube 10m by 10m by 10m. In that case the time it takes for the pressure in that room to drop to 30\% (a bit past the limit of what is unbreathable) would be a bit less than 56 seconds.
+	The armstrong limit (ie, pressure low enough that the boiling points of bodily fluids drops below typical human body temperature) is marked as a horizontal red line.
 	
-	$$ t_{0.3} = \frac{V}{A} \cdot 0.005025854 s/m $$
+	\medskip
 	
-	where:
+	Velocity of air getting sucked into the hole at 5cm distance while at full atmospheric pressure:
 	
-	\begin{itemize}
-		\item $t_{0.3}$ is time till air pressure drops by 70\% [s]
+	$$ v = \frac{0.0001m^2}{(5cm)^2} \cdot 31.66725372m/s = 1.266690149 m/s $$
+	
+	\begin{center}
+		Graphed with X axis as distance from the hole in centimetres and Y axis as velocity in metres per second:
 		
-		\item $V$ is volume of the room [$m^3$]
-		
-		\item $A$ is area of the hole [$m^2$]
-	\end{itemize}
-	
-	$$ t_{0.3} = \frac{1000m^3}{0.09m^2} \cdot 0.005025854 s/m = 55.843s $$
-	
-	\pagebreak
-	
-	\section{section}
-	
-	\section{section}
-	
-	\section{section}
-	
-	
+		\begin{tikzpicture}
+			\begin{axis}[
+				width=0.5\linewidth,
+				xlabel=distance (cm),
+				ylabel=air velocity (m/s),
+				scaled ticks=false,%disables scientific notation
+				ytick={0,5,...,30},%forces every multiple of 10 000 to be shown
+				xtick={0,1,...,10},
+				yticklabel style={font=\scriptsize},%makes axis numbers tiny
+				%xticklabel style={font=\scriptsize},%makes axis numbers tiny
+				%ymode=log,
+				%xmin=1, xmax=100,
+				%ymin=0, ymax=10,
+				grid=both,
+				minor grid style={gray!25},
+				major grid style={gray!50},
+				]
+				\addplot[blue, thick, domain=1:10, samples=100]  {(0.0001/pow(0.01*x,2))*31.66725372};
+			\end{axis}
+		\end{tikzpicture}
+	\end{center}
 	
 \end{document}
