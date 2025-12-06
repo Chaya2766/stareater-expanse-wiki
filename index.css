@@ -184,6 +184,11 @@ img.styled{
  margin: 6px;
 }
 
+/*if the image is both centered AND styled*/
+img.centered.styled{
+ margin: 6px auto;
+}
+
 /*NEVER-MANDATORY PAGE PARTS START HERE*/
 hr{
  clear: both;
@@ -287,6 +292,8 @@ STRUCTURE OF A SPOILER
 </input>
 */
 
+/*should someday rewrite this to just be another element-specific version of the "styled" class
+for now not touching it so that I don't break all the tables I already put on the site*/
 .styled-table{
  border: 1px solid white;
  background-color: black;
