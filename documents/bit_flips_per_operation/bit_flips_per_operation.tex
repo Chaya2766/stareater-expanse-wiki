@@ -45,7 +45,7 @@
 	\vfill
 	
 	\begin{abstract}
-		Abstract goes here
+		Abstract goes here (todo)
 	\end{abstract}
 	
 	%\noindent \rule{\linewidth}{1pt}
@@ -59,9 +59,13 @@
 	
 	Why NAND gates?
 	
+	1. My whole system of FPGA-based "computronium" relies on a paper that among other things estimated the energy to flip a nand gate made using a number of different computing forms (eg. standard CMOS, other electronic, spintronic, nanomagnet logic, etc.).
+	
+	2. NAND gates alone can be used to construct any circuit. When combined the right way they can approximate any other gate.
+	
 	\pagebreak
 	
-	\section{Addition}
+	\section{Addition and Substraction}
 	\label{addition}
 	
 	\noindent\rule{\linewidth}{0.5pt}
@@ -111,10 +115,14 @@
 	\end{itemize}
 	
 	One gate could also be removed in the final step if you don't need the carry bit.
+	
+	\medskip
+	
+	This circuit can also perform subtraction by using values encoded in two's complement.
     
 	\pagebreak
 	
-	\section{Multiplication}
+	\section{Multiplication (integer and fixed-point)}
 	
 	(big thanks to this video \href{https://www.youtube.com/embed/O34KquoMpT0}{https://www.youtube.com/embed/O34KquoMpT0})
 	
@@ -143,13 +151,25 @@
 	
 	\medskip
 	
-	The additions have to be done with adders such as shown in section \ref{addition}. First row of multiplications (partial 1) does not need adders. Second row (partial 2) can start with a half-adder as well as end with a half-adder but needs full adders inbetween. The rows after that can start with a half-adder but then be full adders to the end.
+	The additions have to be done with adders such as shown in section \ref{addition}.
 	
-	This means the second row adds 2 half-adders and n-2 full adders, which translates to $2\cdot5 + (n-2)\cdot9 = 9n - 8$ NAND gates.
+	In an n-bit multiplier each row will have length n and there will be n rows
 	
-	And each row from third and onwards adds $1\cdot5 + (n-1)\cdot9 = 9n-4$ NAND gates. Since in an n-bit adder there are going to be n partial rows, this gets multiplied by $n-2$.
-	
-	\medskip
+	\begin{itemize}
+		\item First row (partial 1): does not require adders.
+		
+		(0)
+		
+		\item Second row (partial 2): requires a half-adder at the start, a half-adder at the end, and full adders through the middle.
+		
+		(2 half-adders and n-2 full adders, which is $2\cdot5 + (n-2)\cdot9 = 9n - 8$ NAND gates)
+		
+		\item Third row (partial 3): requires a half-adder at the start, and full adders the rest of the way.
+		
+		(1 half adder and n-1 full adders, which is $1\cdot5 + (n-1)\cdot9 = 9n-4$ NAND gates)
+		
+		\item Every row after the third is the same as the third, so the third row is additionally multiplied by n-2
+	\end{itemize}
 	
 	In total we need to sum up these terms:
 	
@@ -159,9 +179,9 @@
 	
 	$(n-2)\cdot(9n-4) = (9n^2-22n+8)$ from the adders from row 3 onwards.
 	
-	\medskip
+	\bigskip
 	
-	In total an n-bit adder should have this many gates:
+	In total an n-bit multiplier should have this many gates:
 	
 	$$ G = 11n^2 - 13n $$
 	
@@ -175,12 +195,95 @@
 	
 	\medskip
 	
-	\noindent\rule{\linewidth}{0.5pt}
+	%\noindent\rule{\linewidth}{0.5pt}
+	\pagebreak
 	
 	Here is an example 3-bit multiplier with 60 gates (yes I counted manually to confirm):
 	
 	\begin{center}
-		\includegraphics[width=0.9\linewidth]{circuits/3-bit_multiplier.png}
+		\includegraphics[angle=90,height=0.95\textheight]{circuits/3-bit_multiplier.png}
+	\end{center}
+	
+	\pagebreak
+	
+	\section{Division (todo)}
+	
+	\pagebreak
+	
+	\section{Final gate count}
+	
+	I've also included gate count for a "multiply and accumulate" circuit, which is simply a multiplication combined with an addition, and I assume the needed circuit has as many gates as those two circuits added together.
+	
+	$$ G_{+/-} = 9n - 4 $$
+	
+	$$ G_{\times} = 11n^2 - 13n $$
+	
+	$$ G_{\div} = ??? $$
+	
+	$$ G_{+\times} = G_{+/-} + G_{\times} = 11n^2 - 4n - 4$$
+	
+	where:
+	
+	\begin{itemize}
+		\item $G_{+/-}$ is the number of NAND gates in an n-bit adder
+		
+		\item $G_{\times}$ is the number of NAND gates in an n-bit multiplier
+		
+		\item $G_{\div}$ is the number of NAND gates in an n-bit divider
+		
+		\item $G_{+\times}$ is the number of NAND gates in an n-bit multiply-and-accumulate circuit
+		
+		\item $n$ is the number of bits in an input variable
+	\end{itemize}
+	
+	There exist optimizations that allow you to get gate counts smaller than that given by these equations, but they haven't been accounted for. These equations give you what you'll get if you just systematically apply the usual method of building these circuits with no additional tweaking.
+	
+	\bigskip
+	
+	I included a table with the number of NAND gates in each of those circuits from 1 bits to 32 bits. The row for 1 bit was only included for completeness, as contemplating 1-bit implementation of these circuits largely makes no sense. These should be a good approximation for how many bits you need to flip to perform the given operation.
+	
+	\begin{center}
+		\begin{tabular}{| c | c | c | c | c |}
+			\hline
+			n & $G_{+/-}$ & $G_{\times}$ & $G_{\div}$ & $G_{+\times}$ \\\hline
+			%0 & -4 & 0 & 0 & -4 \\\hline
+			1 & 5 & -2 & - & 3 \\\hline
+			2 & 14 & 18 & - & 32 \\\hline
+			3 & 23 & 60 & - & 83 \\\hline
+			4 & 32 & 124 & - & 156 \\\hline
+			5 & 41 & 210 & - & 251 \\\hline
+			6 & 50 & 318 & - & 368 \\\hline
+			7 & 59 & 448 & - & 507 \\\hline
+			8 & 68 & 600 & - & 668 \\\hline
+			9 & 77 & 774 & - & 851 \\\hline
+			10 & 86 & 970 & - & 1056 \\\hline
+			11 & 95 & 1188 & - & 1283 \\\hline
+			12 & 104 & 1428 & - & 1532 \\\hline
+			13 & 113 & 1690 & - & 1803 \\\hline
+			14 & 122 & 1974 & - & 2096 \\\hline
+			15 & 131 & 2280 & - & 2411 \\\hline
+			16 & 140 & 2608 & - & 2748 \\\hline
+		\end{tabular}
+		\begin{tabular}{| c | c | c | c | c |}
+			\hline
+			n & $G_{+/-}$ & $G_{\times}$ & $G_{\div}$ & $G_{+\times}$ \\\hline
+			17 & 149 & 2958 & - & 3107 \\\hline
+			18 & 158 & 3330 & - & 3488 \\\hline
+			19 & 167 & 3724 & - & 3891 \\\hline
+			20 & 176 & 4140 & - & 4316 \\\hline
+			21 & 185 & 4578 & - & 4763 \\\hline
+			22 & 194 & 5038 & - & 5232 \\\hline
+			23 & 203 & 5520 & - & 5723 \\\hline
+			24 & 212 & 6024 & - & 6236 \\\hline
+			25 & 221 & 6550 & - & 6771 \\\hline
+			26 & 230 & 7098 & - & 7328 \\\hline
+			27 & 239 & 7668 & - & 7907 \\\hline
+			28 & 248 & 8260 & - & 8508 \\\hline
+			29 & 257 & 8874 & - & 9131 \\\hline
+			30 & 266 & 9510 & - & 9776 \\\hline
+			31 & 275 & 10 168 & - & 10 443 \\\hline
+			32 & 284 & 10 848 & - & 11 132 \\\hline
+		\end{tabular}
 	\end{center}
 	
 \end{document}
