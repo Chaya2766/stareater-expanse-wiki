@@ -146,6 +146,31 @@ function toMetric(number,precision){
   return number;
 }
 
+function VolumeToMetric(number,precision){
+  power = Math.round(Math.log(number)/Math.log(Math.pow(1000,3)));
+  //gives which power of 1000 the number has
+  
+  number = number/Math.pow(Math.pow(1000,3),power);
+  
+  prefix = "";
+  switch(power){
+    case -3: prefix = "n"; break;
+    case -2: prefix = "u"; break;
+    case -1: prefix = "m"; break;
+    case 0: prefix = ""; break;
+    case 1: prefix = "k"; break;
+    case 2: prefix = "M"; break;
+    case 3: prefix = "G"; break;
+    case 4: prefix = "T"; break;
+    case 5: prefix = "P"; break;
+    case 6: prefix = "E"; break;
+    default: return number.toExponential(precision);
+  }
+  
+  number = number.toPrecision(precision) + prefix;
+  return number;
+}
+
 function recalculate_table(){
   mem_req = document.getElementById("mem_req").value;
   flip_req = document.getElementById("flip_req").value;
@@ -194,28 +219,28 @@ function recalculate_table(){
   c2_flip_use = Math.min(1,flip_req/c2_flip_available); c2_mem_use = mem_req/c2_mem_available;
   document.getElementById("flip_use_c2").innerHTML = (c2_flip_use*100).toFixed(2) + "%";
   document.getElementById("mem_use_c2").innerHTML = (c2_mem_use*100).toFixed(2) + "%";
-  document.getElementById("vol_c2").innerHTML = (c2_need * 1e-7).toExponential(3) + "m<sup>3</sup> &approx; ("+toMetric(Math.pow(c2_need * 1e-7,1/3),4)+"m)<sup>3</sup>";
+  document.getElementById("vol_c2").innerHTML = VolumeToMetric((c2_need * 1e-7),6) + "m<sup>3</sup> &approx; ("+toMetric(Math.pow(c2_need * 1e-7,1/3),4)+"m)<sup>3</sup>";
   document.getElementById("pow_use_c2").innerHTML = toMetric((c2_flip_use * c2_flip_available * c2_eff),4) + "W";
   if(memory_focus == true){document.getElementById("flip_use_c2").innerHTML = Math.max(1,(flip_req/c2_flip_available).toFixed(2));}
   
   c3_flip_use = Math.min(1,flip_req/c3_flip_available); c3_mem_use = mem_req/c3_mem_available;
   document.getElementById("flip_use_c3").innerHTML = (c3_flip_use*100).toFixed(2) + "%";
   document.getElementById("mem_use_c3").innerHTML = (c3_mem_use*100).toFixed(2) + "%";
-  document.getElementById("vol_c3").innerHTML = (c3_need * 1e-7).toExponential(3) + "m<sup>3</sup> &approx; ("+toMetric(Math.pow(c3_need * 1e-7,1/3),4)+"m)<sup>3</sup>";
+  document.getElementById("vol_c3").innerHTML = VolumeToMetric((c3_need * 1e-7),6) + "m<sup>3</sup> &approx; ("+toMetric(Math.pow(c3_need * 1e-7,1/3),4)+"m)<sup>3</sup>";
   document.getElementById("pow_use_c3").innerHTML = toMetric((c3_flip_use * c3_flip_available * c3_eff),4) + "W";
   if(memory_focus == true){document.getElementById("flip_use_c3").innerHTML = Math.max(1,(flip_req/c3_flip_available).toFixed(2));}
   
   c4_flip_use = Math.min(1,flip_req/c4_flip_available); c4_mem_use = mem_req/c4_mem_available;
   document.getElementById("flip_use_c4").innerHTML = (c4_flip_use*100).toFixed(2) + "%";
   document.getElementById("mem_use_c4").innerHTML = (c4_mem_use*100).toFixed(2) + "%";
-  document.getElementById("vol_c4").innerHTML = (c4_need * 1e-7).toExponential(3) + "m<sup>3</sup> &approx; ("+toMetric(Math.pow(c4_need * 1e-7,1/3),4)+"m)<sup>3</sup>";
+  document.getElementById("vol_c4").innerHTML = VolumeToMetric((c4_need * 1e-7),6) + "m<sup>3</sup> &approx; ("+toMetric(Math.pow(c4_need * 1e-7,1/3),4)+"m)<sup>3</sup>";
   document.getElementById("pow_use_c4").innerHTML = toMetric((c4_flip_use * c4_flip_available * c4_eff),4) + "W";
   if(memory_focus == true){document.getElementById("flip_use_c4").innerHTML = Math.max(1,(flip_req/c4_flip_available).toFixed(2));}
   
   c5_flip_use = Math.min(1,flip_req/c5_flip_available); c5_mem_use = mem_req/c5_mem_available;
   document.getElementById("flip_use_c5").innerHTML = (c5_flip_use*100).toFixed(2) + "%";
   document.getElementById("mem_use_c5").innerHTML = (c5_mem_use*100).toFixed(6) + "%";
-  document.getElementById("vol_c5").innerHTML = (c5_need * 1e-7).toExponential(3) + "m<sup>3</sup> &approx; ("+toMetric(Math.pow(c5_need * 1e-7,1/3),4)+"m)<sup>3</sup>";
+  document.getElementById("vol_c5").innerHTML = VolumeToMetric((c5_need * 1e-7),6) + "m<sup>3</sup> &approx; ("+toMetric(Math.pow(c5_need * 1e-7,1/3),4)+"m)<sup>3</sup>";
   document.getElementById("pow_use_c5").innerHTML = toMetric((c5_flip_use * c5_flip_available * c5_eff),4) + "W";
   if(memory_focus == true){document.getElementById("flip_use_c5").innerHTML = Math.max(1,(flip_req/c5_flip_available).toFixed(2));}
 }
