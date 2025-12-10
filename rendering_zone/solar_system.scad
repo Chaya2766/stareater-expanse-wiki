@@ -1,8 +1,8 @@
 //use openscad solar_system.scad -o frame.png --colorscheme=Starnight --imgsize=1000,1000
 
 //these here are the core assumption
-Camera_angle = [70,0,90];
-Camera_position = [2e7, 0e6, 10e6];
+Camera_angle = [78,0,100];
+Camera_position = [3e7, 5e6, 8e6];
 Distance = 2e7;
 $vpf=32;
 //setting these positions the camera exactly, and calculates the focus point from that
@@ -57,39 +57,7 @@ $vpt = target;
 $vpr = Camera_angle;
 $vpd = Distance;
 
-module sol(){
-    color([2,1,0]){
-        sphere(6.957e8);
-    }
-}
-
-module mercury(){
-    color([0.6,0.6,0.6]){
-        sphere(2.4397e6);
-    }
-}
-
-module venus(){
-    color([0.75,0.7,0.65]){
-        sphere(6.0518e6);
-    }
-}
-
-module terra(details=false){
-    //the planet
-    color([0.4,0.6,0.5]){
-        sphere(6.371e6);
-    }
-    if(details){
-        //tethered ring
-        ring_H = 4e6;
-        ring_R = 5.5e6;
-        ring_T = 2e4;
-        n_tethers=128;
-        tethers_H = 5.5e6;
-        tethers_R = 3e6;
-        tethers_T = 4e3;
-        color([0.6,0.6,0.6]){
+module tethered_ring(ring_H=4e6,ring_R=5.5e6,ring_T=2e4,tethers_H=5.5e6,tethers_R=3e6,tethers_T=4e3,n_tethers=32){
             translate([0,0,ring_H]){
                 difference(){
                     cylinder(r=ring_R,h=ring_T,center=true);
@@ -106,6 +74,45 @@ module terra(details=false){
                     }
                 }
             }
+}
+
+module solar_shade(r=1e6,d=1e7){
+    translate([-d,0,0]){
+        rotate([0,-90,0]){
+            cylinder(h=2*r,r1=r,r2=0);
+        }
+    }
+}
+
+module sol(){
+    color([2,1,0]){
+        sphere(6.957e8);
+    }
+}
+
+module mercury(){
+    color([0.6,0.6,0.6]){
+        sphere(2.4397e6);
+    }
+}
+
+module venus(){
+    color([0.75,0.7,0.65]){
+        sphere(6.0518e6);
+        solar_shade(r=15.4e6,d=2.5e8);
+        //tethered_ring(ring_H=3.5e6,ring_R=5.5e6,ring_T=2e4,tethers_H=5.2e6,tethers_R=3e6,tethers_T=4e3,n_tethers=128);
+    }
+}
+
+module terra(details=false){
+    //the planet
+    color([0.4,0.6,0.5]){
+        sphere(6.371e6);
+    }
+    if(details){
+        color([0.6,0.6,0.6]){
+        tethered_ring(4e6,5.5e6,2e4,5.5e6,3e6,4e3,128);
+        rotate([180,0,0]){tethered_ring(4e6,5.5e6,2e4,5.5e6,3e6,4e3,128);}
         }
     }
 }
@@ -151,7 +158,7 @@ module solar_system(){
     
     translate([1.0821e11,0,0]){venus();}
     
-    translate([1.496e11,0,0]){terra(true);}
+    translate([1.496e11,0,0]){terra();}
     translate([1.496e11-3.84784e8,0,0]){luna();}
     
     translate([2.2794e11,0,0]){mars();}
@@ -159,8 +166,8 @@ module solar_system(){
     translate([2.2794e11,2.34632e7,0]){deimos();}
 }
 
-
-translate([-1.496e11,0,0]){
+zero_coordinate = [1.0821e11,0,0];
+translate(-zero_coordinate){
     solar_system();
 }
 //the reason I'm moving the entire solar system

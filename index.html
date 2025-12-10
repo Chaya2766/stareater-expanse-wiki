@@ -39,9 +39,7 @@
 
   // Reject scheme-prefixed values (e.g. "http:", "javascript:", "data:")
   if (/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(s)) return;
-
-  // Only allow relative or absolute paths on same origin that end with .html or .htm
-  if (!/^\/?[\w\-./%]+\.html?(\?.*)?(#.*)?$/i.test(s)) return;
+  //I guess it is a good idea to not allow creating URLs that cause external sites to be displayed within my site?
 
   // Set iframe (assumes iframe[name="IM"] exists)
   document.querySelector('iframe[name="IM"]').src = s;
