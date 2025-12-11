@@ -79,7 +79,22 @@ module tethered_ring(ring_H=4e6,ring_R=5.5e6,ring_T=2e4,tethers_H=5.5e6,tethers_
 module solar_shade(r=1e6,d=1e7){
     translate([-d,0,0]){
         rotate([0,-90,0]){
-            cylinder(h=2*r,r1=r,r2=0);
+            difference(){
+                cylinder(h=r/2,r1=r/2,r2=0);
+                translate([0,0,-r*0.01]){cylinder(h=r/2,r1=r/2,r2=0);}
+            }
+            intersection(){
+                rotate([0,180,0]){translate([0,0,-3*r/3]){difference(){
+                    cylinder(h=2*r/1.5,r1=2*r,r2=0);
+                    translate([0,0,-r*0.1]){cylinder(h=2*r/1.5,r1=2*r,r2=0);}
+                }}}
+                for(i=[0.6,0.7,0.8,0.9,1,1.1,1.2,1.3,1.4,1.5]){
+                    difference(){
+                        cylinder(h=r*i,r1=r*i,r2=0);
+                        translate([0,0,-r*0.01]){cylinder(h=r*i,r1=r*i,r2=0);}
+                    }
+                }
+            }
         }
     }
 }
