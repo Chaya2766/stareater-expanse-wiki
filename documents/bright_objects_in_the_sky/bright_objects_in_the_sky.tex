@@ -1,0 +1,135 @@
+\documentclass[a4paper]{article}
+\usepackage[margin=3cm]{geometry}
+\usepackage{graphicx}
+
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=cyan,
+	hyperindex=true,
+	linktocpage=true,%makes the page number be the link in the index
+}
+\usepackage{listings}
+\lstset{
+	basicstyle=\tiny\ttfamily,
+	columns=fullflexible,
+	keepspaces=true,
+	breaklines=true,
+	frame=single,
+	showstringspaces=true,
+	tabsize=4,
+	showspaces=true,
+	showtabs=true,
+}
+
+\renewcommand{\arraystretch}{1.2}
+
+\title{Bright objects in the sky}
+
+\author{Chaya2766}
+
+\begin{document}
+	\sffamily
+	\hyphenchar\font=-1
+	\sloppy
+	
+	\maketitle
+	
+	\textbf{
+		\sloppy
+		\hyphenchar\font=-1
+		}
+	
+	\vfill
+	
+	\begin{abstract}
+		Methods for assessing the visibility of objects in orbit from the planet's surface or otherwise from a distance.
+	\end{abstract}
+	
+	%\noindent \rule{\linewidth}{1pt}
+	\vfill
+	
+	\tableofcontents
+	
+	\pagebreak
+	
+	\section{Definitions and explanations}
+	
+	\textbf{Lumen} - a unit of brightness, describing the amount of visible light an object emits per second.
+	A source of light that does not change will have the same number of lumens regardless of any observers.
+	It can be compared to the unit of watts which describes energy per second.
+	
+	\bigskip
+	
+	\textbf{Lux} - a unit of illuminance, lumens per square metre. It describes how brightly an area is lit. A source of light of 100 lumens shining on an area of 10 square metres will produce 10 lumens per square metre, that is, 10 lux.
+	A source of known brightness in lumens emitting in all directions can be trivially converted into lux at specific distance.
+	Ground in direct sunlight is typically illuminated with anywhere between 32 000 lx and 100 000 lx.
+	Direct sunlight, not filtered by an atmosphere, falling onto a surface at a right angle will produce 128 000 lx.
+	A full moon illuminates the ground with 0.3lx to 0.05lx.
+	The faintest visible star illuminates the ground with 8 nanolux.
+	In all these cases looking straight at the object in question would result in the back of your eye being illuminated that brightly, which is the core of how I will be talking about brightness in this document.
+	
+	\bigskip
+	
+	\textbf{Luminous Efficancy} - a description of how sensitive the human eye is to a given wavelength, useful for converting watts into lumens. Watts are commonly used to describe the luminosity of stars, and watts of light energy can be converted into lumens using "luminous efficancy" - for example, light at the exact wavelength of 555nm (which would appear green) has luminous efficancy of 683.002 lm/W. Sunlight on the other hand includes a lot of light that carries energy yet is not visible to humans, so it has lower luminous efficancy of around 94 lm/W.
+	
+	\bigskip
+	
+	\textbf{Irradiance} - describes how strongly an area is lit in terms of energy rather than light. Watts per square metre. The sun produces an irradiance of 1361W/m$^2$ at earth's distance.
+	
+	\bigskip
+	
+	\textbf{Apparent magnitude} - a number that describes how bright an object appears. It is reverse logarithmic so the lower the number the brighter the object appears, and the change in brightness is exponential as you go further down. When viewed from earth, the sun has an apparent magnitude of -26.832 and the moon as an apparent magnitude of -12.74. The faintest star visible to the naked eye has an apparent magnitude of 6.5. If the apparent magnitude of two objects differs by exactly 1 then one of them is exactly $\sqrt[5]{100}$ times brighter than the other one. ($\sqrt[5]{100} \approx 2.511886432$)
+    
+	\pagebreak
+	
+	\section{Converting between apparent magnitude and illuminance}
+	
+	If you know the apparent magnitude of an object you can calculate the illuminance it provides like this:
+	
+	$$ (\sqrt[5]{100})^{(-M)} \cdot 10^{-6} \cdot 2.368155lx = I $$
+	
+	And in reverse:
+	
+	$$ M = -2.5 \cdot log_{10}\left( \frac{I}{10^{-6} \cdot 2.368155lx} \right) $$
+	
+	Where:
+	
+	\begin{itemize}
+		\item $M$ is the apparent magnitude of the object
+		
+		\item $I$ is the illuminance provided by the object (in lux)
+	\end{itemize}
+	
+	Examples:
+	
+	\begin{tabular}{| c | c | c |}
+		\hline
+		object & apparent magnitude & illuminance provided \\\hline
+		Sun & -26.832 & 128 000 lux \\\hline
+		Full moon & -12.74 & 0.3 lux \\\hline
+		Faintest visible star & 6.5 & 8E-9lux \\\hline
+	\end{tabular}
+	
+	\medskip
+	
+	Provided equations convert the 6.5 magnitude into 5.9E-9 lux, and the 8E-9 lux into 6.1783 magnitude, which is a small discrepancy (lands within the same order of magnitude) that shouldn't be too much of an issue, but could likely be fixed by adjusting the constant of $10^{-6} \cdot 2.368155lx$ which had been hardcoded into the equations.
+	
+	\bigskip
+	
+	For a custom example let's consider a 1-metre sphere at low earth orbit (0.5m radius).
+	As far as the sunlight is concerned the sphere might as well be a 1-metre circle, which would have an area of roughly 0.785m$^2$.
+	Illumination from the sun is 128 000 lux, so the sphere is getting hit with 100531 lumens.
+	It is ofcourse not reflecting them equally in all directions but I'll skip that step for the sake of simplicity.
+	
+	\medskip
+	
+	I'll assume LEO altitude to be 800km. If the sphere is reflecting light in all directions equally then the 100531 lumens would have to be divided by the area of a sphere with 800km radius, which is 8 042 477 193 190 $m^2$, giving us 12.5 nanolux.
+	
+	\medskip
+	
+	This is more than the 8 nanolux given for the faintest visible star so we already know it would be visible. Using the provided formulas, 12.5 nanolux converts to an apparent magnitude of 5.694.
+	
+\end{document}
