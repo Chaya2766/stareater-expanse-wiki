@@ -12,6 +12,8 @@
 Felicity is a mind upload, member of the <a href="reminiscence_divergency.html">Reminiscence divergency</a> and a <a href="family_mechanics.html#divergency">derivant</a> of Reminiscence. She is primarily occupied with trying to maintain technological independence from the rest of society.
 <br><br>
 <span class="meta">Something to know about Felicity is that the setting is effectively built around her. Writing her is how I gathered most of my knowledge upon which I built the Stareater Expanse. There is a 150-page document of her and her technology, which I plan to eventually link to here, but so far is stuck in a permanent unfinished state.</span>
+<br><br>
+(see also: <a href="felicity_techtree.html">Felicity techtree</a>)
 </article>
 <hr>
 <article>
@@ -41,6 +43,46 @@ Minimal <a href="computation.html#computronium">computronium</a> requirements fo
   <tr><td>Civic-4 chip</td><td id="num_c4">770 500</td><td id="pow_use_c4">2.541MW</td><td id="vol_c4">0.07705m<sup>3</sup> ≈ (425.5mm)<sup>3</sup></td><td id="flip_use_c4">32.98%</td><td id="mem_use_c4">100.00%</td></tr>
 </table>
 
+</article>
+
+<h3>Variables and quantization</h3>
+<article>
+Felicity's brain simulation uses 16-bit fixed-point weights for the following benefits:
+<ul>
+  <li>potentially easier quantization</li>
+  <li>very easy compatibility with homomorphic encryption</li>
+</ul>
+Some specifics: the weights in the neural networks tend to be close to 1, and the fixed point implementation gives equal number of bits before and after the decimal point. Two's complement is used (negative numbers are made by inverting the positive number and adding one) so that subtraction can be executed using simple addition circuits in hardware.
+
+<table class="styled-table">
+  <tr><td>binary representation</td><td>corresponding value</td></tr>
+  <tr><td>0000 0000.0000 0000</td><td>0</td></tr>
+  <tr><td>0000 0001.0000 0000</td><td>1</td></tr>
+  <tr><td>1111 1111.0000 0000</td><td>-1</td></tr>
+  <tr><td>0000 0000.0000 0001</td><td>0.00390625</td></tr>
+  <tr><td>1111 1111.1111 1111</td><td>-0.00390625</td></tr>
+  <tr><td>0111 1111.1111 1111</td><td>127.9960938</td></tr>
+  <tr><td>1000 0000.0000 0000</td><td>-128</td></tr>
+</table>
+
+Quantization simply trims off bits to save on memory and processing required. In an extreme case it can be brought down to as little as 8 bits, leaving 4 bits before and 4 bits after the decimal point:
+
+<table class="styled-table">
+  <tr><td>binary representation</td><td>corresponding value</td></tr>
+  <tr><td>0000.0000</td><td>0</td></tr>
+  <tr><td>0001.0000</td><td>1</td></tr>
+  <tr><td>1111.0000</td><td>-1</td></tr>
+  <tr><td>0000.0001</td><td>0.0625</td></tr>
+  <tr><td>1111.1111</td><td>-0.0625</td></tr>
+  <tr><td>0111.1111</td><td>7.9375</td></tr>
+  <tr><td>1000.0000</td><td>-8</td></tr>
+</table>
+
+To anyone who knows how complex and sensitive brains are, the idea of doing such a thing to a brain simulation model may seem insanely gruesome, but interestingly when neural networks are large they seem to inherently have more resilience to this kind of treatment.
+In Felicity's case cutting down the weights to 8 bits still allows her to function coherently, but does cause and/or exacerbate some neurological symptoms like <a href="https://en.wikipedia.org/wiki/Scotoma">scotoma</a>, <a href="https://en.wikipedia.org/wiki/Aura_(symptom)">aura</a>, visual snow, muscle twitching and general sensory processing sensitivity.
+Additionally, quantizing certain areas of the brain all the way down to 0 bits can be done, but the areas to which this can be done without crating broader issues are quite small (eg. <a href="https://web.stanford.edu/~wandell/data/papers/2007-Wandell-Encyclopedia.pdf">the visual cortex only contains about 5 billion neurons</a>, meanwhile the cerebellum has &approx;60 billion neurons and isn't strictly necessary for Felicity to remain conscious and functional, but will cause widespread processing issues in other parts of the brain if removed) and so don't usually yield significant memory requirement reduction.
+<br>
+If processing speed rather than available memory is the constraint, simply running the simulation slower is usually much preferable to quantization. The main use of quantization is to decrease the memory use, decreasing the minimum amount of computing hardware required for the brain simulation to run.
 </article>
 
 <h2>mind structure</h2>

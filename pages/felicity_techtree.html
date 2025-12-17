@@ -1,0 +1,127 @@
+<head>
+ <link rel="stylesheet" href="../index.css"></link>
+</head>
+<html class="background2" id="page">
+<a style="float: right;" target="_blank" href="../index.html?page=pages/felicity_techtree.html">link to this page</a>
+
+<h1>Felicity techtree</h1>
+<hr>
+
+<img src="../images/card_placeholder.png" class="basics"></img>
+<article class="basics">
+A collection of blueprints and procedures that together form a self-sufficient whole, capable of producing working equipment from any of the provided blueprints given only solar energy and asteroid material.
+<br><br>
+This is the result of <a href="felicity.html">Felicity</a>'s combined curiosity and aversion to relying on technology she does not understand, that pushed her to put a lifetime of work into developing a complete technological system that is simultaneously sufficient for its own needs and simple enough for a protohuman mind to understand.
+<br><br>
+The conceptual simplicity often comes at a great cost in efficiency in terms of energy or time as well as scalability.
+Most of the industrial processes are executed on a small scale, using machines that a single person can operate.
+</article>
+
+<hr>
+
+<h2>Low Temperature Electrolysis of mixed metal oxides</h2>
+<img class="styled right" src="../images/"></img>
+<article>
+The LTE process can be thought of as a precursor to a whole big branch of the tech tree Felicity operates, as it trivializes the extraction of several metals from asteroid material.
+<br><br>
+Asteroid dust is mixed in with a concentrated solution of sodium hydroxide at close to 100<sup>o</sup>C and a current is passed through it, reducing the metal oxides from the dust into a mixed alloy of these metals.
+The resulting alloy is roughly equivalent to wrought iron, which can be later refined into the elemental metals or simply used as is, but it is not corrosion-resistant.
+A large amount of oxygen is also produced in the process.
+<br><br>
+A 100kg batch of asteroid regolith with the breakdown of extracted elements above would be turned into 40kg of oxygen gas, 23.573279kg of alloy containing primarily iron but also a lot of other elements, as well as 36.426721 kg of an enriched sludge of regolith and sodium hydroxide solution full of elements that <u>can't</u> be extracted with this simple process.
+Using the machine provided in the tech tree this consumes a total of 140MJ in electrical energy.
+Once the process is done, the cathode will have grown a beautiful and heavy tree of crystallized metal that can be lifted out of the machine and scraped off for further processing.
+<!note to me whenever I'm writing the page and/or document about this process: the original Felicity document specifies that it takes 8 hours, but I think 72 hours would be more appropriate as those are the kinds of times the original paper I based this on mentions. Also the fact that 140MJ divided by 8h gives nearly 5kW feels a little conspicuous that I might have calculated the time from known energy and power, where it probably should be the power that is calculated from known energy and time.>
+<table class="styled-table">
+  <tr><th colspan=10>Average yield of elements from refining a 100kg batch of regolith</th></tr>
+  <tr><td>O (40kg)</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td>Fe (22kg)</td><td>Co (59g)</td><td>Ni (1.3kg)</td><td>Cu (11g)</td><td>Zn (18g)</td><td>Ga (760mg)</td><td>Ge (2.1g)</td><td>As (180mg)</td><td>Se (1.3g)</td><td></td></tr>
+  <tr><td>Mo (120mg)</td><td>Ru (81mg)</td><td>Rh (16mg)</td><td>Pd (66mg)</td><td>Ag (14mg)</td><td>Cd (44mg)</td><td>In (4.4mg)</td><td>Sn (120mg)</td><td>Sb (12mg)</td><td>Te (12mg)</td></tr>
+  <tr><td>W (12mg)</td><td>Re (4.9mg)</td><td>Os (66mg)</td><td>Ir (54mg)</td><td>Pt (98mg)</td><td>Au (17mg)</td><td>Hg (25mg)</td><td>Tl (7.8mg)</td><td>Pb (140mg)</td><td>Bi (6.9mg)</td></tr>
+</table>
+
+Among those elements which are left in the regolith are some <u>very important ones</u> like chromium, which is needed for stainless steel, or lithium, which is needed for high-performance batteries.
+These lacking elements are the reason that the LTE process can be thought of as a precursor to it's own branch in the tech tree, as the specific set of elements it provides forces a lot of downstream design choices that would have otherwise made no sense.
+<br><br>
+<span class="meta">math document to be added</span>
+</article>
+
+<hr>
+
+<h2>Ion beam deposition printing</h2>
+<img class="styled right" src="../images/"></img>
+<article>
+This is one of many things that Felicity did not bother re-inventing herself, as the complexity of the machinery required simply overpowered the need for deep understanding when sufficiently open source solutions already existed.
+<br><br>
+Using ion beams to deposit material in exact quantities at exact positions can create macroscopic objects given enough time.
+The exact printer model that Felicity included in the tech tree can achieve deposition rates of 5 micromol per second, which means that print times typically vary from hours to weeks with some exceptions.
+The willingness to make such an extreme payment of time and energy (since the machine is pulling about 100 watts the whole time) for the ability to produce complex electronics and photovoltaics from a single machine is fairly typical of Felicity's approach to technological independence.
+<br><br>
+<span class="meta">math document to be added</span>
+</article>
+
+<hr>
+
+<h2>Gallium arsenide photovoltaics</h2>
+<img class="styled right" src="../images/"></img>
+<article>
+Primary power source for Felicity.
+These can be made simply with the ion beam deposition process.
+At great distances where sunlight is faint, they would be used as a small part of larger concentrated solar arrays that can boost the power production by 23.5 times while costing only about 1.5 times as much energy (but much more material) to produce than plain solar panels.
+Ofcourse a concentrated solar array has the downside of having to stay pointed accurately at the sun, which is largely negated by operating in weightlessness.
+<br><br>
+<span class="meta">math document to be added</span>
+</article>
+
+<hr>
+
+<h2>Hydrogen peroxide synthesis</h2>
+<img class="styled right" src="../images/"></img>
+<article>
+High-concentration hydrogen peroxide (also called HTP for "high-test peroxide") can be used as a monopropellant and works adequately well as fuel for travel between destinations within a planet's sphere of influence.
+The supplied machine for HTP production uses a process that involves passing current through water while repeatedly flipping its polarity to produce 10% hydrogen peroxide, and then uses vacuum distillation to concentrate it to 85%.
+<br><br>
+HTP can be handled well with monel, an alloy of nickel and copper, which notably can both be acquired from the LTE process.
+Simple thrusters can be fairly easily 3d-printed from monel, using either catalytic or thermal decomposition to extract the energy from the hydrogen peroxide.
+Piping and fuel tanks can also be made from monel, and must use welded seams.
+<br><br>
+Avoiding HTP leakage is of extreme importance given that the primary construction material in this tech tree is a wrought-iron-like alloy vulnerable to corrosion.
+Any amount of HTP spillage usually results in blood red rust covering the affected wall or floor in less than a minute.
+<br><br>
+<span class="meta">math document to be added</span>
+</article>
+
+<!--
+<hr>
+notes for my future self who will no doubt someday see this, about content that was not in the original document but remains to be worked on in the future
+
+Originally the elastomer and insulator of choice was silicone, which would be imported, but I see a reasonable pathway to production of polyethylene
+
+carbon dioxide hydrogenation - an entry into the organics and plastics branch of the tech tree
+(organics are a hell to wrap my head around and Felicity hates it too since honestly she is very close to being a self-insert)
+carbon dioxide hydrogenation can apparently create methanol with a Cu/ZnO catalyst
+then from methanol you can get 
+
+alternatively make it from ethanol in accordance with this video
+https://www.youtube.com/embed/UKFEbYdKdJg
+this would simply go like this:
+pump ethanol through an AlO2 catalyst at 450oC to convert it to ethylene
+take the ethylene and somehow polymerize into polyethylene
+problem: where do I get ethanol from, am I gonna have to start farming?
+
+also look at other videos of this guy, there's also one about making sodium which might be useful too
+-->
+
+<hr>
+
+<h2>todo</h2>
+<img class="styled right" src="../images/"></img>
+<article>
+todo
+<br><br>
+<span class="meta">math document todo</span>
+</article>
+
+<hr>
+
+</html>
