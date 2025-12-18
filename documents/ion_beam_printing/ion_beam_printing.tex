@@ -1,0 +1,204 @@
+\documentclass[a4paper]{article}
+\usepackage[margin=3cm]{geometry}
+\usepackage{graphicx}
+
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=cyan,
+	hyperindex=true,
+	linktocpage=true,%makes the page number be the link in the index
+}
+\usepackage{listings}
+\lstset{
+	basicstyle=\tiny\ttfamily,
+	columns=fullflexible,
+	keepspaces=true,
+	breaklines=true,
+	frame=single,
+	showstringspaces=true,
+	tabsize=4,
+	showspaces=true,
+	showtabs=true,
+}
+
+\renewcommand{\arraystretch}{1.2}
+
+\title{Ion beam printing}
+
+\author{Chaya2766}
+
+\begin{document}
+	\sffamily
+	\hyphenchar\font=-1
+	\sloppy
+	
+	\maketitle
+	
+	\textbf{
+		\sloppy
+		\hyphenchar\font=-1
+		}
+	
+	\vfill
+	
+	\begin{abstract}
+		A hypothetical device for 3d printing objects using ion beams is presented and compared to existing magnetron sputtering deposition technology, finding that magnetron sputtering deposition requires about 1/4 as much energy per atom deposited and achieves 19.38 times higher deposition rate at equal power.
+	\end{abstract}
+	
+	%\noindent \rule{\linewidth}{1pt}
+	\vfill
+	
+	\tableofcontents
+	
+	\pagebreak
+	
+	\section{Journey of an atom from feedstock to object}
+	
+	Let's look at what needs to happen for an atom to be taken from feedstock material and deposited as a part of the object being printed.
+	A copper atom is used because of the existence of a study on magnetron sputtering deposition to which the findings could be compared later.
+	
+	\medskip
+	
+	First the copper atom has to be ionized, which likely happens through blasting a pure copper block or plate with a laser pulse using enough power to vaporize a small amount of material, and also using wavelengths that can vaporize the copper.
+	This particular step might face major inefficiencies.
+	
+	\medskip
+	
+	Copper has a 1st ionization energy of 745.5kJ/mol, that is, 745.5kJ needed to ionize 6.02214076E+23 atoms, which means ionizing the single copper atom required about 1.237766E-18 joules or 7.72553 electronvolts.
+	
+	\medskip
+	
+	It also has an enthalpy of vaporization of 300.3kJ/mol, which is 4.985599E-19 joules or 3.11239 electronvolts per atom. 
+	
+	\medskip
+	
+	The material is picked up and guided by magnetic fields, channeling it into the print chamber while also accelerating or decelerating it to a desired velocity.
+	In an \href{https://en.wikipedia.org/wiki/Ion_beam_deposition}{ion beam deposition} process it is normal for ions to have only a few eV in kinetic energy.
+	Higher energies (in kiloelectronvolts) are only needed for ion implantation.
+	I will arbitrarily assume "a few" would mean 10.
+	
+	\medskip
+	
+	At the end, the stream of ions would be focussed onto the exact spot where they should be deposited, and an electron beam might be used to neutralize most of them before they actually hit the target.
+	
+	\medskip
+	
+	$$ 7.72553eV + 3.11239eV + 10eV = 20.83792 eV $$
+	
+	\medskip
+	
+	In total, the atom absorbed nearly 21 electronvolts, but various inefficiencies might have created a discrepancy between the energy delivered to the atoms and energy consumed by the machine.
+	I will conservatively assume only 1\% of the energy consumed is actually energy delivered to the atoms, as such the process would consume about 2.1keV per atom, or 202.6191975MJ/mol.
+	
+	\medskip
+	
+	This reveals a crucial fact, in that the energy deposited onto the object being printed is actually very small compared to the energy used by the machine, and as such, it may enable fairly quick deposition rates without risking thermal damage to the object being printed.
+	
+	\pagebreak
+	
+	\section{Power constraints}
+	
+	Ion beams usually have very low power, but it is forseeable that a machine made to print objects with them might incorporate multiple, so it is not facing much constraint on that end.
+	
+	\bigskip
+	
+	Stefan-boltzmann law relates temperature of an object to the power it radiates away in thermal radiation.
+	
+	$$ P = \epsilon \cdot \sigma \cdot A \cdot T^4 $$
+	
+	$$ T = \left( \frac{P}{\epsilon \cdot \sigma \cdot A} \right)^{(1/4)} $$
+	
+	where:
+	
+	\begin{itemize}
+		\item $\epsilon$ is the emissivity of an object, always between 0 and 1.
+		
+		\item $\sigma$ is the stefan-boltzmann constant ($5.670374419E-8 W \cdot m^{-2} \cdot K^{-4}$)
+		
+		\item $A$ is the surface area of the object
+		
+		\item $T$ is the temperature of the object
+	\end{itemize}
+	
+	If we assume the object being printed is 1cm$^2$ in area and is at a safe temperature of 300 kelvin, it would be radiating only 0.046W, which assuming a cooled print chamber, would also be the budget for kinetic energy delivered to it with deposited atoms.
+	
+	\medskip
+	
+	At 21eV per atom, this translates to 1.367E+16 atoms per second, or about 22.7 nanomol per second.
+	This would scale up linearly with the area of the object being printed, eg. if it is 100 times bigger (10cm by 10cm) which might be done for example by simply printing 100 identical objects at once, the print speed could be 100 times bigger too, giving 2.27 micromol per second.
+	
+	\medskip
+	
+	This could be also increased if the object being printed is not vulnerable to high temperatures. If the temperature is raised to 357K (84oC) then the allowable power is double that of which is safe at 300K (27oC).
+	
+	\medskip
+	
+	A cooled print bed is also plausible, potentially enabling the deposition to be carried out at whole watts of power.
+	Using 1W and 21eV per atom enables a deposition rate of 493.537 nanomol/s.
+	
+	\section{A hypothetical ion beam printer, exact numbers}
+	
+	The machine is made with an actively cooled 10cm by 10cm by 10cm print chamber, and designed to print at upwards of 5 micromoles per second.
+	
+	\medskip
+	
+	Small, flat objects that conduct heat well can make full use of the roughly averaged 10.2 watts worth of ion beams for the full 5 $\mu mol/s$ deposition rate, but larger objects are limited to 22.7 nanomol per second per square centimetre due to thermal issues, which adds up to 2.27 $\mu mol/s$ across the whole print bed.
+	
+	\medskip
+	
+	The efficiency of the machine is about 1\%, so at the socket it pulls 100 times more than the printing power, around 1020W at max print speed.
+	
+	\medskip
+	
+	As a rule of thumb, printing 1 mole of material pulls a total energy of 202.62MJ ($\approx$ 56.283kWh) and takes 200 kiloseconds ($\approx$ 2 days, 7 hours, 33 minutes and 22 seconds) to complete at max speed.
+	
+	\medskip
+	
+	For objects which are vulnerable to heat, longer. With the most optimal usage of the print bed, depositing 1 mole of heat-sensitive material will take 440.53 kiloseconds ($\approx$ 5 days, 2h, 22min and 9s) to complete.
+	
+	\pagebreak
+	
+	\section{Comparison to magnetron sputtering deposition}
+	
+	Referenced paper is "Studies of medium frequency high power density magnetron sputtering discharges" by Andrzej Brudnik, Adam Czapla and Witold Posadowski.
+	
+	\bigskip
+	
+	In the study an experiment was executed, where copper is being deposited using magnetron sputtering at various power levels onto a copper disk 25mm in radius.
+	
+	\medskip
+	
+	In the Figure 1 they show a relation between the sputtering power and the deposition rate in nanometres per second.
+	It showed a clear linear relationship.
+	The point I could read best corresponded to 350nm/s at 5kW, so I will base my calculations on this.
+	
+	\bigskip
+	
+	Knowing the deposition rate and power used allows calculating an energy needed to deposit a given thickness of copper.
+	Then knowing the diameter of the copper disk as well as the thickness of the deposited material allows calculating a volume, giving a final result in energy required to deposit a volume of material.
+	
+	$$ \frac{350nm/s}{5kW} = 70nm/kJ $$
+	
+	$$ \pi \cdot (25mm)^2 \cdot 70nm/kJ = 0.1374446786 mm^3/kJ $$
+	
+	$$ 0.1374446786 mm^3/kJ = 0.0001374446786 mm^3/J $$
+	
+	$$ \frac{1}{0.0001374446786 mm^3/J} = 7275.654541 J/mm^3 $$
+	
+	This means that 1 joule of energy is enough to deposit 0.0001374446786 mm$^3$ of copper, and in the other way, 1mm$^3$ of copper requires 7275.654541 joules of energy to deposit.
+	
+	\medskip
+	
+	Given the density of copper (8960kg/m$^3$), 1 cubic millimeter corresponds to 8.96mg, and further given the molar mass of copper (63.5 g/mol) it corresponds to 141 micromoles.
+	
+	\medskip
+	
+	7275.654541 joules used to deposit 141 micromoles give 51.6MJ/mol.
+	Given the used magnetron sputtering deposition power (5kW) it gives a deposition rate of 96.9 micromol per second.
+	Both of these figures land fairly close to the described hypothetical ion beam printing device.
+	Magnetron sputtering deposition requires about 1/4 as much energy per atom deposited and achieves 19.38 times higher deposition rate at equal power.
+	
+\end{document}
