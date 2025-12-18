@@ -44,7 +44,7 @@ As of the year 3000 these schemes are so sophisticated and all-encompassing that
 
 <h2>Proof of Work "boosting"</h2>
 <article>
-Although not strictly steganographic, there is also a common trend of using proof of work to convey the importance of a message, which usually means that when someone makes a post whose text has an unnaturally low hash number it is likely to be passed on further. This behaviour had spilled over into some of the openly visible social networks where various other social behaviours had attached themselves to this mechanism. Among others there is a vague common belief that a message that carries the mark of massive computational power is also more trustworthy, or at the very least important, thus it is often used for "boosting" your posts so that they are more likely to be shared. Some users of the networks where this became habitual had also taken to applying proof of work to their username as a way of showing off how long they had been around, or flexing about what kinds of computational power they have access to. These networks then ofcourse, mostly unknowingly, had become great mediums for carrying hidden messages, and some even speak proudly of having normalized this otherwise conspicuous behaviour.-49021788
+There is also a trend of using proof of work to convey the importance of a message, which usually means that when someone makes a post whose text has an unnaturally low hash number it is likely to be passed on further. This behaviour had spilled over into some of the openly visible social networks where various other social behaviours had attached themselves to this mechanism. Among others there is a vague common belief that a message that carries the mark of massive computational power is also more trustworthy, or at the very least important, thus it is often used for "boosting" your posts so that they are more likely to be shared. This text for example has an unnaturally small SHA256 hash, though that doesn't on its own say anything about its trustworthiness. Some users of the networks where this became habitual had also taken to applying proof of work to their username as a way of showing off how much computational power they have access to. These networks then, mostly unknowingly but some no doubt knowingly too, had become great mediums for carrying hidden messages.-4580897539
 <br><br>
 In the context of steganographic social networks this has an additional function of clarifying that given piece of data was intentionally constructed, as in some schemes it is possible to encounter false positives, ie. your key detected and decoded a hidden message where in reality there was none and you are left trying to look for meaning in actual random noise.
 It is incredibly unlikely (on the order of 1 in 1 048 576) that if you put such random noise through a hash function you will get 20 leading zero bits, or 5 leading zeros in hexadecimal encoding.
@@ -53,10 +53,13 @@ It is incredibly unlikely (on the order of 1 in 1 048 576) that if you put such 
 <h1>example SHA-256 PoW worker</h1>
 <article>
 Here's an example PoW worker that you can use to both generate and check proof of work, it just appends a dash and a number onto the end of the text, which results in an unnaturally low SHA-256 hash value.
-You can check the text above if you're curious to see that it has a hash value with 6 zeros at the front.
+If you can check the text above beware of copy-pasting sometimes adding a space on the end that breaks the PoW.
 Beware of high processor usage since this is a brute force process, it just keeps trying higher numbers and replaces the one in the text field with a new one whenever it finds one with a lower hash, but this one is only single-threaded.
 <br>
-<span class="meta">This will also work with any of the sites you might find if you look up "SHA-256 online" as long as they encode text the same way, just beware of any tools you might feel like testing this with automatically adding a newline marker at the end.</span>
+<span class="meta">
+This will also work with any of the sites you might find if you look up "SHA-256 online" as long as they encode text the same way, just beware of any tools you might feel like testing this with automatically adding a newline marker at the end.
+Also this is really inefficient, don't bother letting this run too long if you want some actual results, simply asking ChatGPT for this but in python instead will immediately boost you by like 2 orders of magnitude.
+</span>
 </article>
 
   <textarea id="text" style="width: 50vw; height: 200px;"></textarea>
@@ -337,7 +340,7 @@ Beware of high processor usage since this is a brute force process, it just keep
     // Initial setup: populate sample input, update current hash display,
     // and initialize LowestHash without starting the PoW loop.
     ///////////////////////////////////////////////////////////////////////////
-    textInput.value = 'test-168289';
+    textInput.value = 'test-0';
     updateCurrentHash();
     (async () => { await initializeLowestHashFromInput(); statusEl.textContent = 'idle'; })();
 

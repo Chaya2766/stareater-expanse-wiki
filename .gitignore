@@ -1,5 +1,6 @@
 stars from lorewiki/*
 push.sh
+force_push.sh
 
 # ignore everything with those specific extensions under documents directory
 documents/**/*.aux
