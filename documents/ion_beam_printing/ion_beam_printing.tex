@@ -67,30 +67,34 @@
 	
 	\medskip
 	
-	Copper has a 1st ionization energy of 745.5kJ/mol, that is, 745.5kJ needed to ionize 6.02214076E+23 atoms, which means ionizing the single copper atom required about 1.237766E-18 joules or 7.72553 electronvolts.
+	Copper has a 1st ionization energy of 745.5kJ/mol, that is, 745.5kJ needed to ionize 6.02214076E+23 atoms, which means ionizing the single copper atom required about 1.237766E-18 joules or \underline{7.72553eV}.
+	
+	It also has an enthalpy of fusion (energy required to melt) of 13.26kJ/mol which is 2.201875E-20J or \underline{0.13743eV} per atom, and an enthalpy of vaporization (energy required to vaporize) of 300.3kJ/mol, which is 4.985599E-19 joules or \underline{3.11239eV} per atom.
 	
 	\medskip
 	
-	It also has an enthalpy of vaporization of 300.3kJ/mol, which is 4.985599E-19 joules or 3.11239 electronvolts per atom. 
+	The boiling point of copper is at 2835K, so it has to be heated by about 2535K over the initial 300K.
+	With copper's molar heat capacity being 24.440 J/(mol·K), heating it by 2535K would require 11.2554kJ/mol, which is 1.869E-20J or \underline{0.116654eV} per atom.
 	
 	\medskip
 	
 	The material is picked up and guided by magnetic fields, channeling it into the print chamber while also accelerating or decelerating it to a desired velocity.
 	In an \href{https://en.wikipedia.org/wiki/Ion_beam_deposition}{ion beam deposition} process it is normal for ions to have only a few eV in kinetic energy.
 	Higher energies (in kiloelectronvolts) are only needed for ion implantation.
-	I will arbitrarily assume "a few" would mean 10.
+	I will arbitrarily assume "a few electronvolts" would mean \underline{10eV} just to be safe, as I would interpret that wording as anything from 2eV to barely under 10eV.
 	
 	\medskip
 	
 	At the end, the stream of ions would be focussed onto the exact spot where they should be deposited, and an electron beam might be used to neutralize most of them before they actually hit the target.
+	Upon hitting the target the single free atom becomes part of a solid, which is equivalent to solidifying from a gas state, meaning that it will release all the corresponding thermal energy required for the phase change.
 	
 	\medskip
 	
-	$$ 7.72553eV + 3.11239eV + 10eV = 20.83792 eV $$
+	$$ 7.72553eV + 0.13743eV + 3.11239eV + 0.116654eV + 10eV = 21.092004 eV $$
 	
 	\medskip
 	
-	In total, the atom absorbed nearly 21 electronvolts, but various inefficiencies might have created a discrepancy between the energy delivered to the atoms and energy consumed by the machine.
+	In total, the atom absorbed just over 21 electronvolts, but various inefficiencies might have created a discrepancy between the energy delivered to the atoms and energy consumed by the machine.
 	I will conservatively assume only 1\% of the energy consumed is actually energy delivered to the atoms, as such the process would consume about 2.1keV per atom, or 202.6191975MJ/mol.
 	
 	\medskip
@@ -101,7 +105,7 @@
 	
 	\section{Power constraints}
 	
-	Ion beams usually have very low power, but it is forseeable that a machine made to print objects with them might incorporate multiple, so it is not facing much constraint on that end.
+	Ion beams and ion sources can be found with powers in whole kilowatts, and a machine made to print objects with them will most likely incorporate multiple, so it is not facing much constraint on that end.
 	
 	\bigskip
 	
