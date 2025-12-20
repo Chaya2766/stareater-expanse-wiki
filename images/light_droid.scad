@@ -16,17 +16,21 @@ module light_droid(paint="#EEE",metal="#888"){
     translate([-250,0,0]){rotate([0,90,90]){
         color(paint){cylinder(d=50,h=100,center=true);}
     }}
+    leg_hind_left_bends = [90,0,-60,0,60,0];
+    leg_hind_left_twists = [0,-45,0,0,0,0];
     translate([-250,50,0]){rotate([0,90,90]){
-        robot_arm([90,0,-60,0,60,0],//joint bends
-                  [0,-45,0,0,0,0],//joint twists
+        robot_arm(leg_hind_left_bends,//joint bends
+                  leg_hind_left_twists,//joint twists
                   limb_lengths,//segment lengths
                   [0,0,0,0,0,0,0,0],//finger angles
                   [100,100,100,100,100,100,100,100],
                   diameter=50,paint=paint,metal=metal);
     }}
+    leg_hind_right_bends = [90,0,-60,0,60,0];
+    leg_hind_right_twists = [0,45,0,0,0,0];
     translate([-250,-50,0]){rotate([0,90,-90]){
-        robot_arm([90,0,-60,0,60,0],//joint bends
-                  [0,45,0,0,0,0],//joint twists
+        robot_arm(leg_hind_right_bends,//joint bends
+                  leg_hind_right_twists,//joint twists
                   limb_lengths,//segment lengths
                   [0,0,0,0,0,0,0,0],//finger angles
                   [100,100,100,100,100,100,100,100],
@@ -38,17 +42,21 @@ module light_droid(paint="#EEE",metal="#888"){
     translate([250,0,0]){rotate([0,90,90]){
         color(paint){cylinder(d=50,h=100,center=true);}
     }}
+    leg_front_left_bends = [90,0,-60,0,60,0];
+    leg_front_left_twists = [0,45,0,0,0,0];
     translate([250,50,0]){rotate([0,90,90]){
-        robot_arm([90,0,-60,0,60,0],//joint bends
-                  [0,45,0,0,0,0],//joint twists
+        robot_arm(leg_front_left_bends,//joint bends
+                  leg_front_left_twists,//joint twists
                   limb_lengths,//segment lengths
                   [0,0,0,0,0,0,0,0],//finger angles
                   [100,100,100,100,100,100,100,100],
                   diameter=50,paint=paint,metal=metal);
     }}
+    leg_front_right_bends = [90,0,-60,0,60,0];
+    leg_front_right_twists = [0,-45,0,0,0,0];
     translate([250,-50,0]){rotate([0,90,-90]){
-        robot_arm([90,0,-60,0,60,0],//joint bends
-                  [0,-45,0,0,0,0],//joint twists
+        robot_arm(leg_front_right_bends,//joint bends
+                  leg_front_right_twists,//joint twists
                   limb_lengths,//segment lengths
                   [0,0,0,0,0,0,0,0],//finger angles
                   [100,100,100,100,100,100,100,100],
@@ -81,17 +89,21 @@ module light_droid(paint="#EEE",metal="#888"){
     translate([-250,0,0]){rotate([0,90,90]){
         color(paint){cylinder(d=50,h=100,center=true);}
     }}
+    arm_lower_left_bends = [60,30,-60,-60,30,30,0];
+    arm_lower_left_twists = [120,-5,90,0,-90,0];
     translate([-250,50,0]){rotate([0,90,90]){
-        robot_arm([60,30,-60,-60,30,30,0],//joint bends
-                  [120,-5,90,0,-90,0],//joint twists
+        robot_arm(arm_lower_left_bends,//joint bends
+                  arm_lower_left_twists,//joint twists
                   limb_lengths,//segment lengths
                   [60,60,60,60,60,60,60,60],//finger bends
                   [100,100,100,100,100,100,100,100],//finger lengths
                   diameter=50,paint=paint,metal=metal);
     }}
+    arm_lower_right_bends = [60,30,-60,-60,30,30,0];
+    arm_lower_right_twists = [-120,5,-90,0,90,0];
     translate([-250,-50,0]){rotate([0,90,-90]){
-        robot_arm([60,30,-60,-60,30,30,0],//joint bends
-                  [-120,5,-90,0,90,0],//joint twists
+        robot_arm(arm_lower_right_bends,//joint bends
+                  arm_lower_right_twists,//joint twists
                   limb_lengths,//segment lengths
                   [60,60,60,60,60,60,60,60],//finger bends
                   [100,100,100,100,100,100,100,100],//finger lengths
@@ -103,17 +115,21 @@ module light_droid(paint="#EEE",metal="#888"){
     translate([250,0,0]){rotate([0,90,90]){
         color(paint){cylinder(d=50,h=100,center=true);}
     }}
+    arm_upper_left_bends = [60,30,-60,-60,30,30,0];
+    arm_upper_left_twists = [120,-5,90,0,-90,0];
     translate([250,50,0]){rotate([0,90,90]){
-        robot_arm([60,30,-60,-60,30,30,0],//joint bends
-                  [120,-5,90,0,-90,0],//joint twists
+        robot_arm(arm_upper_left_bends,//joint bends
+                  arm_upper_left_twists,//joint twists
                   limb_lengths,//segment lengths
                   [60,60,60,60,60,60,60,60],//finger bends
                   [100,100,100,100,100,100,100,100],//finger lengths
                   diameter=50,paint=paint,metal=metal);
     }}
+    arm_upper_right_bends = [60,30,-60,-60,30,30,0];
+    arm_upper_right_twists = [-120,5,-90,0,90,0];
     translate([250,-50,0]){rotate([0,90,-90]){
-        robot_arm([60,30,-60,-60,30,30,0],//joint bends
-                  [-120,5,-90,0,90,0],//joint twists
+        robot_arm(arm_upper_right_bends,//joint bends
+                  arm_upper_right_twists,//joint twists
                   limb_lengths,//segment lengths
                   [60,60,60,60,60,60,60,60],//finger bends
                   [100,100,100,100,100,100,100,100],//finger lengths
@@ -121,6 +137,77 @@ module light_droid(paint="#EEE",metal="#888"){
     }}
     
     }}}}}
+    
+    color("#EEE8"){union(){
+    
+    //skin is a bunch of hulls
+    hull(){
+    translate([-500,0,0]){sphere(50);}
+    translate([-400,0,0]){sphere(100);}
+    translate([-300,0,0]){sphere(125);}
+    translate([-000,0,0]){sphere(150);}
+    translate([500+(50*1),0,0]){sphere(125);}
+    }
+    
+    hull(){
+    translate([500+(50*1),0,0]){sphere(125);
+    rotate([0,body_angles[0],0]){
+    translate([(50*1.6)+body_lengths[0],0,0]){sphere(125);}}}
+    }
+    
+    hull(){
+    translate([500+(50*1),0,0]){
+    rotate([0,body_angles[0],0]){
+    translate([(50*1.6)+body_lengths[0],0,0]){sphere(125);
+    rotate([0,body_angles[1],0]){
+    translate([(50*1.6)+body_lengths[1]*1/3,0,0]){sphere(125);}
+    translate([(50*1.6)+body_lengths[1]*1/2,0,0]){sphere(150);}
+    translate([(50*1.6)+body_lengths[1]*2/3,0,0]){sphere(125);}
+    translate([(50*1.6)+body_lengths[1],0,0]){sphere(75);}
+    }}}}
+    }
+    
+    hull(){
+    translate([500+(50*1),0,0]){
+    rotate([0,body_angles[0],0]){
+    translate([(50*1.6)+body_lengths[0],0,0]){
+    rotate([0,body_angles[1],0]){
+    translate([(50*1.6)+body_lengths[1],0,0]){sphere(75);
+    rotate([0,body_angles[2],0]){
+    translate([(50*1.6)+body_lengths[2],0,0]){sphere(75);}
+    }}}}}}
+    }
+    
+    hull(){
+    translate([500+(50*1),0,0]){
+    rotate([0,body_angles[0],0]){
+    translate([(50*1.6)+body_lengths[0],0,0]){
+    rotate([0,body_angles[1],0]){
+    translate([(50*1.6)+body_lengths[1],0,0]){
+    rotate([0,body_angles[2],0]){
+    translate([(50*1.6)+body_lengths[2],0,0]){sphere(75);
+    rotate([0,body_angles[3],0]){
+    translate([(50*1.6)+body_lengths[3],0,0]){sphere(75);}
+    }}}}}}}}
+    }
+    
+    hull(){
+    translate([500+(50*1),0,0]){
+    rotate([0,body_angles[0],0]){
+    translate([(50*1.6)+body_lengths[0],0,0]){
+    rotate([0,body_angles[1],0]){
+    translate([(50*1.6)+body_lengths[1],0,0]){
+    rotate([0,body_angles[2],0]){
+    translate([(50*1.6)+body_lengths[2],0,0]){
+    rotate([0,body_angles[3],0]){
+    translate([(50*1.6)+body_lengths[3],0,0]){sphere(75);
+    rotate([0,body_angles[4],0]){
+    translate([(50*1.6)+body_lengths[4],0,0]){sphere(30);}
+    translate([(50*1.6)+body_lengths[4]+40,0,0]){sphere(5);}
+    }}}}}}}}}}
+    }
+    
+    }}
 }
 
 translate([0,0,1210]){light_droid();}
