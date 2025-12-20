@@ -20,35 +20,36 @@ module robot_joint(angle=0,diameter=10){
     }}
 }
 
-module robot_arm(bends=[0,0,0], twists=[0,0,0], lengths=[100,100,100], effectorvars=[], n=0, diameter=10){
+module robot_arm(bends=[0,0,0], twists=[0,0,0], lengths=[100,100,100], finger_angles=[],finger_lengths=[], n=0, diameter=10){
     if(n<min(len(bends),len(twists),len(lengths))){
         rotate([0,0,twists[n]]){
             robot_joint(bends[n],diameter);
             translate([0,0,diameter]){rotate([0,bends[n],0]){translate([0,0,diameter*0.6]){
                 cylinder(d=diameter,h=lengths[n]);
-                translate([0,0,lengths[n]]){robot_arm(bends,twists,lengths,effectorvars,n+1,diameter);}
+                translate([0,0,lengths[n]]){robot_arm(bends,twists,lengths,finger_angles,finger_lengths,n+1,diameter);}
             }}}
         }
     } else {
-        effector(effectorvars,diameter);
+        effector(finger_angles,finger_lengths,diameter=diameter);
     }
 }
 
-module effector(effectorvars=[],diameter=10){
-    if(len(effectorvars)>0){
-        ev=effectorvars;
+module effector(finger_angles=[],finger_lengths=[],diameter=10){
+    if(len(finger_angles)>0 && len(finger_lengths)>0){
+        fa=finger_angles;
+        fl=finger_lengths;
     translate([0,0,3]){cube(6,true);
         rotate([0,-90,0]){translate([0,0,3]){scale(0.5){
-            robot_arm([ev[0],ev[1]],[0,0],[20,20],diameter=diameter);
+            robot_arm([fa[0],fa[1]],[0,0],[fl[0],fl[1]],diameter=diameter);
             }}}
             rotate([90,-90,0]){translate([0,0,3]){scale(0.5){
-                robot_arm([ev[2],ev[3]],[0,0],[20,20],diameter=diameter);
+                robot_arm([fa[2],fa[3]],[0,0],[fl[2],fl[3]],diameter=diameter);
             }}}
             rotate([180,-90,0]){translate([0,0,3]){scale(0.5){
-                robot_arm([ev[4],ev[5]],[0,0],[20,20],diameter=diameter);
+                robot_arm([fa[4],fa[5]],[0,0],[fl[4],fl[5]],diameter=diameter);
             }}}
             rotate([270,-90,0]){translate([0,0,3]){scale(0.5){
-                robot_arm([ev[6],ev[7]],[0,0],[20,20],diameter=diameter);
+                robot_arm([fa[6],fa[7]],[0,0],[fl[6],fl[7]],diameter=diameter);
             }}}
         }
     } else {
@@ -56,4 +57,4 @@ module effector(effectorvars=[],diameter=10){
     }
 }
 
-robot_arm([0,30,60,90,0],[0,0,0,0,0],[50,50,50,50,0],[90,0,90,0,90,0,90,0],diameter=10);
+robot_arm([0,30,60,90,0],[0,0,0,0,0],[50,50,50,50,0],[90,0,90,0,90,0,90,0],[0,50,0,50,0,50,0,50],diameter=10);
