@@ -1,7 +1,7 @@
 use <robot_arm.scad>
 use <power_connector.scad>
 
-module light_droid(paint="#EEE",metal="#888",skin="#EEE8"){
+module light_droid(paint="#EEE",metal="#888",skin="#EEE8",render_skin=true,render_skeleton=false){
     //lists of joint angles for posing
     limb_lengths=[350,50,350,50,200,50,0];
     body_lengths=[200,1000,200,100,100,100];
@@ -23,8 +23,8 @@ module light_droid(paint="#EEE",metal="#888",skin="#EEE8"){
     arm_upper_right_bends = [60,30,-60,-60,30,30,0];
     arm_upper_right_twists = [-120,6,-90,0,90,0];
     
-    render_skeleton = true;
-    render_skin = true;
+    //render_skeleton = true;
+    //render_skin = true;
     
     //main body
     translate([0,0,0]){rotate([0,90,0]){
@@ -125,10 +125,12 @@ module light_droid(paint="#EEE",metal="#888",skin="#EEE8"){
     
     //continuation of the body
     translate([500,0,0]){rotate([0,90,0]){
+        if(render_skeleton){
         robot_arm(body_angles,
                   [0,0,0,0,0],
                   body_lengths,
                   diameter=50,paint=paint,metal=metal);
+        }
     }}
     
     //this is a massive chain of translations and rotations to move the arms onto the upper body
@@ -231,6 +233,7 @@ module light_droid(paint="#EEE",metal="#888",skin="#EEE8"){
     
     }}}}}
     
+    if(render_skin){
     color(skin){union(){
     
     //skin is a bunch of hulls
@@ -302,9 +305,19 @@ module light_droid(paint="#EEE",metal="#888",skin="#EEE8"){
     
     
     }}
+    }
 }
 
-translate([0,0,1210]){light_droid(skin="#8888");}
+if($t<1/3){
+translate([0,0,1210]){light_droid(skin="#8888",render_skin=false,render_skeleton=true);}
+} else {
+if($t<2/3){
+translate([0,0,1210]){light_droid(skin="#8888",render_skin=true,render_skeleton=true);}
+} else {
+translate([0,0,1210]){light_droid(skin="#EEE",render_skin=true,render_skeleton=false);}
+}
+}
 
-//$vpr = [70,0,180*$t];
-//$vpt = [0,0,50];
+$vpr = [70,0,3*360*$t];
+$vpt = [0,0,1300];
+$vpd = 8000;
