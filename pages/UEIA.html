@@ -21,19 +21,21 @@ These AI models are just as much people as any human, they just think differentl
 <hr>
 
 <h3>Computational requirements</h3>
-<article class="warning">fliprate and table still need to be recalculated after changes to bit flips per operation approximations</article>
-<article>
-Minimal <a href="computation.html#computronium">computronium</a> requirements for nominal operation: 1.81e16 bits memory and 2.236e20bit/s processing
+<!2^50 * 16bit = 1.80144E+16 bits>
+<!2^50 * 2748bits * 1000Hz = 3.093973E+20>
+Minimal <a href="computation.html#computronium">computronium</a> requirements for nominal operation: 1.81e16 bits memory and 3.094e21bit/s processing.
 <br>
 <table class="styled-table" style="margin: 10 auto;">
-  <tr><th colspan=6>hardware requirement examples</th></tr>
-  <tr><td></td><td>number needed</td><td>power draw</td><td>bare substrate volume</td><td>processing used</td><td>memory used</td></tr>
-  <tr><td>Civic-2 chip</td><td>4472</td><td>44.72kW</td><td>447.2cm<sup>3</sup></td><td>100%</td><td>0.405%</td></tr>
-  <tr><td>Civic-3 chip</td><td>28</td><td>279.5W</td><td>2.8cm<sup>3</sup><td>99.82%</td><td>64.64%</td></tr>
-  <tr><td>Civic-4 chip</td><td>31</td><td>7.1552W</td><td>3.1cm<sup>3</sup><td>2.3%</td><td>96.85%</td></tr>
-</table>
+  <tbody><tr><th colspan="6">civic chip requirements</th></tr>
+  <tr><td></td><td>number needed</td><td>power draw</td><td>bare substrate volume</td><td id="processing">processing used</td><td>memory used</td></tr>
+  <tr><td>Civic-2 chip</td><td id="num_c2">61880</td><td id="pow_use_c2">618.8kW</td><td id="vol_c2">0.00618800m<sup>3</sup> ≈ (183.6mm)<sup>3</sup></td><td id="flip_use_c2">100.00%</td><td id="mem_use_c2">0.03%</td></tr>
+  <tr><td>Civic-3 chip</td><td id="num_c3">387</td><td id="pow_use_c3">3.868kW</td><td id="vol_c3">0.0000387000m<sup>3</sup> ≈ (33.82mm)<sup>3</sup></td><td id="flip_use_c3">99.94%</td><td id="mem_use_c3">4.68%</td></tr>
+  <tr><td>Civic-4 chip</td><td id="num_c4">31</td><td id="pow_use_c4">99.01W</td><td id="vol_c4">3100.00mm<sup>3</sup> ≈ (14.58mm)<sup>3</sup></td><td id="flip_use_c4">31.94%</td><td id="mem_use_c4">97.31%</td></tr>
+  <tr><td>Civic-5 chip</td><td id="num_c5">24752000</td><td id="pow_use_c5">247.5MW</td><td id="vol_c5">2.47520m<sup>3</sup> ≈ (1.353m)<sup>3</sup></td><td id="flip_use_c5">100.00%</td><td id="mem_use_c5">0.000003%</td></tr>
+</tbody></table>
 <br>
-The minimal requirement for processing is only for the purpose of operating in realtime using a robotic body and corresponds to 100 inferences per second, in practice UEIA could run much slower and still do well in tasks like conversation, or run much faster as needed if excess processing is available.
+The minimal requirement for processing is only for the purpose of operating in realtime using a robotic body which requires millisecond reaction times and correspondingly a 1000Hz inference rate.
+In purely intellectual tasks like conversation UEIA could run much slower and still perform well, and an inference rate of 100 times per second is usually sufficient.
 These figures also assume the model is running with full 16-bit weights, but in a necessity the model could be quantized all the way down to 4-bits variables without becoming largely nonfunctional.
 Consult the conversion table on the <a href="computation.html#bitflips">computation</a> page and the calculator on the <a href="civic_chips.html#calculator">civic chips</a> page for the corresponding hardware requirement estimates.
 </article>
