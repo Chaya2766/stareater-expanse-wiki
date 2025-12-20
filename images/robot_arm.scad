@@ -38,17 +38,17 @@ module effector(finger_angles=[],finger_lengths=[],diameter=10,paint="#EEE", met
     if(len(finger_angles)>0 && len(finger_lengths)>0){
         fa=finger_angles;
         fl=finger_lengths;
-    translate([0,0,3]){color(paint){cube(6,true);}
-        rotate([0,-90,0]){translate([0,0,3]){scale(0.5){
+    translate([0,0,diameter*0.3]){color(paint){cube(diameter*0.6,true);}
+        rotate([0,-90,0]){translate([0,0,diameter*0.3]){scale(0.5){
             robot_arm([fa[0],fa[1]],[0,0],[fl[0],fl[1]],diameter=diameter);
             }}}
-            rotate([90,-90,0]){translate([0,0,3]){scale(0.5){
+            rotate([90,-90,0]){translate([0,0,diameter*0.3]){scale(0.5){
                 robot_arm([fa[2],fa[3]],[0,0],[fl[2],fl[3]],diameter=diameter);
             }}}
-            rotate([180,-90,0]){translate([0,0,3]){scale(0.5){
+            rotate([180,-90,0]){translate([0,0,diameter*0.3]){scale(0.5){
                 robot_arm([fa[4],fa[5]],[0,0],[fl[4],fl[5]],diameter=diameter);
             }}}
-            rotate([270,-90,0]){translate([0,0,3]){scale(0.5){
+            rotate([270,-90,0]){translate([0,0,diameter*0.3]){scale(0.5){
                 robot_arm([fa[6],fa[7]],[0,0],[fl[6],fl[7]],diameter=diameter);
             }}}
         }
@@ -57,4 +57,76 @@ module effector(finger_angles=[],finger_lengths=[],diameter=10,paint="#EEE", met
     }
 }
 
+module robot_arm_sleeve(bends=[0,0,0], twists=[0,0,0], lengths=[100,100,100], finger_angles=[],finger_lengths=[], n=0, diameter=10, paint="#EEE", metal="#888", extra=5,effector_extra=1){
+    if(n<min(len(bends),len(twists),len(lengths))){
+        rotate([0,0,twists[n]]){
+            translate([0,0,diameter]){rotate([0,bends[n],0]){translate([0,0,diameter*0.6]){
+                
+                translate([0,0,lengths[n]]){robot_arm_sleeve(bends,twists,lengths,finger_angles,finger_lengths,n+1,diameter,paint=paint,metal=metal,extra=extra,effector_extra=effector_extra);}
+            }}}
+        }
+        if(1+n<min(len(bends),len(twists),len(lengths))){
+        color(paint){hull(){
+        rotate([0,0,twists[n]]){
+            translate([0,0,diameter]){sphere(extra+diameter/2);}
+        }
+        
+        rotate([0,0,twists[n]]){
+            translate([0,0,diameter]){rotate([0,bends[n],0]){translate([0,0,diameter*0.6]){
+                translate([0,0,lengths[n]+diameter]){sphere(extra+diameter/2);}
+            }}}
+        }
+        }}
+        } else {
+        color(paint){hull(){
+        rotate([0,0,twists[n]]){
+            translate([0,0,diameter]){sphere(extra+diameter/2);}
+        }
+        
+        rotate([0,0,twists[n]]){
+            translate([0,0,diameter]){rotate([0,bends[n],0]){translate([0,0,diameter*0.6]){
+                translate([0,0,lengths[n]]){sphere((effector_extra)+diameter/2);}
+            }}}
+        }
+        }}
+        }
+    } else {
+        effector_sleeve(finger_angles,finger_lengths,diameter=diameter,paint=paint,metal=metal,extra=effector_extra);
+    }
+}
+
+module effector_sleeve(finger_angles=[],finger_lengths=[],diameter=10,paint="#EEE", metal="#888",extra=1){
+    if(len(finger_angles)>0 && len(finger_lengths)>0){
+        fa=finger_angles;
+        fl=finger_lengths;
+    translate([0,0,diameter*0.3]){
+        rotate([0,-90,0]){translate([0,0,diameter*0.3]){scale(0.5){
+            robot_arm_sleeve([fa[0],fa[1]],[0,0],[fl[0],fl[1]],diameter=diameter,extra=extra,paint=paint);
+            }}}
+            rotate([90,-90,0]){translate([0,0,diameter*0.3]){scale(0.5){
+                robot_arm_sleeve([fa[2],fa[3]],[0,0],[fl[2],fl[3]],diameter=diameter,extra=extra,paint=paint);
+            }}}
+            rotate([180,-90,0]){translate([0,0,diameter*0.3]){scale(0.5){
+                robot_arm_sleeve([fa[4],fa[5]],[0,0],[fl[4],fl[5]],diameter=diameter,extra=extra,paint=paint);
+            }}}
+            rotate([270,-90,0]){translate([0,0,diameter*0.3]){scale(0.5){
+                robot_arm_sleeve([fa[6],fa[7]],[0,0],[fl[6],fl[7]],diameter=diameter,extra=extra,paint=paint);
+            }}}
+        
+        color(paint){hull(){
+            translate([0,0,-diameter*0.3]){sphere(extra+diameter/2);}
+            translate([diameter*0.8,0,0]){sphere((extra+diameter/2)/2);}
+            translate([-diameter*0.8,0,0]){sphere((extra+diameter/2)/2);}
+            translate([0,diameter*0.8,0]){sphere((extra+diameter/2)/2);}
+            translate([0,-diameter*0.8,0]){sphere((extra+diameter/2)/2);}
+            }}
+        }
+        
+    } else {
+        color(paint){sphere(diameter/2);}
+    }
+}
+
 robot_arm([0,30,60,90,0],[0,0,0,0,0],[50,50,50,50,0],[90,0,90,0,90,0,90,0],[0,50,0,50,0,50,0,50],diameter=10);
+
+robot_arm_sleeve([0,30,60,90,0],[0,0,0,0,0],[50,50,50,50,0],[90,0,90,0,90,0,90,0],[0,50,0,50,0,50,0,50],diameter=10,extra=2,effector_extra=2,paint="#8888");
