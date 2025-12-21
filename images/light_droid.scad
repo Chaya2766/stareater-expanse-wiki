@@ -1,10 +1,10 @@
 use <robot_arm.scad>
 use <power_connector.scad>
 
-module light_droid(paint="#EEE",metal="#888",skin="#EEE8",render_skin=true,render_skeleton=false){
+module light_droid(paint="#EEE",metal="#888",skin="#EEE8",render_skin=true,render_skeleton=false,render_internals=false){
     //lists of joint angles for posing
-    limb_lengths=[350,50,350,50,200,50,0];
-    body_lengths=[200,1000,200,100,100,100];
+    limb_lengths=[150,50,150,50,150,10,0];
+    body_lengths=[200,600,200,100,100,100];
     //second spot in body lengths is also the lower body length
     body_angles=[-50,-50,60,60,30];
     leg_hind_left_bends = [90,0,-60,0,60,0];
@@ -16,14 +16,17 @@ module light_droid(paint="#EEE",metal="#888",skin="#EEE8",render_skin=true,rende
     leg_front_right_bends = [90,0,-60,0,60,0];
     leg_front_right_twists = [0,-45,0,0,0,0];
     arm_lower_left_bends = [60,30,-60,-60,30,30,0];
-    arm_lower_left_twists = [120,-6,90,0,-90,0];
+    arm_lower_left_twists = [120,-14,90,0,-90,0];
     arm_lower_right_bends = [60,30,-60,-60,30,30,0];
-    arm_lower_right_twists = [-120,6,-90,0,90,0];
-    arm_upper_left_bends = [60,30,-60,-60,30,30,0];
-    arm_upper_left_twists = [120,-6,90,0,-90,0];
-    arm_upper_right_bends = [60,30,-60,-60,30,30,0];
-    arm_upper_right_twists = [-120,6,-90,0,90,0];
+    arm_lower_right_twists = [-120,14,-90,0,90,0];
+    arm_upper_left_bends = [50,30,-60,-60,30,30,0];
+    arm_upper_left_twists = [120,-12,90,0,-90,0];
+    arm_upper_right_bends = [50,30,-60,-60,30,30,0];
+    arm_upper_right_twists = [-120,12,-90,0,90,0];
     limb_diameter = 50;
+    limb_skin_thickness=30;
+    effector_skin_thickness=15;//doesn't do anything yet
+    body_skin_thickness_multiplier=1;
     
     //render_skeleton = true;
     //render_skin = true;
@@ -56,7 +59,7 @@ module light_droid(paint="#EEE",metal="#888",skin="#EEE8",render_skin=true,rende
                   [0,0,0,0,0,0,0,0],//finger angles
                   [100,100,100,100,100,100,100,100],
                   diameter=limb_diameter,paint=skin,metal=metal,
-                  extra=50,effector_extra=15);
+                  extra=limb_skin_thickness,effector_extra=15);
         }
     }}
     translate([-body_lengths[1]/4,-limb_diameter,0]){rotate([0,90,-90]){
@@ -75,7 +78,7 @@ module light_droid(paint="#EEE",metal="#888",skin="#EEE8",render_skin=true,rende
                   [0,0,0,0,0,0,0,0],//finger angles
                   [100,100,100,100,100,100,100,100],
                   diameter=limb_diameter,paint=skin,metal=metal,
-                  extra=50,effector_extra=15);
+                  extra=limb_skin_thickness,effector_extra=15);
         }
     }}
     
@@ -100,7 +103,7 @@ module light_droid(paint="#EEE",metal="#888",skin="#EEE8",render_skin=true,rende
                   [0,0,0,0,0,0,0,0],//finger angles
                   [100,100,100,100,100,100,100,100],
                   diameter=limb_diameter,paint=skin,metal=metal,
-                  extra=50,effector_extra=15);
+                  extra=limb_skin_thickness,effector_extra=15);
         }
     }}
     translate([body_lengths[1]/4,-limb_diameter,0]){rotate([0,90,-90]){
@@ -119,9 +122,23 @@ module light_droid(paint="#EEE",metal="#888",skin="#EEE8",render_skin=true,rende
                   [0,0,0,0,0,0,0,0],//finger angles
                   [100,100,100,100,100,100,100,100],
                   diameter=limb_diameter,paint=skin,metal=metal,
-                  extra=50,effector_extra=15);
+                  extra=limb_skin_thickness,effector_extra=15);
         }
     }}
+    if(render_internals){
+        //10MJ battery modules
+        /*
+        translate([0,0,0.5*limb_diameter+100/2]){cube([300,100,100],true);}
+            translate([0,0,-0.5*limb_diameter-100/2]){cube([300,120,120],true);}
+        */
+        //1MJ battery modules
+        for(i=[-220,-110,0,110,220]){
+            translate([i,0,0.5*limb_diameter+30/2]){cube([100,100,30],true);}
+            //translate([i,0,0.5*limb_diameter+30/2+40]){cube([100,100,30],true);}
+            translate([i,0,-0.5*limb_diameter-30/2]){cube([100,100,30],true);}
+            //translate([i,-0.5*limb_diameter-100/2,0]){cube([30,100,100],true);}
+        }
+    }
     
     
     
@@ -166,7 +183,7 @@ module light_droid(paint="#EEE",metal="#888",skin="#EEE8",render_skin=true,rende
                   [60,60,60,60,60,60,60,60],//finger bends
                   [100,100,100,100,100,100,100,100],//finger lengths
                   diameter=limb_diameter,paint=skin,metal=metal,
-                  extra=50,effector_extra=15);
+                  extra=limb_skin_thickness,effector_extra=15);
         }
     }}
     translate([-0.25*body_lengths[1],-limb_diameter,0]){rotate([0,90,-90]){
@@ -185,7 +202,7 @@ module light_droid(paint="#EEE",metal="#888",skin="#EEE8",render_skin=true,rende
                   [60,60,60,60,60,60,60,60],//finger bends
                   [100,100,100,100,100,100,100,100],//finger lengths
                   diameter=limb_diameter,paint=skin,metal=metal,
-                  extra=50,effector_extra=15);
+                  extra=limb_skin_thickness,effector_extra=15);
         }
     }}
     
@@ -210,7 +227,7 @@ module light_droid(paint="#EEE",metal="#888",skin="#EEE8",render_skin=true,rende
                   [60,60,60,60,60,60,60,60],//finger bends
                   [100,100,100,100,100,100,100,100],//finger lengths
                   diameter=limb_diameter,paint=skin,metal=metal,
-                  extra=50,effector_extra=15);
+                  extra=limb_skin_thickness,effector_extra=15);
         }
     }}
     translate([0.25*body_lengths[1],-limb_diameter,0]){rotate([0,90,-90]){
@@ -229,39 +246,49 @@ module light_droid(paint="#EEE",metal="#888",skin="#EEE8",render_skin=true,rende
                   [60,60,60,60,60,60,60,60],//finger bends
                   [100,100,100,100,100,100,100,100],//finger lengths
                   diameter=limb_diameter,paint=skin,metal=metal,
-                  extra=50,effector_extra=15);
+                  extra=limb_skin_thickness,effector_extra=15);
         }
     }}
     
-    }}}}}
+    //1MJ battery modules
+    if(render_internals){
+        for(i=[-250,-140,-30,80,190]){
+            translate([i,0,0.5*limb_diameter+30/2]){cube([100,100,30],true);}
+            //translate([i,0,0.5*limb_diameter+30/2+40]){cube([100,100,30],true);}
+            translate([i,0,-0.5*limb_diameter-30/2]){cube([100,100,30],true);}
+            //translate([i,-0.5*limb_diameter-100/2,0]){cube([30,100,100],true);}
+        }
+    }
+    
+    }}}}}//upper body end
     
     if(render_skin){
     color(skin){union(){
     
     //skin is a bunch of hulls
     hull(){
-    translate([-0.5*body_lengths[1],0,0]){sphere(50);}
-    translate([-0.4*body_lengths[1],0,0]){sphere(100);}
-    translate([-0.3*body_lengths[1],0,0]){sphere(125);}
-    translate([-0*body_lengths[1],0,0]){sphere(150);}
-    translate([0.5*body_lengths[1]+(limb_diameter*1),0,0]){sphere(125);}
+    translate([-0.5*body_lengths[1],0,0]){sphere(50*body_skin_thickness_multiplier);}
+    translate([-0.4*body_lengths[1],0,0]){sphere(100*body_skin_thickness_multiplier);}
+    translate([-0.3*body_lengths[1],0,0]){sphere(125*body_skin_thickness_multiplier);}
+    translate([-0*body_lengths[1],0,0]){sphere(150*body_skin_thickness_multiplier);}
+    translate([0.5*body_lengths[1]+(limb_diameter*1),0,0]){sphere(125*body_skin_thickness_multiplier);}
     }
     
     hull(){
-    translate([0.5*body_lengths[1]+(limb_diameter*1),0,0]){sphere(125);
+    translate([0.5*body_lengths[1]+(limb_diameter*1),0,0]){sphere(125*body_skin_thickness_multiplier);
     rotate([0,body_angles[0],0]){
-    translate([(limb_diameter*1.6)+body_lengths[0],0,0]){sphere(125);}}}
+    translate([(limb_diameter*1.6)+body_lengths[0],0,0]){sphere(125*body_skin_thickness_multiplier);}}}
     }
     
     hull(){
     translate([0.5*body_lengths[1]+(limb_diameter*1),0,0]){
     rotate([0,body_angles[0],0]){
-    translate([(limb_diameter*1.6)+body_lengths[0],0,0]){sphere(125);
+    translate([(limb_diameter*1.6)+body_lengths[0],0,0]){sphere(125*body_skin_thickness_multiplier);
     rotate([0,body_angles[1],0]){
-    translate([(limb_diameter*1.6)+body_lengths[1]*1/3,0,0]){sphere(125);}
-    translate([(limb_diameter*1.6)+body_lengths[1]*1/2,0,0]){sphere(150);}
-    translate([(limb_diameter*1.6)+body_lengths[1]*2/3,0,0]){sphere(125);}
-    translate([(limb_diameter*1.6)+body_lengths[1],0,0]){sphere(75);}
+    translate([(limb_diameter*1.6)+body_lengths[1]*1/3,0,0]){sphere(125*body_skin_thickness_multiplier);}
+    translate([(limb_diameter*1.6)+body_lengths[1]*1/2,0,0]){sphere(150*body_skin_thickness_multiplier);}
+    translate([(limb_diameter*1.6)+body_lengths[1]*2/3,0,0]){sphere(125*body_skin_thickness_multiplier);}
+    translate([(limb_diameter*1.6)+body_lengths[1],0,0]){sphere(75*body_skin_thickness_multiplier);}
     }}}}
     }
     
@@ -270,9 +297,9 @@ module light_droid(paint="#EEE",metal="#888",skin="#EEE8",render_skin=true,rende
     rotate([0,body_angles[0],0]){
     translate([(limb_diameter*1.6)+body_lengths[0],0,0]){
     rotate([0,body_angles[1],0]){
-    translate([(limb_diameter*1.6)+body_lengths[1],0,0]){sphere(75);
+    translate([(limb_diameter*1.6)+body_lengths[1],0,0]){sphere(75*body_skin_thickness_multiplier);
     rotate([0,body_angles[2],0]){
-    translate([(limb_diameter*1.6)+body_lengths[2],0,0]){sphere(75);}
+    translate([(limb_diameter*1.6)+body_lengths[2],0,0]){sphere(75*body_skin_thickness_multiplier);}
     }}}}}}
     }
     
@@ -283,9 +310,9 @@ module light_droid(paint="#EEE",metal="#888",skin="#EEE8",render_skin=true,rende
     rotate([0,body_angles[1],0]){
     translate([(limb_diameter*1.6)+body_lengths[1],0,0]){
     rotate([0,body_angles[2],0]){
-    translate([(limb_diameter*1.6)+body_lengths[2],0,0]){sphere(75);
+    translate([(limb_diameter*1.6)+body_lengths[2],0,0]){sphere(75*body_skin_thickness_multiplier);
     rotate([0,body_angles[3],0]){
-    translate([(limb_diameter*1.6)+body_lengths[3],0,0]){sphere(75);}
+    translate([(limb_diameter*1.6)+body_lengths[3],0,0]){sphere(75*body_skin_thickness_multiplier);}
     }}}}}}}}
     }
     
@@ -298,9 +325,9 @@ module light_droid(paint="#EEE",metal="#888",skin="#EEE8",render_skin=true,rende
     rotate([0,body_angles[2],0]){
     translate([(limb_diameter*1.6)+body_lengths[2],0,0]){
     rotate([0,body_angles[3],0]){
-    translate([(limb_diameter*1.6)+body_lengths[3],0,0]){sphere(75);
+    translate([(limb_diameter*1.6)+body_lengths[3],0,0]){sphere(75*body_skin_thickness_multiplier);
     rotate([0,body_angles[4],0]){
-    translate([(limb_diameter*1.6)+body_lengths[4],0,0]){sphere(30);}
+    translate([(limb_diameter*1.6)+body_lengths[4],0,0]){sphere(30*body_skin_thickness_multiplier);}
     translate([(limb_diameter*1.6)+body_lengths[4]+40,0,0]){sphere(5);}
     }}}}}}}}}}
     }
@@ -312,14 +339,15 @@ module light_droid(paint="#EEE",metal="#888",skin="#EEE8",render_skin=true,rende
 
 //comment this out before rendering animation
 $t=0.5;
-
+translate([0,0,860]){
 if($t<1/3){
-translate([0,0,1210]){light_droid(skin="#8888",render_skin=false,render_skeleton=true);}
+light_droid(skin="#8888",render_skin=false,render_skeleton=true);
 } else {
 if($t<2/3){
-translate([0,0,1210]){light_droid(skin="#8888",render_skin=true,render_skeleton=true);}
+light_droid(skin="#8888",render_skin=true,render_skeleton=true,render_internals=true);
 } else {
-translate([0,0,1210]){light_droid(skin="#EEE",render_skin=true,render_skeleton=false);}
+light_droid(skin="#EEE",render_skin=true,render_skeleton=false);
+}
 }
 }
 
