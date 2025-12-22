@@ -1,0 +1,150 @@
+\documentclass[a4paper]{article}
+\usepackage[margin=3cm]{geometry}
+\usepackage{graphicx}
+
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=cyan,
+	hyperindex=true,
+	linktocpage=true,%makes the page number be the link in the index
+}
+\usepackage{listings}
+\lstset{
+	basicstyle=\tiny\ttfamily,
+	columns=fullflexible,
+	keepspaces=true,
+	breaklines=true,
+	frame=single,
+	showstringspaces=true,
+	tabsize=4,
+	showspaces=true,
+	showtabs=true,
+}
+
+\renewcommand{\arraystretch}{1.2}
+
+\title{Felicity tech tree: light droid}
+
+\author{Chaya2766}
+
+\begin{document}
+	\sffamily
+	\hyphenchar\font=-1
+	\sloppy
+	
+	\maketitle
+	
+	\textbf{
+		\sloppy
+		\hyphenchar\font=-1
+		}
+	
+	\vfill
+	
+	\begin{abstract}
+		Calculations behind the capabilities of the light droid included in the felicity tech tree.
+	\end{abstract}
+	
+	%\noindent \rule{\linewidth}{1pt}
+	\vfill
+	
+	\tableofcontents
+	
+	\pagebreak
+	
+	\section{Motors}
+	
+	The motors identified as \href{https://www.ato.com/100w-bldc-motor}{ATO-D2BLD100}, \href{https://www.ato.com/250w-bldc-motor}{ATO-D5BLD250} and \href{https://www.ato.com/30-w-dc-gear-motor}{ATO-D2BLD30-24} are examples motors commercially available from ATO in the 21st century.
+	They are used as a reference to achieve realistic assumptions about the motors the droid may have been built in.
+	
+	\scriptsize
+	
+	\begin{center}
+		\begin{tabular}{| l | l |}
+			\hline
+			\multicolumn{2}{|c|}{ATO-D5BLD250 motor relevant specifications} \\\hline
+			Rated power , Working efficiency & 250W , 85\% \\\hline
+			Holding torque , peak torque & 0.8Nm , 2.39Nm \\\hline
+			Rated speed & 3000 RPM (= 50tr/s) \\\hline
+			Weight & 3kg \\\hline
+			Physical dimensions (body only) & 70mm × 86mm × 86mm \\\hline
+			Physical dimensions (with rotor) & 107mm × 86mm × 86mm \\\hline
+		\end{tabular}
+		\begin{tabular}{| l | l |}
+			\hline
+			\multicolumn{2}{|c|}{ATO-D2BLD100 motor relevant specifications} \\\hline
+			Rated power , Working efficiency & 100W , 85\% \\\hline
+			Holding torque , peak torque & 0.32Nm , 0.96Nm \\\hline
+			Rated speed & 3000 RPM (= 50tr/s) \\\hline
+			Weight & 2.5kg \\\hline
+			Physical dimensions (body only) & 95mm × 57mm × 57mm \\\hline
+			Physical dimensions (with rotor) & 120mm × 57mm × 57mm \\\hline
+		\end{tabular}
+		\begin{tabular}{| l | l |}
+			\hline
+			\multicolumn{2}{|c|}{ATO-D2BLD30-24 motor relevant specifications} \\\hline
+			Rated power , Working efficiency & 30W , 85\% \\\hline
+			Holding torque , peak torque & 0.1Nm , 0.29Nm \\\hline
+			Rated speed & 3000 RPM (= 50tr/s) \\\hline
+			Weight & 1.5kg \\\hline
+			Physical dimensions (body only) & 60mm × 60mm × 60mm \\\hline
+			Physical dimensions (with rotor) & 85mm × 60mm × 60mm \\\hline
+		\end{tabular}
+	\end{center}
+	
+	\normalsize
+	
+	25:1 planetary gearing can be used to reduce the speed from 50 down to 2 revolutions per second, a reasonable speed for the movement of the droid's limbs, at the same time correspondingly increasing the holding torque and peak torque by 25 times.
+	
+	\medskip
+	
+	ATO-D2BLD30-24 motor appears to be the best fit given the present space constraints, but is too weak.
+	ATO-D5BLD250 will require additional space, but is most likely to allow the droid to lift itself without requiring crippling gear ratios.
+	
+	\medskip
+	
+	If 2 motors (one for bending, one for rotating the limb) are to be present in a limb segment, then the segment may have dimensions of at least 86mm × 86mm × 214mm, in practice more likely 250mm in length.
+	A differential gearbox can be used for the gearing, such that when both motors turn in the same direction they bend the joint, and when they turn in opposite directions they rotate the limb.
+	That way the combined strength of both motors can be used for each movement instead of one of the motors taking the full load and the other remaining unused.
+	Given the 250mm length and 25:1 gear ratio, the two motor's combined 1.6Nm holding torque could exert 160N of force, and the combined peak torque of 4.78Nm could exert 478N of force.
+	
+	\medskip
+	
+	Given that there are 4 limbs for locomotion use, this \textbf{gives the droid a lifting force of at least 640N consistently or 1912N in short bursts}, equivalent to the weight of 65.26kg and 194.97kg in a 1 gee gravity environment.
+	This is doubled if the remaining 4 limbs are also used for locomotion rather than manipulation.
+	In practice the droid's actual carrying capacity would likely exceed these forces severalfold, since the motors would usually be only dealing with the small fractions of the forces that are actually bending the limb instead of being transferred through its strongest angles.
+	
+	\medskip
+	
+	If on average there is 1 motors in each limb segment (alternating between 2 and 0), 5 segments in each limb and 8 limbs in total, plus 4 segments making up the spine, there would be \textbf{44 motors, adding up to 132kg} and a theoretical maximum 33kW power consumption.
+	
+	\medskip
+	
+	The details need not stay this specific for the actual design, but this would seem like a good estimate.
+	
+	$$ \frac{2 \cdot 0.8Nm \cdot 25}{0.25m} = 160N \qquad
+	\frac{2 \cdot 2.39Nm \cdot 25}{0.25m} = 478N \qquad
+	(5 \cdot 8 + 4) \cdot 3kg = \mathbf{44} \cdot 3kg = \mathbf{132kg} $$
+	
+	$$ \frac{4 \cdot 160N}{9.807m/s^2} = \frac{\mathbf{640N}}{9.807m/s^2} = 65.2595kg \qquad \frac{4 \cdot 478N}{9.807m/s^2} = \frac{\mathbf{1912N}}{9.807m/s^2} = 194.9628kg $$
+	
+	\pagebreak
+	
+	\section{Batteries}
+	
+	Solid state thin film lithium ion todo from existing documentation not yet transcribed onto the wiki.
+	
+	\medskip
+	
+	\noindent The droid contains a total of 20 battery modules, each 1MJ and 0.5kg for a total of \textbf{20MJ} and \textbf{10kg}.
+	
+	\pagebreak
+	
+	\section{Stat card}
+	
+	
+	
+\end{document}
