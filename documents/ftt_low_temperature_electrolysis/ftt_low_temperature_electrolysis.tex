@@ -1,0 +1,270 @@
+\documentclass[a4paper]{article}
+\usepackage[margin=3cm]{geometry}
+\usepackage{graphicx}
+
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=cyan,
+	hyperindex=true,
+	linktocpage=true,%makes the page number be the link in the index
+}
+\usepackage{listings}
+\lstset{
+	basicstyle=\tiny\ttfamily,
+	columns=fullflexible,
+	keepspaces=true,
+	breaklines=true,
+	frame=single,
+	showstringspaces=true,
+	tabsize=4,
+	showspaces=true,
+	showtabs=true,
+}
+
+\renewcommand{\arraystretch}{1.2}
+
+\title{Felicity tech tree:\\low temperature electrolysis of mixed metal oxides}
+
+\author{Chaya2766}
+
+\begin{document}
+	\sffamily
+	\hyphenchar\font=-1
+	\sloppy
+	
+	\maketitle
+	
+	\textbf{
+		\sloppy
+		\hyphenchar\font=-1
+		}
+	
+	\vfill
+	
+	\begin{abstract}
+		Math behind the process for extracting metal from asteroid regolith with low temperature electrolysis.
+		
+		\medskip
+		
+		\noindent Largely based on my interpretation of the paper "\href{https://www.semanticscholar.org/paper/Low-Temperature-Electrolysis-of-Mixed-Metal-Oxides-Wang-Burdette/821a8dbb15a57500893ec3141e0e3cdd89e5f62c}{Low Temperature Electrolysis of Mixed Metal Oxides}" by Everett Baker, Shaun Bonefas, Brittany Kyer, Christian Morneau, Yan Wang and\\ Shawn Burdette
+	\end{abstract}
+	
+	%\noindent \rule{\linewidth}{1pt}
+	\vfill
+	
+	\tableofcontents
+	
+	\pagebreak
+	
+	\section{Basic idea of the process}
+	
+	Finely powdered asteroid regolith is added to an aqueous solution of sodium hydroxide, at concentrations of 50\% to 60\% by mass.
+	Current is passed through the solution at 1.7 volts to reduce the metal oxides into metals, and deposit them on the cathode.
+	Once the process is done, the cathode is removed with the metals crystallized onto it, which are removed for further processing.
+	Only a select group of elements whose oxides break down at or below the voltage used can be produced this way, so other elements will remain in oxidized state and have to be extracted in some other way.
+	
+	\noindent\rule{\linewidth}{0.5pt}
+	
+	Parts of this which were just my own guesses:
+	
+	\begin{itemize}
+		\item The extracted metals will crystallize onto the cathode. I've seen this process many times whenever passing current through a solution results in formation of solid material, but that's about all that my reasoning for stating that this would happen is based on.
+	\end{itemize}
+	
+	\begin{itemize}
+		\item The crystallized metals will deposit as a mixed alloy rather than separate layers. This is a conservative assumption as on the contrary assuming that the metals will deposit in layers at this stage would trivialize their later separation in a way that gives overly optimistic energy costs.
+	\end{itemize}
+	
+	What I actually sourced from the study:
+	
+	\begin{itemize}
+		\item The material to extract metal from needs to be powdered - that is the form in which material was processed in the study.
+		
+		\item A solution which is 50\% to 60\% sodium hydroxide by mass with water.
+		
+		\item A current passed through the solution at 1.7 volts.
+		
+		\item The exact list of elements which can be extracted using this method - see figure 2 in the original study (on page 9).
+	\end{itemize}
+    
+	\pagebreak
+	
+	\section{List of elements extracted via LTE}
+	
+	The listed elements are those which both can be extracted using Low Temperature Electrolysis and are present in asteroid regolith.
+	
+	\medskip
+	
+	For reasons I'm about to explain, "asteroid regolith" and "meteor" had been used interchangably here despite being obviously different, as that is an equivalence that my choice of my sources forced me to assume.
+	
+	\medskip
+	
+	\href{https://ptable.com/#Properties/Abundance/Meteor}{Ptable} is an online interactive table of elements, which among other functions, provides the exact concentration of the chosen element as a percentage of mass in the whole universe, the solar system, meteor material, earth's crust, the ocean, and the human body.
+	I chose the concentration in meteor material as likely the closest available approximation to asteroid material.
+	Data was collected in 20.03.2025 and I had not re-checked it for any changes that might have happened since.
+    
+    \begin{center}
+    	\begin{tabular}{cccccc}
+    		Atomic number & Symbol & Name & Percentage & Atomic mass & mass in 100kg \\
+    		\hline
+    		8 & O & Oxygen & 40 & 15.999 & 40kg \\
+    		26 & Fe & Iron & 22 & 55.845 & 22kg \\
+    		27 & Co & Cobalt & 0.059 & 58.93319 & 59g \\
+    		28 & Ni & Nickel & 1.3 & 58.6934 & 1.3kg \\
+    		29 & Cu & Copper & 0.011 & 63.546 & 11g \\
+    		30 & Zn & Zinc & 0.018 & 65.38 & 18g \\
+    		31 & Ga & Gallium & 0.00076 & 69.723 & 760mg \\
+    		32 & Ge & Germanium & 0.0021 & 72.63 & 2.1g \\
+    		33 & As & Arsenic & 0.00018 & 74.92160 & 180mg \\
+    		34 & Se & Selenium & 0.0013 & 78.971 & 1.3g \\
+    		42 & Mo & Molybdenum & 0.00012 & 95.95 & 120mg \\
+    		44 & Ru & Ruthenium & 0.000081 & 101.07 & 81mg \\
+    		45 & Rh & Rhodium & 0.000018 & 102.9055 & 16mg \\
+    		46 & Pd & Palladium & 0.000066 & 106.42 & 66mg \\
+    		47 & Ag & Silver & 0.000014 & 107.8682 & 14mg \\
+    		48 & Cd & Cadmium & 0.000044 & 112.414 & 44mg \\
+    		49 & In & Indium & 0.0000044 & 114.818 & 4.4mg \\
+    		50 & Sn & Tin & 0.00012 & 118.710 & 120mg \\
+    		51 & Sb & Antimony & 0.000012 & 121.760 & 12mg \\
+    		52 & Te & Tellurium & 0.00021 & 127.60 & 210mg \\
+    		74 & W & Tungsten & 0.000012 & 183.84 & 12mg \\
+    		75 & Re & Rhenium & 0.000000049 & 186.207 & 4.9mg \\
+    		76 & Os & Osmium & 0.000066 & 190.23 & 66mg \\
+    		77 & Ir & Iridium & 0.000054 & 192.217 & 54mg \\
+    		78 & Pt & Platinum & 0.000098 & 195.084 & 98mg \\
+    		79 & Au & Gold & 0.000017 & 196.9666 & 17mg \\
+    		80 & Hg & Mercury & 0.000025 & 200.59 & 25mg \\
+    		81 & Tl & Thallium & 0.0000078 & 204.38 & 7.8mg \\
+    		82 & Pb & Lead & 0.00014 & 207.2 & 140mg \\
+    		83 & Bi & Bismuth & 0.0000069 & 208.9804 & 6.9mg \\
+    		\hline
+    	\end{tabular}
+    \end{center}
+    
+    The expected yield from processing 100kg of dry asteroid regolith is \textbf{23.573279kg} of metal and 40kg of oxygen.
+    
+    \medskip
+    
+    There will remain a sludge including 36.426721 kg of the remaining elements which could not be brought to their elemental, still oxidized and mixed with the sodium hydroxide solution whose mass had not been counted. This byproduct can be simply washed to recover and reuse the sodium hydroxide.
+    
+    \pagebreak
+    
+    \section{Energy and power use}
+    
+    The study presents 2 chemical processes that were used to determine how long to run the electrolysis process for:
+    
+    $$ Fe_2O_{3(s)} + 6e^- \rightarrow 2Fe_{(s)} + ^3/_2 O_{2(g)} + 6e^- $$
+    
+    $$ NiFe_2O_{4(s)} 8e^- \rightarrow Ni_{(s)} + 2Fe_{(s)} + 4O_{2(s)} + 8e^-$$
+    
+    My simplified interpretation here is that for every atom of iron to be split out of the iron oxide, 3 electrons pass from anode to cathode. In the second reaction, for every 1 atom of nickel and 2 atoms of iron, 8 electrons pass, which if we keep the assumption of 3 electrons per atom of iron means that 2 of these 8 electrons were used to free the nickel.
+    
+    \medskip
+    
+    Since the voltage difference between anode and cathode is 1.7 volts, every electron carries 1.7 electron-volts.
+    This can be used to estimate the energy needed to reduce the whole batch, if the total number of atoms is known.
+    
+    \medskip
+    
+    For a real proper estimate I would have to know the expected number of electrons required to free the metal atom from the oxide compound for each of the 30 elements that are being extracted, which would require knowing what these oxides look like.
+    For now such a task surpasses the limits of my dedication, so I will use the two provided formulas as an estimate, which is at the very least supported by the fact that iron and nickel are the two biggest mass fractions in the extracted metals.
+    
+    \medskip
+    
+    22kg of iron and 1.3kg of nickel are extracted from electrolysis of 100kg of material.
+    
+    Iron has a molar mass of 0.0558kg/mol, and Nickel has a molar mass of 0.05869kg/mol.
+    
+    $$ \frac{22kg}{0.0558kg/mol} = 394 mol \qquad \frac{1.3kg}{0.05869kg/mol} = 22.149 mol $$
+    
+    (I will likely eventually update the table in previous section with molar amounts calculated like this)
+    
+    \medskip
+    
+    3 electrons are needed per iron atom, and 2 electrons per nickel atom:
+    
+    $$ 394 mol (Fe) \cdot \frac{3 (e^-)}{1 (Fe)} = 1182 mol (e^-) 
+    \qquad
+    22.149 mol (Ni) \cdot \frac{2 (e^-)}{1 (Ni)} = 44.298 mol (e^-)$$
+    
+    In total, 1226.298 moles of electrons have to be transferred.
+    1 mole of electrons means 6.02214076 E+23 electrons in accordance with the avogadro constant.
+    This means the total energy spent is:
+    
+    $$ 1226.298 mol \cdot \frac{6.02214076 E+23 \cdot 1.7eV}{mol} = 1.023764 E+24 eV = 164025J $$
+    
+    Now, that only accounts for the combined 23.3kg of iron and nickel, whereas the total mass of extracted metal is a bit over 23.57kg, and also assumes 100\% efficiency. Majority of the remaining elements are heavier, and as such their molar fraction would be even smaller than their mass fraction, but as I had not done the calculations behind that, the mass fraction will do as a conservative estimate.
+    
+    \medskip
+    
+    Additionally, I will assume a 50\% efficiency, which feels reasonable for electrolysis, as the electrolysis of water typically has an efficiency well above that, though admittedly it is far from being the same thing.
+    
+    $$ 164025J \cdot \frac{23.573279kg}{23.3kg} \cdot \frac{1}{0.5} = 331898 J $$
+    
+    So counting only electrolysis the energy cost is 331.898 kJ of electrical power for every 100kg batch of regolith.
+    
+    \bigskip
+    
+    In the study, successful electrolysis of a sample required 5 hours, which would mean that the electrolysis pulls just 18.44 watts, though small as that seems, at 1.7 volts that corresponds to nearly 10.85 amperes.
+    
+    \pagebreak
+    
+    The solution needs to be hot, around 100$^o$C, so it would use additional power just to stay hot.
+    This can be mitigated using a vacuum insulation around the electrolysis cauldron, which would have the additional benefit of allowing the heat leakage to be simply estimated using the stefan-boltzmann law.
+    
+    $$ \sigma \cdot \epsilon \cdot A \cdot T^4 = P $$
+    
+    where:
+    
+    \begin{itemize}
+    	\item $\sigma$ is the stefan-boltzmann constant ($\approx 0.00000005670374419 W \cdot m^{-2} \cdot K^{-4} $)
+    	
+    	\item $\epsilon$ is the emissivity of material used
+    	
+    	\item $A$ is the surface area of the hot object
+    	
+    	\item $T$ is the temperature of the hot object
+    	
+    	\item $P$ is the power of thermal radiation, ie. rate at which the object's heat is lost to glowing at various wavelengths of light due to its heat
+    \end{itemize}
+    
+    For smooth steel the emissivity is about 0.1.
+    
+    \medskip
+    
+    If the electrolysis chamber should hold 100kg of asteroid material then it will likely hold about 200kg of total mass, might be about 200L in size, and if it were a cube that would give it a surface area of about 2m$^2$.
+    
+    \medskip
+    
+    Temperature should be around 100$^o$C which is 373.15K.
+    
+    \medskip
+    
+    $$ \sigma \cdot 0.1 \cdot 2m^2 \cdot (373.15K)^4 = 219.87W $$
+    
+    \medskip
+    
+    So the real power use adds up to a little under 240W, with only about 18.5W of that being the electrolysis.
+    This means that better insulation could still greatly decrease energy costs.
+    Scaling up the process could do so as well, since the heat loss depends on surface area, and a bigger container would have much bigger ratio of volume to surface area.
+    
+    \medskip
+    
+    $$ 5h \cdot 240W = 4.32MJ $$
+    
+    \bigskip
+    
+    So in the end the cost of refining one 100kg batch of regolith is: \textbf{4.32MJ} of energy and \textbf{5h} of time.
+    
+    \bigskip
+    
+    \noindent From another perspective, the \underline{cost of the metal alloy} obtained this way is roughly \textbf{183.258 kJ/kg}:
+    
+    $$ \frac{4.32MJ}{23.573279kg} = 183.258 kJ/kg$$
+    
+    %An interesting bit of trivia I can share that I originally did a little napkin math only loosely based on estimates of the amperage and time required, and vaguely aiming for an energy cost on par with modern iron ore smelting, which yielded 140MJ per batch, which as it turns out, overestimated the energy cost by a factor of 421.8 times. It would appear that really the true cost of this process will be the time it takes.
+	
+\end{document}
