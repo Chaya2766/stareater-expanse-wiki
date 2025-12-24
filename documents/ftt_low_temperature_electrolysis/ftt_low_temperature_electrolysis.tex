@@ -50,6 +50,11 @@
 		\medskip
 		
 		\noindent Largely based on my interpretation of the paper "\href{https://www.semanticscholar.org/paper/Low-Temperature-Electrolysis-of-Mixed-Metal-Oxides-Wang-Burdette/821a8dbb15a57500893ec3141e0e3cdd89e5f62c}{Low Temperature Electrolysis of Mixed Metal Oxides}" by Everett Baker, Shaun Bonefas, Brittany Kyer, Christian Morneau, Yan Wang and\\ Shawn Burdette
+		
+		\medskip
+		
+		The final findings were that the machine included in the Felicity tech tree, which is used for this process, would require 4.32MJ of energy and 5h of time to process one 100-kilogram batch of asteroid regolith into mixed metal alloy.
+		The energy cost of the alloy was found to be 183.258 kJ/kg, and a single machine allows for production rate of 4.7146558 kg/h.
 	\end{abstract}
 	
 	%\noindent \rule{\linewidth}{1pt}
@@ -63,8 +68,32 @@
 	
 	Finely powdered asteroid regolith is added to an aqueous solution of sodium hydroxide, at concentrations of 50\% to 60\% by mass.
 	Current is passed through the solution at 1.7 volts to reduce the metal oxides into metals, and deposit them on the cathode.
+	This takes about 5 hours to complete.
+	
+	\medskip
+	
 	Once the process is done, the cathode is removed with the metals crystallized onto it, which are removed for further processing.
+	
+	\medskip
+	
+	
 	Only a select group of elements whose oxides break down at or below the voltage used can be produced this way, so other elements will remain in oxidized state and have to be extracted in some other way.
+	
+	\noindent\rule{\linewidth}{0.5pt}
+	
+	What I actually sourced from the study:
+	
+	\begin{itemize}
+		\item The material to extract metal from needs to be powdered - that is the form in which material was processed in the study.
+		
+		\item A solution which is 50\% to 60\% sodium hydroxide by mass with water.
+		
+		\item A current is passed through the solution at 1.7 volts.
+		
+		\item 5 hour time to completion - that is how long a successful sample took to process in the study.
+		
+		\item The exact list of elements which can be extracted using this method - see figure 2 in the original study (on page 9).
+	\end{itemize}
 	
 	\noindent\rule{\linewidth}{0.5pt}
 	
@@ -76,18 +105,6 @@
 	
 	\begin{itemize}
 		\item The crystallized metals will deposit as a mixed alloy rather than separate layers. This is a conservative assumption as on the contrary assuming that the metals will deposit in layers at this stage would trivialize their later separation in a way that gives overly optimistic energy costs.
-	\end{itemize}
-	
-	What I actually sourced from the study:
-	
-	\begin{itemize}
-		\item The material to extract metal from needs to be powdered - that is the form in which material was processed in the study.
-		
-		\item A solution which is 50\% to 60\% sodium hydroxide by mass with water.
-		
-		\item A current passed through the solution at 1.7 volts.
-		
-		\item The exact list of elements which can be extracted using this method - see figure 2 in the original study (on page 9).
 	\end{itemize}
     
 	\pagebreak
@@ -261,10 +278,16 @@
     
     \bigskip
     
-    \noindent From another perspective, the \underline{cost of the metal alloy} obtained this way is roughly \textbf{183.258 kJ/kg}:
+    \noindent From another perspective, the \underline{cost of the metal alloy} obtained this way is roughly \textbf{183.258 kJ/kg}, and a single machine can allow a maximum production rate of \textbf{4.7146558 kg/h}:
     
-    $$ \frac{4.32MJ}{23.573279kg} = 183.258 kJ/kg$$
+    $$ \frac{4.32MJ}{23.573279kg} = 183.258 kJ/kg
+    \qquad
+    \frac{23.573279kg}{5h} = 4.7146558 kg/h$$
     
-    %An interesting bit of trivia I can share that I originally did a little napkin math only loosely based on estimates of the amperage and time required, and vaguely aiming for an energy cost on par with modern iron ore smelting, which yielded 140MJ per batch, which as it turns out, overestimated the energy cost by a factor of 421.8 times. It would appear that really the true cost of this process will be the time it takes.
+    \vfill
+    
+    An interesting bit of trivia I can share that I originally did a little napkin math only loosely based on my vague estimates of the amperage and time required, which yielded 140MJ per batch, which as it turns out, overestimated the energy cost by a factor of 32.4 times.
+    %More than that, if the thermal losses were eliminated, that overestimation would be of a factor 421.8 instead.
+    %This is sure to shake things up a little.
 	
 \end{document}
