@@ -53,7 +53,7 @@
 		
 		\medskip
 		
-		The final findings were that the machine included in the Felicity tech tree, which is used for this process, would require 4.32MJ of energy and 5h of time to process one 100-kilogram batch of asteroid regolith into mixed metal alloy.
+		The final findings were that the machine included in the Felicity tech tree, which is used for this process, would require 348MJ of energy and 22.38h of time to process one 100-kilogram batch of asteroid regolith into mixed metal alloy.
 		The energy cost of the alloy was found to be 183.258 kJ/kg, and a single machine allows for production rate of 4.7146558 kg/h.
 	\end{abstract}
 	
@@ -112,9 +112,6 @@
 	\section{List of elements extracted via LTE}
 	
 	The listed elements are those which both can be extracted using Low Temperature Electrolysis and are present in asteroid regolith.
-	
-	\medskip
-	
 	For reasons I'm about to explain, "asteroid regolith" and "meteor" had been used interchangably here despite being obviously different, as that is an equivalence that my choice of my sources forced me to assume.
 	
 	\medskip
@@ -127,7 +124,7 @@
     	\begin{tabular}{cccccc}
     		Atomic number & Symbol & Name & Percentage & Atomic mass & mass in 100kg \\
     		\hline
-    		8 & O & Oxygen & 40 & 15.999 & 40kg \\
+    		8 & O & Oxygen & 40 & 15.999 & 40kg (9.46kg) \\
     		26 & Fe & Iron & 22 & 55.845 & 22kg \\
     		27 & Co & Cobalt & 0.059 & 58.93319 & 59g \\
     		28 & Ni & Nickel & 1.3 & 58.6934 & 1.3kg \\
@@ -161,76 +158,76 @@
     	\end{tabular}
     \end{center}
     
-    The expected yield from processing 100kg of dry asteroid regolith is \textbf{23.573279kg} of metal and 40kg of oxygen.
-    
-    \medskip
-    
-    There will remain a sludge including 36.426721 kg of the remaining elements which could not be brought to their elemental, still oxidized and mixed with the sodium hydroxide solution whose mass had not been counted. This byproduct can be simply washed to recover and reuse the sodium hydroxide.
+    The expected yield from processing 100kg of dry asteroid regolith is \textbf{23.573279kg} of metal and 9.46kg of oxygen.
+    (the 40kg figure is how much total oxygen there is in 100kg of regolith, only 9.46kg actually gets released)
+    There will remain a sludge including 66.966721 kg of the remaining elements which could not be brought to their elemental, still oxidized and mixed with the sodium hydroxide solution whose mass had not been counted.
+    This byproduct can be simply washed to recover and reuse the sodium hydroxide.
     
     \pagebreak
     
-    \section{Energy and power use}
+    \section{Energy use \& oxygen release}
     
-    The study presents 2 chemical processes that were used to determine how long to run the electrolysis process for:
+    The study presents 2 chemical processes that happen during the electrolysis process:
     
     $$ Fe_2O_{3(s)} + 6e^- \rightarrow 2Fe_{(s)} + ^3/_2 O_{2(g)} + 6e^- $$
     
     $$ NiFe_2O_{4(s)} 8e^- \rightarrow Ni_{(s)} + 2Fe_{(s)} + 4O_{2(s)} + 8e^-$$
     
-    My simplified interpretation here is that for every atom of iron to be split out of the iron oxide, 3 electrons pass from anode to cathode. In the second reaction, for every 1 atom of nickel and 2 atoms of iron, 8 electrons pass, which if we keep the assumption of 3 electrons per atom of iron means that 2 of these 8 electrons were used to free the nickel.
-    
-    \medskip
-    
-    Since the voltage difference between anode and cathode is 1.7 volts, every electron carries 1.7 electron-volts.
-    This can be used to estimate the energy needed to reduce the whole batch, if the total number of atoms is known.
-    
-    \medskip
-    
-    For a real proper estimate I would have to know the expected number of electrons required to free the metal atom from the oxide compound for each of the 30 elements that are being extracted, which would require knowing what these oxides look like.
-    For now such a task surpasses the limits of my dedication, so I will use the two provided formulas as an estimate, which is at the very least supported by the fact that iron and nickel are the two biggest mass fractions in the extracted metals.
-    
-    \medskip
-    
-    22kg of iron and 1.3kg of nickel are extracted from electrolysis of 100kg of material.
+    Of those $Fe_2O_3$ (\href{https://en.wikipedia.org/wiki/Iron(III)_oxide}{Iron(III) oxide}) has a much more easily available enthalpy of formation, so it will be used to judge the energy cost, as well as the amount of oxygen released.
+    These will necessarily only be approximations.
     
     Iron has a molar mass of 0.0558kg/mol, and Nickel has a molar mass of 0.05869kg/mol.
     
-    $$ \frac{22kg}{0.0558kg/mol} = 394 mol \qquad \frac{1.3kg}{0.05869kg/mol} = 22.149 mol $$
+    $$ \frac{22kg}{0.0558kg/mol} = 394 mol $$
     
-    (I will likely eventually update the table in previous section with molar amounts calculated like this)
+    394 moles of atomic iron are produced.
+    As Iron(III) oxide has 2 atoms of iron in it, that would mean each mole of Iron(III) oxide broken down would be responsible for 2 moles of iron extracted.
+    197 moles of Iron(III) oxide have to be broken down to yield 394 moles of iron.
+    Doing so would also release 591 moles of oxygen atoms, equal to \underline{9.46kg of oxygen.}
     
     \medskip
     
-    3 electrons are needed per iron atom, and 2 electrons per nickel atom:
+    The enthalpy of formation of Iron(III) oxide is -824.2 kJ/mol, which as I understand means that $Fe_2O_3$ releases 824.2 kJ/mol when formed from single free atoms of iron and oxygen.
+    Using gibbs free energy might be more appropriate, which would be -742.2 kJ/mol, but I honestly don't know.
+    Using the enthalpy of formation, breaking down all 197 moles of Iron(III) oxide would consume 162.3674MJ of energy:
     
-    $$ 394 mol (Fe) \cdot \frac{3 (e^-)}{1 (Fe)} = 1182 mol (e^-) 
-    \qquad
-    22.149 mol (Ni) \cdot \frac{2 (e^-)}{1 (Ni)} = 44.298 mol (e^-)$$
+    $$ 824.2 kJ/mol \cdot 197mol = 162.3674MJ $$
     
-    In total, 1226.298 moles of electrons have to be transferred.
-    1 mole of electrons means 6.02214076 E+23 electrons in accordance with the avogadro constant.
-    This means the total energy spent is:
-    
-    $$ 1226.298 mol \cdot \frac{6.02214076 E+23 \cdot 1.7eV}{mol} = 1.023764 E+24 eV = 164025J $$
-    
-    Now, that only accounts for the combined 23.3kg of iron and nickel, whereas the total mass of extracted metal is a bit over 23.57kg, and also assumes 100\% efficiency. Majority of the remaining elements are heavier, and as such their molar fraction would be even smaller than their mass fraction, but as I had not done the calculations behind that, the mass fraction will do as a conservative estimate.
+    Now, that only accounts for the combined 22kg of iron produced, whereas the total mass of extracted metal is a bit over 23.57kg, and also assumes 100\% efficiency.
+    Majority of the remaining elements are heavier, and as such their molar fraction would be even smaller than their mass fraction, but as I had not done the calculations behind that, the mass fraction will do as a conservative estimate.
     
     \medskip
     
     Additionally, I will assume a 50\% efficiency, which feels reasonable for electrolysis, as the electrolysis of water typically has an efficiency well above that, though admittedly it is far from being the same thing.
     
-    $$ 164025J \cdot \frac{23.573279kg}{23.3kg} \cdot \frac{1}{0.5} = 331898 J $$
+    $$ 162.3674MJ \cdot \frac{23.573279kg}{22kg} \cdot \frac{1}{0.5} = 347.9574564 MJ $$
     
-    So counting only electrolysis the energy cost is 331.898 kJ of electrical power for every 100kg batch of regolith.
+    So the energy cost is \textbf{348 MJ} of electrical power for every 100kg batch of regolith.
     
-    \bigskip
+    \medskip
     
-    In the study, successful electrolysis of a sample required 5 hours, which would mean that the electrolysis pulls just 18.44 watts, though small as that seems, at 1.7 volts that corresponds to nearly 10.85 amperes.
+    \noindent From another perspective, the \underline{cost of the metal alloy} obtained this way is roughly \textbf{14.7625MJ/kg}.
+    
+    $$ \frac{348MJ}{23.573279kg} = 14.7625MJ/kg $$
+    
+    %\bigskip
+    
+    %Scaling up the oxygen release the same way gives 10.1365kg or 633.532 mol
+    
+    %$$ 9.46kg \cdot \frac{23.573279kg}{22kg} = 10.13650997 kg $$
+    
+    %$$ \frac{10.13650997 kg}{16g/mol} = 633.5318731 mol $$
     
     \pagebreak
     
-    The solution needs to be hot, around 100$^o$C, so it would use additional power just to stay hot.
-    This can be mitigated using a vacuum insulation around the electrolysis cauldron, which would have the additional benefit of allowing the heat leakage to be simply estimated using the stefan-boltzmann law.
+    \section{Power use}
+    
+    In the study, successful electrolysis of a sample required 5 hours, which would mean that the electrolysis pulls just 19331 watts, a massive amount of power.
+    The solution needs to be hot, around 100$^o$C, but not boil, and assuming the 50\% efficiency, half the power is just turned into heat.
+    
+    \medskip
+    
+    I have honestly no idea how to calculate convection cooling, so I will substitute with the usual stefan-boltzmann law, and write it off as a conservative assumption because radiative cooling would occur either way and is slower than convection or conduction.
     
     $$ \sigma \cdot \epsilon \cdot A \cdot T^4 = P $$
     
@@ -248,7 +245,9 @@
     	\item $P$ is the power of thermal radiation, ie. rate at which the object's heat is lost to glowing at various wavelengths of light due to its heat
     \end{itemize}
     
-    For smooth steel the emissivity is about 0.1.
+    I usually compare the mixed metal alloy resulting from the process to wrought iron, for which the engineering toolbox gives an emissivity of 0.94.
+    In any case it would not be very difficult to artificially increase the emissivity of the device's walls up to that value, so that's what I'll use.
+    As a sidenote this might imply the device will need to have additional radiating surfaces, which is nice.
     
     \medskip
     
@@ -260,34 +259,30 @@
     
     \medskip
     
-    $$ \sigma \cdot 0.1 \cdot 2m^2 \cdot (373.15K)^4 = 219.87W $$
+    $$ \sigma \cdot 0.94 \cdot 2m^2 \cdot (373.15K)^4 = 2066.823399 W $$
     
     \medskip
     
-    So the real power use adds up to a little under 240W, with only about 18.5W of that being the electrolysis.
-    This means that better insulation could still greatly decrease energy costs.
-    Scaling up the process could do so as well, since the heat loss depends on surface area, and a bigger container would have much bigger ratio of volume to surface area.
+    So the device can handle 2067W of heat output, which accounts for only half the power consumption because the second half is absorbed by the breakage of chemical bonds through electrolysis and as such is not contributing to the heating, so really the device should consume 4134W of power.
     
-    \medskip
+    $$ \frac{347.9574564 MJ}{4134W} = 84169.67983 s \approx 22h + 22min + 50s
+    %\qquad \frac{347.9574564 MJ}{4000W} = 86989.3641 s \approx 1 d + 10 min
+    $$
     
-    $$ 5h \cdot 240W = 4.32MJ $$
-    
-    \bigskip
-    
-    So in the end the cost of refining one 100kg batch of regolith is: \textbf{4.32MJ} of energy and \textbf{5h} of time.
+    So the time required to proces a 100kg batch of regolith is \textbf{22.38h} or \textbf{80.57ks} of time.
     
     \bigskip
     
-    \noindent From another perspective, the \underline{cost of the metal alloy} obtained this way is roughly \textbf{183.258 kJ/kg}, and a single machine can allow a maximum production rate of \textbf{4.7146558 kg/h}:
+    \noindent A single machine can allow an alloy production rate of \textbf{1.008246729 kg/h}.
     
-    $$ \frac{4.32MJ}{23.573279kg} = 183.258 kJ/kg
-    \qquad
-    \frac{23.573279kg}{5h} = 4.7146558 kg/h$$
+    $$\frac{23.573279kg}{84169.67983 s} = 1.008246729 kg/h$$
     
     \vfill
     
-    An interesting bit of trivia I can share that I originally did a little napkin math only loosely based on my vague estimates of the amperage and time required, which yielded 140MJ per batch, which as it turns out, overestimated the energy cost by a factor of 32.4 times.
+    An interesting bit of trivia I can share that I originally did a little napkin math only loosely based on my vague estimates of the amperage and time required, which yielded 140MJ per batch, which as it turns out, %overestimated the energy cost by a factor of 32.4 times.
+    would have actually been really close if I had also tacked on the "50\% efficiency" debuff onto that estimate.
     %More than that, if the thermal losses were eliminated, that overestimation would be of a factor 421.8 instead.
     %This is sure to shake things up a little.
+    At least I assume that's how I calculated that placeholder figure, as it is napkin math that I never wrote down, and as such don't really know.
 	
 \end{document}
