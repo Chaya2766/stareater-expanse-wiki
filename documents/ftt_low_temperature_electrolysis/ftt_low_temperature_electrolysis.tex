@@ -53,8 +53,8 @@
 		
 		\medskip
 		
-		The final findings were that the machine included in the Felicity tech tree, which is used for this process, would require 348MJ of energy and 22.38h of time to process one 100-kilogram batch of asteroid regolith into mixed metal alloy.
-		The energy cost of the alloy was found to be 183.258 kJ/kg, and a single machine allows for production rate of 4.7146558 kg/h.
+		The final findings were that the machine included in the Felicity tech tree, which is used for this process, would require 348MJ of energy and 23.38h of time to process one 100-kilogram batch of asteroid regolith into mixed metal alloy.
+		The energy cost of the alloy was found to be 14.7625MJ/kg, and a single machine allows for alloy production rate of 1.008246729 kg/h.
 	\end{abstract}
 	
 	%\noindent \rule{\linewidth}{1pt}
@@ -68,7 +68,7 @@
 	
 	Finely powdered asteroid regolith is added to an aqueous solution of sodium hydroxide, at concentrations of 50\% to 60\% by mass.
 	Current is passed through the solution at 1.7 volts to reduce the metal oxides into metals, and deposit them on the cathode.
-	This takes about 5 hours to complete.
+	This takes about 23.38 hours to complete.
 	
 	\medskip
 	
@@ -90,21 +90,19 @@
 		
 		\item A current is passed through the solution at 1.7 volts.
 		
-		\item 5 hour time to completion - that is how long a successful sample took to process in the study.
-		
 		\item The exact list of elements which can be extracted using this method - see figure 2 in the original study (on page 9).
 	\end{itemize}
 	
 	\noindent\rule{\linewidth}{0.5pt}
 	
-	Parts of this which were just my own guesses:
+	Parts of this which were my own additions:
 	
 	\begin{itemize}
 		\item The extracted metals will crystallize onto the cathode. I've seen this process many times whenever passing current through a solution results in formation of solid material, but that's about all that my reasoning for stating that this would happen is based on.
-	\end{itemize}
-	
-	\begin{itemize}
+		
 		\item The crystallized metals will deposit as a mixed alloy rather than separate layers. This is a conservative assumption as on the contrary assuming that the metals will deposit in layers at this stage would trivialize their later separation in a way that gives overly optimistic energy costs.
+		
+		\item 23.38 hour time to completion - a successful sample took 5 hours to process in the study, but my calculations later down in the document showed that with the way and scale that I want to conduct the process at, thermal limitations increase the time to that much.
 	\end{itemize}
     
 	\pagebreak
@@ -169,7 +167,7 @@
     
     The study presents 2 chemical processes that happen during the electrolysis process:
     
-    $$ Fe_2O_{3(s)} + 6e^- \rightarrow 2Fe_{(s)} + ^3/_2 O_{2(g)} + 6e^- $$
+    $$ Fe_2O_{3(s)} + 6e^- \rightarrow 2Fe_{(s)} + {^3/_2} O_{2(g)} + 6e^- $$
     
     $$ NiFe_2O_{4(s)} 8e^- \rightarrow Ni_{(s)} + 2Fe_{(s)} + 4O_{2(s)} + 8e^-$$
     
@@ -265,11 +263,11 @@
     
     So the device can handle 2067W of heat output, which accounts for only half the power consumption because the second half is absorbed by the breakage of chemical bonds through electrolysis and as such is not contributing to the heating, so really the device should consume 4134W of power.
     
-    $$ \frac{347.9574564 MJ}{4134W} = 84169.67983 s \approx 22h + 22min + 50s
+    $$ \frac{347.9574564 MJ}{4134W} = 84169.67983 s \approx 23h + 22min + 50s
     %\qquad \frac{347.9574564 MJ}{4000W} = 86989.3641 s \approx 1 d + 10 min
     $$
     
-    So the time required to proces a 100kg batch of regolith is \textbf{22.38h} or \textbf{80.57ks} of time.
+    So the time required to proces a 100kg batch of regolith is \textbf{23.38h} or \textbf{84.17ks} of time.
     
     \bigskip
     
