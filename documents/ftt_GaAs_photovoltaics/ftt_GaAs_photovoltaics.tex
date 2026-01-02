@@ -1,0 +1,169 @@
+\documentclass[a4paper]{article}
+\usepackage[margin=3cm]{geometry}
+\usepackage{graphicx}
+
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=cyan,
+	hyperindex=true,
+	linktocpage=true,%makes the page number be the link in the index
+}
+\usepackage{listings}
+\lstset{
+	basicstyle=\tiny\ttfamily,
+	columns=fullflexible,
+	keepspaces=true,
+	breaklines=true,
+	frame=single,
+	showstringspaces=true,
+	tabsize=4,
+	showspaces=true,
+	showtabs=true,
+}
+
+\renewcommand{\arraystretch}{1.2}
+
+\title{Felicity tech tree:\\Gallium Arsenide photovoltaics}
+
+\author{Chaya2766}
+
+\begin{document}
+	\sffamily
+	\hyphenchar\font=-1
+	\sloppy
+	
+	\maketitle
+	
+	\textbf{
+		\sloppy
+		\hyphenchar\font=-1
+		}
+	
+	\vfill
+	
+	\begin{abstract}
+		Math behind the photovoltaic power generation in the Felicity tech tree.
+		
+		\medskip
+		
+		References an earlier \href{https://chaya2766.github.io/stareater-expanse-wiki/?page=documents/ion_beam_printing/ion_beam_printing.pdf}{"Ion beam printing" document by me}, as well as the paper \href{https://pmc.ncbi.nlm.nih.gov/articles/PMC8200097/pdf/materials-14-03075.pdf}{"Overview of the Current State of Gallium Arsenide-Based Solar Cells" by Nikola Papež, Rashid Dallaev, Stefan Talu and Jaroslav Kaštyl}.
+	\end{abstract}
+	
+	%\noindent \rule{\linewidth}{1pt}
+	\vfill
+	
+	\tableofcontents
+	
+	\vfill
+	
+	Reference markings:
+	
+	[1] - "Ion beam printing"
+	
+	[2] - "Overview of the Current State of Gallium Arsenide-Based Solar Cells"
+	
+	[3] - \href{https://en.wikipedia.org/wiki/Gallium_arsenide}{wikipedia page for "Gallium Arsenide"}
+	
+	[4] - "Felicity tech tree: low temperature electrolysis of mixed metal oxides"
+	
+	\pagebreak
+	
+	\section{Characteristics of GaAs photovoltaics}
+	
+	GaAs photovoltaics are made 10$\mu$m thick [2], and achieve an efficiency of 40\%.
+	
+	\bigskip
+	
+	Given that Gallium Arsenide has a density of 5.3176 g/cm3 [3], the mass of material that goes into creating the panels would be 53.176g/m$^2$.
+	
+	$$ \frac{5.3176g/cm^3}{10\mu m} = 53.176g/m^2 $$
+	
+	Given that molar mass of Gallium Arsenide is 144.645 g/mol [3], the amount of material needed to create the panes is around 0.368mol of GaAs per square meter.
+	This means 0.368mol of Gallium and 0.368mol of arsenic, as GaAs contains both in equal parts, giving a total of 0.735 mol/m$^2$ counting individual elements.
+	For the individual elements:
+	
+	\begin{itemize}
+		\item Gallium : 69.72 g/mol, results required 0.36763mol/m$^2$, 25.6312g/m$^2$
+		
+		\item Arsenic : 74.9216 g/mol, results required 0.36763mol/m$^2$, 27.5435g/m$^2$
+	\end{itemize}
+	
+	
+	$$ \frac{53.176g/m^2}{144.645 g/mol} = 0.3676310968 mol/m^2 \qquad 2 \cdot 0.3676310968 mol/m^2 = 0.7352621936 mol/m^2 $$
+	
+	$$ (0.3676310968 mol/m^2) \cdot (69.72 g/mol) = 25.63124007 g/m^2 (Ga) $$
+	
+	$$ (0.3676310968 mol/m^2) \cdot (74.9216 g/mol) = 27.54350998 g/m^2 (As) $$
+	
+	\bigskip
+	
+	The printer discussed in [3] is capable of depositing 5 micromol per second, and consumes 202.62MJ/mol.
+	As such the panels would take around 147ks/m$^2$ and 149MJ/m$^2$ to print.
+	
+	$$ \frac{0.7352621936 mol/m^2}{5E-6 mol/s} = 147052.4387 s/m^2 $$
+	
+	$$ 0.7352621936 mol/m^2 \cdot 202.62MJ/mol = 148978825.7 J/m^2 $$
+	
+	\bigskip
+	
+	All taken together:
+	
+	\begin{center}
+		\begin{tabular}{| c | c |}
+			\hline
+			Solar conversion efficiency & 40\% \\\hline
+			mass & 25.6312g/m$^2$ Gallium \\
+			& 27.5435g/m$^2$ Arsenic \\
+			& total 53.176g/m$^2$ \\\hline
+			material amount (single atoms) & 0.36763mol/m$^2$ Gallium,\\
+			& 0.36763mol/m$^2$ Arsenic,\\
+			& total 0.73526mol/m$^2$ \\\hline
+			time to print & 147.052ks/m$^2$ \\\hline
+			energy to print & 148.979MJ/m$^2$ \\\hline
+		\end{tabular}
+	\end{center}
+	
+	\pagebreak
+	
+	\section{Construction of concentrated solar arrays}
+	
+	GaAs photovoltaics can handle sunlight at intensities of 246 to 302 suns [2], as such, ignoring absorbtion for now, the area of the collector can be that many times smaller than the mirror area.
+	
+	\bigskip
+	
+	As a basic standard design I will assume a concentrated solar array where the collector is a disk 5m in radius, and the mirror as seen from the front is 50m in radius.
+	
+	\bigskip
+	
+	Covering a 5m-radius collector in GaAs photovoltaics would require printing a total area of 15.708m$^2$.
+	
+	This results in the following resource costs:
+	
+	\begin{itemize}
+		\item Gallium: 5.775mol, 0.402615kg
+		
+		\item Arsenic: 5.775mol, 0.4326533kg
+		
+		\item Energy: 2340.162132 MJ
+		
+		\item Time: 2.340162132 Ms ($\approx$ 27 d + 2 h + 2 min + 42.132 s)
+	\end{itemize}
+	
+	$$ M_{Ga} = 25.6312g/m^2 \cdot 15.708m^2 = 0.4026148896 kg (Ga) $$
+	
+	$$ N_{Ga} = 0.36763mol/m^2 \cdot 15.708m^2 = 5.77473204 mol (Ga) $$
+	
+	$$ M_{As} = 27.5435g/m^2 \cdot 15.708m^2 = 0.432653298 g (As) $$
+	
+	$$ N_{As} = 0.36763mol/m^2 \cdot 15.708m^2 = 5.77473204 mol (As) $$
+	
+	$$ E = 148.979MJ/m^2 \cdot 15.708m^2 = 2340.162132 MJ $$
+	
+	$$ T = 148.979ks/m^2 \cdot 15.708m^2 = 2340162.132 s$$
+	
+	The skeleton of the concentrated solar array has a volume of X, measured empirically by making a 3d model and measuring the volume in Orca slicer.
+	
+\end{document}
