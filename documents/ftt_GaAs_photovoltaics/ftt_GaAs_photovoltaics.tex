@@ -69,6 +69,8 @@
 	
 	[4] - "Felicity tech tree: low temperature electrolysis of mixed metal oxides"
 	
+	[5] - Engineering Toolbox table of emissivities for various materials \\ \indent (https://www.engineeringtoolbox.com/emissivity-coefficients-d\_447.html)
+	
 	\pagebreak
 	
 	\section{Characteristics of GaAs photovoltaics}
@@ -164,6 +166,140 @@
 	
 	$$ T = 148.979ks/m^2 \cdot 15.708m^2 = 2340162.132 s$$
 	
-	The skeleton of the concentrated solar array has a volume of X, measured empirically by making a 3d model and measuring the volume in Orca slicer.
+	The skeleton of the concentrated solar array has a volume of 78.7869m$^3$, measured empirically by rendering a 3d model (code at the end) and measuring the volume in Orca slicer.
+	The assumed thickness for both the mirror, supports, and the collector was 1cm.
+	
+	\medskip
+	
+	Assuming metal density of 7750kg/m$^3$, the skeleton would mass 610598.475 kg.
+	
+	\medskip
+	
+	Given that the LTE process [4] can produce metal at a cost of 14.7625MJ/kg, and rate of 1.008kg/h, that amount of metal would take 9014GJ and 2.18071Gs to produce.
+	
+	(2.18071Gs $\approx$ 25239 d + 16 h + 27 min + 19 s)
+	
+	$$ 78.7869m^3 \cdot 7750kg/m^3 = 610598.475 kg $$
+	
+	$$ 610598.475 kg \cdot 14.7625MJ/kg = 9.013959987 TJ $$
+	
+	$$ \frac{610598.475 kg}{1.008kg/h} = 2180708839 s $$
+	
+	\pagebreak
+	
+	The concentrated solar array is collecting light with a mirror 50m in radius, but the collector which is 5m in radius is in front of the mirror, blocking some of the light.
+	The mirror is also only 93\% reflective since smooth polished steel absorbs 7\% of light [5].
+	The photovoltaics have an efficiency of 40\%.
+	
+	$$ (\pi (50m)^2 - \pi (5m)^2) \cdot 0.93 \cdot 0.4 = 7775.441818 m^2 \cdot 0.93 \cdot 0.4 = 2892.464356 m^2 $$
+	
+	The array is equivalent to a 100\% efficient collector with an area of $2892.464356 m^2$.
+	
+	\bigskip
+	
+	At earth's distance, sunlight intensity is 1361W/m$^2$, which means the array would produce 3.9366MW of power.
+	
+	$$ 2892.464356 m^2 \cdot 1361W/m^2 = 3936643.989 W $$
+	
+	This can be generalized for largely any level of insolation, for example, the asteroid belt, at the distance of 2.7AU, has an insolation of 186.69W/m$^2$, so the array would produce 540kW of power.
+	
+	$$ 1361W/m^2 \cdot (\frac{1AU}{2.7AU})^2 \cdot 2892.464356 m^2 = 186.6941015 W/m^2 \cdot 2892.464356 m^2 = 540006.0341 W $$
+	
+	And at Saturn's distance, 9.5826 AU, the insolation is only 14.8215W/m$^2$ so the array would produce 42.87kW of power.
+	
+	$$ 1361W/m^2 \cdot (\frac{1AU}{9.5826AU})^2 \cdot 2892.464356 m^2 = 14.82147429 W/m^2 \cdot 2892.464356 m^2 = 42870.58609 W $$
+	
+	\rule{\linewidth}{0.5pt}
+	
+	Cost of the array, all taken together:
+	
+	\begin{itemize}
+		\item 610598.475 kg of mixed metal alloy in the mirror and support skeleton
+		\item 0.402615kg (5.775mol) of Gallium in the photovoltaic cells
+		\item 0.4326533kg (5.775mol) of Arsenic in the photovoltaic cells
+		\item 2340.162132 MJ energy spent Ion beam printing the photovoltaic cells
+		\item 2.340162132 Ms total Ion beam print time for the photovoltaic cells
+	\end{itemize}
+	
+	Ofcourse additional energy must be spent producing the materials if they are not available:
+	
+	\begin{itemize}
+		\item 9.013959987 TJ energy spent on electrolysis for the mixed metal alloy
+		
+		\item 2 180 708 839 s total electrolysis time for the mixed metal alloy
+		
+		\item todo: Germanium and Arsenic production costs, that will have to wait for a future document
+	\end{itemize}
+	
+	\pagebreak
+	
+	\section{Concentrated solar array model}
+	
+	Here is the OpenSCAD code for the 3d model that was used to calculate the volume of the concentrated solar array.
+	
+	\begin{lstlisting}
+module parabolic_mirror(focal_length=20,mirror_length=80,thickness=1,detail=16){
+    // Parameters
+    f = focal_length;           // focal length (mm)
+    z_max = mirror_length;       // mirror depth (mm)
+    segments = detail;   // increase for smoother curve
+    thickness = thickness;    // rim thickness (optional)
+
+    // build 2D profile points (x,z)
+    pts = [for (i = [0:segments]) let(z = z_max * i/segments, x = 2*sqrt(f*z)) [x, z]];
+    // optionally close inner vertex and add rim thickness
+    profile = concat([[0,0]], pts, [[0,z_max+thickness]]);
+
+    difference(){
+        color("#888"){rotate_extrude($fn = segments)polygon(points = profile);}
+        translate([0,0,thickness]){
+            color("#CCC"){rotate_extrude($fn = segments)polygon(points = profile);}
+        }
+    }
+}
+
+//100,80 = 180
+//50,80 = 130
+//50,50 = 100
+//so the radius of the mirror as seen from head on is just the focal length plus mirror length
+
+module concentrated_solar_array(array_radius,collector_radius,thickness=1,detail=16){
+    /*
+    focus = array_radius*(3/4);
+    depth = array_radius*(1.33/4);
+    //1.33 derived empirically to achieve correct radius
+    */
+    focus = array_radius;
+    depth = array_radius/4;
+    //this new way of calculating the focus and depth also results in correct size
+    //but this time it feels way too elegant to be a coincidence
+    //I don't know the math behind why it should work out this way
+    parabolic_mirror(focus,depth,thickness,detail);
+    color("#888"){
+    translate([0,0,focus]){cylinder(r=collector_radius,h=thickness);}
+    for(i=[0:1:8]){
+        rotate([0,0,i*45]){
+            hull(){
+                translate([array_radius-thickness,0,depth]){sphere(thickness/2);}
+                translate([collector_radius,0,focus+thickness/2]){sphere(thickness/2);}
+            }
+        }
+    }}
+}
+
+module mobile_concentrated_solar_array(array_radius,collector_radius,thickness=1){
+    concentrated_solar_array(array_radius,collector_radius,thickness);
+    translate([0,0,-array_radius/2]){cylinder(r=0.5,h=2*array_radius);}
+    translate([0,0,-array_radius/2]){sphere(r=3);}
+    translate([0,0,1.5*array_radius]){sphere(r=3);}
+    }
+
+rotate([0,90,0]){
+concentrated_solar_array(50,5,0.01,32);
+}
+
+$vpr=[105,0,35];
+$vpd=325;
+	\end{lstlisting}
 	
 \end{document}
