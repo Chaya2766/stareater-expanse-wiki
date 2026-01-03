@@ -133,6 +133,79 @@
 	
 	\pagebreak
 	
+	\section{Real carrying capacity}
+	
+	\begin{minipage}{0.4\linewidth}
+		\includegraphics[width=\linewidth]{images/torque1.png}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.5\linewidth}
+		When calculating the carrying capacity in the previous section, I used the situation showed on the right.
+		Imagine that the motor is applying a torque of 10Nm, the pole is 2m long, and the mass on the end has a weight of 5N.
+		In that setup, the weight is perfectly balanced against the torque of the motor and the length of the pole.
+		
+		\medskip
+		
+		Bringing in the real numbers, given the gearing and motors, each limb segment is given a torque of 80Nm.
+		The segments are also said to be 250mm long.
+		With these numbers applied to the setup shown on the left, the weight at the end could at maximum be 160N.
+	\end{minipage}
+	
+	\bigskip
+	
+	\begin{minipage}{0.4\linewidth}
+		\includegraphics[width=\linewidth]{images/torque2.png}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.5\linewidth}
+		A more realistic scenario would look like this.
+		A simple exercise to feel just how much of a difference it makes would be to stand normally for a while, and then try standing with your knees bent at a right angle.
+		
+		\medskip
+		
+		In the image on the left, the pole is 30 degrees off of vertical.
+		If it were fully vertical, theoretically the motor would not need any torque at all to support the weight, but reality often supplies disturbances that have to be taken care of.
+		
+		\medskip
+		
+		Given my earlier example of a 10Nm motor with a 2m long pole, at this angle it would be able to support a 10N weight, that is twice as much.
+	\end{minipage}
+	
+	The relationship between maximum weight and angle can be described like this:
+	
+	$$ W_{max} = \frac{T}{L \cdot sin(\theta)} $$
+	
+	where:
+	
+	\begin{itemize}
+		\item $W_{max}$ is the biggest weight that can be put on the end of the pole [N]
+		
+		\item $T$ is the torque of the motor [Nm]
+		
+		\item $L$ is the length of the pole [m]
+		
+		\item $\theta$ is the angle of the pole compared to being fully vertical
+	\end{itemize}
+	
+	So I said the droid is capable of carrying 640N consistently, and lifting up to 1912N in short bursts.
+	That would actually be what I'll call a guaranteed lifting/carrying capacity, a weight that it can lift regardless of the angle of its limbs. Assuming that regular walking doesn't require leg angles beyond 30 degrees away from vertical, the real carrying capacity is double that of what I mentioned.
+	
+	\begin{center}
+		\begin{tabular}{| c | c | c |}
+			\hline
+			guaranteed carrying capacity (consistent) & 640N & 65.26kgf \\\hline
+			guaranteed lifting capacity (momentary) & 1912N & 194.97kgf \\\hline
+			nominal carrying capacity (consistent) & 1280N & 130.52kgf \\\hline
+			nominal lifting capacity (momentary) & 3824N & 389.94kgf \\\hline
+		\end{tabular}
+	\end{center}
+	
+	single limb: $ \frac{40Nm}{0.25m \cdot sin(30^o)} = \frac{40Nm}{0.25m \cdot 0.5} = 320N$
+	
+	all 4: $ \frac{640N}{sin(30^o)} = \frac{640N}{0.5} = 1280N$
+	
+	\pagebreak
+	
 	\section{Batteries}
 	
 	Solid state thin film lithium ion todo from existing documentation not yet transcribed onto the wiki.
