@@ -179,6 +179,16 @@ img.right{
  max-width: 50%;
 }
 
+img.left{
+ float: left;
+ max-height: 400px;
+ max-width: 50%;
+}
+
+img.vert + img.vert{
+ clear:both;
+}/*for vertically stacking left or right images*/
+
 img.styled{
  border: 1px solid white;
  margin: 6px;
@@ -316,6 +326,14 @@ for now not touching it so that I don't break all the tables I already put on th
 }
 .styled-table tr:nth-last-child(1) *{
  border-bottom: none;
+}
+table.styled-table.left{
+ float: left;
+ max-width: 50%;
+}
+table.styled-table.right{
+ float: right;
+ max-width: 50%;
 }
 
 table.gallery * {
