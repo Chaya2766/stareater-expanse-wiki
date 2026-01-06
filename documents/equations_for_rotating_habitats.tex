@@ -15,6 +15,8 @@
 
 \author{Chaya2766}
 
+\date{last updated \today}
+
 \begin{document}
 	\sffamily
 	\sloppy
@@ -41,7 +43,21 @@
 		\medskip
 		
 		In all 4 cases, one or more examples for results of the calculations are provided as reference.
+		
+		\medskip
 	\end{abstract}
+	
+	\vfill
+	
+	\begin{quote}
+		\begin{center}
+			\textbf{DISCLAIMER AND WARNING}
+		\end{center}
+		
+		This is not a scientific paper or engineering advice.
+		This document is only intended as creative world‑building and has not been peer‑reviewed or approved for any practical application.
+		Use of these ideas in real‑world designs or other serious application is entirely at the reader’s discretion and risk.
+	\end{quote}
 	
 	%\noindent \rule{\linewidth}{1pt}
 	\vfill
@@ -92,14 +108,14 @@
 	
 	\pagebreak
 	
-	\section{Sideways coriolis force}
+	\section{Sideways deflection from vertical movement}
 	
-	Be warned that this is my own derivation of the effect, and it notably does not match the formulas for "coriolis force" shown elsewhere. My attempts to research the coriolis force so far failed to let me make sense of the factor of two commonly included in the formula for it. My interpretation of it is also evidently different, as I focussed on accelerations that are parallel to the floor, instead of generalizing it for any direction. For this reason I had opted to title the section as "sideways coriolis force" instead of simply "coriolis force" as to not lead others into a mistake. I still believe that the effect I am describing makes physical sense, as explained after the equations, even if it is different from the general "coriolis~force".
+	Be warned that this is my own derivation of the effect, and it notably does not match the formulas for "coriolis force" shown elsewhere. My attempts to research the coriolis force so far failed to let me make sense of the factor of two commonly included in the formula for it. My interpretation of it is also evidently different, as I focussed on accelerations that are parallel to the floor, instead of generalizing it for any direction. For this reason I had opted to not title the section as "coriolis force" as to not lead others into a mistake. I still believe that the effect I am describing makes physical sense, as explained after the equations, even if it is different from the general "coriolis~force".
 	
 	\medskip
 	
 	\begin{center}
-		\textbf{sideways acceleration caused by coriolis force}
+		\textbf{sideways acceleration caused by vertical movement}
 	\end{center}
 	
 	$$ a_c = \omega \cdot v_v = \frac{2 \pi}{t} \cdot v_v $$
@@ -109,13 +125,13 @@
 	where:
 	
 	\begin{itemize}
-		\item $a_c$ is the acceleration caused by the coriolis force
+		\item $a_c$ is the acceleration caused by the change in height
 		
 		\item $v_v$ is vertical component of the object's velocity\\(meaning velocity with which the object is moving towards the axis of rotation)
 		
 		\item $t$ is time in which the habitat completes one full rotation
 		
-		\item $\omega$ is the angular velocity
+		\item $\omega$ is the angular velocity of the habitat
 		
 		\item $\Delta v_t$ is the change in an object's tangential velocity \underline{as measured in the rotating frame of reference}\\an object sitting on the floor in any part of the habitat is considered to have a velocity of 0m/s in this understanding
 		
@@ -149,6 +165,31 @@
 	$$ a_c = \frac{2pi}{28.099s} \cdot 10m/s = 2.236m/s^2 $$
 	
 	\pagebreak
+	
+	\iffalse
+	
+	At the same time, since your environment is rotating, if you jump and stay in the air, your direction of movement will appear to be rotating relative to the environment.
+	If you manage to jump and stay in the air so long that the habitat rotated by one quarter turn, all of your vertical velocity will appear to have been converted into horizontal velocity.
+	This too could be explained as a force or an acceleration acting on you:
+	
+	$$ a_r = \frac{v_v}{t/4} $$
+	
+	\begin{itemize}
+		\item $a_r$ is the apparent acceleration caused by rotation
+		
+		\item $v_v$ is vertical component of the object's velocity\\(meaning velocity with which the object is moving towards the axis of rotation)
+		
+		\item $t$ is time in which the habitat completes one full rotation
+		
+		\item $\omega$ is the angular velocity
+		
+		\item $\Delta v_t$ is the change in an object's tangential velocity \underline{as measured in the rotating frame of reference}\\an object sitting on the floor in any part of the habitat is considered to have a velocity of 0m/s in this understanding
+		
+		\item $\Delta r$ is the change in an object's distance from the axis of rotation
+	\end{itemize}
+	
+	\pagebreak
+	\fi
 	
 	\iffalse
 	
