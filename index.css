@@ -242,6 +242,14 @@ hr{
  margin: 10px;
 }
 
+.quote{
+ max-width: 80%;
+ margin: 20px auto;
+ padding: 10px;
+ border-top: 1px solid white;
+ border-bottom: 1px solid white;
+}
+
 nsfw{
  display: none;
 }
