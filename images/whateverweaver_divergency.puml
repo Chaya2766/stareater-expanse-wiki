@@ -1,0 +1,9 @@
+@startuml
+usecase Patricia
+usecase Felicity
+usecase Serendipity
+
+Patricia --> Felicity : "Patricia copied herself via nondestructive mind uploading.\nDigital copy changed name to Felicity\nPatricia is Felicity's source\nFelicity is Patricia's derivant\nPatricia, Felicity and Serendipity are all each other's divergents"
+Felicity --> Felicity : "Felicity copied herself multiple times\nThe copies established identity and memory synchronization\nFelicity and her copies are each other's convergents"
+Felicity --> Serendipity : "Felicity 12 left the convergency, then changed name to Serendipity\nSerendipity is Felicity's derivant\nFelicity is Serendipity's source\nFelicity, Serendipity and Patricia are all each other's divergents"
+@enduml
