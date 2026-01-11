@@ -48,7 +48,18 @@
 	\vfill
 	
 	\begin{abstract}
-		Abstract goes here
+		\hyphenchar\font=-1
+		\sloppy
+		Based on my previous document "humanity of the third millenium under assumption of exponential growth" I extrapolate the sizes of the biggest model trained to date, and a reference size of a model that can be casually ran on consumer hardware, over the next 1000 years, once again assuming simple exponential growth.
+		
+		\medskip
+		
+		Instead of extrapolating growth rate from current trends of AI model sizes, the growth rate is simply assumed to match that of humanity's total GDP for the biggest trained model, and that of humanity's average GDP per capita for the casual offline inference model.
+		The starting points are set in the year 2025 with model sizes of Kimi K2 (1 trillion parameters) and Llama3 (8 billion parameters).
+		
+		\medskip
+		
+		The resulting model sizes are presented as charts (linear and exponential) as well as tables showing the extrapolated model size for any given year (in 5 year increments) from 2025 to 3000.
 	\end{abstract}
 	
 	\vfill
@@ -89,7 +100,19 @@
 	
 	The starting point is 2025, as such exponential function is set as:
 	
-	$$ 1E+15 \cdot 1.0288^{(x-2025)} $$
+	$$ 1E+12 \cdot 1.0288^{(x-2025)} $$
+	
+	\bigskip
+	
+	To also look at what kinds of models might be possible to run casually on consumer hardware I'll take the Llama3 model with \textbf{8 billion} parameters as a starting point in 2025.
+	For this case, the model size should scale with GDP per capita instead of total global GDP.
+	As with the findings of my referenced previous document, the rate of growth should in that case be 1.545\% annually.
+	
+	\medskip
+	
+	As such the second exponential function is set as:
+	
+	$$ 8E+9 \cdot 1.01545^{(x-2025)} $$
 	
 	\bigskip
 	
@@ -97,7 +120,7 @@
 	
 	\pagebreak
 	
-	\section{charts and data tables (years 2025 to 3000)}
+	\section{biggest model trained charts and data tables}
 	
 	Horizontal lines and bold text mark the milestones of trillion, quadrillion, quintillion, sextillion and septillion parameters.
 	
@@ -124,7 +147,9 @@
 				major grid style={gray!50},
 				]
 				\addplot[red, thick, domain=2025:3000, samples=100]
-				{1E+15 * pow(1.0288,x-2025)};
+				{1E+12 * pow(1.0288,x-2025)};
+				\addplot[blue, thick, domain=2025:3000, samples=100]
+				{1E+12};
 				\addplot[blue, thick, domain=2025:3000, samples=100]
 				{1E+15};
 				\addplot[blue, thick, domain=2025:3000, samples=100]
@@ -133,8 +158,6 @@
 				{1E+21};
 				\addplot[blue, thick, domain=2025:3000, samples=100]
 				{1E+24};
-				\addplot[blue, thick, domain=2025:3000, samples=100]
-				{1E+27};
 			\end{axis}
 		\end{tikzpicture}
 		
@@ -162,7 +185,9 @@
 				major grid style={gray!50},
 				]
 				\addplot[red, thick, domain=2025:3000, samples=100]
-				{1E+15 * pow(1.0288,x-2025)};
+				{1E+12 * pow(1.0288,x-2025)};
+				\addplot[blue, thick, domain=2025:3000, samples=100]
+				{1E+12};
 				\addplot[blue, thick, domain=2025:3000, samples=100]
 				{1E+15};
 				\addplot[blue, thick, domain=2025:3000, samples=100]
@@ -171,8 +196,6 @@
 				{1E+21};
 				\addplot[blue, thick, domain=2025:3000, samples=100]
 				{1E+24};
-				\addplot[blue, thick, domain=2025:3000, samples=100]
-				{1E+27};
 			\end{axis}
 		\end{tikzpicture}
 	\end{center}
@@ -184,219 +207,526 @@
     \begin{tabular}{| c | c |}
     	\hline
     	year & model size \\\hline
-    	\textbf{2025} & \textbf{1.0000E+15} \\\hline
-    	2030 & 1.1525E+15 \\\hline
-    	2035 & 1.3283E+15 \\\hline
-    	2040 & 1.5310E+15 \\\hline
-    	2045 & 1.7645E+15 \\\hline
-    	2050 & 2.0336E+15 \\\hline
-    	2055 & 2.3438E+15 \\\hline
-    	2060 & 2.7014E+15 \\\hline
-    	2065 & 3.1134E+15 \\\hline
-    	2070 & 3.5883E+15 \\\hline
-    	2075 & 4.1357E+15 \\\hline
-    	2080 & 4.7665E+15 \\\hline
-    	2085 & 5.4936E+15 \\\hline
-    	2090 & 6.3316E+15 \\\hline
-    	2095 & 7.2974E+15 \\\hline
-    	2100 & 8.4105E+15 \\\hline
-    	2105 & 9.6934E+15 \\\hline
-    	2110 & 1.1172E+16 \\\hline
-    	2115 & 1.2876E+16 \\\hline
-    	2120 & 1.4840E+16 \\\hline
-    	2125 & 1.7104E+16 \\\hline
-    	2130 & 1.9713E+16 \\\hline
-    	2135 & 2.2720E+16 \\\hline
-    	2140 & 2.6185E+16 \\\hline
-    	2145 & 3.0180E+16 \\\hline
-    	2150 & 3.4783E+16 \\\hline
-    	2155 & 4.0089E+16 \\\hline
-    	2160 & 4.6204E+16 \\\hline
-    	2165 & 5.3252E+16 \\\hline
-    	2170 & 6.1375E+16 \\\hline
-    	2175 & 7.0736E+16 \\\hline
-    	2180 & 8.1526E+16 \\\hline
-    	2185 & 9.3962E+16 \\\hline
-    	2190 & 1.0829E+17 \\\hline
-    	2195 & 1.2481E+17 \\\hline
-    	2200 & 1.4385E+17 \\\hline
-    	2205 & 1.6580E+17 \\\hline
-    	2210 & 1.9109E+17 \\\hline
-    	2215 & 2.2023E+17 \\\hline
-    	2220 & 2.5383E+17 \\\hline
-    	2225 & 2.9254E+17 \\\hline
-    	2230 & 3.3717E+17 \\\hline
-    	2235 & 3.8860E+17 \\\hline
-    	2240 & 4.4787E+17 \\\hline
-    	2245 & 5.1619E+17 \\\hline
-    	2250 & 5.9493E+17 \\\hline
-    	2255 & 6.8568E+17 \\\hline
-    	2260 & 7.9027E+17 \\\hline
-    	2265 & 9.1081E+17 \\\hline
+    	\textbf{2025} & \textbf{1.0000E+12} \\\hline
+    	2030 & 1.1525E+12 \\\hline
+    	2035 & 1.3283E+12 \\\hline
+    	2040 & 1.5310E+12 \\\hline
+    	2045 & 1.7645E+12 \\\hline
+    	2050 & 2.0336E+12 \\\hline
+    	2055 & 2.3438E+12 \\\hline
+    	2060 & 2.7014E+12 \\\hline
+    	2065 & 3.1134E+12 \\\hline
+    	2070 & 3.5883E+12 \\\hline
+    	2075 & 4.1357E+12 \\\hline
+    	2080 & 4.7665E+12 \\\hline
+    	2085 & 5.4936E+12 \\\hline
+    	2090 & 6.3316E+12 \\\hline
+    	2095 & 7.2974E+12 \\\hline
+    	2100 & 8.4105E+12 \\\hline
+    	2105 & 9.6934E+12 \\\hline
+    	2110 & 1.1172E+13 \\\hline
+    	2115 & 1.2876E+13 \\\hline
+    	2120 & 1.4840E+13 \\\hline
+    	2125 & 1.7104E+13 \\\hline
+    	2130 & 1.9713E+13 \\\hline
+    	2135 & 2.2720E+13 \\\hline
+    	2140 & 2.6185E+13 \\\hline
+    	2145 & 3.0180E+13 \\\hline
+    	2150 & 3.4783E+13 \\\hline
+    	2155 & 4.0089E+13 \\\hline
+    	2160 & 4.6204E+13 \\\hline
+    	2165 & 5.3252E+13 \\\hline
+    	2170 & 6.1375E+13 \\\hline
+    	2175 & 7.0736E+13 \\\hline
+    	2180 & 8.1526E+13 \\\hline
+    	2185 & 9.3962E+13 \\\hline
+    	2190 & 1.0829E+14 \\\hline
+    	2195 & 1.2481E+14 \\\hline
+    	2200 & 1.4385E+14 \\\hline
+    	2205 & 1.6580E+14 \\\hline
+    	2210 & 1.9109E+14 \\\hline
+    	2215 & 2.2023E+14 \\\hline
+    	2220 & 2.5383E+14 \\\hline
+    	2225 & 2.9254E+14 \\\hline
+    	2230 & 3.3717E+14 \\\hline
+    	2235 & 3.8860E+14 \\\hline
+    	2240 & 4.4787E+14 \\\hline
+    	2245 & 5.1619E+14 \\\hline
+    	2250 & 5.9493E+14 \\\hline
+    	2255 & 6.8568E+14 \\\hline
+    	2260 & 7.9027E+14 \\\hline
+    	2265 & 9.1081E+14 \\\hline
     \end{tabular}
     \hfill
     \begin{tabular}{| c | c |}
     	\hline
     	year & model size \\\hline
-    	\textbf{2270} & \textbf{1.0497E+18} \\\hline
-    	2275 & 1.2099E+18 \\\hline
-    	2280 & 1.3944E+18 \\\hline
-    	2285 & 1.6071E+18 \\\hline
-    	2290 & 1.8523E+18 \\\hline
-    	2295 & 2.1348E+18 \\\hline
-    	2300 & 2.4604E+18 \\\hline
-    	2305 & 2.8357E+18 \\\hline
-    	2310 & 3.2683E+18 \\\hline
-    	2315 & 3.7668E+18 \\\hline
-    	2320 & 4.3414E+18 \\\hline
-    	2325 & 5.0036E+18 \\\hline
-    	2330 & 5.7669E+18 \\\hline
-    	2335 & 6.6465E+18 \\\hline
-    	2340 & 7.6604E+18 \\\hline
-    	2345 & 8.8289E+18 \\\hline
-    	2350 & 1.0176E+19 \\\hline
-    	2355 & 1.1728E+19 \\\hline
-    	2360 & 1.3517E+19 \\\hline
-    	2365 & 1.5578E+19 \\\hline
-    	2370 & 1.7955E+19 \\\hline
-    	2375 & 2.0694E+19 \\\hline
-    	2380 & 2.3850E+19 \\\hline
-    	2385 & 2.7488E+19 \\\hline
-    	2390 & 3.1681E+19 \\\hline
-    	2395 & 3.6514E+19 \\\hline
-    	2400 & 4.2083E+19 \\\hline
-    	2405 & 4.8502E+19 \\\hline
-    	2410 & 5.5901E+19 \\\hline
-    	2415 & 6.4428E+19 \\\hline
-    	2420 & 7.4255E+19 \\\hline
-    	2425 & 8.5582E+19 \\\hline
-    	2430 & 9.8636E+19 \\\hline
-    	2435 & 1.1368E+20 \\\hline
-    	2440 & 1.3102E+20 \\\hline
-    	2445 & 1.5101E+20 \\\hline
-    	2450 & 1.7404E+20 \\\hline
-    	2455 & 2.0059E+20 \\\hline
-    	2460 & 2.3119E+20 \\\hline
-    	2465 & 2.6645E+20 \\\hline
-    	2470 & 3.0710E+20 \\\hline
-    	2475 & 3.5394E+20 \\\hline
-    	2480 & 4.0793E+20 \\\hline
-    	2485 & 4.7015E+20 \\\hline
-    	2490 & 5.4187E+20 \\\hline
-    	2495 & 6.2452E+20 \\\hline
-    	2500 & 7.1979E+20 \\\hline
-    	2505 & 8.2958E+20 \\\hline
-    	2510 & 9.5612E+20 \\\hline
+    	\textbf{2270} & \textbf{1.0497E+15} \\\hline
+    	2275 & 1.2099E+15 \\\hline
+    	2280 & 1.3944E+15 \\\hline
+    	2285 & 1.6071E+15 \\\hline
+    	2290 & 1.8523E+15 \\\hline
+    	2295 & 2.1348E+15 \\\hline
+    	2300 & 2.4604E+15 \\\hline
+    	2305 & 2.8357E+15 \\\hline
+    	2310 & 3.2683E+15 \\\hline
+    	2315 & 3.7668E+15 \\\hline
+    	2320 & 4.3414E+15 \\\hline
+    	2325 & 5.0036E+15 \\\hline
+    	2330 & 5.7669E+15 \\\hline
+    	2335 & 6.6465E+15 \\\hline
+    	2340 & 7.6604E+15 \\\hline
+    	2345 & 8.8289E+15 \\\hline
+    	2350 & 1.0176E+16 \\\hline
+    	2355 & 1.1728E+16 \\\hline
+    	2360 & 1.3517E+16 \\\hline
+    	2365 & 1.5578E+16 \\\hline
+    	2370 & 1.7955E+16 \\\hline
+    	2375 & 2.0694E+16 \\\hline
+    	2380 & 2.3850E+16 \\\hline
+    	2385 & 2.7488E+16 \\\hline
+    	2390 & 3.1681E+16 \\\hline
+    	2395 & 3.6514E+16 \\\hline
+    	2400 & 4.2083E+16 \\\hline
+    	2405 & 4.8502E+16 \\\hline
+    	2410 & 5.5901E+16 \\\hline
+    	2415 & 6.4428E+16 \\\hline
+    	2420 & 7.4255E+16 \\\hline
+    	2425 & 8.5582E+16 \\\hline
+    	2430 & 9.8636E+16 \\\hline
+    	2435 & 1.1368E+17 \\\hline
+    	2440 & 1.3102E+17 \\\hline
+    	2445 & 1.5101E+17 \\\hline
+    	2450 & 1.7404E+17 \\\hline
+    	2455 & 2.0059E+17 \\\hline
+    	2460 & 2.3119E+17 \\\hline
+    	2465 & 2.6645E+17 \\\hline
+    	2470 & 3.0710E+17 \\\hline
+    	2475 & 3.5394E+17 \\\hline
+    	2480 & 4.0793E+17 \\\hline
+    	2485 & 4.7015E+17 \\\hline
+    	2490 & 5.4187E+17 \\\hline
+    	2495 & 6.2452E+17 \\\hline
+    	2500 & 7.1979E+17 \\\hline
+    	2505 & 8.2958E+17 \\\hline
+    	2510 & 9.5612E+17 \\\hline
     \end{tabular}
     \hfill
     \begin{tabular}{| c | c |}
     	\hline
     	year & model size \\\hline
-    	\textbf{2515} & \textbf{1.1020E+21} \\\hline
-    	2520 & 1.2701E+21 \\\hline
-    	2525 & 1.4638E+21 \\\hline
-    	2530 & 1.6871E+21 \\\hline
-    	2535 & 1.9444E+21 \\\hline
-    	2540 & 2.2410E+21 \\\hline
-    	2545 & 2.5828E+21 \\\hline
-    	2550 & 2.9768E+21 \\\hline
-    	2555 & 3.4309E+21 \\\hline
-    	2560 & 3.9542E+21 \\\hline
-    	2565 & 4.5574E+21 \\\hline
-    	2570 & 5.2526E+21 \\\hline
-    	2575 & 6.0538E+21 \\\hline
-    	2580 & 6.9772E+21 \\\hline
-    	2585 & 8.0415E+21 \\\hline
-    	2590 & 9.2681E+21 \\\hline
-    	2595 & 1.0682E+22 \\\hline
-    	2600 & 1.2311E+22 \\\hline
-    	2605 & 1.4189E+22 \\\hline
-    	2610 & 1.6353E+22 \\\hline
-    	2615 & 1.8848E+22 \\\hline
-    	2620 & 2.1723E+22 \\\hline
-    	2625 & 2.5036E+22 \\\hline
-    	2630 & 2.8855E+22 \\\hline
-    	2635 & 3.3257E+22 \\\hline
-    	2640 & 3.8330E+22 \\\hline
-    	2645 & 4.4177E+22 \\\hline
-    	2650 & 5.0915E+22 \\\hline
-    	2655 & 5.8682E+22 \\\hline
-    	2660 & 6.7633E+22 \\\hline
-    	2665 & 7.7949E+22 \\\hline
-    	2670 & 8.9839E+22 \\\hline
-    	2675 & 1.0354E+23 \\\hline
-    	2680 & 1.1934E+23 \\\hline
-    	2685 & 1.3754E+23 \\\hline
-    	2690 & 1.5852E+23 \\\hline
-    	2695 & 1.8270E+23 \\\hline
-    	2700 & 2.1057E+23 \\\hline
-    	2705 & 2.4269E+23 \\\hline
-    	2710 & 2.7971E+23 \\\hline
-    	2715 & 3.2237E+23 \\\hline
-    	2720 & 3.7155E+23 \\\hline
-    	2725 & 4.2822E+23 \\\hline
-    	2730 & 4.9354E+23 \\\hline
-    	2735 & 5.6882E+23 \\\hline
-    	2740 & 6.5559E+23 \\\hline
-    	2745 & 7.5559E+23 \\\hline
-    	2750 & 8.7085E+23 \\\hline
-    	\textbf{2755} & \textbf{1.0037E+24} \\\hline
+    	\textbf{2515} & \textbf{1.1020E+18} \\\hline
+    	2520 & 1.2701E+18 \\\hline
+    	2525 & 1.4638E+18 \\\hline
+    	2530 & 1.6871E+18 \\\hline
+    	2535 & 1.9444E+18 \\\hline
+    	2540 & 2.2410E+18 \\\hline
+    	2545 & 2.5828E+18 \\\hline
+    	2550 & 2.9768E+18 \\\hline
+    	2555 & 3.4309E+18 \\\hline
+    	2560 & 3.9542E+18 \\\hline
+    	2565 & 4.5574E+18 \\\hline
+    	2570 & 5.2526E+18 \\\hline
+    	2575 & 6.0538E+18 \\\hline
+    	2580 & 6.9772E+18 \\\hline
+    	2585 & 8.0415E+18 \\\hline
+    	2590 & 9.2681E+18 \\\hline
+    	2595 & 1.0682E+19 \\\hline
+    	2600 & 1.2311E+19 \\\hline
+    	2605 & 1.4189E+19 \\\hline
+    	2610 & 1.6353E+19 \\\hline
+    	2615 & 1.8848E+19 \\\hline
+    	2620 & 2.1723E+19 \\\hline
+    	2625 & 2.5036E+19 \\\hline
+    	2630 & 2.8855E+19 \\\hline
+    	2635 & 3.3257E+19 \\\hline
+    	2640 & 3.8330E+19 \\\hline
+    	2645 & 4.4177E+19 \\\hline
+    	2650 & 5.0915E+19 \\\hline
+    	2655 & 5.8682E+19 \\\hline
+    	2660 & 6.7633E+19 \\\hline
+    	2665 & 7.7949E+19 \\\hline
+    	2670 & 8.9839E+19 \\\hline
+    	2675 & 1.0354E+20 \\\hline
+    	2680 & 1.1934E+20 \\\hline
+    	2685 & 1.3754E+20 \\\hline
+    	2690 & 1.5852E+20 \\\hline
+    	2695 & 1.8270E+20 \\\hline
+    	2700 & 2.1057E+20 \\\hline
+    	2705 & 2.4269E+20 \\\hline
+    	2710 & 2.7971E+20 \\\hline
+    	2715 & 3.2237E+20 \\\hline
+    	2720 & 3.7155E+20 \\\hline
+    	2725 & 4.2822E+20 \\\hline
+    	2730 & 4.9354E+20 \\\hline
+    	2735 & 5.6882E+20 \\\hline
+    	2740 & 6.5559E+20 \\\hline
+    	2745 & 7.5559E+20 \\\hline
+    	2750 & 8.7085E+20 \\\hline
+    	\textbf{2755} & \textbf{1.0037E+21} \\\hline
     \end{tabular}
     \hfill
     \begin{tabular}{| c | c |}
     	\hline
     	year & model size \\\hline
-    	2760 & 1.1568E+24 \\\hline
-    	2765 & 1.3332E+24 \\\hline
-    	2770 & 1.5366E+24 \\\hline
-    	2775 & 1.7710E+24 \\\hline
-    	2780 & 2.0411E+24 \\\hline
-    	2785 & 2.3525E+24 \\\hline
-    	2790 & 2.7113E+24 \\\hline
-    	2795 & 3.1249E+24 \\\hline
-    	2800 & 3.6016E+24 \\\hline
-    	2805 & 4.1509E+24 \\\hline
-    	2810 & 4.7841E+24 \\\hline
-    	2815 & 5.5138E+24 \\\hline
-    	2820 & 6.3549E+24 \\\hline
-    	2825 & 7.3243E+24 \\\hline
-    	2830 & 8.4415E+24 \\\hline
-    	2835 & 9.7291E+24 \\\hline
-    	2840 & 1.1213E+25 \\\hline
-    	2845 & 1.2924E+25 \\\hline
-    	2850 & 1.4895E+25 \\\hline
-    	2855 & 1.7167E+25 \\\hline
-    	2860 & 1.9786E+25 \\\hline
-    	2865 & 2.2804E+25 \\\hline
-    	2870 & 2.6282E+25 \\\hline
-    	2875 & 3.0291E+25 \\\hline
-    	2880 & 3.4911E+25 \\\hline
-    	2885 & 4.0237E+25 \\\hline
-    	2890 & 4.6374E+25 \\\hline
-    	2895 & 5.3448E+25 \\\hline
-    	2900 & 6.1601E+25 \\\hline
-    	2905 & 7.0997E+25 \\\hline
-    	2910 & 8.1827E+25 \\\hline
-    	2915 & 9.4308E+25 \\\hline
-    	2920 & 1.0869E+26 \\\hline
-    	2925 & 1.2527E+26 \\\hline
-    	2930 & 1.4438E+26 \\\hline
-    	2935 & 1.6641E+26 \\\hline
-    	2940 & 1.9179E+26 \\\hline
-    	2945 & 2.2104E+26 \\\hline
-    	2950 & 2.5476E+26 \\\hline
-    	2955 & 2.9362E+26 \\\hline
-    	2960 & 3.3841E+26 \\\hline
-    	2965 & 3.9003E+26 \\\hline
-    	2970 & 4.4952E+26 \\\hline
-    	2975 & 5.1809E+26 \\\hline
-    	2980 & 5.9712E+26 \\\hline
-    	2985 & 6.8820E+26 \\\hline
-    	2990 & 7.9318E+26 \\\hline
-    	2995 & 9.1417E+26 \\\hline
-    	\textbf{3000} & \textbf{1.0536E+27} \\\hline
+    	2760 & 1.1568E+21 \\\hline
+    	2765 & 1.3332E+21 \\\hline
+    	2770 & 1.5366E+21 \\\hline
+    	2775 & 1.7710E+21 \\\hline
+    	2780 & 2.0411E+21 \\\hline
+    	2785 & 2.3525E+21 \\\hline
+    	2790 & 2.7113E+21 \\\hline
+    	2795 & 3.1249E+21 \\\hline
+    	2800 & 3.6016E+21 \\\hline
+    	2805 & 4.1509E+21 \\\hline
+    	2810 & 4.7841E+21 \\\hline
+    	2815 & 5.5138E+21 \\\hline
+    	2820 & 6.3549E+21 \\\hline
+    	2825 & 7.3243E+21 \\\hline
+    	2830 & 8.4415E+21 \\\hline
+    	2835 & 9.7291E+21 \\\hline
+    	2840 & 1.1213E+22 \\\hline
+    	2845 & 1.2924E+22 \\\hline
+    	2850 & 1.4895E+22 \\\hline
+    	2855 & 1.7167E+22 \\\hline
+    	2860 & 1.9786E+22 \\\hline
+    	2865 & 2.2804E+22 \\\hline
+    	2870 & 2.6282E+22 \\\hline
+    	2875 & 3.0291E+22 \\\hline
+    	2880 & 3.4911E+22 \\\hline
+    	2885 & 4.0237E+22 \\\hline
+    	2890 & 4.6374E+22 \\\hline
+    	2895 & 5.3448E+22 \\\hline
+    	2900 & 6.1601E+22 \\\hline
+    	2905 & 7.0997E+22 \\\hline
+    	2910 & 8.1827E+22 \\\hline
+    	2915 & 9.4308E+22 \\\hline
+    	2920 & 1.0869E+23 \\\hline
+    	2925 & 1.2527E+23 \\\hline
+    	2930 & 1.4438E+23 \\\hline
+    	2935 & 1.6641E+23 \\\hline
+    	2940 & 1.9179E+23 \\\hline
+    	2945 & 2.2104E+23 \\\hline
+    	2950 & 2.5476E+23 \\\hline
+    	2955 & 2.9362E+23 \\\hline
+    	2960 & 3.3841E+23 \\\hline
+    	2965 & 3.9003E+23 \\\hline
+    	2970 & 4.4952E+23 \\\hline
+    	2975 & 5.1809E+23 \\\hline
+    	2980 & 5.9712E+23 \\\hline
+    	2985 & 6.8820E+23 \\\hline
+    	2990 & 7.9318E+23 \\\hline
+    	2995 & 9.1417E+23 \\\hline
+    	\textbf{3000} & \textbf{1.0536E+24} \\\hline
     \end{tabular}
     
     \normalsize
+    
+    \pagebreak
+    
+    \section{biggest model for casual offline inference}
+    
+    Horizontal lines and bold text mark the milestones of trillion, and quadrillion parameters.
+    
+    \begin{center}
+    	linear scale
+    	
+    	\medskip
+    	
+    	\begin{tikzpicture}
+    		\begin{axis}[
+    			width=0.75\linewidth,
+    			xlabel=year,
+    			ylabel=model size,
+    			scaled ticks=false,%disables scientific notation
+    			%ytick={0,10000,...},%forces every multiple of 10 000 to be shown
+    			xtick={2025,2125,...,3000},
+    			yticklabel style={font=\scriptsize},%makes axis numbers tiny
+    			xticklabel style={font=\scriptsize},%makes axis numbers tiny
+    			%ymode=log,
+    			%xmin=1, xmax=100,
+    			%ymin=0, ymax=10,
+    			grid=both,
+    			minor grid style={gray!25},
+    			major grid style={gray!50},
+    			]
+    			\addplot[red, thick, domain=2025:3000, samples=100]
+    			{8E+9 * pow(1.01545,x-2025)};
+    			\addplot[blue, thick, domain=2025:3000, samples=100]
+    			{1E+12};
+    			\addplot[blue, thick, domain=2025:3000, samples=100]
+    			{1E+15};
+    		\end{axis}
+    	\end{tikzpicture}
+    	
+    	\medskip
+    	
+    	logarithmic scale
+    	
+    	\medskip
+    	
+    	\begin{tikzpicture}
+    		\begin{axis}[
+    			width=0.75\linewidth,
+    			xlabel=year,
+    			ylabel=model size,
+    			scaled ticks=false,%disables scientific notation
+    			%ytick={0,10000,...},%forces every multiple of 10 000 to be shown
+    			xtick={2025,2125,...,3000},
+    			yticklabel style={font=\scriptsize},%makes axis numbers tiny
+    			xticklabel style={font=\scriptsize},%makes axis numbers tiny
+    			ymode=log,
+    			%xmin=1, xmax=100,
+    			%ymin=0, ymax=10,
+    			grid=both,
+    			minor grid style={gray!25},
+    			major grid style={gray!50},
+    			]
+    			\addplot[red, thick, domain=2025:3000, samples=100]
+    			{8E+9 * pow(1.01545,x-2025)};
+    			\addplot[blue, thick, domain=2025:3000, samples=100]
+    			{1E+12};
+    			\addplot[blue, thick, domain=2025:3000, samples=100]
+    			{1E+15};
+    		\end{axis}
+    	\end{tikzpicture}
+    \end{center}
+    
+    \pagebreak
+    
+    \small
+    
+    \begin{tabular}{| c | c |}
+    	\hline
+    	year & model size \\\hline
+    	2025 & 8.0000E+09 \\\hline
+    	2030 & 8.6374E+09 \\\hline
+    	2035 & 9.3256E+09 \\\hline
+    	2040 & 1.0069E+10 \\\hline
+    	2045 & 1.0871E+10 \\\hline
+    	2050 & 1.1737E+10 \\\hline
+    	2055 & 1.2672E+10 \\\hline
+    	2060 & 1.3682E+10 \\\hline
+    	2065 & 1.4772E+10 \\\hline
+    	2070 & 1.5949E+10 \\\hline
+    	2075 & 1.7219E+10 \\\hline
+    	2080 & 1.8591E+10 \\\hline
+    	2085 & 2.0073E+10 \\\hline
+    	2090 & 2.1672E+10 \\\hline
+    	2095 & 2.3399E+10 \\\hline
+    	2100 & 2.5263E+10 \\\hline
+    	2105 & 2.7276E+10 \\\hline
+    	2110 & 2.9449E+10 \\\hline
+    	2115 & 3.1795E+10 \\\hline
+    	2120 & 3.4328E+10 \\\hline
+    	2125 & 3.7063E+10 \\\hline
+    	2130 & 4.0016E+10 \\\hline
+    	2135 & 4.3205E+10 \\\hline
+    	2140 & 4.6647E+10 \\\hline
+    	2145 & 5.0363E+10 \\\hline
+    	2150 & 5.4376E+10 \\\hline
+    	2155 & 5.8708E+10 \\\hline
+    	2160 & 6.3386E+10 \\\hline
+    	2165 & 6.8436E+10 \\\hline
+    	2170 & 7.3889E+10 \\\hline
+    	2175 & 7.9776E+10 \\\hline
+    	2180 & 8.6132E+10 \\\hline
+    	2185 & 9.2994E+10 \\\hline
+    	2190 & 1.0040E+11 \\\hline
+    	2195 & 1.0840E+11 \\\hline
+    	2200 & 1.1704E+11 \\\hline
+    	2205 & 1.2637E+11 \\\hline
+    	2210 & 1.3643E+11 \\\hline
+    	2215 & 1.4730E+11 \\\hline
+    	2220 & 1.5904E+11 \\\hline
+    	2225 & 1.7171E+11 \\\hline
+    	2230 & 1.8539E+11 \\\hline
+    	2235 & 2.0016E+11 \\\hline
+    	2240 & 2.1611E+11 \\\hline
+    	2245 & 2.3333E+11 \\\hline
+    	2250 & 2.5192E+11 \\\hline
+    	2255 & 2.7199E+11 \\\hline
+    	2260 & 2.9366E+11 \\\hline
+    	2265 & 3.1706E+11 \\\hline
+    \end{tabular}
+    \hfill
+    \begin{tabular}{| c | c |}
+    	\hline
+    	year & model size \\\hline
+    	2270 & 3.4232E+11 \\\hline
+    	2275 & 3.6959E+11 \\\hline
+    	2280 & 3.9904E+11 \\\hline
+    	2285 & 4.3084E+11 \\\hline
+    	2290 & 4.6516E+11 \\\hline
+    	2295 & 5.0222E+11 \\\hline
+    	2300 & 5.4224E+11 \\\hline
+    	2305 & 5.8544E+11 \\\hline
+    	2310 & 6.3208E+11 \\\hline
+    	2315 & 6.8245E+11 \\\hline
+    	2320 & 7.3682E+11 \\\hline
+    	2325 & 7.9552E+11 \\\hline
+    	2330 & 8.5891E+11 \\\hline
+    	2335 & 9.2734E+11 \\\hline
+    	\textbf{2340} & \textbf{1.0012E+12} \\\hline
+    	2345 & 1.0810E+12 \\\hline
+    	2350 & 1.1671E+12 \\\hline
+    	2355 & 1.2601E+12 \\\hline
+    	2360 & 1.3605E+12 \\\hline
+    	2365 & 1.4689E+12 \\\hline
+    	2370 & 1.5859E+12 \\\hline
+    	2375 & 1.7123E+12 \\\hline
+    	2380 & 1.8487E+12 \\\hline
+    	2385 & 1.9960E+12 \\\hline
+    	2390 & 2.1551E+12 \\\hline
+    	2395 & 2.3268E+12 \\\hline
+    	2400 & 2.5121E+12 \\\hline
+    	2405 & 2.7123E+12 \\\hline
+    	2410 & 2.9284E+12 \\\hline
+    	2415 & 3.1617E+12 \\\hline
+    	2420 & 3.4136E+12 \\\hline
+    	2425 & 3.6856E+12 \\\hline
+    	2430 & 3.9792E+12 \\\hline
+    	2435 & 4.2963E+12 \\\hline
+    	2440 & 4.6386E+12 \\\hline
+    	2445 & 5.0082E+12 \\\hline
+    	2450 & 5.4072E+12 \\\hline
+    	2455 & 5.8380E+12 \\\hline
+    	2460 & 6.3031E+12 \\\hline
+    	2465 & 6.8053E+12 \\\hline
+    	2470 & 7.3475E+12 \\\hline
+    	2475 & 7.9330E+12 \\\hline
+    	2480 & 8.5650E+12 \\\hline
+    	2485 & 9.2474E+12 \\\hline
+    	2490 & 9.9842E+12 \\\hline
+    	2495 & 1.0780E+13 \\\hline
+    	2500 & 1.1639E+13 \\\hline
+    	2505 & 1.2566E+13 \\\hline
+    	2510 & 1.3567E+13 \\\hline
+    \end{tabular}
+    \hfill
+    \begin{tabular}{| c | c |}
+    	\hline
+    	year & model size \\\hline
+    	2515 & 1.4648E+13 \\\hline
+    	2520 & 1.5815E+13 \\\hline
+    	2525 & 1.7075E+13 \\\hline
+    	2530 & 1.8435E+13 \\\hline
+    	2535 & 1.9904E+13 \\\hline
+    	2540 & 2.1490E+13 \\\hline
+    	2545 & 2.3202E+13 \\\hline
+    	2550 & 2.5051E+13 \\\hline
+    	2555 & 2.7047E+13 \\\hline
+    	2560 & 2.9202E+13 \\\hline
+    	2565 & 3.1529E+13 \\\hline
+    	2570 & 3.4041E+13 \\\hline
+    	2575 & 3.6753E+13 \\\hline
+    	2580 & 3.9681E+13 \\\hline
+    	2585 & 4.2842E+13 \\\hline
+    	2590 & 4.6256E+13 \\\hline
+    	2595 & 4.9941E+13 \\\hline
+    	2600 & 5.3920E+13 \\\hline
+    	2605 & 5.8216E+13 \\\hline
+    	2610 & 6.2855E+13 \\\hline
+    	2615 & 6.7863E+13 \\\hline
+    	2620 & 7.3270E+13 \\\hline
+    	2625 & 7.9107E+13 \\\hline
+    	2630 & 8.5410E+13 \\\hline
+    	2635 & 9.2215E+13 \\\hline
+    	2640 & 9.9562E+13 \\\hline
+    	2645 & 1.0749E+14 \\\hline
+    	2650 & 1.1606E+14 \\\hline
+    	2655 & 1.2531E+14 \\\hline
+    	2660 & 1.3529E+14 \\\hline
+    	2665 & 1.4607E+14 \\\hline
+    	2670 & 1.5771E+14 \\\hline
+    	2675 & 1.7027E+14 \\\hline
+    	2680 & 1.8384E+14 \\\hline
+    	2685 & 1.9849E+14 \\\hline
+    	2690 & 2.1430E+14 \\\hline
+    	2695 & 2.3137E+14 \\\hline
+    	2700 & 2.4981E+14 \\\hline
+    	2705 & 2.6971E+14 \\\hline
+    	2710 & 2.9120E+14 \\\hline
+    	2715 & 3.1440E+14 \\\hline
+    	2720 & 3.3945E+14 \\\hline
+    	2725 & 3.6650E+14 \\\hline
+    	2730 & 3.9570E+14 \\\hline
+    	2735 & 4.2722E+14 \\\hline
+    	2740 & 4.6126E+14 \\\hline
+    	2745 & 4.9801E+14 \\\hline
+    	2750 & 5.3769E+14 \\\hline
+    	2755 & 5.8053E+14 \\\hline
+    \end{tabular}
+    \hfill
+    \begin{tabular}{| c | c |}
+    	\hline
+    	year & model size \\\hline
+    	2760 & 6.2679E+14 \\\hline
+    	2765 & 6.7673E+14 \\\hline
+    	2770 & 7.3064E+14 \\\hline
+    	2775 & 7.8886E+14 \\\hline
+    	2780 & 8.5171E+14 \\\hline
+    	2785 & 9.1957E+14 \\\hline
+    	2790 & 9.9283E+14 \\\hline
+    	\textbf{2795} & \textbf{1.0719E+15} \\\hline
+    	2800 & 1.1573E+15 \\\hline
+    	2805 & 1.2496E+15 \\\hline
+    	2810 & 1.3491E+15 \\\hline
+    	2815 & 1.4566E+15 \\\hline
+    	2820 & 1.5727E+15 \\\hline
+    	2825 & 1.6980E+15 \\\hline
+    	2830 & 1.8332E+15 \\\hline
+    	2835 & 1.9793E+15 \\\hline
+    	2840 & 2.1370E+15 \\\hline
+    	2845 & 2.3073E+15 \\\hline
+    	2850 & 2.4911E+15 \\\hline
+    	2855 & 2.6896E+15 \\\hline
+    	2860 & 2.9038E+15 \\\hline
+    	2865 & 3.1352E+15 \\\hline
+    	2870 & 3.3850E+15 \\\hline
+    	2875 & 3.6547E+15 \\\hline
+    	2880 & 3.9459E+15 \\\hline
+    	2885 & 4.2603E+15 \\\hline
+    	2890 & 4.5997E+15 \\\hline
+    	2895 & 4.9662E+15 \\\hline
+    	2900 & 5.3619E+15 \\\hline
+    	2905 & 5.7891E+15 \\\hline
+    	2910 & 6.2503E+15 \\\hline
+    	2915 & 6.7483E+15 \\\hline
+    	2920 & 7.2860E+15 \\\hline
+    	2925 & 7.8665E+15 \\\hline
+    	2930 & 8.4932E+15 \\\hline
+    	2935 & 9.1699E+15 \\\hline
+    	2940 & 9.9005E+15 \\\hline
+    	2945 & 1.0689E+16 \\\hline
+    	2950 & 1.1541E+16 \\\hline
+    	2955 & 1.2461E+16 \\\hline
+    	2960 & 1.3453E+16 \\\hline
+    	2965 & 1.4525E+16 \\\hline
+    	2970 & 1.5682E+16 \\\hline
+    	2975 & 1.6932E+16 \\\hline
+    	2980 & 1.8281E+16 \\\hline
+    	2985 & 1.9738E+16 \\\hline
+    	2990 & 2.1310E+16 \\\hline
+    	2995 & 2.3008E+16 \\\hline
+    	3000 & 2.4841E+16 \\\hline
+    \end{tabular}
+    
+    \normalsize
+    
+    \pagebreak
+    
+    \section{Conclusions}
+    
+    \begin{tabular}{c | l}
+    	year & milestone \\\hline
+    	2025 & first trillion-parameter AI model \\\hline
+    	2270 & first quadrillion-parameter AI model \\\hline
+    	2340 & consumer hardware gets powerful enough to casually run trillion-parameter models \\\hline
+    	2515 & first quintillion-parameter AI model \\\hline
+    	2755 & first sextillion-parameter AI model \\\hline
+    	2795 & consumer hardware gets powerful enough to casually run quadrillion-parameter models \\\hline
+    	3000 & first septillion-parameter model
+    \end{tabular}
 	
 \end{document}
