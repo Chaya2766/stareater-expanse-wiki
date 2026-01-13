@@ -27,7 +27,7 @@ Minimal <a href="computation.html#computronium">computronium</a> requirements fo
 <br>
 <!--
 <article class="warning">table is still not recalculated to the newly increased fliprate requirement</article>
-<table class="styled-table" style="margin: 10 auto;">
+<table class="styled" style="margin: 10 auto;">
   <tr><th colspan=6>hardware requirement examples</th></tr>
   <tr><td></td><td>number needed</td><td>power draw</td><td>bare substrate volume</td><td>processing used</td><td>memory used</td></tr>
   <tr><td>Civic-2 chip</td><td>1 588 000 000</td><td>15.88GW</td><td>114.76m<sup>3</sup></td><td>100%</td><td>0.04%</td></tr>
@@ -36,7 +36,7 @@ Minimal <a href="computation.html#computronium">computronium</a> requirements fo
 </table>
 -->
 
-<table class="styled-table" style="margin: 10 auto;">
+<table class="styled" style="margin: 10 auto;">
   <tr><th colspan="6">civic chip requirements</th></tr>
   <tr><td></td><td>number needed</td><td>power draw</td><td>bare substrate volume</td><td id="processing">processing used</td><td>memory used</td></tr>
   <tr><td>Civic-2 chip</td><td id="num_c2">1 588 000 000</td><td id="pow_use_c2">15.88GW</td><td id="vol_c2">158.8m<sup>3</sup> ≈ (5.415m)<sup>3</sup></td><td id="flip_use_c2">100.00%</td><td id="mem_use_c2">0.03%</td></tr>
@@ -55,7 +55,7 @@ Felicity's brain simulation uses 16-bit fixed-point weights for the following be
 </ul>
 Some specifics: the weights in the neural networks tend to be close to 1, and the fixed point implementation gives equal number of bits before and after the decimal point. Two's complement is used (negative numbers are made by inverting the positive number and adding one) so that subtraction can be executed using simple addition circuits in hardware.
 
-<table class="styled-table">
+<table class="styled">
   <tr><td>binary representation</td><td>corresponding value</td></tr>
   <tr><td>0000 0000.0000 0000</td><td>0</td></tr>
   <tr><td>0000 0001.0000 0000</td><td>1</td></tr>
@@ -68,7 +68,7 @@ Some specifics: the weights in the neural networks tend to be close to 1, and th
 
 Quantization simply trims off bits to save on memory and processing required. In an extreme case it can be brought down to as little as 8 bits, leaving 4 bits before and 4 bits after the decimal point:
 
-<table class="styled-table">
+<table class="styled">
   <tr><td>binary representation</td><td>corresponding value</td></tr>
   <tr><td>0000.0000</td><td>0</td></tr>
   <tr><td>0001.0000</td><td>1</td></tr>
@@ -171,7 +171,7 @@ Felicity's entire personal technosphere is dependent on small scale processes, w
 As a result they had gained significant cultural importance and aesthetic value in Felicity's culture.
 <br><br>
 <b>TRCC</b> (Task-Reason-Coordination-Context) system of goal specification is used extensively and it is the default that Felicity uses with her AI agents.
-<table class="styled-table">
+<table class="styled">
 <tr><th>Task</th>
 <th>Reason</th></tr>
 <tr><td><ul>
