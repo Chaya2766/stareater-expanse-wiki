@@ -16,9 +16,59 @@ Kiloseconds, megaseconds and gigaseconds are generally used as common units of t
 For the purpose of making dates more human readable it is most common to space out the digits in groups of 3 to implicitly specify which are the seconds and which the kilo- mega- and giga seconds.
 
 <br><br>
-Dates before time zero are simply written as negative, for example the first human footstep on the moon was made at unix time -14 115 840, corresponding to 02:56 UTC on July 21, 1969.
+Dates before time zero are simply written as negative, for example the first human footstep on the moon was made at unix time -14 159 025, corresponding to 02:56:15 UTC July 21, 1969.
 </article>
 <hr>
+
+<h1>UTC Gregorian Date ⇄ Unix Epoch Date</h1>
+<div>
+    <span>UTC Gregorian date</span>
+    <input type="text" id="utcInput" placeholder="UTC Gregorian date (YYYY-MM-DD HH:MM:SS)" style="width: 295px;">
+    <button onclick="convertToUnix()">Convert to Unix Epoch</button>
+    <p id="unixResult"></p>
+    <span>Unix Epoch date</span>
+    <input type="text" id="epochInput" placeholder="Unix Epoch date (seconds)">
+    <button onclick="convertToUTC()">Convert to UTC Date</button>
+    <button onclick="setTimeNow()">Set time to now</button>
+    <p id="utcResult"></p>
+</div>
+<script>
+//thank Claude Haiku 3.5 for most of this code, though I modified it a little bit from the original
+//date conversions seem to agree with the linux command line date utility eg.:
+//date --date="02:56 UTC July 21, 1969" +%s
+    function convertToUnix() {
+        const utcInput = document.getElementById('utcInput').value;
+        try {
+            const date = new Date(utcInput + ' UTC');
+            const unixTime = Math.floor(date.getTime() / 1000);
+            document.getElementById('epochInput').value = isNaN(unixTime) ? 'Invalid date format' : unixTime;
+            //weird but very compact if statement inside value assignment. The way this works is: condition ? valueIfTrue : valueIfFalse
+        } catch (error) {
+            document.getElementById('epochInput').value = 'Error converting date';
+        }
+    }
+    function convertToUTC() {
+        const epochInput = document.getElementById('epochInput').value.replace(/ /g,'');
+        //replace all whitespaces with nothing so that dates with digits spaced into groups of 3 can be converted
+        try {
+            const epochTime = parseInt(epochInput, 10);
+            if (isNaN(epochTime)) {
+                document.getElementById('utcInput').value = 'Invalid epoch time';
+                return;
+            }
+            
+            const date = new Date(epochTime * 1000);
+            document.getElementById('utcInput').value = date.toUTCString();
+        } catch (error) {
+            document.getElementById('utcInput').value = 'Error converting epoch time';
+        }
+    }
+    function setTimeNow() {
+        const currentUnixTime = Math.floor(Date.now() / 1000);
+        document.getElementById('epochInput').value = currentUnixTime;
+        convertToUTC();
+    }
+</script>
 
 <table class="styled">
   <tr><th colspan=2>unit conversion table</th></tr>
@@ -34,5 +84,7 @@ Dates before time zero are simply written as negative, for example the first hum
   <tr><td>11d + 13h + 46min + 40s</td><td>1 megasecond</td></tr>
   <tr><td>31y + 251d + 7h + 46min + 40s</td><td>1 gigasecond (Gs)</td></tr>
 </table>
+
+
 
 </html>
