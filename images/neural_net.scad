@@ -63,6 +63,8 @@ module multilayer(layers=[5,5,3],sep_neurons=5,sep_layers=20,neuron_size=2,synap
     bilayer(layers[0],layers[1],true,sep_neurons,sep_layers,neuron_size,synapse_size);
 }
 
-multilayer([128,128,128,128,128,2],sep_layers=1000,neuron_size=20,synapse_size=1,sep_neurons=50);
+//multilayer([128,128,128,128,128,2],sep_layers=1000,neuron_size=20,synapse_size=1,sep_neurons=50);
+
+multilayer([3,8,8,8,8,3],sep_layers=100,neuron_size=20,synapse_size=1,sep_neurons=50);
 
 //use openscad neural_net.scad -o neural_net.png --imgsize=1000,1000 --colorscheme=Starnight --viewall --autocenter --projection=o --camera=0,0,0,0,0,0,0
