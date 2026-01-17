@@ -125,7 +125,7 @@ function toMetric(number,precision){
   power = Math.floor(Math.log(number)/Math.log(1000));
   //gives which power of 1000 the number has
   
-  number = number/Math.pow(1000,power);
+  reduced_number = number/Math.pow(1000,power);
   
   prefix = "";
   switch(power){
@@ -142,15 +142,15 @@ function toMetric(number,precision){
     default: return number.toExponential(precision);
   }
   
-  number = number.toPrecision(precision) + prefix;
-  return number;
+  reduced_number = reduced_number.toPrecision(precision) + prefix;
+  return reduced_number;
 }
 
 function VolumeToMetric(number,precision){
   power = Math.round(Math.log(number)/Math.log(Math.pow(1000,3)));
   //gives which power of 1000 the number has
   
-  number = number/Math.pow(Math.pow(1000,3),power);
+  reduced_number = number/Math.pow(Math.pow(1000,3),power);
   
   prefix = "";
   switch(power){
@@ -167,8 +167,8 @@ function VolumeToMetric(number,precision){
     default: return number.toExponential(precision);
   }
   
-  number = number.toPrecision(precision) + prefix;
-  return number;
+  reduced_number = reduced_number.toPrecision(precision) + prefix;
+  return reduced_number;
 }
 
 function recalculate_table(){
