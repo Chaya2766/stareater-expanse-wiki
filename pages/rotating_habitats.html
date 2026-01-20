@@ -11,10 +11,54 @@
 <article class="basics">
 Rotating habitats use centrifugal force to simulate gravity. They are about 11 million times more efficient at providing living space for a given amount of material than planets, and by far the most common type of large settlement in space.
 <br><br>
-The illustration used for this page shows a habitat that provides interior lighting by redirecting natural sunlight with mirrors into its interior through massive UV-filtering windows - while visually beautiful, it is quite uncommon and vast majority opt to instead have no transparent sections and simply generate light internally.
+The illustration used for this page shows a habitat that provides interior lighting by redirecting natural sunlight with mirrors into its interior through massive UV-filtering windows (spin rate not to scale) - while visually beautiful, it is quite uncommon and vast majority opt to instead have no transparent sections and simply generate light internally.
 <br><br>
 <span class="meta">A set of equations used for determining the numerical properties of habitats in Stareater Expanse can be found <a href="../documents/equations_for_rotating_habitats.pdf">here</a>.</span>
 </article>
+<hr>
+
+<h1>Calculator <span class="warning">work in progress</span></h1>
+
+<article>Pick the one which should be calculated automatically and fill in the other two:</article>
+<input type="radio" id="radius_autocalc" name="autocalc"></input>
+<span> Habitat radius: </span>
+<input type="number" id="hab_radius" oninput="autocalc()"></input>
+<span> metres</span>
+<br>
+<input type="radio" id="time_autocalc" name="autocalc"></input>
+<span> Rotation time: </span>
+<input type="number" id="hab_rotation_time" oninput="autocalc()"></input>
+<span> seconds</span>
+<br>
+<input type="radio" id="acceleration_autocalc" name="autocalc"></input>
+<span> Felt acceleration: </span>
+<input type="number" id="hab_acceleration" value="9.807" oninput="autocalc()"></input>
+<span> m/s<sup>2</sup></span>
+
+<script>
+function autocalc(){
+  console.log("autocalc()");
+  radius = document.getElementById("hab_radius").value;
+  time = document.getElementById("hab_rotation_time").value;
+  acceleration = document.getElementById("hab_acceleration").value;
+  console.log(radius,time,acceleration);
+  
+  selected = document.querySelector('input[name="autocalc"]:checked').id;
+  
+  console.log(selected);
+  if(selected == "radius_autocalc"){
+    document.getElementById("hab_radius").value = acceleration * Math.pow(time/(2*Math.PI),2);
+    console.log(acceleration * Math.pow(time/(2*Math.PI),2));
+  }
+  if(selected == "time_autocalc"){
+    document.getElementById("hab_rotation_time").value = 2 * Math.PI / Math.sqrt(acceleration / radius);
+  }
+  if(selected == "acceleration_autocalc"){
+    document.getElementById("hab_acceleration").value = radius / Math.pow(time/(2*Math.PI),2);
+  }
+}
+</script>
+
 <hr>
 
 <h3>Fictitious force effects</h3>
