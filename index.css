@@ -1,5 +1,5 @@
 /*
-CONTENTS BY BEGINNING LINE NUMBER
+CONTENTS BY BEGINNING LINE NUMBER (this is outdated, I need to fix that at some point)
 8 - adjustments
 19 - classes defining common elements of pages & interface
 152 - classes defining elements that are never mandatory in a page
@@ -197,6 +197,12 @@ img.styled{
 /*if the image is both centered AND styled*/
 img.centered.styled{
  margin: 6px auto;
+}
+
+img.cardsize{
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
 }
 
 /*NEVER-MANDATORY PAGE PARTS START HERE*/

@@ -34,6 +34,49 @@ The illustration used for this page shows a habitat that provides interior light
 <span> Felt acceleration: </span>
 <input type="number" id="hab_acceleration" value="9.807" oninput="autocalc()"></input>
 <span> m/s<sup>2</sup></span>
+<br><br>
+<article>Once the choices above are set, tune the length and material choices:</article>
+<span> Habitat length: </span>
+<input type="number" id="hab_length" oninput="table_calc()"></input>
+<span style="margin-right: 50px;"> metres</span>
+<span class="tip" tip="Highly recommend you leave it at 10 000 kg/m^2 unless you have a reason not to. The aerial density means how much mass there is in each square metre of the cylinder, and the default value of 10 000 kg/m^2 corresponds to the same radiation shielding power as earth's atmosphere, matching the 10 tonnes of air over each sqare metre of earth's surface"> Habitat aerial density: </span>
+<input type="number" id="hab_aerial_density" value=10000></input>
+<span> kg/m<sup>2</sup></span>
+<br>
+<span style="margin-right: 50px;">Material properties:</span>
+<span>(optional - pick ready preset:</span>
+<select name="material" id="material_picker" oninput="set_material()">
+  <option value="SAE_304_steel">SAE 304 stainless steel</option>
+  <option value="wrought_iron">wrought iron</option>
+  <option value="aluminium">Aluminium</option>
+  <option value="aluminium_alloy_7034">Aluminium alloy 7034</option>
+  <option value="carbon_fiber">Carbon fiber</option>
+</select>
+<span>)</span>
+<br>
+
+<span> Density: </span>
+<input type="number" id="material_density"></input>
+<span style="margin-right: 50px;"> kg/m<sup>3</sup></span>
+
+<span> Yield strength: </span>
+<input type="number" id="material_strength"></input>
+<span style="margin-right: 50px;"> Pascals</span>
+
+<br><br><br>
+
+<table class="styled">
+<tr><th colspan=2>habitat data</th></tr>
+<tr>
+  <td>Useable surface area</td>
+  <td id="table_hab_useable_area">-</td>
+</tr>
+<tr>
+  <td>Habitat mass</td>
+  <td id="table_hab_mass">-</td>
+</tr>
+</table>
+
 
 <script>
 function autocalc(){
@@ -56,10 +99,47 @@ function autocalc(){
   if(selected == "acceleration_autocalc"){
     document.getElementById("hab_acceleration").value = radius / Math.pow(time/(2*Math.PI),2);
   }
+
+  table_calc();
+}
+
+function set_material(){
+  material = document.getElementById("material_picker").value;
+  console.log(material);
+  
+  let materials_dict = {};      //density,strength
+  materials_dict["wrought_iron"] = [7750,200E+6];
+  materials_dict["aluminium"] = [2699,47E+6];
+  materials_dict["aluminium_alloy_7034"] = [2890,730E+6];
+  materials_dict["SAE_304_steel"] = [7900,210E+6];
+  materials_dict["titanium"] = [4110,434E+6];
+  materials_dict["carbon_fiber"] = [1800,4E+9];
+  
+  console.log(materials_dict[material]);
+  document.getElementById("material_density").value = materials_dict[material][0];
+  document.getElementById("material_strength").value = materials_dict[material][1];
+}
+
+function table_calc(){
+  radius = document.getElementById("hab_radius").value;
+  length = document.getElementById("hab_length").value;
+  useable_area = 2*Math.PI*radius*length;
+  document.getElementById("table_hab_useable_area").innerHTML = useable_area + " m<sup>2</sup>";
+  hemisphere_caps_area = Math.PI*radius*radius;
+  
+  aerial_density = document.getElementById("hab_aerial_density").value;
+  habitat_mass = (useable_area + hemisphere_caps_area) * aerial_density;
+  document.getElementById("table_hab_mass").innerHTML = habitat_mass + " kg";
 }
 </script>
 
 <hr>
+
+<h1>designing a rotating habitat</h1>
+<article>
+todo: discuss some of the choices available in the calculator here.
+In particular explain the aerial density and safety factor.
+</article>
 
 <h3>Fictitious force effects</h3>
 
