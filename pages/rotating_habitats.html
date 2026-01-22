@@ -36,7 +36,7 @@ This calculator assumes that you're using hemispherical caps at both ends.
 <br>
 <input type="radio" id="acceleration_autocalc" name="autocalc"></input>
 <span> Felt acceleration: </span>
-<input type="number" id="hab_acceleration" value="9.807" oninput="autocalc()"></input>
+<input type="number" id="hab_acceleration" value="9.80665" oninput="autocalc()"></input>
 <span> m/s<sup>2</sup></span>
 <br><br>
 <article>Once the choices above are set, tune the length and material choices:</article>
@@ -75,7 +75,7 @@ This calculator assumes that you're using hemispherical caps at both ends.
 <br><br>
 
 <table class="styled centered">
-<tr><th colspan=2>complete habitat data table</th></tr>
+<tr><th colspan=2>summary habitat data table</th></tr>
 <tr>
   <td>Habitat radius</td>
   <td id="table_hab_radius">-</td>
@@ -85,15 +85,23 @@ This calculator assumes that you're using hemispherical caps at both ends.
   <td id="table_hab_length">-</td>
 </tr>
 <tr>
-  <td>Provided living area</td>
-  <td id="table_hab_useable_area">-</td>
-</tr>
-<tr>
   <td>Habitat mass</td>
   <td id="table_hab_mass">-</td>
 </tr>
 <tr>
-  <td class="tip" tip="the number of times that the stress in the habitat would have to increase past what is already caused by its own rotation before it breaks">Safety factor</td>
+  <td>Provided centrifugal gravity</td>
+  <td id="table_hab_gravity">-</td>
+</tr>
+<tr>
+  <td>Provided living area</td>
+  <td id="table_hab_useable_area">-</td>
+</tr>
+<tr>
+  <td>Time to complete a rotation</td>
+  <td id="table_hab_rotation_time">-</td>
+</tr>
+<tr>
+  <td class="tip" tip="the number of times that the stress in the habitat would have to increase above what is already caused by its own rotation before it breaks">Safety factor</td>
   <td id="table_hab_safety_factor">-</td>
 </tr>
 <tr>
@@ -105,15 +113,16 @@ This calculator assumes that you're using hemispherical caps at both ends.
 
 <script>
 function autocalc(){
-  console.log("autocalc()");
+  debug_log = false;
+  if(debug_log)console.log("autocalc()");
   radius = document.getElementById("hab_radius").value;
   time = document.getElementById("hab_rotation_time").value;
   acceleration = document.getElementById("hab_acceleration").value;
-  console.log(radius,time,acceleration);
+  if(debug_log)console.log(radius,time,acceleration);
   
   selected = document.querySelector('input[name="autocalc"]:checked').id;
   
-  console.log(selected);
+  if(debug_log)console.log(selected);
   if(selected == "radius_autocalc"){
     document.getElementById("hab_radius").value = acceleration * Math.pow(time/(2*Math.PI),2);
     console.log(acceleration * Math.pow(time/(2*Math.PI),2));
@@ -129,8 +138,9 @@ function autocalc(){
 }
 
 function set_material(){
+  debug_log = false;
   material = document.getElementById("material_picker").value;
-  console.log(material);
+  if(debug_log)console.log(material);
   
   let materials_dict = {};      //density,strength
   materials_dict["wrought_iron"] = [7750,200E+6];
@@ -141,7 +151,7 @@ function set_material(){
   materials_dict["carbon_fiber"] = [1800,4E+9];
   materials_dict["perfect_graphene"] = [3500,50E+9];
   
-  console.log(materials_dict[material]);
+  if(debug_log)console.log(materials_dict[material]);
   document.getElementById("material_density").value = materials_dict[material][0];
   document.getElementById("material_strength").value = materials_dict[material][1];
   
@@ -152,20 +162,26 @@ function table_calc(){
   digits = 3;
   
   radius = document.getElementById("hab_radius").value;
-  document.getElementById("table_hab_radius").innerHTML = radius + "m";
+  document.getElementById("table_hab_radius").innerHTML = radius + " m";
   
   length = document.getElementById("hab_length").value;
-  document.getElementById("table_hab_length").innerHTML = length + "m";
+  document.getElementById("table_hab_length").innerHTML = length + " m";
   
   useable_area = 2*Math.PI*radius*length;
   document.getElementById("table_hab_useable_area").innerHTML = useable_area.toFixed(digits) + " m<sup>2</sup>";
   hemisphere_caps_area = Math.PI*radius*radius;
+  
+  time = document.getElementById("hab_rotation_time").value * 1;
+  document.getElementById("table_hab_rotation_time").innerHTML = time.toFixed(digits) + " s";
   
   aerial_density = document.getElementById("hab_aerial_density").value;
   habitat_mass = (useable_area + hemisphere_caps_area) * aerial_density;
   document.getElementById("table_hab_mass").innerHTML = habitat_mass.toFixed(digits) + " kg";
   
   gravity = document.getElementById("hab_acceleration").value;
+  document.getElementById("table_hab_gravity").innerHTML = (gravity*1).toFixed(digits) + " m/s<sup>2</sup> ("+(gravity/9.80665).toFixed(digits)+"g )";
+  
+  
   material_density = document.getElementById("material_density").value;
   stress = radius * gravity * material_density;
   material_strength = document.getElementById("material_strength").value;
