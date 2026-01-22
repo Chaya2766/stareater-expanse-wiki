@@ -20,7 +20,6 @@ The illustration used for this page shows a habitat that provides interior light
 <h1>Calculator <span class="warning">work in progress</span></h1>
 <article>This is just an implementation of some of the equations explained <a href="../documents/equations_for_rotating_habitats.pdf">here</a>, so have a look at them if you want more flexibility.
 <br>
-This calculator assumes that you're using hemispherical caps at both ends.
 </article>
 <br>
 <article>Pick the one which should be calculated automatically and fill in the other two:</article>
@@ -39,7 +38,9 @@ This calculator assumes that you're using hemispherical caps at both ends.
 <input type="number" id="hab_acceleration" value="9.80665" oninput="autocalc()"></input>
 <span> m/s<sup>2</sup></span>
 <br><br>
-<article>Once the choices above are set, tune the length and material choices:</article>
+<article>Once the choices above are set, tune the length, cap type and material choices:</article>
+<input type="radio" id="hemispherical_caps" name="caps" checked="true" onchange="autocalc()"></input><span style="margin-right: 50px;">Hemispherical caps</span> <input type="radio" id="circular_caps" name="caps" onchange="autocalc()"></input><span>Circular caps</span>
+<br>
 <span> Habitat length: </span>
 <input type="number" id="hab_length" oninput="autocalc()"></input>
 <span style="margin-right: 50px;"> metres</span>
@@ -61,11 +62,11 @@ This calculator assumes that you're using hemispherical caps at both ends.
 <br>
 
 <span> Density: </span>
-<input type="number" id="material_density"></input>
+<input type="number" id="material_density" oninput="autocalc()"></input>
 <span style="margin-right: 50px;"> kg/m<sup>3</sup></span>
 
 <span> Yield strength: </span>
-<input type="number" id="material_strength"></input>
+<input type="number" id="material_strength" oninput="autocalc()"></input>
 <span style="margin-right: 50px;"> Pascals</span>
 
 <article>Stress in the cylinder is <span id="hab_hoop_stress">??</span> pascals, which is <span id="hab_hoop_stress_percentage"></span>% of maximum.</article>
@@ -125,7 +126,7 @@ function autocalc(){
   if(debug_log)console.log(selected);
   if(selected == "radius_autocalc"){
     document.getElementById("hab_radius").value = acceleration * Math.pow(time/(2*Math.PI),2);
-    console.log(acceleration * Math.pow(time/(2*Math.PI),2));
+    if(debug_log)console.log(acceleration * Math.pow(time/(2*Math.PI),2));
   }
   if(selected == "time_autocalc"){
     document.getElementById("hab_rotation_time").value = 2 * Math.PI / Math.sqrt(acceleration / radius);
@@ -169,13 +170,16 @@ function table_calc(){
   
   useable_area = 2*Math.PI*radius*length;
   document.getElementById("table_hab_useable_area").innerHTML = useable_area.toFixed(digits) + " m<sup>2</sup>";
-  hemisphere_caps_area = Math.PI*radius*radius;
+  
+  caps_type = document.querySelector('input[name="caps"]:checked').id;
+  if(caps_type == "circular_caps"){ caps_area = 2*Math.PI*radius*radius; }
+  if(caps_type == "hemispherical_caps"){ caps_area = 4*Math.PI*radius*radius; }
   
   time = document.getElementById("hab_rotation_time").value * 1;
   document.getElementById("table_hab_rotation_time").innerHTML = time.toFixed(digits) + " s";
   
   aerial_density = document.getElementById("hab_aerial_density").value;
-  habitat_mass = (useable_area + hemisphere_caps_area) * aerial_density;
+  habitat_mass = (useable_area + caps_area) * aerial_density;
   document.getElementById("table_hab_mass").innerHTML = habitat_mass.toFixed(digits) + " kg";
   
   gravity = document.getElementById("hab_acceleration").value;
