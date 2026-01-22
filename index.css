@@ -397,6 +397,10 @@ table.styled.right{
  max-width: 50%;
 }
 
+table.centered.styled{
+  margin: 6px auto;
+}
+
 table.gallery * {
  max-width: 400px;
 }
