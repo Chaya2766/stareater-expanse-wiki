@@ -53,9 +53,11 @@ The illustration used for this page shows a habitat that provides interior light
 <select name="material" id="material_picker" oninput="set_material()">
   <option value="SAE_304_steel">SAE 304 stainless steel</option>
   <option value="wrought_iron">wrought iron</option>
-  <option value="aluminium">Aluminium</option>
+  <option value="aluminium">Pure aluminium</option>
   <option value="aluminium_alloy_7034">Aluminium alloy 7034</option>
   <option value="carbon_fiber">Carbon fiber</option>
+  <option value="low_end_carbon_nanotubes">Low-end carbon nanotubes</option>
+  <option value="high_end_carbon_nanotubes">High-end carbon nanotubes</option>
   <option value="perfect_graphene">Perfect graphene</option>
 </select>
 <span>)</span>
@@ -88,6 +90,10 @@ The illustration used for this page shows a habitat that provides interior light
 <tr>
   <td>Habitat mass</td>
   <td id="table_hab_mass">-</td>
+</tr>
+<tr>
+  <td>Internal volume</td>
+  <td id="table_hab_volume">-</td>
 </tr>
 <tr>
   <td>Provided centrifugal gravity</td>
@@ -150,7 +156,9 @@ function set_material(){
   materials_dict["SAE_304_steel"] = [7900,210E+6];
   materials_dict["titanium"] = [4110,434E+6];
   materials_dict["carbon_fiber"] = [1800,4E+9];
-  materials_dict["perfect_graphene"] = [3500,50E+9];
+  materials_dict["low_end_carbon_nanotubes"] = [1400,11E+9];
+  materials_dict["high_end_carbon_nanotubes"] = [1400,63E+9];
+  materials_dict["perfect_graphene"] = [1400,130E+9];
   
   if(debug_log)console.log(materials_dict[material]);
   document.getElementById("material_density").value = materials_dict[material][0];
@@ -172,8 +180,17 @@ function table_calc(){
   document.getElementById("table_hab_useable_area").innerHTML = useable_area.toFixed(digits) + " m<sup>2</sup>";
   
   caps_type = document.querySelector('input[name="caps"]:checked').id;
-  if(caps_type == "circular_caps"){ caps_area = 2*Math.PI*radius*radius; }
-  if(caps_type == "hemispherical_caps"){ caps_area = 4*Math.PI*radius*radius; }
+  if(caps_type == "circular_caps"){
+    caps_area = 2*Math.PI*radius*radius;
+    caps_volume = 0;
+  }
+  if(caps_type == "hemispherical_caps"){
+    caps_area = 4*Math.PI*radius*radius;
+    caps_volume = (4/3)*Math.PI*radius*radius*radius;
+  }
+  
+  hab_volume = (Math.PI*radius*radius*length) + caps_volume;
+  document.getElementById("table_hab_volume").innerHTML = hab_volume.toFixed(digits) + " m<sup>3</sup>";
   
   time = document.getElementById("hab_rotation_time").value * 1;
   document.getElementById("table_hab_rotation_time").innerHTML = time.toFixed(digits) + " s";
@@ -189,7 +206,7 @@ function table_calc(){
   material_density = document.getElementById("material_density").value;
   stress = radius * gravity * material_density;
   material_strength = document.getElementById("material_strength").value;
-  document.getElementById("hab_hoop_stress").innerHTML = stress.toFixed(digits) ;
+  document.getElementById("hab_hoop_stress").innerHTML = stress.toFixed(0) ;
   document.getElementById("hab_hoop_stress_percentage").innerHTML = (100 * stress / material_strength).toFixed(digits);
   document.getElementById("table_hab_safety_factor").innerHTML = (material_strength / stress).toFixed(digits);
   document.getElementById("table_hab_carrying_capacity").innerHTML = (((material_strength / stress)-1)*aerial_density).toFixed(digits) + "kg/m<sup>2</sup>";
