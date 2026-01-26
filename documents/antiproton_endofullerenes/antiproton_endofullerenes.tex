@@ -47,7 +47,7 @@
 	\vfill
 	
 	\begin{abstract}
-		Investigation of antimatter storage using buchmeisterfullerenes (A.K.A. C60 or Buckyballs) for use in the Stareater Expanse worldbuilding project.
+		Investigation of antimatter storage using buckmeisterfullerenes (A.K.A. C60 or Buckyballs) for use in the Stareater Expanse worldbuilding project.
 		
 		\medskip
 		
@@ -86,7 +86,7 @@
 	
 	\section{Evidence of plausibility and worldbuilding potential}
 	
-	The evidence for and against the possibility of long term storage of antiprotons inside buchmeisterfullerenes is discussed in much greater detail in the following paper:
+	The evidence for and against the possibility of long term storage of antiprotons inside buckmeisterfullerenes is discussed in much greater detail in the following paper:
 	
 	\medskip
 	
@@ -99,11 +99,11 @@
 	As a short, non-exhaustive summary, here are some of the points brought up:
 	
 	\begin{itemize}
-		\item Some models of the buchmeisterfullerene show that a point charge placed in the middle of the molecule would experience no net force, and as such would not be held in the middle.
+		\item Some models of the buckmeisterfullerene show that a point charge placed in the middle of the molecule would experience no net force, and as such would not be held in the middle.
 		
 		\item Experiments using a flourine ion, which is suggested as a good stand-in for an antiproton, showed that there is a potential well in the middle of the molecule, and the flourine ion does in fact get held in the middle away from the carbon atoms rather than experiencing no net force.
 		
-		\item No observation of an antiproton placed inside a buchmeisterfullerene had been made so far, as such given the mixed theoretical evidence and total lack of practical evidence, the viability of antiproton endofullerenes cannot be accepted nor discarded.
+		\item No observation of an antiproton placed inside a buckmeisterfullerene had been made so far, as such given the mixed theoretical evidence and total lack of practical evidence, the viability of antiproton endofullerenes cannot be accepted nor discarded.
 	\end{itemize}
 	
 	The paper also describes an experiment that could verify whether antiprotons embedded inside fullerenes are stable or not, and the nearest opportunity to conduct this experiment is a time window stretching from late 2026 to early 2028, during which a particular needed piece of equipment capable of producing large numbers of antiprotons will not be in use, and as such could be available for the experiment.
@@ -130,7 +130,7 @@
 	The opportunity presented by this is relevant in collaborative writing, in particular where representatives of the sol civilization are to meet a less advanced alien species.
 	Direct contact of most fictional civilizations with the Stareater Expanse sol civilization would be decisively one-sided just due to the vast the scale difference between typical "reasonably powerful" sci-fi civilization and the usual hard sci-fi depiction of a civilization nearing the kardashev-2 status.
 	Removing the solar system from the playing field of the first contact scenario and putting in its place a single vessel or small collection of vessels, cut off from the overwhelming wealth and experience of the solar system, is likely to make the odds significantly more even, as well as justify some level of inexperienced behaviour from the visitors in a plausible manner.
-	It can also help justify retaining a third millenium level of technological advancement while accessing locations thousands of years distant from sol, such as omega centauri or others, which would have normally taken millions of years or more to reach by the natural slow expansion of the human civilization.
+	It can also help justify retaining a third millenium level of technological advancement while accessing locations thousands of years distant from sol, such as omega centauri or others, which would have normally taken millions of years or more to reach by the natural slow expansion of the human civilization with technological advancement continuing throughout that time.
 	
 	\medskip
 	
@@ -215,5 +215,117 @@
     \pagebreak
     
     \section{antiproton endofullerenes as rocket fuel}
+    
+    The total mass of an antiproton endofullerene is 721.6u and the annihilated mass is 2u, leaving behind 719.6u of mass that did not get annihilated.
+    
+    \medskip
+    
+    I will take two approaches to determining the resulting exhaust velocity.
+    
+    \medskip
+    
+    \textbf{1. simple kinetic energy conversion:} I will assume that the mass-energy of the annihilated proton and antiproton is dumped into the remaining 719.6u of mass as kinetic energy.
+    
+    $$ 2u \cdot c^2 = 2.9848362 E-10 J ; 719.6u = 1.194923914 E-24 kg $$
+    
+    Kinetic energy formula: $E_k = \frac{m \cdot v^2}{2}$
+    
+    Rearranged to deduce the velocity: $$v = \sqrt{\frac{2 E_k}{m}}$$
+    
+    $$ v = \sqrt{\frac{2 \cdot 2.9848362 E-10 J}{1.194923914 E-24 kg}} = 22351420.19 m/s $$
+    
+    Specific impulse: $\frac{22351420.19 m/s}{9.80665 m/s^2} = 2279210.555 s \approx 2.28 E+6 s$
+    
+    \medskip
+    
+    \textbf{2. heating:} the mass-energy of the annihilated particles is dumped into the remaining particles as heat, and the exhaust escapes with the corresponding thermal velocity.
+    As to not bring nuclear physics into this I have to assume that despite having annihilated one of the regular protons, the exhaust is still 100\% carbon atoms, this should not have a major effect on the result.
+    
+    \medskip
+    
+    Carbon's specific heat capacity is 709.1 J/(kg·K).
+    The energy from annihilation would be spread evenly between all 60 carbon atoms, giving each of them $\frac{2.9848362 E-10 J}{60} = 4.974727 E-12 J$ of thermal energy.
+    
+    \medskip
+    
+    A carbon atom masses 12.01u = 1.99430742 E-26 kg.
+    That mass of carbon being given 4.974727 E-12 J of thermal energy would give temperature as such:
+    
+    $$ \frac{4.974727 E-12 J}{1.99430742 E-26 kg \cdot 709.1 J/(kg·K)} = 351778799382 K $$
+    
+    \medskip
+    
+    The root mean square velocity of particles in a hot gas can be calculated using the following equation:
+    
+    $$ v = \sqrt{\frac{k_B \cdot T}{m}} $$
+    
+    where:
+    
+    \begin{itemize}
+    	\item $T$ is the temperature of the gas
+    	
+    	\item $m$ is the mass of the particle
+    	
+    	\item $k_B$ is the boltzmann constant = 1.380649 E-23 J/K
+    \end{itemize}
+    
+    For carbon with particle mass 1.99430742 E-26 kg heated to 351 778 799 382 K it gives:
+    
+    $$ \sqrt{\frac{1.380649 E-23 J/K \cdot 351778799382 K}{1.99430742 E-26 kg}} = 15605598.17 m/s $$
+    
+    Specific impulse: $\frac{15605598.17 m/s}{9.80665 m/s^2} = 1591328.147 s \approx 1.59 E+6 s$
+    
+    \medskip
+    
+    I am inclined to include some inefficiency, but not too much, perhaps bringing the effective exhaust velocity down to 10 000 000 m/s and specific impulse to a bit over 1 million seconds, which would represent about 45\% to 64\% efficiency.
+    
+    \pagebreak
+    
+    Two equations for use in this section, the newtonian and relativistic versions of the rocket equation.
+    
+    $$ \Delta v = v_e \cdot ln(\frac{M_f}{M_e}) $$
+    
+    $$ \Delta v = c \cdot tanh\left( \frac{v_e}{c} \cdot ln(\frac{M_f}{M_e}) \right) $$
+    
+    where:
+    
+    \begin{itemize}
+    	\item $\Delta v$ is the rocket's available velocity budget
+    	
+    	\item $v_e$ is the exhaust velocity of the rocket
+    	
+    	\item $M_f$ is the mass of the rocket when fully fueled
+    	
+    	\item $M_e$ is the mass of the rocket when empty
+    	
+    	\item $c$ is the speed of light = 299 792 458 m/s
+    \end{itemize}
+    
+    Given the 10 000 000 m/s exhaust velocity, a spacecraft that carries enough fuel to equal its own mass would be able to reach roughly 2.312\% of the speed of light:
+    
+    $$ 10Mm/s \cdot ln(2) = 2.31209\%c \qquad ; \qquad 1c \cdot tanh\left( \frac{10Mm/s}{c} \cdot ln(2) \right) = 2.31168\%c $$
+    
+    One whose mass when fueled is 20 times greater than when empty would be able to reach nearly 10\% of the speed of light:
+    
+    $$ 10Mm/s \cdot ln(20) = 9.993\%c \qquad ; \qquad 1c \cdot tanh\left( \frac{10Mm/s}{c} \cdot ln(20) \right) = 9.96\%c $$
+    
+    And a spacecraft whose functional parts make up only 1\% of the mass, with the remainder being fuel, would be able to reach over 15\% of the speed of light:
+    
+    $$ 10Mm/s \cdot ln(100) = 15.361\%c \qquad ; \qquad 1c \cdot tanh\left( \frac{10Mm/s}{c} \cdot ln(100) \right) = 15.241\%c $$
+    
+    Stretching the limits a bit, a spacecraft that is 99.9\% fuel and 0.1\% hull would be able to reach well past 20\% of the speed of light, which means coasting speed of 10\%c even if the velocity budget has to be split in half between the launch and slowdown at the other end:
+    
+    $$ 10Mm/s \cdot ln(1000) = 23.0418\%c \qquad ; \qquad 1c \cdot tanh\left( \frac{10Mm/s}{c} \cdot ln(1000) \right) = 22.6425\%c $$
+    
+    At such high mass ratios using a staged rocket would be expected, and discarding expensive equipment such as superconducting magnetic nozzles wouldn't be much more of a sacrifice than using antimatter fuel already is.
+    Advanced materials such as graphene and carbon nanotubes, combined with sufficient wealth and will, could likely implement even the last of these options.
+    
+    \medskip
+    
+    Although theoretically it could go on arbitrarily far, eg. letting there be 0.01\% hull with the rest being fuel allows 29.79\%c $\Delta V$ and going down to 0.001\% would enable 36.62\%, but practical limits have to be drawn somewhere and 10\%c is already a lot.
+    
+    \medskip
+    
+    Launch via laser sail or some other beamed energy system, if deemed viable, could even further speed up the trip by removing the need to use onboard fuel for launch, and saving all of it for slowdown and in-transit maneouvering.
 	
 \end{document}
