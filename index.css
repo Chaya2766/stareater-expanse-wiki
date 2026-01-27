@@ -232,6 +232,12 @@ hr{
   border: 5px dashed #F8F;
 }
 
+.warning.soft{
+  background-color: black;
+  color: #0fa;
+  border: 5px dashed #0fa;
+}
+
 .division{
  clear: both;
  margin: 0px;

@@ -95,7 +95,7 @@ module buckyball() {
 color("#666") {buckyball();}
 color("#F00"){sphere(0.3,$fn=16);}
 
-$vpr=[73.9,0,59.3];
+$vpr=[73.9,0,59.3+$t*180];
 $vpd=15.41;
 
 //openscad buckyball.scad -o buckyball.png --colorscheme=Starnight --imgsize=1000,1000
