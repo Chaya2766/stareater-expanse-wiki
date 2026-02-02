@@ -52,6 +52,9 @@ The illustration used for this page shows a habitat that provides interior light
 <span>(optional - pick ready preset:</span>
 <select name="material" id="material_picker" oninput="set_material()">
   <option value="SAE_304_steel">SAE 304 stainless steel</option>
+  <option value="grade_200_maraging_steel">grade 200 maraging steel</option>
+  <option value="grade_350_maraging_steel">grade 350 maraging steel</option>
+  <option value="eglin_steel">Eglin steel</option>
   <option value="wrought_iron">wrought iron</option>
   <option value="aluminium">Pure aluminium</option>
   <option value="aluminium_alloy_7034">Aluminium alloy 7034</option>
@@ -159,6 +162,9 @@ function set_material(){
   materials_dict["low_end_carbon_nanotubes"] = [1400,11E+9];
   materials_dict["high_end_carbon_nanotubes"] = [1400,63E+9];
   materials_dict["perfect_graphene"] = [1400,130E+9];
+  materials_dict["grade_200_maraging_steel"] = [8100,1379E+6];
+  materials_dict["grade_350_maraging_steel"] = [8100,2413E+6];
+  materials_dict["eglin_steel"] = [7850,1337E+6];
   
   if(debug_log)console.log(materials_dict[material]);
   document.getElementById("material_density").value = materials_dict[material][0];
