@@ -99,6 +99,10 @@ The illustration used for this page shows a habitat that provides interior light
   <td id="table_hab_volume">-</td>
 </tr>
 <tr>
+  <td>Hull thickness</td>
+  <td id="table_hab_hull_thickness">-</td>
+</tr>
+<tr>
   <td>Provided centrifugal gravity</td>
   <td id="table_hab_gravity">-</td>
 </tr>
@@ -216,6 +220,10 @@ function table_calc(){
   document.getElementById("hab_hoop_stress_percentage").innerHTML = (100 * stress / material_strength).toFixed(digits);
   document.getElementById("table_hab_safety_factor").innerHTML = (material_strength / stress).toFixed(digits);
   document.getElementById("table_hab_carrying_capacity").innerHTML = (((material_strength / stress)-1)*aerial_density).toFixed(digits) + "kg/m<sup>2</sup>";
+  
+  hull_thickness = aerial_density / material_density;
+  document.getElementById("table_hab_hull_thickness").innerHTML = hull_thickness.toFixed(5) + " m";
+  
 }
 </script>
 
