@@ -17,6 +17,8 @@ For the purpose of making dates more human readable it is most common to space o
 
 <br><br>
 Dates before time zero are simply written as negative, for example the first human footstep on the moon was made at unix time -14 159 025, corresponding to 02:56:15 UTC July 21, 1969.
+<br><br>
+Local times are often defined as just epoch time modulo the local cycle length, eg. 86400 seconds for terra.
 </article>
 <hr>
 
@@ -41,7 +43,7 @@ Dates before time zero are simply written as negative, for example the first hum
         try {
             const date = new Date(utcInput + ' UTC');
             const unixTime = Math.floor(date.getTime() / 1000);
-            document.getElementById('epochInput').value = isNaN(unixTime) ? 'Invalid date format' : unixTime;
+            document.getElementById('epochInput').value = isNaN(unixTime) ? 'Invalid date format' : unixTime.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
             //weird but very compact if statement inside value assignment. The way this works is: condition ? valueIfTrue : valueIfFalse
         } catch (error) {
             document.getElementById('epochInput').value = 'Error converting date';
@@ -65,7 +67,7 @@ Dates before time zero are simply written as negative, for example the first hum
     }
     function setTimeNow() {
         const currentUnixTime = Math.floor(Date.now() / 1000);
-        document.getElementById('epochInput').value = currentUnixTime;
+        document.getElementById('epochInput').value = currentUnixTime.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
         convertToUTC();
     }
 </script>

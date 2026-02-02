@@ -6,6 +6,19 @@
 
 <html class="background1">
 
+<article id="clock" style="
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin: 2px;
+    padding: 2px;
+    background-color: #0008;
+    z-index: 1000;
+    text-align: right;
+">
+    [date]<br>[time]
+</article>
+
 <!--
 <div class="titlebox">
 <div class="title"><img src="strange_matters_text.png"></img></div>
@@ -27,6 +40,13 @@
 <!the entire script below just redirects users to the exact page >
 
 <script>
+function clock(){
+  datenow = Math.floor(Date.now() / 1000);
+  timenow = datenow % 86400;
+  document.getElementById("clock").innerHTML = datenow.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + "<br>" + timenow.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+}
+setInterval(clock, 1000);
+
 //this was written by some LLM but I should probably take the time to rewrite this myself at some point
 //the code works, but it is surprisingly large for what it does
 //and I also feel a little weird not knowing how such a central piece of my site works
