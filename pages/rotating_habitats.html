@@ -48,9 +48,14 @@ The illustration used for this page shows a habitat that provides interior light
 <input type="number" id="hab_aerial_density" value=10000 oninput="autocalc()"></input>
 <span> kg/m<sup>2</sup></span>
 <br>
+<span> Atmospheric pressure: </span>
+<input type="number" id="hab_pressure" value=101325 oninput="autocalc()"></input>
+<span style="margin-right: 50px;"> pascals</span>
+<br><br>
 <span style="margin-right: 50px;">Material properties:</span>
 <span>(optional - pick ready preset:</span>
 <select name="material" id="material_picker" oninput="set_material()">
+  <option value="-">-</option>
   <option value="SAE_304_steel">SAE 304 stainless steel</option>
   <option value="grade_200_maraging_steel">grade 200 maraging steel</option>
   <option value="grade_350_maraging_steel">grade 350 maraging steel</option>
@@ -115,13 +120,15 @@ The illustration used for this page shows a habitat that provides interior light
   <td id="table_hab_rotation_time">-</td>
 </tr>
 <tr>
-  <td class="tip" tip="the number of times that the stress in the habitat would have to increase above what is already caused by its own rotation before it breaks">Safety factor</td>
+  <td class="tip" tip="the number of times that the stress in the habitat would have to increase above what is already caused by its own rotation before it breaks - if the safety factor of a habitat is 3, that would mean the stress that it experiences from its own rotation and rated atmospheric pressure is 3 times less than what is required to break it">Safety factor</td>
   <td id="table_hab_safety_factor">-</td>
 </tr>
+<!--
 <tr>
   <td class="tip" tip="the amount of added mass (eg. cargo, people, buidlings, other infrastructure) that can be added to the habitat before it breaks">Internal carrying capacity</td>
   <td id="table_hab_carrying_capacity">-</td>
 </tr>
+-->
 </table>
 
 
@@ -214,12 +221,19 @@ function table_calc(){
   
   
   material_density = document.getElementById("material_density").value;
-  stress = radius * gravity * material_density;
+  stress_centrifugal = radius * gravity * material_density;
+  
+  atmospheric_pressure = document.getElementById("hab_pressure").value;
+  stress_atmospheric = radius * atmospheric_pressure * material_density / aerial_density;
+  
+  stress = stress_atmospheric + stress_centrifugal;
   material_strength = document.getElementById("material_strength").value;
   document.getElementById("hab_hoop_stress").innerHTML = stress.toFixed(0) ;
   document.getElementById("hab_hoop_stress_percentage").innerHTML = (100 * stress / material_strength).toFixed(digits);
   document.getElementById("table_hab_safety_factor").innerHTML = (material_strength / stress).toFixed(digits);
-  document.getElementById("table_hab_carrying_capacity").innerHTML = (((material_strength / stress)-1)*aerial_density).toFixed(digits) + "kg/m<sup>2</sup>";
+  
+  //document.getElementById("table_hab_carrying_capacity").innerHTML = (((material_strength / stress)-1)*aerial_density).toFixed(digits) + "kg/m<sup>2</sup>";
+  //calculating internal carrying capacity is no longer this simple now that atmospheric pressure is also taken into account
   
   hull_thickness = aerial_density / material_density;
   document.getElementById("table_hab_hull_thickness").innerHTML = hull_thickness.toFixed(5) + " m";
@@ -241,6 +255,7 @@ Similarly in an elevator a person will experience a constant sideways force prop
 <br><br>
 Lastly, this same force could aid the <b>sense of direction</b>, as a person would be easily able to tell their orientation in relation to the direction of the habitat's spin, potentially making spinwards and anti-spinwards very useful terms in the same way that east and west are.</article>
 
+<!-- removed from visibility until I re-read, verify and fix anything that is plainly untrue after the recent atmospheric pressure calculation update
 <h3>habitat sizes</h3>
 <article>Maximum radius a habitat can be safely built with varies by material and desired level of gravity. Not all habitats are meant to emulate terran gravity, especially as not all human species are used to it, not all people like it even if they are of a species made to exist within such gravity, and the alien species did not evolve for terran levels of gravity anyway.<br><br>
 It is standard to build a habitat such that the stress in its walls is only half that of the maximum stress the material can handle, this allows a section of the habitat wall to support up to it's own mass worth of buildings, though almost always some margin is kept just in case, such as having each section of the wall only support half it's own mass worth of buildings.
@@ -253,5 +268,6 @@ A more advanced habitat structure involves a non-rotating shell to which weight 
 Habitats of this scale could have living surface equivalent to thousands of planets and easily support trillions of people.
 At a much smaller and more practical scale, this could also allow construction of habitats with rotational periods equal to that of planets whose conditions they seek to replicate, providing a natural day-night cycle using the natural light of the star rather than artificial lighting.
 </article>
+-->
 
 </html>
