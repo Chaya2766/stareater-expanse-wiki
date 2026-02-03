@@ -271,25 +271,31 @@
 		\textbf{Maximum radius of a rotating habitat}
 	\end{center}
 	
-	$$ R_{max} = \frac{\sigma_{max}}{s \cdot g \cdot \rho} $$
+	$$ \sigma_\theta = R_c \cdot \rho_{wall} \cdot (g + \frac{P}{\rho_a})$$
 	
-	$$ s = \frac{\sigma_{max}}{R_{max} \cdot g \cdot \rho} $$
+	$$ R_c = \frac{\sigma_\theta}{s \cdot \rho_{wall} \cdot (g + \frac{P}{\rho_a})}$$
+	
+	$$ s = \frac{\sigma_\theta}{R_c \cdot \rho_{wall} \cdot (g + \frac{P}{\rho_a})}$$
 	
 	where:
 	
 	\begin{itemize}
-		\item $\sigma_{max}$ is the maximum tensile stress the building material can handle
+		\item $s$ is the safety factor (failure stress divided by maximum acceptable stress)
 		
-		\item $R_{max}$ is the largest achievable radius of the cylinder
+		\item $\sigma_\theta$ is the hoop stress in the habitat
 		
-		\item $s$ is the safety factor (eg. 2 means the actual stress on the habitat wall would have to double for it to break, you can interpret it to mean how many times stronger the wall material is than necessary)
+		\item $R_c$ is the radius of the cylinder
 		
-		\item $g$ is the surface gravity felt in the habitat
+		\item $P$ is the internal atmospheric pressure
 		
-		\item $\rho$ is the density of the material from which the habitat is made
+		\item $\rho_{wall}$ is the density of the wall material
+		
+		\item $\rho_a$ is the aerial density of the habitat wall (mass per area, typically set to 10t/m$^2$)
+		
+		\item $g$ is the centrifugal acceleration provided by the habitat's rotation
 	\end{itemize}
 	
-	Safety factor must always be larger than 1, if the safety factor is exactly 1 then the habitat is operating exactly at its theoretical breaking point, where the centrifugal force acting on the mass of its walls is just enough to overpower the tensile strength of the walls.
+	Safety factor must always be larger than 1, if the safety factor is exactly 1 then the habitat is operating exactly at its theoretical breaking point, where the centrifugal force acting on the mass of its walls combined with the atmospheric pressure it holds is exactly enough to overpower the tensile strength of the walls and rupture the habitat.
 	
 	\bigskip
 	
@@ -297,33 +303,23 @@
 	
 	\bigskip
 	
-	Example of a rotating habitat with safety factor 2 and internal gravity 1g, made from mild steel of density $\rho = 7850kg/m^3$ and tensile strength $\sigma = 300MPa$:
+	As an example habitat I will present one with the following characteristics:
 	
-	$$ R_{max} = \frac{300MPa}{2 \cdot 9.807m/s^2 \cdot 7850kg/m^3} = 1948m $$
+	\begin{itemize}
+		\item 1gee internal gravity ($g = 9.807m/s^2$)
+		
+		\item 1 atmosphere internal pressure ($P = 101325 Pa$)
+		
+		\item Made from hardened 304 stainless steel (tensile strength 1050MPa and density 7900$kg/m^3$)
+		
+		\item 10 tonnes per square meter of hull (standard for, $\rho_a = 10 000kg/m^2$)
+		
+		\item safety factor 2 (meaning that stress in the habitat is naturally 2 times less than what it would take to break it)
+	\end{itemize}
 	
-	This means the habitat as a whole could be 3.896km in diameter, potentially a bit less than 8km in diameter if a lower safety factor were acceptable.
+	$$ R_c = \frac{1050MPa}{2 \cdot 7900kg/m^3 \cdot (9.807m/s^2 + \frac{101325 Pa}{10 000kg/m^2})} = 3332.925235m$$
 	
-	\bigskip
-	
-	Several other materials using the same assumptions of 1g internal gravity and safety factor of 2:
-	
-	\begin{enumerate}
-		\item Pure aluminium ($\rho = 2699kg/m^3$, $\sigma = 47MPa$): 887.8m
-		
-		\item fully annealed \href{https://en.wikipedia.org/wiki/SAE_304_stainless_steel#Mechanical_properties}{SAE 304 stainless steel} ($\rho = 7900kg/m^3$, $\sigma = 210MPa$): 1355m
-		
-		\item Pure titanium ($\rho = 4110kg/m^3$, $\sigma = 434MPa$): 5384m
-		
-		\item fully hardened \href{https://en.wikipedia.org/wiki/SAE_304_stainless_steel#Mechanical_properties}{SAE 304 stainless steel} ($\rho = 7900kg/m^3$, $\sigma = 1050MPa$): 6776m
-		
-		\item \href{https://en.wikipedia.org/wiki/7034_aluminium_alloy}{7034 aluminium alloy} ($\rho = 2890kg/m^3$, $\sigma = 730MPa$): 12.88km
-		
-		\item Carbon fiber ($\rho = 1800kg/m^3$, $\sigma = 4GPa$): 113.3km
-		
-		\item Low end carbon nanotubes ($\rho = 1400kg/m^3$, $\sigma = 11GPa$): 400.6km
-		
-		\item High end carbon nanotubes ($\rho = 1400kg/m^3$, $\sigma = 63GPa$): 2294km
-	\end{enumerate}
+	As such this example habitat is nearly 3.333km in radius.
 	
 	\pagebreak
 	
@@ -388,6 +384,76 @@
 	$$ \sigma_\theta \approx R_c \cdot g \cdot \rho_{wall} $$
 	
 	Formulated like this, it gives us the stress experienced by the habitat wall as a function of the habitat's radius, internal gravity and density of the material the wall is made from, and can be used to judge what material is required for given habitat specifications.
+	
+	\pagebreak
+	
+	For clarity this equation deducing stress from the habitat's rotation and composition will be written as such:
+	
+	$$ \sigma_{\theta r} \approx R_c \cdot g \cdot \rho_{wall} $$
+	
+	where:
+	
+	\begin{itemize}
+		\item $\sigma_{\theta r}$ is the hoop stress in the habitat resulting from its own rotation
+		
+		\item $R_c$ is the radius of the habitat
+		
+		\item $g$ is the centrifugal acceleration provided by the habitat's rotation
+		
+		\item $\rho_{wall}$ is the density of the material from which the habitat is made
+	\end{itemize}
+	
+	This could notably already be the final form if the habitat in question has no atmosphere.
+	
+	\noindent \rule{\linewidth}{0.5pt}
+	
+	\begin{center}
+		\textbf{accounting for internal atmospheric pressure}
+	\end{center}
+	
+	As previously mentioned the hoop stress equation is as such:
+	
+	$$ \sigma_\theta \approx \frac{R_c \cdot P}{t_d} $$
+	
+	To make use of it for calculating stress caused in the habitat by atmospheric pressure, thickness of the wall must be known. The thickness of the wall can be calculated simply as such:
+	
+	$$ t_d = \frac{\rho_a}{\rho_{wall}} $$
+	
+	where:
+	
+	\begin{itemize}
+		\item $t_d$ is the thickness of the cylinder wall
+		
+		\item $\rho_{wall}$ is the density of the wall material
+		
+		\item $\rho_a$ is the aerial density of the habitat wall (mass per area, typically set to 10t/m$^2$)
+	\end{itemize}
+	
+	Combining the equations gives:
+	
+	$$ \sigma_{\theta p} \approx \frac{R_c \cdot P \cdot \rho_{wall}}{\rho_a} $$
+	
+	As such for the final hoop stress in the habitat the two causes of stress should be combined, ie. summing up the stress caused by internal atmospheric pressure with the stress caused by rotation:
+	
+	$$ \sigma_\theta = \sigma_{\theta r} + \sigma_{\theta p} = R_c \cdot g \cdot \rho_{wall} + \frac{R_c \cdot P \cdot \rho_{wall}}{\rho_a} = R_c \cdot \rho_{wall} \cdot (g + \frac{P}{\rho_a})$$
+	
+	where:
+	
+	\begin{itemize}
+		\item $\sigma_{\theta p}$ is the hoop stress resulting from internal atmospheric pressure
+		
+		\item $\sigma_{\theta r}$ is the hoop stress in the habitat resulting from its own rotation
+		
+		\item $R_c$ is the radius of the cylinder
+		
+		\item $P$ is the internal atmospheric pressure
+		
+		\item $\rho_{wall}$ is the density of the wall material
+		
+		\item $\rho_a$ is the aerial density of the habitat wall (mass per area, typically set to 10t/m$^2$)
+		
+		\item $g$ is the centrifugal acceleration provided by the habitat's rotation
+	\end{itemize}
 	
 	\pagebreak
 	
