@@ -112,6 +112,10 @@ The illustration used for this page shows a habitat that provides interior light
   <td id="table_hab_gravity">-</td>
 </tr>
 <tr>
+  <td>Internal atmospheric pressure</td>
+  <td id="table_hab_pressure">-</td>
+</tr>
+<tr>
   <td>Provided living area</td>
   <td id="table_hab_useable_area">-</td>
 </tr>
@@ -225,6 +229,7 @@ function table_calc(){
   
   atmospheric_pressure = document.getElementById("hab_pressure").value;
   stress_atmospheric = radius * atmospheric_pressure * material_density / aerial_density;
+  document.getElementById("table_hab_pressure").innerHTML = (atmospheric_pressure*1).toFixed(digits) + " Pa ("+(atmospheric_pressure/101325).toFixed(digits)+" atm )";
   
   stress = stress_atmospheric + stress_centrifugal;
   material_strength = document.getElementById("material_strength").value;
