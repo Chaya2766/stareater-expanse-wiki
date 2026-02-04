@@ -63,6 +63,8 @@ The illustration used for this page shows a habitat that provides interior light
   <option value="wrought_iron">wrought iron</option>
   <option value="aluminium">Pure aluminium</option>
   <option value="aluminium_alloy_7034">Aluminium alloy 7034</option>
+  <option value="tungsten">Tungsten</option>
+  <option value="HDPE">High Density Polyethylene (HDPE)</option>
   <option value="carbon_fiber">Carbon fiber</option>
   <option value="low_end_carbon_nanotubes">Low-end carbon nanotubes</option>
   <option value="high_end_carbon_nanotubes">High-end carbon nanotubes</option>
@@ -94,6 +96,10 @@ The illustration used for this page shows a habitat that provides interior light
 <tr>
   <td>Habitat length</td>
   <td id="table_hab_length">-</td>
+</tr>
+<tr>
+  <td class="tip" tip="Amount of mass per area of hull, relevant to radiation shielding. At 10 000 kg/m^2 the habitat hull provides radiation shielding equivalent to earth's atmosphere.">Aerial density</td>
+  <td id="table_hab_aerial_density">-</td>
 </tr>
 <tr>
   <td>Habitat mass</td>
@@ -180,6 +186,8 @@ function set_material(){
   materials_dict["grade_200_maraging_steel"] = [8100,1379E+6];
   materials_dict["grade_350_maraging_steel"] = [8100,2413E+6];
   materials_dict["eglin_steel"] = [7850,1337E+6];
+  materials_dict["tungsten"] = [19254,550E+6];
+  materials_dict["HDPE"] = [961,38E+6];//https://en.wikipedia.org/wiki/High-density_polyethylene
   
   if(debug_log)console.log(materials_dict[material]);
   document.getElementById("material_density").value = materials_dict[material][0];
@@ -217,6 +225,7 @@ function table_calc(){
   document.getElementById("table_hab_rotation_time").innerHTML = time.toFixed(digits) + " s";
   
   aerial_density = document.getElementById("hab_aerial_density").value;
+  document.getElementById("table_hab_aerial_density").innerHTML = (aerial_density*1).toFixed(digits) + " kg/m<sup>2</sup>";
   habitat_mass = (useable_area + caps_area) * aerial_density;
   document.getElementById("table_hab_mass").innerHTML = habitat_mass.toFixed(digits) + " kg";
   

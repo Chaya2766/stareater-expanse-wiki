@@ -1,0 +1,112 @@
+<head>
+ <link rel="stylesheet" href="../index.css"></link>
+</head>
+<html class="background2">
+<a style="float: right;" target="_blank" href="../index.html?page=pages/finespun_station_one.html">link to this page</a>
+
+<h1>Finespun Station One</h1>
+<img src="../images/placeholder.png" class="basics"></img>
+<article class="basics">
+Finespun Station One is the first of the rotating habitats constructed by <a href="felicity.html">Felicity</a> in orbit of the Finespun asteroid.
+<br><br>
+It is crude and unable to hold air at standard terran atmospheric pressure.
+</article>
+
+<hr>
+
+<h1>Structure</h1>
+
+<table class="styled right">
+<tbody><tr><th colspan="2">summary habitat data table</th></tr>
+<tr>
+  <td>Habitat radius</td>
+  <td id="table_hab_radius">70 m</td>
+</tr>
+<tr>
+  <td>Habitat length</td>
+  <td id="table_hab_length">50 m</td>
+</tr>
+<tr>
+  <td class="tip" tip="Amount of mass per area of hull, relevant to radiation shielding. At 10 000 kg/m^2 the habitat hull provides radiation shielding equivalent to earth's atmosphere.">Aerial density</td>
+  <td>77.5kg/m<sup>2</sup></td>
+</tr>
+<tr>
+  <td>Habitat mass</td>
+  <td id="table_hab_mass">4090353.635 kg</td>
+</tr>
+<tr>
+  <td>Internal volume</td>
+  <td id="table_hab_volume">769690.200 m<sup>3</sup></td>
+</tr>
+<tr>
+  <td>Hull thickness</td>
+  <td id="table_hab_hull_thickness">0.01000 m</td>
+</tr>
+<tr>
+  <td>Provided centrifugal gravity</td>
+  <td id="table_hab_gravity">1.000 m/s<sup>2</sup> (0.102g )</td>
+</tr>
+<tr>
+  <td>Internal atmospheric pressure</td>
+  <td id="table_hab_pressure">21000.000 Pa (0.207 atm )</td>
+</tr>
+<tr>
+  <td>Provided living area</td>
+  <td id="table_hab_useable_area">21991.149 m<sup>2</sup></td>
+</tr>
+<tr>
+  <td>Time to complete a rotation</td>
+  <td id="table_hab_rotation_time">52.569 s</td>
+</tr>
+<tr>
+  <td class="tip" tip="the number of times that the stress in the habitat would have to increase above what is already caused by its own rotation before it breaks - if the safety factor of a habitat is 3, that would mean the stress that it experiences from its own rotation and rated atmospheric pressure is 3 times less than what is required to break it">Safety factor</td>
+  <td id="table_hab_safety_factor">1.356</td>
+</tr>
+</tbody></table>
+
+<article>
+
+Finespun One is made out of 10mm plates of what is effectively plain iron with a little bit of nickel and various impurities, produced from asteroid regolith through <a href="ftt_low_temperature_electrolysis.html">low temperature electrolysis</a> and used without much further processing.
+Despite being made of a material not resistant to corrosion, it is filled with a low pressure pure-oxygen atmosphere, mainly due to the fact it is not strong enough to hold a full atmosphere of pressure.
+A trick borrowed from naval engineering is used to keep the structure from rusting too quickly - sacrificial anodes (in this case made of zinc) are mounted to the walls, which would preferentially rust first before the less electronegative iron is affected, additionally moisture level is kept low when reasonably possible.
+Despite the workarounds, the structure inevitably will rust through eventually, but is expected to remain safely usable for at least a century since construction with such maintenance.
+<br><br>
+The station is divided into 24 sections that retain pressure independently.
+There are 3 levels to the ring, each 15m tall, with radii of 70m, 55m and 40m, producing apparent gravity of respectively 1m/s<sup>2</sup>, 0.786m/s<sup>2</sup> and 0.571m/s<sup>2</sup>.
+Each of these levels is also divided into 8 separate rooms along the ring.
+The "top" of the ring, which is exposed to space at a radius of 25m and centrifugal acceleration of 0.357m/s<sup>2</sup>, might be thought of as a landing zone for small spacecraft, mostly for the mining vessels that collect regolith from Finespun and bring it to the station for refining.
+</article>
+
+<h1>Internal environment</h1>
+<article>
+The internal atmosphere is 21kPa of pure oxygen, which delivers the exact same amount of oxygen as standard terran air at standard terran pressure but with none of the other gasses, most notably nitrogen.
+Temperature is vaguely kept some safe margin away from freezing as a necessity for the continued functioning of the station, eg. within a few kelvin of 285K ( 12<sup>o</sup>C / 53<sup>o</sup>F ).
+Moisture levels practically never reach 50% or above.
+<br><br>
+Visitors are generally advised to use nonflamable clothing or request such as needed - or keep their spacesuits on if it is safe and conveniently possible.
+Any use of fire is discouraged, as despite the identical amount of oxygen as in the common terran environment, the low atmospheric pressure causes flames to be considerably expanded compared to what most people are ready to expect (an example is usually presented of a thin piece of wood burning in the local atmosphere, producing what looks like a hazy aura of orange glow instead of the typical flame with a clear boundary and upwards direction).
+</article>
+
+<h1>timekeeping</h1>
+<article>
+The local standard of timekeeping is <a href="unix_epoch.html">Epoch Time</a>, and the chosen cycle length is 90 kiloseconds, exactly equal to 25 hours.
+Dates are written with digits spaced in groups of three, and the time of day is simply calculated as the epoch time modulo cycle length, which at the moment would correspond to <span id="finespun_local_time">[time]</span>. The megasecond stands in for the local equivalent of a week and/or month.
+
+<script>
+function FinespunClock(){
+  timenow = Math.floor(Date.now() / 1000) % 90000;
+  document.getElementById("finespun_local_time").innerHTML = timenow.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+}
+setInterval(FinespunClock, 1000);
+</script>
+
+</article>
+
+<h1 class="division">relevant pages</h1>
+
+<div class="card">
+ <img src="../images/card_placeholder.png"></img>
+ <a target="IM" href="testpage.html">placeholder</a>
+</div>
+
+</html>
