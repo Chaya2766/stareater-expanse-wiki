@@ -1,3 +1,5 @@
+$fn=64;
+
 module finespun_one(equipment=false){
 
 difference(){
@@ -41,21 +43,51 @@ if(equipment){
 
 }
 
-
+/*
+//openscad finespun_station_one.scad -o finespun_station_cutaway.png --colorscheme=Starnight --imgsize=1000,1000
+$vpr=[66.2,0,33];
+$vpd=420E+3;
+rotate([90,0,0]){
 difference(){
-    finespun_one(true);
-    translate([0,0,130e3]){
-        rotate([25,-15,50]){
+    color("#888"){finespun_one(false);}
+    translate([0,0,135e3]){
+        rotate([0,30,0]){
+            cube([400e3,400e3,200e3],true);}}
+}
+}
+*/
+
+
+
+
+//alternative view cutting paradigm
+//this one requires animation
+$vpr=[76.2,0,33+360*$t];
+$vpd=420E+3;
+difference(){
+    rotate([90,0,0]){color("#888"){finespun_one(true);}}
+    rotate($vpr){
+        translate([0,0,120e3]){
             cube([400e3,400e3,200e3],true);}}
 }
 
 
+
+
+//top down view
+//openscad finespun_station_one.scad -o finespun_station_one_divisions.png --colorscheme=Starnight --imgsize=1000,1000 --projection ortho
 /*
-//alternative view cutting paradigm
+$vpr=[0,0,0];
+$vpt=[0,0,0];
+$vpd=4E+5;
+minkowski(){
 difference(){
-    finespun_one(true);
-    rotate($vpr){
-        translate([0,0,110e3]){
-            cube([400e3,400e3,200e3],true);}}
+    finespun_one(false);
+    translate([0,0,110e3]){
+        cube([400e3,400e3,200e3],true);}
+    translate([0,0,-110e3]){
+        cube([400e3,400e3,200e3],true);}
+}
+cube(1E+3);
 }
 */
