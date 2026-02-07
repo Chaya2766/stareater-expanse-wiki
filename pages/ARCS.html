@@ -1,0 +1,289 @@
+<head>
+ <link rel="stylesheet" href="../index.css"></link>
+</head>
+<html class="background2" id="page">
+<article class="warning">work in progress</article>
+<a style="float: right;" target="_blank" href="../index.html?page=pages/ARCS.html">link to this page</a>
+
+<h1>Advanced Recovery Code Standard</h1>
+<hr>
+
+<img src="../images/placeholder.png" class="basics"></img>
+<article class="basics">
+With the massive amounts of data routinely used and stored in the modern day, corruption is routine and expected.
+<br><br>
+ARCS is a standard specifying a scheme for packaging any piece of data with a recovery code capable that helps in error detection and allows the original bits to be recreated in case of corruption.
+Many digital files created in the modern incorporate an ARCS field, and undergo routine integrity checks and repair.
+<br><br>
+It incorporates a number of algorithms, most notably Reed-Solomon error correction codes.
+</article>
+<hr>
+<!--
+<h2>Parameters and simplified relations</h2>
+<ul>
+  <li>d - number of bits of original data</li>
+  <li>r - number of redundancy bits</li>
+  <li>a - number of all bits (a = d + r)</li>
+  <li>c - number of corrupted bits that can be repaired</li>
+  <li>l - level of original redundancy (ratio of repairable corruption to original data)</li>
+  <li>t - level of total redundancy (ratio of repairable corruption to all data)</li>
+  <li>ceil() - rounding up</li>
+  <li>floor() - rounding down</li>
+</ul>
+<article>
+c = floor(r/2)<br>
+r = ceil(d × 2 × l)<br>
+r = 2 * ceil(tb / (1-t))<br>
+l = c/d <br>
+<! t = c/a = floor(r/2)/a = floor(r/2)/(d+r) = floor(r/2)/(d+ceil(d × 2 × l)) = floor(r/2)/ceil(d + d × 2 × l) = floor(r/2)/ceil(d × 2 × (l+0.5)) = floor((d×2×l)/2)/ceil(d × 2 × (l+0.5)) = floor(d×l)/ceil(d × 2 × (l+0.5)) >
+t = c/a = floor(d×l)/ceil(d × 2 × (l+0.5))<br>
+<! r = t×a = t×(d+r) = t×(d+(d×l)) = ... >
+
+</article>
+<hr>
+-->
+
+<h2>File size and redundancy approximator</h2>
+<article>Calculate the effects of adding an ARCS field to a file.</article>
+<br>
+<article>Pick the one which should be calculated automatically and fill in the other two, make sure to specify whether the redundancy percentage is given compared to original size or final size:</article>
+<input type="radio" id="autocalc_original_filesize" name="autocalc"></input>
+<span> Original file size: </span>
+<input type="number" id="original_filesize" oninput="autocalc()"></input>
+<select name="unit" id="original_filesize_unit" oninput="autocalc()">
+  <option value="1">bits</option>
+  <option value="1000">kb</option>
+  <option value="1024">kib</option>
+  <option value="1E+6">Mb</option>
+  <option value="1048576">Mib</option>
+  <option value="1E+9">Gb</option>
+  <option value="1073741824">Gib</option>
+  <option value="1E+12">Tb</option>
+  <option value="1099511627776">Tib</option>
+  <option value="1E+15">Pb</option>
+  <option value="1125899906842624">Pib</option>
+  <option value="1E+18">Eb</option>
+  <option value="1152921504606846976">Eib</option>
+  <option value="1E+21">Zb</option>
+  <option value="1180591620717411303424">Zib</option>
+  <option value="1E+24">Yb</option>
+  <option value="1208925819614629174706176">Yib</option>
+  <option value="1E+27">Rb</option>
+  <option value="1237940039285380274899124224">Rib</option>
+  <option value="1E+30">Qb</option>
+  <option value="1267650600228229401496703205376">Qib</option>
+  <option value="8">Bytes</option>
+  <option value="8E+3">kB</option>
+  <option value="8192">kiB</option>
+  <option value="8E+6">MB</option>
+  <option value="8388608">MiB</option>
+  <option value="8E+9">GB</option>
+  <option value="8589934592">GiB</option>
+  <option value="8E+12">TB</option>
+  <option value="8796093022208">TiB</option>
+  <option value="8E+15">PB</option>
+  <option value="9007199254740992">PiB</option>
+  <option value="8E+18">EB</option>
+  <option value="9223372036854775808">EiB</option>
+  <option value="8E+21">ZB</option>
+  <option value="9444732965739290427392">ZiB</option>
+  <option value="8E+24">YB</option>
+  <option value="9671406556917033397649408">YiB</option>
+  <option value="8E+27">RB</option>
+  <option value="9903520314283042199192993792">RiB</option>
+  <option value="8E+30">QB</option>
+  <option value="10141204801825835211973625643008">QiB</option>
+</select>
+<br>
+<input type="radio" id="autocalc_final_filesize" name="autocalc"></input>
+<span> Final file size: </span>
+<input type="number" id="final_filesize" oninput="autocalc()"></input>
+<select name="unit" id="final_filesize_unit" oninput="autocalc()">
+  <option value="1">bits</option>
+  <option value="1000">kb</option>
+  <option value="1024">kib</option>
+  <option value="1E+6">Mb</option>
+  <option value="1048576">Mib</option>
+  <option value="1E+9">Gb</option>
+  <option value="1073741824">Gib</option>
+  <option value="1E+12">Tb</option>
+  <option value="1099511627776">Tib</option>
+  <option value="1E+15">Pb</option>
+  <option value="1125899906842624">Pib</option>
+  <option value="1E+18">Eb</option>
+  <option value="1152921504606846976">Eib</option>
+  <option value="1E+21">Zb</option>
+  <option value="1180591620717411303424">Zib</option>
+  <option value="1E+24">Yb</option>
+  <option value="1208925819614629174706176">Yib</option>
+  <option value="1E+27">Rb</option>
+  <option value="1237940039285380274899124224">Rib</option>
+  <option value="1E+30">Qb</option>
+  <option value="1267650600228229401496703205376">Qib</option>
+  <option value="8">Bytes</option>
+  <option value="8E+3">kB</option>
+  <option value="8192">kiB</option>
+  <option value="8E+6">MB</option>
+  <option value="8388608">MiB</option>
+  <option value="8E+9">GB</option>
+  <option value="8589934592">GiB</option>
+  <option value="8E+12">TB</option>
+  <option value="8796093022208">TiB</option>
+  <option value="8E+15">PB</option>
+  <option value="9007199254740992">PiB</option>
+  <option value="8E+18">EB</option>
+  <option value="9223372036854775808">EiB</option>
+  <option value="8E+21">ZB</option>
+  <option value="9444732965739290427392">ZiB</option>
+  <option value="8E+24">YB</option>
+  <option value="9671406556917033397649408">YiB</option>
+  <option value="8E+27">RB</option>
+  <option value="9903520314283042199192993792">RiB</option>
+  <option value="8E+30">QB</option>
+  <option value="10141204801825835211973625643008">QiB</option>
+</select>
+<br>
+<input type="radio" id="autocalc_redundancy_level" name="autocalc"></input>
+<span> Redundancy level: </span>
+<input type="number" id="redundancy_level" value="10" oninput="autocalc()"></input>
+<span> % </span>
+<input type="radio" id="percentage_of_original" name="redundancy_reference" checked="true" onchange="autocalc()"></input><span style="margin-right: 50px;">as percentage of original file size</span> <input type="radio" id="percentage_of_final" name="redundancy_reference" onchange="autocalc()"></input><span class="tip" tip="note that there is no possibility of repairing more than 50% corruption. If you are using this setting, file size approaches infinity as redundancy approaches 50%.">as percentage of the final file size</span>
+<br><br>
+<article id="conclusion">[conclusion]</article>
+
+<script>
+
+function autocalc(){
+  selected = document.querySelector('input[name="autocalc"]:checked').id;
+  reference = document.querySelector('input[name="redundancy_reference"]:checked').id;
+  
+  console.log("autocalc()",selected,reference);
+  
+  let original_filesize = 1;
+  let original_filesize_unit = document.getElementById("original_filesize_unit").value * 1;
+  let final_filesize = 1;
+  let final_filesize_unit = document.getElementById("final_filesize_unit").value * 1;
+  let redundancy_level = 1;
+  
+  let error_fixes = 1;
+  let redundancy_bits = 1;
+  
+  if(selected == "autocalc_original_filesize"){
+    final_filesize = document.getElementById("final_filesize").value * final_filesize_unit;
+    redundancy_level = document.getElementById("redundancy_level").value / 100;
+    if(reference == "percentage_of_original"){
+      //algebra time. Starting from the facts:
+      //redundancy_level = error_fixes/original_file_size
+      //error_fixes = Math.floor(redundancy_bits/2)
+      //redundancy_bits = final_filesize - original_filesize
+      
+      //combining and rearranging:
+      //redundancy_level = error_fixes/original_file_size
+      //redundancy_level = (redundancy_bits/2)/original_file_size
+      //redundancy_level = ((final_filesize - original_filesize)/2)/original_file_size
+      //redundancy_level = (final_filesize - original_filesize)/(2*original_file_size)
+      //redundancy_level*2*original_file_size = (final_filesize - original_filesize)
+      //redundancy_level*2*original_file_size + original_filesize = final_filesize
+      //(redundancy_level*2 + 1)* original_filesize = final_filesize
+      //(redundancy_level*2 + 1) = final_filesize/original_filesize
+      //(redundancy_level*2 + 1)/final_filesize = 1/original_filesize
+      //original_filesize = final_filesize/(redundancy_level*2 + 1)
+      
+      original_filesize = final_filesize/(redundancy_level*2 + 1);
+      document.getElementById("original_filesize").value = original_filesize / original_filesize_unit;
+    } else {
+      error_fixes = Math.floor(redundancy_level * final_filesize);
+      redundancy_bits = 2*error_fixes;
+      original_filesize = final_filesize-redundancy_bits;
+      document.getElementById("original_filesize").value = original_filesize / original_filesize_unit;
+    }
+    filesize_increase = 100 * (final_filesize-original_filesize)/original_filesize;
+    document.getElementById("conclusion").innerHTML="Adding an ARCS field increased the file size by "+filesize_increase.toFixed(2)+"% over the original, and should allow it to suffer "+error_fixes.toExponential(3)+" corrupted bits before it becomes unrepairable.";
+  }
+  if(selected == "autocalc_final_filesize"){
+    original_filesize = document.getElementById("original_filesize").value * original_filesize_unit;
+    redundancy_level = document.getElementById("redundancy_level").value / 100;
+    if(reference == "percentage_of_original"){
+      error_fixes = original_filesize * redundancy_level;
+      redundancy_bits = Math.ceil(error_fixes * 2);
+      final_filesize = original_filesize + redundancy_bits;
+      document.getElementById("final_filesize").value = final_filesize/final_filesize_unit;
+    } else {
+      //algebra time. starting from:
+      //redundancy_level = error_fixes / final_filesize
+      //error_fixes = 0.5*redundancy_bits
+      //redundancy_bits = final_filesize-original_filesize
+      //redundancy_bits+original_filesize = final_filesize
+      
+      //rearranging and substituting:
+      //redundancy_level = error_fixes / final_filesize
+      //redundancy_level*final_filesize = error_fixes
+      //final_filesize = error_fixes/redundancy_level
+      //final_filesize = 0.5*redundancy_bits/redundancy_level
+      //final_filesize = 0.5*(final_filesize-original_filesize)/redundancy_level
+      //final_filesize*redundancy_level = 0.5*(final_filesize-original_filesize)
+      //final_filesize*redundancy_level*2 = (final_filesize-original_filesize)
+      //final_filesize*redundancy_level*2 - final_filesize = -original_filesize
+      //(redundancy_level*2 -1)*final_filesize = -original_filesize
+      //this step, I feel like this is the first time I ever used this trick outside of math class
+      //when you have a × b - b you can turn it into (a-1) × b and it is super satisfying
+      //final_filesize = -original_filesize/(redundancy_level*2 - 1)
+      
+      final_filesize = Math.ceil(-original_filesize/(redundancy_level*2 - 1));
+      redundancy_bits = final_filesize - original_filesize;
+      error_fixes = Math.floor(redundancy_bits/2);
+      document.getElementById("final_filesize").value = final_filesize/final_filesize_unit;
+    }
+    filesize_increase = 100 * (final_filesize-original_filesize)/original_filesize;
+    document.getElementById("conclusion").innerHTML="Adding an ARCS field increased the file size by "+filesize_increase.toFixed(2)+"% over the original, and should allow it to suffer "+error_fixes.toExponential(3)+" corrupted bits before it becomes unrepairable.";
+  }
+  if(selected == "autocalc_redundancy_level"){
+    original_filesize = document.getElementById("original_filesize").value * original_filesize_unit;
+    final_filesize = document.getElementById("final_filesize").value * final_filesize_unit;
+    if(reference == "percentage_of_original"){
+      redundancy_bits = final_filesize - original_filesize;
+      error_fixes = Math.floor(redundancy_bits/2);
+      redundancy_level = error_fixes / original_filesize;
+      document.getElementById("redundancy_level").value = (redundancy_level*100);
+    } else {
+      redundancy_bits = final_filesize - original_filesize;
+      error_fixes = Math.floor(redundancy_bits/2);
+      redundancy_level = error_fixes / final_filesize;
+      document.getElementById("redundancy_level").value = (redundancy_level*100);
+    }
+    filesize_increase = 100 * (final_filesize-original_filesize)/original_filesize;
+    document.getElementById("conclusion").innerHTML="Adding an ARCS field increased the file size by "+filesize_increase.toFixed(2)+"% over the original, and should allow it to suffer "+error_fixes.toExponential(3)+" corrupted bits before it becomes unrepairable.";
+  }
+}
+
+</script>
+<!--
+<hr>
+
+<h2>Performance</h2>
+<table>
+  <tr>
+    <th>operation</th>
+    <th>cost</th>
+    <th>result</th>
+  </tr>
+  <tr>
+    <td>creating recovery code</td>
+    <td>b = ceil( 2 × d × l × log2(2 × d × l) )</td>
+    <td>r = 2 × d × l</td>
+  </tr>
+</table>
+<article>
+
+<ul>
+  <li>d - number of bits of original data (ie. excluding the bits contained in the recovery code)</li>
+  <li>r - number of redundancy bits</li>
+  <li>l - level of redundancy (ratio of repairable corruption to original data)</li>
+  <li>b - bit flips required to complete a given operation</li>
+  <li>ceil() - rounding up</li>
+</ul>
+
+</article>
+-->
+
+</html>
