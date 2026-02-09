@@ -11,11 +11,14 @@
 <img src="../images/placeholder.png" class="basics"></img>
 <article class="basics">
 With the massive amounts of data routinely used and stored in the modern day, corruption is routine and expected.
+Although widespread and well-supported, it is just one of many schemes used to protect data against corruption.
 <br><br>
 ARCS is a standard specifying a scheme for packaging any piece of data with a recovery code capable that helps in error detection and allows the original bits to be recreated in case of corruption.
-Many digital files created in the modern incorporate an ARCS field, and undergo routine integrity checks and repair.
+Digital files sometimes incorporate a built-in ARCS field, with the help of which they undergo routine integrity checks and repair.
+Other times, for files which do not support having a built-in ARCS field, separate arcs files can be generated to provide them with redundancy.
 <br><br>
 It incorporates a number of algorithms, most notably Reed-Solomon error correction codes.
+<psan class="meta">In the future will likely add an option to pick between (or maybe use both) reed-solomon and Low-Density Parity Checks (I expect that LDPC would be much better for massive files thanks to linear complexity - Reed-Solomon appears to be completely unuseable for error correction on files zetabytes in size such as human brain emulations even for a quettabithertz level compute cluster, and even for particularly large AI models stays prohibitively expensive - but I should fix the bitflip cost calculation of Reed-Solomon first)</span>
 </article>
 <hr>
 <!--
@@ -43,10 +46,22 @@ t = c/a = floor(d×l)/ceil(d × 2 × (l+0.5))<br>
 <hr>
 -->
 
+<h2>Usage</h2>
+<article>
+
+</article>
+
+<hr>
+
 <h2>File size and redundancy approximator</h2>
-<article>Calculate the effects of adding an ARCS field to a file.</article>
+<article>
+Calculate the effects of adding an ARCS field to a file.
+</article>
 <br>
-<article>Pick the one which should be calculated automatically and fill in the other two, make sure to specify whether the redundancy percentage is given compared to original size or final size:</article>
+<article>
+Pick the one which should be calculated automatically and fill in the other two.
+Make sure to specify whether the redundancy percentage is given compared to original size or final size.
+Also know that you can use scientific notation in these fields (eg. 4.623E+20) if you don't want to bother picking a unit of roughly appropriate size.</article>
 <input type="radio" id="autocalc_original_filesize" name="autocalc"></input>
 <span> Original file size: </span>
 <input type="number" id="original_filesize" oninput="autocalc()"></input>
@@ -148,7 +163,14 @@ t = c/a = floor(d×l)/ceil(d × 2 × (l+0.5))<br>
 <input type="number" id="redundancy_level" value="10" oninput="autocalc()"></input>
 <span> % </span>
 <input type="radio" id="percentage_of_original" name="redundancy_reference" checked="true" onchange="autocalc()"></input><span style="margin-right: 50px;">as percentage of original file size</span> <input type="radio" id="percentage_of_final" name="redundancy_reference" onchange="autocalc()"></input><span class="tip" tip="note that there is no possibility of repairing more than 50% corruption. If you are using this setting, file size approaches infinity as redundancy approaches 50%.">as percentage of the final file size</span>
-<br><br>
+<!--<br>
+<span class="tip" tip="Using a larger symbol size can vastly speed up calculations needed for the reed-solomon error correction, but comes at the cost of increasing the possibility of relatively small data corruption becoming unrepairable. If even a single bit is corrupted in a symbol, the whole symbol becomes corrupted. For example using a symbol length of 8, which corresponds to each byte of the file being a separate symbol, you could get lucky, and have the corrupted bits clustered in one spot, but in the worst case you could have the errors spread out such that only a single bit in each byte is corrupted, thus making them all unrecoverable."> Symbol size: </span>
+<input type="number" id="symbol_size" value="8" oninput="autocalc()"></input>
+<span> bits </span>-->
+<!picking symbol length was an implemented feature, but contrary to the description I wrote, I found that the computational cost only gets worse for any symbol length greater than one bit>
+<br>
+<article>Manual control in case the fields don't automatically update: <input type="button" onclick="autocalc()" value="recalculate"></input></article>
+<br>
 <article id="conclusion">[conclusion]</article>
 
 <script>
@@ -191,6 +213,8 @@ function autocalc(){
       
       original_filesize = final_filesize/(redundancy_level*2 + 1);
       document.getElementById("original_filesize").value = original_filesize / original_filesize_unit;
+      redundancy_bits = final_filesize-original_filesize;
+      error_fixes=Math.floor(redundancy_bits/2);
     } else {
       error_fixes = Math.floor(redundancy_level * final_filesize);
       redundancy_bits = 2*error_fixes;
@@ -254,6 +278,20 @@ function autocalc(){
     filesize_increase = 100 * (final_filesize-original_filesize)/original_filesize;
     document.getElementById("conclusion").innerHTML="Adding an ARCS field increased the file size by "+filesize_increase.toFixed(2)+"% over the original, and should allow it to suffer "+error_fixes.toExponential(3)+" corrupted bits before it becomes unrepairable.";
   }
+  
+  let macs = 1;
+  //let symbol_size = document.getElementById("symbol_size").value * 1;
+  //so it turns out actually using any symbol length greater than one bit is more computationally expensive, so there is actually no reason to even have the symbol length picker
+  let symbol_size = 1;
+  let bitflips_per_mac = (11 * symbol_size * symbol_size) - (4 * symbol_size) - 4; //equation for bit flips per multiply-accumulate from the computation page, gives 3 for one bit
+  
+  original_filesize = document.getElementById("original_filesize").value * document.getElementById("original_filesize_unit").value * 1;
+  final_filesize = document.getElementById("final_filesize").value * document.getElementById("final_filesize_unit").value * 1;
+  
+  macs = Math.ceil(original_filesize/symbol_size) * Math.ceil(redundancy_bits/symbol_size);
+  bitflips_total = macs * bitflips_per_mac;//I left the code doing all these operations just in case it is ever needed in this form
+  
+  document.getElementById("conclusion").innerHTML += "<br><span class='soft tip' tip='The calculations regarding the number of operations required to compute the reed-solomon code still requires more research and verification. Most notably there is the counterfact that I managed to produce 64GB of parity data for one of my long term data backups using par2 utility in just 4 days, which, if this calculator is to be trusted, would mean my laptop has a 2.275E+18bit/s flip rate, roughly equal to somewhere between 50 TeraFLOPS and 850 TeraFLOPS of computing power depending on operation size or that the par2 utility uses a vastly smarter and more optimized solution. For context, those huge A100 GPUs that Nvidia sells to the AI training datacenters have about 9.7 TeraFLOPS each.'>To compute this amount of redundancy data or repair the file with it, a minimum of "+bitflips_total+" bitflips would be required. </span>";
 }
 
 </script>
@@ -285,5 +323,16 @@ function autocalc(){
 
 </article>
 -->
+
+<hr>
+
+<h2>Commonly used values</h2>
+<article></article>
+<ul>
+  <li>0.5% redundancy relative to original: results in files that are 1% bigger than their unsecured counterparts</li>
+  <li>5% redundancy relative to original: results in files that are 10% bigger than their unsecured counterparts</li>
+  <li>10% redundancy across the whole file: results in files that are 25% bigger than their unsecured counterparts</li>
+  <li>25% redundancy across the whole file: results in files that are twice as big as their unsecured counterparts</li>
+</ul>
 
 </html>
