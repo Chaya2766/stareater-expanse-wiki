@@ -1,0 +1,55 @@
+<head>
+ <link rel="stylesheet" href="../index.css"></link>
+</head>
+<html class="background2">
+<a style="float: right;" target="_blank" href="../index.html?page=pages/finespun.html">link to this page</a>
+
+<h1>Finespun</h1>
+<hr>
+<img src="../images/finespun_flag.webp" class="basics"></img>
+<article class="basics">
+Finespun is a small mining settlement in the solar system asteroid belt, inhabited in majority by general purpose worker AI and a single human brain emulation.
+</article>
+<hr>
+
+<h1>Name and flag</h1>
+<article>
+The settlement was named Finespun after the loose composition of the asteroid that centers it, and the architecture that would be built within it in the form of a vast web of tunnels, which ended up never actually being built.
+<br><br>
+The flag of finespun is an abstract depiction of a kamacite crystal, showing off the mineral's 3-way symmetry, chosen for the symbol due to kamacite being the primary building material for nearly all of Finespun infrastructure, by far the most produced material locally, and also a key element of the local technology.
+</article>
+
+<h1>timekeeping</h1>
+<article>
+The local standard of timekeeping is <a href="unix_epoch.html">Epoch Time</a>, and the chosen cycle length is 90 kiloseconds, exactly equal to 25 hours, which was chosen because the lack of an overt day-night cycle combined with the availability of instant on-demand artificial lighting tends to delay the onset of sleep of the occasional human visitors, extending their circadian cycle to roughly that length.
+<br><br>
+Dates are written with digits spaced in groups of three, and the time of day is simply calculated as the epoch time modulo cycle length, which at the moment would correspond to <span id="finespun_local_time">[time]</span>.
+The megasecond stands in for the local equivalent of a week and/or month.
+No equivalent of noon or midnight is set - the settlement as a whole maintains a fairly consistent level of activity throughout the whole cycle, with local time used mainly just for synchronization rather than specifically corresponding to parts of a day-night cycle.
+
+<script>
+function FinespunClock(){
+  timenow = Math.floor(Date.now() / 1000) % 90000;
+  document.getElementById("finespun_local_time").innerHTML = timenow.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+}
+setInterval(FinespunClock, 1000);
+</script>
+
+</article>
+
+<h1>Habitats</h1>
+<article>
+Habitat structures around the Finespun asteroid:
+</article>
+<ol>
+  <li><a href="finespun_station_one.html">Finespun One</a> - a crude toroidal rotating habitat, also being the first one constructed around Finespun</li>
+</ol>
+
+<h1 class="division">relevant pages</h1>
+
+<div class="card">
+ <img src="../images/card_placeholder.png"></img>
+ <a target="IM" href="testpage.html">placeholder</a>
+</div>
+
+</html>

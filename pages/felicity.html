@@ -44,6 +44,13 @@ Minimal <a href="computation.html#computronium">computronium</a> requirements fo
   <tr><td>Civic-4 chip</td><td id="num_c4">770 500</td><td id="pow_use_c4">2.541MW</td><td id="vol_c4">0.07705m<sup>3</sup> ≈ (425.5mm)<sup>3</sup></td><td id="flip_use_c4">32.98%</td><td id="mem_use_c4">100.00%</td></tr>
 </table>
 
+More granular details:<br>
+The average neuron in Felicity's brain requires about 4.623E+9 bits of memory and 7.94E+14 bits/s to simulate at realtime speed, but only returns output information at about 4.8E+4bits/s and takes 1.12E+8bits/s of input.
+This means that while within the neuron massive bandwidth is required, the transfer of information between neurons is small enough that they could be distributed across separate devices.
+As a bonus, the neurons tend to be grouped up, ie. they can be divided into small groups where neurons within the group have a lot of connections with each other but relatively few connections with neurons in other groups.
+This is nothing special in terms of neurology, but it means that Felicity is very well suited for networked computing clusters.
+As is frequently the case with the hardware she uses, a device capable of simulating 2.163 million neurons in realtime may theoretically need 30.282TB/s of bandwidth, but a huge fraction of that bandwidth actually just goes to other neurons in the same device, while only a small fraction has to actually leave and be transferred via network connection to a different device to get to the relevant neurons.
+
 </article>
 
 <h3>Variables and quantization</h3>
@@ -240,6 +247,11 @@ stop these gaps from accumulating to the point of failure
 <div class="card">
  <img src="../images/card_placeholder.png"></img>
  <a target="IM" href="UEIA.html">UEIA</a>
+</div>
+
+<div class="card">
+ <img src="../images/finespun_flag.webp"></img>
+ <a target="IM" href="finespun.html">Finespun</a>
 </div>
 
 </html>

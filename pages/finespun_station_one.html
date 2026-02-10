@@ -31,8 +31,14 @@ On the left the station is shown with a section cut away to show the internal st
   <td id="table_hab_aerial_density">79kg/m<sup>2</sup></td>
 </tr>
 <tr>
-  <td>Habitat mass</td>
-  <td id="table_hab_mass">4169521.770 kg</td>
+  <td>Structural mass</td>
+  <td id="table_hab_mass">8 261 583 kg</td>
+  <!Calculated by multiplying the structural volume below by the 7900kg/m^3 density of kamacite>
+</tr>
+<tr>
+  <td>Structural volume</td>
+  <td>1045.77m<sup>3</sup></td>
+  <!Calculated by exporting model from OpenSCAD as STL and putting it into Orca Slicer which returned "1.04577e+12mm^3">
 </tr>
 <tr>
   <td>Internal volume</td>
@@ -74,7 +80,7 @@ On the left the station is shown with a section cut away to show the internal st
 
 <article>
 
-Finespun One is made out of 10mm plates of what is effectively plain iron with a little bit of nickel and various impurities, produced from asteroid regolith through <a href="ftt_low_temperature_electrolysis.html">low temperature electrolysis</a> and used without much further processing.
+Finespun One is made out of 10mm plates of kamacite, produced from the local asteroid regolith through <a href="ftt_low_temperature_electrolysis.html">low temperature electrolysis</a> and used without much further processing.
 Despite being made of a material not resistant to corrosion, it is filled with a low pressure pure-oxygen atmosphere, mainly due to the fact it is not strong enough to hold a full atmosphere of pressure.
 A trick borrowed from naval engineering is used to keep the structure from rusting too quickly - sacrificial anodes (in this case made of zinc) are mounted to the walls, which would preferentially rust first before the less electronegative iron is affected, additionally moisture level is kept low when reasonably possible.
 Despite the workarounds, the structure inevitably will rust through eventually, but is expected to remain safely usable for at least a century since construction with such maintenance.
@@ -96,21 +102,6 @@ Moisture levels practically never reach 50% or above.
 <br><br>
 Visitors are generally advised to use nonflamable clothing or request such as needed - or keep their spacesuits on if it is safe and conveniently possible.
 Any use of fire is discouraged, as despite the identical amount of oxygen as in the common terran environment, the low atmospheric pressure causes flames to be considerably expanded compared to what most people are ready to expect (an example is usually presented of a thin piece of wood burning in the local atmosphere, producing what looks like a hazy aura of orange glow instead of the typical flame with a clear boundary and upwards direction).
-</article>
-
-<h1>timekeeping</h1>
-<article>
-The local standard of timekeeping is <a href="unix_epoch.html">Epoch Time</a>, and the chosen cycle length is 90 kiloseconds, exactly equal to 25 hours.
-Dates are written with digits spaced in groups of three, and the time of day is simply calculated as the epoch time modulo cycle length, which at the moment would correspond to <span id="finespun_local_time">[time]</span>. The megasecond stands in for the local equivalent of a week and/or month.
-
-<script>
-function FinespunClock(){
-  timenow = Math.floor(Date.now() / 1000) % 90000;
-  document.getElementById("finespun_local_time").innerHTML = timenow.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-}
-setInterval(FinespunClock, 1000);
-</script>
-
 </article>
 
 <h1 class="division">relevant pages</h1>
