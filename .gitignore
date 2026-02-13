@@ -13,3 +13,5 @@ rendering_zone/**/*.png
 rendering_zone/**/*.webp
 rendering_zone/**/*.gif
 rendering_zone/**/*.scad
+
+tools/orbit_search_tool/allnum.cat
