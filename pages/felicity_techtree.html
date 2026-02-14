@@ -92,6 +92,32 @@ Remotely controlled, self-contained platforms for interaction with the physical 
 <a href="ftt_drones.html">Dedicated page explaining the software used and listing various drone designs included in the felicity tech tree.</a>
 </article>
 
+<hr>
+
+<h2>Compute infrastructure</h2>
+<img class="styled right" src="../images/ftt_network_node.webp"></img>
+<article>
+The compute infrastructure provided by the tech tree consists of 3 main parts:
+<ul>
+  <li>
+  <b>Compute nodes</b> equipped with large amounts of general purpose computing chips and standard compute-sharing software capable of handling homomorphic encryption.
+  Client nodes can connect to them and delegate bulk computation to be performed by these nodes, all the while homomorphic encryption allows the computation to be performed without actually revealing the real data to the compute nodes.
+  </li>
+  <li>
+  <b>Network nodes</b> provide the communication primarily via infrared laser pulses, but also through some other means.
+  The network is self-organizing and nodes automatically detect each other upon line of sight to make the setup easier.
+  </li>
+  <li>
+  <b>Program nodes</b> run the actual AI programs and other critical software in plain form (no homomorphic encryption).
+  They themselves don't have anywhere near enough computing power for most applications, and as such must rely on the compute nodes to do bulk of the processing.
+  The main purpose of the program nodes is security - they are hardened against tampering, external intrusion, and immediately erase their contents when physically compromised.
+  </li>
+</ul>
+These elements form a scalable compute grid that makes any settlement using it practically its own local distributed supercomputer.
+<br><br>
+<a href="ftt_compute_infrastructure.html">Page explaining the compute infrastructure.</a>
+</article>
+
 <!--
 <hr>
 notes for my future self who will no doubt someday see this, about content that was not in the original document but remains to be worked on in the future

@@ -2,7 +2,9 @@
 import sys
 import argparse
 
+#made by Claude 3.5 Haiku
 #instructions
+#run the program from command line like this:
 #python3 search_orbits.py [data file] [a min] [a max] [e min] [e max] [i min] [i max] [long min] [long max] [node min] [node max] [arg min] [arg max] [anomaly min] [anomaly max]
 #it will only return objects for which all parameters fit between the specified min/max values
 #example of how I found some objects near 160278 finespun
