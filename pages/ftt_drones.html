@@ -75,6 +75,16 @@ In zero gravity this level of force enables the drone to launch itself at up to 
 The drone under normal circumstances should be able to function for <span class="tip" tip="nominal usage assumes walking and potentially carrying items but not running and jumping, corresponding to an average power of 1 kilowatt">100 000 seconds</span> without needing to recharge, but excessive movement if taken to extreme could fully drain the batteries in as little as 2800 seconds.
 <br><br>
 In bipedal stance the body has a height of 3 metres, in hexapedal stance up to 2 metres.
+<!average human in flat shoes exerts 17kPa on the floor (see https://en.wikipedia.org/wiki/Ground_pressure)>
+<!pixel measurements for drone foot: full height is 1339px = 3m>
+<!foot is 383px long so each toe is 191.5px long, also measured as 42px wide>
+<!there are 4 toes so foot area is 383×42×(3m)^2/(1339)^2 = 0.08074756222 m^2>
+<!drone mass is 600kg, weight is 600kg×1gee=5883.99 N>
+<!ground pressure when upright is 5883.99 N/(2×0.08074756222 m^2)=36.43447454 kPa>
+<!this is 214.3% as much pressure as a human standing on the ground>
+<!ground pressure when hexaped is 5883.99 N/(6×0.08074756222 m^2)=12.14482485 kPa>
+<!this is 71.4% as much pressure as a human standing on the ground>
+Despite its mass, the ground pressure it exerts is only about 36.434kPa (214.3% as much as a typical human), and in hexapedal motion drops to just 12.145kPa (71.4%).
 </article>
 
 
