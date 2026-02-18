@@ -51,11 +51,15 @@
 		
 		\medskip
 		
-		The approximate energy required to separate one kilogram of matter composed in equal parts by weight of the first 104 elements of the periodic table into the individual elements via this process is between 6.4685GJ and 64.685GJ.
+		The approximate energy required to separate one kilogram of matter composed in equal parts by weight of the first 104 elements of the periodic table into the individual elements via this process is 129.37 GJ.
 		
 		\medskip
 		
-		For meteor material that energy is between 15.5GJ and 155GJ.
+		For meteor material that energy is 310.13GJ.
+		
+		\medskip
+		
+		It was also calculated to be 54.358GJ for kamacite of very specific composition.
 	\end{abstract}
 	
 	\vfill
@@ -659,35 +663,31 @@
     It should be a product of all the following factors multiplied together:
     
     \begin{itemize}
-    	\item Efficiency of the excimer laser used for initial ionization of the material: between 2\% and 0.2\% (\href{https://spie.org/publications/spie-publication-resources/optipedia-free-optics-information/fg12_p87-88_excimer_lasers}{spie.org})
+    	\item Efficiency of the ion source:
+    	
+    	The best method for generating ions seems to be \href{https://en.wikipedia.org/wiki/Electron_ionization#The_efficiency_of_EI}{Electron Ionization} achieved by bombarding the material sample with electrons.
+    	Judging from the following sentence given on wikipedia, I will set the efficiency at 0.1\%.
+    	"Under these conditions, about 1 in 1000 analyte molecules in the source are ionized."
     	
     	\item Efficiency of the ion accelerator: unknown, for now assumed 50\%.
     	
     	\item Efficiency multipllier of by the deflector magnet: unknown, for now assumed 50\%.
     \end{itemize}
     
-    In the best case this gives a final efficiency of 0.5\%, and in the worst case 0.05\%.
+    This gives a final efficiency of 0.025\%.
     
-    $$ \eta_{optimistic} = 0.02 \cdot 0.5 \cdot 0.5 = 0.005 $$
+    $$ \eta = 0.001 \cdot 0.5 \cdot 0.5 = 0.00025 $$
     
-    $$ \eta_{pessimistic} = 0.002 \cdot 0.5 \cdot 0.5 = 0.005 $$
+    Correspondingly the specific energy of refining general matter (composed in equal parts by weight of the first 104 elements of the periodic table) would be approximately 129.37 GJ/kg.
     
-    Correspondingly the specific energy of refining general matter (composed in equal parts by weight of the first 104 elements of the periodic table) would be approximately between 6.4685 GJ/kg and 64.685 GJ/kg.
+    $$ \epsilon = \frac{32.3424893575117 MJ/kg}{0.00025} = 129.3699574 GJ/kg $$
     
-    $$ \epsilon_{optimistic} = \frac{32.3424893575117 MJ/kg}{0.005} = 6.468497872 GJ/kg $$
+    For meteor material the energy per kilogram to be refined this way is approximately 310.13GJ/kg.
     
-    $$ \epsilon_{pessimistic} = \frac{32.3424893575117 MJ/kg}{0.0005} = 64.68497872 GJ/kg $$
+    $$ \epsilon = \frac{77.5334091946941 MJ/kg}{0.00025} = 310.1336368 GJ/kg $$
     
-    For meteor material the energy per kilogram to be refined this way is between 15.5GJ/kg and 155GJ/kg .
+    For electrolytic kamacite the energy per kilogram to be refined this way is 54.358GJ/kg.
     
-    $$ \epsilon_{optimistic} = \frac{77.5334091946941 MJ/kg}{0.005} = 15.50668184 GJ/kg $$
-    
-    $$ \epsilon_{pessimistic} = \frac{77.5334091946941 MJ/kg}{0.0005} = 155.0668184 GJ/kg $$
-    
-    For electrolytic kamacite the energy per kilogram to be refined this way is between 2.71788GJ/kg and 27.1788GJ/kg.
-    
-    $$ \epsilon_{optimistic} = \frac{13.589417469546 MJ/kg}{0.005} = 2.717883494 GJ/kg $$
-    
-    $$ \epsilon_{pessimistic} = \frac{13.589417469546 MJ/kg}{0.0005} = 27.17883494 GJ/kg $$
+    $$ \epsilon = \frac{13.589417469546 MJ/kg}{0.00025} = 54.35766988 GJ/kg $$
 	
 \end{document}
