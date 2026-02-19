@@ -1,0 +1,153 @@
+module plugpole(dout=100,din=90,h=100,cutdepth=0){
+    difference(){
+        cylinder(h=h,d=dout);
+        translate([0,0,-h]){cylinder(h=h*3,d=din);}
+        translate([-dout+cutdepth,0,0]){cube([dout*2,dout*2,h*3],true);}
+    }
+}
+module plug_plates(h=50){
+    color("#BBB"){
+        intersection(){
+            difference(){
+            cylinder(d=80,h=h);
+            cylinder(d=70,h=2*h);
+            }
+            translate([0,0,0]){
+                rotate([0,0,-45]){
+                    cube([100,100,2*(h)]);
+                }
+            }
+        }
+    }
+    color("#444"){
+        intersection(){
+            difference(){
+            cylinder(d=90,h=h+5);
+            cylinder(d=75,h=2*(h+5));
+            }
+            translate([-5,0,0]){
+                rotate([0,0,-45]){
+                    cube([100,100,2*(h+5)]);
+                }
+            }
+        }
+    }
+    color("#BBB"){
+        intersection(){
+            difference(){
+            cylinder(d=50,h=h);
+            cylinder(d=40,h=2*h);
+            }
+            translate([-10,0,0]){
+                rotate([0,0,-45]){
+                    cube([100,100,2*(h)]);
+                }
+            }
+        }
+    }
+    color("#444"){
+        intersection(){
+            difference(){
+            cylinder(d=60,h=h+5);
+            cylinder(d=45,h=2*(h+5));
+            }
+            translate([-15,0,0]){
+                rotate([0,0,-45]){
+                    cube([100,100,2*(h+5)]);
+                }
+            }
+        }
+    }
+    color("#444"){
+    translate([0,-35,0]){
+        difference(){
+        cylinder(h,d=25);
+        cylinder(h+5,d=15);
+        }
+    }}
+}
+module plug(d=50,h=50,locked=false){
+    s = d/100;
+    scale([s,s,1]){
+        difference(){
+            color("#EEE"){cylinder(h=h,d=100);}
+            rotate([0,0,180]){translate([0,0,-h+75]){
+                    plug_plates(30);
+            }}
+            color("#444"){
+            translate([0,35,10]){cylinder(h=50,d=20);}
+            }
+            color("#EEE"){
+            translate([0,0,41]){cube([25,11,20],true);}
+            }
+        }
+        translate([0,0,h-10]){
+            plug_plates(30);
+        }
+    }
+    if(locked){
+    color("#444"){
+        translate([0,25,25]){
+            translate([0,5,0]){cube([40,10,10],true);}
+        }
+        translate([0,-25,25]){
+            translate([0,-5,0]){cube([40,10,10],true);}
+        }
+    }
+    }else{
+    color("#444"){
+        translate([0,25,25]){
+            translate([0,5,0]){cube([10,10,40],true);}
+        }
+        translate([0,-25,25]){
+            translate([0,-5,0]){cube([10,10,40],true);}
+        }
+    }
+    }
+    color("#AAA"){
+        translate([3.5,0,41]){//locking_hook
+            difference(){
+                cube([5,5,50],true);
+                translate([0,0,0]){cube([2,10,47],true);}
+                translate([-2,0,0]){cube([3,10,43],true);}
+            }
+        }
+    }
+}
+module plug_to_cable(d1=50,d2=24,l=100){
+    color("#EEE"){
+        hull(){
+            cylinder(d=d1,h=1);
+            translate([-d2/2,0,-50]){sphere(d=d2);}
+            translate([d2/2,0,-50]){sphere(d=d2);}
+            translate([0,-d2/2,-50]){sphere(d=d2);}
+            translate([0,d2/2,-50]){sphere(d=d2);}
+        }
+        hull(){
+            translate([-d2/2,0,-50]){sphere(d=d2);}
+            translate([d2/2,0,-50]){sphere(d=d2);}
+            translate([-d2/2,0,-l-50]){sphere(d=d2);}
+            translate([d2/2,0,-l-50]){sphere(d=d2);}
+            translate([0,-d2/2,-50]){sphere(d=d2);}
+            translate([0,d2/2,-50]){sphere(d=d2);}
+            translate([0,-d2/2,-l-50]){sphere(d=d2);}
+            translate([0,d2/2,-l-50]){sphere(d=d2);}
+        }
+    }
+}
+
+module cable(d=50,l=200,locked=false){
+    plug(d=50,locked=locked);
+    plug_to_cable(d1=50,d2=25,l=l);
+}
+
+cable();
+translate([-100,-100,0]){rotate([0,90,90]){cable();}}
+
+translate([100,-250,-100]){rotate([0,90,0]){cable(locked=true);}}
+translate([200.2,-250,-100]){rotate([0,-90,0]){cable(locked=true,l=400);}}
+
+$vpt=[-25,-50,-5];
+$vpr=[54,0,232];
+$vpd=750;
+//openscad ftt_power_connector_2.scad -o ftt_power_connector_2.png --colorscheme=Starnight --imgsize=1000,1000
