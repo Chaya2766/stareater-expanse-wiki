@@ -1,0 +1,45 @@
+<head>
+ <link rel="stylesheet" href="../index.css"></link>
+</head>
+<html class="background2" id="page">
+<a style="float: right;" target="_blank" href="../index.html?page=pages/ftt_power_infrastructure.html">link to this page</a>
+
+<h1>Felicity Techtree: Power infrastructure</h1>
+<hr>
+<img src="../images/ftt_power_connector_2.webp" class="basics"></img>
+<article class="basics">
+Power infrastructure in the <a href="felicity_techtree.html">Felicity tech tree</a> operates on 576 volts of direct current.
+Electricity is generated from solar energy and stored in batteries without any conversion along the way.
+Management of both electrical power and thermal power (ie. waste heat) are considered functions of the power infrastructure.
+</article>
+<hr>
+
+<h1>Finespun standard power+coolant connector</h1>
+<img src="../images/ftt_power_connector_2.webp" class="styled right"></img>
+<article>
+The common power connector provides both electricity and coolant.
+The plug is self-similar, and plugs directly into an exact copy of itself.
+When plugged in, handles at the sides of the plug must be turned to enable coolant flow, which at the same time engages the locking hook that keeps the two plugs together - in this way cables can't easily come apart while the coolant valves are open.
+A tiny bit of spillage is still expected when disconnecting cables, but the geometry of the plug makes it very hard for water to bridge the gap between the positive and negative plates.
+<br><br>
+<img src="../images/ftt_power_cable_crossection.webp" class="styled left cardsize"></img>
+The conductors in the cable are 20mm in diameter and made of kamacite wires, which is cheap but much more resistive than copper, giving the cable a 2-way resistance of a bit under 4.9m&Omega; per metre.
+The coolant lines are also 20mm in diameter internally, and both the insulation of the cable as well as the coolant lines themselves are made of plain 5mm thick polyethylene.
+<!6.9E−7Ohmm×2m/(circle(2cm/2)×0.9069) = 4.843617190 mΩ>
+<!0.9069 is from hexagonal circle packing efficiency>
+Resistive losses are easily absorbed since the cable also carries coolant, which naturally carries the heat away.
+For this reason it is critical that even if a device does not use the coolant, it takes it as input and returns it to maintain the flow of coolant through the cable.
+<br><br>
+The cable can reliably handle coolant flow rates of 1L/s and amperages up to 175A (which would deliver 100kW but also cause 150W of heating in each metre of the cable from resistive losses - losses scale with square of current and grow linearly with total length of cable).
+<!(1L/s)/(pi×(1cm)^2)=3.183098862 m/s , this goes ever so slightly above the maximum recomended 3m/s for heating circulation (https://www.engineeringtoolbox.com/flow-velocity-water-pipes-d_385.html) but should be fine>
+<!4.9mOhm × (175A)^2 = 150.0625 W>
+<!150W/((1L/s)×(1cal/(K×ml))) = 35.85086042 mK>
+<!I also accidentally arrived at this very neat figure: ((1L/s)×(1cal/(K×ml))) = 4.184 kW/K>
+<!so if you want to know the temperature rise of the water flowing through the cable, divide the waste heating by 4.184 kW/K and you'll get how much the temperature increased between the water flowing in and out of the cable, it should work the same regardless of length but for longer cables there will be more waste heat, eg. since 1m of cable produces 150W of waste heat in total at 175 amps, 10m will produce 1500W, so coolant would heat up by 0.3585 kelvin when passing through a 10m cable carrying 175A>
+</article>
+
+<hr>
+
+
+
+</html>
