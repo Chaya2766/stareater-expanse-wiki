@@ -1,0 +1,434 @@
+\documentclass[a4paper]{article}
+\usepackage[margin=3cm]{geometry}
+\usepackage{graphicx}
+
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=cyan,
+	hyperindex=true,
+	linktocpage=true,%makes the page number be the link in the index
+}
+\usepackage{listings}
+\lstset{
+	basicstyle=\tiny\ttfamily,
+	columns=fullflexible,
+	keepspaces=true,
+	breaklines=true,
+	frame=single,
+	showstringspaces=true,
+	tabsize=4,
+	showspaces=true,
+	showtabs=true,
+}
+
+\renewcommand{\arraystretch}{1.2}
+
+\title{Baking kamacite for arsenic}
+
+\author{Chaya2766}
+
+\date{last updated \today}
+
+\begin{document}
+	\sffamily
+	\hyphenchar\font=-1
+	\sloppy
+	
+	\maketitle
+	
+	\textbf{
+		\sloppy
+		\hyphenchar\font=-1
+		}
+	
+	\vfill
+	
+	\begin{abstract}
+		Abstract goes here
+	\end{abstract}
+	
+	\vfill
+	
+	\begin{quote}
+		\begin{center}
+			\textbf{DISCLAIMER AND WARNING}
+		\end{center}
+		
+		This is not a scientific paper or engineering advice.
+		This document is only intended as creative world‑building and has not been peer‑reviewed or approved for any practical application.
+		Use of these ideas in real‑world designs or other serious application is entirely at the reader’s discretion and risk.
+	\end{quote}
+	
+	%\noindent \rule{\linewidth}{1pt}
+	\vfill
+	
+	\tableofcontents
+	
+	\pagebreak
+	
+	\section{Elements and their vapor pressures}
+	
+	The table below shows a list of elements and temperatures at which they achieve the corresponding vapor pressure.
+	The temperatures are given in kelvin.
+	These values had been sourced from wikipedia pages for each of these elements.
+	
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|c|}
+			\hline
+			atomic number & element name & 1Pa & 10Pa & 100Pa & 1kPa & 10kPa & 100kPa \\
+			\hline
+			26 & iron & 1728 & 1890 & 2091 & 2346 & 2679 & 3132 \\
+			\hline
+			27 & cobalt & 1790 & 1960 & 2165 & 2423 & 2755 & 3198 \\
+			\hline
+			28 & nickel & 1783 & 1950 & 2154 & 2410 & 2741 & 3184 \\
+			\hline
+			29 & \underline{copper} & 1509 & 1661 & 1850 & 2089 & 2404 & 2834 \\
+			\hline
+			30 & \textbf{zinc} & 610 & 670 & 750 & 852 & 990 & 1179 \\
+			\hline
+			31 & \underline{gallium} & 1310 & 1448 & 1620 & 1838 & 2125 & 2518 \\
+			\hline
+			32 & germanium & 1644 & 1814 & 2023 & 2287 & 2633 & 3104 \\
+			\hline
+			33 & \textbf{arsenic} & 553 & 596 & 646 & 706 & 781 & 874 \\
+			\hline
+			34 & \textbf{selenium} & 500 & 552 & 617 & 704 & 813 & 958 \\
+			\hline
+			42 & molybdenum & 2742 & 2994 & 3312 & 3707 & 4212 & 4879 \\
+			\hline
+			44 & ruthenium & 2588 & 2811 & 3087 & 3424 & 3845 & 4388 \\
+			\hline
+			45 & rhodium & 2288 & 2496 & 2749 & 3063 & 3405 & 3997 \\
+			\hline
+			46 & palladium & 1721 & 1897 & 2117 & 2395 & 2753 & 3234 \\
+			\hline
+			47 & \underline{silver} & 1283 & 1413 & 1575 & 1782 & 2055 & 2433 \\
+			\hline
+			48 & \textbf{cadmium} & 530 & 583 & 654 & 745 & 867 & 1040 \\
+			\hline
+			49 & \underline{indium} & 1196 & 1325 & 1485 & 1690 & 1962 & 2340 \\
+			\hline
+			50 & \underline{tin} & 1497 & 1657 & 1855 & 2107 & 2438 & 2893 \\
+			\hline
+			51 & \textbf{antimony} & 807 & 876 & 1011 & 1219 & 1491 & 1858 \\
+			\hline
+			52 & \textbf{tellurium} & ? & ? & (775) ? & (888) ? & 1042 & 1266 \\
+			\hline
+			74 & tungsten & 3477 & 3773 & 4137 & 4579 & 5127 & 5823 \\
+			\hline
+			75 & rhenium & 3303 & 3614 & 4009 & 4500 & 5127 & 5954 \\
+			\hline
+			76 & osmium & 3160 & 3423 & 3751 & 4148 & 4638 & 5256 \\
+			\hline
+			77 & iridium & 2713 & 2957 & 3252 & 3614 & 4069 & 4659 \\
+			\hline
+			78 & platinum & 2330 & (2550) ? & 2815 & 3143 & 3556 & 4094 \\
+			\hline
+			79 & gold & 1646 & 1814 & 2021 & 2281 & 2620 & 3078 \\
+			\hline
+			80 & \textbf{mercury} & 315 & 350 & 393 & 449 & 523 & 629 \\
+			\hline
+			81 & \textbf{thallium} & 882 & 977 & 1097 & 1252 & 1461 & 1758 \\
+			\hline
+			82 & \textbf{lead} & 978 & 1088 & 1229 & 1412 & 1660 & 2027 \\
+			\hline
+			83 & \textbf{bismuth} & 941 & 1041 & 1165 & 1325 & 1538 & 1835 \\
+			\hline
+		\end{tabular}
+	\end{center}
+    
+    \noindent Elements which have vapor pressures of 1Pa below 1000 kelvin had been marked in bold, and they are as follows:
+    Zinc, Arsenic, Selenium, Cadmium, Antimony, Tellurium, Mercury, Thallium, Lead, Bismuth.
+    
+    \medskip
+    
+    \noindent Additionally, elements which have vapor pressures of 1Pa at higher than 1000K but at least 200K lower than iron (1528K) had been underlined, and they are as follows:
+    Copper, Gallium, Silver, Indium, Tin.
+    
+	\pagebreak
+	
+	\section{original composition}
+	
+	The table below shows a breakdown of elements constituting the kamacite being processed.
+	"Normalized kamacite mass fraction" is the mass of the element divided by the original mass of kamacite, that is to say, for example with iron, given that this figure is given as "0.94043381955614200000" for iron, it would mean that every 1kg of kamacite contains 0.940433819556142kg of iron.
+	
+	\begin{center}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			atomic number & element name & normalized kamacite mass fraction \\
+			\hline
+			26 & iron & 0.94043381955614200000 \\
+			\hline
+			27 & cobalt & 0.00252207251608238000 \\
+			\hline
+			28 & nickel & 0.05557108933740840000 \\
+			\hline
+			29 & copper & 0.00047021690977807100 \\
+			\hline
+			30 & zinc & 0.00076944585236411600 \\
+			\hline
+			31 & gallium & 0.00003248771376648490 \\
+			\hline
+			32 & germanium & 0.00008976868277581350 \\
+			\hline
+			33 & arsenic & 0.00000769445852364116 \\
+			\hline
+			34 & selenium & 0.00005557108933740840 \\
+			\hline
+			42 & molybdenum & 0.00000512963901576077 \\
+			\hline
+			44 & ruthenium & 0.00000346250633563852 \\
+			\hline
+			45 & rhodium & 0.00000068395186876810 \\
+			\hline
+			46 & palladium & 0.00000282130145866843 \\
+			\hline
+			47 & silver & 0.00000059845788517209 \\
+			\hline
+			48 & cadmium & 0.00000188086763911228 \\
+			\hline
+			49 & indium & 0.00000018808676391123 \\
+			\hline
+			50 & tin & 0.00000512963901576077 \\
+			\hline
+			51 & antimony & 0.00000051296390157608 \\
+			\hline
+			52 & tellurium & 0.00000897686827758135 \\
+			\hline
+			74 & tungsten & 0.00000051296390157608 \\
+			\hline
+			75 & rhenium & 0.00000020946025981023 \\
+			\hline
+			76 & osmium & 0.00000282130145866843 \\
+			\hline
+			77 & iridium & 0.00000230833755709235 \\
+			\hline
+			78 & platinum & 0.00000418920519620463 \\
+			\hline
+			79 & gold & 0.00000072669886056611 \\
+			\hline
+			80 & mercury & 0.00000106867479495016 \\
+			\hline
+			81 & thallium & 0.00000033342653602445 \\
+			\hline
+			82 & lead & 0.00000598457885172090 \\
+			\hline
+			83 & bismuth & 0.00000029495424340624 \\
+			\hline
+		\end{tabular}
+	\end{center}
+	
+	\pagebreak
+	
+	\section{expected extraction results}
+	
+	"actual amount extracted" is the total mass of that element in kilograms which could be pulled out of one kilogram of kamacite.
+	
+	\medskip
+	
+	"normalized product mass fraction" is the mass of that element divided by the total amount of extracted material.
+	
+	\bigskip
+	
+	For 1000K extraction, the total amount of mass extracted from one kilogram of kamacite is 0.000851468780226131kg (851.4687802 milligrams).
+	
+	Majority of the product (over 90\% by mass) is zinc.
+	
+    \begin{center}
+	    \begin{tabular}{|c|c|c|c|}
+	    	\hline
+	    	atomic number & element name & actual amount extracted & Normalized product mass fraction \\
+	    	\hline
+	    	30 & zinc & 0.0007694458523641160 & 0.90366889571660900 \\
+	    	\hline
+	    	33 & arsenic & 0.0000076944585236412 & 0.00903668895716609 \\
+	    	\hline
+	    	34 & selenium & 0.0000555710893374084 & 0.06526497580175520 \\
+	    	\hline
+	    	48 & cadmium & 0.0000018808676391123 & 0.00220896841175171 \\
+	    	\hline
+	    	51 & antimony & 0.0000005129639015761 & 0.00060244593047774 \\
+	    	\hline
+	    	52 & tellurium & 0.0000089768682775814 & 0.01054280378336040 \\
+	    	\hline
+	    	80 & mercury & 0.0000010686747949502 & 0.00125509568849529 \\
+	    	\hline
+	    	81 & thallium & 0.0000003334265360245 & 0.00039158985481053 \\
+	    	\hline
+	    	82 & lead & 0.0000059845788517209 & 0.00702853585557363 \\
+	    	\hline
+	    \end{tabular}
+    \end{center}
+    
+    For 1500K extraction the total mass extracted from one kilogram of kamacite is 0.00136008958743553kg (1.360089587 grams).
+    Majority of the product is zinc (56.57\% by mass) followed by copper (34.57\% by mass).
+    
+    \begin{center}
+    	\begin{tabular}{|c|c|c|c|}
+    		\hline
+    		atomic number & element name & actual amount extracted & Normalized product mass fraction \\
+    		\hline
+    		29 & copper & 0.0004702169097780710 & 0.345724953798574 \\
+    		\hline
+    		30 & zinc & 0.0007694458523641160 & 0.565731742579485 \\
+    		\hline
+    		31 & gallium & 0.0000324877137664849 & 0.023886451353356 \\
+    		\hline
+    		33 & arsenic & 0.0000076944585236412 & 0.00565731742579485 \\
+    		\hline
+    		34 & selenium & 0.0000555710893374084 & 0.0408584036307406 \\
+    		\hline
+    		47 & silver & 0.0000005984578851721 & 0.000440013577561822 \\
+    		\hline
+    		48 & cadmium & 0.0000018808676391123 & 0.00138289981519429 \\
+    		\hline
+    		49 & indium & 0.0000001880867639112 & 0.000138289981519429 \\
+    		\hline
+    		50 & tin & 0.0000051296390157608 & 0.0037715449505299 \\
+    		\hline
+    		51 & antimony & 0.0000005129639015761 & 0.00037715449505299 \\
+    		\hline
+    		52 & tellurium & 0.0000089768682775814 & 0.00660020366342733 \\
+    		\hline
+    		80 & mercury & 0.0000010686747949502 & 0.000785738531360395 \\
+    		\hline
+    		81 & thallium & 0.0000003334265360245 & 0.000245150421784443 \\
+    		\hline
+    		82 & lead & 0.0000059845788517209 & 0.00440013577561822 \\
+    		\hline
+    	\end{tabular}
+    \end{center}
+	
+	Both temperatures would get rid of the original majority elements Iron (94\%) and Nickel (5.56\%), reducing the amount of material that will be passed to downstream processes by two orders of magnitude.
+	
+	\pagebreak
+	
+	\section{Implications on calutron extraction}
+	
+	Below is a table showing the energy needed to ionize a given element as a function of mass:
+	
+	\begin{center}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			atomic number & element name & specific ionization energy (MJ/kg) \\
+			\hline
+			29 & copper & 11.7316589557171 \\
+			\hline
+			30 & zinc & 13.8635668400122 \\
+			\hline
+			31 & gallium & 8.3014213387261 \\
+			\hline
+			33 & arsenic & 12.6398803976344 \\
+			\hline
+			34 & selenium & 11.9157665472135 \\
+			\hline
+			47 & silver & 6.77678871066728 \\
+			\hline
+			48 & cadmium & 7.7196790435355 \\
+			\hline
+			49 & indium & 4.8624780086746 \\
+			\hline
+			50 & tin & 5.96916856204195 \\
+			\hline
+			51 & antimony & 6.84954007884363 \\
+			\hline
+			52 & tellurium & 6.81269592476489 \\
+			\hline
+			80 & mercury & 5.02068896754574 \\
+			\hline
+			81 & thallium & 2.88384382033467 \\
+			\hline
+			82 & lead & 3.45366795366795 \\
+			\hline
+		\end{tabular}
+	\end{center}
+	
+	To get the specific ionization energy of the two extraction results, a weighted average is taken of the specific ionization energies, with the mass fraction of the element in the mix being the weight.
+	
+	\bigskip
+	
+	For the 1000K extraction product, the result is 8.47949943193412MJ/kg.
+	The majority of cost comes from zinc.
+	
+	\begin{center}
+		\scriptsize
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline
+			atomic number & element name & specific ionization energy (MJ/kg) & 1000K fraction & weighted ion. energy (MJ/kg) \\
+			\hline
+			30 & zinc & 13.8635668400122 & 0.565731742579485 & 7.84305982676727 \\
+			\hline
+			33 & arsenic & 12.6398803976344 & 0.00565731742579485 & 0.0715078156334998 \\
+			\hline
+			34 & selenium & 11.9157665472135 & 0.0408584036307406 & 0.486859199155726 \\
+			\hline
+			48 & cadmium & 7.7196790435355 & 0.00138289981519429 & 0.0106755427226645 \\
+			\hline
+			51 & antimony & 6.84954007884363 & 0.00037715449505299 & 0.00258333482978149 \\
+			\hline
+			52 & tellurium & 6.81269592476489 & 0.00660020366342733 & 0.0449651806004497 \\
+			\hline
+			80 & mercury & 5.02068896754574 & 0.000785738531360395 & 0.00394494877577673 \\
+			\hline
+			81 & thallium & 2.88384382033467 & 0.000245150421784443 & 0.000706975528915504 \\
+			\hline
+			82 & lead & 3.45366795366795 & 0.00440013577561822 & 0.0151966079200405 \\
+			\hline
+			&  &  &  &  \\
+			\hline
+			&  &  & sum (MJ/kg) & \textbf{8.47949943193412} \\
+			\hline
+		\end{tabular}
+	\end{center}
+	
+	\bigskip
+	
+	For the 1500K extraction product, the result is 12.7598854779392MJ/kg.
+	The majority of energy cost is added by zinc and copper.
+	
+	\begin{center}
+		\scriptsize
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline
+			atomic number & element name & specific ionization energy (MJ/kg) & 1000K fraction & weighted ion. energy (MJ/kg) \\
+			\hline
+			29 & copper & 11.7316589557171 & 0.345724953798574 & 4.05592725044592 \\
+			\hline
+			30 & zinc & 13.8635668400122 & 0.565731742579485 & 7.84305982676727 \\
+			\hline
+			31 & gallium & 8.3014213387261 & 0.023886451353356 & 0.198291496971192 \\
+			\hline
+			33 & arsenic & 12.6398803976344 & 0.00565731742579485 & 0.0715078156334998 \\
+			\hline
+			34 & selenium & 11.9157665472135 & 0.0408584036307406 & 0.486859199155726 \\
+			\hline
+			47 & silver & 6.77678871066728 & 0.000440013577561822 & 0.00298187904496128 \\
+			\hline
+			48 & cadmium & 7.7196790435355 & 0.00138289981519429 & 0.0106755427226645 \\
+			\hline
+			49 & indium & 4.8624780086746 & 0.000138289981519429 & 0.00067243199395824 \\
+			\hline
+			50 & tin & 5.96916856204195 & 0.0037715449505299 & 0.0225129875490311 \\
+			\hline
+			51 & antimony & 6.84954007884363 & 0.00037715449505299 & 0.00258333482978149 \\
+			\hline
+			52 & tellurium & 6.81269592476489 & 0.00660020366342733 & 0.0449651806004497 \\
+			\hline
+			80 & mercury & 5.02068896754574 & 0.000785738531360395 & 0.00394494877577673 \\
+			\hline
+			81 & thallium & 2.88384382033467 & 0.000245150421784443 & 0.000706975528915504 \\
+			\hline
+			82 & lead & 3.45366795366795 & 0.00440013577561822 & 0.0151966079200405 \\
+			\hline
+			&  &  &  &  \\
+			\hline
+			&  &  & sum (MJ/kg) & \textbf{12.7598854779392} \\
+			\hline
+		\end{tabular}
+	\end{center}
+	
+\end{document}
