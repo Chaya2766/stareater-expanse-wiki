@@ -55,8 +55,8 @@
 		
 		\medskip
 		
-		The final findings were that the machine included in the Felicity tech tree, which is used for this process, would require 348MJ of energy and 23.38h of time to process one 100-kilogram batch of asteroid regolith into mixed metal alloy.
-		The energy cost of the alloy was found to be 14.7625MJ/kg, and a single machine allows for alloy production rate of 1.008246729 kg/h.
+		The final findings were that the machine included in the Felicity tech tree, which is used for this process, would require 345MJ of energy and 23.2h of time to process one 100-kilogram batch of asteroid regolith into mixed metal alloy.
+		The energy cost of the alloy was found to be 14.76MJ/kg, and a single machine allows for alloy production rate of 1.008246729 kg/h.
 	\end{abstract}
 	
 	\vfill
@@ -170,9 +170,11 @@
     	\end{tabular}
     \end{center}
     
-    The expected yield from processing 100kg of dry asteroid regolith is \textbf{23.573279kg} of metal and 9.46kg of oxygen.
+    % 22kg+59g+1.3kg+11g+18g+760mg+2.1g+180mg+1.3g+120mg+81mg+16mg+66mg+14mg+44mg+4.4mg+120mg+12mg+210mg+12mg+4.9mg+66mg+54mg+98mg+17mg+25mg+7.8mg+140mg+6.9mg = 23.393459 kg
+    % 100kg - (9.46kg + 23.393459 kg) = 67.146541 kg
+    The expected yield from processing 100kg of dry asteroid regolith is \textbf{23.393459 kg} of metal and 9.46kg of oxygen.
     (the 40kg figure is how much total oxygen there is in 100kg of regolith, only 9.46kg actually gets released)
-    There will remain a sludge including 66.966721 kg of the remaining elements which could not be brought to their elemental, still oxidized and mixed with the sodium hydroxide solution whose mass had not been counted.
+    There will remain a sludge including 67.146541 kg of the remaining elements which could not be brought to their elemental, still oxidized and mixed with the sodium hydroxide solution whose mass had not been counted.
     This byproduct can be simply washed to recover and reuse the sodium hydroxide.
     
     \pagebreak
@@ -212,22 +214,22 @@
     
     Additionally, I will assume a 50\% efficiency, which feels reasonable for electrolysis, as the electrolysis of water typically has an efficiency well above that, though admittedly it is far from being the same thing.
     
-    $$ 162.3674MJ \cdot \frac{23.573279kg}{22kg} \cdot \frac{1}{0.5} = 347.9574564 MJ $$
+    $$ 162.3674MJ \cdot \frac{23.393459 kg}{22kg} \cdot \frac{1}{0.5} = 345.3031923 MJ $$
     
-    So the energy cost is \textbf{348 MJ} of electrical power for every 100kg batch of regolith.
+    So the energy cost is \textbf{345 MJ} of electrical power for every 100kg batch of regolith.
     
     \medskip
     
-    \noindent From another perspective, the \underline{cost of the metal alloy} obtained this way is roughly \textbf{14.7625MJ/kg}.
+    \noindent From another perspective, the \underline{cost of the metal alloy} obtained this way is roughly \textbf{14.76MJ/kg}.
     
-    $$ \frac{348MJ}{23.573279kg} = 14.7625MJ/kg $$
+    $$ \frac{345.3031923 MJ}{23.393459 kg} = 14.76067273 MJ/kg $$
     
     %\bigskip
     
     %Scaling up the oxygen release the same way gives 10.1365kg or 633.532 mol
     
     %$$ 9.46kg \cdot \frac{23.573279kg}{22kg} = 10.13650997 kg $$
-    
+    %wrong mass, should be 23.393459 kg
     %$$ \frac{10.13650997 kg}{16g/mol} = 633.5318731 mol $$
     
     \pagebreak
@@ -277,17 +279,17 @@
     
     So the device can handle 2067W of heat output, which accounts for only half the power consumption because the second half is absorbed by the breakage of chemical bonds through electrolysis and as such is not contributing to the heating, so really the device should consume 4134W of power.
     
-    $$ \frac{347.9574564 MJ}{4134W} = 84169.67983 s \approx 23h + 22min + 50s
-    %\qquad \frac{347.9574564 MJ}{4000W} = 86989.3641 s \approx 1 d + 10 min
+    $$ \frac{345.3031923 MJ}{4134W} = 83527.62271 s \approx 23 h + 12 min + 7.622714078 s
+    %\qquad \frac{347.9574564 MJ}{4000W} = 86325.79808 s \approx 23 h + 58 min + 45.798075 s
     $$
     
-    So the time required to proces a 100kg batch of regolith is \textbf{23.38h} or \textbf{84.17ks} of time.
+    So the time required to proces a 100kg batch of regolith is \textbf{23.2h} or \textbf{83.53ks} of time.
     
     \bigskip
     
     \noindent A single machine can allow an alloy production rate of \textbf{1.008246729 kg/h}.
     
-    $$\frac{23.573279kg}{84169.67983 s} = 1.008246729 kg/h$$
+    $$\frac{23.393459 kg}{83527.62271 s} = 280.0685359 mg/s \approx 1.008246729 kg/h$$
     
     \vfill
     
