@@ -36,8 +36,17 @@ Local times are often defined as just epoch time modulo the local cycle length, 
     <button onclick="setTimeNow()">Set time to now</button>
     <p id="utcResult"></p>
 </div>
+
+<table class="styled">
+  <tr><th colspan=2>Fun statistics about epoch time <span id="table_epoch">-</span></th></tr>
+  <tr><td>total human population</td><td id="table_population"></td></tr>
+  <tr><td>total energy use of humanity</td><td id="table_power"></td></tr>
+  <tr><td>average energy use per person</td><td id="table_power_per_person"></td></tr>
+  <tr><td>humanity's kardashev level</td><td id="table_kardashev"></td></tr>
+</table>
+
 <script>
-//thank Claude Haiku 3.5 for most of this code, though I modified it a little bit from the original
+//the date converter portion of the code is written mostly by Claude Haiku 3.5 and further modified manually a little bit
 //date conversions seem to agree with the linux command line date utility eg.:
 //date --date="02:56 UTC July 21, 1969" +%s
     function convertToUnix() {
@@ -47,6 +56,7 @@ Local times are often defined as just epoch time modulo the local cycle length, 
             const unixTime = Math.floor(date.getTime() / 1000);
             document.getElementById('epochInput').value = isNaN(unixTime) ? 'Invalid date format' : unixTime.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
             //weird but very compact if statement inside value assignment. The way this works is: condition ? valueIfTrue : valueIfFalse
+            make_stat_table();
         } catch (error) {
             document.getElementById('epochInput').value = 'Error converting date';
         }
@@ -66,13 +76,37 @@ Local times are often defined as just epoch time modulo the local cycle length, 
         } catch (error) {
             document.getElementById('utcInput').value = 'Error converting epoch time';
         }
+        
+        make_stat_table();
     }
     function setTimeNow() {
         const currentUnixTime = Math.floor(Date.now() / 1000);
         document.getElementById('epochInput').value = currentUnixTime.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
         convertToUTC();
     }
+    
+    //this relies on my document about exponential growth
+    function make_stat_table() {
+      document.getElementById('table_epoch').innerHTML = document.getElementById('epochInput').value;
+      
+      //number of seconds in a year, approximately 31556995.2 seconds
+      year = 1970 + (parseInt(document.getElementById('epochInput').value.replace(/\s/g, ''))/31556995.2);
+      
+      population = Math.floor(1627883132 * Math.pow(1.01314982563501,year-1900));
+      document.getElementById('table_population').innerHTML = population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+      
+      power = 1384842719178.08 * Math.pow(1.022318254,year-1900);
+      document.getElementById('table_power').innerHTML = power.toExponential(5) + " Watts";
+      
+      power_per_person = power/population;
+      document.getElementById('table_power_per_person').innerHTML = power_per_person.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " Watts";
+      
+      kardashev = (Math.log10(power)-6)/10;
+      document.getElementById('table_kardashev').innerHTML = "K "+kardashev.toFixed(4).toString();
+    }
 </script>
+
+<br><br>
 
 <table class="styled">
   <tr><th colspan=2>unit conversion table</th></tr>
