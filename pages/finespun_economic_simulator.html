@@ -1,0 +1,65 @@
+<head>
+ <link rel="stylesheet" href="../index.css"></link>
+</head>
+<html class="background2">
+<a style="float: right;" target="_blank" href="../index.html?page=pages/finespun_economic_simulator.html">link to this page</a>
+
+<h1>Finespun economic simulator</h1>
+<hr>
+<img src="../images/finespun_flag.webp" class="basics"></img>
+<article class="basics">
+A "game" where you take the role of <a href="felicity.html">Felicity</a> and direct the industrial processes at the <a href="finespun.html">Finespun</a> mining settlement, collecting material and energy to build additional infrastructure and provide computational power for your own mind.
+In reality it is more so a simulation tool than a game, but many simulation tools make for good games so I might as well call it that.
+<br><br>
+Note: the HTML of the tables are read off at the start of each time skip to set the internal variables and then updated at the end of each time skip.
+If you directly edit them through the inspection menu, you will be directly changing the game state.
+Or at least that is the intent, the game is not functional at all yet unless I forgot to remove this sentence.
+</article>
+<hr>
+
+<table class="styled left">
+  <tr><th colspan=4>Collected elements</th></tr>
+  <tr><th>Z</th><th>name</th><th>mass</th><th>amount (monoatomic)</th></tr>
+  <tr><td>1</td><td>Hydrogen</td><td><span id="hydrogen_kg">0</span> kg</td><td><span id="hydrogen_mol">0</span> mol</td></tr>
+  <tr><td>2</td><td>Helium</td><td><span id="helium_kg">0</span> kg</td><td><span id="helium_mol">0</span> mol</td></tr>
+  <tr><td>3</td><td>Lithium</td><td><span id="lithium_kg">0</span> kg</td><td><span id="lithium_mol">0</span> mol</td></tr>
+  <tr><td>4</td><td>Beryllium</td><td><span id="beryllium_kg">0</span> kg</td><td><span id="beryllium_mol">0</span> mol</td></tr>
+  <tr><td>5</td><td>Boron</td><td><span id="boron_kg">0</span> kg</td><td><span id="boron_mol">0</span> mol</td></tr>
+  <tr><td>6</td><td>Carbon</td><td><span id="carbon_kg">0</span> kg</td><td><span id="carbon_mol">0</span> mol</td></tr>
+  <tr><td>7</td><td>Nitrogen</td><td><span id="nitrogen_kg">0</span> kg</td><td><span id="nitrogen_mol">0</span> mol</td></tr>
+  <tr><td>8</td><td>Oxygen</td><td><span id="oxygen_kg">0</span> kg</td><td><span id="oxygen_mol">0</span> mol</td></tr>
+  <tr><td>9</td><td>Fluorine</td><td><span id="fluorine_kg">0</span> kg</td><td><span id="fluorine_mol">0</span> mol</td></tr>
+  <tr><td>10</td><td>Neon</td><td><span id="neon_kg">0</span> kg</td><td><span id="neon_mol">0</span> mol</td></tr>
+  <tr><td>11</td><td>Sodium</td><td><span id="sodium_kg">0</span> kg</td><td><span id="sodium_mol">0</span> mol</td></tr>
+  <tr><td>12</td><td>Magnesium</td><td><span id="magnesium_kg">0</span> kg</td><td><span id="magnesium_mol">0</span> mol</td></tr>
+  <tr><td>13</td><td>Aluminium</td><td><span id="aluminium_kg">0</span> kg</td><td><span id="aluminium_mol">0</span> mol</td></tr>
+  <tr><td>14</td><td>Silicon</td><td><span id="silicon_kg">0</span> kg</td><td><span id="silicon_mol">0</span> mol</td></tr>
+  <tr><td>15</td><td>Phosphorus</td><td><span id="phosphorus_kg">0</span> kg</td><td><span id="phosphorus_mol">0</span> mol</td></tr>
+  <tr><td>16</td><td>Sulfur</td><td><span id="sulfur_kg">0</span> kg</td><td><span id="sulfur_mol">0</span> mol</td></tr>
+  <tr><td>17</td><td>Chlorine</td><td><span id="chlorine_kg">0</span> kg</td><td><span id="chlorine_mol">0</span> mol</td></tr>
+  <tr><td>18</td><td>Argon</td><td><span id="argon_kg">0</span> kg</td><td><span id="argon_mol">0</span> mol</td></tr>
+  <tr><td>19</td><td>Potassium</td><td><span id="potassium_kg">0</span> kg</td><td><span id="potassium_mol">0</span> mol</td></tr>
+  <tr><td>20</td><td>Calcium</td><td><span id="calcium_kg">0</span> kg</td><td><span id="calcium_mol">0</span> mol</td></tr>
+  <tr><td>21</td><td>Scandium</td><td><span id="scandium_kg">0</span> kg</td><td><span id="scandium_mol">0</span> mol</td></tr>
+  <tr><td>22</td><td>Titanium</td><td><span id="titanium_kg">0</span> kg</td><td><span id="titanium_mol">0</span> mol</td></tr>
+  <tr><td>23</td><td>Vanadium</td><td><span id="vanadium_kg">0</span> kg</td><td><span id="vanadium_mol">0</span> mol</td></tr>
+  <tr><td>24</td><td>Chromium</td><td><span id="chromium_kg">0</span> kg</td><td><span id="chromium_mol">0</span> mol</td></tr>
+  <tr><td>25</td><td>Manganese</td><td><span id="manganese_kg">0</span> kg</td><td><span id="manganese_mol">0</span> mol</td></tr>
+  <tr><td>26</td><td>Iron</td><td><span id="iron_kg">0</span> kg</td><td><span id="iron_mol">0</span> mol</td></tr>
+  <tr><td>27</td><td>Cobalt</td><td><span id="cobalt_kg">0</span> kg</td><td><span id="cobalt_mol">0</span> mol</td></tr>
+  <tr><td>28</td><td>Nickel</td><td><span id="nickel_kg">0</span> kg</td><td><span id="nickel_mol">0</span> mol</td></tr>
+  <tr><td>29</td><td>Copper</td><td><span id="copper_kg">0</span> kg</td><td><span id="copper_mol">0</span> mol</td></tr>
+  <tr><td>30</td><td>Zinc</td><td><span id="zinc_kg">0</span> kg</td><td><span id="zinc_mol">0</span> mol</td></tr>
+  <tr><td>31</td><td>Gallium</td><td><span id="gallium_kg">0</span> kg</td><td><span id="gallium_mol">0</span> mol</td></tr>
+  <tr><td>32</td><td>Germanium</td><td><span id="germanium_kg">0</span> kg</td><td><span id="germanium_mol">0</span> mol</td></tr>
+  <tr><td>33</td><td>Arsenic</td><td><span id="arsenic_kg">0</span> kg</td><td><span id="arsenic_mol">0</span> mol</td></tr>
+  <tr><td>34</td><td>Selenium</td><td><span id="selenium_kg">0</span> kg</td><td><span id="selenium_mol">0</span> mol</td></tr>
+  <tr><td>35</td><td>Bromine</td><td><span id="bromine_kg">0</span> kg</td><td><span id="bromine_mol">0</span> mol</td></tr>
+  <tr><td>36</td><td>Krypton</td><td><span id="krypton_kg">0</span> kg</td><td><span id="krypton_mol">0</span> mol</td></tr>
+  <tr><td>37</td><td>Rubidium</td><td><span id="rubidium_kg">0</span> kg</td><td><span id="rubidium_mol">0</span> mol</td></tr>
+  <tr><td>38</td><td>Strontium</td><td><span id="strontium_kg">0</span> kg</td><td><span id="strontium_mol">0</span> mol</td></tr>
+  <tr><td>39</td><td>Yttrium</td><td><span id="yttrium_kg">0</span> kg</td><td><span id="yttrium_mol">0</span> mol</td></tr>
+  <tr><td>40</td><td>Zirconium</td><td><span id="zirconium_kg">0</span> kg</td><td><span id="zirconium_mol">0</span> mol</td></tr>
+</table>
+
+</html>
