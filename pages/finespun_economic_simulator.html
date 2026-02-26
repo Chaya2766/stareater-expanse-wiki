@@ -46,11 +46,10 @@ Or at least that is the intent, the game is not functional at all yet unless I f
 <br><br>
 
 <article class="tip centered" tip="This lets you extract some of the valuable elements from kamacite so that it is not as expensive to run them through the calutrons.">Kamacite baking tip</article>
-<input type="button" value="bake 1kg kamacite" onclick=""></input>
-<input type="button" value="bake 10kg kamacite" onclick=""></input>
-<input type="button" value="bake 1 tonne kamacite" onclick=""></input>
-<input type="button" value="bake 1 kilotonne kamacite" onclick=""></input>
-<input type="button" value="bake max kamacite" onclick=""></input>
+<input type="button" value="bake 10kg kamacite" onclick="bake_kamacite(1)"></input>
+<input type="button" value="bake 1 tonne kamacite" onclick="bake_kamacite(100)"></input>
+<input type="button" value="bake 1 kilotonne kamacite" onclick="bake_kamacite(100E+3)"></input>
+<input type="button" value="bake max kamacite" onclick="bake_kamacite(-1)"></input>
 
 
 <br><br>
@@ -65,9 +64,9 @@ Or at least that is the intent, the game is not functional at all yet unless I f
 <input type="button" value="separate 1kg kamacite metal" onclick=""></input>
 <input type="button" value="separate 1 tonne kamacite metal" onclick=""></input>
 <input type="button" value="separate 1 kilotonne kamacite metal" onclick=""></input><br>
-<input type="button" value="separate 1kg kamacite bake" onclick=""></input>
-<input type="button" value="separate 1 tonne kamacite bake" onclick=""></input>
-<input type="button" value="separate 1 kilotonne kamacite bake" onclick=""></input>
+<input type="button" value="separate 1kg kamacite bake" onclick="separate_kamacite_bake(1)"></input>
+<input type="button" value="separate 1 tonne kamacite bake" onclick="separate_kamacite_bake(1E+3)"></input>
+<input type="button" value="separate 1 kilotonne kamacite bake" onclick="separate_kamacite_bake(1E+6)"></input>
 
 <br><br>
 
@@ -104,13 +103,14 @@ Or at least that is the intent, the game is not functional at all yet unless I f
   <tr><th colspan=2>Infrastructure available</th></tr>
   <tr><td>concentrated solar array</td><td id="concentrated_solar_arrays">1</td></tr>
   <tr><td>low temperature electrolysis refinery</td><td id="LTE_refineries">1</td></tr>
-  <tr><td>kamacite oven</td><td>1</td></tr>
-  <tr><td>calutron</td><td>1</td></tr>
+  <tr><td>kamacite oven</td><td id="kamacite_ovens">1</td></tr>
+  <tr><td>calutron</td><td id="calutrons">1</td></tr>
   <tr><td>Ion beam printer</td><td>1</td></tr>
   <tr><td>Compute node</td><td>1</td></tr>
   <tr><td>Program node</td><td>10</td></tr>
 </table>
 
+<!--
 <table class="styled left">
   <tr><th colspan=2>Infrastructure in use</th></tr>
   <tr><th>Object</th><th>time left</th></tr>
@@ -119,6 +119,7 @@ Or at least that is the intent, the game is not functional at all yet unless I f
   <tr><td>calutron</td><td>1</td></tr>
   <tr><td>Ion beam printer</td><td>1</td></tr>
 </table>
+-->
 
 <table class="styled left"><tbody id="production_queue">
   <tr id="pq_header1"><th colspan=4>Production queue</th></tr>
@@ -242,7 +243,7 @@ Or at least that is the intent, the game is not functional at all yet unless I f
 
 <script>
 
-function electrolyze_regolith(m){//m is the number of refineries used, it will use maximum if m is -1
+function electrolyze_regolith(m){//m is the number of refineries used, it will use maximum if m is -1, each takes 100kg
   max = Math.floor(document.getElementById("LTE_refineries").innerHTML * 1);
   if(m < 0){ m = max; }
   T = Math.floor(document.getElementById("epoch_time").innerHTML.replace(/\s/g, '') * 1);
@@ -260,6 +261,48 @@ function electrolyze_regolith(m){//m is the number of refineries used, it will u
     document.getElementById("epoch_time").innerHTML = T.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     completion_time = T + 83528;
     addOrder("Electrolyze 100kg regolith",m,completion_time);
+  }
+}
+
+function bake_kamacite(m){//m is the number of ovens used, it will use maximum if m is -1, each takes 10kg
+  max = Math.floor(document.getElementById("kamacite_ovens").innerHTML * 1);
+  if(m < 0){ m = max; }
+  T = Math.floor(document.getElementById("epoch_time").innerHTML.replace(/\s/g, '') * 1);
+  E = document.getElementById("energy_J").innerHTML * 1;
+  K = document.getElementById("kamacite_kg").innerHTML * 1;
+  if(E>=870E+6*m & m<=max){
+    E -= 870E+6*m;
+    K -= 10*m;
+    
+    document.getElementById("energy_J").innerHTML = E;
+    document.getElementById("kamacite_kg").innerHTML = K;
+    document.getElementById("kamacite_ovens").innerHTML = max - m;
+    
+    //decide completion time and add to queue
+    document.getElementById("epoch_time").innerHTML = T.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    completion_time = T + 10E+3;
+    addOrder("Bake 10kg kamacite",m,completion_time);
+  }
+}
+
+function separate_kamacite_bake(m){//m is the number of calutrons used, it will use maximum if m is -1, each takes 1kg
+  max = Math.floor(document.getElementById("calutrons").innerHTML * 1);
+  if(m < 0){ m = max; }
+  T = Math.floor(document.getElementById("epoch_time").innerHTML.replace(/\s/g, '') * 1);
+  E = document.getElementById("energy_J").innerHTML * 1;
+  Kb = document.getElementById("kamacite_bake_kg").innerHTML * 1;
+  if(E>=51.04E+9*m & m<=max){
+    E -= 51.04E+9*m;
+    Kb -= 1*m;
+    
+    document.getElementById("energy_J").innerHTML = E;
+    document.getElementById("kamacite_bake_kg").innerHTML = Kb;
+    document.getElementById("calutrons").innerHTML = max - m;
+    
+    //decide completion time and add to queue
+    document.getElementById("epoch_time").innerHTML = T.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    completion_time = T + 510400;
+    addOrder("Separate 1kg kamacite bake",m,completion_time);
   }
 }
 
@@ -313,7 +356,6 @@ function removeCompletedOrders(currentGameTime) {//claude haiku 4.5
 }
 
 function complete_order(order_name,order_count){
-  console.log(order_count);
   if(order_name == "Example"){
     for(var i = order_count; i>0; i--){
       console.log("Example production order complete. ("+i.toString()+")");
@@ -333,7 +375,70 @@ function complete_order(order_name,order_count){
     document.getElementById("electrolysis_waste_kg").innerHTML = W;
     document.getElementById("oxygen_kg").innerHTML = O;
     document.getElementById("LTE_refineries").innerHTML = refineries + order_count;
-  }//this is going to be a massive tree of if statements, don't fight me about it
+  }
+  else 
+  if(order_name == "Bake 10kg kamacite"){
+    ovens = Math.floor(document.getElementById("kamacite_ovens").innerHTML * 1);
+    Bk = document.getElementById("baked_kamacite_kg").innerHTML * 1;
+    Kb = document.getElementById("kamacite_bake_kg").innerHTML * 1;
+    
+    Bk += (10-0.0136008958)*order_count;
+    Kb += 0.0136008958*order_count;
+    
+    document.getElementById("baked_kamacite_kg").innerHTML = Bk;
+    document.getElementById("kamacite_bake_kg").innerHTML = Kb;
+    document.getElementById("kamacite_ovens").innerHTML = ovens + order_count;
+  }
+  else 
+  if(order_name == "Separate 1kg kamacite bake"){
+    calutrons = Math.floor(document.getElementById("calutrons").innerHTML * 1);
+    Cu = document.getElementById("copper_kg").innerHTML * 1;
+    Zn = document.getElementById("zinc_kg").innerHTML * 1;
+    Ga = document.getElementById("gallium_kg").innerHTML * 1;
+    As = document.getElementById("arsenic_kg").innerHTML * 1;
+    Se = document.getElementById("selenium_kg").innerHTML * 1;
+    Ag = document.getElementById("silver_kg").innerHTML * 1;
+    Cd = document.getElementById("cadmium_kg").innerHTML * 1;
+    In = document.getElementById("indium_kg").innerHTML * 1;
+    Sn = document.getElementById("tin_kg").innerHTML * 1;
+    Sb = document.getElementById("antimony_kg").innerHTML * 1;
+    Te = document.getElementById("tellurium_kg").innerHTML * 1;
+    Hg = document.getElementById("mercury_kg").innerHTML * 1;
+    Tl = document.getElementById("thallium_kg").innerHTML * 1;
+    Pb = document.getElementById("lead_kg").innerHTML * 1;
+    
+    Cu += 0.0004702169097780710*order_count;
+    Zn += 0.0007694458523641160*order_count;
+    Ga += 0.0000324877137664849*order_count;
+    As += 0.0000076944585236412*order_count;
+    Se += 0.0000555710893374084*order_count;
+    Ag += 0.0000005984578851721*order_count;
+    Cd += 0.0000018808676391123*order_count;
+    In += 0.0000001880867639112*order_count;
+    Sn += 0.0000051296390157608*order_count;
+    Sb += 0.0000005129639015761*order_count;
+    Te += 0.0000089768682775814*order_count;
+    Hg += 0.0000010686747949502*order_count;
+    Tl += 0.0000003334265360245*order_count;
+    Pb += 0.0000059845788517209*order_count;
+    
+    document.getElementById("calutrons").innerHTML = calutrons + order_count;
+    document.getElementById("copper_kg").innerHTML = Cu;
+    document.getElementById("zinc_kg").innerHTML = Zn;
+    document.getElementById("gallium_kg").innerHTML = Ga;
+    document.getElementById("arsenic_kg").innerHTML = As;
+    document.getElementById("selenium_kg").innerHTML = Se;
+    document.getElementById("silver_kg").innerHTML = Ag;
+    document.getElementById("cadmium_kg").innerHTML = Cd;
+    document.getElementById("indium_kg").innerHTML = In;
+    document.getElementById("tin_kg").innerHTML = In;
+    document.getElementById("antimony_kg").innerHTML = Sb;
+    document.getElementById("tellurium_kg").innerHTML = Te;
+    document.getElementById("mercury_kg").innerHTML = Hg;
+    document.getElementById("thallium_kg").innerHTML = Tl;
+    document.getElementById("lead_kg").innerHTML = Pb;
+  }
+  //this is going to be a massive tree of if statements, don't fight me about it
 }
 
 function addOrder(name, count, completionTime) {//claude haiku 4.5
@@ -350,7 +455,7 @@ function addOrder(name, count, completionTime) {//claude haiku 4.5
   newRow.innerHTML = `
     <td id="pq_item${itemNumber}_name">${name}</td>
     <td id="pq_item${itemNumber}_count">${count}</td>
-    <td id="pq_item${itemNumber}_completion_time">${completionTime}</td>
+    <td id="pq_item${itemNumber}_completion_time">${completionTime.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}</td>
     <td id="pq_item${itemNumber}_time_left">0</td>
   `;
   
