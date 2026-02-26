@@ -205,6 +205,10 @@ img.cardsize{
   object-fit: contain;
 }
 
+article.centered{
+  text-align: center;
+}
+
 /*NEVER-MANDATORY PAGE PARTS START HERE*/
 hr{
  clear: both;
@@ -296,7 +300,7 @@ a.tip {
     transition: opacity 0.3s ease;
     
     /*properties for text wrapping*/
-    max-width: 400px;  /* Adjust as needed */
+    max-width: 400px;
     width: max-content;
     white-space: normal;  /* Allow text to wrap */
     word-wrap: break-word;  /* Ensure long words break */
@@ -306,6 +310,35 @@ a.tip {
 .tip:hover::after {
     visibility: visible;
     opacity: 1;
+}
+
+.inline-tip{
+ text-decoration: underline;
+ text-decoration-color: #8FF;
+ text-decoration-style: dashed;
+ cursor: help;
+}
+
+.inline-tip::after {
+ content: attr(tip);
+ visibility: hidden;
+ opacity: 0;
+ font-size: 0%;
+ padding: 0px;
+ transition: 0.5s;
+ text-decoration: none;
+}
+
+.inline-tip:hover::after {
+ visibility: visible;
+ opacity: 1;
+ font-size: 100%;
+ padding: 1px;
+ background-color: #222;
+ border: 1px dashed #8ff;
+ border-radius: 5px;
+ color: #8FF;
+ transition: 0.5s;
 }
 
 

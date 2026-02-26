@@ -18,18 +18,104 @@ Or at least that is the intent, the game is not functional at all yet unless I f
 
 <hr>
 
-<input type="button" value="electrolyze 100kg regolith" onclick="electrolyze_regolith_100kg()"></input>
-
+<article class="tip centered" tip="This just lets you wait to generate power.">Waiting tip</article>
 <input type="button" value="wait 1 second" onclick="wait_seconds(1)"></input>
-
 <input type="button" value="wait 1 kilosecond" onclick="wait_seconds(1E+3)"></input>
-
 <input type="button" value="wait 1 megasecond" onclick="wait_seconds(1E+6)"></input>
+
+<br><br>
+
+<article class="tip centered" tip="refining 100kg requires 1 LTE refinery, 1 tonne requires 10, 1 kilotonnes requires 10 000. Refine Max will use all the refineries as you have. The time cost is always 83 528 seconds no matter how many refineries you ran in paralel.">Regolith refining tip</article>
+<input type="button" value="electrolyze 100kg regolith" onclick="electrolyze_regolith(1)"></input>
+<input type="button" value="electrolyze 1 tonne regolith" onclick="electrolyze_regolith(10)"></input>
+<input type="button" value="electrolyze 1 kilotonne regolith" onclick="electrolyze_regolith(10E+3)"></input>
+<input type="button" value="electrolyze max. regolith" onclick="electrolyze_regolith(-1)"></input>
+
+<br><br>
+
+<article class="tip centered" tip="Some of these might be completely useless if you're using this as a game rather than a simulation tool.">Infrastructure building tip</article>
+<input type="button" value="build concentrated solar array" onclick=""></input>
+<input type="button" value="build LTE refinery" onclick=""></input>
+<input type="button" value="build kamacite oven" onclick=""></input>
+<input type="button" value="build calutron" onclick=""></input>
+<input type="button" value="build ion beam printer" onclick=""></input>
+<input type="button" value="build compute node" onclick=""></input>
+<input type="button" value="build program node" onclick=""></input>
+
+
+<br><br>
+
+<article class="tip centered" tip="This lets you extract some of the valuable elements from kamacite so that it is not as expensive to run them through the calutrons.">Kamacite baking tip</article>
+<input type="button" value="bake 1kg kamacite" onclick=""></input>
+<input type="button" value="bake 10kg kamacite" onclick=""></input>
+<input type="button" value="bake 1 tonne kamacite" onclick=""></input>
+<input type="button" value="bake 1 kilotonne kamacite" onclick=""></input>
+<input type="button" value="bake max kamacite" onclick=""></input>
+
+
+<br><br>
+
+<article class="tip centered" tip="The time cost is divided by the number of calutrons you have, so the more you make the faster you can separate. This is the main way you will get any pure elements, other than directly editing the HTML of the element table.">Calutron separation tip</article>
+<input type="button" value="separate 1kg unprocessed asteroid regolith" onclick=""></input>
+<input type="button" value="separate 1 tonne unprocessed asteroid regolith" onclick=""></input>
+<input type="button" value="separate 1 kilotonne unprocessed asteroid regolith" onclick=""></input><br>
+<input type="button" value="separate 1kg post-electrolysis waste" onclick=""></input>
+<input type="button" value="separate 1 tonne post-electrolysis waste" onclick=""></input>
+<input type="button" value="separate 1 kilotonne post-electrolysis waste" onclick=""></input><br>
+<input type="button" value="separate 1kg kamacite metal" onclick=""></input>
+<input type="button" value="separate 1 tonne kamacite metal" onclick=""></input>
+<input type="button" value="separate 1 kilotonne kamacite metal" onclick=""></input><br>
+<input type="button" value="separate 1kg kamacite bake" onclick=""></input>
+<input type="button" value="separate 1 tonne kamacite bake" onclick=""></input>
+<input type="button" value="separate 1 kilotonne kamacite bake" onclick=""></input>
+
+<br><br>
+
+<article class="tip centered" tip="Todo.">Ion beam printing tip</article>
+<input type="button" value="print 1 civic-2 chip" onclick=""></input>
+<input type="button" value="print 100 civic-2 chips" onclick=""></input>
+<input type="button" value="print 10 000 civic-2 chips" onclick=""></input><br>
+<input type="button" value="print 0.01m^2 of GaAs solar cells" onclick=""></input>
+<input type="button" value="print 1m^2 of GaAs solar cells" onclick=""></input>
+<input type="button" value="print 100m^2 of GaAs solar cells" onclick=""></input>
 
 <hr>
 
 <table class="styled left">
-  <tr><th colspan=4>Collected elements</th></tr>
+  <tr><th colspan=2>misc. stats</th></tr>
+  <tr><td>current <a href="epoch_time.html">epoch time</a></td><td id="epoch_time">13 299 971 939</td></tr>
+  <tr><td>moves made</td><td id="moves">0</td></tr>
+  <tr><td>time passed</td><td><span id="time_passed">0</span> s</td></tr>
+</table>
+
+<table class="styled left">
+  <tr><th colspan=2>Other resources</th></tr>
+  <tr><td>unused energy</td><td><span id="energy_J">0</span> J</td></tr>
+  <tr><td>raw asteroid regolith</td><td><span id="regolith_kg">2159000000000000</span> kg</td></tr>
+  <tr><td>kamacite</td><td><span id="kamacite_kg">0</span> kg</td></tr>
+  <tr><td>post-electrolysis waste</td><td><span id="electrolysis_waste_kg">0</span> kg</td></tr>
+  <tr><td>baked kamacite</td><td><span id="baked_kamacite_kg">0</span> kg</td></tr>
+  <tr><td>kamacite bake</td><td><span id="kamacite_bake_kg">0</span> kg</td></tr>
+</table>
+
+<table class="styled left">
+  <tr><th colspan=2>Infrastructure built</th></tr>
+  <tr><td>concentrated solar array</td><td id="concentrated_solar_arrays">1</td></tr>
+  <tr><td>low temperature electrolysis refinery</td><td id="LTE_refineries">1</td></tr>
+  <tr><td>kamacite oven</td><td>1</td></tr>
+  <tr><td>calutron</td><td>1</td></tr>
+  <tr><td>Ion beam printer</td><td>1</td></tr>
+  <tr><td>Compute node</td><td>1</td></tr>
+  <tr><td>Program node</td><td>1</td></tr>
+</table>
+
+<table class="styled left">
+  <tr><th colspan=2>Components</th></tr>
+  <tr><td>civic-2 chip</td><td>0</td></tr>
+</table>
+
+<table class="styled left">
+  <tr><th colspan=4>Collected purified elements</th></tr>
   <tr><th>Z</th><th>name</th><th>mass</th><th>amount (monoatomic)</th></tr>
   <tr><td>1</td><td>Hydrogen</td><td><span id="hydrogen_kg">0</span> kg</td><td><span id="hydrogen_mol">0</span> mol</td></tr>
   <tr><td>2</td><td>Helium</td><td><span id="helium_kg">0</span> kg</td><td><span id="helium_mol">0</span> mol</td></tr>
@@ -137,72 +223,49 @@ Or at least that is the intent, the game is not functional at all yet unless I f
   <tr><td>104</td><td>Rutherfordium</td><td><span id="rutherfordium_kg">0</span> kg</td><td><span id="rutherfordium_mol">0</span> mol</td></tr>
 </table>
 
-<table class="styled left">
-  <tr><th colspan=2>misc. stats</th></tr>
-  <tr><td>current <a href="epoch_time.html">epoch time</a></td><td id="epoch_time">13 299 971 939</td></tr>
-  <tr><td>moves made</td><td id="moves">0</td></tr>
-  <tr><td>time passed</td><td><span id="time_passed">0</span> s</td></tr>
-</table>
-
-<table class="styled left">
-  <tr><th colspan=2>Other resources</th></tr>
-  <tr><td>unused energy</td><td><span id="energy_J">0</span> J</td></tr>
-  <tr><td>raw asteroid regolith</td><td><span id="regolith_kg">2159000000000000</span> kg</td></tr>
-  <tr><td>kamacite</td><td><span id="kamacite_kg">0</span> kg</td></tr>
-  <tr><td>post-electrolysis waste</td><td><span id="electrolysis_waste_kg">0</span> kg</td></tr>
-  <tr><td>baked kamacite</td><td><span id="baked_kamacite_kg">0</span> kg</td></tr>
-  <tr><td>kamacite bake</td><td><span id="kamacite_bake_kg">0</span> kg</td></tr>
-</table>
-
-<table class="styled left">
-  <tr><th colspan=2>Infrastructure built</th></tr>
-  <tr><td>concentrated solar array</td><td id="concentrated_solar_arrays">1</td></tr>
-  <tr><td>low temperature electrolysis refinery</td><td>1</td></tr>
-  <tr><td>kamacite oven</td><td>1</td></tr>
-  <tr><td>calutron</td><td>1</td></tr>
-  <tr><td>Ion beam printer</td><td>1</td></tr>
-  <tr><td>Compute node</td><td>1</td></tr>
-  <tr><td>Program node</td><td>1</td></tr>
-</table>
-
-<table class="styled left">
-  <tr><th colspan=2>Components</th></tr>
-  <tr><td>civic-2 chip</td><td>0</td></tr>
-</table>
-
 <script>
 
-function electrolyze_regolith_100kg(){
+function electrolyze_regolith(m){//m is the number of refineries used, it will use maximum if m is -1
+  max = Math.floor(document.getElementById("LTE_refineries").innerHTML * 1);
+  if(m < 0){ m = max; }
   M = Math.floor(document.getElementById("moves").innerHTML * 1);
+  T = Math.floor(document.getElementById("epoch_time").innerHTML.replace(/\s/g, '') * 1);
   E = document.getElementById("energy_J").innerHTML * 1;
   R = document.getElementById("regolith_kg").innerHTML * 1;
   K = document.getElementById("kamacite_kg").innerHTML * 1;
   W = document.getElementById("electrolysis_waste_kg").innerHTML * 1;
   O = document.getElementById("oxygen_kg").innerHTML * 1;
-  if(E>=345303192.3){
-    E -= 345303192.3;
-    R -= 100;
-    K += 23.393459;
-    W += 67.146541;
-    O += 9.46;
+  if(E>=345303192.3*m & m<=max){
+    E -= 345303192.3*m;
+    R -= 100*m;
+    K += 23.393459*m;
+    W += 67.146541*m;
+    O += 9.46*m;
     M += 1; //only counts the move if it was successful
+    T += 83528;//refining one batch of regolith takes this long no mater how big
   }
   document.getElementById("energy_J").innerHTML = E;
   document.getElementById("regolith_kg").innerHTML = R;
   document.getElementById("kamacite_kg").innerHTML = K;
   document.getElementById("electrolysis_waste_kg").innerHTML = W;
   document.getElementById("oxygen_kg").innerHTML = O;
+  document.getElementById("moves").innerHTML = M;
+  document.getElementById("epoch_time").innerHTML = T.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  document.getElementById("time_passed").innerHTML = T - 13299971939;
 }
 
 function wait_seconds(s){
   E = document.getElementById("energy_J").innerHTML * 1;
   C = document.getElementById("concentrated_solar_arrays").innerHTML * 1;
   T = Math.floor(document.getElementById("epoch_time").innerHTML.replace(/\s/g, '') * 1);
+  M = Math.floor(document.getElementById("moves").innerHTML * 1);
   T += s;
   E += C * 250E+3 * s; //250kW from each array
+  M += 1;
   document.getElementById("energy_J").innerHTML = E;
   document.getElementById("epoch_time").innerHTML = T.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
   document.getElementById("time_passed").innerHTML = T - 13299971939;
+  document.getElementById("moves").innerHTML = M;
 }
 
 </script>
