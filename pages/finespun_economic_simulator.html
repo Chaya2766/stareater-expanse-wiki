@@ -25,7 +25,7 @@ Or at least that is the intent, the game is not functional at all yet unless I f
 
 <br><br>
 
-<article class="tip centered" tip="refining 100kg requires 1 LTE refinery, 1 tonne requires 10, 1 kilotonnes requires 10 000. Refine Max will use all the refineries as you have. The time cost is always 83 528 seconds no matter how many refineries you ran in paralel.">Regolith refining tip</article>
+<article class="tip centered" tip="refining 100kg requires 1 LTE refinery, 1 tonne requires 10, 1 kilotonnes requires 10 000. Refine Max will use all the refineries as you have. The time cost is always 83 528 seconds no matter how many refineries you ran in paralel. The refineries will disappear from 'available infrastructure' until the order is done, and the resources will only appear once the order is complete, but the energy and regolith will be consumed immediately.">Regolith refining tip</article>
 <input type="button" value="electrolyze 100kg regolith" onclick="electrolyze_regolith(1)"></input>
 <input type="button" value="electrolyze 1 tonne regolith" onclick="electrolyze_regolith(10)"></input>
 <input type="button" value="electrolyze 1 kilotonne regolith" onclick="electrolyze_regolith(10E+3)"></input>
@@ -101,7 +101,7 @@ Or at least that is the intent, the game is not functional at all yet unless I f
 </table>
 
 <table class="styled left">
-  <tr><th colspan=2>Infrastructure built</th></tr>
+  <tr><th colspan=2>Infrastructure available</th></tr>
   <tr><td>concentrated solar array</td><td id="concentrated_solar_arrays">1</td></tr>
   <tr><td>low temperature electrolysis refinery</td><td id="LTE_refineries">1</td></tr>
   <tr><td>kamacite oven</td><td>1</td></tr>
@@ -120,11 +120,11 @@ Or at least that is the intent, the game is not functional at all yet unless I f
   <tr><td>Ion beam printer</td><td>1</td></tr>
 </table>
 
-<table class="styled left">
-  <tr id="pq_header1"><th colspan=3>Production queue</th></tr>
-  <tr id="pq_header2"><th>Order</th><th>completion time</th><th>time left</th></tr>
-  <tr id="pq_item1"><td id="pq_item1_name">Example</td><td id="pq_item1_completion_time">13 300 000 000</td><td id="pq_item1_time_left">28061</td></tr>
-</table>
+<table class="styled left"><tbody id="production_queue">
+  <tr id="pq_header1"><th colspan=4>Production queue</th></tr>
+  <tr id="pq_header2"><th>Order</th><th>count</th><th>completion time</th><th>time left</th></tr>
+  <tr id="pq_item1"><td id="pq_item1_name">Example</td><td id="pq_item1_count">3</td><td id="pq_item1_completion_time">13 300 000 000</td><td id="pq_item1_time_left">28061</td></tr>
+</tbody></table>
 
 <table class="styled left">
   <tr><th colspan=2>Components</th></tr>
@@ -248,30 +248,18 @@ function electrolyze_regolith(m){//m is the number of refineries used, it will u
   T = Math.floor(document.getElementById("epoch_time").innerHTML.replace(/\s/g, '') * 1);
   E = document.getElementById("energy_J").innerHTML * 1;
   R = document.getElementById("regolith_kg").innerHTML * 1;
-  K = document.getElementById("kamacite_kg").innerHTML * 1;
-  W = document.getElementById("electrolysis_waste_kg").innerHTML * 1;
-  O = document.getElementById("oxygen_kg").innerHTML * 1;
   if(E>=345303192.3*m & m<=max){
     E -= 345303192.3*m;
     R -= 100*m;
-    K += 23.393459*m;
-    W += 67.146541*m;
-    O += 9.46*m;
     
     document.getElementById("energy_J").innerHTML = E;
     document.getElementById("regolith_kg").innerHTML = R;
-    document.getElementById("kamacite_kg").innerHTML = K;
-    document.getElementById("electrolysis_waste_kg").innerHTML = W;
-    document.getElementById("oxygen_kg").innerHTML = O;
+    document.getElementById("LTE_refineries").innerHTML = max - m;
+    
+    //decide completion time and add to queue
     document.getElementById("epoch_time").innerHTML = T.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-    document.getElementById("time_passed").innerHTML = T - 13299971939;
-    //wait_seconds(83528);//refining one batch of regolith takes this long no mater how big
-    //remember to always run the wait function only after updating the tables or before reading off the values
-    //never run the wait function inbetween reading off the table values and writing them back in
-    //the HTML update seems to be fast enough that doing it like this does not create errors
-    //I should really consider writing a scheduled resource update function which sets the resulting resources to be added if I wait after a predefined future epoch time
-    //or maybe lock the buttons from being clicked again until the refineries are done refining
-    //for now the wait function will be removed from here, it is probably better to do waiting separately from other actions because ultimately it is the 
+    completion_time = T + 83528;
+    addOrder("Electrolyze 100kg regolith",m,completion_time);
   }
 }
 
@@ -308,17 +296,67 @@ function removeCompletedOrders(currentGameTime) {//claude haiku 4.5
   orderRows.forEach(row => {
     const completionTimeElement = row.querySelector('[id$="_completion_time"]');
     const timeLeftElement = row.querySelector('[id$="_time_left"]');
+    const order_name = row.querySelector('[id$="_name"]').textContent;
+    const order_count = parseInt(row.querySelector('[id$="_count"]').textContent);
     const completionTime = parseInt(completionTimeElement.textContent.replace(/\s/g, ''));
-    console.log(completionTime);
     
     const timeLeft = completionTime - currentGameTime;
     timeLeftElement.textContent = timeLeft;//update completion time
     
+    
+    
     if (completionTime <= currentGameTime) {
+      complete_order(order_name,order_count);
       row.remove();
     }
   });
 }
+
+function complete_order(order_name,order_count){
+  console.log(order_count);
+  if(order_name == "Example"){
+    for(var i = order_count; i>0; i--){
+      console.log("Example production order complete. ("+i.toString()+")");
+    }
+  }
+  else 
+  if(order_name == "Electrolyze 100kg regolith"){
+    refineries = Math.floor(document.getElementById("LTE_refineries").innerHTML * 1);
+    K = document.getElementById("kamacite_kg").innerHTML * 1;
+    W = document.getElementById("electrolysis_waste_kg").innerHTML * 1;
+    O = document.getElementById("oxygen_kg").innerHTML * 1;
+    K += 23.393459*order_count;
+    W += 67.146541*order_count;
+    O += 9.46*order_count;
+    
+    document.getElementById("kamacite_kg").innerHTML = K;
+    document.getElementById("electrolysis_waste_kg").innerHTML = W;
+    document.getElementById("oxygen_kg").innerHTML = O;
+    document.getElementById("LTE_refineries").innerHTML = refineries + order_count;
+  }//this is going to be a massive tree of if statements, don't fight me about it
+}
+
+function addOrder(name, count, completionTime) {//claude haiku 4.5
+  const table = document.querySelector('#production_queue');
+  
+  // Get the next item number by counting existing items
+  const existingItems = document.querySelectorAll('tr[id^="pq_item"]').length;
+  const itemNumber = existingItems + 1;
+  
+  // Create the new row
+  const newRow = document.createElement('tr');
+  newRow.id = `pq_item${itemNumber}`;
+  
+  newRow.innerHTML = `
+    <td id="pq_item${itemNumber}_name">${name}</td>
+    <td id="pq_item${itemNumber}_count">${count}</td>
+    <td id="pq_item${itemNumber}_completion_time">${completionTime}</td>
+    <td id="pq_item${itemNumber}_time_left">0</td>
+  `;
+  
+  table.appendChild(newRow);
+}
+
 
 function build_concentrated_solar_array(){
   C = document.getElementById("concentrated_solar_arrays").innerHTML * 1;
