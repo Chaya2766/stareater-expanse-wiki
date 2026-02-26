@@ -34,7 +34,7 @@ Or at least that is the intent, the game is not functional at all yet unless I f
 <br><br>
 
 <article class="tip centered" tip="Some of these might be completely useless if you're using this as a game rather than a simulation tool.">Infrastructure building tip</article>
-<input type="button" value="build concentrated solar array" onclick=""></input>
+<input type="button" value="build concentrated solar array" onclick="build_concentrated_solar_array()"></input>
 <input type="button" value="build LTE refinery" onclick=""></input>
 <input type="button" value="build kamacite oven" onclick=""></input>
 <input type="button" value="build calutron" onclick=""></input>
@@ -84,8 +84,10 @@ Or at least that is the intent, the game is not functional at all yet unless I f
 <table class="styled left">
   <tr><th colspan=2>misc. stats</th></tr>
   <tr><td>current <a href="epoch_time.html">epoch time</a></td><td id="epoch_time">13 299 971 939</td></tr>
-  <tr><td>moves made</td><td id="moves">0</td></tr>
   <tr><td>time passed</td><td><span id="time_passed">0</span> s</td></tr>
+  <tr><td>avg. power doubling time</td><td><span id="power_doubling_time">0</span> s</td></tr>
+  <tr><td>annual growth rate</td><td><span id="annual_growth_rate">0</span> %</td></tr>
+  <tr><td>annual growth rate</td><td>×<span id="gigasecond_growth_rate">0</span></td></tr>
 </table>
 
 <table class="styled left">
@@ -106,7 +108,22 @@ Or at least that is the intent, the game is not functional at all yet unless I f
   <tr><td>calutron</td><td>1</td></tr>
   <tr><td>Ion beam printer</td><td>1</td></tr>
   <tr><td>Compute node</td><td>1</td></tr>
-  <tr><td>Program node</td><td>1</td></tr>
+  <tr><td>Program node</td><td>10</td></tr>
+</table>
+
+<table class="styled left">
+  <tr><th colspan=2>Infrastructure in use</th></tr>
+  <tr><th>Object</th><th>time left</th></tr>
+  <tr><td>low temperature electrolysis refinery</td><td id="LTE_refineries_use_time">0</td></tr>
+  <tr><td>kamacite oven</td><td>1</td></tr>
+  <tr><td>calutron</td><td>1</td></tr>
+  <tr><td>Ion beam printer</td><td>1</td></tr>
+</table>
+
+<table class="styled left">
+  <tr id="pq_header1"><th colspan=3>Production queue</th></tr>
+  <tr id="pq_header2"><th>Order</th><th>completion time</th><th>time left</th></tr>
+  <tr id="pq_item1"><td id="pq_item1_name">Example</td><td id="pq_item1_completion_time">13 300 000 000</td><td id="pq_item1_time_left">28061</td></tr>
 </table>
 
 <table class="styled left">
@@ -228,7 +245,6 @@ Or at least that is the intent, the game is not functional at all yet unless I f
 function electrolyze_regolith(m){//m is the number of refineries used, it will use maximum if m is -1
   max = Math.floor(document.getElementById("LTE_refineries").innerHTML * 1);
   if(m < 0){ m = max; }
-  M = Math.floor(document.getElementById("moves").innerHTML * 1);
   T = Math.floor(document.getElementById("epoch_time").innerHTML.replace(/\s/g, '') * 1);
   E = document.getElementById("energy_J").innerHTML * 1;
   R = document.getElementById("regolith_kg").innerHTML * 1;
@@ -241,31 +257,72 @@ function electrolyze_regolith(m){//m is the number of refineries used, it will u
     K += 23.393459*m;
     W += 67.146541*m;
     O += 9.46*m;
-    M += 1; //only counts the move if it was successful
-    T += 83528;//refining one batch of regolith takes this long no mater how big
+    
+    document.getElementById("energy_J").innerHTML = E;
+    document.getElementById("regolith_kg").innerHTML = R;
+    document.getElementById("kamacite_kg").innerHTML = K;
+    document.getElementById("electrolysis_waste_kg").innerHTML = W;
+    document.getElementById("oxygen_kg").innerHTML = O;
+    document.getElementById("epoch_time").innerHTML = T.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    document.getElementById("time_passed").innerHTML = T - 13299971939;
+    //wait_seconds(83528);//refining one batch of regolith takes this long no mater how big
+    //remember to always run the wait function only after updating the tables or before reading off the values
+    //never run the wait function inbetween reading off the table values and writing them back in
+    //the HTML update seems to be fast enough that doing it like this does not create errors
+    //I should really consider writing a scheduled resource update function which sets the resulting resources to be added if I wait after a predefined future epoch time
+    //or maybe lock the buttons from being clicked again until the refineries are done refining
+    //for now the wait function will be removed from here, it is probably better to do waiting separately from other actions because ultimately it is the 
   }
-  document.getElementById("energy_J").innerHTML = E;
-  document.getElementById("regolith_kg").innerHTML = R;
-  document.getElementById("kamacite_kg").innerHTML = K;
-  document.getElementById("electrolysis_waste_kg").innerHTML = W;
-  document.getElementById("oxygen_kg").innerHTML = O;
-  document.getElementById("moves").innerHTML = M;
-  document.getElementById("epoch_time").innerHTML = T.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-  document.getElementById("time_passed").innerHTML = T - 13299971939;
 }
 
 function wait_seconds(s){
   E = document.getElementById("energy_J").innerHTML * 1;
   C = document.getElementById("concentrated_solar_arrays").innerHTML * 1;
   T = Math.floor(document.getElementById("epoch_time").innerHTML.replace(/\s/g, '') * 1);
-  M = Math.floor(document.getElementById("moves").innerHTML * 1);
   T += s;
   E += C * 250E+3 * s; //250kW from each array
-  M += 1;
   document.getElementById("energy_J").innerHTML = E;
   document.getElementById("epoch_time").innerHTML = T.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
   document.getElementById("time_passed").innerHTML = T - 13299971939;
-  document.getElementById("moves").innerHTML = M;
+  
+  removeCompletedOrders(T);
+  calculate_statistics();
+}
+
+function calculate_statistics(){
+  year=31557600;//seconds per year
+  time = Math.floor(document.getElementById("time_passed").innerHTML * 1);
+  
+  C = document.getElementById("concentrated_solar_arrays").innerHTML * 1;
+  doubling_time = time/Math.log2(C);
+  document.getElementById("power_doubling_time").innerHTML = doubling_time;
+  
+  document.getElementById("annual_growth_rate").innerHTML = 100*((Math.pow(2,year/doubling_time))-1);
+  document.getElementById("gigasecond_growth_rate").innerHTML = (Math.pow(2,1E+9/doubling_time));
+}
+
+function removeCompletedOrders(currentGameTime) {//claude haiku 4.5
+  // Select all order rows (exclude headers)
+  const orderRows = document.querySelectorAll('tr[id^="pq_item"]');
+  
+  orderRows.forEach(row => {
+    const completionTimeElement = row.querySelector('[id$="_completion_time"]');
+    const timeLeftElement = row.querySelector('[id$="_time_left"]');
+    const completionTime = parseInt(completionTimeElement.textContent.replace(/\s/g, ''));
+    console.log(completionTime);
+    
+    const timeLeft = completionTime - currentGameTime;
+    timeLeftElement.textContent = timeLeft;//update completion time
+    
+    if (completionTime <= currentGameTime) {
+      row.remove();
+    }
+  });
+}
+
+function build_concentrated_solar_array(){
+  C = document.getElementById("concentrated_solar_arrays").innerHTML * 1;
+  document.getElementById("concentrated_solar_arrays").innerHTML = C+1;
 }
 
 </script>
