@@ -46,7 +46,7 @@ The default concentrated solar array has the following characteristics:
 And costs the following:
 <ul>
   <li>610598.475 kg of mixed metal alloy in the mirror and support skeleton</li>
-  <!--
+  <!-- fun thing, these values of close to 0.4kg were actually wrong and I did not discover that until I was doing math for the simulation - I seem to have used a diameter in place of the radius and gotten a value 4 times too small. Doesn't matter anyway, since now I have a precise number of tiles per array and can focus on getting the material requirements of a single tile right
   <li>0.402615kg (5.775mol) of Gallium in the photovoltaic cells (860.3 GJ to gather using <a href="ftt_calutron_refinery.html">calutron refining</a> of kamacite bake)</li>
   <!((0.402615kg)/(23.886451353356 grams))×51.04GJ = 860.2981370 GJ>
   <li>0.4326533kg (5.775mol) of Arsenic in the photovoltaic cells (3.9034 TJ to gather using <a href="ftt_calutron_refinery.html">calutron refining</a> of kamacite bake)</li>
@@ -54,7 +54,8 @@ And costs the following:
   <li>2340.162132 MJ energy spent Ion beam printing the photovoltaic cells</li>
   <li>2.340162132 Ms total Ion beam print time for the photovoltaic cells</li>
   -->
-  <li>1861 photovoltaic tiles</li>
+  <li>7444 photovoltaic tiles</li>
+  <!7444 is actually an extrapolated value. I counted the exact number of tiles on the model I made which came out to 1861 and then I noticed I made the model with radius used as the diameter, meaning it was 4 times smaller by area than it should have been>
   <li>Varrying cost of time and energy to weld the structure together and polish the mirror</li>
 </ul>
 The amount of power produced drops off with the square of distance from the sun.

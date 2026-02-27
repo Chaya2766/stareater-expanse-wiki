@@ -39,7 +39,7 @@ Or at least that is the intent, the game is not functional at all yet unless I f
 <br><br>
 
 <article class="tip centered" tip="Some of these might be completely useless if you're using this as a game rather than a simulation tool.">Infrastructure building tip</article>
-<input type="button" value="build concentrated solar array" onclick="build_concentrated_solar_array()"></input>
+<input type="button" value="build concentrated solar array" onclick="build_concentrated_solar_array(1)"></input>
 <input type="button" value="build LTE refinery" onclick=""></input>
 <input type="button" value="build kamacite oven" onclick=""></input>
 <input type="button" value="build calutron" onclick=""></input>
@@ -79,9 +79,9 @@ Or at least that is the intent, the game is not functional at all yet unless I f
 <input type="button" value="print 1 civic-2 chip" onclick=""></input>
 <input type="button" value="print 100 civic-2 chips" onclick=""></input>
 <input type="button" value="print 10 000 civic-2 chips" onclick=""></input><br>
-<input type="button" value="print 0.01m^2 of GaAs solar cells" onclick=""></input>
-<input type="button" value="print 1m^2 of GaAs solar cells" onclick=""></input>
-<input type="button" value="print 100m^2 of GaAs solar cells" onclick=""></input>
+<input type="button" value="print 1 GaAs solar tile" onclick="print_solar_tile(1)"></input>
+<input type="button" value="print 10 GaAs solar tiles" onclick="print_solar_tile(10)"></input>
+<input type="button" value="print 1000 GaAs solar tiles" onclick="print_solar_tile(1000)"></input>
 
 <hr>
 
@@ -93,7 +93,7 @@ Or at least that is the intent, the game is not functional at all yet unless I f
   <tr><td>time passed</td><td><span id="time_passed">0</span> s</td></tr>
   <tr><td>avg. power doubling time</td><td><span id="power_doubling_time">0</span> s</td></tr>
   <tr><td>annual growth rate</td><td><span id="annual_growth_rate">0</span> %</td></tr>
-  <tr><td>annual growth rate</td><td>×<span id="gigasecond_growth_rate">0</span></td></tr>
+  <tr><td>gigasecond growth rate</td><td>×<span id="gigasecond_growth_rate">0</span></td></tr>
 </table>
 
 <table class="styled left">
@@ -112,21 +112,10 @@ Or at least that is the intent, the game is not functional at all yet unless I f
   <tr><td>low temperature electrolysis refinery</td><td id="LTE_refineries">1</td></tr>
   <tr><td>kamacite oven</td><td id="kamacite_ovens">1</td></tr>
   <tr><td>calutron</td><td id="calutrons">1</td></tr>
-  <tr><td>Ion beam printer</td><td>1</td></tr>
+  <tr><td>Ion beam printer</td><td id="ion_beam_printers">1</td></tr>
   <tr><td>Compute node</td><td>1</td></tr>
   <tr><td>Program node</td><td>10</td></tr>
 </table>
-
-<!--
-<table class="styled left">
-  <tr><th colspan=2>Infrastructure in use</th></tr>
-  <tr><th>Object</th><th>time left</th></tr>
-  <tr><td>low temperature electrolysis refinery</td><td id="LTE_refineries_use_time">0</td></tr>
-  <tr><td>kamacite oven</td><td>1</td></tr>
-  <tr><td>calutron</td><td>1</td></tr>
-  <tr><td>Ion beam printer</td><td>1</td></tr>
-</table>
--->
 
 <table class="styled left"><tbody id="production_queue">
   <tr id="pq_header1"><th colspan=4>Production queue</th></tr>
@@ -137,6 +126,7 @@ Or at least that is the intent, the game is not functional at all yet unless I f
 <table class="styled left">
   <tr><th colspan=2>Components</th></tr>
   <tr><td>civic-2 chip</td><td>0</td></tr>
+  <tr><td>solar tiles</td><td id="solar_tiles">0</td></tr>
 </table>
 
 <table class="styled left">
@@ -287,14 +277,13 @@ function electrolyze_regolith(m){//m is the number of refineries used, it will u
     document.getElementById("LTE_refineries").innerHTML = max - m;
     
     //decide completion time and add to queue
-    //document.getElementById("epoch_time").innerHTML = T.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     completion_time = T + 83528;
     addOrder("Electrolyze 100kg regolith",m,completion_time);
   } else {
     document.getElementById("last_action").innerHTML = "could not electrolyze "+(100*m).toString()+" kg regolith<br>";
-    if(E<=345303192.3*m){ document.getElementById("last_action").innerHTML += "missing "+(345303192.3*m - E).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")+" joules of energy.<br>";}
+    if(E<=345303192.3*m){ document.getElementById("last_action").innerHTML += "missing "+parseInt(345303192.3*m - E).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")+" joules of energy.<br>";}
     if(max<m){ document.getElementById("last_action").innerHTML += "missing low temperature electrolysis refineries, need "+(m).toString()+" but you only have "+(max).toString()+" available.<br>";}
-    if(R<=100*m){ document.getElementById("last_action").innerHTML += "missing regolith, need "+(345303192.3*m).toString()+" kg raw regolith. Did you completely take apart the asteroid?<br>";}
+    if(R<=100*m){ document.getElementById("last_action").innerHTML += "missing regolith, need "+parseInt(345303192.3*m).toString()+" kg raw regolith. Did you completely take apart the asteroid?<br>";}
   }
 }
 
@@ -313,7 +302,6 @@ function bake_kamacite(m){//m is the number of ovens used, it will use maximum i
     document.getElementById("kamacite_ovens").innerHTML = max - m;
     
     //decide completion time and add to queue
-    //document.getElementById("epoch_time").innerHTML = T.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     completion_time = T + 10E+3;
     addOrder("Bake 10kg kamacite",m,completion_time);
   }
@@ -334,9 +322,61 @@ function separate_kamacite_bake(m){//m is the number of calutrons used, it will 
     document.getElementById("calutrons").innerHTML = max - m;
     
     //decide completion time and add to queue
-    document.getElementById("epoch_time").innerHTML = T.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     completion_time = T + 510400;
     addOrder("Separate 1kg kamacite bake",m,completion_time);
+  }
+}
+
+function print_solar_tile(m){//m is the number of printers used and tiles printed, it will use maximum if m is -1
+  max = Math.floor(document.getElementById("ion_beam_printers").innerHTML * 1);
+  if(m < 0){ m = max; }
+  T = Math.floor(document.getElementById("epoch_time").innerHTML.replace(/\s/g, '') * 1);
+  E = document.getElementById("energy_J").innerHTML * 1;
+  Ga = document.getElementById("gallium_kg").innerHTML * 1;
+  As = document.getElementById("arsenic_kg").innerHTML * 1;
+  if(Ga >= 0.000256312*m & As >= 0.000275435*m & E>=489788*m & m<=max){
+    E -= 489788*m;
+    Ga -= 0.000256312*m;
+    As -= 0.000275435*m;
+    //this will have to be updated once I figure out what the casing is made from
+    //and I will have to figure out if I want to make the casing separately or just include the material and machine to make it in this recipe
+    
+    document.getElementById("energy_J").innerHTML = E;
+    document.getElementById("gallium_kg").innerHTML = Ga;
+    document.getElementById("arsenic_kg").innerHTML = As;
+    document.getElementById("ion_beam_printers").innerHTML = max - m;
+    
+    //decide completion time and add to queue
+    completion_time = T + 1471;
+    addOrder("Print solar tile",m,completion_time);
+  }
+}
+
+function build_concentrated_solar_array(m){//m is the number of printers used and tiles printed, it will use maximum if m is -1
+  //max = Math.floor(document.getElementById("ion_beam_printers").innerHTML * 1);
+  //if(m < 0){ m = max; }
+  T = Math.floor(document.getElementById("epoch_time").innerHTML.replace(/\s/g, '') * 1);
+  E = document.getElementById("energy_J").innerHTML * 1;
+  K = document.getElementById("kamacite_kg").innerHTML * 1;
+  Bk = document.getElementById("baked_kamacite_kg").innerHTML * 1;
+  tiles = Math.floor(document.getElementById("solar_tiles").innerHTML * 1);
+  total_kamacite = K + Bk;
+  if(total_kamacite >= 610598.475*m & tiles >= 1861*4*m & E>=1E+9*m){
+    E -= 1E+9*m;
+    tiles -= 1861*4*m;
+    //the 4 is here because the number of tiles in the array on the wiki page is wrong because I used the radius as a diameter when calculating it, so it should be roughly 4 times bigger. TODO FIX
+    
+    Bk -= 610598.475*m;
+    if(Bk < 0){K += Bk; Bk = 0;}
+    //this uses baked kamacite first and then if there is not enough baked kamacite, the remaining missing material is taken from fresh kamacite
+    
+    document.getElementById("energy_J").innerHTML = E;
+    document.getElementById("kamacite_kg").innerHTML = K;
+    document.getElementById("baked_kamacite_kg").innerHTML = Bk;
+    document.getElementById("solar_tiles").innerHTML = tiles;
+    
+    completion_time = T + 1E+6;//time it takes to build an array still to be determined
+    addOrder("Build concentrated solar array",m,completion_time);
   }
 }
 
@@ -356,7 +396,7 @@ function wait_seconds(s){
 
 function calculate_statistics(){
   year=31557600;//seconds per year
-  time = Math.floor(document.getElementById("time_passed").innerHTML * 1).replace(/\s/g, '');
+  time = Math.floor(document.getElementById("time_passed").innerHTML.replace(/\s/g, '') * 1);
   
   C = document.getElementById("concentrated_solar_arrays").innerHTML * 1;
   doubling_time = time/Math.log2(C);
@@ -474,6 +514,25 @@ function complete_order(order_name,order_count){
     document.getElementById("thallium_kg").innerHTML = Tl;
     document.getElementById("lead_kg").innerHTML = Pb;
   }
+  else 
+  if(order_name == "Print solar tile"){
+    printers = Math.floor(document.getElementById("ion_beam_printers").innerHTML * 1);
+    tiles = Math.floor(document.getElementById("solar_tiles").innerHTML * 1);
+    
+    tiles += order_count;
+    printers += order_count;
+    
+    document.getElementById("ion_beam_printers").innerHTML = printers;
+    document.getElementById("solar_tiles").innerHTML = tiles;
+  }
+  else 
+  if(order_name == "Build concentrated solar array"){
+    arrays = Math.floor(document.getElementById("concentrated_solar_arrays").innerHTML * 1);
+    
+    arrays += order_count;
+    
+    document.getElementById("concentrated_solar_arrays").innerHTML = arrays;
+  }
   //this is going to be a massive tree of if statements, don't fight me about it
 }
 
@@ -496,12 +555,6 @@ function addOrder(name, count, completionTime) {//claude haiku 4.5
   `;
   
   table.appendChild(newRow);
-}
-
-
-function build_concentrated_solar_array(){
-  C = document.getElementById("concentrated_solar_arrays").innerHTML * 1;
-  document.getElementById("concentrated_solar_arrays").innerHTML = C+1;
 }
 
 </script>
