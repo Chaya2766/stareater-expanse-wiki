@@ -176,13 +176,13 @@ img.centered{
 img.right{
  float: right;
  max-height: 400px;
- max-width: 50%;
+ max-width: 400px;
 }
 
 img.left{
  float: left;
  max-height: 400px;
- max-width: 50%;
+ max-width: 400px;
 }
 
 img.vert + img.vert{
