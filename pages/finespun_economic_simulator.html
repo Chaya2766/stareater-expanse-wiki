@@ -268,6 +268,9 @@ function electrolyze_regolith(m){//m is the number of refineries used, it will u
   T = Math.floor(document.getElementById("epoch_time").innerHTML.replace(/\s/g, '') * 1);
   E = document.getElementById("energy_J").innerHTML * 1;
   R = document.getElementById("regolith_kg").innerHTML * 1;
+  
+  document.getElementById("last_action").innerHTML = "time "+T.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")+" - electrolyze 100 kg regolith times "+(m).toString()+"<br>";
+  
   if(E>=345303192.3*m & m<=max & R>=100*m){ 
     E -= 345303192.3*m;
     R -= 100*m;
@@ -279,8 +282,9 @@ function electrolyze_regolith(m){//m is the number of refineries used, it will u
     //decide completion time and add to queue
     completion_time = T + 83528;
     addOrder("Electrolyze 100kg regolith",m,completion_time);
+    document.getElementById("last_action").innerHTML += "proceeding to electrolyze "+(100*m).toString()+" kg regolith.<br>";
   } else {
-    document.getElementById("last_action").innerHTML = "could not electrolyze "+(100*m).toString()+" kg regolith<br>";
+    document.getElementById("last_action").innerHTML += "could not electrolyze "+(100*m).toString()+" kg regolith<br>";
     if(E<=345303192.3*m){ document.getElementById("last_action").innerHTML += "missing "+parseInt(345303192.3*m - E).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")+" joules of energy.<br>";}
     if(max<m){ document.getElementById("last_action").innerHTML += "missing low temperature electrolysis refineries, need "+(m).toString()+" but you only have "+(max).toString()+" available.<br>";}
     if(R<=100*m){ document.getElementById("last_action").innerHTML += "missing regolith, need "+parseInt(345303192.3*m).toString()+" kg raw regolith. Did you completely take apart the asteroid?<br>";}
@@ -293,6 +297,9 @@ function bake_kamacite(m){//m is the number of ovens used, it will use maximum i
   T = Math.floor(document.getElementById("epoch_time").innerHTML.replace(/\s/g, '') * 1);
   E = document.getElementById("energy_J").innerHTML * 1;
   K = document.getElementById("kamacite_kg").innerHTML * 1;
+  
+  document.getElementById("last_action").innerHTML = "time "+T.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")+" - bake 10 kg kamacite times "+(m).toString()+"<br>";
+  
   if(E>=870E+6*m & m<=max & K>=10*m){
     E -= 870E+6*m;
     K -= 10*m;
@@ -304,6 +311,12 @@ function bake_kamacite(m){//m is the number of ovens used, it will use maximum i
     //decide completion time and add to queue
     completion_time = T + 10E+3;
     addOrder("Bake 10kg kamacite",m,completion_time);
+    document.getElementById("last_action").innerHTML += "proceeding to bake "+(10*m).toString()+" kg kamacite.<br>";
+  } else {
+    document.getElementById("last_action").innerHTML += "could not bake "+(10*m).toString()+" kg kamacite:<br>";
+    if(E<870E+6*m){ document.getElementById("last_action").innerHTML += "missing "+parseInt(870E+6*m - E).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")+" joules of energy.<br>";}
+    if(K<10*m){ document.getElementById("last_action").innerHTML += "missing "+parseInt(10*m - K).toString()+" kg of kamacite.<br>";}
+    if(max<m){ document.getElementById("last_action").innerHTML += "missing kamacite ovens, need "+(m).toString()+" but you only have "+(max).toString()+" available.<br>";}
   }
 }
 
@@ -313,6 +326,9 @@ function separate_kamacite_bake(m){//m is the number of calutrons used, it will 
   T = Math.floor(document.getElementById("epoch_time").innerHTML.replace(/\s/g, '') * 1);
   E = document.getElementById("energy_J").innerHTML * 1;
   Kb = document.getElementById("kamacite_bake_kg").innerHTML * 1;
+  
+  document.getElementById("last_action").innerHTML = "time "+T.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")+" - separate 1 kg kamacite bake times "+(m).toString()+"<br>";
+  
   if(E>=51.04E+9*m & m<=max & Kb>=1*m){
     E -= 51.04E+9*m;
     Kb -= 1*m;
@@ -324,6 +340,12 @@ function separate_kamacite_bake(m){//m is the number of calutrons used, it will 
     //decide completion time and add to queue
     completion_time = T + 510400;
     addOrder("Separate 1kg kamacite bake",m,completion_time);
+    document.getElementById("last_action").innerHTML += "proceeding to separate "+(1*m).toString()+" kg kamacite bake.<br>";
+  } else {
+    document.getElementById("last_action").innerHTML += "could not separate "+(1*m).toString()+" kg kamacite bake:<br>";
+    if(E<51.04E+9*m){ document.getElementById("last_action").innerHTML += "missing "+parseInt(870E+6*m - E).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")+" joules of energy.<br>";}
+    if(Kb<1*m){ document.getElementById("last_action").innerHTML += "missing "+(1*m - Kb).toString()+" kg of kamacite bake.<br>";}
+    if(max<m){ document.getElementById("last_action").innerHTML += "missing calutrons, need "+(m).toString()+" but you only have "+(max).toString()+" available.<br>";}
   }
 }
 
@@ -334,6 +356,9 @@ function print_solar_tile(m){//m is the number of printers used and tiles printe
   E = document.getElementById("energy_J").innerHTML * 1;
   Ga = document.getElementById("gallium_kg").innerHTML * 1;
   As = document.getElementById("arsenic_kg").innerHTML * 1;
+  
+  document.getElementById("last_action").innerHTML = "time "+T.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")+" - print solar tile times "+(m).toString()+"<br>";
+  
   if(Ga >= 0.000256312*m & As >= 0.000275435*m & E>=489788*m & m<=max){
     E -= 489788*m;
     Ga -= 0.000256312*m;
@@ -349,10 +374,17 @@ function print_solar_tile(m){//m is the number of printers used and tiles printe
     //decide completion time and add to queue
     completion_time = T + 1471;
     addOrder("Print solar tile",m,completion_time);
+    document.getElementById("last_action").innerHTML += "proceeding to print "+(1*m).toString()+" solar tiles.<br>";
+  } else {
+    document.getElementById("last_action").innerHTML += "could not print "+(1*m).toString()+" solar tiles:<br>";
+    if(E<489788*m){ document.getElementById("last_action").innerHTML += "missing "+parseInt(489788*m - E).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")+" joules of energy.<br>";}
+    if(Ga<0.000256312*m){ document.getElementById("last_action").innerHTML += "missing "+(0.000256312*m - Ga).toString()+" kg of Gallium.<br>";}
+    if(As<0.000275435*m){ document.getElementById("last_action").innerHTML += "missing "+(0.000275435*m - As).toString()+" kg of Arsenic.<br>";}
+    if(max<m){ document.getElementById("last_action").innerHTML += "missing ion beam printers, need "+(m).toString()+" but you only have "+(max).toString()+" available.<br>";}
   }
 }
 
-function build_concentrated_solar_array(m){//m is the number of printers used and tiles printed, it will use maximum if m is -1
+function build_concentrated_solar_array(m){//m is the number of arrays to be built. The tool to be used for building these is not yet implemented or even decided
   //max = Math.floor(document.getElementById("ion_beam_printers").innerHTML * 1);
   //if(m < 0){ m = max; }
   T = Math.floor(document.getElementById("epoch_time").innerHTML.replace(/\s/g, '') * 1);
@@ -361,10 +393,12 @@ function build_concentrated_solar_array(m){//m is the number of printers used an
   Bk = document.getElementById("baked_kamacite_kg").innerHTML * 1;
   tiles = Math.floor(document.getElementById("solar_tiles").innerHTML * 1);
   total_kamacite = K + Bk;
-  if(total_kamacite >= 610598.475*m & tiles >= 1861*4*m & E>=1E+9*m){
+  
+  document.getElementById("last_action").innerHTML = "time "+T.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")+" - build concentrated solar array times "+(m).toString()+"<br>";
+  
+  if(total_kamacite >= 610598.475*m & tiles >= 7445*m & E>=1E+9*m){
     E -= 1E+9*m;
-    tiles -= 1861*4*m;
-    //the 4 is here because the number of tiles in the array on the wiki page is wrong because I used the radius as a diameter when calculating it, so it should be roughly 4 times bigger. TODO FIX
+    tiles -= 7445*m;
     
     Bk -= 610598.475*m;
     if(Bk < 0){K += Bk; Bk = 0;}
@@ -377,6 +411,12 @@ function build_concentrated_solar_array(m){//m is the number of printers used an
     
     completion_time = T + 1E+6;//time it takes to build an array still to be determined
     addOrder("Build concentrated solar array",m,completion_time);
+    document.getElementById("last_action").innerHTML += "proceeding to build "+(1*m).toString()+" concentrated solar arrays.<br>";
+  } else {
+    document.getElementById("last_action").innerHTML += "could not build "+(1*m).toString()+" concentrated solar arrays:<br>";
+    if(E<489788*m){ document.getElementById("last_action").innerHTML += "missing "+parseInt(1E+9*m - E).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")+" joules of energy.<br>";}
+    if(total_kamacite<610598.475*m){ document.getElementById("last_action").innerHTML += "missing "+parseInt(610598.475*m - total_kamacite).toString()+" kg of kamacite. This counts the combined total of fresh kamacite and baked kamacite.<br>";}
+    if(tiles<7445*m){ document.getElementById("last_action").innerHTML += "missing "+parseInt(7445*m - tiles).toString()+" solar tiles.<br>";}
   }
 }
 
