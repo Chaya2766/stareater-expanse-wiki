@@ -13,7 +13,6 @@ In reality it is more so a simulation tool than a game, but many simulation tool
 <br><br>
 Note: the HTML of the tables are read off at the start of each time skip to set the internal variables and then updated at the end of each time skip.
 If you directly edit them through the inspection menu, you will be directly changing the game state.
-Or at least that is the intent, the game is not functional at all yet unless I forgot to remove this sentence.
 </article>
 
 <hr>
@@ -130,112 +129,112 @@ Or at least that is the intent, the game is not functional at all yet unless I f
 </table>
 
 <table class="styled left">
-  <tr><th colspan=4>Collected purified elements</th></tr>
-  <tr><th>Z</th><th>name</th><th>mass</th><th>amount (monoatomic)</th></tr>
-  <tr><td>1</td><td>Hydrogen</td><td><span id="hydrogen_kg">0</span> kg</td><td><span id="hydrogen_mol">0</span> mol</td></tr>
-  <tr><td>2</td><td>Helium</td><td><span id="helium_kg">0</span> kg</td><td><span id="helium_mol">0</span> mol</td></tr>
-  <tr><td>3</td><td>Lithium</td><td><span id="lithium_kg">0</span> kg</td><td><span id="lithium_mol">0</span> mol</td></tr>
-  <tr><td>4</td><td>Beryllium</td><td><span id="beryllium_kg">0</span> kg</td><td><span id="beryllium_mol">0</span> mol</td></tr>
-  <tr><td>5</td><td>Boron</td><td><span id="boron_kg">0</span> kg</td><td><span id="boron_mol">0</span> mol</td></tr>
-  <tr><td>6</td><td>Carbon</td><td><span id="carbon_kg">0</span> kg</td><td><span id="carbon_mol">0</span> mol</td></tr>
-  <tr><td>7</td><td>Nitrogen</td><td><span id="nitrogen_kg">0</span> kg</td><td><span id="nitrogen_mol">0</span> mol</td></tr>
-  <tr><td>8</td><td>Oxygen</td><td><span id="oxygen_kg">0</span> kg</td><td><span id="oxygen_mol">0</span> mol</td></tr>
-  <tr><td>9</td><td>Fluorine</td><td><span id="fluorine_kg">0</span> kg</td><td><span id="fluorine_mol">0</span> mol</td></tr>
-  <tr><td>10</td><td>Neon</td><td><span id="neon_kg">0</span> kg</td><td><span id="neon_mol">0</span> mol</td></tr>
-  <tr><td>11</td><td>Sodium</td><td><span id="sodium_kg">0</span> kg</td><td><span id="sodium_mol">0</span> mol</td></tr>
-  <tr><td>12</td><td>Magnesium</td><td><span id="magnesium_kg">0</span> kg</td><td><span id="magnesium_mol">0</span> mol</td></tr>
-  <tr><td>13</td><td>Aluminium</td><td><span id="aluminium_kg">0</span> kg</td><td><span id="aluminium_mol">0</span> mol</td></tr>
-  <tr><td>14</td><td>Silicon</td><td><span id="silicon_kg">0</span> kg</td><td><span id="silicon_mol">0</span> mol</td></tr>
-  <tr><td>15</td><td>Phosphorus</td><td><span id="phosphorus_kg">0</span> kg</td><td><span id="phosphorus_mol">0</span> mol</td></tr>
-  <tr><td>16</td><td>Sulfur</td><td><span id="sulfur_kg">0</span> kg</td><td><span id="sulfur_mol">0</span> mol</td></tr>
-  <tr><td>17</td><td>Chlorine</td><td><span id="chlorine_kg">0</span> kg</td><td><span id="chlorine_mol">0</span> mol</td></tr>
-  <tr><td>18</td><td>Argon</td><td><span id="argon_kg">0</span> kg</td><td><span id="argon_mol">0</span> mol</td></tr>
-  <tr><td>19</td><td>Potassium</td><td><span id="potassium_kg">0</span> kg</td><td><span id="potassium_mol">0</span> mol</td></tr>
-  <tr><td>20</td><td>Calcium</td><td><span id="calcium_kg">0</span> kg</td><td><span id="calcium_mol">0</span> mol</td></tr>
-  <tr><td>21</td><td>Scandium</td><td><span id="scandium_kg">0</span> kg</td><td><span id="scandium_mol">0</span> mol</td></tr>
-  <tr><td>22</td><td>Titanium</td><td><span id="titanium_kg">0</span> kg</td><td><span id="titanium_mol">0</span> mol</td></tr>
-  <tr><td>23</td><td>Vanadium</td><td><span id="vanadium_kg">0</span> kg</td><td><span id="vanadium_mol">0</span> mol</td></tr>
-  <tr><td>24</td><td>Chromium</td><td><span id="chromium_kg">0</span> kg</td><td><span id="chromium_mol">0</span> mol</td></tr>
-  <tr><td>25</td><td>Manganese</td><td><span id="manganese_kg">0</span> kg</td><td><span id="manganese_mol">0</span> mol</td></tr>
-  <tr><td>26</td><td>Iron</td><td><span id="iron_kg">0</span> kg</td><td><span id="iron_mol">0</span> mol</td></tr>
-  <tr><td>27</td><td>Cobalt</td><td><span id="cobalt_kg">0</span> kg</td><td><span id="cobalt_mol">0</span> mol</td></tr>
-  <tr><td>28</td><td>Nickel</td><td><span id="nickel_kg">0</span> kg</td><td><span id="nickel_mol">0</span> mol</td></tr>
-  <tr><td>29</td><td>Copper</td><td><span id="copper_kg">0</span> kg</td><td><span id="copper_mol">0</span> mol</td></tr>
-  <tr><td>30</td><td>Zinc</td><td><span id="zinc_kg">0</span> kg</td><td><span id="zinc_mol">0</span> mol</td></tr>
-  <tr><td>31</td><td>Gallium</td><td><span id="gallium_kg">0</span> kg</td><td><span id="gallium_mol">0</span> mol</td></tr>
-  <tr><td>32</td><td>Germanium</td><td><span id="germanium_kg">0</span> kg</td><td><span id="germanium_mol">0</span> mol</td></tr>
-  <tr><td>33</td><td>Arsenic</td><td><span id="arsenic_kg">0</span> kg</td><td><span id="arsenic_mol">0</span> mol</td></tr>
-  <tr><td>34</td><td>Selenium</td><td><span id="selenium_kg">0</span> kg</td><td><span id="selenium_mol">0</span> mol</td></tr>
-  <tr><td>35</td><td>Bromine</td><td><span id="bromine_kg">0</span> kg</td><td><span id="bromine_mol">0</span> mol</td></tr>
-  <tr><td>36</td><td>Krypton</td><td><span id="krypton_kg">0</span> kg</td><td><span id="krypton_mol">0</span> mol</td></tr>
-  <tr><td>37</td><td>Rubidium</td><td><span id="rubidium_kg">0</span> kg</td><td><span id="rubidium_mol">0</span> mol</td></tr>
-  <tr><td>38</td><td>Strontium</td><td><span id="strontium_kg">0</span> kg</td><td><span id="strontium_mol">0</span> mol</td></tr>
-  <tr><td>39</td><td>Yttrium</td><td><span id="yttrium_kg">0</span> kg</td><td><span id="yttrium_mol">0</span> mol</td></tr>
-  <tr><td>40</td><td>Zirconium</td><td><span id="zirconium_kg">0</span> kg</td><td><span id="zirconium_mol">0</span> mol</td></tr>
-  <tr><td>41</td><td>Niobium</td><td><span id="niobium_kg">0</span> kg</td><td><span id="niobium_mol">0</span> mol</td></tr>
-  <tr><td>42</td><td>Molybdenum</td><td><span id="molybdenum_kg">0</span> kg</td><td><span id="molybdenum_mol">0</span> mol</td></tr>
-  <tr><td>43</td><td>Technetium</td><td><span id="technetium_kg">0</span> kg</td><td><span id="technetium_mol">0</span> mol</td></tr>
-  <tr><td>44</td><td>Ruthenium</td><td><span id="ruthenium_kg">0</span> kg</td><td><span id="ruthenium_mol">0</span> mol</td></tr>
-  <tr><td>45</td><td>Rhodium</td><td><span id="rhodium_kg">0</span> kg</td><td><span id="rhodium_mol">0</span> mol</td></tr>
-  <tr><td>46</td><td>Palladium</td><td><span id="palladium_kg">0</span> kg</td><td><span id="palladium_mol">0</span> mol</td></tr>
-  <tr><td>47</td><td>Silver</td><td><span id="silver_kg">0</span> kg</td><td><span id="silver_mol">0</span> mol</td></tr>
-  <tr><td>48</td><td>Cadmium</td><td><span id="cadmium_kg">0</span> kg</td><td><span id="cadmium_mol">0</span> mol</td></tr>
-  <tr><td>49</td><td>Indium</td><td><span id="indium_kg">0</span> kg</td><td><span id="indium_mol">0</span> mol</td></tr>
-  <tr><td>50</td><td>Tin</td><td><span id="tin_kg">0</span> kg</td><td><span id="tin_mol">0</span> mol</td></tr>
-  <tr><td>51</td><td>Antimony</td><td><span id="antimony_kg">0</span> kg</td><td><span id="antimony_mol">0</span> mol</td></tr>
-  <tr><td>52</td><td>Tellurium</td><td><span id="tellurium_kg">0</span> kg</td><td><span id="tellurium_mol">0</span> mol</td></tr>
-  <tr><td>53</td><td>Iodine</td><td><span id="iodine_kg">0</span> kg</td><td><span id="iodine_mol">0</span> mol</td></tr>
-  <tr><td>54</td><td>Xenon</td><td><span id="xenon_kg">0</span> kg</td><td><span id="xenon_mol">0</span> mol</td></tr>
-  <tr><td>55</td><td>Caesium</td><td><span id="caesium_kg">0</span> kg</td><td><span id="caesium_mol">0</span> mol</td></tr>
-  <tr><td>56</td><td>Barium</td><td><span id="barium_kg">0</span> kg</td><td><span id="barium_mol">0</span> mol</td></tr>
-  <tr><td>57</td><td>Lanthanum</td><td><span id="lanthanum_kg">0</span> kg</td><td><span id="lanthanum_mol">0</span> mol</td></tr>
-  <tr><td>58</td><td>Cerium</td><td><span id="cerium_kg">0</span> kg</td><td><span id="cerium_mol">0</span> mol</td></tr>
-  <tr><td>59</td><td>Praseodymium</td><td><span id="praseodymium_kg">0</span> kg</td><td><span id="praseodymium_mol">0</span> mol</td></tr>
-  <tr><td>60</td><td>Neodymium</td><td><span id="neodymium_kg">0</span> kg</td><td><span id="neodymium_mol">0</span> mol</td></tr>
-  <tr><td>61</td><td>Promethium</td><td><span id="promethium_kg">0</span> kg</td><td><span id="promethium_mol">0</span> mol</td></tr>
-  <tr><td>62</td><td>Samarium</td><td><span id="samarium_kg">0</span> kg</td><td><span id="samarium_mol">0</span> mol</td></tr>
-  <tr><td>63</td><td>Europium</td><td><span id="europium_kg">0</span> kg</td><td><span id="europium_mol">0</span> mol</td></tr>
-  <tr><td>64</td><td>Gadolinium</td><td><span id="gadolinium_kg">0</span> kg</td><td><span id="gadolinium_mol">0</span> mol</td></tr>
-  <tr><td>65</td><td>Terbium</td><td><span id="terbium_kg">0</span> kg</td><td><span id="terbium_mol">0</span> mol</td></tr>
-  <tr><td>66</td><td>Dysprosium</td><td><span id="dysprosium_kg">0</span> kg</td><td><span id="dysprosium_mol">0</span> mol</td></tr>
-  <tr><td>67</td><td>Holmium</td><td><span id="holmium_kg">0</span> kg</td><td><span id="holmium_mol">0</span> mol</td></tr>
-  <tr><td>68</td><td>Erbium</td><td><span id="erbium_kg">0</span> kg</td><td><span id="erbium_mol">0</span> mol</td></tr>
-  <tr><td>69</td><td>Thulium</td><td><span id="thulium_kg">0</span> kg</td><td><span id="thulium_mol">0</span> mol</td></tr>
-  <tr><td>70</td><td>Ytterbium</td><td><span id="ytterbium_kg">0</span> kg</td><td><span id="ytterbium_mol">0</span> mol</td></tr>
-  <tr><td>71</td><td>Lutetium</td><td><span id="lutetium_kg">0</span> kg</td><td><span id="lutetium_mol">0</span> mol</td></tr>
-  <tr><td>72</td><td>Hafnium</td><td><span id="hafnium_kg">0</span> kg</td><td><span id="hafnium_mol">0</span> mol</td></tr>
-  <tr><td>73</td><td>Tantalum</td><td><span id="tantalum_kg">0</span> kg</td><td><span id="tantalum_mol">0</span> mol</td></tr>
-  <tr><td>74</td><td>Tungsten</td><td><span id="tungsten_kg">0</span> kg</td><td><span id="tungsten_mol">0</span> mol</td></tr>
-  <tr><td>75</td><td>Rhenium</td><td><span id="rhenium_kg">0</span> kg</td><td><span id="rhenium_mol">0</span> mol</td></tr>
-  <tr><td>76</td><td>Osmium</td><td><span id="osmium_kg">0</span> kg</td><td><span id="osmium_mol">0</span> mol</td></tr>
-  <tr><td>77</td><td>Iridium</td><td><span id="iridium_kg">0</span> kg</td><td><span id="iridium_mol">0</span> mol</td></tr>
-  <tr><td>78</td><td>Platinum</td><td><span id="platinum_kg">0</span> kg</td><td><span id="platinum_mol">0</span> mol</td></tr>
-  <tr><td>79</td><td>Gold</td><td><span id="gold_kg">0</span> kg</td><td><span id="gold_mol">0</span> mol</td></tr>
-  <tr><td>80</td><td>Mercury</td><td><span id="mercury_kg">0</span> kg</td><td><span id="mercury_mol">0</span> mol</td></tr>
-  <tr><td>81</td><td>Thallium</td><td><span id="thallium_kg">0</span> kg</td><td><span id="thallium_mol">0</span> mol</td></tr>
-  <tr><td>82</td><td>Lead</td><td><span id="lead_kg">0</span> kg</td><td><span id="lead_mol">0</span> mol</td></tr>
-  <tr><td>83</td><td>Bismuth</td><td><span id="bismuth_kg">0</span> kg</td><td><span id="bismuth_mol">0</span> mol</td></tr>
-  <tr><td>84</td><td>Polonium</td><td><span id="polonium_kg">0</span> kg</td><td><span id="polonium_mol">0</span> mol</td></tr>
-  <tr><td>85</td><td>Astatine</td><td><span id="astatine_kg">0</span> kg</td><td><span id="astatine_mol">0</span> mol</td></tr>
-  <tr><td>86</td><td>Radon</td><td><span id="radon_kg">0</span> kg</td><td><span id="radon_mol">0</span> mol</td></tr>
-  <tr><td>87</td><td>Francium</td><td><span id="francium_kg">0</span> kg</td><td><span id="francium_mol">0</span> mol</td></tr>
-  <tr><td>88</td><td>Radium</td><td><span id="radium_kg">0</span> kg</td><td><span id="radium_mol">0</span> mol</td></tr>
-  <tr><td>89</td><td>Actinium</td><td><span id="actinium_kg">0</span> kg</td><td><span id="actinium_mol">0</span> mol</td></tr>
-  <tr><td>90</td><td>Thorium</td><td><span id="thorium_kg">0</span> kg</td><td><span id="thorium_mol">0</span> mol</td></tr>
-  <tr><td>91</td><td>Protactinium</td><td><span id="protactinium_kg">0</span> kg</td><td><span id="protactinium_mol">0</span> mol</td></tr>
-  <tr><td>92</td><td>Uranium</td><td><span id="uranium_kg">0</span> kg</td><td><span id="uranium_mol">0</span> mol</td></tr>
-  <tr><td>93</td><td>Neptunium</td><td><span id="neptunium_kg">0</span> kg</td><td><span id="neptunium_mol">0</span> mol</td></tr>
-  <tr><td>94</td><td>Plutonium</td><td><span id="plutonium_kg">0</span> kg</td><td><span id="plutonium_mol">0</span> mol</td></tr>
-  <tr><td>95</td><td>Americium</td><td><span id="americium_kg">0</span> kg</td><td><span id="americium_mol">0</span> mol</td></tr>
-  <tr><td>96</td><td>Curium</td><td><span id="curium_kg">0</span> kg</td><td><span id="curium_mol">0</span> mol</td></tr>
-  <tr><td>97</td><td>Berkelium</td><td><span id="berkelium_kg">0</span> kg</td><td><span id="berkelium_mol">0</span> mol</td></tr>
-  <tr><td>98</td><td>Californium</td><td><span id="californium_kg">0</span> kg</td><td><span id="californium_mol">0</span> mol</td></tr>
-  <tr><td>99</td><td>Einsteinium</td><td><span id="einsteinium_kg">0</span> kg</td><td><span id="einsteinium_mol">0</span> mol</td></tr>
-  <tr><td>100</td><td>Fermium</td><td><span id="fermium_kg">0</span> kg</td><td><span id="fermium_mol">0</span> mol</td></tr>
-  <tr><td>101</td><td>Mendelevium</td><td><span id="mendelevium_kg">0</span> kg</td><td><span id="mendelevium_mol">0</span> mol</td></tr>
-  <tr><td>102</td><td>Nobelium</td><td><span id="nobelium_kg">0</span> kg</td><td><span id="nobelium_mol">0</span> mol</td></tr>
-  <tr><td>103</td><td>Lawrencium</td><td><span id="lawrencium_kg">0</span> kg</td><td><span id="lawrencium_mol">0</span> mol</td></tr>
-  <tr><td>104</td><td>Rutherfordium</td><td><span id="rutherfordium_kg">0</span> kg</td><td><span id="rutherfordium_mol">0</span> mol</td></tr>
+  <tr><th colspan=3>Collected purified elements</th></tr>
+  <tr><th>Z</th><th>name</th><th>mass</th></tr>
+  <tr><td>1</td><td>Hydrogen</td><td><span id="hydrogen_kg">0</span> kg</td></tr>
+  <tr><td>2</td><td>Helium</td><td><span id="helium_kg">0</span> kg</td></tr>
+  <tr><td>3</td><td>Lithium</td><td><span id="lithium_kg">0</span> kg</td></tr>
+  <tr><td>4</td><td>Beryllium</td><td><span id="beryllium_kg">0</span> kg</td></tr>
+  <tr><td>5</td><td>Boron</td><td><span id="boron_kg">0</span> kg</td></tr>
+  <tr><td>6</td><td>Carbon</td><td><span id="carbon_kg">0</span> kg</td></tr>
+  <tr><td>7</td><td>Nitrogen</td><td><span id="nitrogen_kg">0</span> kg</td></tr>
+  <tr><td>8</td><td>Oxygen</td><td><span id="oxygen_kg">0</span> kg</td></tr>
+  <tr><td>9</td><td>Fluorine</td><td><span id="fluorine_kg">0</span> kg</td></tr>
+  <tr><td>10</td><td>Neon</td><td><span id="neon_kg">0</span> kg</td></tr>
+  <tr><td>11</td><td>Sodium</td><td><span id="sodium_kg">0</span> kg</td></tr>
+  <tr><td>12</td><td>Magnesium</td><td><span id="magnesium_kg">0</span> kg</td></tr>
+  <tr><td>13</td><td>Aluminium</td><td><span id="aluminium_kg">0</span> kg</td></tr>
+  <tr><td>14</td><td>Silicon</td><td><span id="silicon_kg">0</span> kg</td></tr>
+  <tr><td>15</td><td>Phosphorus</td><td><span id="phosphorus_kg">0</span> kg</td></tr>
+  <tr><td>16</td><td>Sulfur</td><td><span id="sulfur_kg">0</span> kg</td></tr>
+  <tr><td>17</td><td>Chlorine</td><td><span id="chlorine_kg">0</span> kg</td></tr>
+  <tr><td>18</td><td>Argon</td><td><span id="argon_kg">0</span> kg</td></tr>
+  <tr><td>19</td><td>Potassium</td><td><span id="potassium_kg">0</span> kg</td></tr>
+  <tr><td>20</td><td>Calcium</td><td><span id="calcium_kg">0</span> kg</td></tr>
+  <tr><td>21</td><td>Scandium</td><td><span id="scandium_kg">0</span> kg</td></tr>
+  <tr><td>22</td><td>Titanium</td><td><span id="titanium_kg">0</span> kg</td></tr>
+  <tr><td>23</td><td>Vanadium</td><td><span id="vanadium_kg">0</span> kg</td></tr>
+  <tr><td>24</td><td>Chromium</td><td><span id="chromium_kg">0</span> kg</td></tr>
+  <tr><td>25</td><td>Manganese</td><td><span id="manganese_kg">0</span> kg</td></tr>
+  <tr><td>26</td><td>Iron</td><td><span id="iron_kg">0</span> kg</td></tr>
+  <tr><td>27</td><td>Cobalt</td><td><span id="cobalt_kg">0</span> kg</td></tr>
+  <tr><td>28</td><td>Nickel</td><td><span id="nickel_kg">0</span> kg</td></tr>
+  <tr><td>29</td><td>Copper</td><td><span id="copper_kg">0</span> kg</td></tr>
+  <tr><td>30</td><td>Zinc</td><td><span id="zinc_kg">0</span> kg</td></tr>
+  <tr><td>31</td><td>Gallium</td><td><span id="gallium_kg">0</span> kg</td></tr>
+  <tr><td>32</td><td>Germanium</td><td><span id="germanium_kg">0</span> kg</td></tr>
+  <tr><td>33</td><td>Arsenic</td><td><span id="arsenic_kg">0</span> kg</td></tr>
+  <tr><td>34</td><td>Selenium</td><td><span id="selenium_kg">0</span> kg</td></tr>
+  <tr><td>35</td><td>Bromine</td><td><span id="bromine_kg">0</span> kg</td></tr>
+  <tr><td>36</td><td>Krypton</td><td><span id="krypton_kg">0</span> kg</td></tr>
+  <tr><td>37</td><td>Rubidium</td><td><span id="rubidium_kg">0</span> kg</td></tr>
+  <tr><td>38</td><td>Strontium</td><td><span id="strontium_kg">0</span> kg</td></tr>
+  <tr><td>39</td><td>Yttrium</td><td><span id="yttrium_kg">0</span> kg</td></tr>
+  <tr><td>40</td><td>Zirconium</td><td><span id="zirconium_kg">0</span> kg</td></tr>
+  <tr><td>41</td><td>Niobium</td><td><span id="niobium_kg">0</span> kg</td></tr>
+  <tr><td>42</td><td>Molybdenum</td><td><span id="molybdenum_kg">0</span> kg</td></tr>
+  <tr><td>43</td><td>Technetium</td><td><span id="technetium_kg">0</span> kg</td></tr>
+  <tr><td>44</td><td>Ruthenium</td><td><span id="ruthenium_kg">0</span> kg</td></tr>
+  <tr><td>45</td><td>Rhodium</td><td><span id="rhodium_kg">0</span> kg</td></tr>
+  <tr><td>46</td><td>Palladium</td><td><span id="palladium_kg">0</span> kg</td></tr>
+  <tr><td>47</td><td>Silver</td><td><span id="silver_kg">0</span> kg</td></tr>
+  <tr><td>48</td><td>Cadmium</td><td><span id="cadmium_kg">0</span> kg</td></tr>
+  <tr><td>49</td><td>Indium</td><td><span id="indium_kg">0</span> kg</td></tr>
+  <tr><td>50</td><td>Tin</td><td><span id="tin_kg">0</span> kg</td></tr>
+  <tr><td>51</td><td>Antimony</td><td><span id="antimony_kg">0</span> kg</td></tr>
+  <tr><td>52</td><td>Tellurium</td><td><span id="tellurium_kg">0</span> kg</td></tr>
+  <tr><td>53</td><td>Iodine</td><td><span id="iodine_kg">0</span> kg</td></tr>
+  <tr><td>54</td><td>Xenon</td><td><span id="xenon_kg">0</span> kg</td></tr>
+  <tr><td>55</td><td>Caesium</td><td><span id="caesium_kg">0</span> kg</td></tr>
+  <tr><td>56</td><td>Barium</td><td><span id="barium_kg">0</span> kg</td></tr>
+  <tr><td>57</td><td>Lanthanum</td><td><span id="lanthanum_kg">0</span> kg</td></tr>
+  <tr><td>58</td><td>Cerium</td><td><span id="cerium_kg">0</span> kg</td></tr>
+  <tr><td>59</td><td>Praseodymium</td><td><span id="praseodymium_kg">0</span> kg</td></tr>
+  <tr><td>60</td><td>Neodymium</td><td><span id="neodymium_kg">0</span> kg</td></tr>
+  <tr><td>61</td><td>Promethium</td><td><span id="promethium_kg">0</span> kg</td></tr>
+  <tr><td>62</td><td>Samarium</td><td><span id="samarium_kg">0</span> kg</td></tr>
+  <tr><td>63</td><td>Europium</td><td><span id="europium_kg">0</span> kg</td></tr>
+  <tr><td>64</td><td>Gadolinium</td><td><span id="gadolinium_kg">0</span> kg</td></tr>
+  <tr><td>65</td><td>Terbium</td><td><span id="terbium_kg">0</span> kg</td></tr>
+  <tr><td>66</td><td>Dysprosium</td><td><span id="dysprosium_kg">0</span> kg</td></tr>
+  <tr><td>67</td><td>Holmium</td><td><span id="holmium_kg">0</span> kg</td></tr>
+  <tr><td>68</td><td>Erbium</td><td><span id="erbium_kg">0</span> kg</td></tr>
+  <tr><td>69</td><td>Thulium</td><td><span id="thulium_kg">0</span> kg</td></tr>
+  <tr><td>70</td><td>Ytterbium</td><td><span id="ytterbium_kg">0</span> kg</td></tr>
+  <tr><td>71</td><td>Lutetium</td><td><span id="lutetium_kg">0</span> kg</td></tr>
+  <tr><td>72</td><td>Hafnium</td><td><span id="hafnium_kg">0</span> kg</td></tr>
+  <tr><td>73</td><td>Tantalum</td><td><span id="tantalum_kg">0</span> kg</td></tr>
+  <tr><td>74</td><td>Tungsten</td><td><span id="tungsten_kg">0</span> kg</td></tr>
+  <tr><td>75</td><td>Rhenium</td><td><span id="rhenium_kg">0</span> kg</td></tr>
+  <tr><td>76</td><td>Osmium</td><td><span id="osmium_kg">0</span> kg</td></tr>
+  <tr><td>77</td><td>Iridium</td><td><span id="iridium_kg">0</span> kg</td></tr>
+  <tr><td>78</td><td>Platinum</td><td><span id="platinum_kg">0</span> kg</td></tr>
+  <tr><td>79</td><td>Gold</td><td><span id="gold_kg">0</span> kg</td></tr>
+  <tr><td>80</td><td>Mercury</td><td><span id="mercury_kg">0</span> kg</td></tr>
+  <tr><td>81</td><td>Thallium</td><td><span id="thallium_kg">0</span> kg</td></tr>
+  <tr><td>82</td><td>Lead</td><td><span id="lead_kg">0</span> kg</td></tr>
+  <tr><td>83</td><td>Bismuth</td><td><span id="bismuth_kg">0</span> kg</td></tr>
+  <tr><td>84</td><td>Polonium</td><td><span id="polonium_kg">0</span> kg</td></tr>
+  <tr><td>85</td><td>Astatine</td><td><span id="astatine_kg">0</span> kg</td></tr>
+  <tr><td>86</td><td>Radon</td><td><span id="radon_kg">0</span> kg</td></tr>
+  <tr><td>87</td><td>Francium</td><td><span id="francium_kg">0</span> kg</td></tr>
+  <tr><td>88</td><td>Radium</td><td><span id="radium_kg">0</span> kg</td></tr>
+  <tr><td>89</td><td>Actinium</td><td><span id="actinium_kg">0</span> kg</td></tr>
+  <tr><td>90</td><td>Thorium</td><td><span id="thorium_kg">0</span> kg</td></tr>
+  <tr><td>91</td><td>Protactinium</td><td><span id="protactinium_kg">0</span> kg</td></tr>
+  <tr><td>92</td><td>Uranium</td><td><span id="uranium_kg">0</span> kg</td></tr>
+  <tr><td>93</td><td>Neptunium</td><td><span id="neptunium_kg">0</span> kg</td></tr>
+  <tr><td>94</td><td>Plutonium</td><td><span id="plutonium_kg">0</span> kg</td></tr>
+  <tr><td>95</td><td>Americium</td><td><span id="americium_kg">0</span> kg</td></tr>
+  <tr><td>96</td><td>Curium</td><td><span id="curium_kg">0</span> kg</td></tr>
+  <tr><td>97</td><td>Berkelium</td><td><span id="berkelium_kg">0</span> kg</td></tr>
+  <tr><td>98</td><td>Californium</td><td><span id="californium_kg">0</span> kg</td></tr>
+  <tr><td>99</td><td>Einsteinium</td><td><span id="einsteinium_kg">0</span> kg</td></tr>
+  <tr><td>100</td><td>Fermium</td><td><span id="fermium_kg">0</span> kg</td></tr>
+  <tr><td>101</td><td>Mendelevium</td><td><span id="mendelevium_kg">0</span> kg</td></tr>
+  <tr><td>102</td><td>Nobelium</td><td><span id="nobelium_kg">0</span> kg</td></tr>
+  <tr><td>103</td><td>Lawrencium</td><td><span id="lawrencium_kg">0</span> kg</td></tr>
+  <tr><td>104</td><td>Rutherfordium</td><td><span id="rutherfordium_kg">0</span> kg</td></tr>
 </table>
 
 <script>
