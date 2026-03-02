@@ -59,9 +59,9 @@ If you directly edit them through the inspection menu, you will be directly chan
 <br><br>
 
 <article class="tip centered" tip="This is the main way you will get any pure elements, other than directly editing the HTML of the element table.">Calutron separation tip</article>
-<input type="button" value="separate 1kg unprocessed asteroid regolith" onclick="" disabled></input>
-<input type="button" value="separate 1 tonne unprocessed asteroid regolith" onclick="" disabled></input>
-<input type="button" value="separate 1 kilotonne unprocessed asteroid regolith" onclick="" disabled></input><br>
+<input type="button" value="separate 1kg unprocessed asteroid regolith" onclick="separate_regolith(1)"></input>
+<input type="button" value="separate 1 tonne unprocessed asteroid regolith" onclick="separate_regolith(1E+3)"></input>
+<input type="button" value="separate 1 kilotonne unprocessed asteroid regolith" onclick="separate_regolith(1E+6)"></input><br>
 <input type="button" value="separate 1kg post-electrolysis waste" onclick="" disabled></input>
 <input type="button" value="separate 1 tonne post-electrolysis waste" onclick="" disabled></input>
 <input type="button" value="separate 1 kilotonne post-electrolysis waste" onclick="" disabled></input><br>
@@ -319,6 +319,35 @@ function bake_kamacite(m){//m is the number of ovens used, it will use maximum i
   }
 }
 
+function separate_regolith(m){//m is the number of calutrons used, it will use maximum if m is -1, each takes 1kg
+  max = Math.floor(document.getElementById("calutrons").innerHTML * 1);
+  if(m < 0){ m = max; }
+  T = Math.floor(document.getElementById("epoch_time").innerHTML.replace(/\s/g, '') * 1);
+  E = document.getElementById("energy_J").innerHTML * 1;
+  R = document.getElementById("regolith_kg").innerHTML * 1;
+  
+  document.getElementById("last_action").innerHTML = "time "+T.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")+" - separate 1 kg raw asteroid regolith times "+(m).toString()+"<br>";
+  
+  if(E>=310133636800*m & m<=max & R>=1*m){
+    E -= 310133636800*m;
+    R -= 1*m;
+    
+    document.getElementById("energy_J").innerHTML = E;
+    document.getElementById("regolith_kg").innerHTML = R;
+    document.getElementById("calutrons").innerHTML = max - m;
+    
+    //decide completion time and add to queue
+    completion_time = T + 3101337;//assumed power 100kW
+    addOrder("Separate 1kg raw asteroid regolith",m,completion_time);
+    document.getElementById("last_action").innerHTML += "proceeding to separate "+(1*m).toString()+" kg raw asteroid regolith.<br>";
+  } else {
+    document.getElementById("last_action").innerHTML += "could not separate "+(1*m).toString()+" kg asteroid regolith:<br>";
+    if(E<310133636800*m){ document.getElementById("last_action").innerHTML += "missing "+parseInt(310133636800*m - E).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")+" joules of energy.<br>";}
+    if(R<1*m){ document.getElementById("last_action").innerHTML += "missing "+(1*m - R).toString()+" kg of asteroid regolith. Did you take a part the entire asteroid?<br>";}
+    if(max<m){ document.getElementById("last_action").innerHTML += "missing calutrons, need "+(m).toString()+" but you only have "+(max).toString()+" available.<br>";}
+  }
+}
+
 function separate_kamacite_bake(m){//m is the number of calutrons used, it will use maximum if m is -1, each takes 1kg
   max = Math.floor(document.getElementById("calutrons").innerHTML * 1);
   if(m < 0){ m = max; }
@@ -501,6 +530,248 @@ function complete_order(order_name,order_count){
     document.getElementById("baked_kamacite_kg").innerHTML = Bk;
     document.getElementById("kamacite_bake_kg").innerHTML = Kb;
     document.getElementById("kamacite_ovens").innerHTML = ovens + order_count;
+  }
+  else 
+  if(order_name == "Separate 1kg raw asteroid regolith"){
+    calutrons = Math.floor(document.getElementById("calutrons").innerHTML * 1);
+    H = document.getElementById("hydrogen_kg").innerHTML * 1;
+    Li = document.getElementById("lithium_kg").innerHTML * 1;
+    Be = document.getElementById("beryllium_kg").innerHTML * 1;
+    B = document.getElementById("boron_kg").innerHTML * 1;
+    C = document.getElementById("carbon_kg").innerHTML * 1;
+    N = document.getElementById("nitrogen_kg").innerHTML * 1;
+    O = document.getElementById("oxygen_kg").innerHTML * 1;
+    F = document.getElementById("fluorine_kg").innerHTML * 1;
+    Na = document.getElementById("sodium_kg").innerHTML * 1;
+    Mg = document.getElementById("magnesium_kg").innerHTML * 1;
+    Al = document.getElementById("aluminium_kg").innerHTML * 1;
+    Si = document.getElementById("silicon_kg").innerHTML * 1;
+    P = document.getElementById("phosphorus_kg").innerHTML * 1;
+    S = document.getElementById("sulfur_kg").innerHTML * 1;
+    Cl = document.getElementById("chlorine_kg").innerHTML * 1;
+    K = document.getElementById("potassium_kg").innerHTML * 1;
+    Ca = document.getElementById("calcium_kg").innerHTML * 1;
+    Sc = document.getElementById("scandium_kg").innerHTML * 1;
+    Ti = document.getElementById("titanium_kg").innerHTML * 1;
+    Va = document.getElementById("vanadium_kg").innerHTML * 1;
+    Cr = document.getElementById("chromium_kg").innerHTML * 1;
+    Mn = document.getElementById("manganese_kg").innerHTML * 1;
+    Fe = document.getElementById("iron_kg").innerHTML * 1;
+    Co = document.getElementById("cobalt_kg").innerHTML * 1;
+    Ni = document.getElementById("nickel_kg").innerHTML * 1;
+    Cu = document.getElementById("copper_kg").innerHTML * 1;
+    Zn = document.getElementById("zinc_kg").innerHTML * 1;
+    Ga = document.getElementById("gallium_kg").innerHTML * 1;
+    Ge = document.getElementById("germanium_kg").innerHTML * 1;
+    As = document.getElementById("arsenic_kg").innerHTML * 1;
+    Se = document.getElementById("selenium_kg").innerHTML * 1;
+    Br = document.getElementById("bromine_kg").innerHTML * 1;
+    Rb = document.getElementById("rubidium_kg").innerHTML * 1;
+    Sr = document.getElementById("strontium_kg").innerHTML * 1;
+    Y = document.getElementById("yttrium_kg").innerHTML * 1;
+    Zr = document.getElementById("zirconium_kg").innerHTML * 1;
+    Nb = document.getElementById("niobium_kg").innerHTML * 1;
+    Mo = document.getElementById("molybdenum_kg").innerHTML * 1;
+    Ru = document.getElementById("ruthenium_kg").innerHTML * 1;
+    Rh = document.getElementById("rhodium_kg").innerHTML * 1;
+    Pd = document.getElementById("palladium_kg").innerHTML * 1;
+    Ag = document.getElementById("silver_kg").innerHTML * 1;
+    Cd = document.getElementById("cadmium_kg").innerHTML * 1;
+    In = document.getElementById("indium_kg").innerHTML * 1;
+    Sn = document.getElementById("tin_kg").innerHTML * 1;
+    Sb = document.getElementById("antimony_kg").innerHTML * 1;
+    Te = document.getElementById("tellurium_kg").innerHTML * 1;
+    I = document.getElementById("iodine_kg").innerHTML * 1;
+    Cs = document.getElementById("caesium_kg").innerHTML * 1;
+    Ba = document.getElementById("barium_kg").innerHTML * 1;
+    La = document.getElementById("lanthanum_kg").innerHTML * 1;
+    Ce = document.getElementById("cerium_kg").innerHTML * 1;
+    Pr = document.getElementById("praseodymium_kg").innerHTML * 1;
+    Nd = document.getElementById("neodymium_kg").innerHTML * 1;
+    Sm = document.getElementById("samarium_kg").innerHTML * 1;
+    Eu = document.getElementById("europium_kg").innerHTML * 1;
+    Gd = document.getElementById("gadolinium_kg").innerHTML * 1;
+    Tb = document.getElementById("terbium_kg").innerHTML * 1;
+    Dy = document.getElementById("dysprosium_kg").innerHTML * 1;
+    Ho = document.getElementById("holmium_kg").innerHTML * 1;
+    Er = document.getElementById("erbium_kg").innerHTML * 1;
+    Tm = document.getElementById("thulium_kg").innerHTML * 1;
+    Yb = document.getElementById("ytterbium_kg").innerHTML * 1;
+    Lt = document.getElementById("lutetium_kg").innerHTML * 1;
+    Hf = document.getElementById("hafnium_kg").innerHTML * 1;
+    Ta = document.getElementById("tantalum_kg").innerHTML * 1;
+    W = document.getElementById("tungsten_kg").innerHTML * 1;
+    Re = document.getElementById("rhenium_kg").innerHTML * 1;
+    Os = document.getElementById("osmium_kg").innerHTML * 1;
+    Ir = document.getElementById("iridium_kg").innerHTML * 1;
+    Pt = document.getElementById("platinum_kg").innerHTML * 1;
+    Au = document.getElementById("gold_kg").innerHTML * 1;
+    Hg = document.getElementById("mercury_kg").innerHTML * 1;
+    Tl = document.getElementById("thallium_kg").innerHTML * 1;
+    Pb = document.getElementById("lead_kg").innerHTML * 1;
+    Bi = document.getElementById("bismuth_kg").innerHTML * 1;
+    Th = document.getElementById("thorium_kg").innerHTML * 1;
+    U = document.getElementById("uranium_kg").innerHTML * 1;
+    
+    //write in values from page 4 and 5 of https://chaya2766.github.io/stareater-expanse-wiki/documents/calutron_refining/calutron_refining.pdf
+    H += 0.0237970036865053*order_count;
+    Li += 1.69E-06 * order_count;
+    Be += 2.88E-08 * order_count;
+    B += 1.59E-06 * order_count;
+    C += 0.0148731273040658 * order_count;
+    N += 0.00138815854837948 * order_count;
+    O += 0.396616728108421 * order_count;
+    F += 8.63E-05 * order_count;
+    Na += 0.0054534800114908 * order_count;
+    Mg += 0.118985018432526 * order_count;
+    Al += 0.00902303056446659 * order_count;
+    Si += 0.138815854837948 * order_count;
+    P += 0.00109069600229816 * order_count;
+    S += 0.0396616728108422 * order_count;
+    Cl += 0.00036687047350029 * order_count;
+    K += 0.000694079274189738 * order_count;
+    Ca += 0.0109069600229816 * order_count;
+    Sc += 6.35E-06 * order_count;
+    Ti += 0.000535432582946369 * order_count;
+    Va += 6.05E-05 * order_count;
+    Cr += 0.00297462546081316 * order_count;
+    Mn += 0.00267716291473185 * order_count;
+    Fe += 0.218139200459632 * order_count;
+    Co += 0.000585009673959922 * order_count;
+    Ni += 0.0128900436635237 * order_count;
+    Cu += 0.000109069600229816 * order_count;
+    Zn += 0.00017847752764879 * order_count;
+    Ga += 7.54E-06 * order_count;
+    Ge += 2.08E-05 * order_count;
+    As += 1.78E-06 * order_count;
+    Se += 1.29E-05 * order_count;
+    Br += 1.19E-06 * order_count;
+    Rb += 3.17E-06 * order_count;
+    Sr += 8.63E-06 * order_count;
+    Y += 1.88E-06 * order_count;
+    Zr += 6.54E-06 * order_count;
+    Nb += 1.88E-07 * order_count;
+    Mo += 1.19E-06 * order_count;
+    Ru += 8.03E-07 * order_count;
+    Rh += 1.78E-07 * order_count;
+    Pd += 6.54E-07 * order_count;
+    Ag += 1.39E-07 * order_count;
+    Cd += 4.36E-07 * order_count;
+    In += 4.36E-08 * order_count;
+    Sn += 1.19E-06 * order_count;
+    Sb += 1.19E-07 * order_count;
+    Te += 2.08E-06 * order_count;
+    I += 2.48E-07 * order_count;
+    Cs += 1.39E-07 * order_count;
+    Ba += 2.68E-06 * order_count;
+    La += 2.78E-07 * order_count;
+    Ce += 7.44E-07 * order_count;
+    Pr += 9.72E-08 * order_count;
+    Nd += 4.96E-07 * order_count;
+    Sm += 1.69E-07 * order_count;
+    Eu += 5.85E-08 * order_count;
+    Gd += 2.28E-07 * order_count;
+    Tb += 3.87E-08 * order_count;
+    Dy += 2.68E-07 * order_count;
+    Ho += 5.85E-08 * order_count;
+    Er += 1.78E-07 * order_count;
+    Tm += 2.88E-08 * order_count;
+    Yb += 1.78E-07 * order_count;
+    Lt += 2.88E-08 * order_count;
+    Hf += 1.69E-07 * order_count;
+    Ta += 1.98E-08 * order_count;
+    W += 1.19E-07 * order_count;
+    Re += 4.86E-08 * order_count;
+    Os += 6.54E-07 * order_count;
+    Ir += 5.35E-07 * order_count;
+    Pt += 9.72E-07 * order_count;
+    Au += 1.69E-07 * order_count;
+    Hg += 2.48E-07 * order_count;
+    Tl += 7.73E-08 * order_count;
+    Pb += 1.39E-06 * order_count;
+    Bi += 6.84E-08 * order_count;
+    Th += 3.87E-08 * order_count;
+    U += 9.72E-09 * order_count;
+    
+    document.getElementById("calutrons").innerHTML = calutrons + order_count;
+    document.getElementById("hydrogen_kg").innerHTML = H;
+    document.getElementById("lithium_kg").innerHTML = Li;
+    document.getElementById("beryllium_kg").innerHTML = Be;
+    document.getElementById("boron_kg").innerHTML = B;
+    document.getElementById("carbon_kg").innerHTML = C;
+    document.getElementById("nitrogen_kg").innerHTML = N;
+    document.getElementById("oxygen_kg").innerHTML = O;
+    document.getElementById("fluorine_kg").innerHTML = F;
+    document.getElementById("sodium_kg").innerHTML = Na;
+    document.getElementById("magnesium_kg").innerHTML = Mg;
+    document.getElementById("aluminium_kg").innerHTML = Al;
+    document.getElementById("silicon_kg").innerHTML = Si;
+    document.getElementById("phosphorus_kg").innerHTML = P;
+    document.getElementById("sulfur_kg").innerHTML = S;
+    document.getElementById("chlorine_kg").innerHTML = Cl;
+    document.getElementById("potassium_kg").innerHTML = K;
+    document.getElementById("calcium_kg").innerHTML = Ca;
+    document.getElementById("scandium_kg").innerHTML = Sc;
+    document.getElementById("titanium_kg").innerHTML = Ti;
+    document.getElementById("vanadium_kg").innerHTML = Va;
+    document.getElementById("chromium_kg").innerHTML = Cr;
+    document.getElementById("manganese_kg").innerHTML = Mn;
+    document.getElementById("iron_kg").innerHTML = Fe;
+    document.getElementById("cobalt_kg").innerHTML = Co;
+    document.getElementById("nickel_kg").innerHTML = Ni;
+    document.getElementById("copper_kg").innerHTML = Cu;
+    document.getElementById("zinc_kg").innerHTML = Zn;
+    document.getElementById("gallium_kg").innerHTML = Ga;
+    document.getElementById("germanium_kg").innerHTML = Ge;
+    document.getElementById("arsenic_kg").innerHTML = As;
+    document.getElementById("selenium_kg").innerHTML = Se;
+    document.getElementById("bromine_kg").innerHTML = Br;
+    document.getElementById("rubidium_kg").innerHTML = Rb;
+    document.getElementById("strontium_kg").innerHTML = Sr;
+    document.getElementById("yttrium_kg").innerHTML = Y;
+    document.getElementById("zirconium_kg").innerHTML = Zr;
+    document.getElementById("niobium_kg").innerHTML = Nb;
+    document.getElementById("molybdenum_kg").innerHTML = Mo;
+    document.getElementById("ruthenium_kg").innerHTML = Ru;
+    document.getElementById("rhodium_kg").innerHTML = Rh;
+    document.getElementById("palladium_kg").innerHTML = Pd;
+    document.getElementById("silver_kg").innerHTML = Ag;
+    document.getElementById("cadmium_kg").innerHTML = Cd;
+    document.getElementById("indium_kg").innerHTML = In;
+    document.getElementById("tin_kg").innerHTML = Sn;
+    document.getElementById("antimony_kg").innerHTML = Sb;
+    document.getElementById("tellurium_kg").innerHTML = Te;
+    document.getElementById("iodine_kg").innerHTML = I;
+    document.getElementById("caesium_kg").innerHTML = Cs;
+    document.getElementById("barium_kg").innerHTML = Ba;
+    document.getElementById("lanthanum_kg").innerHTML = La;
+    document.getElementById("cerium_kg").innerHTML = Ce;
+    document.getElementById("praseodymium_kg").innerHTML = Pr;
+    document.getElementById("neodymium_kg").innerHTML = Nd;
+    document.getElementById("samarium_kg").innerHTML = Sm;
+    document.getElementById("europium_kg").innerHTML = Eu;
+    document.getElementById("gadolinium_kg").innerHTML = Gd;
+    document.getElementById("terbium_kg").innerHTML = Tb;
+    document.getElementById("dysprosium_kg").innerHTML = Dy;
+    document.getElementById("holmium_kg").innerHTML = Ho;
+    document.getElementById("erbium_kg").innerHTML = Er;
+    document.getElementById("thulium_kg").innerHTML = Tm;
+    document.getElementById("ytterbium_kg").innerHTML = Yb;
+    document.getElementById("lutetium_kg").innerHTML = Lt;
+    document.getElementById("hafnium_kg").innerHTML = Hf;
+    document.getElementById("tantalum_kg").innerHTML = Ta;
+    document.getElementById("tungsten_kg").innerHTML = W;
+    document.getElementById("rhenium_kg").innerHTML = Re;
+    document.getElementById("osmium_kg").innerHTML = Os;
+    document.getElementById("iridium_kg").innerHTML = Ir;
+    document.getElementById("platinum_kg").innerHTML = Pt;
+    document.getElementById("gold_kg").innerHTML = Au;
+    document.getElementById("mercury_kg").innerHTML = Hg;
+    document.getElementById("thallium_kg").innerHTML = Tl;
+    document.getElementById("lead_kg").innerHTML = Pb;
+    document.getElementById("bismuth_kg").innerHTML = Bi;
+    document.getElementById("thorium_kg").innerHTML = Th;
+    document.getElementById("uranium_kg").innerHTML = U;
   }
   else 
   if(order_name == "Separate 1kg kamacite bake"){
