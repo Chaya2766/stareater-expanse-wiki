@@ -16,6 +16,7 @@ Although widespread and well-supported, it is just one of many schemes used to p
 ARCS is a standard specifying a scheme for packaging any piece of data with a recovery code capable that helps in error detection and allows the original bits to be recreated in case of corruption.
 Digital files sometimes incorporate a built-in ARCS field, with the help of which they undergo routine integrity checks and repair.
 Other times, for files which do not support having a built-in ARCS field, separate arcs files can be generated to provide them with redundancy.
+The standard is made such that it can be easily added to file types and other arbitrary information which originally did not support it.
 <br><br>
 It incorporates a number of algorithms, most notably Reed-Solomon error correction codes.
 <psan class="meta">In the future will likely add an option to pick between (or maybe use both) reed-solomon and Low-Density Parity Checks (I expect that LDPC would be much better for massive files thanks to linear complexity - Reed-Solomon appears to be completely unuseable for error correction on files zetabytes in size such as human brain emulations even for a quettabithertz level compute cluster, and even for particularly large AI models stays prohibitively expensive - but I should fix the bitflip cost calculation of Reed-Solomon first)</span>
@@ -46,10 +47,29 @@ t = c/a = floor(d×l)/ceil(d × 2 × (l+0.5))<br>
 <hr>
 -->
 
-<h2>Usage</h2>
+<h2>Field structure</h2>
 <article>
-
+The ARCS field is at least 800 bits long, plus however long the recovery data is.
+It can be included in the same piece of data multiple times - if the area they are meant to protect is overlapping then their error correction codes will be calculated together like one long code split into parts.
+All the parts which describe lengths of data or locations are encoded as 128 bits long unsigned base2 integers, allowing encoding of vastly more data than is needed for most use cases as a form of future proofing.
+Including multiple ARCS fields increases the chance that at least one will remain readable, allowing data to be recovered even if there is otherwise no indication where the file begins and ends, and doing so is the reason for ARCS fields with zero reed-solomon bits being valid inclusions.
+For that use case there are dedicated parts of the ARCS field which point at the beginning of the previous field and the beginning of the next field - they always point at the first bit of the field so that the parsing algorithm knows where to start, meaning that having a previous field less than 800 bits away is not valid since it would necessarily overlap, but is not necessarily considered an error and will simply be ignored instead of trying to find another field there.
+<br><br>
+The protection provided by the Reed-Solomon bits implicitly extends to the field itself, as all the values in the field are set first and then the RS bits are calculated, protecting the whole span between the start of preceding data and the end of following data, including the ARCS field itself.
+This is allowed by the Reed-Solomon error correction algorithm, as it does not fundamentally distinguish between error correction bits and data bits.
 </article>
+<table class="styled">
+  <tr><th colspan=4>parts of the Advanced Recovery Code Standard field</th></tr>
+  <tr><th>order</th><th>part</th><th>purpose</th><th>length</th></tr>
+  <tr><td>1</td><td>ARCS field start marker</td><td>a unique bit string that identifies the ARCS field using 16 plaintext characters in UTF-8 encoding</td><td>128 bits</td></tr>
+  <tr><td>2</td><td>preceding data length</td><td>unsigned base 2 integer denoting how many bits before the start of the field are protected by it. If this part is all ones then the field would protect 2^128-1 bits before the field starts</td><td>128 bits</td></tr>
+  <tr><td>3</td><td>following data length</td><td>unsigned base 2 integer denoting how many bits after the start of the field are protected by it. If this part is all ones then the field would protect 2^128-1 bits after the field ends</td><td>128 bits</td></tr>
+  <tr><td>4</td><td>previous ARCS field location</td><td>unsigned base 2 integer denoting how many bits there are between the first bit of this ARCS field and the first bit of the previous ARCS field (if there is no previous field, this part is all zeros)</td><td>128 bits</td></tr>
+  <tr><td>5</td><td>next ARCS field location</td><td>unsigned base 2 integer denoting how many bits there are between the first bit of this ARCS field and the first bit of the next ARCS field (if there is no next field, this part is all zeros)</td><td>128 bits</td></tr>
+  <tr><td>6</td><td>recovery code length</td><td>unsigned base 2 integer denoting how many bits after the CRC part are the recovery code</td><td>128 bits</td></tr>
+  <tr><td>7</td><td>CRC-32 checksum</td><td>provides a way to validate that the field is undamaged - if the CRC-32 algorithm ends up in zero state after passing over the ARCS field from the first bit of part 1 to the last bit of part 7, then there is a good chance that all bits encoding the field are correct</td><td>32 bits</td></tr>
+  <tr><td>8</td><td>Reed-Solomon error correction code data</td><td>bits in this field are the actual recovery code</td><td>from 0 bits up to 2^128-1 (&approx;3.4E+38 bits)</td></tr>
+</table>
 
 <hr>
 
@@ -61,7 +81,9 @@ Calculate the effects of adding an ARCS field to a file.
 <article>
 Pick the one which should be calculated automatically and fill in the other two.
 Make sure to specify whether the redundancy percentage is given compared to original size or final size.
-Also know that you can use scientific notation in these fields (eg. 4.623E+20) if you don't want to bother picking a unit of roughly appropriate size.</article>
+Also know that you can use scientific notation in these fields (eg. 4.623E+20) if you don't want to bother picking a unit of roughly appropriate size.
+Note that each ARCS field takes up an additional 800 bits that are neither the original data nor Reed-Solomon recovery code, so you will for example get zero redundancy if you have an 1000 bit file and try to get a final size of 1800 bits, since all of those 800 bits will be the ARCS data - you need to play around with the values to see what you get.
+</article>
 <input type="radio" id="autocalc_original_filesize" name="autocalc"></input>
 <span> Original file size: </span>
 <input type="number" id="original_filesize" oninput="autocalc()"></input>
@@ -169,6 +191,8 @@ Also know that you can use scientific notation in these fields (eg. 4.623E+20) i
 <span> bits </span>-->
 <!picking symbol length was an implemented feature, but contrary to the description I wrote, I found that the computational cost only gets worse for any symbol length greater than one bit>
 <br>
+Number of fields added: <input type="number" id="fields_number" value="1" oninput="autocalc()"></input>
+<br>
 <article>Manual control in case the fields don't automatically update: <input type="button" onclick="autocalc()" value="recalculate"></input></article>
 <br>
 <article id="conclusion">[conclusion]</article>
@@ -186,12 +210,15 @@ function autocalc(){
   let final_filesize = 1;
   let final_filesize_unit = document.getElementById("final_filesize_unit").value * 1;
   let redundancy_level = 1;
+  let fields_number = document.getElementById("fields_number").value * 1;
+  let ARCS_field_size = 800;
   
   let error_fixes = 1;
   let redundancy_bits = 1;
   
   if(selected == "autocalc_original_filesize"){
     final_filesize = document.getElementById("final_filesize").value * final_filesize_unit;
+    effective_final_filesize = final_filesize - (fields_number * ARCS_field_size);
     redundancy_level = document.getElementById("redundancy_level").value / 100;
     if(reference == "percentage_of_original"){
       //algebra time. Starting from the facts:
@@ -211,26 +238,28 @@ function autocalc(){
       //(redundancy_level*2 + 1)/final_filesize = 1/original_filesize
       //original_filesize = final_filesize/(redundancy_level*2 + 1)
       
-      original_filesize = final_filesize/(redundancy_level*2 + 1);
+      original_filesize = effective_final_filesize/(redundancy_level*2 + 1);
       document.getElementById("original_filesize").value = original_filesize / original_filesize_unit;
-      redundancy_bits = final_filesize-original_filesize;
+      redundancy_bits = effective_final_filesize-original_filesize;
       error_fixes=Math.floor(redundancy_bits/2);
     } else {
       error_fixes = Math.floor(redundancy_level * final_filesize);
       redundancy_bits = 2*error_fixes;
-      original_filesize = final_filesize-redundancy_bits;
+      original_filesize = final_filesize-redundancy_bits - (fields_number * ARCS_field_size);
       document.getElementById("original_filesize").value = original_filesize / original_filesize_unit;
     }
     filesize_increase = 100 * (final_filesize-original_filesize)/original_filesize;
-    document.getElementById("conclusion").innerHTML="Adding an ARCS field increased the file size by "+filesize_increase.toFixed(2)+"% over the original, and should allow it to suffer "+error_fixes.toExponential(3)+" corrupted bits before it becomes unrepairable.";
+    document.getElementById("conclusion").innerHTML="Adding an ARCS field increased the file size by "+filesize_increase.toFixed(2)+"% over the original, and should allow it to suffer "+error_fixes.toFixed(0)+" corrupted bits before it becomes unrepairable.";
   }
   if(selected == "autocalc_final_filesize"){
     original_filesize = document.getElementById("original_filesize").value * original_filesize_unit;
+    effective_original_filesize = original_filesize + (fields_number * ARCS_field_size);
     redundancy_level = document.getElementById("redundancy_level").value / 100;
+    fields_number = document.getElementById("fields_number").value;
     if(reference == "percentage_of_original"){
-      error_fixes = original_filesize * redundancy_level;
+      error_fixes = effective_original_filesize * redundancy_level;
       redundancy_bits = Math.ceil(error_fixes * 2);
-      final_filesize = original_filesize + redundancy_bits;
+      final_filesize = effective_original_filesize + redundancy_bits;
       document.getElementById("final_filesize").value = final_filesize/final_filesize_unit;
     } else {
       //algebra time. starting from:
@@ -253,30 +282,30 @@ function autocalc(){
       //when you have a × b - b you can turn it into (a-1) × b and it is super satisfying
       //final_filesize = -original_filesize/(redundancy_level*2 - 1)
       
-      final_filesize = Math.ceil(-original_filesize/(redundancy_level*2 - 1));
-      redundancy_bits = final_filesize - original_filesize;
+      final_filesize = Math.ceil(-effective_original_filesize/(redundancy_level*2 - 1));
+      redundancy_bits = final_filesize - effective_original_filesize;
       error_fixes = Math.floor(redundancy_bits/2);
       document.getElementById("final_filesize").value = final_filesize/final_filesize_unit;
     }
     filesize_increase = 100 * (final_filesize-original_filesize)/original_filesize;
-    document.getElementById("conclusion").innerHTML="Adding an ARCS field increased the file size by "+filesize_increase.toFixed(2)+"% over the original, and should allow it to suffer "+error_fixes.toExponential(3)+" corrupted bits before it becomes unrepairable.";
+    document.getElementById("conclusion").innerHTML="Adding an ARCS field increased the file size by "+filesize_increase.toFixed(2)+"% over the original, and should allow it to suffer "+error_fixes.toFixed(0)+" corrupted bits before it becomes unrepairable.";
   }
   if(selected == "autocalc_redundancy_level"){
     original_filesize = document.getElementById("original_filesize").value * original_filesize_unit;
     final_filesize = document.getElementById("final_filesize").value * final_filesize_unit;
     if(reference == "percentage_of_original"){
-      redundancy_bits = final_filesize - original_filesize;
+      redundancy_bits = final_filesize - original_filesize - (fields_number * ARCS_field_size);
       error_fixes = Math.floor(redundancy_bits/2);
       redundancy_level = error_fixes / original_filesize;
       document.getElementById("redundancy_level").value = (redundancy_level*100);
     } else {
-      redundancy_bits = final_filesize - original_filesize;
+      redundancy_bits = final_filesize - original_filesize - (fields_number * ARCS_field_size);
       error_fixes = Math.floor(redundancy_bits/2);
       redundancy_level = error_fixes / final_filesize;
       document.getElementById("redundancy_level").value = (redundancy_level*100);
     }
     filesize_increase = 100 * (final_filesize-original_filesize)/original_filesize;
-    document.getElementById("conclusion").innerHTML="Adding an ARCS field increased the file size by "+filesize_increase.toFixed(2)+"% over the original, and should allow it to suffer "+error_fixes.toExponential(3)+" corrupted bits before it becomes unrepairable.";
+    document.getElementById("conclusion").innerHTML="Adding an ARCS field increased the file size by "+filesize_increase.toFixed(2)+"% over the original, and should allow it to suffer "+error_fixes.toFixed(0)+" corrupted bits before it becomes unrepairable.";
   }
   
   let macs = 1;
