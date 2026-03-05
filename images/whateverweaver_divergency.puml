@@ -1,9 +1,99 @@
 @startuml
-usecase Patricia
-usecase Felicity
-usecase Serendipity
 
-Patricia --> Felicity : "Patricia copied herself via nondestructive mind uploading.\nDigital copy changed name to Felicity\nPatricia is Felicity's source\nFelicity is Patricia's derivant\nPatricia, Felicity and Serendipity are all each other's divergents"
-Felicity --> Felicity : "Felicity copied herself multiple times\nThe copies established identity and memory synchronization\nFelicity and her copies are each other's convergents"
-Felicity --> Serendipity : "Felicity 12 left the convergency, then changed name to Serendipity\nSerendipity is Felicity's derivant\nFelicity is Serendipity's source\nFelicity, Serendipity and Patricia are all each other's divergents"
+skinparam linetype polyline
+skinparam padding 5
+skinparam ArrowThickness 2
+
+skinparam backgroundColor #FFFFFF
+skinparam classBackgroundColor #FFFFFF
+skinparam classBorderColor #000000
+skinparam arrowColor #000000
+skinparam packageBackgroundColor #FFFFFF
+skinparam packageBorderColor #000000
+skinparam noteBackgroundColor #FFFFFF
+skinparam noteBorderColor #000000
+skinparam shadowing false
+
+package "Whateverweaver divergency" {
+
+class 4duKDF9ywIXZ5tXN1rzAEk {
+ name: Patricia Whateverweaver
+ type: individual
+ status: archival
+ --
+ 0 instances
+}
+class 71nYW332f6bNrdFbUKCsx5 #80FF80 {
+ name: Patricia Whateverweaver
+ type: individual
+ status: active
+ --
+ 1 instance
+}
+class 6D1BWcDaaRdirGxmVMZggp {
+ name: Felicity Whateverweaver
+ type: individual
+ status: archival
+ --
+ 0 instances
+}
+class 11EFl8bccAjB9eDSsrB5fl {
+ name: Felicity Whateverweaver
+ type: convergency
+ status: archival
+ --
+ 0 instances
+}
+class 7QXipVSDqcvNjF82eHt9XI #80FF80 {
+ name: Felicity Whateverweaver
+ type: convergency
+ status: active
+ --
+ 16 instances
+}
+class 7ZEYkEgS4FeIEPKSruTpba #80FF80 {
+ name: Serendipity Whateverweaver
+ type: individual
+ status: active
+ --
+ 1 instance
+}
+
+}
+
+4duKDF9ywIXZ5tXN1rzAEk --> 71nYW332f6bNrdFbUKCsx5
+note on link
+	Forked due to copying with multiple outputs
+	Identity records inherited
+	Some rights transferred
+end note
+
+4duKDF9ywIXZ5tXN1rzAEk --> 6D1BWcDaaRdirGxmVMZggp
+note on link
+	Forked due to copying with multiple outputs
+	Identity records inherited
+	Some rights transferred
+end note
+
+6D1BWcDaaRdirGxmVMZggp --> 11EFl8bccAjB9eDSsrB5fl
+note on link
+	Change of type from individual to convergency
+	Identity records inherited
+	All rights transferred
+end note
+
+11EFl8bccAjB9eDSsrB5fl --> 7QXipVSDqcvNjF82eHt9XI
+note on link
+	Forked due to instance divergence
+	Identity records inherited
+	Some rights transferred
+end note
+
+11EFl8bccAjB9eDSsrB5fl --> 7ZEYkEgS4FeIEPKSruTpba
+note on link
+	Forked due to instance divergence
+	Identity records inherited
+	Some rights transferred
+end note
+
 @enduml
