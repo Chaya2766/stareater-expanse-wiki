@@ -44,17 +44,17 @@ Minimal <a href="computation.html#computronium">computronium</a> requirements fo
   <tr><td>Civic-4 chip</td><td id="num_c4">770 500</td><td id="pow_use_c4">2.541MW</td><td id="vol_c4">0.07705m<sup>3</sup> ≈ (425.5mm)<sup>3</sup></td><td id="flip_use_c4">32.98%</td><td id="mem_use_c4">100.00%</td></tr>
 </table>
 
-More granular details:<br>
-The average neuron in Felicity's brain requires about 4.623E+9 bits of memory and 7.94E+14 bits/s to simulate at realtime speed, but only returns output information at about 4.8E+4bits/s and takes 1.12E+8bits/s of input.
-This means that while within the neuron massive bandwidth is required, the transfer of information between neurons is small enough that they could be distributed across separate devices.
-As a bonus, the neurons tend to be grouped up, ie. they can be divided into small groups where neurons within the group have a lot of connections with each other but relatively few connections with neurons in other groups.
-This is nothing special in terms of neurology, but it means that Felicity is very well suited for networked computing clusters.
-As is frequently the case with the hardware she uses, a device capable of simulating 2.163 million neurons in realtime may theoretically need 30.282TB/s of bandwidth, but a huge fraction of that bandwidth actually just goes to other neurons in the same device, while only a small fraction has to actually leave and be transferred via network connection to a different device to get to the relevant neurons.
+The files storing her mind also include numerous <a href="ARCS.html">ARCS fields</a> with 1E-10% level of redundancy, which can fix up to 462 290 944 corrupted bits after a calculation requiring 1.2823026204672e+30 bitflips in total - if this check & repair operation is ran with the same amount of computational power as is required to run her mind in realtime speed, it would take just under 16.15 kiloseconds to complete.
 
 </article>
 
-<h3>Variables and quantization</h3>
+<h2>more granular details of the emulation</h2>
 <article>
+More granular details:<br>
+The average <a href="mind_uploading.html">mimic neuron</a> in Felicity's brain requires about 4.623E+9 bits of memory and 7.94E+14 bits/s to simulate at realtime speed.
+On average each mimic neuron contains 137 186 560 weights and 1 071 899 <!3+7×128+7000×153> artificial neurons.
+This means that her mindstate requires roughly 1.7150384 E+18 bits <!(3+7×128+7000×153)×16bit×100billion> to store since only the activation values of neurons need to be stored.
+<br><br>
 Felicity's brain simulation uses 16-bit fixed-point weights for the following benefits:
 <ul>
   <li>potentially easier quantization</li>
@@ -178,60 +178,7 @@ Felicity's entire personal technosphere is dependent on small scale processes, w
 As a result they had gained significant cultural importance and aesthetic value in Felicity's culture.
 <br><br>
 <b>TRCC</b> (Task-Reason-Coordination-Context) system of goal specification is used extensively and it is the default that Felicity uses with her AI agents.
-<table class="styled">
-<tr><th>Task</th>
-<th>Reason</th></tr>
-<tr><td><ul>
-<li>precise description of the task</li>
-<li>where to go</li>
-<li>what to do</li>
-<li>when to do it</li>
-<li>how to do it</li>
-<br>
-Specifying tasks is the most basic<br>
-element of every plan
-</ul></td>
-<td><ul>
-<li>bigger picture</li>
-<li>why your task is important</li>
-<li>what will happen to others if you succeed</li>
-<li>what will happen to others if you fail</li>
-<br>
-Explaining why something is being done has a<br>
-tendency to convey a lot of important information<br>
-about how it should be done and what to do in<br>
-case of unexpected events or circumstances
-</ul></td></tr>
 
-<tr><th>Coordination</th>
-<th>Context</th></tr>
-<tr><td><ul>
-<li>who to report to with success, failure, progress or problems</li>
-<li>how to maintain contact</li>
-<li>what to do if you cannot make contact</li>
-<br>
-Communication about tasks has an excessively<br>
-large effect on the overall quality of work<br>
-and ensuring it can happen is critical enough<br>
-and hard enough to deserve its own field.<br>
-Others must know what you're going to do<br>
-even when they cannot see or contact you
-</ul></td>
-<td><ul>
-<li>the basics and the obvious</li>
-<li>who you are working for</li>
-<li>who the worker is are and why hey've been selected</li>
-<li>free card for any other information you want to provide</li>
-<li>even if something sounds too obvious, write it down</li>
-<br>
-Intelligent agents tend to organize organically, and<br>
-often end up with strange gaps in their knowledge<br>
-and especially can miss information that is so obvious<br>
-that nobody bothers to mention it explicitly, so providing<br>
-even random semi-relevant scraps of information will<br>
-stop these gaps from accumulating to the point of failure
-</ul></td></tr>
-</table>
 
 </article>
 

@@ -355,13 +355,21 @@ function autocalc(){
 
 <hr>
 
-<h2>Commonly used values</h2>
+<h2>Reference redundancy level values</h2>
 <article></article>
 <ul>
-  <li>0.5% redundancy relative to original: results in files that are 1% bigger than their unsecured counterparts</li>
-  <li>5% redundancy relative to original: results in files that are 10% bigger than their unsecured counterparts</li>
-  <li>10% redundancy across the whole file: results in files that are 25% bigger than their unsecured counterparts</li>
-  <li>25% redundancy across the whole file: results in files that are twice as big as their unsecured counterparts</li>
+  <li>
+  1E-13% redundancy across the whole file: provides a number of redundancy bits equivalent to the expected number of random bit flips after a terran year of data storage on a typical solid state hard drive.
+  By the common reliability standards for dedicated data storage devices, the average data corruption accumulated over the course of a terran year should be no more than 1 in 1 quadrillion bits.
+  This is purely a reference value and generally not used.
+  </li>
+  <li>
+  1E-10% redundancy across the whole file: provides theoretically enough redundancy to fix 1000 years worth of accumulated bit rot on standard hardware with 50% probability.
+  It should also provide good protection from mild radiation-induced data corruption such as that which can happen as a result of various solar events.
+  Routine checks and repairs using this level of redundancy practically guarantee that data will not accumulate random bit flips and that it may be returned to pristine condition even after laying forgotten in cold storage, but will not protect against outright hardware failure.
+  Fairly common for AI sapients, as the computational requirements of their minds mean that most already have access to sufficient computational power that a check and repair operation on a piece of data as big as them might take between a second and a kilosecond.
+  At the extreme end a digitized human mind might need to go dormant for a few kiloseconds to perform the full check and repair, making it a chore to be done each week or month, or for those more cautious included as an automatically performed part of sleeping if the given transhuman happens to still do such.
+  </li>
 </ul>
 
 </html>
