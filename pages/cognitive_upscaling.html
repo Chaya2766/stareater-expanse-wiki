@@ -47,6 +47,55 @@ Ofcourse that is all optional, but attempting to make radical improvements to on
 Failure to prepare this way often leads to what is colloquially known as an intelligence implosion, ie. getting stuck in a broken state with no way back, or emerging from it still functional but less capable than before.
 </article>
 
+<hr>
+
+<h1>The proven method</h1>
+<article>
+Over time a surprisingly simple model for a basic composite mind had come out of the open source communities that began work on tools for self-guilded cognitive upscaling about as soon as the idea became known.
+Many different translator networks had already been trained which can act as bridges between two minds - the exact compatibility depends on the particular translator model and the mind in question, some for instance do a good job connecting two human brains together, meanwhile others work well for one particular AI model or a group of AI models, and so on.
+In discussion these translator networks are usually referred to as bridges.
+<br><br>
+A number of generalist AI models (referred to as brain nodes) are linked together into a network, where every brain node is linked directly to all other brain nodes with a bridge.
+This can be enough for very small networks with just 4 or maybe 8 brain nodes, but issues very quickly pile up when moving to numbers higher than that, as two bridges interfacing with the same brain node can interfere with each other if they attempt to relay information at the same time.
+To ease that, the bridges themselves are also bridged with each other with more translator networks usually called meta-bridges.
+<br><br>
+This basic arrangement where every brain node is connected to every other brain node by a bridge, and each bridge is connected to every other bridge with a meta-bridge, appears to very reliably allow a stable composite mind to form, leaving the real bulk of the work being just to pick the correct AI model for the brain node, the bridge and the meta bridge, and tune their configuration if there is any.
+The problem with this arrangement is how fast the number of links grows, the table below illustrates this.
+Generally it is said that the number of sub-networks in such a mind grows with O(n<sup>4</sup>) of the number of brain nodes.
+Images also attached showing the structure of composite minds with 3 and 4 brain nodes.
+<br>
+<img src="../images/composite_mind_3.webp" class="styled right"></img>
+<img src="../images/composite_mind_4.webp" class="styled right"></img>
+<table class="styled">
+<tr><th>brain nodes</th><th>bridges</th><th>meta-bridges</th></tr>
+<tr><td>n</td><td>n×(n-1)/2<br>= 0.5n<sup>2</sup>-0.5n</td><td>(n×(n-1)/2)×((n×(n-1)/2)-1)/2<br>= 0.125n<sup>4</sup>-0.25n<sup>3</sup>-0.125n<sup>2</sup>+0.25n</td></tr>
+<tr><td>1</td><td>0</td><td>0</td></tr>
+<tr><td>2</td><td>1</td><td>0</td></tr>
+<tr><td>3</td><td>3</td><td>3</td></tr>
+<tr><td>4</td><td>6</td><td>15</td></tr>
+<tr><td>5</td><td>10</td><td>45</td></tr>
+<tr><td>6</td><td>15</td><td>105</td></tr>
+<tr><td>8</td><td>28</td><td>378</td></tr>
+<tr><td>16</td><td>120</td><td>7140</td></tr>
+<tr><td>32</td><td>496</td><td>122 760</td></tr>
+<tr><td>64</td><td>2016</td><td>2 031 120</td></tr>
+<tr><td><input type=number id="brains" oninput="bridgecalc()" style="width: 50px;"></input></td><td id="bridges">-</td><td id="meta-bridges">-</td></tr>
+</table>
+
+<script>
+function bridgecalc(){
+  brains = document.getElementById("brains").value * 1;
+  bridges = 0.5*Math.pow(brains,2) - 0.5*brains;
+  metabridges = 0.125*Math.pow(brains,4) - 0.25*Math.pow(brains,3) - 0.125*Math.pow(brains,2) + 0.25*brains;
+  document.getElementById("bridges").innerHTML = bridges.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  document.getElementById("meta-bridges").innerHTML = metabridges.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+}
+</script>
+
+Worse yet, this is actually expected to be a recursive problem where at some point further down the line meta-meta-meta-bridges become necessary and so on, bumping the complexity to O(n<sup>8</sup>).
+As of now this is very sparsely explored territory, as such minds have absolutely cataclysmic computational requirements and at that point it is easier to just explore novel architectures or at least novel arrangements of brain nodes and various levels of bridges that do not necessarily connect every single one to every other one.
+</article>
+
 <br>
 <h1 class="division">relevant pages</h1>
 
