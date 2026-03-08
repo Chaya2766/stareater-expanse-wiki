@@ -62,9 +62,8 @@ To ease that, the bridges themselves are also bridged with each other with more 
 This basic arrangement where every brain node is connected to every other brain node by a bridge, and each bridge is connected to every other bridge with a meta-bridge, appears to very reliably allow a stable composite mind to form, leaving the real bulk of the work being just to pick the correct AI model for the brain node, the bridge and the meta bridge, and tune their configuration if there is any.
 The problem with this arrangement is how fast the number of links grows, the table below illustrates this.
 Generally it is said that the number of sub-networks in such a mind grows with O(n<sup>4</sup>) of the number of brain nodes.
-Images also attached showing the structure of composite minds with 3 and 4 brain nodes.
+Image also attached for illustration.
 <br>
-<img src="../images/composite_mind_3.webp" class="styled right"></img>
 <img src="../images/composite_mind_4.webp" class="styled right"></img>
 <table class="styled">
 <tr><th>brain nodes</th><th>bridges</th><th>meta-bridges</th></tr>
@@ -92,9 +91,19 @@ function bridgecalc(){
 }
 </script>
 
-Worse yet, this is actually expected to be a recursive problem where at some point further down the line meta-meta-meta-bridges become necessary and so on, bumping the complexity to O(n<sup>8</sup>).
+Worse yet, this is actually expected to be a recursive problem where at some point further down the line meta-meta-bridges become necessary and so on, bumping the complexity to O(n<sup>8</sup>).
 As of now this is very sparsely explored territory, as such minds have absolutely cataclysmic computational requirements and at that point it is easier to just explore novel architectures or at least novel arrangements of brain nodes and various levels of bridges that do not necessarily connect every single one to every other one.
+<br><br>
+The choice of what exact translator models to use as bridges has a lot of nuance, but as a very common occurrence <b>a bridge is 1/215th the size of a brain node</b>, as that is roughly the comparison between one hemisphere of the human brain and the corpus callosum which links the two hemispheres together.
+<br><br>
+Below you can see more illustrative renders of the structure of composite minds adhering to this pattern at different levels of complexity.
 </article>
+<img src="../images/composite_mind_3.webp" class="styled left cardsize"></img>
+<img src="../images/composite_mind_4.webp" class="styled left cardsize"></img>
+<img src="../images/composite_mind_6.webp" class="styled left cardsize"></img>
+<img src="../images/composite_mind_8.webp" class="styled left cardsize"></img>
+<img src="../images/composite_mind_16.webp" class="styled left cardsize"></img>
+<img src="../images/composite_mind_24.webp" class="styled left cardsize"></img>
 
 <br>
 <h1 class="division">relevant pages</h1>

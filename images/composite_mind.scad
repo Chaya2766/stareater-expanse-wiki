@@ -1,4 +1,4 @@
-n = 4;//specifies the number of nodes
+n = 3;//specifies the number of nodes
 d = 100;//distance of nodes from the center
 r = 3;//node size
 t = 1;//connection thickness
@@ -86,6 +86,31 @@ d_midpoints = [for(i=[0:len(midpoints)-1]) for(j=[0:len(midpoints)-1]) if(i>j)
 
 echo("d_midpoints:",len(d_midpoints));
 
-//openscad composite_mind.scad -o composite_mind.png --colorscheme=Starnight --imgsize=1000,1000 --autocenter --viewall
+
+//these variables must be defined explicitly for them to work in command line
+$vpt = [0,0,0];
+$vpr = [85.8,0,345.8];
+$vpd = 650;
+
+//add text to the render
+translate($vpt){
+    rotate($vpr){
+        translate([-0.19*$vpd,0.18*$vpd,0]){
+            color("#0FF"){text("composite mind illustration",$vpd*0.01,halign="left");}
+        }
+        translate([0.19*$vpd,0.18*$vpd,0]){
+            color("#F00"){text(str("brain nodes: ",n),$vpd*0.01,halign="right");}
+        }
+        translate([0.19*$vpd,0.165*$vpd,0]){
+            color("#08F"){text(str("bridges: ",len(midpoints)),$vpd*0.01,halign="right");}
+        }
+        translate([0.19*$vpd,0.15*$vpd,0]){
+            color("#0F0"){text(str("meta-bridges: ",len(d_midpoints)),$vpd*0.01,halign="right");}
+        }
+    }
+}
+
+//openscad composite_mind.scad -o composite_mind.png --colorscheme=Starnight --imgsize=1000,1000
 //for 3 nodes, --camera=-18.3,22.84,0,90,0,308.7,680
 //for 4 nodes, --camera=-18.3,22.84,0,85.8,0,345.8,680
+//anything above 26 requires --csglimit=10000000
