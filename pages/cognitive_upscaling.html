@@ -144,8 +144,8 @@ function set_brain(){
   brain = document.getElementById("brain_model").value;
   if(debug_log)console.log(brain);
   
-  let brain_dict = {};
-  brain_dict["UEIA"] = [Math.pow(2,50),5];
+  let brain_dict = {};//num. of synapses and size of active memory
+  brain_dict["UEIA"] = [Math.pow(2,50),4];
   
   if(debug_log)console.log(brain_dict[brain]);
   document.getElementById("brain_size").value = brain_dict[brain][0];
