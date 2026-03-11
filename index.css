@@ -572,7 +572,8 @@ div.thread{
 
 
 .unfinished,.wip{
- /*display: none;*/
+ border-color: #FB0;
+ border-style: dashed;
 }
 
 .card.unfinished,.card.wip{

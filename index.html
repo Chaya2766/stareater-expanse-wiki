@@ -19,6 +19,23 @@
     [date]<br>[time]
 </article>
 
+<!--a search bar that I added and then realized I don't actually need because it is no better than typing in the page flag into the url, unless I add all the pages to the autofill list
+<input id="searchbar" type="text" list="pages" placeholder="pages/ (press enter to go)" on style="
+    position: fixed;
+    top: 8px;
+    right: 130px;
+    border: 1px solid gray;
+    background-color: #0008;
+    z-index: 1000;
+    color: white;
+" onkeypress="if(event.key === 'Enter') go_to_page()">
+</input>
+
+<datalist id="pages">
+  <option value="pages/epoch_time.html">
+</datalist>
+-->
+
 <!--
 <div class="titlebox">
 <div class="title"><img src="strange_matters_text.png"></img></div>
@@ -70,6 +87,10 @@ setInterval(clock, 1000);
   const newUrl = window.location.pathname + (newSearch ? '?' + newSearch : '') + window.location.hash;
   history.replaceState(null, '', newUrl);
 })();
+
+function go_to_page(){
+  document.querySelector('iframe[name="IM"]').src = document.getElementById("searchbar").value;
+}
 </script>
 
 
