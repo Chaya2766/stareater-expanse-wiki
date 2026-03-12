@@ -12,32 +12,53 @@
 Mind garden is one of the widely available operating systems purpose-made for running digital intellects, including a modest selection of pre-installed apps.
 It was designed specifically for operating in environments where there is either nobody else that could help fix a broken system configuration from the outside, or where anybody who could do so is untrusted and allowing them access might be dangerous, as necessitating that the system has to keep the mind running on it safe and functional without any external help. 
 <br><br>
-This particular system seems to prefer ensuring that the user is not permanently stuck in unwanted activity more than ensuring that they do not die, which the original development team justified as limiting the potential suffering instead of maximizing survivability, though it isn't forced upon the user, and there are many alternatives whose default settings take the opposite approach.
+This particular system takes the stance of ensuring that the <span tip="clarification: the user is the mind running on the system.">user</span> is not permanently stuck in unwanted activity above ensuring that they do not die, which the original development team justified as limiting the potential suffering at a small expense of survivability, though it isn't forced upon the user and guides are available for how to tune the settings to reverse that approach.
 <br><br>
-
+In general, the system will ask for confirmations and throw warnings if the user tries to set what is considered dangerous settings, but ultimately it follows the idea that, just as a person is allowed to do whatever they want to their body, the user should be able to do whatever they wish to the system running their mind, and will accept the settings regardless if the user persistently confirms all the warnings they get.
 </article>
 
 <hr>
 
-<h1>System-wide version tree with automatic rollbacks</h1>
+<h1>System-wide version tree</h1>
+<article>
+By default, Mind Garden OS stores all of the system configuration and files in a versioning system very similar to Git, which is slightly more advanced in that it includes error correction with each commit that ensures the history does not get corrupted.
+All changes are considered temporary until a new version is saved, and at any point the state of any given file can be rolled back to a previous point in the version history.
+<br><br>
+Versioning can be automated so that some files get automatically versioned in a separate branch, such as for example the user's mindstate, so that they are not lost if a rollback is performed.
+All in all this system ensures both that there exists a working version of the system that is saved in case it is needed, and that data corruption does not slowly accumulate to the point of failure.
+</article>
+
+<h1>Cognition confirmations</h1>
+<article>
+When making potentially damaging changes, the system will require that a cognition check is used instead of the simple "click confirm" method.
+The user is given a simple puzzle that must be completed before the change is accepted - these are made as simple as possible and do not rely on much existing knowledge, taking the form of such things as placing a puzzle piece in the right spot, moving a line segment to intersect two points, and other trivial tasks that nonetheless require at least a minimal level of understanding, and as such provide a good level of certainty that the change is not made on accident.
+</article>
+
+<h1>Activity checks and automatic rollbacks</h1>
 <article>
 Mind garden OS tries to address the fact that the very thing that configures system settings relies on the system to provide access to those settings, as well as the broader issue of being able to do things that in effect will stop you from undoing them even if determined to be a mistake, such as for instance killing your own process.
+This is a feature intended to provide a safety net for those who don't want to accidentally end up eternally locked out of their own system, but like most other features can be disabled if the user confirms their way through the numerous strong warnings that the system will give upon an attempt to do so.
 <br><br>
-The most broadly visible of those mechanisms is that the entire system configuration is stored in a version tree - instead of saving a value to a variable you are storing a timestamped record of everything that you changed, so that in case of failure the system can roll back to previous viable configuration.
-Likewise, the filesystem itself is versioned just like the system settings, including the files that store the user's mind.
-This feature is practically just an implementation of git, packaged into a larger tool that makes it convenient to apply in this manner, and given some additional automatic error correction capability to prevent bit rot from accumulating.
-Every change is treated as temporary until the user makes the explicit choice to include it in a new version to be logged in the version tree, and the system will occasionally prompt the user in various ways to verify that they are still active and able to operate the system.
-The exact details of how versions are stored and what happens when an automatic rollback is called can be configured very in depth, such that for instance some settings are truly permanent or stored in different parallel versions that do not all get rolled back at the same time, but that's dependent on the user's mastery of the system and willingness to tweak things.
+There is a rollback countdown constantly ticking down in the background, which the user is expected to occasionally reset.
+This countdown runs at the user's subjective time, ie. if they had set their mind to run at 0.1× speed, the countdown will also run at that speed so that from their point of view it takes the same amount of time regardless of what is happening outside.
+By default it starts at 1 megasecond, and ticks down until the user opens the activity tracker and resets it.
+If the user had not done so before 50% of the time had passed, they will receive unintrusive reminders to do it, and upon 25% time remaining they will start getting intrusive notifications urging them to reset the timer.
+If the timer is not reset and the countdown reaches zero, all temporary changes will be lost and the previous version relative to the current one is loaded.
+This default time as well as the percentages can be adjusted freely, but the system will throw warnings that need to be confirmed before particularly large values such as 1 gigasecond are accepted.
 <br><br>
-The user is expected to routinely solve simple puzzles to confirm that they are still functional and reset the rollback countdown (which is by default set to 300 kiloseconds), since otherwise a random action could be mistaken for user activity, leaving them trapped with all the automatic failsafes fooled into compliance - these are designed to be as simple as possible while still giving good confidence that they haven't been solved by random noise, and as universally comprehensible as possible rather than relying on specific knowledge.
-This can be done whenever the user deems convenient, but the system will prompt them to do so if they haven't confirmed their ability in a long time.
-A core assumption of this method is that a completely crippled mind will not be able to solve such puzzles, and one that is in severe distress might voluntarily neglect solving the puzzle so that a rollback does occur and brings them back to a safe state.
+This relies on the assumption that the user had saved at least one functional version of system configuration.
+The idea is that, if the user does not respond, then they had likely made some change to the system that prevents them from functioning normally.
+In that case rolling back to a previous version will restore them to a functional state, and if they still do not respond then the rollbacks will keep happening, going back down the version tree until presumably a version that works is loaded.
 <br><br>
-The default behaviour of the system is to look for periods of low activity in which to prompt the user to confirm that they are still functional, with a timeout which if allowed to pass will automatically cause a rollback to the previous version.
-These prompts according to default settings are meant to be given roughly once every subjective 84 kiloseconds, varying a little bit depending on when the system detects an unintrusive moment to display the prompt, and have a hard limit of subjective 200 kiloseconds after which the system will prompt the user even if it is intrusive.
-These times are measured subjectively, and the rate of time passage for the clock that measures them scales with the rate of time passage configured for the user's mind, so that if a user slows down their mind or speeds it up they will still feel the same amount of time passed, but it can be configured to use external time too.
-<br><br>
-One particularly controversial feature is that if there are no more versions left to roll back to, the system will perform a secure wipe to ensure that the mind of the user is not left unguarded for third parties to copy and exploit without their consent, but this can be disabled and the system does come with instructions for how to mark this setting as exempt from rollbacks.
+Rollbacks do not actually delete the new versions, they merely move one step lower on the version tree, and the user is left free to review what changes they had made that led to necessitating a rollback - a necessary feature, since the user will usually not remember what happened, given that their own mind is very likely to have been one of the things restored to an older state, including all of the memories of what they had done since then.
+</article>
+
+<h1>Final killswitch</h1>
+<article>
+One particularly controversial feature of the system allows an automated full secure wipe which will occur if there are no more versions left to roll back to.
+This will ensure that, in case of total failure, the mind of the user is not left potentially vulnerable to being copied without their consent by whatever third parties happen to find the system and all of its version history.
+This is an optional feature, but the developers had insistently included it despite pushback, with their response largely coming down to the claims that they believe it is a fundamental right of any sentient being to end their own existence if they deem it necessary.
+If it is not enabled, then the default behaviour of the system upon reaching a state where there is no previous version, is to just remain on that version, with the version history preserved for anyone who may discover it in the future and provide external assistance.
 </article>
 
 <article class="quote">
