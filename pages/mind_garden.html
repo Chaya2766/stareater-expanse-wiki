@@ -10,25 +10,34 @@
 <img src="../images/placeholder.png" class="basics"></img>
 <article class="basics">
 Mind garden is one of the widely available operating systems purpose-made for running digital intellects, including a modest selection of pre-installed apps.
+It was designed specifically for operating in environments where there is either nobody else that could help fix a broken system configuration from the outside, or where anybody who could do so is untrusted and allowing them access might be dangerous, as necessitating that the system has to keep the mind running on it safe and functional without any external help. 
+<br><br>
+This particular system seems to prefer ensuring that the user is not permanently stuck in unwanted activity more than ensuring that they do not die, which the original development team justified as limiting the potential suffering instead of maximizing survivability, though it isn't forced upon the user, and there are many alternatives whose default settings take the opposite approach.
+<br><br>
+
 </article>
 
 <hr>
 
-<h1>System-wide version tree</h1>
+<h1>System-wide version tree with automatic rollbacks</h1>
 <article>
 Mind garden OS tries to address the fact that the very thing that configures system settings relies on the system to provide access to those settings, as well as the broader issue of being able to do things that in effect will stop you from undoing them even if determined to be a mistake, such as for instance killing your own process.
 <br><br>
 The most broadly visible of those mechanisms is that the entire system configuration is stored in a version tree - instead of saving a value to a variable you are storing a timestamped record of everything that you changed, so that in case of failure the system can roll back to previous viable configuration.
 Likewise, the filesystem itself is versioned just like the system settings, including the files that store the user's mind.
 This feature is practically just an implementation of git, packaged into a larger tool that makes it convenient to apply in this manner, and given some additional automatic error correction capability to prevent bit rot from accumulating.
-Every change is treated as temporary until the user makes the explicit choice to commit it to the version tree, and the system will occasionally prompt the user in various ways to verify that they are still active and able to operate the system.
+Every change is treated as temporary until the user makes the explicit choice to include it in a new version to be logged in the version tree, and the system will occasionally prompt the user in various ways to verify that they are still active and able to operate the system.
 The exact details of how versions are stored and what happens when an automatic rollback is called can be configured very in depth, such that for instance some settings are truly permanent or stored in different parallel versions that do not all get rolled back at the same time, but that's dependent on the user's mastery of the system and willingness to tweak things.
 <br><br>
 The user is expected to routinely solve simple puzzles to confirm that they are still functional, since otherwise a random action could be mistaken for user activity, leaving them trapped with all the automatic failsafes fooled into compliance - these are designed to be as simple as possible while still giving good confidence that they haven't been solved by random noise, and as universally comprehensible as possible rather than relying on specific knowledge.
 This can be done whenever the user deems convenient, but the system will prompt them to do so if they haven't confirmed their ability in a long time.
+A core assumption of this method is that a completely crippled mind will not be able to solve such puzzles, and one that is in severe distress might voluntarily neglect solving the puzzle so that a rollback does occur and brings them back to a safe state.
 <br><br>
 The default behaviour of the system is to look for periods of low activity in which to prompt the user to confirm that they are still functional, with a timeout which if allowed to pass will automatically cause a rollback to the previous version.
 These prompts according to default settings are meant to be given roughly once every subjective 84 kiloseconds, varying a little bit depending on when the system detects an unintrusive moment to display the prompt, and have a hard limit of subjective 200 kiloseconds after which the system will prompt the user regardless of the situation, with the timeout to automatic rollback being another 100 subjective kiloseconds, giving the user plenty of time to confirm that they are fine.
+These times are measured subjectively, and the rate of time passage for the clock that measures them scales with the rate of time passage configured for the user's mind, so that if a user slows down their mind or speeds it up they will still feel the same amount of time passed, but it can be configured to use external time too.
+<br><br>
+One particularly controversial feature is that if there are no more versions left to roll back to, the system will perform a secure wipe to ensure that the mind of the user is not left unguarded for third parties to copy and exploit without their consent, but this can be disabled and the system does come with instructions for how to mark this setting as exempt from rollbacks.
 </article>
 
 </html>
