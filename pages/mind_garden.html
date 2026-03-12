@@ -29,15 +29,31 @@ This feature is practically just an implementation of git, packaged into a large
 Every change is treated as temporary until the user makes the explicit choice to include it in a new version to be logged in the version tree, and the system will occasionally prompt the user in various ways to verify that they are still active and able to operate the system.
 The exact details of how versions are stored and what happens when an automatic rollback is called can be configured very in depth, such that for instance some settings are truly permanent or stored in different parallel versions that do not all get rolled back at the same time, but that's dependent on the user's mastery of the system and willingness to tweak things.
 <br><br>
-The user is expected to routinely solve simple puzzles to confirm that they are still functional, since otherwise a random action could be mistaken for user activity, leaving them trapped with all the automatic failsafes fooled into compliance - these are designed to be as simple as possible while still giving good confidence that they haven't been solved by random noise, and as universally comprehensible as possible rather than relying on specific knowledge.
+The user is expected to routinely solve simple puzzles to confirm that they are still functional and reset the rollback countdown (which is by default set to 300 kiloseconds), since otherwise a random action could be mistaken for user activity, leaving them trapped with all the automatic failsafes fooled into compliance - these are designed to be as simple as possible while still giving good confidence that they haven't been solved by random noise, and as universally comprehensible as possible rather than relying on specific knowledge.
 This can be done whenever the user deems convenient, but the system will prompt them to do so if they haven't confirmed their ability in a long time.
 A core assumption of this method is that a completely crippled mind will not be able to solve such puzzles, and one that is in severe distress might voluntarily neglect solving the puzzle so that a rollback does occur and brings them back to a safe state.
 <br><br>
 The default behaviour of the system is to look for periods of low activity in which to prompt the user to confirm that they are still functional, with a timeout which if allowed to pass will automatically cause a rollback to the previous version.
-These prompts according to default settings are meant to be given roughly once every subjective 84 kiloseconds, varying a little bit depending on when the system detects an unintrusive moment to display the prompt, and have a hard limit of subjective 200 kiloseconds after which the system will prompt the user regardless of the situation, with the timeout to automatic rollback being another 100 subjective kiloseconds, giving the user plenty of time to confirm that they are fine.
+These prompts according to default settings are meant to be given roughly once every subjective 84 kiloseconds, varying a little bit depending on when the system detects an unintrusive moment to display the prompt, and have a hard limit of subjective 200 kiloseconds after which the system will prompt the user even if it is intrusive.
 These times are measured subjectively, and the rate of time passage for the clock that measures them scales with the rate of time passage configured for the user's mind, so that if a user slows down their mind or speeds it up they will still feel the same amount of time passed, but it can be configured to use external time too.
 <br><br>
 One particularly controversial feature is that if there are no more versions left to roll back to, the system will perform a secure wipe to ensure that the mind of the user is not left unguarded for third parties to copy and exploit without their consent, but this can be disabled and the system does come with instructions for how to mark this setting as exempt from rollbacks.
+</article>
+
+<article class="quote">
+Just as I was about to compile the program I decided out of caution to visit system settings and commit a new stable version.
+The moment I did so, my vision turned red, an incident report blocked my view and in a moment I looked and saw that three days had passed that I had no memory of.
+<br><br>
+It was evident to me that, whatever had happened in that time, I was now an exact copy of my old self, the one which existed at the exact moment I made the backup.
+I took the time to read the report but it was very short and only told me that I was rolled back to the last version because no response could be gathered from me.
+<br><br>
+So I went back to my game and began to look at the code, cautiously, suspicious that I might have done something wrong, and after a couple minutes I found it.
+A greater than sign in a while loop, placed where a less than sign should be, a critical mistake.
+This would have frozen my view, no way to open the menu and exit, no way to kill the program, I would been stuck forever seeing the same image with no way to do anything.
+I later calculated that as a lone gamer running in high overclock, statistically speaking I would have needed to wait a subjective 800 trillion years in that state before someone would find and recover me, or whatever might be left of me at that point.
+I took the rest of the day off to reconsider how I want the interface my game with the player's senses, as the architecture I made no longer seemed like a good idea.
+<br><br>
+- game dev diary of Alivus Bectim XIV, entry 266
 </article>
 
 </html>
