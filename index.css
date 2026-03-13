@@ -324,7 +324,7 @@ a.tip {
 }
 
 .inline-tip::after {
- content: attr(tip);
+ content: " " attr(tip);
  visibility: hidden;
  opacity: 0;
  font-size: 0%;
