@@ -31,7 +31,7 @@ Local times are often defined as just epoch time modulo the local cycle length, 
     <button onclick="convertToUnix()">Convert to Epoch Time</button>
     <p id="unixResult"></p>
     <span>Epoch time</span>
-    <input type="text" id="epochInput" placeholder="Epoch time (seconds)">
+    <input type="text" id="epochInput" placeholder="Epoch time (seconds)" onkeypress="if(event.key === 'Enter') convertToUTC()">
     <button onclick="convertToUTC()">Convert to UTC Date</button>
     <button onclick="setTimeNow()">Set time to now</button>
     <p id="utcResult"></p>
@@ -74,7 +74,7 @@ Local times are often defined as just epoch time modulo the local cycle length, 
             }
             
             const date = new Date(epochTime * 1000);
-            document.getElementById('utcInput').value = date.toUTCString();
+            document.getElementById('utcInput').value = date.toUTCString().replace('GMT', 'UTC');
         } catch (error) {
             document.getElementById('utcInput').value = 'Error converting epoch time';
         }
