@@ -5,12 +5,12 @@
 <a style="float: right;" target="_blank" href="../index.html?page=pages/mind_uploading.html">link to this page</a>
 
 <h1>Mind uploading</h1>
-<h3 class="warning">work in progress</h3>
 <hr>
 
 <img src="../images/mimic_neuron_example.png" class="basics"></img>
 <article class="basics">
-Mind uploading. The only method described here is what within the context of the Stareater Expanse is commonly referred to as the "machine learning approximation of single neurons" method.
+Mind uploading refers to converting an organic mind into a virtual one.
+This page describes methods that are available for doing this, both a nonlethal one which will create a functioning virtual copy of a person while leaving the original alive, and destructive option which can be applied even after the person had died, provided that their brain had been preserved properly.
 <br><br>
 <span class="meta">There is a document <a href="../documents/mind_uploading_through_machine_learning/mind_uploading_through_machine_learning.pdf">here</a> which goes over the structure of brain emulation and calculations for its computational requirements.
 <br><br>
@@ -28,7 +28,7 @@ Engrams are thought to be a significant building block of human memories. <span 
 <br>
 <b>Artificial neuron:</b> for clarity throughout this article the term 'artificial neuron' should refer to the simple neurons in artificial neural networks, not the recreation of a real biological neuron.
 <br>
-<b>Mimic neuron:</b> for clarity throughout this article the term 'mimic neuron' should refer to the model that mimics the behavior of a real biological neuron.
+<b>Mimic neuron:</b> for clarity throughout this article the term 'mimic neuron' should refer to the simulation model that mimics the behavior of a real biological neuron.
 <br>
 <b>Parameter and Weight:</b> a parameter or a weight is a number assigned to a connection between artificial neurons that dictates how strongly that connection affects the artificial neuron which uses it.
 <hr>
@@ -70,50 +70,22 @@ This mimic neuron contains 41898 artificial neurons and 5 346 560 parameters
 
 <hr>
 
-<h1 class="thread">Process of mind uploading: start to end</h1>
-<div class="thread">
-
-<h3>0. mental preparation</h3>
+<h3>Hardware and surgery</h3>
 <article>
-Although maybe not as technically interesting, preparing yourself mentally is absolutely critical, in fact possibly the most critical part of the process.
-You are entirely in charge at this step, and largely the only one who can execute it properly.
-<br>
-Here are just some of the issues that you should think through thoroughly beforehand:
-<br>
-<ol>
-<li>The uploading process will not kill you, you will see your digital copy get activated and live their own life all the while you are still stuck in your flesh.</li><br>
-<li>
-There are some things which cannot be shared, maybe your lover, your social media accounts or your intellectual property, you are the one who knows best what you would never be fine sharing with someone else even if that someone else is pretty much identical to you.
-You may have to give up some of these things, so that both of you get to keep some of them.
-</li><br>
-<li>
-If you have a definite preference for whether you would rather be the one that wakes up to a digital existence, or the one that sees the copy activated, you need to make sure you're fine with not getting the outcome you were hoping for.
-If your best dreams can only be lived out once you are freed from your organic body, you need to know what you'll do when you see your digital self activate and realize that you will not be the one living out those dreams.
-</li><br>
-<li>
-If you plan on creating a whole new identity for either your digital self or the organic self after the process is done so that you can go on living your lives, you are well advised to actually do it long before the process is done and properly commit to it to make sure you are comfortable with either of them while you still have the option to go back.
-</li>
-</ol>
-Testing out your assumptions beforehand is well advised, try to live for a while without the things that you would be willing to give up for your digital copy to have, invest in a long term virtual reality simulation of what it is like to live as the future digital copy, barred from any of the things the organic leftover would not want to share with you, watch recordings of yourself interacting with others to spot behaviours you engage in that you would hate to be on the other end of, or maybe even roleplay these situations with some AI agents deeply familiar with your behaviour to see what it's like to be someone else talking to you.
-There are many ways to go about it, seeking advice of existing mind uploads when in doubt is also a good move.
+Gathering the data necessary for training all the mimic neurons is done by implanting every single neuron in the body with a probe that transmits the information to the outside through a physical wire.
+The probes are usually in the form of a microscopic probe head capable of navigating through the brain, attached to a wire made from multiple carbon nanotubes (and possibly boron nitride nanotubes).
+This is exactly the same as some of the very high end direct neural interfaces, but applied to the whole brain as well as every significant nerve.
+Although <span class="tip" tip="To put it in context imagine that there is a facility mass-producing these probes at the incredibly low cost of 1$ for one whole probe, which includes multiple perfect carbon nanotubes and boron nitride nanotubes that are over 10cm in length each, as well as a nanotech submarine just a few micrometres across. You'd be paying about 86 billion dollars for that if dollars were still in use. In practice, you'll probably be paying a bit more.">expensive</span>, the use of nanotubes is practically unavoidable because using anything bigger as the wire would literally add too much volume to the brain to be safe if you tried weaving 86 billion strands of it between the neurons.
+<br><br>
+These probes will usually be implanted across a very large number of surgeries, starting with a relatively small number of probes embedded into nerves outside of the brain to make sure no undesirable reaction will occur.
+Each surgery can be expected to take a few hours as the probes <span class="tip" tip="Probably somewhere in the range of 1&micro;m/s to 10&micro;m/s - it is a blessing of human neurology that vast majority of the brain's neurons are located in the outermost few millimetres of brain tissue, so only a small fraction of the probes will have to go all the way in deep inside the brain.">very slowly</span> swim through the brain, avoiding neurons and their delicate dendrites.
+The probes are guided by external computers, with the probe leads being used to transmit control signals and power to the probe tips.
+The process at the same time generates a rough map of where each neuron in the brain is from sensor data of the probe tips, but it is not precise enough to determine every neuron connection and its type - these will have to be approximated from the data collected during probe implantation.
+<br><br>
+With about 1 million probes being implanted each kilosecond, plus a few longer stretches where the probes actually have to go in deep inside the brain, the patient can be expected to spend about 9 megaseconds in the operating rig - it should be noted that in principle you could do this in one go, but usually people opt to keep functioning in their daily life, splitting up the process across 300 to 400 separate surgeries performed during sleep, extending the process to about 30Ms total.
+<br><br>
+Alongside the probes, a storage device will also be implanted, from which the patient will have to regularly dump data onto external storage (since the probes will be producing ML training data at around 172TB/s) but that is a relatively trivial part of the process.
 </article>
-
-<h3>1. surgery</h3>
-<article>
-The common method by which the data required to create a brain emulation is extracted from a person's brain is direct recording of neural activity.
-Neural activity recording hardware needs to be installed before the process can move on.
-</article>
-
-<h3>gathering data</h3>
-<article>
-todo
-</article>
-<h4>creating the brain model</h4>
-<article>todo</article>
-<h4>running the brain model</h4>
-<article>todo</article>
-
-</div>
 
 <hr>
 
@@ -137,16 +109,25 @@ A fairly reliable way to prevent any significant misgeneralization is to go adve
 
 </div>
 
-<h1>Honorable mention: mimic brains</h1>
+<hr>
+
+<h1>Destructive option: full brain scan and virtual recreation</h1>
 <article>
-As there are not yet any known cases of a practical implementation of a mimic brain nor are there any solid numbers on them, they will only be mentioned here briefly, but the idea is, instead of training small neural networks to pretend to be neurons and then link them together, just make one large neural network that is trained on the total of recorded inputs and outputs of the brain as a whole, thereby making a much more efficient emulation that focuses on the mental processes rather than wasting computation on the details of neurological activity.
+The function of human neurons is understood well enough that having a detail scan of one is generally enough to construct a virtual model that functions identically or at least very similarly.
+If all of them and their connections properly mapped across the brain they can be turned into a working simulation.
+The benefit of this approach is that it does not require observing how the neuron is functioning over a long time, instead most of the function can be inferred simply from knowing the neuron's structure.
+The problem however is the amount of work required, as every neuron has to be inspected and modeled.
 <br><br>
-It is likely that the internal structure and function of such a brain would be vastly different to the original even though the outward behavior may still be the same, whether the mind inside is feeling just like you and behaving accordingly, or just suffering massive fear of what will happen if it ever stops pretending to be you, or if it is feeling anything at all for that matter and not just returning responses out of instinct with little actual thought.
+The main use case here is post-mortem mind uploading, as brains can actually be preserved very well by a process known as <b>fixation</b>, of which the easiest method is to pump the body full of <b>formaldehyde</b>, though there are more sophisticated alternatives that further guarantee successful preservation.
+Doing so will preserve the neurological structure all the way down to positions of individual protein, and allow the brain to be carefully scanned later, but ofcourse this is an inherently deadly procedure.
+In some localities doing this is included as part of providing post mortem aid, and implants are available that will automatically preserve the brain in case of death (predictably with known cases where these implants falsely activated and caused said death in the first place).
 <br><br>
-There is a commonly quoted argument against that variance is the thought experiment of pretending to add 2 numbers together, don't actually run the number addition in your head, only pretend, but still return the right number - pretty hard isn't it?
-As convincing as the argument may be in the case of addition, it should not go without notice just how immensely difficult it is to find other such cases where there truly is only one or just a few ways to conduct a mental process that results in the 'correct' behaviour.
+The scanning process usually involves splitting the brain into small chunks which are then thinly sliced and scanned by millions of electron microscopes running in parallel for <span class="tip" tip="You can expect to complete this within 30 megaseconds (a bit less than 1 year) with just one million microscopes.">many megaseconds</span>, and adding the scanned chunks to a virtual map of the brain.
+Then once a full virtual map of the brain is available, all of the neurons are located, inspected, their connections identified, and all individually are turned into functional mimic neurons based on the appropriate neuron simulation model.
+The sheer amount of work that doing this requires will usually mean that it is done by millions of AI agents working in parallel for <span class="tip" tip="With a million agents running at realtime speed, spending 1 hour on each neuron, you'll have this done in about 310Ms, but this can be sped up with more computing power so eg. if you're running them at 10× speed then their hour of work looks like just 6 minutes and the total drops to 31Ms.">many megaseconds</span>.
+The simulation produced will usually be a bit more efficient than the machine learning based equivalent, but not by much, since every neuron will be handcrafted to the exact needed number of parameters.
 <br><br>
-(The author of the article is indeed biased against that approach given its still not ruled out potential for unknowable suffering.)
+It is not unexpected for this process to take in excess of 100Ms to complete.
 </article>
 
 </html>
