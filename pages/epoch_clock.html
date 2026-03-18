@@ -1,0 +1,48 @@
+<head>
+ <link rel="stylesheet" href="../index.css"></link>
+</head>
+<html class="background2" id="page">
+<article class="meta warning">this is just a curiosity page that has largely nothing to do with the setting</article>
+<a style="float: right;" target="_blank" href="../index.html?page=pages/epoch_clock.html">link to this page</a>
+
+<h1>Epoch clock</h1>
+<hr>
+
+<h1 id="date" style="
+  margin: 0 auto;
+  text-align: center;
+  width: 80%;
+  font-size: 10vw;
+  border-bottom: 1px solid white;
+">
+    [date]
+</h1>
+
+<h1 id="clock" style="
+  margin: 0 auto;
+  text-align: center;
+  width: 80%;
+  font-size: 20vw;
+  border-top: 1px solid white;
+">
+    [time]
+</h1>
+
+<script>
+function clock(){
+  datenow = Math.floor(Date.now() / 1000);
+  timenow = datenow % 86400;
+  document.getElementById("date").innerHTML = datenow.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  document.getElementById("clock").innerHTML = timenow.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+}
+setInterval(clock, 1000);
+</script>
+
+<hr>
+
+<div class="card">
+ <img src="../images/card_placeholder.png"></img>
+ <a target="IM" href="epoch_time.html">Epoch time</a>
+</div>
+
+</html>
