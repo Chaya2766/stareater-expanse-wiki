@@ -2,6 +2,7 @@
  <link rel="stylesheet" href="../index.css"></link>
 </head>
 <html class="background2" id="page">
+<article class="warning">this warning lets the reader know something important about the page. If this sentence is still here on a page different than the testpage.html then I forgot to change it while making a new page.</article>
 <a style="float: right;" target="_blank" href="../index.html?page=pages/testpage.html">link to this page</a>
 
 <h1>test page, also used as "doesn't exist yet" page</h1>
@@ -17,17 +18,8 @@ The image will always be rescaled to match the one you see here in height (400px
 </article>
 <hr>
 
-  <div>
-  <h3>table of contents</h3>
-  <ol>
-   <li><a href="#thread">thread class</a></li>
-   <li><a href="#cards">cards</a></li>
-   <li><a href="#gallery">Gallery</a></li>
-  </ol>
-  </div>
-
   <table class="styled">
-      <tr><th colspan=2>stylized table</th></tr>
+      <tr><th colspan=2>styled table</th></tr>
       <tr><td> cell </td> <td> cell </td></tr>
       <tr><td>cell</td> <td>cell</td></tr>
   </table>
@@ -51,9 +43,15 @@ The image will always be rescaled to match the one you see here in height (400px
 <article>As you can see, this works even when you insert images in the middle. Try also moving to it via the table of contents to see that the line on the left also lights up together with the heading.</article>
 </div>
 
+Right, left and center styled images:
+<br>
+<img src="../images/card_placeholder.png" class="styled right"></img>
+<img src="../images/card_placeholder.png" class="styled left"></img>
+<img src="../images/card_placeholder.png" class="styled centered"></img>
 
 
-<h2 id="cards">cards</h2>
+
+<h2 class="division" id="cards">cards</h2>
 
 <div class="card">
  <img src="../images/card_placeholder.png"></img>
@@ -99,18 +97,6 @@ Timeline with checkpoints or list with explanations
     <dd>subitem 1</dd>
     <dd>subitem 2</dd>
 </dl>
-
-<hr>
-
-styled class adds border and 6px margin around image, centered makes it centered, right makes it float on the right
-
-centered styled image
-
-<img src="../images/placeholder.png" class="centered styled">
-
-right styled image
-
-<img src="../images/placeholder.png" class="right styled">
 
 <hr>
 
