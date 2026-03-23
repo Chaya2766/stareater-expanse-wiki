@@ -598,6 +598,17 @@ div.thread{
  transition-duration: 1s;
 }
 
+.uid{
+  font-family: monospace;
+  font-size: 0.45em;
+  line-height: 1.05;
+  display: inline-block;
+  vertical-align: middle;
+  width: 6.8em;
+  word-break: break-all;
+}
+
+
 /*COLOR CODING CHARACTERS & STUFF*/
 c1{
  color: #F80;
