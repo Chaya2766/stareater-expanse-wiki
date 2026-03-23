@@ -1,0 +1,91 @@
+<head>
+ <link rel="stylesheet" href="../index.css"></link>
+</head>
+<html class="background2" id="page">
+<article class="warning">character creator is still very work in progress</article>
+<a style="float: right;" target="_blank" href="../index.html?page=pages/character_creator.html">link to this page</a>
+<label style="float: right; margin-right: 30px;"><input id="editing_toggle" type="checkbox" checked onclick="toggle_editing_view()"></input>editing view</label>
+<h1><input id="name_input" type="text" value="Name" style="
+  background-color: #8884;
+  border: none;
+  color: white;
+  font-size: 1em;
+" oninput="adjust_textinput_size('name_input')" size="4"></input>
+<span id="name_text"></span>
+<span class="uid" id="uid" onclick="reroll_uid()">UID (click to reroll)</span>
+</h1>
+<hr>
+
+<img src="../images/placeholder.png" class="basics"></img>
+<article class="basics">
+<textarea style="
+  background-color: #8884;
+  border: none;
+  color: white;
+  font-size: 1.1em;
+  min-height: 390px;
+  min-width: calc(100% - 410px);
+  max-width: calc(100% - 410px);
+" id="basics_input"></textarea>
+<span id="basics_text" value="a basic short description to write in here">
+</span>
+</article>
+<hr>
+<article>
+<h3>section title (click to edit, not implemented yet)</h3>
+<article>
+section contents (click to edit, not implemented yet)
+</article>
+
+<script>
+function toBase62(num) {
+  const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  if(num === 0){ return '0'; }
+  let result = '';  while (num > 0) {
+    result = chars[num % 62] + result;
+    num = Math.floor(num / 62);
+  }
+return result;
+}
+
+function reroll_uid(){
+  new_uid_raw_integer = Math.floor(Math.random()*Math.pow(2,128));
+  new_uid = toBase62(new_uid_raw_integer);
+  
+  while(new_uid.length < 22){ new_uid = "0" + new_uid; }
+  
+  document.getElementById("uid").innerHTML = new_uid;
+}
+
+function adjust_textinput_size(id,min_length=4){
+  content = document.getElementById(id).value;
+  needed_length = content.length;
+  if(needed_length<min_length){needed_length=min_length;}
+  
+  document.getElementById(id).size = needed_length.toString();
+}
+adjust_textinput_size("name_input");
+
+function toggle_editing_view(){
+  is_editing = document.getElementById("editing_toggle").checked;
+  
+  if(is_editing){
+    document.getElementById("name_text").innerHTML = "";
+    document.getElementById("name_input").style.display = "inline";
+    
+    document.getElementById("basics_text").innerHTML = "";
+    document.getElementById("basics_input").style.display = "inline";
+  } else {
+    name = document.getElementById("name_input").value;
+    document.getElementById("name_text").innerHTML = name;
+    document.getElementById("name_input").style.display = "none";
+    
+    basics = document.getElementById("basics_input").value;
+    basics = basics.replaceAll("\n","<br>");
+    document.getElementById("basics_text").innerHTML = basics;
+    document.getElementById("basics_input").style.display = "none";
+  }
+}
+</script>
+
+</html>
