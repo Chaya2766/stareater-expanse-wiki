@@ -371,7 +371,7 @@ function separate_kamacite_bake(m){//m is the number of calutrons used, it will 
     document.getElementById("last_action").innerHTML += "proceeding to separate "+(1*m).toString()+" kg kamacite bake.<br>";
   } else {
     document.getElementById("last_action").innerHTML += "could not separate "+(1*m).toString()+" kg kamacite bake:<br>";
-    if(E<51.04E+9*m){ document.getElementById("last_action").innerHTML += "missing "+parseInt(870E+6*m - E).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")+" joules of energy.<br>";}
+    if(E<51.04E+9*m){ document.getElementById("last_action").innerHTML += "missing "+parseInt(51.04E+9*m - E).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")+" joules of energy.<br>";}
     if(Kb<1*m){ document.getElementById("last_action").innerHTML += "missing "+(1*m - Kb).toString()+" kg of kamacite bake.<br>";}
     if(max<m){ document.getElementById("last_action").innerHTML += "missing calutrons, need "+(m).toString()+" but you only have "+(max).toString()+" available.<br>";}
   }
