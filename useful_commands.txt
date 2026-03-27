@@ -1,0 +1,6 @@
+git fsck --full //checks the repository for errors (dangling blobs are not actually dangerous)
+git gc //clears the dangling blobs
+//those below require par2 utility (can get from apt using "apt install par2")
+par2 c -r25 -n1 -R "recovery.par2" * //creates a par2 recovery file for everything within the current directory
+par2 v recovery.par2 //verifies integrity of the repository
+par2 r recovery.par2 //calculates the original files from the reed solomon data

@@ -15,3 +15,5 @@ rendering_zone/**/*.gif
 rendering_zone/**/*.scad
 
 tools/orbit_search_tool/allnum.cat
+
+*.par2
