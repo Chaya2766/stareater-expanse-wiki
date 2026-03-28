@@ -1,0 +1,47 @@
+<head>
+ <link rel="stylesheet" href="../index.css"></link>
+</head>
+<html class="background2" id="page">
+<a style="float: right;" target="_blank" href="../index.html?page=pages/UID.html">link to this page</a>
+
+<h1>Unique Identifiers (UIDs)</h1>
+<hr>
+
+<img src="../images/card_placeholder.png" class="basics"></img>
+<article class="basics">
+Unique identifiers are a technology that had been consistently in use for over 15 thousand years before the year 3000.
+
+</article>
+<hr>
+
+<h1>Random identifiers and the Birthday Paradox</h1>
+<article>
+Here's a simple takeaway from what's written lower down in this section: The number of random identifiers you need to generate to accidentally end up using the same one twice has a simple formula.
+<br>
+If your scheme allows for X different identifiers, then you need to randomly generate √(2 × X × ln(2)) identifiers for a 50% chance that at least one had been accidentally generated twice.
+An even simpler approximation if you need it would be 1.17741×√(X).
+<br>
+For example, in a scheme that uses randomly generated 128-bit numbers, the total number of different possible identifiers is 2^128 which is &approx; 3.402823669 * 10^38.
+In that case the number of identifiers that can be generated before a collision occurs is √(2 × 2^128 × ln(2)) &approx; 2.171938136 * 10^19.
+<br><br>
+<b>Explanation:</b>
+<br>
+"The Birthday Paradox" is a famous counterintuitive hypothetical scenario presenting an outcome that is unintuitive to people not previously familiar with its statistical basis.
+It asks the question: how many people do you need to put in the same room so that with 50% certainty at least 2 of them will share a birthday? The answer is only 23.
+<br><br>
+The solution goes like this:
+There are 365 possible days on which a person could have a birthday, meaning that the chance of a person being on a given specific day is 1/365.
+It is much easier to solve by finding the probability that they all have different birthdays and then inverting it.
+<br><br>
+The intuitive way is that each next person you add to a room needs to be born on a different day, so first person can be born on any day, the second one can be born on all except one day, the third can be born on all except two days of the year, and so on, and the probability of that being true is multiplied every time.
+<br>
+P = (365/365)×(364/365)×(363/365)×(362/365)×(361/365)×...
+<br>
+Doing this 23 times gives a probability 0.4927027657 that all people will be born on different days of the year, which means that probability of the opposite case (that NOT all people will be born on different days of the year), is 1-0.4927027657 = 0.5072972343 &approx;50.73%.
+Using the simplified formula provided earlier, √(2 × 365 × ln(2)) = 22.49, which rounds up to the correct 23.
+<br><br>
+I do not have an explanation of where exactly the simplified formula √(2 × X × ln(2)) comes from, but using a square root does fit the nature of the problem - the number of pairs of people grows with the square of the number of people.
+From my testing it appears to be remarkably accurate (within tiny fractions of a percentage) for large numbers of possibilities such as 2^64 (testing was done using <a href="https://www.desmos.com/calculator">desmos</a>), and from the few cases I tested manually seems to struggle with low numbers but it still gave me the right answer as long as I rounded it upwards.
+</article>
+
+</html>
