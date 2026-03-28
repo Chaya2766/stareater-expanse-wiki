@@ -1,0 +1,51 @@
+<head>
+ <link rel="stylesheet" href="../index.css"></link>
+</head>
+<html class="background2" id="page">
+<a style="float: right;" target="_blank" href="../index.html?page=pages/data_storage.html">link to this page</a>
+
+<h1>Simplified Text Encoding 8</h1>
+<hr>
+
+<img src="../images/optical_data_storage.png" class="basics"></img>
+<article class="basics">
+Stripped-down encoding of text as binary data, and of binary data as text.
+STE8 encodes every character as a 8 bits and contains only printable characters, with control characters and invisible characters either omitted or or forced to display themselves as a visible part of text.
+
+</article>
+<hr>
+
+<span class="meta">some things like for example the brackets and common punctuation are placed in this table in a partially nonsensical order because I've just been adding characters ad-hoc whenever I realized that they are necessary, and I will rearrange them into a more sensible order later once I've filled out this table</span>
+<table class="styled">
+  <tr><th colspan=17>STE8 character table</th></tr>
+  <tr><th> </th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr>
+  <tr><th>0</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>a</td><td>b</td><td>c</td><td>d</td><td>e</td><td>f</td></tr>
+  <tr><th>1</th><td>g</td><td>h</td><td>i</td><td>j</td><td>k</td><td>l</td><td>m</td><td>n</td><td>o</td><td>p</td><td>q</td><td>r</td><td>s</td><td>t</td><td>u</td><td>v</td></tr>
+  <tr><th>2</th><td>w</td><td>x</td><td>y</td><td>z</td><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td></tr>
+  <tr><th>3</th><td>M</td><td>N</td><td>O</td><td>P</td><td>Q</td><td>R</td><td>S</td><td>T</td><td>U</td><td>V</td><td>W</td><td>X</td><td>Y</td><td>Z</td><td>␣</td><td>⏎</td></tr>
+  <tr><th>4</th><td>.</td><td>,</td><td>!</td><td>?</td><td>:</td><td>_</td><td>@</td><td>#</td><td>*</td><td>&</td><td>(</td><td>)</td><td>/</td><td>\</td><td>"</td><td>'</td></tr>
+  <tr><th>5</th><td>+</td><td>-</td><td>×</td><td>÷</td><td>=</td><td>≠</td><td><</td><td>></td><td>≤</td><td>≥</td><td>^</td><td>√</td><td>∫</td><td>∑</td><td>∏</td><td>|</td></tr>
+  <tr><th>6</th><td>[</td><td>]</td><td>{</td><td>}</td><td>⟨</td><td>⟩</td><td>←</td><td>↑</td><td>→</td><td>↓</td><td>↺</td><td>↻</td><td>;</td><td> </td><td> </td><td> </td></tr>
+  <tr><th>7</th><td>░</td><td>▒</td><td>▓</td><td>█</td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+  <tr><th>8</th><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+  <tr><th>9</th><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+  <tr><th>A</th><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+  <tr><th>B</th><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+  <tr><th>C</th><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+  <tr><th>D</th><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+  <tr><th>E</th><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+  <tr><th>F</th><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+</table>
+
+<hr>
+
+<table class="styled">
+  <tr><th colspan=20>typical STE8 keyboard layout</th></tr>
+  <tr><td>0 <sup>=</sup><sub>≠</sub></td><td>1 <sup>></sup><sub><</sub></td><td>2 <sup>≥</sup><sub>≤</sub></td><td>3 <sup>+</sup><sub>-</sub></td><td>4 <sup>×</sup><sub>÷</sub></td><td>5 <sup>^</sup><sub>√</sub></td><td>6 <sup>∫</sup><sub>'</sub></td><td>7 <sup>∑</sup><sub>∏</sub></td><td>8</td><td>9</td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+  <tr><td>a <sup>A</sup></td><td>b <sup>B</sup></td><td>c <sup>C</sup></td><td>d <sup>D</sup></td><td>e <sup>E</sup></td><td>f <sup>F</sup></td><td>g <sup>G</sup></td><td>h <sup>H</sup></td><td>i <sup>I</sup></td><td>j <sup>J</sup></td><td>k <sup>K</sup></td><td>l <sup>L</sup></td><td>m <sup>M</sup></td><td>n <sup>N</sup></td><td>o <sup>O</sup></td><td>p <sup>P</sup></td><td>q <sup>Q</sup></td><td>r <sup>R</sup></td><td>s <sup>S</sup></td><td>t <sup>T</sup></td></tr>
+  <tr><td>u <sup>U</sup></td><td>v <sup>V</sup></td><td>w <sup>W</sup></td><td>x <sup>X</sup></td><td>y <sup>Y</sup></td><td>z <sup>Z</sup></td><td>. <sup>!</sup><sub>?</sub></td><td>' <sup>"</sup><sub>,</sub></td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+  <tr><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+  <tr><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+</table>
+
+</html>
