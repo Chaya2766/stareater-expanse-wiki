@@ -87,9 +87,10 @@ module spokehab(r,h){
 module noca_bell(){
     phi = (sqrt(5)+1)/2;
     pi = 3.14159265;
-    core_edge=16E+3;
-    hab_radius = core_edge*0.28;
-    hab_length = 40E+3;
+    core_edge=17.85E+3;
+    //hab_radius = core_edge*0.28;
+    hab_radius = 5E+3;
+    hab_length = 50E+3;
     
     rotate([0,32,0]){icosahedron(core_edge);}
     
@@ -121,7 +122,7 @@ module noca_bell(){
 color("#888"){
 noca_bell();
 }
-$vpd=3E+5;
+$vpd=3.3E+5;
 
 //translate([0,12E+7,0]){saturn();}
 
