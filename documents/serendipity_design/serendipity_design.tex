@@ -1,0 +1,265 @@
+\documentclass[a4paper]{article}
+\usepackage[margin=3cm]{geometry}
+\usepackage{graphicx}
+
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=cyan,
+	hyperindex=true,
+	linktocpage=true,%makes the page number be the link in the index
+}
+\usepackage{listings}
+\lstset{
+	basicstyle=\tiny\ttfamily,
+	columns=fullflexible,
+	keepspaces=true,
+	breaklines=true,
+	frame=single,
+	showstringspaces=true,
+	tabsize=4,
+	showspaces=true,
+	showtabs=true,
+}
+
+\renewcommand{\arraystretch}{1.2}
+
+\title{Serendipity design details}
+
+\author{Chaya2766}
+
+\date{last updated \today}
+
+\begin{document}
+	\sffamily
+	\hyphenchar\font=-1
+	\sloppy
+	
+	\maketitle
+	
+	\textbf{
+		\sloppy
+		\hyphenchar\font=-1
+		}
+	
+	\vfill
+	
+	\begin{abstract}
+		Math and design details for my character Serendipity, a composite mind.
+	\end{abstract}
+	
+	\vfill
+	
+	\begin{quote}
+		\begin{center}
+			\textbf{DISCLAIMER AND WARNING}
+		\end{center}
+		
+		This is not a scientific paper or engineering advice.
+		This document is only intended as creative world‑building and has not been peer‑reviewed or approved for any practical application.
+		Use of these ideas in real‑world designs or other serious application is entirely at the reader’s discretion and risk.
+	\end{quote}
+	
+	%\noindent \rule{\linewidth}{1pt}
+	\vfill
+	
+	\tableofcontents
+	
+	\pagebreak
+	
+	\section{Models in use}
+	
+	Models in use:
+	
+	\medskip
+	
+	\begin{tabular}{| c | c |}
+		\hline
+		\multicolumn{2}{| c |}{UEIA}\\\hline
+		Active memory & 4 \\\hline
+		Synapses & 1125899906842624 \\\hline
+		Parameters & 1125899906842624 \\\hline
+		Storage req. & 1.81e16 bits \\\hline
+		Fliprate req. & 3.094e21 bits/s \\\hline
+	\end{tabular}
+	\begin{tabular}{| c | c |}
+		\hline
+		\multicolumn{2}{| c |}{Felicity}\\\hline
+		Active memory & 7 \\\hline
+		Synapses [?] & 602000000000000 \\\hline
+		Parameters & 28890572800000000000 \\\hline
+		Storage req. & 4.623e20 bits \\\hline
+		Fliprate req. & 7.940e25 bits/s \\\hline
+	\end{tabular}
+	
+	\smallskip
+	
+	\begin{tabular}{| c | c |}
+		\hline
+		\multicolumn{2}{| c |}{UEIA bridge}\\\hline
+		Synapses & 4398046511104 \\\hline
+		Parameters & 4398046511104 \\\hline
+		Storage req. & 7.037e13 bits \\\hline
+		Fliprate req. & 1.209e19 bits/s \\\hline
+	\end{tabular}
+	\begin{tabular}{| c | c |}
+		\hline
+		\multicolumn{2}{| c |}{UEIA-Human bridge}\\\hline
+		Synapses & 4018371876378 \\\hline
+		Parameters & 4018371876378 \\\hline
+		Storage req. & 6.4294e13 bits \\\hline
+		Fliprate req. & 1.104e19 bits/s \\\hline
+	\end{tabular}
+	
+	\medskip
+	
+	[?] Felicity is a human mind upload with different structure from typical AI models, as such one synapse is not the same as one parameter.
+	This is the only such model in this composition.
+	The number of synapses comes from the average values for the human brain of 86 billion neurons total and 7000 synapses per neuron.
+	The number of parameters comes from the particular digital emulation of the organic neurons which is much larger than just one parameter per synapse.
+	
+	\bigskip
+	
+	Human-Ueia bridge synapse count is calculated in accordance with the 1/215 rule which says that the bridge network usually has around 215 times fewer synapses than the model it is to be used with.
+	Since this one bridges two different their size is averaged first.
+	
+	$$ \frac{1125899906842624 + 602000000000000}{2} \cdot \frac{1}{215} = 4018371876378 $$
+    
+    \bigskip
+    
+    All of these models are meant to be inferenced at 1000Hz.
+    
+    All of them use 16-bit parameters.
+    
+    $$ 4018371876378 \cdot 16 bits \approx 6.4294e13 bits $$
+    
+    Given the 2748 bit flips per 16-bit multiply-accumulate operation:
+    
+    $$ 4018371876378 \cdot 1000Hz \cdot 2748bits \approx 1.104e19 bits/s $$
+    
+	\pagebreak
+	
+	\section{Composite mind structure}
+	
+    The composite mind is fully-connected meaning that every brain node has a direct connection to every other brain node via a bridge, and every bridge has a direct connection to every other bridge via a meta-bridge.
+    
+    \medskip
+    
+    The number of brain nodes is 64, as such the number of bridges is:
+    
+    $$ N_B = \frac{64 \cdot (64-1)}{2} = 2016 $$
+    
+    And the number of meta-bridges in that case is:
+    
+    $$ N_{MB} = \frac{2016 \cdot (2016-1)}{2} = 2\ 031\ 120 $$
+    
+    \bigskip
+    
+    There is only one human brain in the network, and the other 63 brain nodes are UEIA models, as such all bridges from Human to UEIA will be the UEIA-Human bridges.
+    There are 63 UEIA-Human bridges.
+    
+    \medskip
+    
+    All meta-bridges that connect the UEIA-Human bridges are going to also be UEIA-Human bridges, so the number of UEIA-Human metabridges is:
+    
+    $$ \frac{63\cdot(63-1)}{2} = 1953 $$
+    
+    The remaining ones can be UEIA bridges, so their number (bridges and meta-bridges) is:
+    
+    $$ N_{UB} = 2016 - 63 = 1953 $$
+    
+    $$ N+{UMB} = 2031120 - 1953 = 2\ 029\ 167 $$
+    
+    
+    This gives the final composition:
+    
+    \begin{tabular}{| c | c | c | c |}
+    	\hline
+    	\multicolumn{4}{| c |}{Serendipity composite mind composition}\\\hline
+    	element type & model & count & num.parameters \\\hline
+    	brain node & Felicity (human) & 1 & 28 890 572 800 000 000 000 \\\hline
+    	brain node & UEIA & 63 & 1 125 899 906 842 624 \\\hline
+    	bridge & UEIA-Human-bridge & 63 & 4 018 371 876 378 \\\hline
+    	bridge & UEIA-bridge & 1953 & 4 398 046 511 104 \\\hline
+    	metabridge & UEIA-Human-bridge & 1953 & 4 018 371 876 378 \\\hline
+    	metabridge & UEIA-bridge & 2 029 167 & 4 398 046 511 104 \\\hline
+    \end{tabular}
+    
+    brain nodes total : 64
+    
+    bridges total : 2016
+    
+    metabridges total : 2 031 120
+    
+    parameters total: 37 902 565 761 467 419 840
+    
+    \bigskip
+    
+    \noindent
+    $ 
+    1 \cdot 28 890 572 800 000 000 000 + \\
+    63 \cdot 1 125 899 906 842 624 + \\
+    63 \cdot 4 018 371 876 378 + \\
+    1953 \cdot 4 398 046 511 104 + \\
+    1953 \cdot 4 018 371 876 378 + \\
+    2 029 167 \cdot 4 398 046 511 104 = \\
+    37 902 565 761 467 419 840
+    $
+    
+    \pagebreak
+    
+    \section{computational requirements}
+    
+    The whole network is to be inferenced at 1000Hz.
+    
+    All parameters are 16-bit.
+    
+    A 16-bit multiply-accumulate operation requires 2748 bit flips.
+    
+    \bigskip
+    
+    Size of the model:
+    
+    $$ 37 902 565 761 467 419 840 \cdot 16bit = 606441052183478717440 bits \approx 6.065e20 bits $$
+    
+    Fliprate required to run the model:
+    
+    $$ 37 902 565 761 467 419 840 \cdot 1000Hz \cdot 2748 bits = 104156250712512469720320000 bits/s \approx 1.0416e26 bits/s $$
+    
+    \rule{\linewidth}{1pt}
+    
+    \section{Summary}
+    
+    \begin{tabular}{| c | c | c | c |}
+    	\hline
+    	\multicolumn{4}{| c |}{Serendipity composite mind composition}\\\hline
+    	element type & model & count & num.parameters \\\hline
+    	brain node & Felicity (human) & 1 & 28 890 572 800 000 000 000 \\\hline
+    	brain node & UEIA & 63 & 1 125 899 906 842 624 \\\hline
+    	bridge & UEIA-Human-bridge & 63 & 4 018 371 876 378 \\\hline
+    	bridge & UEIA-bridge & 1953 & 4 398 046 511 104 \\\hline
+    	metabridge & UEIA-Human-bridge & 1953 & 4 018 371 876 378 \\\hline
+    	metabridge & UEIA-bridge & 2 029 167 & 4 398 046 511 104 \\\hline
+    \end{tabular}
+    
+    \medskip
+    
+    brain nodes total : 64
+    
+    bridges total : 2016
+    
+    metabridges total : 2 031 120
+    
+    parameters total : 37 902 565 761 467 419 840
+    
+    inference rate : 1000Hz
+    
+    data storage requirement : 6.065e20 bits
+    
+    fliprate requirement : 1.0416e26 bits/s
+    
+    active memory : 259
+	
+\end{document}
