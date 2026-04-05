@@ -42,6 +42,8 @@ Using the simplified formula provided earlier, √(2 × 365 × ln(2)) = 22.49, w
 <br><br>
 I do not have an explanation of where exactly the simplified formula √(2 × X × ln(2)) comes from, but using a square root does fit the nature of the problem - the number of pairs of people grows with the square of the number of people.
 From my testing it appears to be remarkably accurate (within tiny fractions of a percentage) for large numbers of possibilities such as 2^64 (testing was done using <a href="https://www.desmos.com/calculator">desmos</a>), and from the few cases I tested manually seems to struggle with low numbers but it still gave me the right answer as long as I rounded it upwards.
+<!shared birthday probability function for pasting into desmos: p\left(b,d\right)=1-\prod_{n=1}^{b}\frac{\left(d-n+1\right)}{d} >
+<!b is the number of people, d is the number of different days on which it is possible to have a birthday>
 </article>
 
 </html>

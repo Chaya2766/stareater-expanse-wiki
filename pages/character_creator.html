@@ -41,7 +41,8 @@ section contents (click to edit, not implemented yet)
 function toBase62(num) {
   const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
   if(num === 0){ return '0'; }
-  let result = '';  while (num > 0) {
+  let result = '';
+  while (num > 0) {
     result = chars[num % 62] + result;
     num = Math.floor(num / 62);
   }
@@ -49,12 +50,15 @@ return result;
 }
 
 function reroll_uid(){
-  new_uid_raw_integer = Math.floor(Math.random()*Math.pow(2,128));
-  new_uid = toBase62(new_uid_raw_integer);
-  
-  while(new_uid.length < 22){ new_uid = "0" + new_uid; }
-  
-  document.getElementById("uid").innerHTML = new_uid;
+  is_editing = document.getElementById("editing_toggle").checked;
+  if(is_editing){
+    new_uid_raw_integer = Math.floor(Math.random()*Math.pow(2,128));
+    new_uid = toBase62(new_uid_raw_integer);
+    
+    while(new_uid.length < 22){ new_uid = "0" + new_uid; }
+    
+    document.getElementById("uid").innerHTML = new_uid;
+  }
 }
 
 function adjust_textinput_size(id,min_length=4){

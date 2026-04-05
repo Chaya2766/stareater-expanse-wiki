@@ -239,6 +239,9 @@ If you directly edit them through the inspection menu, you will be directly chan
 
 <script>
 
+let start_timestamp = 14900000000;
+document.getElementById("epoch_time").innerHTML = start_timestamp.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+
 let waitInterval = null;
 
 function setupWaitCheckbox() {//Claude Haiku 4.5
@@ -456,7 +459,7 @@ function wait_seconds(s){
   E += C * 250E+3 * s; //250kW from each array
   document.getElementById("energy_J").innerHTML = E;
   document.getElementById("epoch_time").innerHTML = T.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-  document.getElementById("time_passed").innerHTML = (T - 13299971939).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  document.getElementById("time_passed").innerHTML = (T - start_timestamp).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
   
   removeCompletedOrders(T);
   calculate_statistics();

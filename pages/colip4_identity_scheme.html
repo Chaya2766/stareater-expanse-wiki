@@ -24,7 +24,7 @@ It is intended to serve as part of a legal system, but itself describes no parti
 Fundamentally an identity in the Colip4 system is a chain of records signed with a particular cryptographic keypair.
 <br><br>
 To create a new identity, a person generates a public-private keypair, which will allow them to sign documents in a way that is verifiable to outsiders, but not possible to forge without access to the private part of the key.
-For the scheme to work, this key must be easy to store within the mind of a person, so a list of 12 words is generated first, and the keypair is generated from them - a person is expected to memorize this list of words and keep it secret from others.
+For the scheme to work, this key must be easy to store within the mind of a person, so a passphrase of typically 12 up to 24 words is generated first, and the keypair is generated from them - a person is expected to memorize this passphrase and keep it secret from others.
 This is intentional design to make it impossible for someone to keep the key secret from their own copies, since a mind that is copied will be able to simply recall the key from memory, the benefits of this will be explained later.
 Further use of the same identity can be prevented by generating an archival identity marker and publishing it, so that everyone who receives it knows that this identity is not valid for future use.
 This does not inherently prevent the identity from being used further, otherwise any property that is left assigned to that identity and not transferred before making it archival would be lost - any legal system adopting this identity scheme will have to decide for itself what can or can't be done with an archival identity.
@@ -54,6 +54,8 @@ An off-record copy legally does not exist and thus cannot do anything until they
 <br><br>
 <b>Colip4 identity scheme</b> makes it impossible on the technical level to make a copy who does not have the same rights as an original, because the copy will know the original's private key.
 As such the only two possible choices are to either have an off-record copy with access to all your rights, or publish a piece of information that makes it evident <i>something</i> had happened.
+<br><br>
+In reality this isn't an either-or choice, both can be implemented and complement each other, with the colip4 scheme vastly increasing the chance of catching off-record copies made even when no external oversight is present.
 </article>̀
 
 <h1>Potential failings of the scheme</h1>
