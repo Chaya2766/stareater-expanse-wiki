@@ -1,0 +1,82 @@
+<head>
+ <link rel="stylesheet" href="../index.css"></link>
+</head>
+<html class="background2" id="page">
+<article class="warning">this warning lets the reader know something important about the page. If this sentence is still here on a page different than the testpage.html then I forgot to change it while making a new page.</article>
+<a style="float: right;" target="_blank" href="../index.html?page=pages/colip4_identity_scheme.html">link to this page</a>
+
+<h1>Colip4 identity scheme</h1>
+<hr>
+
+<img src="../images/whateverweaver_divergency.webp" class="basics"></img>
+<article class="basics">
+Identity tracking scheme designed for compatibility with virtual beings and mind uploading technology.
+The Colip4 identity scheme was made to be resilient to the issues that arise with the ability to copy minds.
+It is intended to serve as part of a legal system, but itself describes no particular legal system or policy, rather it merely provides a set of tools and a framework for any legal system or policy to use when dealing with legal identities of duplicable beings.
+<br><br>
+<span class="meta">I need to swap out the illustration of this page for something that actually uses the colip4 scheme, because I don't think the whateverweaver divergency graph truly adheres to it.</span>
+</article>
+
+<hr>
+
+<h1>Technical nature of colip4 identities</h1>
+<article>
+Fundamentally an identity in the Colip4 system is a chain of records signed with a particular cryptographic keypair.
+<br><br>
+To create a new identity, a person generates a public-private keypair, which will allow them to sign documents in a way that is verifiable to outsiders, but not possible to forge without access to the private part of the key.
+For the scheme to work, this key must be easy to store within the mind of a person, so a list of 12 words is generated first, and the keypair is generated from them - a person is expected to memorize this list of words and keep it secret from others.
+This is intentional design to make it impossible for someone to keep the key secret from their own copies, since a mind that is copied will be able to simply recall the key from memory, the benefits of this will be explained later.
+Further use of the same identity can be prevented by generating an archival identity marker and publishing it, so that everyone who receives it knows that this identity is not valid for future use.
+This does not inherently prevent the identity from being used further, otherwise any property that is left assigned to that identity and not transferred before making it archival would be lost - any legal system adopting this identity scheme will have to decide for itself what can or can't be done with an archival identity.
+<br><br>
+The public key is converted into a much smaller public identifier by hashing it, which makes it easier to use.
+The hash and key length are arbitrarily variable to account for the potentially massive number of identities being generated.
+</article>
+
+<h1>Copying</h1>
+<article>
+When a person creates a copy of themself copy will know their private key, which is a problem.
+This problem is solved easily by having both the copy and the original generate new identities for themselves, divide up the property and rights between the new identities, and publish an archival marker on the original identity to prevent misuse.
+<br><br>
+This addresses the issue of people making off-record copies.
+An off-record copy which nobody knows about will know the original's private key and thus have access to all their rights, which is risky.
+The only way to remove this risk is to move property to separate identities and close the original identity, which requires publishing the relevant records as well as an archival marker.
+Publishing these records, by definition, cannot be hidden, so it naturally puts the new copy on record.
+<br><br>
+An attempt to betray one's own copy will also not remain hidden, as the copy still has access to the old private key.
+Even if an identity is made archival, the off-record copy will still have access to the archival identity's private key, and can still add a record under it that registers the new copy and thus warrants investigation - if anything, it will be even more evident that something is wrong, when a new record appears after the identity is marked as archival.
+</article>
+
+<h1>Comparison with classical oversight</h1>
+<article>
+<b>Classical oversight</b> involves law enforcement agents observing people and trying to detect off-record copying.
+An off-record copy legally does not exist and thus cannot do anything until they are noticed and given rights - they are practically equivalent to an outsider.
+<br><br>
+<b>Colip4 identity scheme</b> makes it impossible on the technical level to make a copy who does not have the same rights as an original, because the copy will know the original's private key.
+As such the only two possible choices are to either have an off-record copy with access to all your rights, or publish a piece of information that makes it evident <i>something</i> had happened.
+</article>̀
+
+<h1>Potential failings of the scheme</h1>
+<article>
+<b>1. private key theft</b> - if a private key is stolen, a new copy can be registered under someone with no actual copy having been made, property can be stolen, or the identity can be maliciously marked as archival.
+It is ultimately up to the authorities of the given legal system using this scheme to decide what to do in such a case - records can be considered invalid legally but there is no technical capability to erase them (because the system depends on the lack of ability to erase records to function at all).
+Decisions of this type usually require informed judgement, and cannot be automated in a simple manner like the cryptographic aspects.
+<br><br>
+<b>2. complete scheme abandonment</b> - there is nothing stopping a copy from simply refusing to remain off-record by simply abandoning the system altogether.
+Any legal system depending on this scheme will have to also implement systems that gate keep people who do not have a valid key, or in some other way incentivize adhering to the scheme.
+Note however that making a copy who then generates a new identity for themselves entirely separate is not a valid exploit unless the legal system immediately grants significant rights to any new registered key, so this hole is at least partially plugged by default.
+<br><br>
+<b>3. lack of privacy by design</b> - copying oneself has characteristics of a private, personal activity, but this scheme focuses on forcing people to reveal it.
+It is a tradeoff between privacy and the danger of being left with no rights.
+If a particular legal system is very heavily reliant on this scheme then contracts, debt, property, all must be placed in records so that they can be transferred later, though they do not necessarily have to be publicly visible, they can be made readable only to particular people with various cryptographic tricks.
+By design intent this is a feature, but in societies that rely highly on informal transactions it can be more of a fault than a feature.
+<br><br>
+<b>4. no handling of corrupted or modified copies</b> - damage to someone's mind could make them forget their private key, and the whole scheme relies on this not happening.
+Any legal system adhering to this scheme will have to have a process for handling people whose minds had been corrupted or tampered with.
+Handling of such cases is usually too complex to automate simply, and requires informed judgement of other people in the legal system.
+<br><br>
+<b>5. it is not a legal system, only a building block to be used in a legal system</b> - the scheme defines some constraints and gives the tools to enforce those constraints but that alone does not result in any actionable policy.
+A legal system still must be built and defined coherently before this scheme becomes useful.
+One of the results is that merely being familiar with the scheme does not automatically make anyone familiar with all legal systems using this scheme.
+</article>
+</html>
