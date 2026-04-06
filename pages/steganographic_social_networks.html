@@ -44,10 +44,14 @@ As of the year 3000 these schemes are so sophisticated and all-encompassing that
 
 <h2>Proof of Work "boosting"</h2>
 <article>
-There is also a trend of using proof of work to convey the importance of a message, which usually means that when someone makes a post whose text has an unnaturally low hash number it is likely to be passed on further. This behaviour had spilled over into some of the openly visible social networks where various other social behaviours had attached themselves to this mechanism. Among others there is a vague common belief that a message that carries the mark of massive computational power is also more trustworthy, or at the very least important, thus it is often used for "boosting" your posts so that they are more likely to be shared. This text for example has an unnaturally small SHA256 hash, though that doesn't on its own say anything about its trustworthiness. Some users of the networks where this became habitual had also taken to applying proof of work to their username as a way of showing off how much computational power they have access to. These networks then, mostly unknowingly but some no doubt knowingly too, had become great mediums for carrying hidden messages.-4580897539
-<br><br>
-In the context of steganographic social networks this has an additional function of clarifying that given piece of data was intentionally constructed, as in some schemes it is possible to encounter false positives, ie. your key detected and decoded a hidden message where in reality there was none and you are left trying to look for meaning in actual random noise.
-It is incredibly unlikely (on the order of 1 in 1 048 576) that if you put such random noise through a hash function you will get 20 leading zero bits, or 5 leading zeros in hexadecimal encoding.
+There is also a trend of using proof of work to convey the importance of a message, which usually means that when someone makes a post whose text has an unnaturally low hash number it is likely to be passed on further.
+This remains a very niche behaviour since the amount of brute force computation poured into a message does not correspond directly to trustworthiness or importance, it merely shows commitment and forces the sender to spend resources, in a way making them pay for passing on the message.
+One major use case of doing this is keeping the network functional, as it provides a completely decentralized method of spam control, which is useful to secretive networks that tend to be very decentralized.
+Even if an attacker with massive amounts of computational power does infiltrate the network and attempt to cripple it by spreading large amounts of messages with higher proof of work than any of the members can compete with, this still ensures that at the very least such an attack is costly to execute and sustain.
+</article>
+<br>
+<article style="border:1px solid gray;">
+In the context of steganographic social networks this has an additional function of clarifying that given piece of data was intentionally constructed, as in some schemes it is possible to encounter false positives, ie. your key detected and decoded a hidden message where in reality there was none and you are left trying to look for meaning in actual random noise. It is incredibly unlikely (on the order of 1 in 1 048 576) that if you put such random noise through a hash function you will get 20 leading zero bits, or 5 leading zeros in hexadecimal encoding. This section of text is an example of that. pow:1000972436
 </article>
 
 <h1>example SHA-256 PoW worker</h1>
