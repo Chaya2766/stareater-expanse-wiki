@@ -39,7 +39,7 @@ The illustration used for this page shows a habitat that provides interior light
 <span> m/s<sup>2</sup></span>
 <br><br>
 <article>Once the choices above are set, tune the length, cap type and material choices:</article>
-<input type="radio" id="hemispherical_caps" name="caps" checked="true" onchange="autocalc()"></input><span style="margin-right: 50px;">Hemispherical caps</span> <input type="radio" id="circular_caps" name="caps" onchange="autocalc()"></input><span>Circular caps</span>
+<input type="radio" id="hemispherical_caps" name="caps" checked="true" onchange="autocalc()"></input><span style="margin-right: 50px;">Hemispherical caps</span> <input type="radio" id="circular_caps" name="caps" onchange="autocalc()"></input><span class="tip" tip="WARNING: the calculator will not tell you if circular caps are a valid choice for a given habitat. All it does is make the caps use less material and not contribute to internal volume. If you want to be sure, you should manually verify that flat end caps are a viable choice given the habitat's size, wall thickness and internal pressure and structure by applying plate bending equations. In general, flat circular caps will tend to bend outwards, and need to be thick enough or braced somehow, or else pressurizing the habitat might bend them into the shape of hemispherical endcaps, severely damaging them in the process.">Circular caps</span>
 <br>
 <span> Habitat length: </span>
 <input type="number" id="hab_length" oninput="autocalc()"></input>
