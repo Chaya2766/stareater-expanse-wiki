@@ -9,9 +9,10 @@
 <article class="basics">
 Finespun Station One is the first of the rotating habitats constructed by <a href="felicity.html">Felicity</a> in orbit of the <a href="finespun.html">Finespun</a> asteroid.
 <br><br>
-It is crude and unable to hold air at standard terran atmospheric pressure.
-<br><br>
 On the left the station is shown with a section cut away to show the internal structure.
+The station design is at least locally considered notable for producing pleasantly round acceleration figures for each floor when the runway is calibrated to experience some multiple of 0.5m/s<sup>2</sup>.
+<br><br>
+The environment as a whole tends to be uncomfortable for guests as a result of the administrator being an odd kind of person that actually enjoys strong coriolis forces and the oddities of nonstandard atmosphere rather than trying to avoid them, but since there are rarely any guests, the rotation rate of the station is often adjusted to suit the visitors.
 </article>
 
 <hr>
@@ -28,17 +29,18 @@ On the left the station is shown with a section cut away to show the internal st
 </tr>
 <tr>
   <td class="tip" tip="Amount of mass per area of hull, relevant to radiation shielding. At 10 000 kg/m^2 the habitat hull provides radiation shielding equivalent to earth's atmosphere.">Aerial density</td>
-  <td id="table_hab_aerial_density">79kg/m<sup>2</sup></td>
+  <td id="table_hab_aerial_density">790kg/m<sup>2</sup></td>
 </tr>
 <tr>
   <td>Structural mass</td>
-  <td id="table_hab_mass">8 261 583 kg</td>
+  <td id="table_hab_mass">82 615 830 kg</td>
   <!Calculated by multiplying the structural volume below by the 7900kg/m^3 density of kamacite>
 </tr>
 <tr>
   <td>Structural volume</td>
-  <td>1045.77m<sup>3</sup></td>
+  <td>10457.7m<sup>3</sup></td>
   <!Calculated by exporting model from OpenSCAD as STL and putting it into Orca Slicer which returned "1.04577e+12mm^3">
+  <!I later decided to scale up the hull thickness from 0.01m to 0.1m due to bending too much under pressure>
 </tr>
 <tr>
   <td>Internal volume</td>
@@ -46,15 +48,15 @@ On the left the station is shown with a section cut away to show the internal st
 </tr>
 <tr>
   <td>Hull thickness</td>
-  <td id="table_hab_hull_thickness">0.01000 m</td>
+  <td id="table_hab_hull_thickness">0.1 m</td>
 </tr>
 <tr>
   <td>Provided centrifugal gravity</td>
-  <td id="table_hab_gravity">1.000 m/s<sup>2</sup> (0.102g )</td>
+  <td id="table_hab_gravity">5.6m/s<sup>2</sup>, 4.4m/s<sup>2</sup>, 3.2m/s<sup>2</sup></td>
 </tr>
 <tr>
   <td>Internal atmospheric pressure</td>
-  <td id="table_hab_pressure">21000.000 Pa (0.207 atm )</td>
+  <td id="table_hab_pressure">21 000 Pa (0.207 atm )</td>
 </tr>
 <tr>
   <td>Provided living area (3 floors)</td>
@@ -62,15 +64,11 @@ On the left the station is shown with a section cut away to show the internal st
 </tr>
 <tr>
   <td>Time to complete a rotation</td>
-  <td id="table_hab_rotation_time">52.569 s</td>
-</tr>
-<tr>
-  <td class="tip" tip="This is roughly how fast you would need to run inside the habitat to completely cancel out the centrifugal gravity.">Tangential velocity of outer hull</td>
-  <td>8.3666m/s</td>
+  <td id="table_hab_rotation_time">22.214 s</td>
 </tr>
 <tr>
   <td class="tip" tip="the number of times that the stress in the habitat would have to increase above what is already caused by its own rotation before it breaks - if the safety factor of a habitat is 3, that would mean the stress that it experiences from its own rotation and rated atmospheric pressure is 3 times less than what is required to break it">Safety factor</td>
-  <td id="table_hab_safety_factor">1.355</td>
+  <td id="table_hab_safety_factor">11.238</td>
 </tr>
 <tr><th colspan=2>hull material: <a href="ftt_low_temperature_electrolysis.html">electrolytic asteroidal kamacite</a></ht></tr>
   <tr><td>Density</td><td>7900kg/m<sup>3</sup></td></tr>
@@ -84,17 +82,22 @@ On the left the station is shown with a section cut away to show the internal st
 
 <article>
 
-Finespun One is made out of 10mm plates of kamacite, produced from the local asteroid regolith through <a href="ftt_low_temperature_electrolysis.html">low temperature electrolysis</a> and used without much further processing.
-Despite being made of a material not resistant to corrosion, it is filled with a low pressure pure-oxygen atmosphere, mainly due to the fact it is not strong enough to hold a full atmosphere of pressure.
-A trick borrowed from naval engineering is used to keep the structure from rusting too quickly - sacrificial anodes (in this case made of zinc) are mounted to the walls, which would preferentially rust first before the less electronegative iron is affected, additionally moisture level is kept low when reasonably possible.
-Despite the workarounds, the structure inevitably will rust through eventually, but is expected to remain safely usable for at least a century since construction with such maintenance.
+Finespun One is made out of 100mm thick kamacite plating, produced from the local asteroid regolith through <a href="ftt_low_temperature_electrolysis.html">low temperature electrolysis</a> and used without much further processing.
+<br><br>
+Despite being made of a material not resistant to corrosion, it is filled with a low pressure pure-oxygen atmosphere, mainly due to the fact that oxygen is a cheap byproduct of the local kamacite refining, whereas nitrogen-rich air would be expensive and necessitate more sophisticated airlock mechanisms that recover the air instead of venting it into space.
+<!A trick borrowed from naval engineering is used to keep the structure from rusting too quickly - sacrificial anodes (in this case made of zinc) are mounted to the walls, which would preferentially rust first before the less electronegative iron is affected, additionally moisture level is kept low when reasonably possible.>
+The structure inevitably will rust through eventually, but is expected to remain safely usable for at least another century.
 <br><br>
 <img class="styled left cardsize" src="../images/finespun_one_divisions.webp"></img>
 The station is divided into 24 sections that retain pressure independently.
-There are 3 levels to the ring, each 15m tall, with radii of 70m, 55m and 40m, producing apparent gravity of respectively 1m/s<sup>2</sup>, 0.786m/s<sup>2</sup> and 0.571m/s<sup>2</sup>.
+There are 3 levels to the ring, each 15m tall, with radii of 70m, 55m and 40m, producing apparent gravity of respectively 5.6m/s<sup>2</sup>, 4.4m/s<sup>2</sup> and 3.2m/s<sup>2</sup>.
 Each of these levels is also divided into 8 separate rooms along the ring.
-The "top" of the ring, which is exposed to space at a radius of 25m and centrifugal acceleration of 0.357m/s<sup>2</sup>, might be thought of as a landing zone for small spacecraft, mostly for the mining vessels that collect regolith from Finespun and bring it to the station for refining.
+<br><br>
+The "top" of the ring, which is exposed to space at a radius of 25m and centrifugal acceleration of 2m/s<sup>2</sup>, might be thought of as a landing zone for small spacecraft, mostly for the mining vessels that collect regolith from Finespun and bring it to the station for refining.
+It is often referred to as the "runway" because with the low tangential velocity of the hull there, space transport vehicles equipped with wheels can simply drive anti-spinwards at about 7m/s to completely cancel out the centrifugal acceleration, largely removing the need for powerful thrusters.
 </article>
+
+<img class="styled centered" src="../images/finespun_one_map.webp" style="max-height: 400px;"></img>
 
 <br class="division">
 

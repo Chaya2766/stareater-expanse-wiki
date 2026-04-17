@@ -1,0 +1,150 @@
+\documentclass[a4paper]{article}
+\usepackage[margin=3cm]{geometry}
+\usepackage{graphicx}
+
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=cyan,
+	hyperindex=true,
+	linktocpage=true,%makes the page number be the link in the index
+}
+\usepackage{listings}
+\lstset{
+	basicstyle=\tiny\ttfamily,
+	columns=fullflexible,
+	keepspaces=true,
+	breaklines=true,
+	frame=single,
+	showstringspaces=true,
+	tabsize=4,
+	showspaces=true,
+	showtabs=true,
+}
+
+\renewcommand{\arraystretch}{1.2}
+
+\title{Finespun One station design calculations}
+
+\author{Chaya2766}
+
+\date{last updated \today}
+
+\begin{document}
+	\sffamily
+	\hyphenchar\font=-1
+	\sloppy
+	
+	\maketitle
+	
+	\textbf{
+		\sloppy
+		\hyphenchar\font=-1
+		}
+	
+	\vfill
+	
+	\begin{abstract}
+		Abstract goes here
+	\end{abstract}
+	
+	\vfill
+	
+	\begin{quote}
+		\begin{center}
+			\textbf{DISCLAIMER AND WARNING}
+		\end{center}
+		
+		This is not a scientific paper or engineering advice.
+		This document is only intended as creative world‑building and has not been peer‑reviewed or approved for any practical application.
+		Use of these ideas in real‑world designs or other serious application is entirely at the reader’s discretion and risk.
+	\end{quote}
+	
+	%\noindent \rule{\linewidth}{1pt}
+	\vfill
+	
+	\tableofcontents
+	
+	\pagebreak
+	
+	\section{Internal structure}
+	
+	The habitat is to be a ring with inner radius of 25m and outer radius of 70m.
+	The internal space is further divided into 3 floors, each 15m tall.
+	Each floor is further segmented into 8 rooms with a vertical wall, thus producing 24 segments.
+	
+	\medskip
+	
+	todo
+    
+	\pagebreak
+	
+	\section{Bending of dividing walls}
+	
+    Dividing walls are rectangles sized 15m by 50m, held in place by being one solid part together with the rest of the station.
+    
+    \medskip
+    
+    Maximum deflection of a uniformly loaded rectangular plate is given by the following equation:
+    
+    $$ \omega_{max} = \alpha\frac{qa^4}{D} $$
+        
+    where:
+    
+    \begin{itemize}
+    	\item $\alpha$ is a numerical factor depending on the ratio of length/width of the sides of the plate
+    	
+    	\item $q$ is the intensity of a continuously distributed load (ie. pressure difference acting on the plate)
+    	
+    	\item $a$ is the shorter edge of the plate
+    	
+    	\item $D$ is the flexural rigidity of the plate
+    \end{itemize}
+    
+    For length/width ratio of 3.333 the alpha value is approximately 0.01223.
+    
+    (source: "Theory of plates and shells" by S. Timoshenko and S. Woinowsky-Krieger, second edition - equation on page 117 and alpha values table on page 120)
+    
+    \begin{center}
+    	\rule{0.8\linewidth}{0.5pt}
+    \end{center}
+	
+	The flexural rigidity of the plate (parameter $D$) is calculated like this:
+	
+	$$ D =  \frac{E h_e^3}{12 \cdot (1 - \nu^2)}$$
+	
+	where:
+	
+	\begin{itemize}
+		\item $D$ is the flexural rigidity of the plate
+		
+		\item $E$ is Young's Modulus
+		
+		\item $h_e$ is elastic thickness (here it is just the actual thickness of the plate)
+		
+		\item $\nu$ is Poisson's Ratio
+	\end{itemize}
+	
+	(source: \href{https://en.wikipedia.org/wiki/Flexural_rigidity}{"Flexural rigidity" wikipedia page}, accessed 17th of april 2026)
+	
+	Poisson's Ratio for steel is around 0.27 to 0.3, for cast iron is 0.21 to 0.26.
+	Given that the station is made of kamacite, a type of nickle-rich meteoric iron, I will assume 0.27 as if it were a kind of steel.
+	
+	\begin{center}
+		\rule{0.8\linewidth}{0.5pt}
+	\end{center}
+	
+	$$ D = \frac{200GPa \cdot (100mm)^3}{12 \cdot (1 - 0.27^2)} = 17977204.9 J $$
+	
+	$$ \omega_{max} = 0.01223 \frac{21kPa \cdot (15m)^4}{17977204.9 J} = 0.7232502952 m $$
+	
+	$$ \omega_{max} = 0.01223 \frac{100kPa \cdot (15m)^4}{17977204.9 J} = 3.444049025 m $$
+	
+	Wall thickness of 0.1m appears to be adequate.
+	I derived it by just repeatedly running the calculations above with increasingly larger thickness until the maximum deflection was satisfyingly small.
+	The dividing walls would still noticeably bulge inwards on a depressurized section in the habitat due to the pressure but the amount seems acceptable.
+	Given that the caps of the habitat are also flat and at maximum roughly the same size as the dividing walls, they too would be noticeably bulged outwards into space by the habitat's internal pressure.
+	
+\end{document}

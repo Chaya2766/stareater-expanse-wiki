@@ -26,7 +26,7 @@ input:disabled{
 /*PAGE-PART CLASSES START HERE*/
 html{
  color: white;
- font-family: sans-serif;
+ font-family: "Noto Sans", sans-serif;
  /*font-family: monospace; there's no good reason for it, I just like the look of monospace fonts*/
 }
 .background1{
@@ -201,6 +201,7 @@ img.styled{
 /*if the image is both centered AND styled*/
 img.centered.styled{
  margin: 6px auto;
+ max-width: 98%;
 }
 
 img.cardsize{
@@ -612,6 +613,10 @@ div.thread{
   word-break: break-all;
 }
 
+.monospace{
+  font-family: monospace;
+  font-size: 125%;
+}
 
 /*COLOR CODING CHARACTERS & STUFF*/
 c1{
