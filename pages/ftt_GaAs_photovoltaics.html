@@ -32,7 +32,7 @@ The casing [todo, figure out what the casing even is, and how it is produced].
 <img src="../images/ftt_concentrated_solar_array.webp" class="styled right vert"></img>
 <img src="../images/ftt_solar_array.webp" class="styled right vert"></img>
 <article>
-The included concentrated solar array uses a parabolic mirror to concentrate sunlight onto a much smaller disk covered with 1861 photovoltaic tiles.
+The included concentrated solar array uses a parabolic mirror to concentrate sunlight onto a much smaller disk covered with 7445 photovoltaic tiles.
 This greatly reduces cost, as the mirror itself is simply made of smooth-polished metal, which is much cheaper (in terms of energy cost) to produce than an equal area of photovoltaics.
 In this way solar power can remain viable at great distances such as those of the asteroid belt, but it comes with a downside that the array must be pointed straight at the sun, as even just 10 degrees of angle will move it out of focus and it will stop producing power completely, which stands in contrast with plain photovoltaic panels which will keep producing power as long as they are pointing anywhere within 90 degrees of the sun.
 <br><br>
@@ -63,6 +63,12 @@ In practice the array can't produce much more than 266.4 kW of power without add
 At that level of insolation the collector would reach 553K, meaning it would be radiating away 416kW of heat, meanwhile 266.4kW of the sunlight gets converted into electricity instead of heat.
 <br><br>
 For practical purposes 250kW of power output is a safe maximum.
+The solar collector assembly by default comes with 1000m<sup>2</sup> worth of low temperature radiators, which is enough to radiate away the full 666kW of combined power while remaining at a safe temperature of 330K.
+<!2×1m×25m×5×4 = 1000m2>
+<!2×1m×25m×5×4×stefan×(330K)^4 = 672.4616102 kW>
+<br><br>
+As the power cannot be easily transmitted from the solar array to other structures without wasting most of it in conversion losses, it tends to be the case that equipment is tacked directly onto the solar collector assembly and the power is used there immediately.
+That being the case, it is not uncommon for the solar array as a whole to be given a slow rotation, usually no faster than one turn per 140 seconds, so that gravity-needing equipment can function on it.
 </article>
 
 </html>
