@@ -1,0 +1,77 @@
+<head>
+ <link rel="stylesheet" href="../index.css"></link>
+</head>
+<html class="background2" id="page">
+<article class="warning">this warning lets the reader know something important about the page. If this sentence is still here on a page different than the testpage.html then I forgot to change it while making a new page.</article>
+<a style="float: right;" target="_blank" href="../index.html?page=pages/air_leak.html">link to this page</a>
+
+<h1>Air leak</h1>
+<hr>
+
+<img src="../images/card_placeholder.png" class="basics"></img>
+<article class="basics">
+This page provides a calculator for estimating the effects of a punctured spacecraft hull (or otherwise an open hole) on the atmosphere inside, and discusses some of the what, how, and why of air leaks.
+<br><br>
+<span class="meta">Here is a <a href="../documents/air_leaks/air_leaks.pdf">document</a> showing how the equations implemented here were derived.</span>
+</article>
+<hr>
+
+<h1>Puncture effects calculator</h1>
+The results will update whenever you change the inputs.<br>
+All fields need to be filled for my code to work, sorry.<br>
+Conclusions valid only for dry air of terran composition.<br>
+<br>
+Total area of the hole: <input type="number" id="hole_area" oninput="calculate()"></input> m<sup>2</sup><br>
+Volume of the pressurized interior: <input type="number" id="interior_volume" oninput="calculate()"></input> m<sup>3</sup>
+<br><br>
+Initial pressure: <input type="number" id="initial_pressure" oninput="calculate()"></input> atmospheres<br><!give this a unit selector>
+Time since puncture: <input type="number" id="time_passed" oninput="calculate()"></input> seconds.<br>
+Distance from the hole: <input type="number" id="distance_from_hole" oninput="calculate()"></input> metres.
+<br><br>
+
+Pressure halving time: <span id="pressure_halving_time">[pressure_halving_time]</span> seconds.<br>
+Pressure remaining after the given time: <span id="pressure_remaining">[pressure_remaining]</span> <span id="text_pressure_unit">atmospheres</span><br>
+Air velocity at given distance: <span id="air_velocity">[air_velocity]</span> m/s.</span> (warning: assumes a circular hole in a flat wall)
+
+<br><br>
+
+Note that the below claims for given air speed are vaild only in one atmosphere of air pressure or close to it.
+Air pressure is however not expected to change significantly from the ambient air at distances greater than the hole's radius.
+
+<!https://en.wikipedia.org/wiki/Beaufort_scale>
+<table class="styled">
+  <tr><th colspan=2>Reference air velocities from the Beaufort and Saffir-Simpson scales</th></tr>
+  <tr><td>1.5 m/s</td><td>Not enough wind force to significantly move hanging cloth</td></tr>
+  <tr><td>3.3 m/s</td><td>A light breeze - just enough to feel the wind on your face</td></tr>
+  <tr><td>7.9 m/s</td><td>Moderate breeze - raises dust and loose paper</td></tr>
+  <tr><td>12 m/s</td><td>Strong breeze - enough wind force to make using an umbrella difficult</td></tr>
+  <tr><td>17.1 m/s</td><td>Moderate gale - noticeable resistance when walking against the wind</td></tr>
+  <tr><td>24.4 m/s</td><td>Strong gale - objects made of steel plate such as pots might be blown away</td></tr>
+  <tr><td>37 m/s</td><td>Category 1 huricane - wind likely to knock people over</td></tr>
+  <tr><td>54 m/s</td><td>Category 3 huricane - people can be lifted off the ground by winds of this speed</td></tr>
+</table>
+
+<script>
+function calculate(){
+hole_area = document.getElementById('hole_area').value * 1;
+interior_volume = document.getElementById('interior_volume').value * 1;
+initial_pressure = document.getElementById('initial_pressure').value * 1;
+time_passed = document.getElementById('time_passed').value * 1;
+distance_from_hole = document.getElementById('distance_from_hole').value * 1;
+air_temperature = 300; //kelvin
+
+pressure_loss_constant = 0.05954558309; //the unit would be seconds times square root of kelvin divided by metres
+air_velocity_constant = 31.66725372; //the unit would be metres per second
+
+pressure_halving_time = pressure_loss_constant * interior_volume / (hole_area * Math.sqrt(air_temperature));
+document.getElementById('pressure_halving_time').innerHTML = pressure_halving_time;
+
+pressure_remaining = initial_pressure * Math.pow(2,-time_passed/pressure_halving_time);
+document.getElementById('pressure_remaining').innerHTML = pressure_remaining;
+
+air_velocity = air_velocity_constant * hole_area / Math.pow(distance_from_hole,2);
+document.getElementById('air_velocity').innerHTML = air_velocity;
+}
+</script>
+
+</html>
