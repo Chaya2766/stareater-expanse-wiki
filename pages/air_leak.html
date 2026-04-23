@@ -2,7 +2,7 @@
  <link rel="stylesheet" href="../index.css"></link>
 </head>
 <html class="background2" id="page">
-<article class="warning">this warning lets the reader know something important about the page. If this sentence is still here on a page different than the testpage.html then I forgot to change it while making a new page.</article>
+<article class="warning">This calculator could benefit from experimental validation.</article>
 <a style="float: right;" target="_blank" href="../index.html?page=pages/air_leak.html">link to this page</a>
 
 <h1>Air leak</h1>
@@ -10,7 +10,12 @@
 
 <img src="../images/card_placeholder.png" class="basics"></img>
 <article class="basics">
-This page provides a calculator for estimating the effects of a punctured spacecraft hull (or otherwise an open hole) on the atmosphere inside, and discusses some of the what, how, and why of air leaks.
+This page provides a calculator for estimating the effects of a punctured spacecraft hull (or otherwise an open hole) on the atmosphere inside.
+For now the calculations are valid only for dry terran air at roughly room temperature.
+It also assumes an interior that allows air to flow freely without much constraint, ie. the volume is treated as a single room with a hole in it.
+<br><br>
+This is because my mathematical model only works if the air can move in to fill the losses quicker than the losses are happening, ie. pressure near the hole will be pretty much the same as in the rest of the room.
+This is going to be true for big rooms with small holes in them, but might not be true for example in a long corridor with one end open to space, or a room with internal partitions that significantly impede air flow.
 <br><br>
 <span class="meta">Here is a <a href="../documents/air_leaks/air_leaks.pdf">document</a> showing how the equations implemented here were derived.</span>
 </article>
