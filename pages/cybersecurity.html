@@ -1,0 +1,44 @@
+<head>
+ <link rel="stylesheet" href="../index.css"></link>
+</head>
+<html class="background2" id="page">
+<article class="warning">this warning lets the reader know something important about the page. If this sentence is still here on a page different than the testpage.html then I forgot to change it while making a new page.</article>
+<a style="float: right;" target="_blank" href="../index.html?page=pages/cybersecurity.html">link to this page</a>
+
+<h1>Cybersecurity</h1>
+<hr>
+
+<img src="../images/card_placeholder.png" class="basics"></img>
+<article class="basics">
+Basics - put basic info here.
+
+The image located on the right comes from the img element above, swap it to whatever illustration you want.
+
+The image will always be rescaled to match the one you see here in height (400px) and I highly recommend making it square.
+</article>
+<hr>
+
+<h1>Rayleigh distribution in cybersecurity</h1>
+<!f\left(x,s\right)=\frac{x}{s^{2}}e^{-\frac{x^{2}}{\left(2s^{2}\right)}}>
+<!(x/(s^2))×e^(−(x^2)/(2×s^2))>
+<img src="../images/rayleigh.webp" class="styled right"></img>
+<article>
+One of the common elements of many models of software development is the Rayleigh curve (image on the right), which starts at zero, grows to a peak, and then asymptotically approaches (but never reaches) zero.
+One of the properties of software that seems to roughly follow this curve is the number of exploits fixed - when the software is first launched no exploits are known, then rapidly many easy exploits are discovered and fixed, then as time goes on fewer and fewer exploits are found and fixed, and each additional unit of develompent time yields diminishing returns.
+<br><br>
+There is hypothetically a finite number of exploits in any given piece of software (assuming that new ones aren't being introduced) and as such hypothetically a fully exploit-free piece of software could be eventually achieved, but by definition there is no way to know if there are any undiscovered exploits left.
+For highly sensitive use cases this means that a vast amount of resources will be poured into exploring the asymptotic tail, and new features are unlikely to appear as to not introduce new exploits that could be found easily.
+<br><br>
+In the modern day for the most sensitive use cases it is common to use only <u>time-hardened software</u> that had gone through gigaseconds of testing without finding new exploits.
+Nonetheless, cases aren't unheard of that after 200 years of testing and finding nothing, a new severe exploit is found, a reminder that the asymptotic tail never quite reaches zero.
+Exploits found deep in the asymptotic tail usually require vast expert knowledge to understand and execute, or even may be too complicated for human-level adversaries to use.
+Time-hardened software predictably tends to feel outdated and poor in features, since understandably being in the testing and hardening phase for centuries prevents it from gaining any new modern features and might even result in losing some that are found to be too easily exploitable - this ofcourse works only one way, and assuming that a piece of software is time-hardened just because it is old or poor in modern features would be a mistake.
+<br><br>
+Discussion of what attacks lay in the <u>deep asymptotic tail</u> and how to defend against them can be difficult outside of expert circles, as it tends to attract various kinds of software mysticism and attitudes that treat cybersecurity like magic rather than engineering.
+</article>
+
+<hr>
+
+
+
+</html>
