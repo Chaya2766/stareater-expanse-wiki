@@ -3,7 +3,14 @@ module coremodule(dist,size,thickness){
         rotate([0,0,45]){difference(){
             square(sqrt(2)*size/2,center=true);
             square(sqrt(2)*size/2-(2*thickness),center=true);
-        }}
+        }
+            /*for(x=[thickness/1.5,-thickness/1.5]){for(y=[thickness/1.5,-thickness/1.5]){
+                translate([x,y,0]){circle(d=thickness,$fn=16);}
+            }}*/
+            //for(a=[0,90]){rotate([0,0,a]){square([thickness/2,size/sqrt(2)],true);}}
+            //for(a=[90:90:360]){rotate([0,0,a]){translate([size/2,0,0]){circle(thickness/2,$fn=16);}}}
+            for(a=[90:90:360]){rotate([0,0,a]){translate([size/2,0,0]){square([thickness/2,size/2],true);}}}
+        }
     }
     translate([0,-thickness/2,0]){
         square([dist-(size)+(thickness/2),thickness]);
@@ -71,3 +78,9 @@ module symbol(){
 }
 
 color([0,0,0,1]){symbol();}
+
+$vpr = [0,0,0];
+$vpt = [0,0,0];
+$vpd = 300;
+
+//openscad serendipity_icon.scad -o serendipity_icon.png --projection=ortho --colorscheme=Nature --imgsize=1000,1000
