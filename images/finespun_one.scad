@@ -8,8 +8,16 @@ room_labels = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"
 //room_labels = ["1 - α","2 - β","3 - γ","4 - δ","5 - ε","6 - ζ","7 - η","8 - θ","9 - ι","10 - κ","11 - λ","12 - μ","13 - ν","14 - ξ","15 - ο","16 - π","17 - ρ","18 - σ","19 - τ","20 - υ","21 - φ","22 - χ","23 - ψ","24 - ω"];
 //room_labels = ["1 α","2 β","3 γ","4 δ","5 ε","6 ζ","7 η","8 θ","9 ι","10 κ","11 λ","12 μ","13 ν","14 ξ","15 ο","16 π","17 ρ","18 σ","19 τ","20 υ","21 φ","22 χ","23 ψ","24 ω"];
 
-module finespun_one(equipment=false){
+module runway_light(){
+    color("#888"){cylinder(h=0.5e3,d=100);}
+    color([0,5,0]){
+        //translate([0,0,5e3]){sphere(d=200);}
+        translate([0,0,0.5e3]){sphere(d=200);}
+    }
+}
 
+module finespun_one(equipment=false){
+color("#888"){
 difference(){
 union(){
 //outer shell
@@ -52,20 +60,23 @@ cylinder(h=50e3,r=40e3+th,center=true);
 cylinder(h=51e3,r=40e3,center=true);
 }
 
+}//end of color
+
 if(equipment){
-    for(h=[-20e3:4e3:20e3]){
-    for(a=[5:2:40]){
-    rotate([0,90,a]){
-    translate([h,0,-70e3]){
-    cube([1e3,1e3,2e3]);
-    }}
-    }}
+//runway lights
+for(a=[0:11.46:360]){//this angle makes the lights be spaced 5m apart
+    rotate([0,-90,a]){
+        translate([20e3,0,-25e3]){runway_light();}
+        translate([10e3,0,-25e3]){runway_light();}
+    }
 }
 
-}
+}//end of equipment
+
+}//end of finespun
 
 /*
-//openscad finespun_station_one.scad -o finespun_station_cutaway.png --colorscheme=Starnight --imgsize=1000,1000
+//openscad finespun_one.scad -o finespun_station_cutaway.png --colorscheme=Starnight --imgsize=1000,1000
 $vpr=[66.2,0,33];
 $vpd=420E+3;
 rotate([90,0,0]){
@@ -86,12 +97,12 @@ difference(){
 $vpr=[76.2,0,33+360*$t];
 $vpd=420E+3;
 difference(){
-    rotate([90,0,0]){color("#888"){finespun_one(true);}}
+    rotate([90,0,0]){finespun_one(true);}
     rotate($vpr){
         translate([0,0,120e3]){
             cube([400e3,400e3,200e3],true);}}
 }
-
+//openscad finespun_one.scad -o finespun_station_cutaway.png --colorscheme=Starnight --imgsize=1000,1000
 
 
 /*
