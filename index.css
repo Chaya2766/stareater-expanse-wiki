@@ -210,6 +210,12 @@ img.cardsize{
   object-fit: contain;
 }
 
+img.iconsize{
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
 article.centered{
   text-align: center;
 }
