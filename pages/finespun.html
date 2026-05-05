@@ -63,18 +63,66 @@ After the 16th gigasecond, the settlement's resource use was able to be relaxed 
 
 <h1>timekeeping</h1>
 <article>
-The local standard of timekeeping is <a href="epoch_time.html">Epoch Time</a>, and the chosen cycle length is 90 kiloseconds, exactly equal to 25 hours, which was chosen because the lack of an overt day-night cycle combined with the availability of instant on-demand artificial lighting tends to delay the onset of sleep of the occasional human visitors, extending their circadian cycle to roughly that length.
+The local standard of timekeeping is tied to <a href="epoch_time.html">Epoch Time</a>, and dates are written as just the current epoch time with digits spaced in groups of three.
+The chosen cycle length is 90 kiloseconds, exactly equal to 25 hours, which was chosen because the lack of an overt day-night cycle combined with the availability of instant on-demand artificial lighting tends to delay the onset of sleep of the occasional human visitors, extending their circadian cycle to roughly that length.
 <br><br>
-Dates are written with digits spaced in groups of three, and the time of day is simply calculated as the epoch time modulo cycle length, which at the moment would correspond to <span id="finespun_local_time">[time]</span>.
-The megasecond stands in for the local equivalent of a week and/or month.
-No equivalent of noon or midnight is set - the settlement as a whole maintains a fairly consistent level of activity throughout the whole cycle, with local time used mainly just for synchronization rather than specifically corresponding to parts of a day-night cycle.
-
+The habitat implements a 12-day week which is exactly 1 megasecond long, which is notably not an integer multiple of the day length, resulting in a 12th day of the week being only 10 kiloseconds long to align it with epoch time megaseconds.
+The 12th day of the week is considered a backup day - it is the day everyone gets for their own use, mainly for things like making backups of important data and/or their minds, running parity checks, equalizing charge levels in their remote body's batteries, etc.
+<br><br>
+Regardless of any other free days, it is considered culturally inappropriate for this free time to be violated with any assigned work or required social interaction, and is strictly set aside as free time for all workers and autonomous systems to perform self-maintenance, and especially to perform backups of any important data as they wish.
+<table class="styled centered">
+  <tr>
+    <th colspan=12 id="megasecond_table_header"> current local time: <span id="finespun_local_time">[time]</span> | current day of the week below</th>
+  </tr>
+  <tr id="megasecond_table_cycles">
+  
+  </tr>
+</table>
+Visitors are not expected to follow this convention, and it is also generally considered aggrevating among most people who hear about it to have a bonus 2.8 hour day inserted into each week.
 <script>
+let cycle_length = 90000;
+
 function FinespunClock(){
-  timenow = Math.floor(Date.now() / 1000) % 90000;
+  timenow = (Math.floor(Date.now() / 1000) % 1000000) % cycle_length;
   document.getElementById("finespun_local_time").innerHTML = timenow.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  refresh_megasecond_table();
 }
 setInterval(FinespunClock, 1000);
+
+function refresh_megasecond_table(){
+  datenow = Math.floor(Date.now() / 1000);
+  this_megasecond_start = datenow - (datenow % 1000000);
+  time_since_last_megasecond = datenow - this_megasecond_start;
+  
+  num_cycles = Math.ceil(1000000 / cycle_length);
+  document.getElementById("megasecond_table_header").colspan = num_cycles;
+  
+  cycle_row = document.getElementById("megasecond_table_cycles");
+  cycle_row.innerHTML = "";
+  for(let c = 1; c<=num_cycles; c++){
+    next_cycle = document.createElement('td');
+    next_cycle.style["text-align"] = "center";
+    next_cycle.innerHTML += c.toString();
+    next_cycle.innerHTML += "<br>";
+    
+    cycle_start = (c-1)*cycle_length;
+    cycle_end = c*cycle_length - 1;
+    if(cycle_end >= 1000000){
+      cycle_end = 999999;
+      next_cycle.innerHTML += "backup day<br>";
+    } else {next_cycle.innerHTML += "standard<br>";}
+    this_cycle_length = cycle_end - cycle_start + 1;
+    next_cycle.innerHTML += this_cycle_length.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    
+    if(time_since_last_megasecond >= cycle_start && time_since_last_megasecond <= cycle_end){
+      next_cycle.style["background-color"] = "#00FF00";
+      next_cycle.style["color"] = "black";
+      next_cycle.style["font-weight"] = "bold";
+    }
+    
+    cycle_row.appendChild(next_cycle);
+  }
+}
 </script>
 
 </article>
