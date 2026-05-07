@@ -17,14 +17,36 @@ module thread(radius=100, base_size=25, tip_size=0, thread_height=50, separation
 
 module airlock_half(open=false,door=true){
     difference(){
-    cylinder(d=1850,h=1000);
-    translate([0,0,-100]){cylinder(d=1750,h=1050);}
-    cylinder(d=1000,h=1100);
+    cylinder(r=825,h=1000);
+    translate([0,0,-100]){cylinder(r=925-200,h=1200);}
+    cylinder(r=500,h=1100);
     }
+    //angled cap
+    difference(){
+    translate([0,0,1000]){cylinder(r1=825,r2=0,h=825);}
+    translate([0,0,1000-100]){cylinder(r1=825,r2=0,h=825);}
+    translate([0,0,1000-100]){cylinder(r1=500,r2=500,h=1000);}
+    translate([0,0,1275]){cylinder(r1=1000,r2=1000,h=100);}
+    }
+    //cap handles
+    for(i=[1:1:8]){rotate([0,0,i*45]){
+        hull(){
+            translate([700,0,1100]){sphere(d=40);}
+            translate([800-20,0,1200-20]){sphere(d=40);}
+        }
+        hull(){
+            translate([800-20,0,1200-20]){sphere(d=40);}
+            translate([650-20,0,1350-20]){sphere(d=40);}
+        }
+        hull(){
+            translate([650-20,0,1350-20]){sphere(d=40);}
+            translate([550,0,1250]){sphere(d=40);}
+        }
+    }}
     //outer thread
     difference(){
         translate([0,0,1000]){
-        thread(radius=1850/2,deg_step=10,num_turns=18);
+        thread(radius=825,deg_step=10,num_turns=18,thread_height=25,base_size=25,separation=55);
         }
         translate([0,0,1100]){cube([2000,2000,210],true);}
         translate([0,0,-100]){cube([2000,2000,210],true);}
@@ -56,34 +78,40 @@ module airlock_half(open=false,door=true){
 
 module airlock_connector(){
     difference(){
-        cylinder(h=1000,d=2000,center=true);
-        cylinder(h=1100,d=1900,center=true);
+        cylinder(h=1000,r=925,center=true);
+        cylinder(h=1100,r=825+5,center=true);
         translate([0,0,500]){
-        thread(radius=1850/2,deg_step=10,num_turns=18,base_size=30, tip_size=5, thread_height=55);
+        thread(radius=825,deg_step=10,num_turns=18,base_size=30, tip_size=5, thread_height=30);
         }
     }
 }
 
+//for illustration
+/*
 difference(){
 airlock_half(false,false);
-translate([0,-500,500]){cube([2100,1000,1100],true);}
+translate([0,-500,1000]){cube([2100,1000,2200],true);}
 }
 
 difference(){
-translate([0,0,-40]){rotate([180,0,0]){airlock_half(false,false);}}
-translate([0,-500,-500]){cube([2100,1000,1100],true);}
+translate([0,0,-35]){rotate([180,0,0]){airlock_half(false,false);}}
+translate([0,-500,-1000]){cube([2100,1000,2200],true);}
 }
 
 difference(){
-airlock_connector();
+translate([0,0,5]){airlock_connector();}
 translate([0,-500,0]){cube([2100,1000,1100],true);}
 }
 
-//for print:
-/*
-scale(0.01){
-translate([0,0,1000]){rotate([180,0,0]){airlock_half(false,false);}}
-translate([2500,0,1000]){rotate([180,0,0]){airlock_half(false,false);}}
-translate([1250,1750,500]){airlock_connector();}
+difference(){
+translate([0,0,1270]){airlock_connector();}
+translate([0,-500,1300]){cube([2100,1000,1100],true);}
 }
 */
+
+//for print:
+scale(0.04){
+translate([0,0,0]){airlock_half(false,false);}
+translate([2500,0,0]){airlock_half(false,false);}
+translate([1250,1750,500]){airlock_connector();}
+}
