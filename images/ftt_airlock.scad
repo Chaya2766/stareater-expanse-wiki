@@ -32,24 +32,65 @@ module airlock_half(open=false,door=true,deg_step=10){
     difference(){
     translate([0,0,1000]){cylinder(r1=825,r2=0,h=825);}
     translate([0,0,1000-100]){cylinder(r1=825,r2=0,h=825);}
-    translate([0,0,1000-100]){cylinder(r1=500,r2=500,h=1000);}
-    translate([0,0,1275]){cylinder(r1=1000,r2=1000,h=100);}
+    translate([0,0,1000-100]){cylinder(r1=600,r2=600,h=1000);}
+    translate([0,0,1175]){cylinder(r1=1000,r2=1000,h=100);}
     }
-    //cap handles
+    //outer handles
     for(i=[1:1:8]){rotate([0,0,i*45]){
         hull(){
-            translate([700,0,1100]){sphere(d=40);}
-            translate([800-20,0,1200-20]){sphere(d=40);}
+            translate([750,0,1050]){sphere(d=40);}
+            translate([800,0,1100]){sphere(d=40);}
         }
         hull(){
-            translate([800-20,0,1200-20]){sphere(d=40);}
-            translate([650-20,0,1350-20]){sphere(d=40);}
+            translate([800,0,1100]){sphere(d=40);}
+            translate([700,0,1200]){sphere(d=40);}
         }
         hull(){
-            translate([650-20,0,1350-20]){sphere(d=40);}
-            translate([550,0,1250]){sphere(d=40);}
+            translate([700,0,1200]){sphere(d=40);}
+            translate([650,0,1150]){sphere(d=40);}
         }
     }}
+    //inner handles
+    for(a=[-30,0,30,150,180,210]){rotate([0,0,a]){
+        hull(){
+            translate([760,0,750]){sphere(d=40);}
+            translate([660,0,850]){sphere(d=40);}
+        }
+        hull(){
+            translate([660,0,850]){sphere(d=40);}
+            translate([660,0,1000]){sphere(d=40);}
+        }
+    }}
+    //base handles
+    for(a=[45:45:360]){rotate([0,0,a]){
+        hull(){
+            translate([760,0,050]){sphere(d=40);}
+            translate([660,0,150]){sphere(d=40);}
+        }
+        hull(){
+            translate([660,0,150]){sphere(d=40);}
+            translate([660,0,250]){sphere(d=40);}
+        }
+        hull(){
+            translate([660,0,250]){sphere(d=40);}
+            translate([760,0,350]){sphere(d=40);}
+        }
+    }}
+    //door supports
+    translate([0,0,900]){
+        difference(){
+        translate([0,0,0]){cylinder(h=120,r1=800,r2=800);}
+        translate([0,0,-50]){
+            cylinder(h=50+150,r1=650+200-15-(sqrt(2)*50),r2=600+100-15-(sqrt(2)*50));
+        }
+        translate([0,650,0]){
+            cube([2000,500,300],true);
+        }
+        translate([0,-650,0]){
+            cube([2000,500,300],true);
+        }
+    }
+    }
     //outer thread
     difference(){
         translate([0,0,1000]){
@@ -69,18 +110,66 @@ module airlock_half(open=false,door=true,deg_step=10){
     */
     if(door){
     if(open){
-        translate([400,0,0200]){
-        rotate([0,90,0]){
-            cylinder(d=1100,h=100);
-            cylinder(d=900,h=200);
+        translate([-300,0,1072-750]){
+        rotate([0,-90,0]){
+            airlock_door();
         }}
     } else {
-        translate([0,0,0800]){
-            cylinder(d=1100,h=100);
-            cylinder(d=900,h=200);
+        translate([0,0,1072]){
+            airlock_door();
         }
     }
     }
+}
+
+module airlock_door(){
+    difference(){
+        //cylinder(h=100,r1=650,r2=550);
+        translate([0,0,-50]){cylinder(h=100+50,r1=650+50,r2=550);}
+        //cylinder(h=50,r1=650-(sqrt(2)*50),r2=600-(sqrt(2)*50));
+        /*translate([0,0,-50]){
+            cylinder(h=50+50,r1=650+50-(sqrt(2)*50),r2=600-(sqrt(2)*50));
+        }*/
+        translate([0,0,-100]){
+            cylinder(h=50+100,r1=650+100-(sqrt(2)*50),r2=600-(sqrt(2)*50));
+        }
+        translate([0,650,-50]){
+            cube([2000,500,100],true);
+        }
+        translate([0,-650,-50]){
+            cube([2000,500,100],true);
+        }
+    }
+    //translate([0,0,100]){cylinder(h=100,r=550);}
+    //cap handles
+    for(i=[1:1:8]){rotate([0,0,i*45]){
+        //outer
+        hull(){
+            translate([500,0,100]){sphere(d=40);}
+            translate([500,0,150]){sphere(d=40);}
+        }
+        hull(){
+            translate([500,0,150]){sphere(d=40);}
+            translate([350,0,150]){sphere(d=40);}
+        }
+        hull(){
+            translate([350,0,150]){sphere(d=40);}
+            translate([350,0,100]){sphere(d=40);}
+        }
+        //inner
+        hull(){
+            translate([500,0,50]){sphere(d=40);}
+            translate([500,0,0]){sphere(d=40);}
+        }
+        hull(){
+            translate([500,0,0]){sphere(d=40);}
+            translate([350,0,0]){sphere(d=40);}
+        }
+        hull(){
+            translate([350,0,0]){sphere(d=40);}
+            translate([350,0,50]){sphere(d=40);}
+        }
+    }}
 }
 
 module airlock_connector(gap=5,deg_step=10){
@@ -96,31 +185,37 @@ module airlock_connector(gap=5,deg_step=10){
 //for illustration
 
 difference(){
-airlock_half(false,false);
-translate([0,-500,1000]){cube([2100,1000,2200],true);}
+airlock_half();
+translate([0,-500,1000]){cube([2100,1000,3200],true);}
 }
 
 difference(){
-translate([0,0,-35]){rotate([180,0,0]){airlock_half(false,false);}}
-translate([0,-500,-1000]){cube([2100,1000,2200],true);}
+translate([0,0,-35]){rotate([180,0,0]){airlock_half(true);}}
+translate([0,-500,-1000]){cube([2100,1000,3200],true);}
 }
 
 difference(){
 translate([0,0,5]){airlock_connector();}
 translate([0,-500,0]){cube([2100,1000,1100],true);}
 }
-/*
+
 difference(){
-translate([0,0,1270]){airlock_connector(7.5);}
+translate([0,0,1270]){airlock_connector(6);}
 translate([0,-500,1300]){cube([2100,1000,1100],true);}
 }
-*/
+
+difference(){
+translate([0,0,2600-50]){rotate([180,0,0]){airlock_half(false);}}
+translate([0,-500,2600]){cube([2100,1000,3200],true);}
+}
+
 
 //for print:
 /*
 scale(0.04){
 translate([0,0,0]){airlock_half(false,false,deg_step=3);}
-translate([2500,0,0]){airlock_half(false,false,deg_step=3);}
-translate([1250,1750,500]){airlock_connector(deg_step=3);}
+translate([2000,0,500]){rotate([0,180-45,0]){airlock_door();}}
+translate([1250,1750,500]){airlock_connector(gap=6,deg_step=3);}
 }
 */
+//when printing with 0.2mm layer height, the thread looks like garbage but somehow still works
