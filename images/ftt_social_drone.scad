@@ -207,6 +207,113 @@ limb([
     [60,20,100,0,10,0,true]
     //the two above aren't parametric because they determine the head shape
 ]);
+
+//ears
+//upper left ear
+difference(){
+    limb([
+        [50,50,100,ba[5][0],ba[5][1],ba[5][2],false],
+        [50,50,100,ba[4][0],ba[4][1],ba[4][2],false],
+        [50,50,100,ba[3][0],ba[3][1],ba[3][2],false],
+        [50,50,100,ba[2][0],ba[2][1],ba[2][2],false],
+        [50,60,100,ba[1][0],ba[1][1],ba[1][2],false],
+        [60,80,100,ba[0][0],ba[0][1],ba[0][2],false],
+        [40,40,90,90+45,0,45,false],
+        [10,10,20,10,0,0,false],//this one just offsets the ear back, modify the angle of only this one to move the ear
+        [40,10,100,-45,0,0,true]
+    ]);
+    limb([
+        [50,50,100,ba[5][0],ba[5][1],ba[5][2],false],
+        [50,50,100,ba[4][0],ba[4][1],ba[4][2],false],
+        [50,50,100,ba[3][0],ba[3][1],ba[3][2],false],
+        [50,50,100,ba[2][0],ba[2][1],ba[2][2],false],
+        [50,60,100,ba[1][0],ba[1][1],ba[1][2],false],
+        [60,80,100,ba[0][0],ba[0][1],ba[0][2],false],
+        [40,40,90,90+45,0,45,false],
+        [10,10,10,10,0,0,false],//same angle goes here to move the ear
+        [30,10,100,-45,0,0,true],
+        [10,40,100,200,0,0,true]
+    ]);
+}
+//lower left ear
+difference(){
+    limb([
+        [50,50,100,ba[5][0],ba[5][1],ba[5][2],false],
+        [50,50,100,ba[4][0],ba[4][1],ba[4][2],false],
+        [50,50,100,ba[3][0],ba[3][1],ba[3][2],false],
+        [50,50,100,ba[2][0],ba[2][1],ba[2][2],false],
+        [50,60,100,ba[1][0],ba[1][1],ba[1][2],false],
+        [60,80,100,ba[0][0],ba[0][1],ba[0][2],false],
+        [40,40,90,90+45,0,-45,false],
+        [10,10,20,10,0,0,false],//this one just offsets the ear back, modify the angle of only this one to move the ear
+        [40,10,100,-45,0,0,true]
+    ]);
+    limb([
+        [50,50,100,ba[5][0],ba[5][1],ba[5][2],false],
+        [50,50,100,ba[4][0],ba[4][1],ba[4][2],false],
+        [50,50,100,ba[3][0],ba[3][1],ba[3][2],false],
+        [50,50,100,ba[2][0],ba[2][1],ba[2][2],false],
+        [50,60,100,ba[1][0],ba[1][1],ba[1][2],false],
+        [60,80,100,ba[0][0],ba[0][1],ba[0][2],false],
+        [40,40,90,90+45,0,-45,false],
+        [10,10,10,10,0,0,false],//same angle goes here to move the ear
+        [30,10,100,-45,0,0,true],
+        [10,40,100,200,0,0,true]
+    ]);
+}
+//upper right ear
+difference(){
+    limb([
+        [50,50,100,ba[5][0],ba[5][1],ba[5][2],false],
+        [50,50,100,ba[4][0],ba[4][1],ba[4][2],false],
+        [50,50,100,ba[3][0],ba[3][1],ba[3][2],false],
+        [50,50,100,ba[2][0],ba[2][1],ba[2][2],false],
+        [50,60,100,ba[1][0],ba[1][1],ba[1][2],false],
+        [60,80,100,ba[0][0],ba[0][1],ba[0][2],false],
+        [40,40,90,90+45,0,135,false],
+        [10,10,20,10,0,0,false],//this one just offsets the ear back, modify the angle of only this one to move the ear
+        [40,10,100,-45,0,0,true]
+    ]);
+    limb([
+        [50,50,100,ba[5][0],ba[5][1],ba[5][2],false],
+        [50,50,100,ba[4][0],ba[4][1],ba[4][2],false],
+        [50,50,100,ba[3][0],ba[3][1],ba[3][2],false],
+        [50,50,100,ba[2][0],ba[2][1],ba[2][2],false],
+        [50,60,100,ba[1][0],ba[1][1],ba[1][2],false],
+        [60,80,100,ba[0][0],ba[0][1],ba[0][2],false],
+        [40,40,90,90+45,0,135,false],
+        [10,10,10,10,0,0,false],//same angle goes here to move the ear
+        [30,10,100,-45,0,0,true],
+        [10,40,100,200,0,0,true]
+    ]);
+}
+//lower right ear
+difference(){
+    limb([
+        [50,50,100,ba[5][0],ba[5][1],ba[5][2],false],
+        [50,50,100,ba[4][0],ba[4][1],ba[4][2],false],
+        [50,50,100,ba[3][0],ba[3][1],ba[3][2],false],
+        [50,50,100,ba[2][0],ba[2][1],ba[2][2],false],
+        [50,60,100,ba[1][0],ba[1][1],ba[1][2],false],
+        [60,80,100,ba[0][0],ba[0][1],ba[0][2],false],
+        [40,40,90,90+45,0,-135,false],
+        [10,10,20,10,0,0,false],//this one just offsets the ear back, modify the angle of only this one to move the ear
+        [40,10,100,-45,0,0,true]
+    ]);
+    limb([
+        [50,50,100,ba[5][0],ba[5][1],ba[5][2],false],
+        [50,50,100,ba[4][0],ba[4][1],ba[4][2],false],
+        [50,50,100,ba[3][0],ba[3][1],ba[3][2],false],
+        [50,50,100,ba[2][0],ba[2][1],ba[2][2],false],
+        [50,60,100,ba[1][0],ba[1][1],ba[1][2],false],
+        [60,80,100,ba[0][0],ba[0][1],ba[0][2],false],
+        [40,40,90,90+45,0,-135,false],
+        [10,10,10,10,0,0,false],//same angle goes here to move the ear
+        [30,10,100,-45,0,0,true],
+        [10,40,100,200,0,0,true]
+    ]);
+}
+
 }
 //eyes
 color(eye_blacks){
