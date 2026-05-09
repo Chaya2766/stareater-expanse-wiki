@@ -21,6 +21,8 @@ if(n<len(in)){
 fur_color = [0.8,0.8,0.8];
 eye_blacks = [0.25,0.25,0.25];
 eye_lights = [1,1,1];
+wings=true;
+num_feathers = 20;
 
 //body angles
 ba=[//order from neck to body to tail
@@ -623,4 +625,82 @@ limb([
     [50,20,100,0,100,180,true],
     [20,10,50,0,10,0,true],
 ]);
+}
+
+if(wings){
+color(fur_color){
+//front left wing
+limb([
+    [50,80,100,0,90,0,false],
+    [80,50,100,45,180+45,0,true],
+    [50,50,150,0,80,-35,true],
+    [50,50,250,0,-90,-30,true],
+    [50,5,1000,0,120,0,true]
+]);
+for(i=[1:1:num_feathers-1]){
+limb([
+    [50,80,100,0,90,0,false],
+    [80,50,100,45,180+45,0,false],
+    [50,50,150,0,80,-35,false],
+    [50,5,250,0,-90,-30,false],
+    [25,5,1000*((num_feathers-i)/(num_feathers))+250*(i/num_feathers),0,120*((num_feathers-i)/(num_feathers))+180*(i/num_feathers),0,true]
+]);    
+}
+//front right wing
+limb([
+    [50,80,100,0,90,0,false],
+    [80,50,100,-45,180+45,0,true],
+    [50,50,150,0,80,35,true],
+    [50,50,250,0,-90,20,true],
+    [50,5,1000,0,120,0,true]
+]);
+for(i=[1:1:num_feathers-1]){
+limb([
+    [50,80,100,0,90,0,false],
+    [80,50,100,-45,180+45,0,false],
+    [50,50,150,0,80,35,false],
+    [50,5,250,0,-90,20,false],
+    [25,5,1000*((num_feathers-i)/(num_feathers))+250*(i/num_feathers),0,120*((num_feathers-i)/(num_feathers))+180*(i/num_feathers),0,true]
+]);    
+}
+//hind left wing
+limb([
+    [50,80,100,0,90,0,false],
+    [80,100,200,0,0,-10,false],
+    [100,50,100,45,180+45,0,true],//
+    [50,50,150,0,80,-35,true],
+    [50,50,250,0,-90,-25,true],
+    [50,5,1000,0,120,0,true]
+]);
+for(i=[1:1:num_feathers-1]){
+limb([
+    [50,80,100,0,90,0,false],
+    [80,100,200,0,0,-10,false],
+    [100,50,100,45,180+45,0,true],//
+    [50,50,150,0,80,-35,false],
+    [50,5,250,0,-90,-25,false],
+    [25,5,1000*((num_feathers-i)/(num_feathers))+250*(i/num_feathers),0,120*((num_feathers-i)/(num_feathers))+180*(i/num_feathers),0,true]
+]);
+}
+//hind right wing
+limb([
+    [50,80,100,0,90,0,false],
+    [80,100,200,0,0,10,false],
+    [100,50,100,-45,180+45,0,true],//
+    [50,50,150,0,80,35,true],
+    [50,50,250,0,-90,25,true],
+    [50,5,1000,0,120,0,true]
+]);
+for(i=[1:1:num_feathers-1]){
+limb([
+    [50,80,100,0,90,0,false],
+    [80,100,200,0,0,10,false],
+    [100,50,100,-45,180+45,0,true],//
+    [50,50,150,0,80,35,false],
+    [50,5,250,0,-90,25,false],
+    [25,5,1000*((num_feathers-i)/(num_feathers))+250*(i/num_feathers),0,120*((num_feathers-i)/(num_feathers))+180*(i/num_feathers),0,true]
+]);
+}
+
+}
 }
