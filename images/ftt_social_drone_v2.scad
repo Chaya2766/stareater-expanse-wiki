@@ -24,6 +24,12 @@ eye_lights = [1,1,1];
 wings=true;
 num_feathers = 20;
 
+//for rendering 360 view:
+$vpd = 5000;
+$vpr = [65,0,$t*360];
+$vpt = [380,0,0];
+//recomended render 100 frames at 10fps
+
 //body angles
 ba=[//order from neck to body to tail
     [0,-20,0],//neck joint nearest to the head
