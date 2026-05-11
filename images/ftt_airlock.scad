@@ -34,6 +34,7 @@ module airlock_half(open=false,door=true,deg_step=10){
     translate([0,0,1000-100]){cylinder(r1=825,r2=0,h=825);}
     translate([0,0,1000-100]){cylinder(r1=600,r2=600,h=1000);}
     translate([0,0,1175]){cylinder(r1=1000,r2=1000,h=100);}
+    translate([0,0,1025]){cylinder(r1=500,r2=700,h=200);}
     }
     //outer handles
     for(i=[1:1:8]){rotate([0,0,i*45]){
@@ -86,8 +87,18 @@ module airlock_half(open=false,door=true,deg_step=10){
         translate([0,650,0]){
             cube([2000,500,300],true);
         }
+        translate([0,400,120]){
+            rotate([45,0,0]){
+                cube([2000,100,100],true);
+            }
+        }
         translate([0,-650,0]){
             cube([2000,500,300],true);
+        }
+        translate([0,-400,120]){
+            rotate([45,0,0]){
+                cube([2000,100,100],true);
+            }
         }
     }
     }
@@ -122,22 +133,32 @@ module airlock_half(open=false,door=true,deg_step=10){
     }
 }
 
-module airlock_door(){
+module airlock_door(gap=1){
     difference(){
         //cylinder(h=100,r1=650,r2=550);
-        translate([0,0,-50]){cylinder(h=100+50,r1=650+50,r2=550);}
+        translate([0,0,2*gap-50]){cylinder(h=100+50-2*gap,r1=650+50-2*gap,r2=550);}
         //cylinder(h=50,r1=650-(sqrt(2)*50),r2=600-(sqrt(2)*50));
         /*translate([0,0,-50]){
             cylinder(h=50+50,r1=650+50-(sqrt(2)*50),r2=600-(sqrt(2)*50));
         }*/
-        translate([0,0,-100]){
+        translate([0,0,0.-100]){
             cylinder(h=50+100,r1=650+100-(sqrt(2)*50),r2=600-(sqrt(2)*50));
         }
-        translate([0,650,-50]){
-            cube([2000,500,100],true);
+        translate([0,550,-50]){
+                cube([2000,400,100],true);
         }
-        translate([0,-650,-50]){
-            cube([2000,500,100],true);
+        translate([0,350,-sqrt(2)*50]){
+            rotate([45,0,0]){
+                cube([2000,100,100],true);
+            }
+        }
+        translate([0,-550,-50]){
+                cube([2000,400,100],true);
+        }
+        translate([0,-350,-sqrt(2)*50]){
+            rotate([45,0,0]){
+                cube([2000,100,100],true);
+            }
         }
     }
     //translate([0,0,100]){cylinder(h=100,r=550);}
@@ -182,7 +203,12 @@ module airlock_connector(gap=5,deg_step=10){
     }
 }
 
+//false for illustration, true for print
+print=false;
+
+if(!print){
 //for illustration
+echo("rendering a 100% scale illustration");
 
 difference(){
 airlock_half();
@@ -209,13 +235,15 @@ translate([0,0,2600-50]){rotate([180,0,0]){airlock_half(false);}}
 translate([0,-500,2600]){cube([2100,1000,3200],true);}
 }
 
-
+}else{
+echo("rendering 4% scale model parts");
 //for print:
-/*
 scale(0.04){
 translate([0,0,0]){airlock_half(false,false,deg_step=3);}
-translate([2000,0,500]){rotate([0,180-45,0]){airlock_door();}}
+translate([2000,0,500]){rotate([0,180-45,0]){airlock_door(gap=10);}}
 translate([1250,1750,500]){airlock_connector(gap=6,deg_step=3);}
 }
-*/
-//when printing with 0.2mm layer height, the thread looks like garbage but somehow still works
+
+}
+//openscad ftt_airlock.scad -o ftt_airlock_printables.stl -D print=true
+//when printing with 0.2mm layer height, the thread looks like garbage but somehow still works, still recomend using 0.16mm
