@@ -1,6 +1,7 @@
 stars from lorewiki/*
 push.sh
 force_push.sh
+*.par2
 
 # ignore everything with those specific extensions under documents directory
 documents/**/*.aux
@@ -16,4 +17,6 @@ rendering_zone/**/*.scad
 
 tools/orbit_search_tool/allnum.cat
 
-*.par2
+images/10_000_asteroids.scad
+images/100_000_asteroids.scad
+images/*.png
