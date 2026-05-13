@@ -7,6 +7,13 @@
 
 <h1>Epoch clock</h1>
 <hr>
+Set your own parameters? | cycle length:
+<input type="number" id="cycle_length_input" value="86400"></input>
+| time offset:
+<input type="number" id="time_offset_input" value="0"></input>
+|
+<input type="button" value="apply" onclick="apply_parameters();">
+<hr>
 
 <h1 id="date" style="
   margin: 0 auto;
@@ -590,9 +597,17 @@
 let audioContext = null;
 document.getElementById('soundToggle').checked = false;
 
+let cycle_length = 86400;
+let time_offset = 0;
+
+function apply_parameters(){
+  cycle_length = document.getElementById("cycle_length_input").value * 1;
+  time_offset = document.getElementById("time_offset_input").value * 1;
+}
+
 function clock(){
   datenow = Math.floor(Date.now() / 1000);
-  timenow = datenow % 86400;
+  timenow = (datenow  + time_offset) % cycle_length;
   document.getElementById("date").innerHTML = datenow.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
   document.getElementById("clock").innerHTML = timenow.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
   

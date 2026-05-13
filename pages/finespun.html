@@ -64,12 +64,15 @@ After the 16th gigasecond, the settlement's resource use was able to be relaxed 
 <h1>timekeeping</h1>
 <article>
 The local standard of timekeeping is tied to <a href="epoch_time.html">Epoch Time</a>, and dates are written as just the current epoch time with digits spaced in groups of three.
+For most purposes, to specify when something will happen, when a task should be done, or leaving a timestamp to mark when something was done, that's all that is used and nobody cares about other kinds of time like cycles, years, times of day, etc.
+The artificial minds which have no need for sleep, and felicity herself who has a very flexible sleep schedule, deal with that well and don't find it necessary to have defined days and weeks.
+<br><br>
+For purposes that are largely recreational, the habitat does actually have a defined 12-day week which is exactly 1 megasecond long.
 The chosen cycle length is 90 kiloseconds, exactly equal to 25 hours, which was chosen because the lack of an overt day-night cycle combined with the availability of instant on-demand artificial lighting tends to delay the onset of sleep of the occasional human visitors, extending their circadian cycle to roughly that length.
+This is a somewhat strange choice because there is no multiple of 90 kiloseconds which would fit exactly into 1 megasecond, resulting in a week with a non-integer number of days - this is solved by having leap hours every week, that look just like an additional 12th day of the week which is only 10 kiloseconds long and serve to align it with epoch time megaseconds.
 <br><br>
-The habitat implements a 12-day week which is exactly 1 megasecond long, which is notably not an integer multiple of the day length, resulting in a 12th day of the week being only 10 kiloseconds long to align it with epoch time megaseconds.
 The 12th day of the week is considered a backup day - it is the day everyone gets for their own use, mainly for things like making backups of important data and/or their minds, running parity checks, equalizing charge levels in their remote body's batteries, etc.
-<br><br>
-Regardless of any other free days, it is considered culturally inappropriate for this free time to be violated with any assigned work or required social interaction, and is strictly set aside as free time for all workers and autonomous systems to perform self-maintenance, and especially to perform backups of any important data as they wish.
+It is still easy to know when the backup day is even without looking at the week & day time since it always happens in the last 10 kiloseconds of every megasecond.
 <table class="styled centered">
   <tr>
     <th colspan=12 id="megasecond_table_header"> current local time: <span id="finespun_local_time">[time]</span> | current day of the week below</th>
@@ -78,7 +81,11 @@ Regardless of any other free days, it is considered culturally inappropriate for
   
   </tr>
 </table>
-Visitors are not expected to follow this convention, and it is also generally considered aggrevating among most people who hear about it to have a bonus 2.8 hour day inserted into each week.
+Visitors are not expected to follow this convention, and it is also generally considered aggrevating among most people who hear about it to have a bonus 2.8 leap hours inserted into each week.
+This convention is still superseded by simply using unix epoch timestamps for all timing purposes, and visitors who don't find the local week to be fit for their needs are advised to either just use the raw timestamps, or define their own day length where the time of day will be calculated by taking a modulo of the current timestamp, eg. t % 86400 for a 24-hour day.
+<br><br>
+The time of day in the finespun week is still very simple but uses two modulos: ( t % 1000000 ) % 90000
+<! echo $(( $((`date +%s` % 1000000 )) % 90000 )) >
 <script>
 let cycle_length = 90000;
 
