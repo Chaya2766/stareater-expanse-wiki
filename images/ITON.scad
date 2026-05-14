@@ -19,11 +19,12 @@ module tree(n,h,a,s){
     if(n==0){color([1,0,0,1]){sphere(1.5);}}
 }
 
-//this generates the symbol image
+//this generates the card image
 rotate([81.5, -13, 151.3]){
     tree(9,10,[30,50,20],0.9);
 }
-$vpr = [180,0,300]; $vpt = [-12,4,0];
+$vpr = [180,0,300]; $vpt = [-10.5,2.5,0];
+$vpd = 160;
 
 //this generates the avatar showoff gif
 /*
@@ -31,3 +32,5 @@ tree(9,10,[0,50,20],0.9);
 $vpr = [75,0,52+($t*360)];
 $vpt = [0,20,0]; $vpd=240;
 */
+
+//openscad ITON.scad -o ITON.png --colorscheme=Starnight --imgsize=1000,1000 --projection=ortho
