@@ -37,6 +37,15 @@ max. power consumption: 10W
 <article>
 Civic 2 relies on indium arsenide tunneling field effect transistors, and can be easily produced through ion beam printing, requiring only materials that are easily extracted through low temperature electrolysis.
 <br><br>
+<table class="styled left">
+  <tr><th colspan=3>Civic-2 chip elemental makeup</th></tr>
+  <tr><td>Arsenic</td><td>206.5 mg</td><td>2.75621 mmol</td></tr>
+  <tr><td>Gallium</td><td>192.2 mg</td><td>2.757 mmol</td></tr>
+  <tr><td>Copper</td><td>173 mg</td><td>2.7244 mmol</td></tr>
+  <tr><td>Gold</td><td>5 mg</td><td>25.38502 µmol</td></tr>
+  <tr><td>Indium</td><td>1.3 mg</td><td>11.322 µmol</td></tr>
+  <tr><td>Total</td><td>578 mg</td><td>8.27431702 millimol</td></tr>
+</table>
 computation rate: 5e16bit/s<br>
 memory: 1e15bit<br>
 efficiency: 2e-16J/bit<br>
@@ -147,6 +156,10 @@ function toMetric(number,precision){
     case 4: prefix = "T"; break;
     case 5: prefix = "P"; break;
     case 6: prefix = "E"; break;
+    case 7: prefix = "Z"; break;
+    case 8: prefix = "Y"; break;
+    case 9: prefix = "R"; break;
+    case 10: prefix = "Q"; break;
     default: return number.toExponential(precision);
   }
   
@@ -172,6 +185,10 @@ function VolumeToMetric(number,precision){
     case 4: prefix = "T"; break;
     case 5: prefix = "P"; break;
     case 6: prefix = "E"; break;
+    case 7: prefix = "Z"; break;
+    case 8: prefix = "Y"; break;
+    case 9: prefix = "R"; break;
+    case 10: prefix = "Q"; break;
     default: return number.toExponential(precision);
   }
   
