@@ -1,0 +1,64 @@
+<head>
+ <link rel="stylesheet" href="../index.css"></link>
+</head>
+<html class="background2" id="page">
+<article class="meta warning">this is a meta page, not to be understood as in-setting content</article>
+<article class="warning">this page is work in progress and I will gradually add things as I see fit</article>
+<a style="float: right;" target="_blank" href="../index.html?page=pages/chaya2766.html">link to this page</a>
+
+<h1>Chaya2766</h1>
+<hr>
+
+<img src="../images/chaya2766.webp" class="basics"></img>
+<article class="basics">
+Author of this worldbuilding project.
+<br><br>
+This also serves as a page I can include a link to in my profile on any given social media as an additional resource for people who are trying to talk to me, because character limits prevent me from introducing myself adequately.
+<br><br>
+</article>
+
+<hr>
+
+<h1>Where to talk to me</h1>
+<article>
+I tend to hang out in the <a href="https://orionsarm.com/">Orion's Arm</a> discord server, which as of writing this can be found through the Orion's Arm website under the "participate" section in the top menu.
+</article>
+
+<h1 id="how_to_talk_to_me">How to talk to me</h1>
+<article>
+I plan to write a more specific description here of what it means to be "nice" to me, since not everybody understands it the same way.
+For now here's a small list of things that, if you ever encounter me, you might find useful to be aware of:
+<br><br>
+<b>1. how to read my discussion</b>: I very often say things that sound like arguments but in reality are just me giving you a piece of information I thought you might find useful.
+I often also say things that are obvious on the off chance you might have not already been aware of it.
+These things may often also be prepended with "if we assume" that leads into a bizarrely narrow assumption so that you can quickly determine if what I said fits your case.
+I recommend not interpreting things I randomly point out in such ways as counterarguments or corrections as I can see how doing so would result in a lot of annoyance - they can usually be safely ignored if they aren't useful, but acknowledging them is recommended to stop me from repeating them.
+(many platforms offer reaction emojis, which work well as an acknowledgement)
+<br><br>
+<b>2. what not to say</b>: I apply a simple rule to others, which I encourage applying to me as well, that is: do not say anything unless it is (A) useful in some way, or (B) nice to hear.
+If it is neither A or B then simply don't say it - obviously this is going to have edge cases but should cover most of daily interaction adequately.
+This is not an absolute requirement, but it is a safe bet to fall back on if you don't know any better.
+</article>
+
+
+<h1>other miscellaneous information</h1>
+<article>
+By now I've spent roughly <span id="time_used">[lifetime percentage passed]</span>% of my statistically expected lifespan, and should still be alive for about <span id="time_left" style="white-space: nowrap;">[time_left]</span> seconds.
+<br><br>
+Remind me to update this if the timer is negative and I'm still alive.
+</article>
+
+<script>
+function DeathClock(){
+  time_now = Math.floor(Date.now() / 1000);
+  birth_time = 951825600;
+  death_time = 3314001600;//unix timestamp corresponding to some time in 2075
+  seconds_left = death_time - time_now;
+  document.getElementById("time_left").innerHTML = seconds_left.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  time_used = (time_now - birth_time)/(death_time - birth_time);
+  document.getElementById("time_used").innerHTML = (100*time_used).toFixed(1).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+}
+setInterval(DeathClock, 1000);
+</script>
+
+</html>

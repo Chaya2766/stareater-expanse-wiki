@@ -246,11 +246,24 @@ hr{
   color: #F8F;
   border: 5px dashed #F8F;
 }
+.warning.meta:before{
+  content: "Meta content warning: ";
+}
 
 .warning.soft{
   background-color: black;
   color: #0fa;
   border: 5px dashed #0fa;
+}
+
+.warning.external{
+  background-color: black;
+  color: #f0a;
+  border: 5px dashed #f0a;
+}
+
+.warning.external:before{
+  content: "External content warning: ";
 }
 
 .division{
