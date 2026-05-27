@@ -112,33 +112,42 @@ Below you can see more illustrative renders of the structure of composite minds 
 
 <h1>upscaling calculator</h1>
 <article>
-A simple tool for approximating the results of cognitive upscaling in the full mesh method with meta-bridges.
+A simple tool for approximating the results of cognitive upscaling.
+Keep sparsity at 100% for a fully-connected composite mind
 Note that this approximation tool is insufficient for heterogeneous composite minds which include more that one type of brain or bridge model.
 <br><br>
 Brain node model:
 <select name="brain_model" id="brain_model" selected="-" oninput="set_brain()">
   <option value="-">-</option>
   <option value="UEIA">UEIA</option>
+  <option value="Aurob">Aurob</option>
 </select>
 <br>
 Bridge model:
 <select name="bridge_model" id="bridge_model" selected="-" oninput="set_bridge()">
   <option value="-">-</option>
   <option value="UEIA-bridge">UEIA-bridge</option>
+  <option value="Aurob-bridge">Aurob-bridge</option>
 </select>
 <br><br>
 Brain node size: <input type="number" id="brain_size" oninput="autocalc()"></input> synapses, 
 Brain node active memory: <input type="number" id="brain_memory" oninput="autocalc()"></input> elements<br>
+Brain node learning rate: <input type="number" id="brain_learning" oninput="autocalc()"></input>%<br>
 Bridge size: <input type="number" id="bridge_size" oninput="autocalc()"></input> synapses (<span id="relative_bridge_size">-</span>% of brain node size)</span>
+<br>
+Sparsity: include <input type="number" id="sparsity" oninput="autocalc()" value=100></input> % of all bridges, 
 </article>
 <ul>
   <li>number of brain nodes: <input type="number" id="brains" value=1 oninput="autocalc()"></input>, containing a total of <span id="brain_synapses">-</span> synapses</li>
   <li>number of bridges: <span id="bridges">-</span>, containing a total of <span id="bridges_synapses">-</span> synapses</li>
   <li>number of meta-bridges: <span id="meta-bridges">-</span>, containing a total of <span id="meta-bridges_synapses">-</span> synapses</li>
-  <li>total number of synapses: <span id="total_synapses">-</span></li>
+  <li>total number of synapses: <span id="total_synapses">-</span> (<span id="brain_synapses_percentage">-</span>% located in brain nodes)</li>
   <li>approximate active memory: <span id="active_memory">-</span> elements</li>
-  <li>approx. required <a href="computation.html#computronium">computronium</a> memory: <span id="computronium_memory">-</span> bits</li>
-  <li>approx. required <a href="computation.html#computronium">computronium</a> fliprate: <span id="computronium_fliprate">-</span> bits/s</li>
+  <li>expected learning rate: <span id="learning_rate">-</span>%</li>
+  <li><span class="inline-tip" tip="(here degree of the graph is the number of nodes directly connected to any given node)">graph degree</span>: <span id="direct_connections">-</span> nodes</li>
+  <li>average separation between brain nodes: <span id="separation">-</span> bridges</li>
+  <li>approx. required <a href="computation.html#computronium">computronium</a> memory: <span id="computronium_memory">-</span> bits (<span id="computronium_memory_per_brain">-</span> bits per brain node)</li>
+  <li>approx. required <a href="computation.html#computronium">computronium</a> fliprate: <span id="computronium_fliprate">-</span> bits/s (<span id="computronium_fliprate_per_brain">-</span> bits/s per brain node)</li>
 </ul>
 
 <script>
@@ -147,12 +156,14 @@ function set_brain(){
   brain = document.getElementById("brain_model").value;
   if(debug_log)console.log(brain);
   
-  let brain_dict = {};//num. of synapses and size of active memory
-  brain_dict["UEIA"] = [Math.pow(2,50),4];
+  let brain_dict = {};//num. of synapses, size of active memory and learning rate
+  brain_dict["UEIA"] = [Math.pow(2,50),4,0.05];
+  brain_dict["Aurob"] = [9.96e17,125,0.1];
   
   if(debug_log)console.log(brain_dict[brain]);
   document.getElementById("brain_size").value = brain_dict[brain][0];
   document.getElementById("brain_memory").value = brain_dict[brain][1];
+  document.getElementById("brain_learning").value = brain_dict[brain][2]*100;
   
   autocalc();
 }
@@ -164,6 +175,7 @@ function set_bridge(){
   
   let bridge_dict = {};
   bridge_dict["UEIA-bridge"] = Math.pow(2,42);
+  bridge_dict["Aurob-bridge"] = 4.65e15;
   
   if(debug_log)console.log(bridge_dict[bridge]);
   document.getElementById("bridge_size").value = bridge_dict[bridge];
@@ -175,6 +187,8 @@ function autocalc(){
   brains = document.getElementById("brains").value * 1;
   brain_size = document.getElementById("brain_size").value * 1;
   brain_memory = document.getElementById("brain_memory").value * 1;
+  brain_learning = document.getElementById("brain_learning").value * 0.01;//convert % to fraction
+  sparsity = document.getElementById("sparsity").value * 0.01;
   
   brain_synapses = brains * brain_size;
   document.getElementById("brain_synapses").innerHTML = brain_synapses.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
@@ -183,7 +197,7 @@ function autocalc(){
   document.getElementById("active_memory").innerHTML = active_memory.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
   
   bridge_size = document.getElementById("bridge_size").value * 1;
-  bridges = 0.5*Math.pow(brains,2) - 0.5*brains;
+  bridges = 0.5*brains*(brains-1)*sparsity;
   document.getElementById("bridges").innerHTML = bridges.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
   
   relative_bridge_size = bridge_size / brain_size;
@@ -192,7 +206,7 @@ function autocalc(){
   bridges_synapses = bridges * bridge_size;
   document.getElementById("bridges_synapses").innerHTML = bridges_synapses.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
   
-  metabridges = 0.125*Math.pow(brains,4) - 0.25*Math.pow(brains,3) - 0.125*Math.pow(brains,2) + 0.25*brains;
+  metabridges = 0.5 * bridges * (bridges-1);
   document.getElementById("meta-bridges").innerHTML = metabridges.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
   
   metabridges_synapses = metabridges * bridge_size;
@@ -200,12 +214,23 @@ function autocalc(){
   
   total_synapses = brain_synapses + bridges_synapses + metabridges_synapses;
   document.getElementById("total_synapses").innerHTML = total_synapses.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  document.getElementById("brain_synapses_percentage").innerHTML = (100*brain_synapses/total_synapses).toFixed(3);
   
   computronium_memory = total_synapses * 16;
   document.getElementById("computronium_memory").innerHTML = computronium_memory.toExponential(3);
+  document.getElementById("computronium_memory_per_brain").innerHTML = (computronium_memory/brains).toExponential(3);
   
   computronium_fliprate = total_synapses * 1000 * 2748;
   document.getElementById("computronium_fliprate").innerHTML = computronium_fliprate.toExponential(3);
+  document.getElementById("computronium_fliprate_per_brain").innerHTML = (computronium_fliprate/brains).toExponential(3);
+  
+  direct_connections_per_brain = 2*bridges/brains;
+  expected_learning_rate = 1-Math.pow(1-brain_learning,direct_connections_per_brain+1);
+  document.getElementById("learning_rate").innerHTML = (100*expected_learning_rate).toFixed(2);//fraction back to %
+  
+  separation_bridges = Math.log(brains)/Math.log(direct_connections_per_brain);
+  document.getElementById("direct_connections").innerHTML = direct_connections_per_brain.toFixed(2);
+  document.getElementById("separation").innerHTML = separation_bridges.toFixed(2);
 }
 </script>
 
