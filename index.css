@@ -306,6 +306,11 @@ a.tip {
     cursor: help;
     position: relative;
 }
+span.tip:active{
+  display: inline-block;
+  min-width: 410px;
+  transition-delay: 5s;
+}
 
 .tip::after {
     content: attr(tip);
@@ -336,6 +341,10 @@ a.tip {
 .card .tip::after{ max-width: 200px; } /*tips attached to cards will be smaller to ensure that the tip does not go offscreen*/
 
 .tip:hover::after {
+    visibility: visible;
+    opacity: 1;
+}
+.tip:active::after {
     visibility: visible;
     opacity: 1;
 }

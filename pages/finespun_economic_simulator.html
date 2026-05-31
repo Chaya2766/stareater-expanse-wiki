@@ -103,6 +103,7 @@ If you directly edit them through the inspection menu, you will be directly chan
   <tr><td>post-electrolysis waste</td><td><span id="electrolysis_waste_kg">0</span> kg</td></tr>
   <tr><td>baked kamacite</td><td><span id="baked_kamacite_kg">0</span> kg</td></tr>
   <tr><td>kamacite bake</td><td><span id="kamacite_bake_kg">0</span> kg</td></tr>
+  <tr><td>dollar-equivalent currency</td><td><span id="DEC">1000000</span> $</td></tr>
 </table>
 
 <table class="styled left">
@@ -129,53 +130,98 @@ If you directly edit them through the inspection menu, you will be directly chan
 </table>
 
 <table class="styled left">
-  <tr><th colspan=4>Collected purified elements</th></tr>
-  <tr><th>Z</th><th>symbol</th><th>name</th><th>mass in storage</th></tr>
-  <tr><td>1</td><td>H</td><td>Hydrogen</td><td><span id="hydrogen_kg">0</span> kg</td></tr>
-  <tr><td>2</td><td>He</td><td>Helium</td><td><span id="helium_kg">0</span> kg</td></tr>
-  <tr><td>3</td><td>Li</td><td>Lithium</td><td><span id="lithium_kg">0</span> kg</td></tr>
-  <tr><td>4</td><td>Be</td><td>Beryllium</td><td><span id="beryllium_kg">0</span> kg</td></tr>
-  <tr><td>5</td><td>B</td><td>Boron</td><td><span id="boron_kg">0</span> kg</td></tr>
-  <tr><td>6</td><td>C</td><td>Carbon</td><td><span id="carbon_kg">0</span> kg</td></tr>
-  <tr><td>7</td><td>N</td><td>Nitrogen</td><td><span id="nitrogen_kg">0</span> kg</td></tr>
-  <tr><td>8</td><td>O</td><td>Oxygen</td><td><span id="oxygen_kg">0</span> kg</td></tr>
-  <tr><td>9</td><td>F</td><td>Fluorine</td><td><span id="fluorine_kg">0</span> kg</td></tr>
-  <tr><td>10</td><td>Ne</td><td>Neon</td><td><span id="neon_kg">0</span> kg</td></tr>
-  <tr><td>11</td><td>Na</td><td>Sodium</td><td><span id="sodium_kg">0</span> kg</td></tr>
-  <tr><td>12</td><td>Mg</td><td>Magnesium</td><td><span id="magnesium_kg">0</span> kg</td></tr>
-  <tr><td>13</td><td>Al</td><td>Aluminium</td><td><span id="aluminium_kg">0</span> kg</td></tr>
-  <tr><td>14</td><td>Si</td><td>Silicon</td><td><span id="silicon_kg">0</span> kg</td></tr>
-  <tr><td>15</td><td>P</td><td>Phosphorus</td><td><span id="phosphorus_kg">0</span> kg</td></tr>
-  <tr><td>16</td><td>S</td><td>Sulfur</td><td><span id="sulfur_kg">0</span> kg</td></tr>
-  <tr><td>17</td><td>Cl</td><td>Chlorine</td><td><span id="chlorine_kg">0</span> kg</td></tr>
-  <tr><td>18</td><td>Ar</td><td>Argon</td><td><span id="argon_kg">0</span> kg</td></tr>
-  <tr><td>19</td><td>K</td><td>Potassium</td><td><span id="potassium_kg">0</span> kg</td></tr>
-  <tr><td>20</td><td>Ca</td><td>Calcium</td><td><span id="calcium_kg">0</span> kg</td></tr>
-  <tr><td>21</td><td>Sc</td><td>Scandium</td><td><span id="scandium_kg">0</span> kg</td></tr>
-  <tr><td>22</td><td>Ti</td><td>Titanium</td><td><span id="titanium_kg">0</span> kg</td></tr>
-  <tr><td>23</td><td>Va</td><td>Vanadium</td><td><span id="vanadium_kg">0</span> kg</td></tr>
-  <tr><td>24</td><td>Cr</td><td>Chromium</td><td><span id="chromium_kg">0</span> kg</td></tr>
-  <tr><td>25</td><td>Mn</td><td>Manganese</td><td><span id="manganese_kg">0</span> kg</td></tr>
-  <tr><td>26</td><td>Fe</td><td>Iron</td><td><span id="iron_kg">0</span> kg</td></tr>
-  <tr><td>27</td><td>Co</td><td>Cobalt</td><td><span id="cobalt_kg">0</span> kg</td></tr>
-  <tr><td>28</td><td>Ni</td><td>Nickel</td><td><span id="nickel_kg">0</span> kg</td></tr>
-  <tr><td>29</td><td>Cu</td><td>Copper</td><td><span id="copper_kg">0</span> kg</td></tr>
-  <tr><td>30</td><td>Zn</td><td>Zinc</td><td><span id="zinc_kg">0</span> kg</td></tr>
-  <tr><td>31</td><td>Ga</td><td>Gallium</td><td><span id="gallium_kg">0</span> kg</td></tr>
-  <tr><td>32</td><td>Ge</td><td>Germanium</td><td><span id="germanium_kg">0</span> kg</td></tr>
-  <tr><td>33</td><td>As</td><td>Arsenic</td><td><span id="arsenic_kg">0</span> kg</td></tr>
-  <tr><td>34</td><td>Se</td><td>Selenium</td><td><span id="selenium_kg">0</span> kg</td></tr>
-  <tr><td>35</td><td>Br</td><td>Bromine</td><td><span id="bromine_kg">0</span> kg</td></tr>
-  <tr><td>36</td><td>Kr</td><td>Krypton</td><td><span id="krypton_kg">0</span> kg</td></tr>
-  <tr><td>37</td><td>Rb</td><td>Rubidium</td><td><span id="rubidium_kg">0</span> kg</td></tr>
-  <tr><td>38</td><td>Sr</td><td>Strontium</td><td><span id="strontium_kg">0</span> kg</td></tr>
-  <tr><td>39</td><td>Y</td><td>Yttrium</td><td><span id="yttrium_kg">0</span> kg</td></tr>
-  <tr><td>40</td><td>Zr</td><td>Zirconium</td><td><span id="zirconium_kg">0</span> kg</td></tr>
-  <tr><td>41</td><td>Nb</td><td>Niobium</td><td><span id="niobium_kg">0</span> kg</td></tr>
-  <tr><td>42</td><td>Mo</td><td>Molybdenum</td><td><span id="molybdenum_kg">0</span> kg</td></tr>
-  <tr><td>43</td><td>Tc</td><td>Technetium</td><td><span id="technetium_kg">0</span> kg</td></tr>
-  <tr><td>44</td><td>Ru</td><td>Ruthenium</td><td><span id="ruthenium_kg">0</span> kg</td></tr>
-  <tr><td>45</td><td>Rh</td><td>Rhodium</td><td><span id="rhodium_kg">0</span> kg</td></tr>
+  <tr><th colspan=7>Collected purified elements</th></tr>
+  <tr><th>Z</th><th>symbol</th><th>name</th><th>mass in storage</th><th><a href="https://en.wikipedia.org/w/index.php?title=Prices_of_chemical_elements&oldid=1352591840">price</a> ($/kg)</th><th>actions</th></tr>
+  <tr><td>1</td><td>H</td><td>Hydrogen</td><td><span id="hydrogen_kg">0</span> kg</td>
+  <td id="hydrogen_price">1.39</td><td><input value="buy" size=2 type="button" onclick="buy_element('hydrogen')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('hydrogen')"></input>1kg</td></tr>
+  <tr><td>2</td><td>He</td><td>Helium</td><td><span id="helium_kg">0</span> kg</td>
+  <td id="helium_price">24.0</td><td><input value="buy" size=2 type="button" onclick="buy_element('helium')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('helium')"></input>1kg</td></tr>
+  <tr><td>3</td><td>Li</td><td>Lithium</td><td><span id="lithium_kg">0</span> kg</td>
+  <td id="lithium_price">83.5</td><td><input value="buy" size=2 type="button" onclick="buy_element('lithium')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('lithium')"></input>1kg</td></tr>
+  <tr><td>4</td><td>Be</td><td>Beryllium</td><td><span id="beryllium_kg">0</span> kg</td>
+  <td id="beryllium_price">857</td><td><input value="buy" size=2 type="button" onclick="buy_element('beryllium')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('beryllium')"></input>1kg</td></tr>
+  <tr><td>5</td><td>B</td><td>Boron</td><td><span id="boron_kg">0</span> kg</td>
+  <td id="boron_price">3.68</td><td><input value="buy" size=2 type="button" onclick="buy_element('boron')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('boron')"></input>1kg</td></tr>
+  <tr><td>6</td><td>C</td><td>Carbon</td><td><span id="carbon_kg">0</span> kg</td>
+  <td id="carbon_price">0.122</td><td><input value="buy" size=2 type="button" onclick="buy_element('carbon')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('carbon')"></input>1kg</td></tr>
+  <tr><td>7</td><td>N</td><td>Nitrogen</td><td><span id="nitrogen_kg">0</span> kg</td>
+  <td id="nitrogen_price">0.140</td><td><input value="buy" size=2 type="button" onclick="buy_element('nitrogen')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('nitrogen')"></input>1kg</td></tr>
+  <tr><td>8</td><td>O</td><td>Oxygen</td><td><span id="oxygen_kg">0</span> kg</td>
+  <td id="oxygen_price">0.001</td><td><input value="buy" size=2 type="button" onclick="buy_element('oxygen')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('oxygen')"></input>1kg</td></tr>
+  <tr><td>9</td><td>F</td><td>Fluorine</td><td><span id="fluorine_kg">0</span> kg</td>
+  <td id="fluorine_price">2.0</td><td><input value="buy" size=2 type="button" onclick="buy_element('fluorine')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('fluorine')"></input>1kg</td></tr>
+  <tr><td>10</td><td>Ne</td><td>Neon</td><td><span id="neon_kg">0</span> kg</td>
+  <td id="neon_price">240</td><td><input value="buy" size=2 type="button" onclick="buy_element('neon')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('neon')"></input>1kg</td></tr>
+  <tr><td>11</td><td>Na</td><td>Sodium</td><td><span id="sodium_kg">0</span> kg</td>
+  <td id="sodium_price">3.0</td><td><input value="buy" size=2 type="button" onclick="buy_element('sodium')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('sodium')"></input>1kg</td></tr>
+  <tr><td>12</td><td>Mg</td><td>Magnesium</td><td><span id="magnesium_kg">0</span> kg</td>
+  <td id="magnesium_price">2.32</td><td><input value="buy" size=2 type="button" onclick="buy_element('magnesium')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('magnesium')"></input>1kg</td></tr>
+  <tr><td>13</td><td>Al</td><td>Aluminium</td><td><span id="aluminium_kg">0</span> kg</td>
+  <td id="aluminium_price">1.79</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <tr><td>14</td><td>Si</td><td>Silicon</td><td><span id="silicon_kg">0</span> kg</td>
+  <td id="silicon_price">1.70</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <tr><td>15</td><td>P</td><td>Phosphorus</td><td><span id="phosphorus_kg">0</span> kg</td>
+  <td id="phosphorus_price">2.69</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <tr><td>16</td><td>S</td><td>Sulfur</td><td><span id="sulfur_kg">0</span> kg</td>
+  <td id="sulfur_price">0.0926</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <tr><td>17</td><td>Cl</td><td>Chlorine</td><td><span id="chlorine_kg">0</span> kg</td>
+  <td id="chlorine_price">0.082</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <tr><td>18</td><td>Ar</td><td>Argon</td><td><span id="argon_kg">0</span> kg</td>
+  <td id="argon_price">0.931</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <tr><td>19</td><td>K</td><td>Potassium</td><td><span id="potassium_kg">0</span> kg</td>
+  <td id="potassium_price">12.85</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <tr><td>20</td><td>Ca</td><td>Calcium</td><td><span id="calcium_kg">0</span> kg</td>
+  <td id="calcium_price">2.28</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <tr><td>21</td><td>Sc</td><td>Scandium</td><td><span id="scandium_kg">0</span> kg</td>
+  <td id="scandium_price">3460</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <tr><td>22</td><td>Ti</td><td>Titanium</td><td><span id="titanium_kg">0</span> kg</td>
+  <td id="titanium_price">11.4</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <tr><td>23</td><td>Va</td><td>Vanadium</td><td><span id="vanadium_kg">0</span> kg</td>
+  <td id="vanadium_price">371</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <tr><td>24</td><td>Cr</td><td>Chromium</td><td><span id="chromium_kg">0</span> kg</td>
+  <td id="chromium_price">9.40</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <tr><td>25</td><td>Mn</td><td>Manganese</td><td><span id="manganese_kg">0</span> kg</td>
+  <td id="manganese_price">1.82</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <tr><td>26</td><td>Fe</td><td>Iron</td><td><span id="iron_kg">0</span> kg</td>
+  <td id="iron_price">0.424</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <tr><td>27</td><td>Co</td><td>Cobalt</td><td><span id="cobalt_kg">0</span> kg</td>
+  <td id="cobalt_price">32.8</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <tr><td>28</td><td>Ni</td><td>Nickel</td><td><span id="nickel_kg">0</span> kg</td>
+  <td id="nickel_price">13.9</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <tr><td>29</td><td>Cu</td><td>Copper</td><td><span id="copper_kg">0</span> kg</td>
+  <td id="copper_price">6.0</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <tr><td>30</td><td>Zn</td><td>Zinc</td><td><span id="zinc_kg">0</span> kg</td>
+  <td id="zinc_price">2.55</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <tr><td>31</td><td>Ga</td><td>Gallium</td><td><span id="gallium_kg">0</span> kg</td>
+  <td id="gallium_price">148</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <tr><td>32</td><td>Ge</td><td>Germanium</td><td><span id="germanium_kg">0</span> kg</td>
+  <td id="germanium_price">962</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <tr><td>33</td><td>As</td><td>Arsenic</td><td><span id="arsenic_kg">0</span> kg</td>
+  <td id="arsenic_price">1.1545</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <tr><td>34</td><td>Se</td><td>Selenium</td><td><span id="selenium_kg">0</span> kg</td>
+  <td id="_price">X</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <tr><td>35</td><td>Br</td><td>Bromine</td><td><span id="bromine_kg">0</span> kg</td>
+  <td id="_price">X</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <tr><td>36</td><td>Kr</td><td>Krypton</td><td><span id="krypton_kg">0</span> kg</td>
+  <td id="_price">X</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <tr><td>37</td><td>Rb</td><td>Rubidium</td><td><span id="rubidium_kg">0</span> kg</td>
+  <td id="_price">X</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <tr><td>38</td><td>Sr</td><td>Strontium</td><td><span id="strontium_kg">0</span> kg</td>
+  <td id="_price">X</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <tr><td>39</td><td>Y</td><td>Yttrium</td><td><span id="yttrium_kg">0</span> kg</td>
+  <td id="_price">X</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <tr><td>40</td><td>Zr</td><td>Zirconium</td><td><span id="zirconium_kg">0</span> kg</td>
+  <td id="_price">X</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <tr><td>41</td><td>Nb</td><td>Niobium</td><td><span id="niobium_kg">0</span> kg</td>
+  <td id="_price">X</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <tr><td>42</td><td>Mo</td><td>Molybdenum</td><td><span id="molybdenum_kg">0</span> kg</td>
+  <td id="_price">X</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <tr><td>43</td><td>Tc</td><td>Technetium</td><td><span id="technetium_kg">0</span> kg</td>
+  <td id="_price">X</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <tr><td>44</td><td>Ru</td><td>Ruthenium</td><td><span id="ruthenium_kg">0</span> kg</td>
+  <td id="_price">X</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <tr><td>45</td><td>Rh</td><td>Rhodium</td><td><span id="rhodium_kg">0</span> kg</td>
+  <td id="_price">X</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
   <tr><td>46</td><td>Pd</td><td>Palladium</td><td><span id="palladium_kg">0</span> kg</td></tr>
   <tr><td>47</td><td>Ag</td><td>Silver</td><td><span id="silver_kg">0</span> kg</td></tr>
   <tr><td>48</td><td>Cd</td><td>Cadmium</td><td><span id="cadmium_kg">0</span> kg</td></tr>
@@ -448,6 +494,40 @@ function build_concentrated_solar_array(m){//m is the number of arrays to be bui
     if(E<489788*m){ document.getElementById("last_action").innerHTML += "missing "+parseInt(1E+9*m - E).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")+" joules of energy.<br>";}
     if(total_kamacite<610598.475*m){ document.getElementById("last_action").innerHTML += "missing "+parseInt(610598.475*m - total_kamacite).toString()+" kg of kamacite. This counts the combined total of fresh kamacite and baked kamacite.<br>";}
     if(tiles<7445*m){ document.getElementById("last_action").innerHTML += "missing "+parseInt(7445*m - tiles).toString()+" solar tiles.<br>";}
+  }
+}
+
+function sell_element(name, amount=1){
+  T = Math.floor(document.getElementById("epoch_time").innerHTML.replace(/\s/g, '') * 1);
+  document.getElementById("last_action").innerHTML = "time "+T.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")+" - sell "+(amount).toString()+" kg of "+name+"<br>";
+  
+  currently_have = document.getElementById(name+"_kg").innerHTML * 1.0;
+  element_price = document.getElementById(name+"_price").innerHTML * 1.0;
+  money_now = document.getElementById("DEC").innerHTML * 1.0;
+  if(currently_have >= amount){
+    document.getElementById(name+"_kg").innerHTML = currently_have - amount;
+    document.getElementById("DEC").innerHTML = money_now + (amount * element_price);
+    
+    document.getElementById("last_action").innerHTML += "successfully sold "+amount+" kg of "+name+" for "+(amount*element_price)+" DEC<br>";
+  } else {
+    document.getElementById("last_action").innerHTML += "could not sell, not enough mass in storage<br>";
+  }
+}
+
+function buy_element(name, amount=1){
+  T = Math.floor(document.getElementById("epoch_time").innerHTML.replace(/\s/g, '') * 1);
+  document.getElementById("last_action").innerHTML = "time "+T.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")+" - buy "+(amount).toString()+" kg of "+name+"<br>";
+  
+  currently_have = document.getElementById(name+"_kg").innerHTML * 1.0;
+  element_price = document.getElementById(name+"_price").innerHTML * 1.0;
+  money_now = document.getElementById("DEC").innerHTML * 1.0;
+  if(money_now >= amount * element_price){
+    document.getElementById("DEC").innerHTML = money_now - (amount * element_price);
+    document.getElementById(name+"_kg").innerHTML = currently_have + amount;
+    
+    document.getElementById("last_action").innerHTML += "successfully bought "+amount+" kg of "+name+" for "+(amount*element_price)+" DEC<br>";
+  } else {
+    document.getElementById("last_action").innerHTML += "could not buy, not enough currency<br>";
   }
 }
 
