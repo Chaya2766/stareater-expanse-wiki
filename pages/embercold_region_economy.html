@@ -1,0 +1,282 @@
+<head>
+ <link rel="stylesheet" href="../index.css"></link>
+</head>
+<html class="background2" id="page">
+<a style="float: right;" target="_blank" href="../index.html?page=pages/embercold_region_economy.html">link to this page</a>
+
+<h1>Economic data for the Embercold Region</h1>
+<hr>
+
+<img src="../images/embercold_region.webp" class="basics"></img>
+<article class="basics">
+This page lists numerical information regarding the <a href="embercold_region.html">Embercold Region</a>'s economy, particularly prices of chosen goods.
+</article>
+<hr>
+
+<h1>Currency units</h1>
+<article>
+The unit of $e is specifically the dollar value adjusted for inflation to 2017 level.
+Although the choice is very arbitrary, it adequately simplifies working with currency and monetary value for mathematical purposes, particularly because of <a href="../documents/third_millenium_exponential_growth/third_millenium_exponential_growth.pdf">this document</a>.
+Note that this is just a way to convey monetary value consistently and not an actual in-world currency.
+<br><br>
+Dollar price to $e converter:<br>
+price of <input type="number" id="input_price" oninput="deq_calc()"></input> dollars in year <input type="number" id="price_year" oninput="deq_calc()"></input> corresponds to <span id="output_price">?.???</span> $e.
+</article>
+
+<script>
+function deq_calc(){
+  //table of [year,$ to $e factor] for use as conversion
+  //1$ in a given year multiplied by the $ to $e factor gives the $e, or equivalently the dollar value in 2017
+  conversion = [
+    [1913,24.76],
+    [1914,24.51],
+    [1915,24.27],
+    [1916,22.49],
+    [1917,19.15],
+    [1918,16.23],
+    [1919,14.17],
+    [1920,12.26],
+    [1921,13.69],
+    [1922,14.59],
+    [1923,14.33],
+    [1924,14.33],
+    [1925,14.01],
+    [1926,13.85],
+    [1927,14.09],
+    [1928,14.33],
+    [1929,14.33],
+    [1930,14.68],
+    [1931,16.13],
+    [1932,17.89],
+    [1933,18.86],
+    [1934,18.29],
+    [1935,17.89],
+    [1936,17.63],
+    [1937,17.02],
+    [1938,17.38],
+    [1939,17.63],
+    [1940,17.51],
+    [1941,16.67],
+    [1942,15.04],
+    [1943,14.17],
+    [1944,13.93],
+    [1945,13.62],
+    [1946,12.57],
+    [1947,10.99],
+    [1948,10.17],
+    [1949,10.30],
+    [1950,10.17],
+    [1951,9.43],
+    [1952,9.25],
+    [1953,9.18],
+    [1954,9.11],
+    [1955,9.15],
+    [1956,9.01],
+    [1957,8.72],
+    [1958,8.48],
+    [1959,8.42],
+    [1960,8.28],
+    [1961,8.20],
+    [1962,8.12],
+    [1963,8.01],
+    [1964,7.91],
+    [1965,7.78],
+    [1966,7.57],
+    [1967,7.34],
+    [1968,7.04],
+    [1969,6.68],
+    [1970,6.32],
+    [1971,6.05],
+    [1972,5.86],
+    [1973,5.52],
+    [1974,4.97],
+    [1975,4.56],
+    [1976,4.31],
+    [1977,4.04],
+    [1978,3.76],
+    [1979,3.38],
+    [1980,2.97],
+    [1981,2.70],
+    [1982,2.54],
+    [1983,2.46],
+    [1984,2.36],
+    [1985,2.28],
+    [1986,2.24],
+    [1987,2.16],
+    [1988,2.07],
+    [1989,1.98],
+    [1990,1.88],
+    [1991,1.80],
+    [1992,1.75],
+    [1993,1.70],
+    [1994,1.65],
+    [1995,1.61],
+    [1996,1.56],
+    [1997,1.53],
+    [1998,1.50],
+    [1999,1.47],
+    [2000,1.42],
+    [2001,1.38],
+    [2002,1.36],
+    [2003,1.33],
+    [2004,1.30],
+    [2005,1.26],
+    [2006,1.22],
+    [2007,1.18],
+    [2008,1.14],
+    [2009,1.14],
+    [2010,1.12],
+    [2011,1.09],
+    [2012,1.07],
+    [2013,1.05],
+    [2014,1.04],
+    [2015,1.03],
+    [2016,1.02],
+    [2017,1.00],
+    [2018,0.98],
+    [2019,0.96],
+    [2020,0.95],
+    [2021,0.90],
+    [2022,0.84],
+    [2023,0.80],
+    [2024,0.78],
+    [2025,0.76]
+  ];
+  
+  input_price = document.getElementById('input_price').value * 1;
+  price_year = parseInt(document.getElementById('price_year').value);
+  output_price = "[no data for that year]";
+  
+  for(var i = 0; i < conversion.length; i++){
+    if(conversion[i][0] == price_year){
+      output_price = conversion[i][1] * input_price;
+      break;
+    }
+  }
+  document.getElementById('output_price').innerHTML = output_price;
+}
+</script>
+
+<h1>Prices of elements and isotopes</h1>
+<article>
+"bulk" is a general reference price for the element, typically meaning 99% purity achieved by chemical refining.
+<span class="meta">These are just the prices from the "<a href="https://en.wikipedia.org/wiki/Prices_of_chemical_elements"></a>" wikipedia page, adjusted for inflation to 2017. Any that were given as a range are put in as the middle of that range.</span>
+<br>
+"pure" means purified sufficiently for semiconductor and quantum applications, ie. typically 99.9999999% purity or better (contaminated by less than 1 part per billion), achieved by various means but likely calutron separation.
+<span class="meta">Prices for pure silicon and arsenic were grabbed from <a href="https://criticalstrategicmetals.com">critical strategic metals</a> (2025 prices), and for others in this category due to lacking data they are simply 671.426 times higher than the bulk price (a similar price increase as in silicon and arsenic).</span>
+<br>
+<span class="meta">Abundance in asteroid material is just the "abundance in meteor" parameter from <a href="https://ptable.com/#Properties/Abundance/Meteor">Ptable</a> but normalized so that when summed across all elements it adds up to 1.</span>
+<br>
+A note about the elements which are not available in asteroids at all - at least some of them are available in vast quantities from starlifting of the sun, thus their lack of local natural availability does not result in astronomical prices.
+</article>
+<table class="styled">
+  <tr><th colspan=5>Average prices and abundance of elements in the embercold region</th></tr>
+  <tr><th>Z</th><th>name</th><th>frac. asteroid mass (kg/kg)</th><th>bulk ($e/kg)</th><th>pure ($e/kg)</th></tr>
+  <tr><td>1</td><td>hydrogen</td><td>2.379700369E-02</td><td>1.4873</td><td>988.612</td></tr>
+  <tr><td>2</td><td>helium</td><td>0</td><td>23.52</td><td>15 791.94</td></tr>
+  <tr><td>3</td><td>lithium</td><td>1.685621094E-06</td><td>79.325</td><td>53 260.867</td></tr>
+  <tr><td>4</td><td>beryllium</td><td>2.875471279E-08</td><td>814.15</td><td>546 641.478</td></tr>
+  <tr><td>5</td><td>boron</td><td>1.586466912E-06</td><td>3.5328</td><td>2 372.014</td></tr>
+  <tr><td>6</td><td>carbon</td><td>1.487312730E-02</td><td>0.11956</td><td>80.275</td></tr>
+  <tr><td>7</td><td>nitrogen</td><td>1.388158548E-03</td><td>0.1932</td><td>129.72</td></tr>
+  <tr><td>8</td><td>oxygen</td><td>3.966167281E-01</td><td>0.21252</td><td>142.7</td></tr>
+  <tr><td>9</td><td>fluorine</td><td>8.626413836E-05</td><td>2</td><td>1 342.852</td></tr>
+  <tr><td>10</td><td>neon</td><td>0</td><td>352.8</td><td>236 879.093</td></tr>
+  <tr><td>11</td><td>sodium</td><td>5.453480011E-03</td><td>2.85</td><td>1 913.564</td></tr>
+  <tr><td>12</td><td>magnesium</td><td>1.189850184E-01</td><td>2.2272</td><td>1 495.4</td></tr>
+  <tr><td>13</td><td>aluminium</td><td>9.023030564E-03</td><td>1.7184</td><td>1 153.778</td></tr>
+  <tr><td>14</td><td>silicon</td><td>1.388158548E-01</td><td>1.632</td><td>777.936</td></tr>
+  <tr><td>15</td><td>phosphorus</td><td>1.090696002E-03</td><td>2.5824</td><td>1 733.891</td></tr>
+  <tr><td>16</td><td>sulfur</td><td>3.966167281E-02</td><td>0.088896</td><td>59.687</td></tr>
+  <tr><td>17</td><td>chlorine</td><td>3.668704735E-04</td><td>0.0861</td><td>57.81</td></tr>
+  <tr><td>18</td><td>argon</td><td>0</td><td>0.89376</td><td>600</td></tr>
+  <tr><td>19</td><td>potassium</td><td>6.940792742E-04</td><td>12.2075</td><td>8 196.433</td></tr>
+  <tr><td>20</td><td>calcium</td><td>1.090696002E-02</td><td>2.166</td><td>1 454.309</td></tr>
+  <tr><td>21</td><td>scandium</td><td>6.345867650E-06</td><td>3287</td><td>2 206 977.262</td></tr>
+  <tr><td>22</td><td>titanium</td><td>5.354325829E-04</td><td>10.83</td><td>7 271.544</td></tr>
+  <tr><td>23</td><td>vanadium</td><td>6.048405104E-05</td><td>352.45</td><td>236 644.094</td></tr>
+  <tr><td>24</td><td>chromium</td><td>2.974625461E-03</td><td>9.024</td><td>6 058.948</td></tr>
+  <tr><td>25</td><td>manganese</td><td>2.677162915E-03</td><td>1.7472</td><td>1 173.116</td></tr>
+  <tr><td>26</td><td>iron</td><td>2.181392005E-01</td><td>0.4028</td><td>270.45</td></tr>
+  <tr><td>27</td><td>cobalt</td><td>5.850096740E-04</td><td>31.488</td><td>21 141.862</td></tr>
+  <tr><td>28</td><td>nickel</td><td>1.289004366E-02</td><td>13.344</td><td>8 959.509</td></tr>
+  <tr><td>29</td><td>copper</td><td>1.090696002E-04</td><td>5.76</td><td>3 867.414</td></tr>
+  <tr><td>30</td><td>zinc</td><td>1.784775276E-04</td><td>2.448</td><td>1 643.651</td></tr>
+  <tr><td>31</td><td>gallium</td><td>7.535717834E-06</td><td>142.08</td><td>95396.206</td></tr>
+  <tr><td>32</td><td>germanium</td><td>2.082237823E-05</td><td>913.9</td><td>613 616.221</td></tr>
+  <tr><td>33</td><td>arsenic</td><td>1.784775276E-06</td><td>1.096775</td><td>950</td></tr>
+  <tr><td>34</td><td>selenium</td><td>1.289004366E-05</td><td>20.544</td><td>13 793.776</td></tr>
+  <tr><td>35</td><td>bromine</td><td>1.189850184E-06</td><td>4.2144</td><td>2 829.658</td></tr>
+  <tr><td>36</td><td>krypton</td><td>0</td><td>426.3</td><td>286 228.9</td></tr>
+  <tr><td>37</td><td>rubidium</td><td>3.172933825E-06</td><td>15 190</td><td>10 198 960.94</td></tr>
+  <tr><td>38</td><td>strontium</td><td>8.626413836E-06</td><td>6.3408</td><td>4 257.378</td></tr>
+  <tr><td>39</td><td>yttrium</td><td>1.883929459E-06</td><td>29.76</td><td>19 981.638</td></tr>
+  <tr><td>40</td><td>zirconium</td><td>6.544176014E-06</td><td>34.58</td><td>23 217.911</td></tr>
+  <tr><td>41</td><td>niobium</td><td>1.883929459E-07</td><td>69.825</td><td>46 882.32</td></tr>
+  <tr><td>42</td><td>molybdenum</td><td>1.189850184E-06</td><td>38.496</td><td>25 847.215</td></tr>
+  <tr><td>43</td><td>technetium</td><td>0</td><td>130 000</td><td><span class="tip" tip="Even a sample of initially perfectly pure technetium-98 with a half life of 4.2e6 years would decay fast enough that after just 192 kiloseconds (&approx; 2 days + 5 hours) it would have more than one part per billion of contamination, thus it is maybe not literally impossible but even if you managed to create it, it would not last long enough to get shipped anywhere. If you ever need quantum-grade technetium for anything, maybe the great composite minds can figure it out, the price might be correspondingly astronomical.">not possible</span></td></tr>
+  <tr><td>44</td><td>ruthenium</td><td>8.031488744E-07</td><td>9 975</td><td>6 697 474.35</td></tr>
+  <tr><td>45</td><td>rhodium</td><td>1.784775276E-07</td><td>141 120</td><td>94 751 637.12</td></tr>
+  <tr><td>46</td><td>palladium</td><td>6.544176014E-07</td><td>47 520</td><td>31 906 163.52</td></tr>
+  <tr><td>47</td><td>silver</td><td>1.388158548E-07</td><td>500.16</td><td>335 820.428</td></tr>
+  <tr><td>48</td><td>cadmium</td><td>4.362784009E-07</td><td>2.6208</td><td>1 759.673</td></tr>
+  <tr><td>49</td><td>indium</td><td>4.362784009E-08</td><td>160.32</td><td>107 643.016</td></tr>
+  <tr><td>50</td><td>tin</td><td>1.189850184E-06</td><td>17.952</td><td>12 053.44</td></tr>
+  <tr><td>51</td><td>antimony</td><td>1.189850184E-07</td><td>5.5584</td><td>3 732.054</td></tr>
+  <tr><td>52</td><td>tellurium</td><td>2.082237823E-06</td><td>60.96</td><td>40 930.129</td></tr>
+  <tr><td>53</td><td>iodine</td><td>2.478854551E-07</td><td>33.6</td><td>22 559.914</td></tr>
+  <tr><td>54</td><td>xenon</td><td>0</td><td>2 646</td><td>1 776 593.196</td></tr>
+  <tr><td>55</td><td>caesium</td><td>1.388158548E-07</td><td>60 564</td><td>40 664 244.26</td></tr>
+  <tr><td>56</td><td>barium</td><td>2.677162915E-06</td><td>0.26571</td><td>178.405</td></tr>
+  <tr><td>57</td><td>lanthanium</td><td>2.776317097E-07</td><td>4.6075</td><td>3 093.595</td></tr>
+  <tr><td>58</td><td>cerium</td><td>7.436563652E-07</td><td>4.408</td><td>2 959.646</td></tr>
+  <tr><td>59</td><td>praseodymium</td><td>9.717109839E-08</td><td>98.88</td><td>66 390.603</td></tr>
+  <tr><td>60</td><td>neodymium</td><td>4.957709101E-07</td><td>55.2</td><td>37 062.715</td></tr>
+  <!--<tr><td>61</td><td>promethium</td><td>0</td><td>611 800</td><td>410 778 426.8</td></tr> radioactive, also the wikipedia page specified promethium-147 not just generally promethium -->
+  <tr><td>61</td><td>promethium</td><td>0</td><td>not reliable</td><td>not possible</td></tr>
+  <tr><td>62</td><td>samarium</td><td>1.685621094E-07</td><td>13.344</td><td>8 959.509</td></tr>
+  <tr><td>63</td><td>europium</td><td>5.850096740E-08</td><td>29.83</td><td>20 028.638</td></tr>
+  <tr><td>64</td><td>gadolinium</td><td>2.280546187E-07</td><td>27.17</td><td>18 242.644</td></tr>
+  <tr><td>65</td><td>terbium</td><td>3.867013099E-08</td><td>631.68</td><td>424 126.376</td></tr>
+  <tr><td>66</td><td>dysprosium</td><td>2.677162915E-07</td><td>294.72</td><td>197 882.67</td></tr>
+  <tr><td>67</td><td>holmium</td><td>5.850096740E-08</td><td>54.245</td><td>36 421.503</td></tr>
+  <tr><td>68</td><td>erbium</td><td>1.784775276E-07</td><td>25.08</td><td>16 839.364</td></tr>
+  <tr><td>69</td><td>thulium</td><td>2.875471279E-08</td><td>3 990</td><td>2 678 989.74</td></tr>
+  <tr><td>70</td><td>ytterbium</td><td>1.784775276E-07</td><td>16.245</td><td>10 907.315</td></tr>
+  <tr><td>71</td><td>lutetium</td><td>2.875471279E-08</td><td>610.85</td><td>410 140.572</td></tr>
+  <tr><td>72</td><td>hafnium</td><td>1.685621094E-07</td><td>900</td><td>604 283.4</td></tr>
+  <tr><td>73</td><td>tantalum</td><td>1.983083641E-08</td><td>292.8</td><td>196 593.533</td></tr>
+  <tr><td>74</td><td>tungsten</td><td>1.189850184E-07</td><td>33.888</td><td>22 753.284</td></tr>
+  <tr><td>75</td><td>rhenium</td><td>4.858554919E-08</td><td>3 401</td><td>2 283 519.826</td></tr>
+  <tr><td>76</td><td>osmium</td><td>6.544176014E-07</td><td>22 800</td><td>15 308 512.8</td></tr>
+  <tr><td>77</td><td>iridium</td><td>5.354325829E-07</td><td>109 440</td><td>73 480 861.44</td></tr>
+  <tr><td>78</td><td>platinum</td><td>9.717109839E-07</td><td>26 688</td><td>17 919 017.09</td></tr>
+  <tr><td>79</td><td>gold</td><td>1.685621094E-07</td><td>58 835.4</td><td>39 503 617.28</td></tr>
+  <tr><td>80</td><td>mercury</td><td>2.478854551E-07</td><td>30.2</td><td>20 277.065</td></tr>
+  <tr><td>81</td><td>thallium</td><td>7.734026198E-08</td><td>4 200</td><td>2 819 989.2</td></tr>
+  <tr><td>82</td><td>lead</td><td>1.388158548E-06</td><td>1.92</td><td>1 289.138</td></tr>
+  <tr><td>83</td><td>bismuth</td><td>6.841638560E-08</td><td>6.1056</td><td>4 099.459</td></tr>
+  <tr><td>84</td><td>polonium</td><td>0</td><td>not reliable</td><td>-</td></tr>
+  <tr><td>85</td><td>astatine</td><td>0</td><td>not reliable</td><td>-</td></tr>
+  <tr><td>86</td><td>radon</td><td>0</td><td>not reliable</td><td>-</td></tr>
+  <tr><td>87</td><td>francium</td><td>0</td><td>not reliable</td><td>-</td></tr>
+  <tr><td>88</td><td>radium</td><td>0</td><td>not reliable</td><td>-</td></tr>
+  <tr><td>89</td><td>actinium</td><td>0</td><td>not reliable</td><td>-</td></tr>
+  <tr><td>90</td><td>thorium</td><td>3.867013099E-08</td><td>321.44</td><td>-</td></tr>
+  <tr><td>91</td><td>protactinium</td><td>0</td><td>not reliable</td><td>-</td></tr>
+  <tr><td>92</td><td>uranium</td><td>9.717109839E-09</td><td>98.98</td><td>-</td></tr>
+  <tr><td>93</td><td>neptunium</td><td>0</td><td>877 800</td><td>-</td></tr>
+  <tr><td>94</td><td>plutonium</td><td>0</td><td>not reliable</td><td>-</td></tr>
+  <tr><td>95</td><td>americium</td><td>0</td><td>-</td><td>-</td></tr>
+  <tr><td>96</td><td>curium</td><td>0</td><td>-</td><td>-</td></tr>
+  <tr><td>97</td><td>berkelium</td><td>0</td><td>-</td><td>-</td></tr>
+  <tr><td>98</td><td>californium</td><td>0</td><td>-</td><td>-</td></tr>
+  <tr><td>99</td><td>einsteinium</td><td>0</td><td>-</td><td>-</td></tr>
+  <tr><td>100</td><td>fermium</td><td>0</td><td>-</td><td>-</td></tr>
+  <tr><td>101</td><td>mendelevium</td><td>0</td><td>-</td><td>-</td></tr>
+  <tr><td>102</td><td>nobelium</td><td>0</td><td>-</td><td>-</td></tr>
+  <tr><td>103</td><td>lawrencium</td><td>0</td><td>-</td><td>-</td></tr>
+  <tr><td>104</td><td>ruthenfordium</td><td>0</td><td>-</td><td>-</td></tr>
+</table>
+
+</html>
