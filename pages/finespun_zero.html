@@ -1,0 +1,118 @@
+<head>
+ <link rel="stylesheet" href="../index.css"></link>
+</head>
+<html class="background2">
+
+<article class="warning">page is work in progress</article>
+
+<a style="float: right;" target="_blank" href="../index.html?page=pages/finespun_one.html">link to this page</a>
+<h1>Finespun Zero habitat</h1>
+<hr>
+<img src="../images/finespun_zero.webp" class="basics"></img>
+<article class="basics">
+Finespun Zero is a minimum viable habitat design used at the <a href="finespun.html">Finespun</a> mining settlement.
+</article>
+
+<hr>
+
+<table class="styled right">
+<tbody><tr><th colspan="2">summary habitat data table</th></tr>
+<tr>
+  <td>Habitat radius</td>
+  <td id="table_hab_radius">edge: 110 m, floor: 100m, runway: 90m</td>
+</tr>
+<tr>
+  <td>Habitat length</td>
+  <td id="table_hab_length">20 m</td>
+</tr>
+<tr>
+  <td class="tip" tip="Amount of mass per area of hull, relevant to radiation shielding. At 10 000 kg/m^2 the habitat hull provides radiation shielding equivalent to earth's atmosphere.">Aerial density</td>
+  <td id="table_hab_aerial_density">79kg/m<sup>2</sup></td>
+</tr>
+<tr>
+  <td>Structural mass</td>
+  <td id="table_hab_mass">6 762 526.4 kg</td>
+  <!Calculated by multiplying the structural volume below by the 7900kg/m^3 density of kamacite>
+</tr>
+<tr>
+  <td>Structural volume</td>
+  <td>856.016m<sup>3</sup></td>
+  <!Calculated by exporting model from OpenSCAD as STL and putting it into Orca Slicer which returned "1.04577e+12mm^3">
+  <!I later decided to scale up the hull thickness from 0.01m to 0.1m due to bending too much under pressure>
+</tr>
+<tr>
+  <td>Presurized internal volume</td>
+  <td id="table_hab_volume">197 392.088 m<sup>3</sup></td>
+</tr>
+<tr>
+  <td>Hull thickness</td>
+  <td id="table_hab_hull_thickness">0.01 m</td>
+</tr>
+<tr>
+  <td>Provided centrifugal gravity</td>
+  <td id="table_hab_gravity">4m/s<sup>2</sup> at floor, 3.6m/s<sup>2</sup> at runway</td>
+</tr>
+<tr>
+  <td>Internal atmospheric pressure</td>
+  <td id="table_hab_pressure">21 000 Pa (0.207 atm )</td>
+</tr>
+<tr>
+  <td>Provided living area</td>
+  <td id="table_hab_useable_area">75 398.224 m<sup>2</sup></td>
+</tr>
+<tr>
+  <td>Time to complete a rotation</td>
+  <td id="table_hab_rotation_time">31.415 s</td>
+</tr>
+<tr>
+  <td class="tip" tip="the number of times that the stress in the habitat would have to increase above what is already caused by its own rotation before it breaks - if the safety factor of a habitat is 3, that would mean the stress that it experiences from its own rotation and rated atmospheric pressure is 3 times less than what is required to break it">Safety factor</td>
+  <td id="table_hab_safety_factor">9.52 @ 0.2atm, 1.974 @ 1atm</td>
+</tr>
+<tr><th colspan=2>hull material: <a href="ftt_low_temperature_electrolysis.html">electrolytic asteroidal kamacite</a></ht></tr>
+  <tr><td>Density</td><td>7900kg/m<sup>3</sup></td></tr>
+  <tr><td>Yield strength</td><td class="tip" tip="this had not been verified. Sources for the yield strength of Kamacite are difficult to find. Until I have a source I just use the assumption that it is like wrought iron.">200MPa</td></tr>
+</tbody></table>
+
+
+<h1>Structure</h1>
+<article>
+<img src="../images/finespun_zero_floor.webp" class="styled left cardsize"></img>
+Finespun Zero uses a torus-shaped hull, whose cross-section is split in half by the floor, providing the inner half of the torus as living space and the outer half as system space for such purposes as power distribution, computation, energy storage, door opening mechanisms, underfloor heating, and also the place to keep and use industrial equipment.
+
+</article>
+
+<br class="division">
+
+<h1>Internal environment</h1>
+<article>
+The internal atmosphere is 21kPa of pure oxygen, which delivers the exact same amount of oxygen as standard terran air at standard terran pressure but with none of the other gasses, most notably nitrogen.
+The oxygen is notably not actually necessary for habitability as majority of the time there are no organics onboard the habitat, but as a byproduct of metal refining it is the most easily available gas produced locally, and it provides the necessary pressure to keep water liquid for <a href="ftt_low_temperature_electrolysis.html">low temperature electrolysis</a> of asteroid regolith.
+<br><br>
+Temperature is vaguely kept some safe margin away from freezing as a necessity for the continued functioning of the station, eg. within a few kelvin of 290K ( 17<sup>o</sup>C / 62<sup>o</sup>F ).
+</article>
+
+<h1>Runway</h1>
+<img src="../images/finespun_zero_runway.webp" class="styled right"></img>
+<article>
+runway.
+</article>
+
+<br class="division">
+
+<h1>Rectenna</h1>
+<img src="../images/placeholder.png" class="styled right"></img>
+<article>
+A large rectenna is mounted in the center of the station to accept nominally 4 megawatts from the surrounding solar arrays equipped with a compatible microwave phased array.
+The size and efficiency of the rectenna makes the received 4 megawatts correspond to 141.5 W/m<sup>2</sup> of microwave intensity - hazardous to unshielded organics and electronics but still less intense than local sunlight, and stopped easily by a faraday mesh or metal plating without excessive heating.
+<br><br>
+The illustration image was taken by administrator <a href="felicity.html">Felicity</a> a few hundred seconds before losing one of her remote bodies to the microwave beam. 
+</article>
+
+<h1 class="division">relevant pages</h1>
+
+<div class="card">
+ <img src="../images/finespun_flag.webp"></img>
+ <a target="IM" href="finespun.html">Finespun</a>
+</div>
+
+</html>
