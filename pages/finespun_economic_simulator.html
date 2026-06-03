@@ -13,6 +13,13 @@ In reality it is more so a simulation tool than a game, but many simulation tool
 <br><br>
 Note: the HTML of the tables are read off at the start of each time skip to set the internal variables and then updated at the end of each time skip.
 If you directly edit them through the inspection menu, you will be directly changing the game state.
+<br>
+<span class="wip">
+things to do:
+- swap the awful multiple buttons with different numbers for single buttons with number input fields
+- use prices of high purity elements rather than bulk prices, since bulk prices are inaccurate, and save the sources of the prices in code comments (there seem to be no such prices for most elements, but high purity polysilicon for semiconductor uses costs about 13.5 times more than plain bulk silicon - maybe I could just multiply the prices by that much to account for purity?)
+- add a "waste oxygen" resource separate from the purified oxygen, and make kamacite refining produce that one instead. Then maybe allow purifying it to turn it into the pure oxygen in the purified elements table.
+</span>
 </article>
 
 <hr>
@@ -103,7 +110,7 @@ If you directly edit them through the inspection menu, you will be directly chan
   <tr><td>post-electrolysis waste</td><td><span id="electrolysis_waste_kg">0</span> kg</td></tr>
   <tr><td>baked kamacite</td><td><span id="baked_kamacite_kg">0</span> kg</td></tr>
   <tr><td>kamacite bake</td><td><span id="kamacite_bake_kg">0</span> kg</td></tr>
-  <tr><td>dollar-equivalent currency</td><td><span id="DEC">1000000</span> $</td></tr>
+  <tr><td>dollar-equivalent currency</td><td><span id="DEC">6 000 000 000</span> $e</td></tr>
 </table>
 
 <table class="styled left">
@@ -117,101 +124,97 @@ If you directly edit them through the inspection menu, you will be directly chan
   <tr><td>Program node</td><td>10</td></tr>
 </table>
 
-<table class="styled left"><tbody id="production_queue">
-  <tr id="pq_header1"><th colspan=4>Production queue</th></tr>
-  <tr id="pq_header2"><th>Order</th><th>count</th><th>completion time</th><th>time left</th></tr>
-  <tr id="pq_item1"><td id="pq_item1_name">Example</td><td id="pq_item1_count">3</td><td id="pq_item1_completion_time">13 300 000 000</td><td id="pq_item1_time_left">28061</td></tr>
-</tbody></table>
-
 <table class="styled left">
   <tr><th colspan=2>Components</th></tr>
   <tr><td>civic-2 chip</td><td>0</td></tr>
   <tr><td>solar tiles</td><td id="solar_tiles">0</td></tr>
 </table>
 
+<hr>
+
 <table class="styled left">
   <tr><th colspan=7>Collected purified elements</th></tr>
   <tr><th>Z</th><th>symbol</th><th>name</th><th>mass in storage</th><th><a href="https://en.wikipedia.org/w/index.php?title=Prices_of_chemical_elements&oldid=1352591840">price</a> ($/kg)</th><th>actions</th></tr>
   <tr><td>1</td><td>H</td><td>Hydrogen</td><td><span id="hydrogen_kg">0</span> kg</td>
-  <td id="hydrogen_price">1.39</td><td><input value="buy" size=2 type="button" onclick="buy_element('hydrogen')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('hydrogen')"></input>1kg</td></tr>
+  <td id="hydrogen_price">988.612</td><td><input value="buy" size=2 type="button" onclick="buy_element('hydrogen')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('hydrogen')"></input>1kg</td></tr>
   <tr><td>2</td><td>He</td><td>Helium</td><td><span id="helium_kg">0</span> kg</td>
-  <td id="helium_price">24.0</td><td><input value="buy" size=2 type="button" onclick="buy_element('helium')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('helium')"></input>1kg</td></tr>
+  <td id="helium_price">15 791.94</td><td><input value="buy" size=2 type="button" onclick="buy_element('helium')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('helium')"></input>1kg</td></tr>
   <tr><td>3</td><td>Li</td><td>Lithium</td><td><span id="lithium_kg">0</span> kg</td>
-  <td id="lithium_price">83.5</td><td><input value="buy" size=2 type="button" onclick="buy_element('lithium')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('lithium')"></input>1kg</td></tr>
+  <td id="lithium_price">53 260.867</td><td><input value="buy" size=2 type="button" onclick="buy_element('lithium')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('lithium')"></input>1kg</td></tr>
   <tr><td>4</td><td>Be</td><td>Beryllium</td><td><span id="beryllium_kg">0</span> kg</td>
-  <td id="beryllium_price">857</td><td><input value="buy" size=2 type="button" onclick="buy_element('beryllium')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('beryllium')"></input>1kg</td></tr>
+  <td id="beryllium_price">546 641.478</td><td><input value="buy" size=2 type="button" onclick="buy_element('beryllium')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('beryllium')"></input>1kg</td></tr>
   <tr><td>5</td><td>B</td><td>Boron</td><td><span id="boron_kg">0</span> kg</td>
-  <td id="boron_price">3.68</td><td><input value="buy" size=2 type="button" onclick="buy_element('boron')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('boron')"></input>1kg</td></tr>
+  <td id="boron_price">2 372.014</td><td><input value="buy" size=2 type="button" onclick="buy_element('boron')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('boron')"></input>1kg</td></tr>
   <tr><td>6</td><td>C</td><td>Carbon</td><td><span id="carbon_kg">0</span> kg</td>
-  <td id="carbon_price">0.122</td><td><input value="buy" size=2 type="button" onclick="buy_element('carbon')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('carbon')"></input>1kg</td></tr>
+  <td id="carbon_price">80.275</td><td><input value="buy" size=2 type="button" onclick="buy_element('carbon')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('carbon')"></input>1kg</td></tr>
   <tr><td>7</td><td>N</td><td>Nitrogen</td><td><span id="nitrogen_kg">0</span> kg</td>
-  <td id="nitrogen_price">0.140</td><td><input value="buy" size=2 type="button" onclick="buy_element('nitrogen')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('nitrogen')"></input>1kg</td></tr>
+  <td id="nitrogen_price">129.72</td><td><input value="buy" size=2 type="button" onclick="buy_element('nitrogen')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('nitrogen')"></input>1kg</td></tr>
   <tr><td>8</td><td>O</td><td>Oxygen</td><td><span id="oxygen_kg">0</span> kg</td>
-  <td id="oxygen_price">0.001</td><td><input value="buy" size=2 type="button" onclick="buy_element('oxygen')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('oxygen')"></input>1kg</td></tr>
+  <td id="oxygen_price">142.7</td><td><input value="buy" size=2 type="button" onclick="buy_element('oxygen')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('oxygen')"></input>1kg</td></tr>
   <tr><td>9</td><td>F</td><td>Fluorine</td><td><span id="fluorine_kg">0</span> kg</td>
-  <td id="fluorine_price">2.0</td><td><input value="buy" size=2 type="button" onclick="buy_element('fluorine')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('fluorine')"></input>1kg</td></tr>
+  <td id="fluorine_price">1 342.852</td><td><input value="buy" size=2 type="button" onclick="buy_element('fluorine')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('fluorine')"></input>1kg</td></tr>
   <tr><td>10</td><td>Ne</td><td>Neon</td><td><span id="neon_kg">0</span> kg</td>
-  <td id="neon_price">240</td><td><input value="buy" size=2 type="button" onclick="buy_element('neon')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('neon')"></input>1kg</td></tr>
+  <td id="neon_price">236 879.093</td><td><input value="buy" size=2 type="button" onclick="buy_element('neon')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('neon')"></input>1kg</td></tr>
   <tr><td>11</td><td>Na</td><td>Sodium</td><td><span id="sodium_kg">0</span> kg</td>
-  <td id="sodium_price">3.0</td><td><input value="buy" size=2 type="button" onclick="buy_element('sodium')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('sodium')"></input>1kg</td></tr>
+  <td id="sodium_price">1 913.564</td><td><input value="buy" size=2 type="button" onclick="buy_element('sodium')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('sodium')"></input>1kg</td></tr>
   <tr><td>12</td><td>Mg</td><td>Magnesium</td><td><span id="magnesium_kg">0</span> kg</td>
-  <td id="magnesium_price">2.32</td><td><input value="buy" size=2 type="button" onclick="buy_element('magnesium')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('magnesium')"></input>1kg</td></tr>
+  <td id="magnesium_price">1 495.4</td><td><input value="buy" size=2 type="button" onclick="buy_element('magnesium')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('magnesium')"></input>1kg</td></tr>
   <tr><td>13</td><td>Al</td><td>Aluminium</td><td><span id="aluminium_kg">0</span> kg</td>
-  <td id="aluminium_price">1.79</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <td id="aluminium_price">1 153.778</td><td><input value="buy" size=2 type="button" onclick="buy_element('aluminium')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('aluminium')"></input>1kg</td></tr>
   <tr><td>14</td><td>Si</td><td>Silicon</td><td><span id="silicon_kg">0</span> kg</td>
-  <td id="silicon_price">1.70</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <td id="silicon_price">777.936</td><td><input value="buy" size=2 type="button" onclick="buy_element('silicon')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('silicon')"></input>1kg</td></tr>
   <tr><td>15</td><td>P</td><td>Phosphorus</td><td><span id="phosphorus_kg">0</span> kg</td>
-  <td id="phosphorus_price">2.69</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <td id="phosphorus_price">1 733.891</td><td><input value="buy" size=2 type="button" onclick="buy_element('phosphorus')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('phosphorus')"></input>1kg</td></tr>
   <tr><td>16</td><td>S</td><td>Sulfur</td><td><span id="sulfur_kg">0</span> kg</td>
-  <td id="sulfur_price">0.0926</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <td id="sulfur_price">59.687</td><td><input value="buy" size=2 type="button" onclick="buy_element('sulfur')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('sulfur')"></input>1kg</td></tr>
   <tr><td>17</td><td>Cl</td><td>Chlorine</td><td><span id="chlorine_kg">0</span> kg</td>
-  <td id="chlorine_price">0.082</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <td id="chlorine_price">57.81</td><td><input value="buy" size=2 type="button" onclick="buy_element('chlorine')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('chlorine')"></input>1kg</td></tr>
   <tr><td>18</td><td>Ar</td><td>Argon</td><td><span id="argon_kg">0</span> kg</td>
-  <td id="argon_price">0.931</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <td id="argon_price">600</td><td><input value="buy" size=2 type="button" onclick="buy_element('argon')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('argon')"></input>1kg</td></tr>
   <tr><td>19</td><td>K</td><td>Potassium</td><td><span id="potassium_kg">0</span> kg</td>
-  <td id="potassium_price">12.85</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <td id="potassium_price">8 196.433</td><td><input value="buy" size=2 type="button" onclick="buy_element('potassium')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('potasium')"></input>1kg</td></tr>
   <tr><td>20</td><td>Ca</td><td>Calcium</td><td><span id="calcium_kg">0</span> kg</td>
-  <td id="calcium_price">2.28</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <td id="calcium_price">1 454.309</td><td><input value="buy" size=2 type="button" onclick="buy_element('calcium')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('calcium')"></input>1kg</td></tr>
   <tr><td>21</td><td>Sc</td><td>Scandium</td><td><span id="scandium_kg">0</span> kg</td>
-  <td id="scandium_price">3460</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <td id="scandium_price">2 206 977.262</td><td><input value="buy" size=2 type="button" onclick="buy_element('scandium')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('scandium')"></input>1kg</td></tr>
   <tr><td>22</td><td>Ti</td><td>Titanium</td><td><span id="titanium_kg">0</span> kg</td>
-  <td id="titanium_price">11.4</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <td id="titanium_price">7 271.544</td><td><input value="buy" size=2 type="button" onclick="buy_element('titanium')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('titanium')"></input>1kg</td></tr>
   <tr><td>23</td><td>Va</td><td>Vanadium</td><td><span id="vanadium_kg">0</span> kg</td>
-  <td id="vanadium_price">371</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <td id="vanadium_price">236 644.094</td><td><input value="buy" size=2 type="button" onclick="buy_element('vanadium')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('vanadium')"></input>1kg</td></tr>
   <tr><td>24</td><td>Cr</td><td>Chromium</td><td><span id="chromium_kg">0</span> kg</td>
-  <td id="chromium_price">9.40</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <td id="chromium_price">6 058.948</td><td><input value="buy" size=2 type="button" onclick="buy_element('chromium')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('chromium')"></input>1kg</td></tr>
   <tr><td>25</td><td>Mn</td><td>Manganese</td><td><span id="manganese_kg">0</span> kg</td>
-  <td id="manganese_price">1.82</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <td id="manganese_price">1 173.116</td><td><input value="buy" size=2 type="button" onclick="buy_element('manganese')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('manganese')"></input>1kg</td></tr>
   <tr><td>26</td><td>Fe</td><td>Iron</td><td><span id="iron_kg">0</span> kg</td>
-  <td id="iron_price">0.424</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <td id="iron_price">270.45</td><td><input value="buy" size=2 type="button" onclick="buy_element('iron')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('iron')"></input>1kg</td></tr>
   <tr><td>27</td><td>Co</td><td>Cobalt</td><td><span id="cobalt_kg">0</span> kg</td>
-  <td id="cobalt_price">32.8</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <td id="cobalt_price">21 141.862</td><td><input value="buy" size=2 type="button" onclick="buy_element('cobalt')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('cobalt')"></input>1kg</td></tr>
   <tr><td>28</td><td>Ni</td><td>Nickel</td><td><span id="nickel_kg">0</span> kg</td>
-  <td id="nickel_price">13.9</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <td id="nickel_price">8 959.509</td><td><input value="buy" size=2 type="button" onclick="buy_element('nickel')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('nickel')"></input>1kg</td></tr>
   <tr><td>29</td><td>Cu</td><td>Copper</td><td><span id="copper_kg">0</span> kg</td>
-  <td id="copper_price">6.0</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <td id="copper_price">3 867.414</td><td><input value="buy" size=2 type="button" onclick="buy_element('copper')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('copper')"></input>1kg</td></tr>
   <tr><td>30</td><td>Zn</td><td>Zinc</td><td><span id="zinc_kg">0</span> kg</td>
-  <td id="zinc_price">2.55</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <td id="zinc_price">1 643.651</td><td><input value="buy" size=2 type="button" onclick="buy_element('zinc')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('zinc')"></input>1kg</td></tr>
   <tr><td>31</td><td>Ga</td><td>Gallium</td><td><span id="gallium_kg">0</span> kg</td>
-  <td id="gallium_price">148</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <td id="gallium_price">95 396.206</td><td><input value="buy" size=2 type="button" onclick="buy_element('gallium')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('gallium')"></input>1kg</td></tr>
   <tr><td>32</td><td>Ge</td><td>Germanium</td><td><span id="germanium_kg">0</span> kg</td>
-  <td id="germanium_price">962</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <td id="germanium_price">613 616.221</td><td><input value="buy" size=2 type="button" onclick="buy_element('germanium')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('germanium')"></input>1kg</td></tr>
   <tr><td>33</td><td>As</td><td>Arsenic</td><td><span id="arsenic_kg">0</span> kg</td>
-  <td id="arsenic_price">1.1545</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <td id="arsenic_price">950</td><td><input value="buy" size=2 type="button" onclick="buy_element('arsenic')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('arsenic')"></input>1kg</td></tr>
   <tr><td>34</td><td>Se</td><td>Selenium</td><td><span id="selenium_kg">0</span> kg</td>
-  <td id="_price">X</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <td id="selenium_price">13 793.776</td><td><input value="buy" size=2 type="button" onclick="buy_element('selenium')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('selenium')"></input>1kg</td></tr>
   <tr><td>35</td><td>Br</td><td>Bromine</td><td><span id="bromine_kg">0</span> kg</td>
-  <td id="_price">X</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <td id="bromine_price">2 829.658</td><td><input value="buy" size=2 type="button" onclick="buy_element('bromine')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('bromine')"></input>1kg</td></tr>
   <tr><td>36</td><td>Kr</td><td>Krypton</td><td><span id="krypton_kg">0</span> kg</td>
-  <td id="_price">X</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <td id="krypton_price">286 228.9</td><td><input value="buy" size=2 type="button" onclick="buy_element('krypton')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('krypton')"></input>1kg</td></tr>
   <tr><td>37</td><td>Rb</td><td>Rubidium</td><td><span id="rubidium_kg">0</span> kg</td>
-  <td id="_price">X</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <td id="rubidium_price">10 198 960.94</td><td><input value="buy" size=2 type="button" onclick="buy_element('rubidium')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('rubidium')"></input>1kg</td></tr>
   <tr><td>38</td><td>Sr</td><td>Strontium</td><td><span id="strontium_kg">0</span> kg</td>
-  <td id="_price">X</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <td id="strontium_price">4 257.378</td><td><input value="buy" size=2 type="button" onclick="buy_element('strontium')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('strontium')"></input>1kg</td></tr>
   <tr><td>39</td><td>Y</td><td>Yttrium</td><td><span id="yttrium_kg">0</span> kg</td>
-  <td id="_price">X</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <td id="yttrium_price">19 981.638</td><td><input value="buy" size=2 type="button" onclick="buy_element('yttrium')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('yttrium')"></input>1kg</td></tr>
   <tr><td>40</td><td>Zr</td><td>Zirconium</td><td><span id="zirconium_kg">0</span> kg</td>
-  <td id="_price">X</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
+  <td id="zirconium_price">23 217.911</td><td><input value="buy" size=2 type="button" onclick="buy_element('zirconium')"></input>/<input value="sell" size=2 type="button" onclick="sell_element('zirconium')"></input>1kg</td></tr>
   <tr><td>41</td><td>Nb</td><td>Niobium</td><td><span id="niobium_kg">0</span> kg</td>
   <td id="_price">X</td><td><input value="buy" size=2></input>/<input value="sell" size=2></input>1kg</td></tr>
   <tr><td>42</td><td>Mo</td><td>Molybdenum</td><td><span id="molybdenum_kg">0</span> kg</td>
@@ -282,6 +285,12 @@ If you directly edit them through the inspection menu, you will be directly chan
   <tr><td>103</td><td>Lr</td><td>Lawrencium</td><td><span id="lawrencium_kg">0</span> kg</td></tr>
   <tr><td>104</td><td>Rf</td><td>Rutherfordium</td><td><span id="rutherfordium_kg">0</span> kg</td></tr>
 </table>
+
+<table class="styled left"><tbody id="production_queue">
+  <tr id="pq_header1"><th colspan=4>Production queue</th></tr>
+  <tr id="pq_header2"><th>Order</th><th>count</th><th>completion time</th><th>time left</th></tr>
+  <tr id="pq_item1"><td id="pq_item1_name">Example</td><td id="pq_item1_count">3</td><td id="pq_item1_completion_time">13 300 000 000</td><td id="pq_item1_time_left">28061</td></tr>
+</tbody></table>
 
 <script>
 
@@ -502,8 +511,8 @@ function sell_element(name, amount=1){
   document.getElementById("last_action").innerHTML = "time "+T.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")+" - sell "+(amount).toString()+" kg of "+name+"<br>";
   
   currently_have = document.getElementById(name+"_kg").innerHTML * 1.0;
-  element_price = document.getElementById(name+"_price").innerHTML * 1.0;
-  money_now = document.getElementById("DEC").innerHTML * 1.0;
+  element_price = document.getElementById(name+"_price").innerHTML.replace(/\s/g, '') * 1.0;
+  money_now = document.getElementById("DEC").innerHTML.replace(/\s/g, '') * 1.0;
   if(currently_have >= amount){
     document.getElementById(name+"_kg").innerHTML = currently_have - amount;
     document.getElementById("DEC").innerHTML = money_now + (amount * element_price);
@@ -519,8 +528,8 @@ function buy_element(name, amount=1){
   document.getElementById("last_action").innerHTML = "time "+T.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")+" - buy "+(amount).toString()+" kg of "+name+"<br>";
   
   currently_have = document.getElementById(name+"_kg").innerHTML * 1.0;
-  element_price = document.getElementById(name+"_price").innerHTML * 1.0;
-  money_now = document.getElementById("DEC").innerHTML * 1.0;
+  element_price = document.getElementById(name+"_price").innerHTML.replace(/\s/g, '') * 1.0;
+  money_now = document.getElementById("DEC").innerHTML.replace(/\s/g, '') * 1.0;
   if(money_now >= amount * element_price){
     document.getElementById("DEC").innerHTML = money_now - (amount * element_price);
     document.getElementById(name+"_kg").innerHTML = currently_have + amount;
