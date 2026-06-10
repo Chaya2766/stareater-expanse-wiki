@@ -51,7 +51,6 @@ In contrast to that, there is specialized hardware, which is only capable of pre
 <article>bits per second aren't the only measure of computing power and in the wild one may encounter measurements in flops or other units. For anyone not frequently dealing with designing systems and software it can be quite a headache to evaluate the needs of a piece of software whose memory and computation rate requirements aren't stated in terms of bits and bits per second, but knowing roughly the type and frequency of operations which the software uses can yield approximate numbers. Table placed below for convenience showing roughly the number of bit flips needed to perform a given operation, also potentially interpretable as the number of gates necessary to perform that operation. For people who primarily deal with specialized hardware it can similarly be a headache to deal with software whose requirements were only stated in terms of bits and bits per second, but they are usually used to such headaches one encounters when chasing greater performance.</article>
 
 <br>
-<article class="warning">This table was recently changed, and a consequent wave of rewrites to everything which relies on bits per operation is still pending.</article>
 
 <article class="meta"><a href="../documents/bit_flips_per_operation/bit_flips_per_operation.pdf">Here</a> is a source document for the numbers in the table below.</article>
 
@@ -71,11 +70,11 @@ In terms of memory, any n-bit variable will generally just take up n bits, for e
 <br><br>
 
 <article>
-Other units one may encounter when dealing with computation, computer hardware and software:
+Other, less often but still frequently used units which you may encounter when dealing with computation, computer hardware and software within the embercold region:
 
 <ul>
   <li><b>FLOPS</b> (FLoating point Operations Per Second), a unit equal to one floating point operation of unspecified type per second. One will usually see them with a metric prefix, and sometimes it will be specified exactly what variable size they are referring to, for example 10GFLOPS (FP16) would refer to 10 billion 16-bit floating point operations per second.</li>
-  <li><b>IPS</b> (Instructions Per Second), functions similarly to FLOPS but broader and more dependent on context, most commonly used with the Mega prefix.</li>
+  <!--<li><b>IPS</b> (Instructions Per Second), functions similarly to FLOPS but broader and more dependent on context, most commonly used with the Mega prefix.</li>-->
   <li><b>MAC</b> (multiply-and-accumulate), one MAC operation, frequently used in machine learning systems as neural network heavily rely on this type of operation. It is often interpreted as two floating point operations (one multiplication and one addition), so that system capable of 1 GigaMAC per second could be said to also have 2 GigaFLOPS, though as usual with specialized hardware this might be misleading, as a given piece of machine learning optimized hardware might not be able to perform multiplications and additions separately, or may not even use floating point arithmetic.</li>
 </ul>
 

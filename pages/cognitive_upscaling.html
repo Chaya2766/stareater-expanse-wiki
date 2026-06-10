@@ -120,6 +120,7 @@ Brain node model:
 <select name="brain_model" id="brain_model" selected="-" oninput="set_brain()">
   <option value="-">-</option>
   <option value="UEIA">UEIA</option>
+  <option value="UEIA-convergent">UEIA-convergent</option>
   <option value="Aurob">Aurob</option>
 </select>
 <br>
@@ -158,6 +159,7 @@ function set_brain(){
   
   let brain_dict = {};//num. of synapses, size of active memory and learning rate
   brain_dict["UEIA"] = [Math.pow(2,50),4,0.05];
+  brain_dict["UEIA-convergent"] = [Math.pow(2,60),4,0.05];
   brain_dict["Aurob"] = [9.96e17,125,0.1];
   
   if(debug_log)console.log(brain_dict[brain]);
