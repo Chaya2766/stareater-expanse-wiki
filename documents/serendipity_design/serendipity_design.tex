@@ -77,18 +77,16 @@
 	
 	\begin{tabular}{| c | c |}
 		\hline
-		\multicolumn{2}{| c |}{UEIA}\\\hline
+		\multicolumn{2}{| c |}{UEIA-convergent}\\\hline
 		Active memory & 4 \\\hline
-		Synapses & 1125899906842624 \\\hline
-		Parameters & 1125899906842624 \\\hline
-		Storage req. & 1.81e16 bits \\\hline
-		Fliprate req. & 3.094e21 bits/s \\\hline
+		Parameters & 1152921504606846976 \\\hline
+		Storage req. & 1.845e19 bits \\\hline
+		Fliprate req. & 3.168e24 bits/s \\\hline
 	\end{tabular}
 	\begin{tabular}{| c | c |}
 		\hline
 		\multicolumn{2}{| c |}{Felicity}\\\hline
 		Active memory & 7 \\\hline
-		Synapses [?] & 602000000000000 \\\hline
 		Parameters & 28890572800000000000 \\\hline
 		Storage req. & 4.623e20 bits \\\hline
 		Fliprate req. & 7.940e25 bits/s \\\hline
@@ -98,34 +96,25 @@
 	
 	\begin{tabular}{| c | c |}
 		\hline
-		\multicolumn{2}{| c |}{UEIA bridge}\\\hline
-		Synapses & 4398046511104 \\\hline
-		Parameters & 4398046511104 \\\hline
-		Storage req. & 7.037e13 bits \\\hline
-		Fliprate req. & 1.209e19 bits/s \\\hline
+		\multicolumn{2}{| c |}{UEIA-convergent-bridge}\\\hline
+		Parameters & 4503599627370496 \\\hline
+		Storage req. & 7.206e16 bits \\\hline
+		Fliprate req. & 1.238e22 bits/s \\\hline
 	\end{tabular}
 	\begin{tabular}{| c | c |}
 		\hline
-		\multicolumn{2}{| c |}{UEIA-Human bridge}\\\hline
-		Synapses & 4018371876378 \\\hline
-		Parameters & 4018371876378 \\\hline
-		Storage req. & 6.4294e13 bits \\\hline
-		Fliprate req. & 1.104e19 bits/s \\\hline
+		\multicolumn{2}{| c |}{UEIA-Human bridge-convergent}\\\hline
+		Parameters & 69868591406062435 \\\hline
+		Storage req. & 1.1179e18 bits \\\hline
+		Fliprate req. & 1.92e23 bits/s \\\hline
 	\end{tabular}
-	
-	\medskip
-	
-	[?] Felicity is a human mind upload with different structure from typical AI models, as such one synapse is not the same as one parameter.
-	This is the only such model in this composition.
-	The number of synapses comes from the average values for the human brain of 86 billion neurons total and 7000 synapses per neuron.
-	The number of parameters comes from the particular digital emulation of the organic neurons which is much larger than just one parameter per synapse.
 	
 	\bigskip
 	
 	Human-Ueia bridge synapse count is calculated in accordance with the 1/215 rule which says that the bridge network usually has around 215 times fewer synapses than the model it is to be used with.
 	Since this one bridges two different their size is averaged first.
 	
-	$$ \frac{1125899906842624 + 602000000000000}{2} \cdot \frac{1}{215} = 4018371876378 $$
+	$$ \frac{1152921504606846976 + 28890572800000000000}{2} \cdot \frac{1}{215} = 69868591406062435 $$
     
     \bigskip
     
@@ -133,11 +122,11 @@
     
     All of them use 16-bit parameters.
     
-    $$ 4018371876378 \cdot 16 bits \approx 6.4294e13 bits $$
+    $$ 69868591406062435 \cdot 16 bits \approx 1.1179e18 bits $$
     
     Given the 2748 bit flips per 16-bit multiply-accumulate operation:
     
-    $$ 4018371876378 \cdot 1000Hz \cdot 2748bits \approx 1.104e19 bits/s $$
+    $$ 69868591406062435 \cdot 1000Hz \cdot 2748bits \approx 1.92e23 bits/s $$
     
 	\pagebreak
 	
@@ -147,30 +136,30 @@
     
     \medskip
     
-    The number of brain nodes is 32, as such the number of bridges is:
+    The number of brain nodes is 16, as such the number of bridges is:
     
-    $$ N_B = \frac{32 \cdot (32-1)}{2} = 496 $$
+    $$ N_B = \frac{16 \cdot (16-1)}{2} = 120 $$
     
     And the number of meta-bridges in that case is:
     
-    $$ N_{MB} = \frac{496 \cdot (496-1)}{2} = 122\ 760 $$
+    $$ N_{MB} = \frac{120 \cdot (120-1)}{2} = 7140 $$
     
     \bigskip
     
-    There is only one human brain in the network, and the other 31 brain nodes are UEIA models, as such all bridges from Human to UEIA will be the UEIA-Human bridges.
-    There are 31 UEIA-Human bridges.
+    There is only one human brain in the network, and the other 15 brain nodes are UEIA-convergent minds, as such all bridges from Human to UEIA will be the UEIA-Human bridges.
+    There are 15 UEIA-Human bridges ($N_{UHB}$).
     
     \medskip
     
     All meta-bridges that connect the UEIA-Human bridges are going to also be UEIA-Human bridges, so the number of UEIA-Human metabridges is:
     
-    $$ \frac{31\cdot(31-1)}{2} = 465 $$
+    $$ N_{UHMB} = \frac{15\cdot(15-1)}{2} = 105 $$
     
     The remaining ones can be UEIA bridges, so their number (bridges and meta-bridges) is:
     
-    $$ N_{UB} = 496 - 31 = 465 $$
+    $$ N_{UB} = N_B - N_{UHB} = 120 - 15 = 105 $$
     
-    $$ N+{UMB} = 122760 - 465 = 122\ 295 $$
+    $$ N_{UMB} = N_{MB} - N_{UHMB} = 7140 - 105 = 7035 $$
     
     
     This gives the final composition:
@@ -180,32 +169,32 @@
     	\multicolumn{4}{| c |}{Serendipity composite mind composition}\\\hline
     	element type & model & count & num.parameters \\\hline
     	brain node & Felicity (human) & 1 & 28 890 572 800 000 000 000 \\\hline
-    	brain node & UEIA & 31 & 1 125 899 906 842 624 \\\hline
-    	bridge & UEIA-Human-bridge & 31 & 4 018 371 876 378 \\\hline
-    	bridge & UEIA-bridge & 465 & 4 398 046 511 104 \\\hline
-    	metabridge & UEIA-Human-bridge & 465 & 4 018 371 876 378 \\\hline
-    	metabridge & UEIA-bridge & 122 295 & 4 398 046 511 104 \\\hline
+    	brain node & UEIA-convergent & 15 & 1 152 921 504 606 846 976 \\\hline
+    	bridge & UEIA-Human-bridge-convergent & 15 & 69 868 591 406 062 435 \\\hline
+    	bridge & UEIA-convergent-bridge & 105 & 4 503 599 627 370 496 \\\hline
+    	metabridge & UEIA-Human-bridge-convergent & 105 & 69 868 591 406 062 435 \\\hline
+    	metabridge & UEIA-convergent-bridge & 7035 & 4 503 599 627 370 496 \\\hline
     \end{tabular}
     
-    brain nodes total : 32
+    brain nodes total : 16
     
-    bridges total : 496
+    bridges total : 120
     
-    metabridges total : 122 760
+    metabridges total : 7140
     
-    parameters total: 29 423 392 534 154 891 872
+    parameters total: 55 072 444 555 909 715 560
     
     \bigskip
     
     \noindent
     $ 
     1 \cdot 28 890 572 800 000 000 000 + \\
-    31 \cdot 1 125 899 906 842 624 + \\
-    31 \cdot 4 018 371 876 378 + \\
-    465 \cdot 4 398 046 511 104 + \\
-    465 \cdot 4 018 371 876 378 + \\
-    112 295 \cdot 4 398 046 511 104 = \\
-    29 423 392 534 154 891 872
+    15 \cdot 1 152 921 504 606 846 976 + \\
+    15 \cdot 69 868 591 406 062 435 + \\
+    105 \cdot 4 503 599 627 370 496 + \\
+    105 \cdot 69 868 591 406 062 435 + \\
+    7035 \cdot 4 398 046 511 104 = \\
+    55 072 444 555 909 715 560
     $
     
     \pagebreak
@@ -222,11 +211,11 @@
     
     Size of the model:
     
-    $$ 29 423 392 534 154 891 872 \cdot 16bit = 470774280546478269952 bits \approx 4.708e20 bits $$
+    $$ 55 072 444 555 909 715 560 \cdot 16bit = 881159112894555448960 bits \approx 8.812e20 bits $$
     
     Fliprate required to run the model:
     
-    $$ 29 423 392 534 154 891 872 \cdot 1000Hz \cdot 2748 bits = 80855482683857642864256000 bits/s \approx 8.086e25 bits/s $$
+    $$ 55 072 444 555 909 715 560 \cdot 1000Hz \cdot 2748 bits = 151 339 077 639 639 898 358 880 000 bits/s \approx 1.5134e26 bits/s $$
     
     \rule{\linewidth}{1pt}
     
@@ -237,27 +226,27 @@
     	\multicolumn{4}{| c |}{Serendipity composite mind composition}\\\hline
     	element type & model & count & num.parameters \\\hline
     	brain node & Felicity (human) & 1 & 28 890 572 800 000 000 000 \\\hline
-    	brain node & UEIA & 31 & 1 125 899 906 842 624 \\\hline
-    	bridge & UEIA-Human-bridge & 31 & 4 018 371 876 378 \\\hline
-    	bridge & UEIA-bridge & 465 & 4 398 046 511 104 \\\hline
-    	metabridge & UEIA-Human-bridge & 465 & 4 018 371 876 378 \\\hline
-    	metabridge & UEIA-bridge & 122 295 & 4 398 046 511 104 \\\hline
+    	brain node & UEIA-convergent & 15 & 1 152 921 504 606 846 976 \\\hline
+    	bridge & UEIA-Human-bridge-convergent & 15 & 69 868 591 406 062 435 \\\hline
+    	bridge & UEIA-convergent-bridge & 105 & 4 503 599 627 370 496 \\\hline
+    	metabridge & UEIA-Human-bridge-convergent & 105 & 69 868 591 406 062 435 \\\hline
+    	metabridge & UEIA-convergent-bridge & 7035 & 4 503 599 627 370 496 \\\hline
     \end{tabular}
     
-    brain nodes total : 32
+    brain nodes total : 16
     
-    bridges total : 496
+    bridges total : 120
     
-    metabridges total : 122 760
+    metabridges total : 7140
     
-    parameters total: 29 423 392 534 154 891 872
+    parameters total: 55 072 444 555 909 715 560
     
     inference rate : 1000Hz
     
-    data storage requirement : 4.708e20 bits
+    data storage requirement : 8.812e20 bits
     
-    fliprate requirement : 8.086e25 bits/s
+    fliprate requirement : 1.514e26 bits/s
     
-    working memory capacity : 131
+    working memory capacity : 67
 	
 \end{document}
