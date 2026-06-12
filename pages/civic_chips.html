@@ -125,11 +125,11 @@ The bare substrate volume is shown directly as volume and also as the size of a 
 </article>
 
 <div style="margin-top: 30;"><article>
-memory: <input type="number" value="1.81e16" id="mem_req" onchange="recalculate_table()"></input>bits, flip rate: <input type="number" value="2.236e20" id="flip_req" onchange="recalculate_table()"></input> bits/s (<input type="checkbox" checled=false id="mem_focus" onchange="recalculate_table()"></input> only focus on memory)
+memory: <input type="number" value="1.81e16" id="mem_req" oninput="recalculate_table()"></input>bits, flip rate: <input type="number" value="2.236e20" id="flip_req" oninput="recalculate_table()"></input> bits/s (<input type="checkbox" checled=false id="mem_focus" onchange="recalculate_table()"></input> only focus on memory)
 </article></div>
 
 <table class="styled" style="margin: 10 auto;">
-  <tr><th colspan=6>civic chip requirements</th></tr>
+  <tr><th colspan=6><a href="civic_chips.html">civic chip</a> requirements | <span id="table_mem_req"></span> bits, <span id="table_flip_req"></span> bits/s</th></tr>
   <tr><td></td><td>number needed</td><td>power draw</td><td>bare substrate volume</td><td id="processing">processing used</td><td>memory used</td></tr>
   <tr><td>Civic-2 chip</td><td id="num_c2">4472</td><td id="pow_use_c2">44.72kW</td><td id="vol_c2">447.2cm<sup>3</sup></td><td id="flip_use_c2">100%</td><td id="mem_use_c2">0.405%</td></tr>
   <tr><td>Civic-3 chip</td><td id="num_c3">28</td><td id="pow_use_c3">279.5W</td><td id="vol_c3">2.8cm<sup>3</sup><td id="flip_use_c3">64.34%</td><td id="mem_use_c3">99.82%</td></tr>
@@ -198,7 +198,9 @@ function VolumeToMetric(number,precision){
 
 function recalculate_table(){
   mem_req = document.getElementById("mem_req").value;
+  document.getElementById("table_mem_req").innerHTML = (Math.ceil(1000*mem_req)/1000).toExponential(3);
   flip_req = document.getElementById("flip_req").value;
+  document.getElementById("table_flip_req").innerHTML = (Math.ceil(1000*flip_req)/1000).toExponential(3);
   memory_focus = document.getElementById("mem_focus").checked;
   console.log("recalculating table based on flip rate "+mem_req+"bits and flip rate "+flip_req+"bits/s, memory focus "+memory_focus);
   

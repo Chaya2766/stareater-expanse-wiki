@@ -78,7 +78,8 @@
 	\begin{tabular}{| c | c |}
 		\hline
 		\multicolumn{2}{| c |}{UEIA-convergent}\\\hline
-		Active memory & 4 \\\hline
+		Working memory & 4 \\\hline
+		Learning rate & 0.05 \\\hline
 		Parameters & 1152921504606846976 \\\hline
 		Storage req. & 1.845e19 bits \\\hline
 		Fliprate req. & 3.168e24 bits/s \\\hline
@@ -86,7 +87,8 @@
 	\begin{tabular}{| c | c |}
 		\hline
 		\multicolumn{2}{| c |}{Felicity}\\\hline
-		Active memory & 7 \\\hline
+		Working memory & 7 \\\hline
+		Learning rate & 0.2 \\\hline
 		Parameters & 28890572800000000000 \\\hline
 		Storage req. & 4.623e20 bits \\\hline
 		Fliprate req. & 7.940e25 bits/s \\\hline
@@ -219,6 +221,27 @@
     
     \rule{\linewidth}{1pt}
     
+    \section{Misc. properties}
+    
+    Working memory is simply the sum of the working memories of all brain nodes:
+    
+    $$ 15 \cdot 4 + 7 = 67 $$
+    
+    Learning rate gives the statistical probability of her succesfully retaining the ability to solve a test task on the learning rate portion of the idala screenings.
+    
+    UEIA has learning rate of 0.05, meaning that correspondingly the probability of NOT learning how to complete the test task is 0.95.
+    Felicity's learning rate is set to 0.2 so the corresponding probability of failure is 0.8.
+    
+    Each mind independently rolls for the chance to remember how to complete the task so for serendipity as a whole to fail, every single mind independently has to fail as well. The probability of that is just the product of the individual minds' failure chances:
+    
+    $$ 0.95^{15} \cdot 0.8 = 0.370633 $$
+    
+    And thus the chance of success is the oposite of that:
+    
+    $$ 1 - 0.370633 = 0.629367 \approx 0.63 $$
+    
+    \pagebreak
+    
     \section{Summary}
     
     \begin{tabular}{| c | c | c | c |}
@@ -248,5 +271,7 @@
     fliprate requirement : 1.514e26 bits/s
     
     working memory capacity : 67
+    
+    Learning rate : 63\%
 	
 \end{document}
