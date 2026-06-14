@@ -128,6 +128,7 @@ Bridge model:
 <select name="bridge_model" id="bridge_model" selected="-" oninput="set_bridge()">
   <option value="-">-</option>
   <option value="UEIA-bridge">UEIA-bridge</option>
+  <option value="UEIA-convergent-bridge">UEIA-convergent-bridge</option>
   <option value="Aurob-bridge">Aurob-bridge</option>
 </select>
 <br><br>
@@ -177,6 +178,7 @@ function set_bridge(){
   
   let bridge_dict = {};
   bridge_dict["UEIA-bridge"] = Math.pow(2,42);
+  bridge_dict["UEIA-convergent-bridge"] = Math.pow(2,52);
   bridge_dict["Aurob-bridge"] = 4.65e15;
   
   if(debug_log)console.log(bridge_dict[bridge]);
