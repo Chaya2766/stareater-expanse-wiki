@@ -20,3 +20,6 @@ tools/orbit_search_tool/allnum.cat
 images/10_000_asteroids.scad
 images/100_000_asteroids.scad
 images/*.png
+images/*.jpg
+images/*.stl
+images/*.xcf
