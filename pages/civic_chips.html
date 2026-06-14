@@ -22,7 +22,7 @@ The project notably also produced a lot of user interfaces for programming the c
 
 <h1 id="civic1">Civic 1 <span class="warning">work in progress</span></h1>
 <article>
-Civic 1 is to be written based on present modern electronics. The design might be so coarse that even masses of modern micrites could emulate it when arranged into the right structure.
+Civic 1 is planned to be written based on nanoscale vacuum tube technology, making it potentially manufacturable locally like the civic-2 chip as well as very resilient to cosmic radiation.
 <br><br>
 computation rate: X<br>
 memory: X<br>
@@ -36,6 +36,8 @@ max. power consumption: 10W
 <img src="../images/civic2.png" class="styled right"></img>
 <article>
 Civic 2 relies on indium arsenide tunneling field effect transistors, and can be easily produced through ion beam printing, requiring only materials that are easily extracted through low temperature electrolysis.
+<br><br>
+The civic-2 is practically useless in comparison to the civic 3 and 4 chips, but it maintains its own niche thanks to the possibility manufacturing it at truly small scale with relatively cheap equipment.
 <br><br>
 <table class="styled left">
   <tr><th colspan=3>Civic-2 chip elemental makeup</th></tr>
@@ -62,6 +64,14 @@ max. power consumption: 10W
 Civic 3 relies on graphene nanoribbon tunneling field effect transistors, exploiting graphene's ability to act as a p-type or n-type semiconductor depending on the presence of electrostatic charge. It requires equipment capable of forming graphene for that purpose. In terms of material, the chip is made almost entirely from carbon, making it very cheap to manufacture if the equipment to do so is available.
 At just 7.8 electronvolts per bit flip, this device sits right near the edge of what charge transfer logic can achieve.
 <br><br>
+Due to the heat-resistant materials and adequately high energy barrier, these chips are notably capable of operating in fairly extreme temperatures upwards of 1000 kelvin (though anecdotally known to have often survived as much as 1200 kelvin) without suffering increased error rates or decreasing computation efficiency.
+In theory it should take about 20.9 teraseconds for even a single bit stored in the chip to spoil due to thermal noise, but in open space there will usually be about 31 to 32 bit flips each megasecond (corruption rate of about 3.1688e-17 Hz/bit) just due to radiation, which is decreased to about 8.556e-20 Hz/bit inside habitats adhering to the recommended standard 10t/m<sup>2</sup> aerial hull density, or about 7.315e-19 Hz/bit at only 1t/m<sup>2</sup>.
+<!ln(2) × 10e−12s × e^(1.25e−18J/(1000K×boltzmann))>
+<!1e15bit×(1−2^−(20.9Ts/1.447444957e28s))>
+<!On ISS each GB of RAM experiences about 8 radiation-induced bitflips per year, which means about 3.168808781 * 10^(-17) Hz/bit>
+<!1e15 bits × 3.168808781e-17 Hz/bit = 0.03168808781 Hz>
+<!allegedly only about 0.27% of space radiation makes it through earth's atmosphere>
+<br><br>
 computation rate: 8e18bit/s<br>
 memory: 1e15bit<br>
 efficiency: 1.25e-18J/bit<br>
@@ -78,8 +88,13 @@ max. power consumption: 10W
 Civic 4 relies on bilayer pseudospin field effect transistors, exploiting quantum effects occurring between closely placed sheets of graphene.
 At just 0.2 electronvolts per bit flip, this device falls well outside of what could have been done with charge transfer logic as not even a single electron would be moved in the switching of a gate.
 Instead of moving charges it manipulates the spin of electrically neutral quasiparticles called excitons, formed by pairs of electrons and electron holes in the graphene nanoribbons.
-It requires equipment capable of forming graphene for that purpose, as well as very precise nanoscale assembly equipment to ensure exact spacing of the graphene nanoribbons, and the extra space needed also halves the number of transistors that could be packed into the chip.
-The chip is still about an order of magnitude less efficient than the theoretical minimum of 0.018eV/bit imposed by the landauer principle on computation at room temperature.
+It requires equipment capable of forming graphene for that purpose, as well as very precise nanoscale assembly equipment to ensure exact spacing of the graphene nanoribbons.
+The chip is still about an order of magnitude less efficient than the theoretical minimum of 0.018eV/bit imposed by the landauer principle on computation at room temperature, but the fact it can manage and correct the noise at that level is still a perfect example of posthuman engineering producing a system capable of consistently operating precariously close to the absolute allowable limit.
+The extra space needed for systems managing the noise and errors also roughly halves the data storage capacity of the chip.
+<br><br>
+Due to the incredibly low energy barrier, bits stored in the chip will dissipate <span class="tip" tip="bit half life generally is t = ln(2) × 10e-5s × e^(3.2e-20J / (boltzmann_constant × temperature)) so corruption rate grows exponentially with temperature">rapidly</span> when the chip is not powered.
+At 300 kelvin the half life of a bit in an unpowered civic-4 chip is about 157 milliseconds, which means that every single bit of data on the chip is expected to have become corrupted by thermal noise after only 7.85 seconds of power loss.
+To actually recover data from an unpowered civic-4 chip, it would need to lose power while already cooled below 50 kelvin, which slows the accumulation of rotten bits enough that they could still be repaired by commonly used error correction algorithms for about one kilosecond since power loss.
 <br><br>
 computation rate: 3.125e20bit/s<br>
 memory: 6e14bit<br>
@@ -125,7 +140,7 @@ The bare substrate volume is shown directly as volume and also as the size of a 
 </article>
 
 <div style="margin-top: 30;"><article>
-memory: <input type="number" value="1.81e16" id="mem_req" oninput="recalculate_table()"></input>bits, flip rate: <input type="number" value="2.236e20" id="flip_req" oninput="recalculate_table()"></input> bits/s (<input type="checkbox" checled=false id="mem_focus" onchange="recalculate_table()"></input> only focus on memory)
+memory: <input type="number" value="1.81e16" id="mem_req" oninput="recalculate_table()"></input>bits, flip rate: <input type="number" value="3.094e21" id="flip_req" oninput="recalculate_table()"></input> bits/s (<input type="checkbox" checled=false id="mem_focus" onchange="recalculate_table()"></input> only focus on memory)
 </article></div>
 
 <table class="styled" style="margin: 10 auto;">
