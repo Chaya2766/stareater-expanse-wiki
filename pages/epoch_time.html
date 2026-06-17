@@ -29,7 +29,7 @@ There is also a big version of that clock <a href="epoch_clock.html">here</a>.
 <h1>UTC Gregorian Date ⇄ Epoch Time</h1>
 <div>
     <span>UTC Gregorian date</span>
-    <input type="text" id="utcInput" placeholder="UTC Gregorian date (YYYY-MM-DD HH:MM:SS)" style="width: 295px;">
+    <input type="text" id="utcInput" placeholder="UTC Gregorian date (YYYY-MM-DD HH:MM:SS)" style="width: 295px;" onkeypress="if(event.key === 'Enter') convertToUnix()">
     <button onclick="convertToUnix()">Convert to Epoch Time</button>
     <p id="unixResult"></p>
     <span>Epoch time</span>
