@@ -1,0 +1,34 @@
+<head>
+ <link rel="stylesheet" href="../index.css"></link>
+</head>
+<html class="background2" id="page">
+<article class="warning">this warning lets the reader know something important about the page. If this sentence is still here on a page different than the testpage.html then I forgot to change it while making a new page.</article>
+<a style="float: right;" target="_blank" href="../index.html?page=pages/ticanode.html">link to this page</a>
+
+<h1>Ticanode research group</h1>
+<hr>
+
+<img src="../images/ticanode_logo.webp" class="basics"></img>
+<article class="basics">
+Ticanode was a research group that operated in the <a href="embercold_region.html">embercold region</a> before it had been widely known under that name.
+It is considered responsible for naming of this region after science fiction author <a href="inkley_embercold.html">Inkley Embercold</a> due to the fondness that the research group's members held for his writing, as well as setting some of the cultural and technical elements that persist in the region to this day.
+<br><br>
+[todo: mention ITON and Vanesii Idala, ITON's support for the Colip4 identity system, their initial usage of IPPACS as their communication medium]
+</article>
+<hr>
+
+<h1>Ticanode Outsourcable Neural Network standard</h1>
+<article>
+TONN is a registered standard for construction of neural networks whose computation can be (relatively) highly efficiently oursourced to untrusted third parties without revealing their actual contents, with the use of Homomorphic Encryption.
+<br><br>
+TONN states the following constraints:
+<ul>
+  <li>All variables in the network are of the standard FX16 <a href="fixed_point_arithmetic.html">fixed-point number format</a>, signed using two's complement.</li>
+  <li>The activation function for neurons is the polynomial approximation of ReLu : <b>f(x) = 0.00390625x<sup>2</sup>+0.5x</b></li>
+</ul>
+These very simple rules enable huge optimization gains for Homomorphic Encryption, on one the algorithmic side due to the fact that both fixed-point arithmetic and matrix operations are exceptionally well suited for computation under homomorphic encryption, and on the hardware side it sets an exact known operation and an exact known data format which the hardware can be optimized for.
+<br><br>
+<!The name of this standard had been criticized for using the word "standard" within its acronym while also being an actual standard, leading to "TONNS standard" implicitly doubling of that word, but the only official fix to that problem was a clarification by the original publishers that this has no practical implications.>
+</article>
+
+</html>

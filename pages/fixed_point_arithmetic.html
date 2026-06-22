@@ -29,14 +29,26 @@ For purposes where a standard variable type declaration is needed, the common ch
 </article>
 
 <table class="styled left">
+  <tr><th colspan=2>signed FX32 variable (Q16.16)</th></tr>
+  <tr><td>binary representation</td><td>corresponding value</td></tr>
+  <tr><td>0000 0000 0000 0000.0000 0000 0000 0000</td><td>0</td></tr>
+  <tr><td>0000 0000 0000 0001.0000 0000 0000 0000</td><td>1</td></tr>
+  <tr><td>1111 1111 1111 1111.0000 0000 0000 0000</td><td>-1</td></tr>
+  <tr><td>0000 0000 0000 0000.0000 0000 0000 0001</td><td>0.000 015 258 789 06</td></tr>
+  <tr><td>1111 1111 1111 1111.1111 1111 1111 1111</td><td>-0.000 015 258 789 06</td></tr>
+  <tr><td>0111 1111 1111 1111.1111 1111 1111 1111</td><td>32 767.999 98</td></tr>
+  <tr><td>1000 0000 0000 0000.0000 0000 0000 0000</td><td>-32 768</td></tr>
+</table>
+
+<table class="styled left">
   <tr><th colspan=2>signed FX16 variable (Q8.8)</th></tr>
   <tr><td>binary representation</td><td>corresponding value</td></tr>
   <tr><td>0000 0000.0000 0000</td><td>0</td></tr>
   <tr><td>0000 0001.0000 0000</td><td>1</td></tr>
   <tr><td>1111 1111.0000 0000</td><td>-1</td></tr>
-  <tr><td>0000 0000.0000 0001</td><td>0.00390625</td></tr>
-  <tr><td>1111 1111.1111 1111</td><td>-0.00390625</td></tr>
-  <tr><td>0111 1111.1111 1111</td><td>127.9960938</td></tr>
+  <tr><td>0000 0000.0000 0001</td><td>0.003 906 25</td></tr>
+  <tr><td>1111 1111.1111 1111</td><td>-0.003 906 25</td></tr>
+  <tr><td>0111 1111.1111 1111</td><td>127.996 093 8</td></tr>
   <tr><td>1000 0000.0000 0000</td><td>-128</td></tr>
 </table>
 
