@@ -154,7 +154,10 @@ Both the strengths of the connections and the layout of the connections were det
 There are many ways to get your hands on UEIA but a relatively common one is through the Open Neural Network Exchange (.onnx) files from the archives of the original project repository, to be ran using any compatible inference engines.
 The files are also readily available on the <a href="IPPACS.html">IPPACS</a> network through their SHA-512 hash.
 <br><br>
-ueia3.2-1126t-F16.onnx (2322.4TB &approx; 1.858E+16 bits)
+ueia15-1126G-<a href="fixed_point_arithmetic.html">FX16</a>.onnx (2322.4TB &approx; 1.858E+16 bits)
+<!major releases of UEIA (ie. UEIA 1, UEIA 2, etc.) might have been released every 100Ms, which would mean 15 major releases till the final one in terran year 2350, thus file starts with ueia15>
+<!1126t would mean 1126 trillion parameters, but maybe it should be 1126G as in giga>
+<!Q notation used conveys 8 bits before and 8 bits after the decimal point for a 16-bit fixed-point variable, this is the ARM version of the Q notation for fixed-point variables: >
 <ul>
   <li>UEIA model weights and connections &approx; 2252TB</li>
   <li>neural graph state &approx; 70.4TB</li>
@@ -190,7 +193,7 @@ This came at the cost of massively increased complexity of the memory cells, blo
 It is however possible to convert between the standard and the convergent versions of the artificial mind with nearly zero losses, offering an awkward but functional workaround.
 Any modified UEIA minds unfortunately cannot convert to the new version without risking significant loss of personality and memory - personalized custom design of a convergent version of the modified mind is so far the only path forward for such cases.
 <br><br>
-The new version of the artificial mind was originally not released publicly due to ethical concerns of some of the project emembers got leaked out by presumably someone else involved in the project as just the single 2.3-exabyte file UEIA-3.2-1153q-convergent.onnx - the rest of the project, its related tools and documentation were later made public in a more orderly manner in the late 16th gigasecond epoch.
+The new version of the artificial mind was originally not released publicly due to ethical concerns of some of the project members got leaked out by presumably someone else involved in the project as just the single 2.3-exabyte file UEIA-15-1153T-convergent-FX16.onnx - the rest of the project, its related tools and documentation were later made public in a more orderly manner in the late 16th gigasecond epoch.
 <br><br>
 The new variant of the UEIA mind allows memories to be stored separately and loaded into the mind from other sources, one at a time, as opposed to the original arrangement where the entire mindstate was indivisible and not possible to synchronize across multiple UEIA instances.
 This new arrangement allows multiple UEIA instances to learn in paralel, directly handing over the learned knowledge to others.

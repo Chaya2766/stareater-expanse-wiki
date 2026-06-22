@@ -1,0 +1,72 @@
+<head>
+ <link rel="stylesheet" href="../index.css"></link>
+</head>
+<html class="background2" id="page">
+<a style="float: right;" target="_blank" href="../index.html?page=pages/fixed_point_arithmetic.html">link to this page</a>
+
+<h1>Fixed-point arithmetic</h1>
+<hr>
+
+<img src="../images/placeholder.png" class="basics"></img>
+<article class="basics">
+todo
+</article>
+<hr>
+<article>
+
+<h2>Benefits over floating-point arithmetic</h2>
+<article>
+Matrix multiplication and addition using fixed-point variables is so far the operation for which Homomorphic Encryption had been most thoroughly developed and optimized.
+</article>
+
+<h2>Common implementations</h2>
+<article>
+Fixed-point variables are commonly described with the <a href="https://en.wikipedia.org/wiki/Q_(number_format)#ARM_version">ARM Q notation</a> which gives the number of bits before and after the decimal point.
+<br>
+Two's complement is often used (negative numbers are made by inverting the positive number and adding one) so that subtraction can be executed using simple addition circuits in hardware.
+<br>
+For purposes where a standard variable type declaration is needed, the common choice is having an equal number of bits before and after the decimal point, with the fixed point variables coming in the same sizes as their floating point counterparts, ie. FX32 or fixed32 as a counterpart to FP32 or float32, as well as similar full names eg. "single-precision fixed-point" as a counterpart to "single-precision floating-point".
+</article>
+
+<table class="styled left">
+  <tr><th colspan=2>signed FX16 variable (Q8.8)</th></tr>
+  <tr><td>binary representation</td><td>corresponding value</td></tr>
+  <tr><td>0000 0000.0000 0000</td><td>0</td></tr>
+  <tr><td>0000 0001.0000 0000</td><td>1</td></tr>
+  <tr><td>1111 1111.0000 0000</td><td>-1</td></tr>
+  <tr><td>0000 0000.0000 0001</td><td>0.00390625</td></tr>
+  <tr><td>1111 1111.1111 1111</td><td>-0.00390625</td></tr>
+  <tr><td>0111 1111.1111 1111</td><td>127.9960938</td></tr>
+  <tr><td>1000 0000.0000 0000</td><td>-128</td></tr>
+</table>
+
+<table class="styled left">
+  <tr><th colspan=2>signed FX8 variable (Q4.4)</th></tr>
+  <tr><td>binary representation</td><td>corresponding value</td></tr>
+  <tr><td>0000.0000</td><td>0</td></tr>
+  <tr><td>0001.0000</td><td>1</td></tr>
+  <tr><td>1111.0000</td><td>-1</td></tr>
+  <tr><td>0000.0001</td><td>0.0625</td></tr>
+  <tr><td>1111.1111</td><td>-0.0625</td></tr>
+  <tr><td>0111.1111</td><td>7.9375</td></tr>
+  <tr><td>1000.0000</td><td>-8</td></tr>
+</table>
+
+<br class="division">
+
+<h2>Benefits for Homomorphic Encryption</h2>
+
+<article>
+Homomorphic encryption enables trusted parties to receive an encrypted version of any given data, perform the requested computation on it, and return the result, all the while not discovering what the actually data or the computation they performed was.
+Fixed-point arithmetic is equivalent to integer arithmetic in terms of the required computation, and can even be done with the same logic circuits as integer arithmetic.
+This tends to add massive computational overheads, but out of all commonly used operations, the most well-optimized use case is matrix operations, which perfectly translates to running <a href="artificial_minds.html">Artificial Minds</a> and <a href="mind_uploading.html">digitized human minds</a> on untrusted substrate.
+<br><br>
+For this specific use case, neural networks constructed with purely fixed-point variables and represented as matrices of activations, weights and biases, combined with specialized implementation of homomorphic encryption, allows enough optimization that in most mature implementations the overhead stays below 10× in terms of the raw number of required bit flips and the energy use.
+Power savings can be even greater when specialized hardware is used, which can be optimized to perform these operations with efficiency near the landauer limit at the cost of being fully optimized to this use case and not easily useable for anything else.
+<br><br>
+For historical reasons, the most common type of homomorphic matrix multiplication chip to be mass produced and used for public compute grids across the <a href="embercold_region.html">embercold region</a> is adapted to matrices of signed 16-bit fixed-point numbers with equal number of whole and fraction bits, using two's complement.
+The common way to achieve nonlinear behavior in those networks is a polynomial approximation of ReLu function (0.00390625x<sup>2</sup>+0.5x to approximate max(0,x) for FX16 variables) which is typically also assumed and implemented at the hardware level.
+This forms a loop of incentives that means most of human uploads and artificial minds in the embercold are based on FX16 matrices, which becomes a technical baggage they have to carry with them everywhere else they go.
+</article>
+
+</html>
