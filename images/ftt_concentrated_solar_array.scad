@@ -25,7 +25,7 @@ module parabolic_mirror(focal_length=20e3,mirror_length=80e3,thickness=1e3,detai
 //50,50 = 100
 //so the radius of the mirror as seen from head on is just the focal length plus mirror length
 
-module concentrated_solar_array(array_radius,collector_radius,thickness=1,detail=16){
+module concentrated_solar_array(array_radius,collector_radius,thickness=1,detail=16,n_supports=8){
     /*
     focus = array_radius*(3/4);
     depth = array_radius*(1.33/4);
@@ -69,9 +69,10 @@ module concentrated_solar_array(array_radius,collector_radius,thickness=1,detail
         }}
     }
     //support struts
+    step = 360/n_supports;
     color("#888"){
-    for(i=[0:1:8]){
-        rotate([0,0,i*45]){
+    for(i=[step:step:360]){
+        rotate([0,0,i]){
             hull(){
                 translate([array_radius-thickness,0,depth]){sphere(thickness/2);}
                 translate([collector_radius,0,focus+thickness/2]){sphere(thickness/2);}
