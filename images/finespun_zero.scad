@@ -247,10 +247,11 @@ color([0.5,0.5,0.5]){
 //finespun_zero(rectenna=true);
 }
 
-/*
+
 //illustration shot
 $vpd=600;$vpr=[76,0,328];$vpf=22.5;
 color([0.5,0.5,0.5]){rotate([0,90,0]){finespun_zero(rectenna=true);}}
+/*
 //add text to the render
 translate($vpt){
     rotate($vpr){rotate([$vpf/2,0,0]){
@@ -273,6 +274,7 @@ translate($vpt){
 //end of illustration shot
 */
 
+/*
 //structure shot
 $vpd=100;$vpr=[95,0,335];$vpf=22.5;$vpt=[-5,0,-95];
 intersection(){
@@ -285,13 +287,14 @@ rotate([0,0,0]){translate([0,110,0]){cube(220,true);}}
 //$vpd=81;
 //$vpr=[101.9,0,167.9];
 //$vpt=[74.0,-18.13,-4.94];
-
+*/
 
 //notes here because I don't feel like writing the page right now
 //bare mass is 730.352m3×7.9t/m3 = 5 769 780.8 kg
 //if you add a floor that is 1cm thick: 856.016 m^3 × 7.9t/m3 = 6 762 526.4 kg
 //presurized internal volume is 2pi^2 × 100m × (10m)^2 = 197 392.0880 m^3
 //surface area is roughly 4pi^2 × 100m × 10m = 39 478.41760 m^2
+//living area is (2pi×100m)×(2×10m) = 12 566.370 61 m^2
 //radiated heat 39 478.41760 m^2 × 0.25 × stefan × (290K)^4 = 3.958252307 MW
 
 //openscad finespun_zero.scad -o finespun_zero.png --colorscheme=Starnight --imgsize=1000,1000

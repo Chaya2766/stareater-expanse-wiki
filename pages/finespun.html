@@ -71,7 +71,8 @@ For most purposes, to specify when something will happen, when a task should be 
 The artificial minds which have no need for sleep, and felicity herself who has a very flexible sleep schedule, deal with that well and don't find it necessary to have defined days and weeks.
 The habitat does actually have a defined 10-day week regardless of that fact, which is exactly 1 megasecond long.
 <br><br>
-The 10th day of the week is considered a backup day - it is the day everyone gets for their own use, mainly for things like making backups of important data and/or their minds, running parity checks, equalizing charge levels in their remote body's batteries, etc.
+The first day of the week is considered a backup day - it is the day everyone gets for their own use, mainly for things like making backups of important data and/or their minds, running parity checks, equalizing charge levels in their remote body's batteries, etc.
+Felicity's idea of the backup day is a way to ensure that no more than a week of work can be lost at a time, thus it is done first at the beginning of each week, saving all new experiences, updated hardware designs, any changes to protocols that run the settlement, and the minds of the people living within, so that if anything catastrophic should happen later in the week, anyone participating will have at most lost that week of work and/or life.
 <table class="styled centered">
   <tr>
     <th colspan=12 id="megasecond_table_header"> current local time: <span id="finespun_local_time">[time]</span> | current day of the week below</th>
@@ -110,8 +111,7 @@ function refresh_megasecond_table(){
     
     cycle_start = (c-1)*cycle_length;
     cycle_end = c*cycle_length - 1;
-    if(c == 10){
-      cycle_end = 999999;
+    if(c == 1){
       next_cycle.innerHTML += "backup day<br>";
     } else {next_cycle.innerHTML += "standard<br>";}
     this_cycle_length = cycle_end - cycle_start + 1;
