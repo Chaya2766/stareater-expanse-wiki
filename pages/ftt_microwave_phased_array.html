@@ -1,0 +1,65 @@
+<head>
+ <link rel="stylesheet" href="../index.css"></link>
+</head>
+<html class="background2" id="page">
+<a style="float: right;" target="_blank" href="../index.html?page=pages/ftt_GaAs_photovoltaics.html">link to this page</a>
+
+<h1>Felicity Techtree: Microwave Phased Arrays</h1>
+<hr>
+<img src="../images/placeholder.png" class="basics"></img>
+<article class="basics">
+Microwave Phased Arrays, as used in the <a href="felicity_techtree.html">Felicity tech tree</a>, allow &approx;86.6% conversion both ways between electrical power and directed microwave radiation.
+They are produced with Ion Beam Printing.
+<br><br>
+They are most commonly used in concentrated solar arrays, which otherwise cannot transmit their power to rotating habitats due to the rotation forbidding a physical connection.
+<br><br>
+They can also be used for communication, typically at 5 milliwatts or less, with even a single tile allowing 2.3E+10 bit/s bandwidth within 100m range at that signal strength, dropping off with the inverse of distance past that range.
+Using the phased array at its full rated 50 watts for communication is not compatible with radiocommunication regulations in most populated areas, but can easily extend the full bandwidth range by 100× up to 10km.
+<!sqrt(50W/5mW)=100>
+</article>
+<hr>
+
+<h1>Standard phased array tile</h1>
+<img src="../images/ftt_phased_array_tile.webp" class="styled right"></img>
+<article>
+A tile sized 10cm by 10cm is used as a basic building block for the collectors of larger phased arrays.
+The tile includes an ion-beam-printed gallium arsenide circuit with 173 copper ring antennas.
+<br><br>
+The tile can coordinate with nearby tiles to form one larger phased array, for which all the logic is already hardware-programmed into the gallium arsenide circuitry.
+<br><br>
+A single tile is only rated for 50 watts of incoming power [*], corresponding to about 6.8 watts of heating due to inefficiencies, but from empirical testing it can actually handle 500 watts just fine as long as active cooling is provided (below the rated 50 watts, inefficiency heating is easily balanced by cooling from passive thermal radiation).
+It is notable that when used as a power receiver, the process is active, unlike a passive rectenna, meaning that if the receiver malfunctions while receiving power above its rated 50W input, it can fail destructively.
+When operating above the rated power, it is critical to have enough spare battery capacity or enough electrical loads to sink all of the power produced.
+If the receiver is handling significantly more than 50 watts of incoming microwave power and cannot sink the produced electrical power into a load, gallium arsenide logic circuitry managing the ring antennas will be destroyed and the whole tile will need to be replaced.
+<br><br>
+[*] When used as a power emitter, 50 watts of incoming electrical power is converted into 43.3W of outgoing microwave power, and when used as a receiver, 50 watts of incoming microwave power is converted into 43.3W of outgoing electrical power.
+End to end transmission incurs the loss twice so 50 watts electrical converted to microwaves and then back to electricity yields 37.5 watts electrical - almost exactly 25% power loss.
+</article>
+
+<h1>Range characteristics</h1>
+<article>
+The size of the emitter is the primary variable that determines the transmission range and size of the receiver.
+Frequency is pre-determined as 5.8GHz, as such the diameter of the transmitter and the distance to the receiver are the two significant remaining variables directly determining how small of a spot the microwaves can be focused to.
+<br><br>
+The general formula for this relationship is: d = 1.2×0.052m×T/D
+<ul>
+  <li><b>d</b> is diameter of the spot the microwaves can be focussed onto</li>
+  <li><b>T</b> is distance to the target</li>
+  <li><b>D</b> is diameter of the transmitter</li>
+</ul>
+Below is a table with size of transmitter on the left and distance to target on top, showing resulting spot size.
+</article>
+
+<table class="styled">
+<tr><th rowspan=2>emitter<br>size</th><th colspan=6>distance to target</th></tr>
+<tr><td>10m</td><td>100m</td><td>1km</td><td>10km</td><td>100km</td><td>1Mm</td></tr>
+<tr><td>10m</td><td>6.24cm</td><td>62.4cm</td><td>6.24m</td><td>6.24m</td><td>624m</td><td>6.24km</td></tr>
+<tr><td>20m</td><td>-</td><td>31.2cm</td><td>3.12m</td><td>31.2m</td><td>312m</td><td>3.12km</td></tr>
+<tr><td>50m</td><td>-</td><td>12.48cm</td><td>1.248m</td><td>12.48m</td><td>124.8m</td><td>1.248km</td></tr>
+<tr><td>100m</td><td>-</td><td>-</td><td>62.4cm</td><td>6.24m</td><td>62.4m</td><td>624m</td></tr>
+<tr><td>200m</td><td>-</td><td>-</td><td>31.2cm</td><td>3.12m</td><td>31.2m</td><td>312m</td></tr>
+<tr><td>500m</td><td>-</td><td>-</td><td>12.48cm</td><td>1.248m</td><td>12.48m</td><td>124.8m</td></tr>
+<tr><td>1km</td><td>-</td><td>-</td><td>-</td><td>62.4cm</td><td>6.24m</td><td>62.4m</td></tr>
+</table>
+
+</html>
