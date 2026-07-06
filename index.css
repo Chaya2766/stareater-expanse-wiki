@@ -42,6 +42,15 @@ html{
  background-color: #111F;
  /*padding-bottom: 40px;*/ /*uncomment bottom padding for freeWHA*/
 }
+.background_spider{
+ background-image: url('images/spider_cluster.png');
+ background-color: #1118;
+ background-blend-mode: overlay;
+ background-repeat: vertical;
+ background-size: cover;
+ background-position: center;
+ background-attachment: fixed;
+}
 .titlebox{
  width: 100%;
  height: 200px;
