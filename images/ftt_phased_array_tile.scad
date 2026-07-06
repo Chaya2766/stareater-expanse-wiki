@@ -1,20 +1,30 @@
-module phased_array_tile(){
+module phased_array_tile(detailed=false){
     color("#554"){
     translate([0,0,0.5]){
         cube([98,98,0.1],true);
     }
     }
-    color("#A64"){
-        spotD=7;
-        gap=1;
-        for(x=[1+(spotD+gap)/2:0.8*(spotD+gap):99-(spotD+gap)/2]){
-            for(y=[1+(spotD+gap)/2:spotD+gap:99-(spotD+gap)/2]){
-                stag=(x/(0.8*(spotD+gap))) % 2;
-            translate([x-50,-52+y+stag*(spotD+gap)/2,0.5]){
-                if(y+stag*(spotD+gap)/2<98)antenna_spot(h=0.15,d=spotD);
+    if(detailed){
+        color("#A64"){
+            spotD=7;
+            gap=1;
+            for(x=[1+(spotD+gap)/2:0.8*(spotD+gap):99-(spotD+gap)/2]){
+                for(y=[1+(spotD+gap)/2:spotD+gap:99-(spotD+gap)/2]){
+                    stag=(x/(0.8*(spotD+gap))) % 2;
+                translate([x-50,-52+y+stag*(spotD+gap)/2,0.5]){
+                    if(y+stag*(spotD+gap)/2<98)antenna_spot(h=0.15,d=spotD);
+                }
             }
         }
-    }
+        }
+    } else {
+        color("#A64"){
+            spotD=7;
+            gap=1;
+            for(x=[1+(spotD+gap)/2:2*(spotD+gap):99-(spotD+gap)/2]){
+                translate([x-50,-49,0.5]){cube([spotD+gap,98,0.5]);}
+            }
+        }
     }
     color("#888"){
     difference(){
@@ -41,7 +51,7 @@ for(x=[-5E+3:100:5E+3]){
     for(y=[-5E+3:100:5E+3]){
         if(sqrt(pow(x,2)+pow(y,2))<(d-sqrt(2)*0.1E+3)/2){
             translate([x,y,0]){
-                phased_array_tile();
+                phased_array_tile(false);
             }
         }
     }
@@ -55,17 +65,18 @@ translate([0,0,-11]){color("#888"){
 
 
 translate([50,-50,0]){
-phased_array_tile();
+phased_array_tile(true);
 }
-
 $vpd=425;
 $vpt=[50,-50,0];
+
 
 //openscad ftt_phased_array_tile.scad -o ftt_phased_array_tile.png --view=axes,scales --colorscheme=Starnight --imgsize=1000,1000
 
 /*
-solar_array(10E+3);
+phased_array(10E+3);
 $vpd=16E+3;
 $vpt=[0,0,-1000];
 */
+
 //openscad ftt_solar_tile.scad -o ftt_solar_tile.png --colorscheme=Starnight --viewall --imgsize=1000,500
