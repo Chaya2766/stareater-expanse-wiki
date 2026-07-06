@@ -10,6 +10,8 @@ module radiator(){
     }
 }
 
+module orionid_ISV(electric_sail=false){
+
 //cylinder(d=60,h=780);
 color([0.3,0.3,0.3]){
 cylinder(d=60,h=1);//pusher plate
@@ -68,20 +70,28 @@ for(rot=[0,90,180,270]){
     }
 }
 
-electric_sail = false;
 if(electric_sail){
     step=360/1024;
     for(i=[step:step:360]){
-    rotate([80,0,i]){translate([30,0,0]){cylinder(h=20e3,r1=0.02,r2=10);}}
+    rotate([90,0,i]){translate([30,0,0]){cylinder(h=200e3,r1=0.02,r2=10);}}
     }
 }
 
-/*
-$vpd=2000+min(1e5,pow(1e5,0.7*$t+0.4));
-$vpr=[55*(0.6+0.9*$t),0,25];
-*/
+}
 
+if($t<0.85){
+orionid_ISV(false);
+}else{
+orionid_ISV(true);
+}
+
+$vpd=2000+min(1.1e6,pow(1e6,0.8*$t+0.4));
+$vpt=[0,0,400];
+//$vpr=[55*(0.6+0.9*$t),0,25];
+
+/*
 $vpr=[55,0,25];
 $vpt=[0,0,400];
 $vpd=2000;
 //$vpd=1e5;
+*/
