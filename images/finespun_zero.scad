@@ -194,35 +194,42 @@ module entrances(R,r,t,gap,entry_d,entry_offset=0.6,L,n){
     }
 }
 
-module mounted_rectenna(R=100,r=10,gap=0.3,n=50){
+module mounted_rectenna(R=100,r=10,Ar=25,gap=0.3,n=50){
     step = 360/n;
     translate([0,0,r-0.1/2]){
-        difference(){
-            cylinder(r=50.1,h=0.1,center=true,$fn=64);
-            cylinder(r=49.9,h=1,center=true,$fn=64);
+        color("#888"){
+        translate([0,0,-0.1]){cylinder(r=Ar+0.01,h=0.05,center=true,$fn=64);}
         }
-        for(x=[-50:0.1:50]){
+        color("#554"){
+        translate([0,0,-0.05]){cylinder(r=Ar+0.01,h=0.05,center=true,$fn=64);}
+        }
+        color("#A64"){
+        for(x=[-Ar:0.2:Ar]){
             //solving for width of the circle at given height using pythagorean theorem
-            width = 2*sqrt(pow(50,2)-pow(x,2));
-            translate([x,0,0]){cube([0.01,width,0.01],true);}
+            width = 2*sqrt(pow(Ar,2)-pow(x,2));
+            translate([x,0,0]){cube([0.04,width,0.04],true);}
         }
-        for(y=[-50:1:50]){
+        for(y=[-Ar:0.2:Ar]){
             //solving for height of the circle at given y position using pythagorean theorem
-            height = 2*sqrt(pow(50,2)-pow(y,2));
-            translate([0,y,0]){cube([height,0.1,0.1],true);}
+            height = 2*sqrt(pow(Ar,2)-pow(y,2));
+            translate([0,y,0]){cube([height,0.04,0.04],true);}
         }
     }
+    }
+    color("#888"){
     for(i=[step:step:360]){
         rotate([0,0,i+1.8]){
         hull(){
-            translate([49.8,0,r]){sphere(0.1);}
+            translate([Ar-0.1,0,r]){sphere(0.1);}
             translate([R-r-gap,0,r]){sphere(0.1);}
         }
         }
     }
+    }
 }
 
 module finespun_zero(R=100,r=10,t=0.01,rectenna=false){
+    color([0.5,0.5,0.5]){
     difference(){
 torus(R,r,n=32,$fn=16);
 torus(R,r-t,n=32,$fn=16);
@@ -235,9 +242,12 @@ runway_lights(R,r,t=0.1,h=10,n=24,gap=0.3,offset=0.4);
 
 //entries
 entrances(R=R,r=r,t=t,gap=0.3,entry_d=5,L=10,n=6);
+    }
 
 if(rectenna){
-    mounted_rectenna(R=100,r=10,gap=0.3,n=12.5);
+    mounted_rectenna(R=100,r=10,gap=0.3,n=10);
+    //whatever you set n to, make sure that dividing 100 by n gives an integer
+    //that way rectenna supports 
 }
 
 }
@@ -250,8 +260,8 @@ color([0.5,0.5,0.5]){
 
 //illustration shot
 $vpd=600;$vpr=[76,0,328];$vpf=22.5;
-color([0.5,0.5,0.5]){rotate([0,90,0]){finespun_zero(rectenna=true);}}
-/*
+rotate([0,-90,0]){finespun_zero(rectenna=true);}
+
 //add text to the render
 translate($vpt){
     rotate($vpr){rotate([$vpf/2,0,0]){
@@ -272,7 +282,7 @@ translate($vpt){
     }}
 }
 //end of illustration shot
-*/
+
 
 /*
 //structure shot
