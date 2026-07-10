@@ -169,9 +169,9 @@ function deq_calc(){
 <br>
 A note about the elements which are not available in asteroids at all - at least some of them are available in vast quantities from starlifting of the sun, thus their lack of local natural availability does not result in astronomical prices.
 </article>
-<table class="styled">
-  <tr><th colspan=5>Average prices and abundance of elements in the embercold region</th></tr>
-  <tr><th>Z</th><th>name</th><th>frac. asteroid mass (kg/kg)</th><th>bulk ($e/kg)</th><th>pure ($e/kg)</th></tr>
+<table class="styled" id="element_prices_table">
+  <tr><th colspan=5>Average prices and abundance of elements in the embercold region<br><small class="gray">(click on Z, frac. asteroid mass, bulk or pure to sort by these columns)</small></th></tr>
+  <tr><th onclick="sort_elements_table(0)">Z</th><th>name</th><th onclick="sort_elements_table(2)">frac. asteroid mass (kg/kg)</th><th onclick="sort_elements_table(3)">bulk ($e/kg)</th><th onclick="sort_elements_table(4)">pure ($e/kg)</th></tr>
   <tr><td>1</td><td>hydrogen</td><td>2.379700369E-02</td><td>1.4873</td><td>988.612</td></tr>
   <tr><td>2</td><td>helium</td><td>0</td><td>23.52</td><td>15 791.94</td></tr>
   <tr><td>3</td><td>lithium</td><td>1.685621094E-06</td><td>79.325</td><td>53 260.867</td></tr>
@@ -278,5 +278,37 @@ A note about the elements which are not available in asteroids at all - at least
   <tr><td>103</td><td>lawrencium</td><td>0</td><td>-</td><td>-</td></tr>
   <tr><td>104</td><td>ruthenfordium</td><td>0</td><td>-</td><td>-</td></tr>
 </table>
+
+<script>
+function sort_elements_table(column){
+  table = document.getElementById("element_prices_table");
+  console.log("sorting elements table by column:",column);
+  needs_sorting = true;
+  loops_limit = 1000;
+  
+  while(needs_sorting && loops_limit > 0){
+    needs_sorting = false;
+    rows = table.rows;
+    loops_limit -= 1;
+    
+    for(i=2 ; i<rows.length-1 ; i++){
+      //replacements remove the spaces in the numbers
+      a = rows[i].cells[column].textContent.replace(/ /g,'');
+      b = rows[i+1].cells[column].textContent.replace(/ /g,'');
+      if(!isNaN(a) && !isNaN(b)){
+        if(parseFloat(a) > parseFloat(b)){
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          needs_sorting = true;
+        }
+      } else {
+        if(isNaN(a) && !isNaN(b)){
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          needs_sorting = true;
+        }
+      }
+    }
+  }
+}
+</script>
 
 </html>
