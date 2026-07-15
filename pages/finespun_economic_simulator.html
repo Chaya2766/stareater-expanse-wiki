@@ -29,6 +29,16 @@ things to do:
   <input type="checkbox" id="wait_checkbox">
   Auto-play
 </label>
+<br>
+delay between turns:
+<input type="number" value="1000" id="autoplay_turn_delay"></input>
+milliseconds (real time)
+<br>
+wait length per turn:
+<input type="number" value="1000" id="autoplay_turn_length"></input>
+seconds (game time)
+<br>
+<br>
 <input type="button" value="wait 1 second" onclick="wait_seconds(1)"></input>
 <input type="button" value="wait 1 kilosecond" onclick="wait_seconds(1E+3)"></input>
 <input type="button" value="wait 1 megasecond" onclick="wait_seconds(1E+6)"></input>
@@ -304,11 +314,18 @@ function setupWaitCheckbox() {//Claude Haiku 4.5
   
   checkbox.addEventListener('change', (event) => {
     if (event.target.checked) {
+      turndelay = parseInt(document.getElementById('autoplay_turn_delay').value);
+      turnlength = parseInt(document.getElementById('autoplay_turn_length').value);
       // Start calling wait_seconds(1) every second
       waitInterval = setInterval(() => {
-        autoplay_action();
-        wait_seconds(1000);
-      }, 1000);
+        //this if statement is a very simple solution to overwhelming energy production
+        //only wait 1000 seconds if you did not have any more actions to take this turn
+        if(autoplay_action()){
+          //wait_seconds(1);
+          //waiting for 1 second on every action is really only just so that it does not somehow lock itself into never waiting
+          //I don't know if it is needed since waiting is the only way to produce energy
+        } else { wait_seconds(turnlength); }
+      }, turndelay);
     } else {
       // Stop the interval
       clearInterval(waitInterval);
@@ -322,28 +339,40 @@ setupWaitCheckbox();
 
 function autoplay_action(){
   //this is much more complicated than it seemed at first
+  tiles = Math.floor(document.getElementById("solar_tiles").innerHTML * 1);
+  
   if(build_concentrated_solar_array(1)){
     return true;
-  } else if(print_solar_tile(1000)) {
-    return true;
-  } else if(print_solar_tile(1)) {
-    return true;
+  } else if(tiles < 8000){
+    if(try_max_print_solar_tile()) {
+      return true;
+    }
   }
   
   energy = document.getElementById("energy_J").innerHTML * 1;
+  kamacite = document.getElementById("kamacite_kg").innerHTML * 1;
+  baked_kamacite = document.getElementById("baked_kamacite_kg").innerHTML * 1;
   kamacite_bake = document.getElementById("kamacite_bake_kg").innerHTML * 1;
+  total_kamacite = K + Bk;
+  
+  //this makes the algorithm focus on just filling up kamacite if there is already enough tiles and energy to make the solar array
+  if(tiles >= 8000 && energy > 1e9 && total_kamacite < 611000){
+    if(try_max_electrolyze_regolith()){
+      return true;
+    }
+  }
   
   //maybe somewhere here should check if the number of concentrated solar arrays is sufficient to switch to separating raw regolith and do that instead after like, say, 1000 solar arrays?
   //or maybe after reaching finespun's growth target of 400 000 solar arrays
   
   if(kamacite_bake > 1){
-    if(separate_kamacite_bake(1)){
+    if(try_max_separate_kamacite_bake()){
       return true;
     }
   } else if(energy > 1e9){
-    if(bake_kamacite(1)) {
+    if(try_max_bake_kamacite()) {
       return true;
-    } else if(electrolyze_regolith(1)){
+    } else if(try_max_electrolyze_regolith()){
       return true;
     }
   }
@@ -353,6 +382,62 @@ function autoplay_action(){
   //here maybe should check if non-baked kamacite is piling up too much and build additional furnaces if so
   
   return false;
+}
+
+function try_max_print_solar_tile(){
+  if(print_solar_tile(1000)){
+    return true;
+  } else if(print_solar_tile(100)){
+    return true;
+  } else if(print_solar_tile(10)){
+    return true;
+  } else if(print_solar_tile(1)){
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function try_max_electrolyze_regolith(){
+  if(electrolyze_regolith(1000)){
+    return true;
+  } else if(electrolyze_regolith(100)){
+    return true;
+  } else if(electrolyze_regolith(10)){
+    return true;
+  } else if(electrolyze_regolith(1)){
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function try_max_bake_kamacite(){
+  if(bake_kamacite(1000)){
+    return true;
+  } else if(bake_kamacite(100)){
+    return true;
+  } else if(bake_kamacite(10)){
+    return true;
+  } else if(bake_kamacite(1)){
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function try_max_separate_kamacite_bake(){
+  if(separate_kamacite_bake(1000)){
+    return true;
+  } else if(separate_kamacite_bake(100)){
+    return true;
+  } else if(separate_kamacite_bake(10)){
+    return true;
+  } else if(separate_kamacite_bake(1)){
+    return true;
+  } else {
+    return false;
+  }
 }
 
 function electrolyze_regolith(m){//m is the number of refineries used, it will use maximum if m is -1, each takes 100kg
@@ -612,10 +697,10 @@ function calculate_statistics(){
   
   C = document.getElementById("concentrated_solar_arrays").innerHTML * 1;
   doubling_time = time/Math.log2(C);
-  document.getElementById("power_doubling_time").innerHTML = doubling_time;
+  document.getElementById("power_doubling_time").innerHTML = parseInt(doubling_time);
   
-  document.getElementById("annual_growth_rate").innerHTML = 100*((Math.pow(2,year/doubling_time))-1);
-  document.getElementById("gigasecond_growth_rate").innerHTML = (Math.pow(2,1E+9/doubling_time));
+  document.getElementById("annual_growth_rate").innerHTML = (100*((Math.pow(2,year/doubling_time))-1)).toFixed(6);
+  document.getElementById("gigasecond_growth_rate").innerHTML = (Math.pow(2,1E+9/doubling_time)).toFixed(6);
 }
 
 function removeCompletedOrders(currentGameTime) {//claude haiku 4.5
