@@ -56,8 +56,8 @@ seconds (game time)
 
 <article class="tip centered" tip="Some of these might be completely useless if you're using this as a game rather than a simulation tool.">Infrastructure building tip</article>
 <input type="button" value="build concentrated solar array" onclick="build_concentrated_solar_array(1)"></input>
-<input type="button" value="build LTE refinery" onclick="" disabled></input>
-<input type="button" value="build kamacite oven" onclick="" disabled></input>
+<input type="button" value="build LTE refinery" onclick="build_LTE_refinery(1)"></input>
+<input type="button" value="build kamacite oven" onclick="build_kamacite_oven(1)"></input>
 <input type="button" value="build calutron" onclick="" disabled></input>
 <input type="button" value="build ion beam printer" onclick="" disabled></input>
 <input type="button" value="build compute node" onclick="" disabled></input>
@@ -126,8 +126,8 @@ seconds (game time)
 <table class="styled left">
   <tr><th colspan=2>Infrastructure available</th></tr>
   <tr><td>concentrated solar array</td><td id="concentrated_solar_arrays">1</td></tr>
-  <tr><td>low temperature electrolysis refinery</td><td id="LTE_refineries">1000000</td></tr>
-  <tr><td>kamacite oven</td><td id="kamacite_ovens">1000000</td></tr>
+  <tr><td>low temperature electrolysis refinery</td><td id="LTE_refineries">1</td></tr>
+  <tr><td>kamacite oven</td><td id="kamacite_ovens">1</td></tr>
   <tr><td>calutron</td><td id="calutrons">1000000</td></tr>
   <tr><td>Ion beam printer</td><td id="ion_beam_printers">1000000</td></tr>
   <tr><td>Compute node</td><td>1</td></tr>
@@ -340,6 +340,13 @@ setupWaitCheckbox();
 function autoplay_action(){
   //this is much more complicated than it seemed at first
   tiles = Math.floor(document.getElementById("solar_tiles").innerHTML * 1);
+  arrays = Math.floor(document.getElementById("concentrated_solar_arrays").innerHTML * 1);
+  LTE_refineries = Math.floor(document.getElementById("LTE_refineries").innerHTML * 1);
+  kamacite_ovens = Math.floor(document.getElementById("kamacite_ovens").innerHTML * 1);
+  
+  if(arrays >= 400000){
+    return try_max_separate_regolith();
+  }
   
   if(build_concentrated_solar_array(1)){
     return true;
@@ -377,6 +384,26 @@ function autoplay_action(){
     }
   }
   
+  if(energy > 1e12){
+    //sequentially here check if there are no low temperature electrolysers left and make more if there is zero left
+    if(kamacite_ovens == 0){
+      if(build_kamacite_oven(1)){
+        return true;
+      }
+    } if(LTE_refineries == 0){
+      if(build_LTE_refinery(1)){
+        return true;
+      }
+    //} else if(ion beam printers == 0) {
+    //do the same for ion beam printers
+    } else if(try_max_separate_regolith()){
+      return true;
+    } else if(false){
+    //and here do the same for calutrons
+      return true;
+    }
+  }
+  
   //here check if energy is growing past 10GJ and start building additional electrolysis refineries if so
   
   //here maybe should check if non-baked kamacite is piling up too much and build additional furnaces if so
@@ -385,7 +412,13 @@ function autoplay_action(){
 }
 
 function try_max_print_solar_tile(){
-  if(print_solar_tile(1000)){
+  if(print_solar_tile(1000000)){
+    return true;
+  } else if(print_solar_tile(100000)){
+    return true;
+  } else if(print_solar_tile(10000)){
+    return true;
+  } else if(print_solar_tile(1000)){
     return true;
   } else if(print_solar_tile(100)){
     return true;
@@ -399,7 +432,13 @@ function try_max_print_solar_tile(){
 }
 
 function try_max_electrolyze_regolith(){
-  if(electrolyze_regolith(1000)){
+  if(electrolyze_regolith(1000000)){
+    return true;
+  } else if(electrolyze_regolith(100000)){
+    return true;
+  } else if(electrolyze_regolith(10000)){
+    return true;
+  } else if(electrolyze_regolith(1000)){
     return true;
   } else if(electrolyze_regolith(100)){
     return true;
@@ -413,7 +452,13 @@ function try_max_electrolyze_regolith(){
 }
 
 function try_max_bake_kamacite(){
-  if(bake_kamacite(1000)){
+  if(bake_kamacite(1000000)){
+    return true;
+  } else if(bake_kamacite(100000)){
+    return true;
+  } else if(bake_kamacite(10000)){
+    return true;
+  } else if(bake_kamacite(1000)){
     return true;
   } else if(bake_kamacite(100)){
     return true;
@@ -427,13 +472,39 @@ function try_max_bake_kamacite(){
 }
 
 function try_max_separate_kamacite_bake(){
-  if(separate_kamacite_bake(1000)){
+  if(separate_kamacite_bake(1000000)){
+    return true;
+  } else if(separate_kamacite_bake(100000)){
+    return true;
+  } else if(separate_kamacite_bake(10000)){
+    return true;
+  } else if(separate_kamacite_bake(1000)){
     return true;
   } else if(separate_kamacite_bake(100)){
     return true;
   } else if(separate_kamacite_bake(10)){
     return true;
   } else if(separate_kamacite_bake(1)){
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function try_max_separate_regolith(){
+  if(separate_regolith(1000000)){
+    return true;
+  } else if(separate_regolith(100000)){
+    return true;
+  } else if(separate_regolith(10000)){
+    return true;
+  } else if(separate_regolith(1000)){
+    return true;
+  } else if(separate_regolith(100)){
+    return true;
+  } else if(separate_regolith(10)){
+    return true;
+  } else if(separate_regolith(1)){
     return true;
   } else {
     return false;
@@ -471,6 +542,45 @@ function electrolyze_regolith(m){//m is the number of refineries used, it will u
   }
 }
 
+function build_LTE_refinery(m){//m is the number of LTE refineries to be built. The tool to be used for building these is not yet implemented but likely will be a wire FDM printer
+  console.log("Function 'build_LTE_refinery' is not fully thought out yet and requires re-examination");
+  //max = Math.floor(document.getElementById("ion_beam_printers").innerHTML * 1);
+  //if(m < 0){ m = max; }
+  T = Math.floor(document.getElementById("epoch_time").innerHTML.replace(/\s/g, '') * 1);
+  E = document.getElementById("energy_J").innerHTML * 1;
+  K = document.getElementById("kamacite_kg").innerHTML * 1;
+  Bk = document.getElementById("baked_kamacite_kg").innerHTML * 1;
+  total_kamacite = K + Bk;
+  
+  energy_cost = 100e6;
+  kamacite_cost = 120;
+  time_cost = 80000;
+  
+  document.getElementById("last_action").innerHTML = "time "+T.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")+" - build LTE refinery times "+(m).toString()+"<br>";
+  
+  if(total_kamacite >= kamacite_cost*m &  E>=energy_cost*m){
+    E -= energy_cost*m;
+    
+    Bk -= kamacite_cost*m;
+    if(Bk < 0){K += Bk; Bk = 0;}
+    //this uses baked kamacite first and then if there is not enough baked kamacite, the remaining missing material is taken from fresh kamacite
+    
+    document.getElementById("energy_J").innerHTML = E;
+    document.getElementById("kamacite_kg").innerHTML = K;
+    document.getElementById("baked_kamacite_kg").innerHTML = Bk;
+    
+    completion_time = T + time_cost;//time it takes to build an array still to be determined
+    addOrder("Build LTE refinery",m,completion_time);
+    document.getElementById("last_action").innerHTML += "proceeding to build "+(1*m).toString()+" LTE refineries.<br>";
+    return true;
+  } else {
+    document.getElementById("last_action").innerHTML += "could not build "+(1*m).toString()+" LTE refineries:<br>";
+    if(E<489788*m){ document.getElementById("last_action").innerHTML += "missing "+parseInt(energy_cost*m - E).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")+" joules of energy.<br>";}
+    if(total_kamacite<610598.475*m){ document.getElementById("last_action").innerHTML += "missing "+parseInt(kamacite_cost*m - total_kamacite).toString()+" kg of kamacite. This counts the combined total of fresh kamacite and baked kamacite.<br>";}
+    return false;
+  }
+}
+
 function bake_kamacite(m){//m is the number of ovens used, it will use maximum if m is -1, each takes 10kg
   max = Math.floor(document.getElementById("kamacite_ovens").innerHTML * 1);
   if(m < 0){ m = max; }
@@ -498,6 +608,45 @@ function bake_kamacite(m){//m is the number of ovens used, it will use maximum i
     if(E<870E+6*m){ document.getElementById("last_action").innerHTML += "missing "+parseInt(870E+6*m - E).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")+" joules of energy.<br>";}
     if(K<10*m){ document.getElementById("last_action").innerHTML += "missing "+parseInt(10*m - K).toString()+" kg of kamacite.<br>";}
     if(max<m){ document.getElementById("last_action").innerHTML += "missing kamacite ovens, need "+(m).toString()+" but you only have "+(max).toString()+" available.<br>";}
+    return false;
+  }
+}
+
+function build_kamacite_oven(m){//m is the number of kamacite ovens to be built. The tool to be used for building these is not yet implemented but likely will be a wire FDM printer
+  console.log("Function 'build_kamacite_oven' is not fully thought out yet and requires re-examination");
+  //max = Math.floor(document.getElementById("ion_beam_printers").innerHTML * 1);
+  //if(m < 0){ m = max; }
+  T = Math.floor(document.getElementById("epoch_time").innerHTML.replace(/\s/g, '') * 1);
+  E = document.getElementById("energy_J").innerHTML * 1;
+  K = document.getElementById("kamacite_kg").innerHTML * 1;
+  Bk = document.getElementById("baked_kamacite_kg").innerHTML * 1;
+  total_kamacite = K + Bk;
+  
+  energy_cost = 140e6;
+  kamacite_cost = 200;
+  time_cost = 120000;
+  
+  document.getElementById("last_action").innerHTML = "time "+T.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")+" - build kamacite oven times "+(m).toString()+"<br>";
+  
+  if(total_kamacite >= kamacite_cost*m &  E>=energy_cost*m){
+    E -= energy_cost*m;
+    
+    Bk -= kamacite_cost*m;
+    if(Bk < 0){K += Bk; Bk = 0;}
+    //this uses baked kamacite first and then if there is not enough baked kamacite, the remaining missing material is taken from fresh kamacite
+    
+    document.getElementById("energy_J").innerHTML = E;
+    document.getElementById("kamacite_kg").innerHTML = K;
+    document.getElementById("baked_kamacite_kg").innerHTML = Bk;
+    
+    completion_time = T + time_cost;//time it takes to build an array still to be determined
+    addOrder("Build kamacite oven",m,completion_time);
+    document.getElementById("last_action").innerHTML += "proceeding to build "+(1*m).toString()+" kamacite ovens.<br>";
+    return true;
+  } else {
+    document.getElementById("last_action").innerHTML += "could not build "+(1*m).toString()+" kamacite ovens:<br>";
+    if(E<489788*m){ document.getElementById("last_action").innerHTML += "missing "+parseInt(energy_cost*m - E).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")+" joules of energy.<br>";}
+    if(total_kamacite<610598.475*m){ document.getElementById("last_action").innerHTML += "missing "+parseInt(kamacite_cost*m - total_kamacite).toString()+" kg of kamacite. This counts the combined total of fresh kamacite and baked kamacite.<br>";}
     return false;
   }
 }
@@ -748,6 +897,12 @@ function complete_order(order_name,order_count){
     document.getElementById("LTE_refineries").innerHTML = refineries + order_count;
   }
   else 
+  if(order_name == "Build LTE refinery"){
+    refineries = Math.floor(document.getElementById("LTE_refineries").innerHTML * 1);
+    console.log("Order 'Build LTE refinery' should give back one wire FDM printer but that machine is not implemented yet");
+    document.getElementById("LTE_refineries").innerHTML = refineries + order_count;
+  }
+  else 
   if(order_name == "Bake 10kg kamacite"){
     ovens = Math.floor(document.getElementById("kamacite_ovens").innerHTML * 1);
     Bk = document.getElementById("baked_kamacite_kg").innerHTML * 1;
@@ -758,6 +913,12 @@ function complete_order(order_name,order_count){
     
     document.getElementById("baked_kamacite_kg").innerHTML = Bk;
     document.getElementById("kamacite_bake_kg").innerHTML = Kb;
+    document.getElementById("kamacite_ovens").innerHTML = ovens + order_count;
+  }
+  else 
+  if(order_name == "Build kamacite oven"){
+    ovens = Math.floor(document.getElementById("kamacite_ovens").innerHTML * 1);
+    console.log("Order 'Build kamacite oven' should give back one wire FDM printer but that machine is not implemented yet");
     document.getElementById("kamacite_ovens").innerHTML = ovens + order_count;
   }
   else 
