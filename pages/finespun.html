@@ -1,3 +1,34 @@
+<style>
+.daycell{
+  float: left;
+  width: 38px;
+  height: 28px;
+  background-color: #000;
+  border: 1px solid white;
+  margin: 0px;
+  font-size: 75%;
+  text-align: center;
+  padding-top: 10px;
+}
+.weekcell{
+  border: 2px dotted white;
+  padding: 2px;
+  margin: 2px;
+  clear: both;
+  height: 40px;
+}
+.monthcell{
+  border: 4px solid white;
+  padding: 4px;
+  float: left;
+}
+.month_header{
+  border-bottom: 2px solid white;
+  font-size: 200%;
+  text-align: center;
+}
+</style>
+
 <head>
  <link rel="stylesheet" href="../index.css"></link>
 </head>
@@ -67,34 +98,41 @@ If sold at market prices, the settlement's production would bring in about 641.6
 <br class="division">
 
 <h1>timekeeping</h1>
+<div id="calendar_small" style="float: left; margin: 10px; border: 1px solid white;"></div>
 <article>
-The local standard of timekeeping is tied to <a href="epoch_time.html">Epoch Time</a>, and dates are written as just the current epoch time with digits spaced in groups of three.
-For most purposes, to specify when something will happen, when a task should be done, or leaving a timestamp to mark when something was done, that's all that is used and nobody cares about other kinds of time like cycles, years, times of day, etc.
-The artificial minds which have no need for sleep, and felicity herself who has a very flexible sleep schedule, deal with that well and don't find it necessary to have defined days and weeks.
-The habitat does actually have a defined 10-day week regardless of that fact, which is exactly 1 megasecond long.
+The local standard of timekeeping is fundamentally tied to <a href="epoch_time.html">Unix Time</a>, and dates are written as just the current epoch time with digits spaced in groups of three.
+For most purposes, to specify when something will happen, when a task should be done, or leaving a leaving a mark of when something was done, the unix timestamp is the only date format that should be used.
+The habitat does actually make some use of <a href="finespun_calendar.html">its own custom calendar</a> regardless of that fact, which spans an entire gigasecond.
 <br><br>
-The first day of the week is considered a backup day - it is the day everyone gets for their own use, mainly for things like making backups of important data and/or their minds, running parity checks, equalizing charge levels in their remote body's batteries, etc.
+<b>short cycle</b> = 100 kiloseconds (= 27 hours, 46 minutes and 40 seconds).
+<br>
+This is what is locally considered a single day. (one of the small boxes on the right)
+<br>
+<b>medium cycle</b> = 1 megasecond (&approx; 11.574 terran days) = exactly 10 local days.
+<br>
+This is what is locally considered a week. (the longer horizontal boxes with dotted border)
+<br>
+<b>long cycle</b> = 10 megaseconds (&approx; 3.8 gregorian months) = 10 local weeks = 100 local days.
+<br>
+This is what is locally considered a month, and is considered a good amount of time for completing one minor project.
+<br>
+<b>gigasecond</b> (&approx; 31.688 terran years) = 100 long cycles = 1000 local weeks = 10 000 local days.
+<br>
+This is treated as the equivalent of a year and considered a good amount of time for completing a major project.
+<br><br>
+A notable oddity of the finespun calendar is starting the count of days at 0 instead of 1, which means that there is a 0th day of the week, 0th week of the month and a 0th month of the year.
+The reason for this is to make the unix timestamp trivially readable as a calendar date - coloured parts of the timestamp <magenta>16</magenta> <u><red>78</red><green>5</green> <orange>0</orange></u><cyan>83 980</cyan> correspond to <magenta>the gigasecond</magenta>, <red>number of the long cycle in the gigasecond</red>, <green>number of the week in the long cycle</green>, <orange>day of the week</orange> and <cyan>time of day</cyan> or alternatively just <u>day of the year</u>.
+<br>
+That example timestamp would correspond to time 83 980th second of the 0th day of the 5th week of the 78th long cycle of the 16th gigasecond.
+<br><br>
+The 0th day of each week is considered a backup day - it is the day everyone gets for their own use, mainly for things like making backups of important data and/or their minds, running parity checks, equalizing charge levels in their remote body's batteries, etc.
 Felicity's idea of the backup day is a way to ensure that no more than a week of work can be lost at a time, thus it is done first at the beginning of each week, saving all new experiences, updated hardware designs, any changes to protocols that run the settlement, and the minds of the people living within, so that if anything catastrophic should happen later in the week, anyone participating will have at most lost that week of work and/or life.
-<table class="styled centered">
-  <tr>
-    <th colspan=12 id="megasecond_table_header"> current local time: <span id="finespun_local_time">[time]</span> | current day of the week below</th>
-  </tr>
-  <tr id="megasecond_table_cycles">
-  
-  </tr>
-</table>
+<br><br>
 Visitors are not expected to follow this convention, and it is generally suggested to follow a 90-kilosecond day cycle (equal exactly to 25 hours) which tends to be more comfortable for humans and other animals aligned with the terran day-night cycle length (the abundance of artificial lighting at finespun habitats tend to slightly delay the onset of sleep in humans and other animals, thus 25 hours actually ends up feeling more natural to follow than the standard 24 hours).
 Since all timekeeping is based on the unix epoch timestamp, any custom cycle length can be tracked by simply applying it as a modulo to the timestamp to get current time of day ( timestamp % cycle_length = current_time ) which many digital clocks can be easily configured to follow.
 <script>
-let cycle_length = 100000;
 
-function FinespunClock(){
-  timenow = Math.floor(Date.now() / 1000) % cycle_length;
-  document.getElementById("finespun_local_time").innerHTML = timenow.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-  refresh_megasecond_table();
-}
-setInterval(FinespunClock, 1000);
-
+/*
 function refresh_megasecond_table(){
   datenow = Math.floor(Date.now() / 1000);
   this_megasecond_start = datenow - (datenow % 1000000);
@@ -128,9 +166,53 @@ function refresh_megasecond_table(){
     cycle_row.appendChild(next_cycle);
   }
 }
+*/
+
+function build_small_calendar(){
+  document.getElementById('calendar_small').innerHTML = '<article style="text-align: center; font-size: 200%;">local time: <span id="finespun_local_time">[time]</span></article>';
+  today = Math.floor((Date.now() / 1000) / 100000) % 10000;
+  weeknow = Math.floor(today/10);
+  monthnow = Math.floor(weeknow/10);
+  document.getElementById('calendar_small').innerHTML += '<div class="monthcell" id="monthnow_'+monthnow.toString()+'"><article class="month_header">long cycle '+monthnow.toString()+'</article></div>';
+
+  week = monthnow * 10;
+
+  while(week < 10 + (monthnow * 10)){
+    month = Math.floor(week/10);
+    //console.log('week',week,'month',month);
+    document.getElementById('monthnow_'+month.toString()).innerHTML += '<div class="weekcell" id="weeknow_'+week.toString()+'"></div>';
+    week += 1;
+  }
+
+  day = monthnow * 100;
+
+  while(day < 100 + (monthnow * 100)){
+    week = Math.floor(day/10);
+    //console.log('week',week,'month',month,'day',day);
+    document.getElementById('weeknow_'+week.toString()).innerHTML += '<div class="daycell" id="daynow_'+day.toString()+'">'+(day % 100).toString()+'</div>';
+    day += 1;
+  }
+
+  document.getElementById('daynow_'+today.toString()).classList.add("green_bg");
+  //document.getElementById('monthnow_'+monthnow.toString()).style.margin = "10px";
+  //document.getElementById('monthnow_'+monthnow.toString()).style.float = "left";
+}
+
+function FinespunClock(){
+  timenow = Math.floor(Date.now() / 1000) % 100000;
+  if(timenow == 0){
+    build_small_calendar();
+  }
+  document.getElementById("finespun_local_time").innerHTML = timenow.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+}
+setInterval(FinespunClock, 1000);
+
+build_small_calendar();
 </script>
 
 </article>
+
+<hr>
 
 <h1>Central asteroid: 160278 Finespun</h1>
 

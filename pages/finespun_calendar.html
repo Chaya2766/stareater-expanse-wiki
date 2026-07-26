@@ -1,0 +1,183 @@
+<style>
+.daycell{
+  float: left;
+  width: 38px;
+  height: 28px;
+  background-color: #000;
+  border: 1px solid white;
+  margin: 0px;
+  font-size: 75%;
+  text-align: center;
+  padding-top: 10px;
+}
+.weekcell{
+  border: 2px dotted white;
+  padding: 2px;
+  margin: 2px;
+  clear: both;
+  height: 40px;
+}
+.monthcell{
+  border: 4px solid white;
+  padding: 4px;
+  margin: 4px;
+  float: left;
+}
+.month_header{
+  border-bottom: 2px solid white;
+  font-size: 200%;
+  text-align: center;
+}
+</style>
+
+<head>
+ <link rel="stylesheet" href="../index.css"></link>
+</head>
+<html class="background2">
+<a style="float: right;" target="_blank" href="../index.html?page=pages/finespun_calendar.html">link to this page</a>
+
+<h1>Finespun gigasecond calendar</h1>
+<hr>
+<img src="../images/finespun_settlement.webp" class="basics"></img>
+<article class="basics">
+A calendar for Finespun's cyclical activities.
+<br><br>
+Short cycles (days) are 100 kiloseconds long.
+<br>
+Medium cycles (weeks) are 1 megasecond long.
+<br>
+Long cycles (months) are 10 megaseconds long.
+<br><br>
+There are 100 short cycles in a long cycle and 100 long cycles in a gigasecond.
+Medium cycles consist of 10 short cycles.
+A long cycle is considered an appropriate amount of time for starting and then completing a minor project, and similarly a gigasecond for a major project.
+A kilosecond is considered an appropriate amount of time for a single task to be started and then completed, as such there are 100 task slots in each day.
+<br><br>
+Every part of the calendar, ie. which day of the week, day of the month, day of the gigasecond, week of the month, week of the gigasecond, and month of the gigasecond, can be trivially read off from the current unix time, therefor dates are written simply as unix time instead of writing every part of the date explicitly.
+Despite the existence of the calendar, it is considered merely an assisting tool, whereas the primary timekeeping tool remains first and foremost the <a href="epoch_time.html">unix time</a>.
+</article>
+
+<hr>
+
+<div id="calendar_small" style="float: left; margin: 10px;"></div>
+
+<article>
+Current long cycle is shown on the right, with the current day of the gigasecond lit up in green (will not update without reloading page).
+</article>
+
+<h1 class="division">Full calendar:</h1>
+
+<div id="calendar">
+
+</div>
+
+<script>
+function build_full_calendar(){
+  document.getElementById('calendar').innerHTML = '';
+  
+  let month = 0;
+
+  while(month < 100){
+    document.getElementById('calendar').innerHTML += '<div class="monthcell" id="month_'+month.toString()+'"><article class="month_header">long cycle '+month.toString()+'</article></div>';
+    month += 1;
+  }
+
+  let week = 0;
+
+  while(week < 1000){
+    month = Math.floor(week/10);
+    //console.log('week',week,'month',month);
+    document.getElementById('month_'+month.toString()).innerHTML += '<div class="weekcell" id="week_'+week.toString()+'"></div>';
+    week += 1;
+  }
+
+  let day = 0;
+
+  while(day < 10000){
+    week = Math.floor(day/10);
+    //console.log('week',week,'month',month,'day',day);
+    document.getElementById('week_'+week.toString()).innerHTML += '<div class="daycell" id="day_'+day.toString()+'">'+(day % 100).toString()+'</div>';
+    day += 1;
+  }
+
+  today = Math.floor((Date.now() / 1000) / 100000) % 10000;
+  //today = Math.floor(2000999999 / 100000) % 10000;
+  console.log("today is",today);
+  document.getElementById('day_'+today.toString()).classList.add("green_bg");
+}
+
+function build_small_calendar(){
+  document.getElementById('calendar_small').innerHTML = '<article style="text-align: center; font-size: 200%;">local time: <span id="finespun_local_time">[time]</span></article>';
+  today = Math.floor((Date.now() / 1000) / 100000) % 10000;
+  weeknow = Math.floor(today/10);
+  monthnow = Math.floor(weeknow/10);
+  document.getElementById('calendar_small').innerHTML += '<div class="monthcell" id="monthnow_'+monthnow.toString()+'"><article class="month_header">long cycle '+monthnow.toString()+'</article></div>';
+
+  week = monthnow * 10;
+
+  while(week < 10 + (monthnow * 10)){
+    month = Math.floor(week/10);
+    //console.log('week',week,'month',month);
+    document.getElementById('monthnow_'+month.toString()).innerHTML += '<div class="weekcell" id="weeknow_'+week.toString()+'"></div>';
+    week += 1;
+  }
+
+  day = monthnow * 100;
+
+  while(day < 100 + (monthnow * 100)){
+    week = Math.floor(day/10);
+    //console.log('week',week,'month',month,'day',day);
+    document.getElementById('weeknow_'+week.toString()).innerHTML += '<div class="daycell" id="daynow_'+day.toString()+'">'+(day % 100).toString()+'</div>';
+    day += 1;
+  }
+
+  document.getElementById('daynow_'+today.toString()).classList.add("green_bg");
+  //document.getElementById('monthnow_'+monthnow.toString()).style.margin = "10px";
+  //document.getElementById('monthnow_'+monthnow.toString()).style.float = "left";
+}
+
+/*
+
+let daynum = 1;
+let opened = false;
+
+while(daynum <= 1000){
+  if(daynum % 10 == 1 && opened){
+    document.getElementById('calendar').innerHTML += '</div>';
+    opened = false;
+    console.log("closed on",daynum);
+  }
+  if(daynum % 10 == 1){
+    document.getElementById('calendar').innerHTML += '<div class="calwindow">';
+    opened = true;
+    console.log("opened on",daynum);
+  }
+  document.getElementById('calendar').innerHTML += '<div class="daycell">'+daynum.toString()+'</div>';
+  daynum += 1;
+}
+
+*/
+
+function FinespunClock(){
+  timenow = Math.floor(Date.now() / 1000) % 100000;
+  if(timenow == 0){
+    build_small_calendar();
+    build_full_calendar();
+  }
+  document.getElementById("finespun_local_time").innerHTML = timenow.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+}
+setInterval(FinespunClock, 1000);
+
+build_small_calendar();
+build_full_calendar();
+
+</script>
+
+<h1 class="division">relevant pages</h1>
+
+<div class="card">
+ <img src="../images/finespun_flag.webp"></img>
+ <a target="IM" href="finespun.html">Finespun</a>
+</div>
+
+</html>
