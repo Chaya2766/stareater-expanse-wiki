@@ -387,7 +387,6 @@ span.tip:active{
  transition: 0.5s;
 }
 
-
 nsfw{
  display: none;
 }
@@ -723,26 +722,40 @@ frac frac:nth-child(2) {
 }
 
 /*text colors*/
-red{ color: red; }
-orange{ color: orange; }
-yellow{ color: yellow; }
-green{ color: green; }
-teal{ color: #00ffc0; }
-cyan{ color: cyan; }
-blue{ color: blue; }
-purple{ color: #8000ff; }
-magenta{ color: magenta; }
-pink{ color: pink; }
-gray{ color: gray; }
+red, .red { color: red; }
+orange, .orange{ color: orange; }
+yellow, .yellow{ color: yellow; }
+green, .green{ color: green; }
+teal, .teal{ color: #00ffc0; }
+cyan, .cyan{ color: cyan; }
+blue, .blue{ color: blue; }
+purple, .purple{ color: #8000ff; }
+magenta, .magenta{ color: magenta; }
+pink, .pink{ color: pink; }
+gray, .gray{ color: gray; }
 
-.red{ color: red; }
-.orange{ color: orange; }
-.yellow{ color: yellow; }
-.green{ color: green; }
-.teal{ color: #00ffc0; }
-.cyan{ color: cyan; }
-.blue{ color: blue; }
-.purple{ color: #8000ff; }
-.magenta{ color: magenta; }
-.pink{ color: pink; }
-.gray{ color: gray; }
+red_bg, .red_bg{ color: white; background-color: red; }
+orange_bg, .orange_bg{ color: black; background-color: red; }
+yellow_bg, .yellow_bg{ color: black; background-color: yellow; }
+green_bg, .green_bg{ color: black; background-color: green; }
+teal_bg, .teal_bg{ color: black; background-color: #00ffc0; }
+cyan_bg, .cyan_bg{ color: black; background-color: cyan; }
+blue_bg, .blue_bg { color: white; background-color: blue; }
+purple_bg, .purple_bg{ color: white; background-color: #8000ff; }
+magenta_bg, .magenta_bg{ color: white; background-color: magenta; }
+pink_bg, .pink_bg{ color: black; background-color: pink; }
+gray_bg, .gray_bg{ color: black; background-color: gray; }
+
+/*mainly for story purposes*/
+
+truth, .truth{
+    text-decoration: underline;
+    text-decoration-color: #FE4;
+    text-decoration-style: dashed;
+}
+truth:after, .truth:after{
+  content: " [true]";
+  color: #FE4;
+  vertical-align: top;
+  font-size: 50%;
+}

@@ -17,8 +17,7 @@ If you directly edit them through the inspection menu, you will be directly chan
 <span class="wip">
 things to do:
 - swap the awful multiple buttons with different numbers for single buttons with number input fields
-- use prices of high purity elements rather than bulk prices, since bulk prices are inaccurate, and save the sources of the prices in code comments (there seem to be no such prices for most elements, but high purity polysilicon for semiconductor uses costs about 13.5 times more than plain bulk silicon - maybe I could just multiply the prices by that much to account for purity?)
-- add a "waste oxygen" resource separate from the purified oxygen, and make kamacite refining produce that one instead. Then maybe allow purifying it to turn it into the pure oxygen in the purified elements table.
+- use prices of high purity elements rather than bulk prices, since bulk prices are inaccurate, and save the sources of the prices in code comments (there seem to be no such prices for most elements, but high purity polysilicon for semiconductor uses costs about 13.5 times more than plain bulk silicon - maybe I could just multiply the prices by that much to account for purity?). Allow purifying waste oxygen into the pure oxygen in the purified elements table, and maybe also let it yield some additional trace purified elements.
 </span>
 </article>
 
@@ -118,9 +117,10 @@ seconds (game time)
   <tr><td>raw asteroid regolith</td><td><span id="regolith_kg">2159000000000000</span> kg</td></tr>
   <tr><td>kamacite</td><td><span id="kamacite_kg">0</span> kg</td></tr>
   <tr><td>post-electrolysis waste</td><td><span id="electrolysis_waste_kg">0</span> kg</td></tr>
+  <tr><td>waste oxygen</td><td><span id="waste_oxygen_kg">0</span> kg</td></tr>
   <tr><td>baked kamacite</td><td><span id="baked_kamacite_kg">0</span> kg</td></tr>
   <tr><td>kamacite bake</td><td><span id="kamacite_bake_kg">0</span> kg</td></tr>
-  <tr><td>dollar-equivalent currency</td><td><span id="DEC">6 000 000 000</span> $e</td></tr>
+  <tr><td>currency</td><td><span id="DEC">6 000 000 000</span> $e</td></tr>
 </table>
 
 <table class="styled left">
@@ -366,9 +366,17 @@ function autoplay_action(){
   if(tiles >= 8000 && energy > 1e9 && total_kamacite < 611000){
     if(try_max_electrolyze_regolith()){
       return true;
+    } else if(build_LTE_refinery(1)){
+      return true;
     }
   }
+  //I am confused about why the if statements below still fire if I have enough tiles and enough energy for a solar array
+  //one thought is that maybe refining eats enough energy to get past this check and then tries one of the lower ones which somehow succeeds, but that shouldn't make sense
+  //it adds many electrolysis orders, then adds separate kamacite bake orders and bake kamacite after that, without waiting
+  //I think it fails to electrolyze regolith because too few LTE refineries, and that lets it get past and bake the kamacite because there is enough ovens
+  //I made it so that it will try to build additional LTE refineries if the thing above fails
   
+  //on another note
   //maybe somewhere here should check if the number of concentrated solar arrays is sufficient to switch to separating raw regolith and do that instead after like, say, 1000 solar arrays?
   //or maybe after reaching finespun's growth target of 400 000 solar arrays
   
@@ -379,13 +387,21 @@ function autoplay_action(){
   } else if(energy > 1e9){
     if(try_max_bake_kamacite()) {
       return true;
+    } else if(kamacite_ovens == 0 && kamacite > 1000 & energy > 1e11){//this set of conditions severely overbuilds ovens but not so badly that I feel the need to fix it
+      if(build_kamacite_oven(1)){
+        return true;
+      }
     } else if(try_max_electrolyze_regolith()){
-      return true;
+        return true;
+    } else if(energy > 1e11){
+      if(build_LTE_refinery(1)){
+        return true;
+      }
     }
   }
   
-  if(energy > 1e12){
-    //sequentially here check if there are no low temperature electrolysers left and make more if there is zero left
+  //I should rethink if building infrastructure as a response to excessive energy in the way I do below is actually a good idea, including it in the functions above might be better
+  if(energy > 1e12){/*
     if(kamacite_ovens == 0){
       if(build_kamacite_oven(1)){
         return true;
@@ -396,10 +412,11 @@ function autoplay_action(){
       }
     //} else if(ion beam printers == 0) {
     //do the same for ion beam printers
-    } else if(try_max_separate_regolith()){
+    } else*/ if(try_max_separate_regolith()){
       return true;
     } else if(false){
     //and here do the same for calutrons
+    //repalce if false with if build_calutron() which is not yet implemented
       return true;
     }
   }
@@ -849,7 +866,7 @@ function calculate_statistics(){
   document.getElementById("power_doubling_time").innerHTML = parseInt(doubling_time);
   
   document.getElementById("annual_growth_rate").innerHTML = (100*((Math.pow(2,year/doubling_time))-1)).toFixed(6);
-  document.getElementById("gigasecond_growth_rate").innerHTML = (Math.pow(2,1E+9/doubling_time)).toFixed(6);
+  document.getElementById("gigasecond_growth_rate").innerHTML = (Math.pow(2,1E+9/doubling_time)).toFixed(3);
 }
 
 function removeCompletedOrders(currentGameTime) {//claude haiku 4.5
@@ -886,14 +903,14 @@ function complete_order(order_name,order_count){
     refineries = Math.floor(document.getElementById("LTE_refineries").innerHTML * 1);
     K = document.getElementById("kamacite_kg").innerHTML * 1;
     W = document.getElementById("electrolysis_waste_kg").innerHTML * 1;
-    O = document.getElementById("oxygen_kg").innerHTML * 1;
+    O = document.getElementById("waste_oxygen_kg").innerHTML * 1;
     K += 23.393459*order_count;
     W += 67.146541*order_count;
     O += 9.46*order_count;
     
     document.getElementById("kamacite_kg").innerHTML = K;
     document.getElementById("electrolysis_waste_kg").innerHTML = W;
-    document.getElementById("oxygen_kg").innerHTML = O;
+    document.getElementById("waste_oxygen_kg").innerHTML = O;
     document.getElementById("LTE_refineries").innerHTML = refineries + order_count;
   }
   else 
