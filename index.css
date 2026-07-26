@@ -723,9 +723,9 @@ frac frac:nth-child(2) {
 
 /*text colors*/
 red, .red { color: red; }
-orange, .orange{ color: orange; }
-yellow, .yellow{ color: yellow; }
-green, .green{ color: green; }
+orange, .orange{ color: #FF8000; }
+yellow, .yellow{ color: #FFFF00; }
+green, .green{ color: #00FF00; }
 teal, .teal{ color: #00ffc0; }
 cyan, .cyan{ color: cyan; }
 blue, .blue{ color: blue; }
@@ -737,7 +737,7 @@ gray, .gray{ color: gray; }
 red_bg, .red_bg{ color: white; background-color: red; }
 orange_bg, .orange_bg{ color: black; background-color: red; }
 yellow_bg, .yellow_bg{ color: black; background-color: yellow; }
-green_bg, .green_bg{ color: black; background-color: green; }
+green_bg, .green_bg{ color: black; background-color: #00FF00; }
 teal_bg, .teal_bg{ color: black; background-color: #00ffc0; }
 cyan_bg, .cyan_bg{ color: black; background-color: cyan; }
 blue_bg, .blue_bg { color: white; background-color: blue; }
