@@ -9,7 +9,7 @@ module coremodule(dist,size,thickness){
             }}*/
             //for(a=[0,90]){rotate([0,0,a]){square([thickness/2,size/sqrt(2)],true);}}
             //for(a=[90:90:360]){rotate([0,0,a]){translate([size/2,0,0]){circle(thickness/2,$fn=16);}}}
-            for(a=[90:90:360]){rotate([0,0,a]){translate([size/2,0,0]){square([thickness/2,size/2],true);}}}
+            //for(a=[90:90:360]){rotate([0,0,a]){translate([size/2,0,0]){square([thickness/2,size/2],true);}}}
         }
     }
     translate([0,-thickness/2,0]){
