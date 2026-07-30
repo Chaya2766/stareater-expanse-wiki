@@ -1,0 +1,5 @@
+0.1s of 880Hz sawtooth tone
+0.1s of 850Hz sawtooth tone
+0.1s of 880Hz sawtooth tone
+0.2s of silence
+repeat
