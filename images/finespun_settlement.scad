@@ -1,4 +1,4 @@
-use <finespun_one.scad>
+use <finespun_zero.scad>
 use <ftt_concentrated_solar_array.scad>
 
 color([0.25,0.25,0.25]){sphere(5552.5E+3);}
@@ -9,14 +9,19 @@ settlement_center = [10E+6,0,0];
 
 translate(settlement_center){
 
-rotate([-90,0,0]){
-color("#888"){finespun_one();}}
+translate([-100e3,150e3,50e3]){
+rotate([90,0,0]){
+scale(1000){finespun_zero(rectenna=true);}}
+}
 
 solar_arrays=[
-    [200E+3,300E+3,100E+3],
+    [0E+3,-300E+3,-100E+3],
     [-200E+3,-300E+3,-100E+3],
-    [300E+3,-200E+3,-0E+3],
-    [-300E+3,200E+3,-0E+3]
+    [100E+3,-300E+3,50E+3],
+    [-100E+3,-300E+3,50E+3],
+    [-300E+3,-300E+3,50E+3],
+    [-200E+3,-300E+3,200E+3],
+    [0E+3,-300E+3,200E+3]
 ];
 
 for(i = solar_arrays){
@@ -26,6 +31,7 @@ for(i = solar_arrays){
     }}
 }
 
+/*
 misc_objects=[
     [0,20E+3,24E+3],
     [0,20E+3,-24E+3],
@@ -49,6 +55,7 @@ for(i = misc_objects){
     cylinder(d=3E+3,h=10E+3,center=true);
     }}}
 }
+*/
 
 }
 
