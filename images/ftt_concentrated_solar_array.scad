@@ -1,4 +1,5 @@
 use <ftt_solar_tile.scad>
+use <ftt_phased_array_tile.scad>
 
 module parabolic_mirror(focal_length=20e3,mirror_length=80e3,thickness=1e3,detail=16){
     // Parameters
@@ -67,6 +68,7 @@ module concentrated_solar_array(array_radius,collector_radius,thickness=1,detail
             translate([0,0,rad_len]){sphere(pipe_th);}
         }
         }}
+        translate([0,0,rad_len+pipe_th+0.4e3]){fake_phased_array(2*collector_radius);}
     }
     //support struts
     step = 360/n_supports;

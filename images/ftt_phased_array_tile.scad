@@ -61,22 +61,48 @@ translate([0,0,-11]){color("#888"){
 }}
 }
 
+module fake_phased_array(d=10e3,r=1e3,Ar=25e3,gap=0.3e3,n=50,wavelength=50,wirethickness=10){
+    R=d/2;
+    Ar = d/2;
+    step = 360/n;
+    translate([0,0,0]){
+        color("#888"){
+        translate([0,0,-0.1e3]){cylinder(r=Ar+0.01e3,h=0.05e3,center=true,$fn=64);}
+        }
+        color("#554"){
+        translate([0,0,-0.05e3]){cylinder(r=Ar+0.01e3,h=0.05e3,center=true,$fn=64);}
+        }
+        color("#A64"){
+        for(x=[-Ar:wavelength:Ar]){
+            //solving for width of the circle at given height using pythagorean theorem
+            width = 2*sqrt(pow(Ar,2)-pow(x,2));
+            translate([x,0,0]){cube([wirethickness,width,wirethickness],true);}
+        }
+        for(y=[-Ar:wavelength:Ar]){
+            //solving for height of the circle at given y position using pythagorean theorem
+            height = 2*sqrt(pow(Ar,2)-pow(y,2));
+            translate([0,y,0]){cube([height,wirethickness,wirethickness],true);}
+        }
+    }
+    }
+}
+
 //actual things to render below
 
-
+/*
 translate([50,-50,0]){
 phased_array_tile(true);
 }
 $vpd=425;
 $vpt=[50,-50,0];
-
+*/
 
 //openscad ftt_phased_array_tile.scad -o ftt_phased_array_tile.png --view=axes,scales --colorscheme=Starnight --imgsize=1000,1000
 
-/*
-phased_array(10E+3);
+
+fake_phased_array(10E+3);
 $vpd=16E+3;
 $vpt=[0,0,-1000];
-*/
+
 
 //openscad ftt_solar_tile.scad -o ftt_solar_tile.png --colorscheme=Starnight --viewall --imgsize=1000,500
