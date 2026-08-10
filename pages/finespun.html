@@ -66,7 +66,7 @@ If sold at market prices, the settlement's production would bring in about 641.6
 </article>
 <br class="division">
 
-<h1>timekeeping</h1>
+<h1 id="timekeeping">timekeeping</h1>
 <div id="calendar_small" style="float: left; margin: 10px; border: 1px solid white;"></div>
 <article>
 The local standard of timekeeping is fundamentally tied to <a href="epoch_time.html">Unix Time</a>, and dates are written as just the current epoch time with digits spaced in groups of three.
@@ -187,45 +187,50 @@ build_small_calendar();
 
 <hr>
 
-<h1>Central asteroid: 160278 Finespun</h1>
+<h1>Central asteroid: 56160278 Finespun</h1>
 
 <table class="styled left">
-  <tr><th colspan=2>160278 Finespun</th></tr>
+  <tr><th colspan=2>56160278 Finespun</th></tr>
   <tr><td colspan=2>physical characteristics</td></tr>
-  <tr><td>mean radius</td><td>5552.5m</td></tr>
-  <tr><td>mean density</td><td>3012kg/m^3</td></tr>
-  <tr><td>mass</td><td>2.159E+15kg</td></tr>
-  <tr><td>surface gravity</td><td>4.674 mm/s<sup>2</sup></td></tr>
-  <tr><td>surface escape velocity</td><td>7.2 m/s</td></tr>
+  <tr><td>mean radius</td><td>155 m</td></tr>
+  <tr><td>mean density</td><td>3012 kg/m^3</td></tr>
+  <tr><td>initial mass</td><td>46 982 775 745 kg</td></tr>
+  <tr><td>surface gravity</td><td>0.13052 mm/s<sup>2</sup></td></tr>
+  <tr><td>surface escape velocity</td><td>0.1422 m/s</td></tr>
   <tr><td>albedo</td><td>0.047</td></tr>
   <tr><td colspan=2>keplerian elements</td></tr>
-  <tr><td>semi-major axis (a)</td><td>3.1407431 AU</td></tr>
-  <tr><td>eccentricity (e)</td><td>0.2014501</td></tr>
-  <tr><td>inclination (i)</td><td>16.07761 deg</td></tr>
-  <tr><td>ascending node (&Omega;)</td><td>247.31 deg</td></tr>
-  <tr><td>argument of perihelion (&omega;)</td><td>160.866 deg</td></tr>
-  <tr><td>anomaly (M)</td><td>35.982 deg</td></tr>
+  <tr><td>semi-major axis (a)</td><td>2.284 AU</td></tr>
+  <tr><td>eccentricity (e)</td><td>0.0295</td></tr>
+  <tr><td>inclination (i)</td><td>	3.8 deg</td></tr>
+  <tr><td>ascending node (&Omega;)</td><td>29.14 deg</td></tr>
+  <tr><td>argument of perihelion (&omega;)</td><td>192.01 deg</td></tr>
+  <tr><td>anomaly (M)</td><td>58.35 deg</td></tr>
   <tr><td colspan=2>other orbital characteristics</td></tr>
+  <!--
   <tr><td>Perihelion</td><td>2.5080402 AU</td></tr>
   <tr><td>Apohelion</td><td>3.773 AU</td></tr>
   <tr><td>orbital period</td><td>1.7565E+8 s &approx; 5.566 terran years</td></tr>
   <!2pi×sqrt((3.1407431 AU)^3/(G×1.988475E+30kg))>
   <tr><td>avg. orbital velocity</td><td> 16.807 km/s</td></tr>
+  -->
   <tr><td colspan=2>other</td></tr>
-  <tr><td>hill sphere radius at parahelion</td><td>30 756 m</td></tr>
-  <!((1/(((1988475E+30kg)/(2.16E+15kg))+1))^(1/3))×2.5 AU×(1−0.2) = 30756.24273 m>
-  <tr><td>hill sphere radius at apohelion</td><td>46 134 m</td></tr>
-  <!((1/(((1988475E+30kg)/(2.16E+15kg))+1))^(1/3))×2.5 AU×(1+0.2) = 46134.36409 m>
-  <tr><td>insolation at parahelion</td><td>216.39W/m<sup>2</sup></td></tr>
-  <tr><td>insolation at semi-major axis</td><td>137.99W/m<sup>2</sup></td></tr>
-  <tr><td>insolation at apohelion</td><td>91.617W/m<sup>2</sup></td></tr>
+  <tr><td>hill sphere radius at perihelion</td><td>95 153 m</td></tr>
+  <!((1/(((1.988475E+30kg)/(46 982 775 745 kg))+1))^(1/3))×2.284 AU×(1−0.0295) = 95 153.16316 m>
+  <tr><td>hill sphere radius at apohelion</td><td>100 938 m</td></tr>
+  <!((1/(((1.988475E+30kg)/(46 982 775 745 kg))+1))^(1/3))×2.284 AU×(1+0.0295) = 100937.8480 m>
+  <tr><td>insolation at perihelion</td><td>276.15W/m<sup>2</sup></td></tr>
+  <tr><td>insolation at semi-major axis</td><td>261W/m<sup>2</sup></td></tr>
+  <tr><td>insolation at apohelion</td><td>246.45W/m<sup>2</sup></td></tr>
+  <!--
   <tr><td>equalibrium temperature</td><td>157K = -116.15<sup>o</sup>C</td></tr>
+  -->
   <!(137.99W/m^2)×circle(5552.5m) = 13.36517414 GW>
   <!stefan×sphereSa(5552.5m)×(x)^4=13.36517414GW gives 157K>
   <!albedo is not factored in because absorptivity and emissivity are equal>
 </table>
 
 <article>
+<!--
 <span class="meta">note: based on the real asteroid number 160278, see <a href="https://en.wikipedia.org/wiki/List_of_minor_planets:_160001%E2%80%93161000">wikipedia</a>, <a href="https://newton.spacedys.com/astdys/index.php?pc=1.1.1&n=160278">AstDyS-2</a> or <a href="https://www.spacereference.org/asteroid/160278-2002-tq236">spacereference</a> - additionally here's a <a href="https://www.spacereference.org/solar-system#ob=160278-2002-tq236,36735-2000-rf55">spacereference map with interesting objects in simlar orbits</a></span>
 <br><br>
 160278 Finespun is an S-type asteroid belonging to the Tirela family of asteroids.
@@ -236,21 +241,32 @@ The matter of fact standard for where to place orbiting objects around the aster
 The asteroid does not have enough surface gravity to walk on, and surface movement has to be limited to less than 5m/s or else risk entering an orbit.
 This fact is frequently exploited by the mining workers who simply manually throw pods full of regolith onto the a trajectory intersecting the orbital station that will take it in for refining.
 Cold gas thrusters using waste oxygen from regolith refining tend to be largely sufficient for most purposes given the small orbital velocities.
+-->
+56160278 Finespun is an S-type asteroid made of loose material (mostly dust and occasional small chunks).
+It has a hill sphere that extends about 95km from the surface, but very weak gravity - objects placed in circular orbit at 1km distance from center of mass take 112.2 kiloseconds <!2pi×sqrt((1km)^3/(G×46 982 775 745 kg)) = 0.1122 Ms> to complete a full orbit at 56mm/s <!sqrt((G×46 982 775 745 kg)/(1km)) = 56mm/s>.
+Just above surface, objects can have circular orbits 160m from center of mass at 140mm/s, taking 7181 seconds to complete a full orbit.
+<br><br>
+Surface gravity and escape velocity are not sufficient to even attempt walking.
+Material can easily be mechanically launched onto the right orbit.
+<br><br>
+Thanks to the asteroid's composition of mostly dust and small pebbles, mining it requires no advanced tools.
 </article>
 
+<!--
 <h2>Nearby objects of interest</h2>
 <article>
 160278 Finespun experiences close encounters with asteroid number 36735 every 290 terran years &approx; 9.15Gs.
 The close encounters within this millennium happen specifically in the gregorian years 2169, 2459, 2749 and one in 3039 earliest next millennium.
 At the closest their distance from each other is about 0.04 AU &approx; 19.96 light seconds &approx; 5.984E+9 metres.
 </article>
+-->
 
 <h1>Habitats</h1>
 <article>
 Habitat structures around the Finespun asteroid:
 </article>
 <ol>
-  <li><a href="finespun_one.html">Finespun One</a> - a crude toroidal rotating habitat, also being the first one constructed around Finespun</li>
+  <li><a href="finespun_zero.html">Finespun Zero</a> - a very basic toroidal rotating habitat, designed to provide a little bit of living space along with everything necessary to conduct mining operations</li>
 </ol>
 
 <h1 class="division">Culture</h1>
