@@ -181,6 +181,53 @@ img.pixelated{
  image-rendering: crisp-edges;
 }
 
+img.revealable{
+ /*transition-duration: 5s;*/
+}
+
+img.revealable:hover{
+ /*
+ transition-duration: 5s;
+ transition-delay: 1s;
+ */
+ animation-name: revealHiddenPixels;
+ animation-duration: 50s;
+ animation-delay: 0s;
+ animation-timing-function:
+  ease-in 0% 20%,
+  linear 20% 50%,
+  ease-in 50% 80%,
+  ease-out 90% 100%;
+ animation-direction: forwards;
+ animation-iteration-count: infinite;
+}
+@keyframes revealHiddenPixels {
+  0% {
+    filter: brightness(1) contrast(1); /*normal image*/
+  }
+  10% {
+    filter: brightness(1) contrast(1); /*normal image*/
+  }
+  20% {
+    filter: brightness(0.7) contrast(16); /*smoothing the transition to hyper-contrast image*/
+  }
+  40% {
+    filter: brightness(0.5) contrast(256); /*reveals almost-white pixels*/
+  }
+  50% {
+    filter: brightness(0.5) contrast(256); /*reveals almost-white pixels*/
+  }
+  80% {
+    filter: brightness(255) contrast(256); /*reveals almost-black pixels*/
+  }
+  90% {
+    filter: brightness(255) contrast(256); /*reveals almost-black pixels*/
+  }
+  100% {
+    filter: brightness(1) contrast(1); /*return to normal image*/
+  }
+}
+
 img.centered{
  margin: 0 auto;
  display: block;
