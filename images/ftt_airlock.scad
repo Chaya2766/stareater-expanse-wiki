@@ -236,12 +236,15 @@ translate([0,-500,2600]){cube([2100,1000,3200],true);}
 }
 
 }else{
-echo("rendering 4% scale model parts");
+echo("rendering 5% scale model parts, this might take an hour");
 //for print:
-scale(0.04){
+scale(0.05){
 translate([0,0,0]){airlock_half(false,false,deg_step=3);}
-translate([2000,0,500]){rotate([0,180-45,0]){airlock_door(gap=10);}}
+echo("done processing 1 of 3 parts");
+translate([2000,0,680]){rotate([0,90,0]){airlock_door(gap=10);}}
+echo("done processing 2 of 3 parts");
 translate([1250,1750,500]){airlock_connector(gap=6,deg_step=3);}
+echo("done processing 3 of 3 parts");
 }
 
 }

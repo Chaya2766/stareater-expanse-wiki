@@ -1,4 +1,4 @@
-use <power_connector.scad>
+use <ftt_power_connector_2.scad>
 
 module network_node(){
     radius=50;
@@ -27,7 +27,7 @@ module network_node(){
     }
     }
     
-    translate([0,0,-12]){
+    translate([0,0,-40]){
         rotate([180,0,0]){
             plug();
         }
