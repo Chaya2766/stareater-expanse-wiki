@@ -1,0 +1,71 @@
+<head>
+ <link rel="stylesheet" href="../index.css"></link>
+</head>
+<html class="background2" id="page">
+<article class="warning">this warning lets the reader know something important about the page. If this sentence is still here on a page different than the testpage.html then I forgot to change it while making a new page.</article>
+<a style="float: right;" target="_blank" href="../index.html?page=pages/BSL_mimic_neuron_array.html">link to this page</a>
+
+<h1>Beniaguev-Segev-London mimic neurons</h1>
+<hr>
+
+<img src="../images/mimic_neuron_example.png" class="basics"></img>
+<article class="basics">
+BSL mimic neurons are neuron models using neural networks to mimic the spiking behaviour of the original neuron they were based on.
+<br><br>
+<span class="meta">I've written a document <a href="../documents/mind_uploading_through_machine_learning/mind_uploading_through_machine_learning.pdf">here</a> which explains this in more detail.</span>
+</article>
+
+<hr>
+
+
+<h1>Benefits of the method</h1>
+<article>
+todo
+</article>
+
+<!--
+<h1>Structure types</h1>
+<article>
+<b>1. block</b> - this is the simplest, most automatable, and most inefficient structure to use.
+<br><br>
+<b>2. branched</b> - the neural network is built to have a structure closely resembling that of the original neuron and then trained on the behaviour of the original neuron being modeled.
+The dentrites, synapses and other parts of the neuron are manually modeled as branches of the neural network with the minimum needed amount of connections between them to minimize the resulting number of parameters.
+A dense neural network with 8 layers and 256 neurons per layer as the soma, together with a couple small neural networks containing about 100 connections in each dendritic branch, is usually sufficient to mimic the original neuron's firing behaviour with more than 99% accuracy, which is considered acceptable for mind uploading.
+For an average human neuron, this usually results in a network with less than 600 000 parameters.
+<!each dendritic branch probably contains about 50 synapses, and I know that the average human neuron has 7000 synapses, so that's 140 branches>
+<!(140×100+8×256^2) = 538288>
+<br><br>
+<b>3. fully custom</b> - this is the incredibly work-hungry and at the same time most efficient option.
+A fully custom structure might in extreme cases contain just a few variables connected by simple mathematical operations, but usually will be much more complex than that.
+BSL mimic neurons with a fully custom soma might mix together many types of variables, including simple boolean operations to achieve greater efficiency.
+</article>
+
+<table class="styled centered">
+  <tr><th colspan=3>BSL mimic neuron structure illustrations</th></tr>
+  <tr>
+    <th>Block</th>
+    <th>Branched</th>
+    <th>Fully custom</th>
+  </tr>
+  <tr>
+    <td><a href="../images/mimic_neuron_real_200.png"><img src="../images/mimic_neuron_real_200_small.png" class="styled cardsize"></img></a></td>
+    <td><img src="../images/placeholder.png" class="styled cardsize"></td>
+    <td><img src="../images/placeholder.png" class="styled cardsize"></td>
+  </tr>
+  <tr>
+    <td>
+      41898 artificial neurons
+      <br>
+      5 346 560 parameters
+    </td>
+    <td>
+      600 000 parameters
+    </td>
+    <td>
+      todo
+    </td>
+  </tr>
+</table>
+-->
+
+</html>
