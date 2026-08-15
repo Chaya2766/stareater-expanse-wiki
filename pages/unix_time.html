@@ -2,33 +2,33 @@
  <link rel="stylesheet" href="../index.css"></link>
 </head>
 <html class="background2" id="page">
-<a style="float: right;" target="_blank" href="../index.html?page=pages/epoch_time.html">link to this page</a>
+<a style="float: right;" target="_blank" href="../index.html?page=pages/unix_time.html">link to this page</a>
 
-<h1>Epoch time</h1>
+<h1>Unix time</h1>
 <hr>
 
 <img src="../images/card_placeholder.png" class="basics"></img>
 <article class="basics">
-Epoch time is a date and time system that includes no days, weeks, months or years and tracks time as simply the number of seconds passed since 1970-01-01 00:00:00 UTC.
+Unix time (often also called <span class="inline-tip" tip=" - Strictly speaking, epoch time is a whole category, whereas unix time is just the most common epoch time. It is the most common to such a degree that whenever someone says 'epoch time' it is generally understood the same as 'unix time' except in specific technical scenarios. Technically, an epoch time is any time which uses a specific point in time as a designated time zero and defines all other dates in relation to that zero point in time - the technical term 'epoch' in this context refers to that specified zero point in time. For example, the 'gregorian epoch' would refer to the starting point of the gregorian calendar, the 1st of january of year 1 AD (since the gregorian calendar does not include a zero year but rather jumps from 1BC to 1AD at that exact point in time).">"epoch time"</span>) is a date and time system that includes no days, weeks, months or years and tracks time as simply the number of seconds passed since 1970-01-01 00:00:00 UTC.
 Many habitats had adopted it as the time system of choice for coordination, especially where no day-night cycle is implemented, where habitats use different cycle lengths, and it remains the main competitor to the gregorian calendar.
 <br><br>
 Kiloseconds, megaseconds and gigaseconds are generally used as common units of time among those who adhere to this timekeeping system, though typically shortened for ease of casual use such as saying "kays" or less commonly "kilos" instead of "kiloseconds".
 For the purpose of making dates more human readable it is most common to space out the digits in groups of 3 to implicitly specify which are the seconds and which the kilo- mega- and giga seconds.
 <br><br>
-Dates before time zero are simply written as negative, for example the first human footstep on the moon was made at epoch time -14 159 025, corresponding to 02:56:15 UTC July 21, 1969.
+Dates before time zero are simply written as negative, for example the first human footstep on the moon was made at unix time -14 159 025, corresponding to 02:56:15 UTC July 21, 1969.
 <br><br>
 Local times are often defined as just epoch time modulo the local cycle length, eg. 86400 seconds for terra.
 <br>
 <span class="meta">
 Which is exactly what the clock in the top right shows in case you were wondering.
-There is also a big version of that clock <a href="epoch_clock.html">here</a>.
+There is also a big version of that clock <a href="unix_clock.html">here</a>.
 <br><br>
 I also made a <a href="https://github.com/Chaya2766/unix-time-clock-gnome-extension">gnome extension that shows unix time in the top bar</a> alongside some other things like seconds since midnight, days and years since unix epoch, for people who love unix time as much as I do.
 </span>
 </article>
 <hr>
 
-<h1>UTC Gregorian Date ⇄ Epoch Time</h1>
+<h1>UTC Gregorian Date ⇄ Unix Time</h1>
 <div>
     <span>UTC Gregorian date</span>
     <input type="text" id="utcInput" placeholder="UTC Gregorian date (YYYY-MM-DD HH:MM:SS)" style="width: 295px;" onkeypress="if(event.key === 'Enter') convertToUnix()">
