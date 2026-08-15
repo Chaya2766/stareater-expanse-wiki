@@ -25,8 +25,9 @@
 }
 
 \renewcommand{\arraystretch}{1.2}
+\renewcommand{\thefootnote}{[\arabic{footnote}]}
 
-\title{Finespun One station design calculations}
+\title{Finespun One habitat design calculations}
 
 \author{Chaya2766}
 
@@ -98,7 +99,7 @@
     	
     	\item $q$ is the intensity of a continuously distributed load (ie. pressure difference acting on the plate)
     	
-    	\item $a$ is the shorter edge of the plate
+    	\item $a$ is the shorter edge of the plate \footnote{I feel the need to justify why I say the parameter a refers to the shorter edge of the plate rather than the longer edge. Two reasons for me making that interpretation. On page 120 the table gives alpha values for b/a ratios of 1, 1.1, etc, up to 5 and then infinity, which suggests that b is larger than a. The other reason is the claim on bottom of page 118 that "as the ratio of b/a increases, the maximum deflection and the maximum moment of the plate rapidly approach the values calculated for a uniformly loaded strip".}
     	
     	\item $D$ is the flexural rigidity of the plate
     \end{itemize}
