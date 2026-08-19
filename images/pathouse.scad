@@ -132,6 +132,65 @@ module pathouse_door(){
     }
 }
 
+module pathouse_toilet(){
+        cube([300,300,1200]);
+        pos=[//pipe
+            [300,150,150],
+            [350,150,150],
+            [400,150,200],
+            [425,150,250],
+            [425,150,350],
+            [400,150,500],
+            [390,150,700],
+            [390,150,900]
+        ];
+        for(i=[1:1:len(pos)-1]){
+            hull(){
+                translate(pos[i-1]) sphere(d=30);
+                translate(pos[i]) sphere(d=30);
+            }
+        }
+        difference(){//pee funnel
+            translate([390,150,900]){cylinder(d1=30,d2=100,h=100);}
+            translate([390,150,900]){cylinder(d1=20,d2=95,h=110);}
+        }
+        //pee funnel holder
+        difference(){
+            union(){
+                translate([300,50,950]){cube([100,200,30]);}
+                translate([400,150,950]){cylinder(d=200,h=30);}
+            }
+            translate([400,150,900]){cylinder(d1=40,d2=110,h=100);}
+            translate([400,130,940]){cube([100,50,60]);}
+        }
+        //tap
+        translate([300,135,1170]){cube([100,30,30]);}
+        translate([400,150,1120]){cylinder(d=30,h=80);}
+        
+        //storage tank - pill shape, radius 250mm, side length 500mm, gives volume 163.625L
+        hull(){
+            translate([250,-400,300]) sphere(250);
+            translate([250,-400-500,300]) sphere(250);
+        }
+        translate([0,-400,0]){cube([500,30,300]);}
+        translate([0,-400-500,0]){cube([500,30,300]);}
+        translate([250,-400+250-10,300]){rotate([-90,0,0])cylinder(h=40,d=40);}
+        
+        pos2=[//pipe from toilet to storage tank
+            [250,-120,300],
+            [250,-100,300],
+            [225,-80,200],
+            [150,-20,150],
+            [150,0,150]
+        ];
+        for(i=[1:1:len(pos2)-1]){
+            hull(){
+                translate(pos2[i-1]) sphere(d=30);
+                translate(pos2[i]) sphere(d=30);
+            }
+        }
+}
+
 module pathouse(){
 //floor is at z=0, with corner exactly at x0y0
 
@@ -202,23 +261,58 @@ for(step=[stepsize-75:stepsize:2200]){
 }
 
 //stairs wall
-hull(){
-    translate([1000,1000,0]){
-        cube([75,75,75]);
+difference(){
+    union(){
+        hull(){
+            translate([1000,1075,0]){
+                cube([75,75,stepsize]);
+            }
+            translate([1000,3275-stepsize,2200-stepsize]){
+                cube([75,75,stepsize]);
+            }
+            translate([1000,3000,2200]){
+                cube([75,125,75]);
+            }
+            translate([1000,3000,0]){
+                cube([75,125,75]);
+            }
+        }
+        //filling to fit with bathroom wall
+        translate([1000,2800,0])cube([75,150,2200]);
     }
-    translate([1000,3200,2200]){
-        cube([75,75,75]);
+    translate([950,2800,0]){
+        cube([200,1000,1875]);
     }
 }
+//bathroom wall
+difference(){
+    translate([1000,2800,0])cube([1850,75,2200]);
+    translate([1175,2750,100])cube([1000,175,2000]);
+}
+//bathtub / shower boundary
+translate([2175,2850,0]){
+    cube([75,1000,600]);
+    //cube([600,75,600]);
+}
+
+translate([100,3000]) pathouse_toilet();
 
 }//end of pathouse module
 
 
 /*
 //1m reference cube
-translate([2850,0,0]){
+translate([1700,2750,2275]){
     color([0,1,0,0.5]){
         cube(1000);
+    }
+}
+*/
+/*
+//human simulant
+translate([2300,3000,0]){
+    color([0,0,1,0.5]){
+        cube([450,200,1800]);
     }
 }
 */
@@ -226,7 +320,7 @@ translate([2850,0,0]){
 
 
 $vpt=[2000,2000,2000];
-//$vpr=[55,0,360*$t];
+$vpr=[55,0,360*$t];
 $vpd=1.7e4;
 
 //half-cut viewing
