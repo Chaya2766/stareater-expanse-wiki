@@ -1,3 +1,10 @@
+/*
+NOTES ABOUT THE HOUSE
+the doors have windows to look through which also points out which side of the door will swing - the side with pointy end of the window swings around, the side with the wide end of the window is where the hinges are
+both doors in the airlock swing into the airlock, not outside
+the bathroom door swings out from the bathroom
+*/
+
 module pathouse_door(){
     difference(){
     translate([-10,0,0]){
@@ -216,12 +223,13 @@ difference(){
 }
 
 //airlock doors
-translate([2775,100,100]){
-    pathouse_door();
+translate([2850,1100,100]){
+    rotate([0,0,180]){pathouse_door();}
 }
 translate([3850,2850-100,100]){
     pathouse_door();
 }
+//both doors hinge inwards
 
 //airlock door rails
 translate([3800,100,25]){
@@ -289,6 +297,11 @@ difference(){
     translate([1000,2800,0])cube([1850,75,2200]);
     translate([1175,2750,100])cube([1000,175,2000]);
 }
+//bathroom door
+translate([1175,1900,100]){
+    pathouse_door();
+}
+
 //bathtub / shower boundary
 translate([2175,2850,0]){
     cube([75,1000,600]);
