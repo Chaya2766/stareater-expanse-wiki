@@ -5,7 +5,12 @@ both doors in the airlock swing into the airlock, not outside
 the bathroom door swings out from the bathroom
 */
 
-module pathouse_door(){
+module pathouse_door(open=0,swingdirection=1){
+    //open is the percentage of door's opening sequence completed, 0=closed 1=open, inbetween is in the middle of opening or closing
+    //at open=0.5 the handle is moved fully up, above 0.5 the door angle changes, at open=1 the door is fully opened
+    //swingdirection is either 1 or -1, alternatively something not zero less than 1 or more than -1 would limit the door's range of angles so that it opens to less than 90 degrees in that direction
+rotate([0,0,90*swingdirection*min(1,max(0,2*open-1))]){
+translate([0,-1000,0]){
     difference(){
     translate([-10,0,0]){
         cube([75+20,1000,2000]);
@@ -98,13 +103,13 @@ module pathouse_door(){
     //inner handle
     translate([-15-10,200,1000]){
         rotate([0,90,0]){cylinder(d=30,h=40);}
-        rotate([-90-30,0,0]){cylinder(d=30,h=600);}
+        rotate([-90-30+(min(1,max(0,2*open))*60),0,0]){cylinder(d=30,h=600);}
         sphere(d=30);
     }
     //outer handle
     translate([60+25,200,1000]){
         rotate([0,-90,0]){cylinder(d=30,h=40);}
-        rotate([-90-30,0,0]){cylinder(d=30,h=600);}
+        rotate([-90-30+(min(1,max(0,2*open))*60),0,0]){cylinder(d=30,h=600);}
         sphere(d=30);
     }
     //viewing pane
@@ -137,6 +142,8 @@ module pathouse_door(){
         }
     }
     }
+}
+}
 }
 
 module pathouse_toilet(){
@@ -198,8 +205,9 @@ module pathouse_toilet(){
         }
 }
 
-module pathouse(){
+module pathouse(doorstate=[0,0,1]){
 //floor is at z=0, with corner exactly at x0y0
+//doorstate [outer airlock, inner airlock, bathroom]
 
 //outer 4 walls
 difference(){
@@ -223,11 +231,11 @@ difference(){
 }
 
 //airlock doors
-translate([2850,1100,100]){
-    rotate([0,0,180]){pathouse_door();}
+translate([2850,0100,100]){//inner door
+    rotate([0,0,180]){pathouse_door(swingdirection=-0.9,open=doorstate[1]);}
 }
-translate([3850,2850-100,100]){
-    pathouse_door();
+translate([3850,3850-100,100]){//outer door
+    pathouse_door(swingdirection=-0.9,open=doorstate[0]);
 }
 //both doors hinge inwards
 
@@ -298,8 +306,8 @@ difference(){
     translate([1175,2750,100])cube([1000,175,2000]);
 }
 //bathroom door
-translate([1175,1900,100]){
-    pathouse_door();
+translate([1175,2800,100]){
+    rotate([0,0,90])pathouse_door(swingdirection=-1,open=doorstate[2]);
 }
 
 //bathtub / shower boundary
@@ -364,7 +372,9 @@ difference(){
 
 //for a render:
 intersection(){
-    pathouse();
+    union(){
+        pathouse([1.2*sin(260*$t),1.2*sin(260*$t),1.2*sin(260*$t)]);
+    }
     translate($vpt){
         rotate($vpr){
             translate([0,0,-$vpd]){
@@ -373,3 +383,6 @@ intersection(){
         }
     }
 }
+
+//door preview
+//translate([0,-1000,0]){pathouse_door(open=1);}
