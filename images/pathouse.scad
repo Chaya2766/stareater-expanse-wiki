@@ -150,7 +150,11 @@ translate([0,-1000,0]){
 
 module pathouse_toilet(){
         color([0.65,0.65,0.65]){
-            cube([300,300,1200]);
+            difference(){
+                cube([300,300,1200]);
+                translate([150,150,1100]){cylinder(d1=30,d2=200,h=110);}
+                translate([150,150,1000]){cylinder(d1=30,d2=30,h=110);}
+            }//this puts a funnel in the top for refilling internal water storage
         }
         pos=[//pipe
             [300,150,150],
@@ -213,6 +217,61 @@ module pathouse_toilet(){
                 }
             }
         }
+}
+
+module pathouse_sink(){
+    color([0.65,0.65,0.65]){
+        difference(){
+            cube([800,250,1000]);
+            translate([10,-10,10]){cube([780,250,600]);}
+            translate([10,10,700]){cube([300,230,500]);}
+        }
+    }
+    color([0.95,0.95,0.95]){
+        translate([30,10,10]){//16L waste water tank
+            cube([200,200,400]);
+            translate([100,100,400]){cylinder(d=20,h=200);}
+        }
+        translate([250,10,10]){//16L source water tank
+            cube([200,200,400]);
+            translate([100,100,400]){cylinder(d=20,h=200);}
+        }
+        translate([500,10,10]){//battery
+            cube([220,320,520]);
+            translate([110,160,520]){cylinder(d=40,h=80);}
+        }
+    }
+    //screen
+    translate([350,-1,700])color([0.15,0.15,0.15]){
+        cube([400,1,250]);
+    }
+    //buttons
+    color([0.95,0.95,0.95]){
+        for(i=[0:100:300]){
+            translate([400+i,60,1000]){cylinder(d=40,h=10);}
+        }
+    }
+    //sink hose
+    pos=[
+        [550,200,1000],
+        [550,200,1100],
+        [525,200,1200],
+        [475,200,1275],
+        [450,200,1300],
+        [400,200,1325],
+        [325,200,1325],
+        [275,200,1300],
+        [250,200,1275],
+        [225,200,1225]
+    ];
+    color([0.65,0.65,0.65]){
+        for(i=[1:1:len(pos)-1]){
+            hull(){
+                translate(pos[i-1]){sphere(d=30);}
+                translate(pos[i]){sphere(d=30);}
+            }
+        }
+    }
 }
 
 module pathouse(doorstate=[0,0,1]){
@@ -327,14 +386,11 @@ color([0.95,0.95,0.95]){
     }
 }
 
-//bathtub water source, todo
-/*
+//sink
 translate([1330,3500,0]){
-    color([0.65,0.65,0.65]){
-        cube([800,250,1000]);
-    }
+    pathouse_sink();
 }
-*/
+//idea is that sink has a heater built in
 
 translate([100,3000]) pathouse_toilet();
 
@@ -423,8 +479,8 @@ difference(){
 
 //for a render:
 intersection(){
-    //pathouse([1.2*sin(260*$t),1.2*sin(260*$t),1.2*sin(260*$t)]);
-    pathouse();
+    pathouse([1.2*sin(260*$t),1.2*sin(260*$t),1.2*sin(260*$t)]);
+    //pathouse();
     translate($vpt){
         rotate($vpr){
             translate([0,0,-$vpd]){
