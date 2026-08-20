@@ -11,106 +11,108 @@ module pathouse_door(open=0,swingdirection=1){
     //swingdirection is either 1 or -1, alternatively something not zero less than 1 or more than -1 would limit the door's range of angles so that it opens to less than 90 degrees in that direction
 rotate([0,0,90*swingdirection*min(1,max(0,2*open-1))]){
 translate([0,-1000,0]){
-    difference(){
-    translate([-10,0,0]){
-        cube([75+20,1000,2000]);
-    }
-    //inner handle cavity
-    hull(){
-        translate([10,200,1000]){
-            rotate([0,-90,0]){
-                cylinder(h=30,d=100);
+    color([0.5,0.5,0.5]){
+        difference(){
+        translate([-10,0,0]){
+            cube([75+20,1000,2000]);
+        }
+        //inner handle cavity
+        hull(){
+            translate([10,200,1000]){
+                rotate([0,-90,0]){
+                    cylinder(h=30,d=100);
+                }
+            }
+            translate([10,700,1300]){
+                rotate([0,-90,0]){
+                    cylinder(h=30,d=100);
+                }
+            }
+            translate([10,800,1200]){
+                rotate([0,-90,0]){
+                    cylinder(h=30,d=100);
+                }
+            }
+            translate([10,800,800]){
+                rotate([0,-90,0]){
+                    cylinder(h=30,d=100);
+                }
+            }
+            translate([10,700,700]){
+                rotate([0,-90,0]){
+                    cylinder(h=30,d=100);
+                }
             }
         }
-        translate([10,700,1300]){
-            rotate([0,-90,0]){
-                cylinder(h=30,d=100);
+        //outer handle cavity
+        hull(){
+            translate([60,200,1000]){
+                rotate([0,90,0]){
+                    cylinder(h=30,d=100);
+                }
+            }
+            translate([60,700,1300]){
+                rotate([0,90,0]){
+                    cylinder(h=30,d=100);
+                }
+            }
+            translate([60,800,1200]){
+                rotate([0,90,0]){
+                    cylinder(h=30,d=100);
+                }
+            }
+            translate([60,800,800]){
+                rotate([0,90,0]){
+                    cylinder(h=30,d=100);
+                }
+            }
+            translate([60,700,700]){
+                rotate([0,90,0]){
+                    cylinder(h=30,d=100);
+                }
             }
         }
-        translate([10,800,1200]){
-            rotate([0,-90,0]){
-                cylinder(h=30,d=100);
+        //viewing cavity hole
+        hull(){
+            translate([70,400,1000]){
+                rotate([0,-90,0]){
+                    cylinder(h=70,d=100);
+                }
+            }
+            translate([70,600,1100]){
+                rotate([0,-90,0]){
+                    cylinder(h=70,d=100);
+                }
+            }
+            translate([70,650,1050]){
+                rotate([0,-90,0]){
+                    cylinder(h=70,d=100);
+                }
+            }
+            translate([70,650,950]){
+                rotate([0,-90,0]){
+                    cylinder(h=70,d=100);
+                }
+            }
+            translate([70,600,900]){
+                rotate([0,-90,0]){
+                    cylinder(h=70,d=100);
+                }
             }
         }
-        translate([10,800,800]){
-            rotate([0,-90,0]){
-                cylinder(h=30,d=100);
-            }
         }
-        translate([10,700,700]){
-            rotate([0,-90,0]){
-                cylinder(h=30,d=100);
-            }
+        //inner handle
+        translate([-15-10,200,1000]){
+            rotate([0,90,0]){cylinder(d=30,h=40);}
+            rotate([-90-30+(min(1,max(0,2*open))*60),0,0]){cylinder(d=30,h=600);}
+            sphere(d=30);
         }
-    }
-    //outer handle cavity
-    hull(){
-        translate([60,200,1000]){
-            rotate([0,90,0]){
-                cylinder(h=30,d=100);
-            }
+        //outer handle
+        translate([60+25,200,1000]){
+            rotate([0,-90,0]){cylinder(d=30,h=40);}
+            rotate([-90-30+(min(1,max(0,2*open))*60),0,0]){cylinder(d=30,h=600);}
+            sphere(d=30);
         }
-        translate([60,700,1300]){
-            rotate([0,90,0]){
-                cylinder(h=30,d=100);
-            }
-        }
-        translate([60,800,1200]){
-            rotate([0,90,0]){
-                cylinder(h=30,d=100);
-            }
-        }
-        translate([60,800,800]){
-            rotate([0,90,0]){
-                cylinder(h=30,d=100);
-            }
-        }
-        translate([60,700,700]){
-            rotate([0,90,0]){
-                cylinder(h=30,d=100);
-            }
-        }
-    }
-    //viewing cavity hole
-    hull(){
-        translate([70,400,1000]){
-            rotate([0,-90,0]){
-                cylinder(h=70,d=100);
-            }
-        }
-        translate([70,600,1100]){
-            rotate([0,-90,0]){
-                cylinder(h=70,d=100);
-            }
-        }
-        translate([70,650,1050]){
-            rotate([0,-90,0]){
-                cylinder(h=70,d=100);
-            }
-        }
-        translate([70,650,950]){
-            rotate([0,-90,0]){
-                cylinder(h=70,d=100);
-            }
-        }
-        translate([70,600,900]){
-            rotate([0,-90,0]){
-                cylinder(h=70,d=100);
-            }
-        }
-    }
-    }
-    //inner handle
-    translate([-15-10,200,1000]){
-        rotate([0,90,0]){cylinder(d=30,h=40);}
-        rotate([-90-30+(min(1,max(0,2*open))*60),0,0]){cylinder(d=30,h=600);}
-        sphere(d=30);
-    }
-    //outer handle
-    translate([60+25,200,1000]){
-        rotate([0,-90,0]){cylinder(d=30,h=40);}
-        rotate([-90-30+(min(1,max(0,2*open))*60),0,0]){cylinder(d=30,h=600);}
-        sphere(d=30);
     }
     //viewing pane
     color([0,0.5,0.5,0.5]){
@@ -147,7 +149,9 @@ translate([0,-1000,0]){
 }
 
 module pathouse_toilet(){
-        cube([300,300,1200]);
+        color([0.65,0.65,0.65]){
+            cube([300,300,1200]);
+        }
         pos=[//pipe
             [300,150,150],
             [350,150,150],
@@ -158,38 +162,42 @@ module pathouse_toilet(){
             [390,150,700],
             [390,150,900]
         ];
-        for(i=[1:1:len(pos)-1]){
-            hull(){
-                translate(pos[i-1]) sphere(d=30);
-                translate(pos[i]) sphere(d=30);
+        color([0.95,0.95,0.95]){
+            for(i=[1:1:len(pos)-1]){
+                hull(){
+                    translate(pos[i-1]) sphere(d=30);
+                    translate(pos[i]) sphere(d=30);
+                }
             }
-        }
-        difference(){//pee funnel
-            translate([390,150,900]){cylinder(d1=30,d2=100,h=100);}
-            translate([390,150,900]){cylinder(d1=20,d2=95,h=110);}
+            difference(){//pee funnel
+                translate([390,150,900]){cylinder(d1=30,d2=100,h=100);}
+                translate([390,150,900]){cylinder(d1=20,d2=95,h=110);}
+            }
         }
         //pee funnel holder
-        difference(){
-            union(){
-                translate([300,50,950]){cube([100,200,30]);}
-                translate([400,150,950]){cylinder(d=200,h=30);}
+        color([0.65,0.65,0.65]){
+            difference(){
+                union(){
+                    translate([300,50,950]){cube([100,200,30]);}
+                    translate([400,150,950]){cylinder(d=200,h=30);}
+                }
+                translate([400,150,900]){cylinder(d1=40,d2=110,h=100);}
+                translate([400,130,940]){cube([100,50,60]);}
             }
-            translate([400,150,900]){cylinder(d1=40,d2=110,h=100);}
-            translate([400,130,940]){cube([100,50,60]);}
+            //tap
+            translate([300,135,1170]){cube([100,30,30]);}
+            translate([400,150,1120]){cylinder(d=30,h=80);}
         }
-        //tap
-        translate([300,135,1170]){cube([100,30,30]);}
-        translate([400,150,1120]){cylinder(d=30,h=80);}
-        
         //storage tank - pill shape, radius 250mm, side length 500mm, gives volume 163.625L
-        hull(){
-            translate([250,-400,300]) sphere(250);
-            translate([250,-400-500,300]) sphere(250);
+        color([0.5,0.5,0.5]){
+            hull(){
+                translate([250,-400,300]) sphere(250);
+                translate([250,-400-500,300]) sphere(250);
+            }
+            translate([0,-400,0]){cube([500,30,300]);}
+            translate([0,-400-500,0]){cube([500,30,300]);}
+            translate([250,-400+250-10,300]){rotate([-90,0,0])cylinder(h=40,d=40);}
         }
-        translate([0,-400,0]){cube([500,30,300]);}
-        translate([0,-400-500,0]){cube([500,30,300]);}
-        translate([250,-400+250-10,300]){rotate([-90,0,0])cylinder(h=40,d=40);}
-        
         pos2=[//pipe from toilet to storage tank
             [250,-120,300],
             [250,-100,300],
@@ -197,10 +205,12 @@ module pathouse_toilet(){
             [150,-20,150],
             [150,0,150]
         ];
-        for(i=[1:1:len(pos2)-1]){
-            hull(){
-                translate(pos2[i-1]) sphere(d=30);
-                translate(pos2[i]) sphere(d=30);
+        color([0.95,0.95,0.95]){
+            for(i=[1:1:len(pos2)-1]){
+                hull(){
+                    translate(pos2[i-1]) sphere(d=30);
+                    translate(pos2[i]) sphere(d=30);
+                }
             }
         }
 }
@@ -210,23 +220,25 @@ module pathouse(doorstate=[0,0,1]){
 //doorstate [outer airlock, inner airlock, bathroom]
 
 //outer 4 walls
-difference(){
-    translate([-75,-75,-75]){
-        cube([4000,4000,4000]);
+color([0.5,0.5,0.5]){
+    difference(){
+        translate([-75,-75,-75]){
+            cube([4000,4000,4000]);
+        }
+        cube([3850,3850,3850]);
+        translate([3800,2850-100,100]){
+            cube([200,1000,2000]);
+        }
     }
-    cube([3850,3850,3850]);
-    translate([3800,2850-100,100]){
-        cube([200,1000,2000]);
-    }
-}
 
-//internal airlock wall
-difference(){
-    translate([2850-75,0,0]){
-        cube([75,3850,2200]);
-    }
-    translate([2750,100,100]){
-        cube([200,1000,2000]);
+    //internal airlock wall
+    difference(){
+        translate([2850-75,0,0]){
+            cube([75,3850,2200]);
+        }
+        translate([2750,100,100]){
+            cube([200,1000,2000]);
+        }
     }
 }
 
@@ -239,71 +251,59 @@ translate([3850,3850-100,100]){//outer door
 }
 //both doors hinge inwards
 
-//airlock door rails
-translate([3800,100,25]){
-    cube([50,3800,50]);
-}
-translate([3800,100,2125]){
-    cube([50,3800,50]);
-}
-translate([2850,100,25]){
-    cube([50,3800,50]);
-}
-translate([2850,100,2125]){
-    cube([50,3800,50]);
-}
-
 //second floor
-difference(){
-translate([0,0,2200]){
-    cube([3850,3850,75]);
-}
-translate([0,1000,2100]){
-    cube([1000,2200,275]);
-}
-}
-
-
-//stairs
-//stepsize=300;
-stepsize=2275/7;//stair step size 325mm
-for(step=[stepsize-75:stepsize:2200]){
-    translate([0,1000+step-stepsize*0.5,step]){
-        cube([1000,stepsize,75]);
+color([0.5,0.5,0.5]){
+    difference(){
+    translate([0,0,2200]){
+        cube([3850,3850,75]);
     }
-    translate([0,1000+step-stepsize*0.5,step-stepsize]){
-        cube([1000,75,stepsize]);
+    translate([0,1000,2100]){
+        cube([1000,2200,275]);
     }
-}
+    }
 
-//stairs wall
-difference(){
-    union(){
-        hull(){
-            translate([1000,1075,0]){
-                cube([75,75,stepsize]);
-            }
-            translate([1000,3275-stepsize,2200-stepsize]){
-                cube([75,75,stepsize]);
-            }
-            translate([1000,3000,2200]){
-                cube([75,125,75]);
-            }
-            translate([1000,3000,0]){
-                cube([75,125,75]);
-            }
+
+    //stairs
+    //stepsize=300;
+    stepsize=2275/7;//stair step size 325mm
+    for(step=[stepsize-75:stepsize:2200]){
+        translate([0,1000+step-stepsize*0.5,step]){
+            cube([1000,stepsize,75]);
         }
-        //filling to fit with bathroom wall
-        translate([1000,2800,0])cube([75,150,2200]);
+        translate([0,1000+step-stepsize*0.5,step-stepsize]){
+            cube([1000,75,stepsize]);
+        }
     }
-    translate([950,2800,0]){
-        cube([200,1000,1875]);
+
+    //stairs wall
+    difference(){
+        union(){
+            hull(){
+                translate([1000,1075,0]){
+                    cube([75,75,stepsize]);
+                }
+                translate([1000,3275-stepsize,2200-stepsize]){
+                    cube([75,75,stepsize]);
+                }
+                translate([1000,3000,2200]){
+                    cube([75,125,75]);
+                }
+                translate([1000,3000,0]){
+                    cube([75,125,75]);
+                }
+            }
+            //filling to fit with bathroom wall
+            translate([1000,2800,0])cube([75,150,2200]);
+        }
+        translate([950,2800,0]){
+            cube([200,1000,1875]);
+        }
     }
-}
-//bathroom wall
-difference(){
-    translate([1000,2800,0])cube([1850,75,2200]);
-    translate([1175,2750,100])cube([1000,175,2000]);
+    //bathroom wall
+    difference(){
+        translate([1000,2800,0])cube([1850,75,2200]);
+        translate([1175,2750,100])cube([1000,175,2000]);
+    }
 }
 //bathroom door
 translate([1175,2800,100]){
@@ -311,12 +311,63 @@ translate([1175,2800,100]){
 }
 
 //bathtub / shower boundary
-translate([2175,2850,0]){
-    cube([75,1000,600]);
-    //cube([600,75,600]);
+color([0.5,0.5,0.5]){
+    translate([2175,2850,0]){
+        cube([75,1000,600]);
+        //cube([600,75,600]);
+    }
+}
+//bathtub polyethylene foam lining
+color([0.95,0.95,0.95]){
+    translate([2250,2875,0]){
+        difference(){
+        cube([525,975,610]);
+        translate([10,10,10])cube([505,955,610]);
+        }
+    }
 }
 
+//bathtub water source, todo
+/*
+translate([1330,3500,0]){
+    color([0.65,0.65,0.65]){
+        cube([800,250,1000]);
+    }
+}
+*/
+
 translate([100,3000]) pathouse_toilet();
+
+//mattress and pillows
+color([0.8,0.8,0.8]){
+translate([2800,1800,2275]){cube([1000,2000,200]);}
+translate([2950,3300,2475]){cube([800,500,100]);}
+translate([3300,3400,2575]){cube([300,300,100]);}
+translate([3000,1850,2475]){rotate([0,0,-20]){cube([300,1500,200]);}}
+}
+//night lamp
+translate([2700,3700,2275]){
+    color([0.2,0.2,0.2])cylinder(d=80,h=30);
+    translate([0,0,10])color([1,0.8,0])cylinder(d=60,h=160);
+    translate([0,0,160])color([0.2,0.2,0.2])cylinder(d=80,h=30);
+}
+
+//stove
+translate([2450,2200,0]){
+    color([0.65,0.65,0.65]){
+        difference(){
+            cube([250,500,1000]);
+            translate([-10,10,10]){cube([250,480,640]);}
+        }
+    }
+    color([0.95,0.95,0.95]){
+        translate([10,90,10]){cube([220,320,520]);}
+        translate([120,250,530]){cylinder(d=40,h=120);}
+    }
+    translate([125,125,1000])color([0.25,0.25,0.25]){cylinder(d=200,h=10);}
+    translate([125,375,1000])color([0.25,0.25,0.25]){cylinder(d=200,h=10);}
+    translate([-1,50,700])color([0.15,0.15,0.15]){cube([1,400,250]);}
+}
 
 }//end of pathouse module
 
@@ -372,9 +423,8 @@ difference(){
 
 //for a render:
 intersection(){
-    union(){
-        pathouse([1.2*sin(260*$t),1.2*sin(260*$t),1.2*sin(260*$t)]);
-    }
+    //pathouse([1.2*sin(260*$t),1.2*sin(260*$t),1.2*sin(260*$t)]);
+    pathouse();
     translate($vpt){
         rotate($vpr){
             translate([0,0,-$vpd]){
