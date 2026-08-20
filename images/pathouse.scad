@@ -3,6 +3,22 @@ NOTES ABOUT THE HOUSE
 the doors have windows to look through which also points out which side of the door will swing - the side with pointy end of the window swings around, the side with the wide end of the window is where the hinges are
 both doors in the airlock swing into the airlock, not outside
 the bathroom door swings out from the bathroom
+
+NECESSITIES:
+hygiene - there is a sink with its own internal 16L fresh and waste water storage tanks as well as a battery for its internal pump and heater. There is a toilet with a 163L waste storage tank. A bathtub is available but only as a spot where any amount of water spillage is safe, since it has no outlet and as such taking full baths would be really difficult - the sink is put next to the bath tub so that the tap may be turned around and used as a warm water source to clean yourself under.
+sleep - a mattress is located on the top floor
+light - supplied by portable battery-powered lamps, one such light is standing right next to the mattress 
+air quality control - MISSING
+temperature regulation - MISSING
+first aid supplies - MISSING, or should I assume the inhabitant's implanted medisystem is going to be enough?
+food and water storage - MISSING, just keep everything on the floor somewhere?
+trash disposal - MISSING, just use trash bags?
+interior pressure regulation - MISSING, also note on this, is it safe to use a pure oxygen 0.21bar atmosphere?
+airlock pressure regulation - provided by manually operated ball valves providing the ability to manually open a hole from the airlock to the outside, or to the inside of the house, which does not retain the air. A better solution may or may not be worth considering - the airlock room could have a battery-powered pump in it that compresses all the air into storage tanks, and releases the air into the room when represurization is needed - is that worth the added complexity? It is probably worth it if atmosphere uses nitrogen which is expensive, not worth it if it is just oxygen which is cheap
+
+non-necessities
+cooking - there is a battery-powered stove with 2 hot plates
+networking - it is easy to get a network connection via infrared laser by mounting a network node right near the airlock door where it has a direct line of sight to the outside through both airlock door windows
 */
 
 module pathouse_door(open=0,swingdirection=1){
@@ -237,7 +253,7 @@ module pathouse_sink(){
             translate([100,100,400]){cylinder(d=20,h=200);}
         }
         translate([500,10,10]){//battery
-            cube([220,320,520]);
+            cube([220,220,520]);
             translate([110,160,520]){cylinder(d=40,h=80);}
         }
     }
@@ -478,13 +494,15 @@ difference(){
 */
 
 //for a render:
-intersection(){
-    pathouse([1.2*sin(260*$t),1.2*sin(260*$t),1.2*sin(260*$t)]);
-    //pathouse();
-    translate($vpt){
-        rotate($vpr){
-            translate([0,0,-$vpd]){
-                cube(1.98*$vpd,center=true);
+translate([75,75,75]){
+    intersection(){
+        pathouse([1.2*sin(260*$t),1.2*sin(260*$t),1.2*sin(260*$t)]);
+        //pathouse();
+        translate($vpt){
+            rotate($vpr){
+                translate([0,0,-$vpd]){
+                    cube(1.98*$vpd,center=true);
+                }
             }
         }
     }
