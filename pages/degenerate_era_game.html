@@ -86,9 +86,9 @@ Gamemodes which occur in space also feature full newtonian movement and gravitat
 All the game physics are fully deterministic as to make any game state computable just from the starting state and a list of player actions.
 </article>
 
-<h1>Massively Multiplayer mode</h1>
+<h1>Serverless Multiplayer mode</h1>
 <article>
-The game can be played in a Massively Multiplayer mode where the world that the player is dropped into includes changes made by other players and also publishes any changes the player makes.
+The game can be played in a Serverless Multiplayer mode where the world that the player is dropped into includes changes made by other players and also publishes any changes the player makes.
 It includes an anti-cheat built by cleverly constructing the savefile such that instead of merely storing the worldstate, it instead stores the chain of actions that resulted in the current world state, with the game logic having been cleverly built in such a way that any action made by the player is just a new entry appended to a log of events that can be mathematically verified to have been possible.
 This allows the save file to be shared with others using a blockchain mechanism, which appends a new block of player actions roughly once every megasecond at default settings, relying on every player to locally verify that the new block they received contains only valid chains of actions.
 <br><br>
@@ -99,16 +99,27 @@ The default 1Ms block time also hypothetically allows players across the entire 
 It is not unheard of for large dedicated communities to produce save files measuring entire petabytes in size.
 <br><br>
 As interesting as this approach is, the most common complaint about it is the total inability to hide your base unless you just carry everything with you every time you log off.
+For primarily this reason, there are a number of somewhat commonly used mods that swap this entire system for a more standard client-server architecture.
 </article>
 
 <h1>Co-Op mode</h1>
 <article>
 A session can be played by multiple players together.
-The game uses the same blockchain-style synchronization as with Massively Multiplayer mode but with block times on the order of one second (adjustable at session start, but generally recommended to be similar to round trip ping time between the participating players) so that all players can immediately see the world changes made by other players, as well as some other minor differences like loading certain actions of other players into the displayed world state before they get included in a block.
+The game uses the same blockchain-style synchronization as with Serverless Multiplayer mode but with block times on the order of one second (adjustable at session start, but generally recommended to be similar to round trip ping time between the participating players) so that all players can immediately see the world changes made by other players, as well as some other minor differences like loading certain actions of other players into the displayed world state before they get included in a block.
 <br>
 The experience can be described as occasionally janky (especially when a player had made an action, which was then displayed to other players, but conflicts with the newest block and ends up being reverted) but it is remarkably stable even at ping times of 10 seconds.
 <br><br>
-Co-Op sessions can be played with or without Massively Multiplayer mode and if the MMmode is enabled then the whole session once it ends is converted into a single log that can be published to be included in the public save file.
+Co-Op sessions can be played with or without Serverless Multiplayer mode and if the SMmode is enabled then the whole session once it ends is converted into a single log that can be published to be included in the public save file.
+</article>
+
+<h1>Game complexity</h1>
+<article>
+Sessions of the game might involve simulating trillions of individual objects at 64 bit precision, resulting in minimum hardware with 1.28e17 bits of memory and capacity for 7.2e19 bit flips per second, which is at least 128 civic-3 chips pulling 87.5 watts - not necessarily a big expense, but a noticeable one.
+<!16×10 000^3,16×10 000^3×1kB,16×10 000^3×44 796bit×100Hz>
+With the new civic-4 chips though, it is not unheard of for people to build worlds with quadrillions of objects especially on multiplayer saves.
+<br><br>
+One artifact of the game being aimed primarily at uploads, who can experience the full immersion of its simulated environment, is the computational complexity of the game, since it assumed uploads inherently had access to massive amounts of computational power.
+Most notably, world loading and game state deconfliction in multiplayer rely on simply re-simulating all the steps since last confirmed valid state at 1000 times faster than realtime speed, which can be non-viable for small systems but is typically a trivial amount of computing power compared to that needed to run a digitally reconstructed mind.
 </article>
 
 <h1 class="thread">Gamemodes</h1>
