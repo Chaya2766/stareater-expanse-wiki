@@ -614,6 +614,20 @@ div.thread{
  border-left: 1px solid white;
 }
 
+details.thread{
+ padding-left: 5px;
+ border-left: 1px solid gray;
+}
+details[open].thread{
+ padding-left: 5px;
+ border-left: 1px solid cyan;
+}
+details[open].thread summary{
+ padding-bottom: 5px;
+ border-bottom: 1px solid cyan;
+ margin-bottom: 5px;
+}
+
 .soft, .card.soft a{
  /*background-color: #0fe1;*/
  color: #0fa;
