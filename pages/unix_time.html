@@ -32,19 +32,19 @@ I also made a <a href="https://github.com/Chaya2766/unix-time-clock-gnome-extens
 <div>
     <span>UTC Gregorian date</span>
     <input type="text" id="utcInput" placeholder="UTC Gregorian date (YYYY-MM-DD HH:MM:SS)" style="width: 295px;" onkeypress="if(event.key === 'Enter') convertToUnix()">
-    <button onclick="convertToUnix()">Convert to Epoch Time</button>
+    <button onclick="convertToUnix()">Convert to Unix Time</button>
     <p id="unixResult"></p>
-    <span>Epoch time</span>
-    <input type="text" id="epochInput" placeholder="Epoch time (seconds)" onkeypress="if(event.key === 'Enter') convertToUTC()">
+    <span>Unix time</span>
+    <input type="text" id="epochInput" placeholder="Unix time (seconds)" onkeypress="if(event.key === 'Enter') convertToUTC()">
     <button onclick="convertToUTC()">Convert to UTC Date</button>
     <button onclick="setTimeNow()">Set time to now</button>
     <p id="utcResult"></p>
 </div>
 
-<article>The table below is roughly accurate only for epoch times between 0 and 32 503 680 000</article>
+<article>The table below is roughly accurate only for unix times between 0 and 32 503 680 000</article>
 
 <table class="styled">
-  <tr><th colspan=2>Fun statistics about epoch time <span id="table_epoch">-</span></th></tr>
+  <tr><th colspan=2>Fun statistics about unix time <span id="table_epoch">-</span></th></tr>
   <tr><td>total human population</td><td id="table_population"></td></tr>
   <tr><td>total energy use of humanity</td><td id="table_power"></td></tr>
   <tr><td>average energy use per person</td><td id="table_power_per_person"></td></tr>
