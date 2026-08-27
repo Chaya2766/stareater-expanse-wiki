@@ -1,0 +1,111 @@
+module roundbox(dimensions=[100,200,500],radius=10){
+    hull(){
+        for(x=[0,dimensions[0]]){
+            for(y=[0,dimensions[1]]){
+                for(z=[0,dimensions[2]]){
+                    translate([x,y,z]){sphere(radius);}
+                }
+            }
+        }
+    }
+}
+
+/*
+module rounded_corner(minor_radius=10,major_radius=100,height=200){
+    intersection(){
+        cube(major_radius+minor_radius);
+        difference(){
+            cylinder(r=major_radius+minor_radius,h=height);
+            translate([0,0,-minor_radius]){
+                cylinder(r=major_radius-minor_radius,h=height-minor_radius*2);
+            }
+        }
+    }
+}
+*/
+
+module rounded_corner(minor_radius=10,major_radius=100,height=200){
+    step=10;
+    for(i=[step:step:90]){
+        hull(){
+            rotate([0,0,i]){
+                translate([major_radius,0,0]){
+                    sphere(minor_radius);
+                }
+            }
+            rotate([0,0,i-step]){
+                translate([major_radius,0,0]){
+                    sphere(minor_radius);
+                }
+            }
+            rotate([0,0,i]){
+                translate([major_radius,0,height]){
+                    sphere(minor_radius);
+                }
+            }
+            rotate([0,0,i-step]){
+                translate([major_radius,0,height]){
+                    sphere(minor_radius);
+                }
+            }
+        }
+    }
+}
+
+module USB_E(){
+    for(rot=[0,180]){
+        rotate([0,0,rot]){
+            color([0.35,0.35,0.35]){
+                hull(){
+                    translate([-10,10,10]){sphere(10);}
+                    translate([-10,10,230]){sphere(10);}
+                    translate([-190,10,10]){sphere(10);}
+                    translate([-190,10,230]){sphere(10);}
+                    translate([-10,90,10]){sphere(10);}
+                    translate([-10,90,230]){sphere(10);}
+                    translate([-150,50,10]){rotate([0,0,90]){rounded_corner(10,40,220);}}
+                }
+                hull(){
+                    translate([-210,-10,10]){sphere(10);}
+                    translate([-210,-10,230]){sphere(10);}
+                    translate([-210,-50,10]){sphere(10);}
+                    translate([-210,-50,230]){sphere(10);}
+                }
+                hull(){
+                    translate([-10,-110,10]){sphere(10);}
+                    translate([-10,-110,230]){sphere(10);}
+                    translate([-150,-110,10]){sphere(10);}
+                    translate([-150,-110,230]){sphere(10);}
+                }
+                translate([-150,-50,10]){rotate([0,0,180]){rounded_corner(10,60,220);}}
+            }
+            color([0.8,0.75,0]){//pins
+                for(x=[-38:-21:-185]){
+                    for(z=[30,160]){
+                        translate([x,-0.1,z]){cube([10,2,60]);}
+                    }
+                }
+                translate([-1.9,20,95]){cube([2,60,60]);}
+            }
+        }
+    }
+    color([0.35,0.35,0.35]){
+        hull(){
+            for(rot=[0,180]){
+                rotate([0,0,rot]){
+                    translate([-150,-50,-210]){rotate([0,0,180]){rounded_corner(10,60,220);}}
+                    translate([-150,50,-210]){rotate([0,0,90]){rounded_corner(10,60,220);}}
+                }
+            }
+        }
+    }
+}
+
+//roundbox();
+//rounded_corner();
+scale(0.025){
+    USB_E();
+}
+
+$vpr=[40,0,$t*180];
+$vpd=50;
