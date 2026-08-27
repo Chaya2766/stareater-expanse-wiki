@@ -14,6 +14,15 @@ Management of both electrical power and thermal power (ie. waste heat) are consi
 </article>
 <hr>
 
+<h1>Electrical and Thermal standards</h1>
+<article>
+Finespun electrical grid operates at <b>576 volts DC</b>.
+<br><br>
+The coolant grid operates at temperature range <b>from 280K</b> (small safety margin from freezing point of water) to <b>330K</b> (near the boiling point of water at 0.21 bar, which would be 333K), and water pressure <b>up to 1 bar</b>.
+</article>
+
+<hr>
+
 <h1>Finespun standard power+coolant connector</h1>
 <img src="../images/ftt_power_connector_2.webp" class="styled right"></img>
 <article>
@@ -24,11 +33,11 @@ A tiny bit of spillage is still expected when disconnecting cables, but the geom
 <br><br>
 <img src="../images/ftt_power_cable_crossection.webp" class="styled left cardsize"></img>
 The conductors in the cable are 20mm in diameter and made of kamacite wires, which is cheap but much more resistive than copper, giving the cable a 2-way resistance of a bit under 4.9m&Omega; per metre.
-The coolant lines are also 20mm in diameter internally, and both the insulation of the cable as well as the coolant lines themselves are made of plain 5mm thick cross-linked polyethylene (XLPE) made by electron irradiation of regular polyethylene (HDPE).
+The coolant lines are also 20mm in diameter internally, and both the insulation of the cable as well as the coolant lines themselves are made of plain 5mm thick high density polyethylene (HDPE).
 <!6.9E−7Ohmm×2m/(circle(2cm/2)×0.9069) = 4.843617190 mΩ>
 <!0.9069 is from hexagonal circle packing efficiency>
 Resistive losses are easily absorbed since the cable also carries coolant, which naturally carries the heat away.
-For this reason it is critical that even if a device does not use the coolant, it takes it as input and returns it to maintain the flow of coolant through the cable.
+For this reason it is important that even if a device does not use the coolant, it takes it as input and returns it to maintain the flow of coolant through the cable.
 <br><br>
 The cable can reliably handle coolant flow rates of 1L/s and amperages up to 175A (which would deliver 100kW but also cause 150W of heating in each metre of the cable from resistive losses - losses scale with square of current and grow linearly with total length of cable).
 <!(1L/s)/(pi×(1cm)^2)=3.183098862 m/s , this goes ever so slightly above the maximum recomended 3m/s for heating circulation (https://www.engineeringtoolbox.com/flow-velocity-water-pipes-d_385.html) but should be fine>
@@ -39,8 +48,7 @@ The cable can reliably handle coolant flow rates of 1L/s and amperages up to 175
 The cables mass about 2.8kg per metre when dry, or 3.11kg/m when carrying water.
 <!0.9×(7900kg/m^3)×pi×(1cm)^2 + 2×(900kg/m^3)×pi×(1cm)^2 + 0×(1000kg/m^3)×pi×(1cm)^2 = 3.047344874 kg/m>
 <!0.9×(7900kg/m^3)×pi×(1cm)^2 + 2×(900kg/m^3)×pi×(1cm)^2 + 1×(1000kg/m^3)×pi×(1cm)^2 = 3.113318320 kg/m>
-The XLPE insulation of the cable can handle temperatures up to 390K in continuous operation, which cannot be reached by water coolant as it boils near 373K.
-It can physically handle temperatures up to 520K for short periods, but only without mechanical tension or electrical load, which means that the conduits cannot safely operate at temperatures that high.
+The HDPE insulation of the cable can handle temperatures up to 350K in continuous operation, which cannot be reached by water coolant as it boils near 330K.
 <!Wikipedia for cross-linked polyethylene : https://en.wikipedia.org/wiki/Cross-linked_polyethylene>
 <!Compared to thermoplastic polyethylene, PEX does not melt (analogous to elastomers) and is thermally resistant (over longer periods of up to 120 °C, for short periods without electrical or mechanical load up to 250 °C).>
 </article>
@@ -91,8 +99,22 @@ Despite the lack of active charge balancing, the batteries don't tend to suffer 
   <tr><td>Arsenic</td><td>0.001102886 mol</td><td>82.63 mg</td></tr>
 </table>
 
+<!--
 <hr>
 
-
+<h1>Active radiators</h1>
+<article>
+Finespun's coolant network typically operates at no more than 330K, which would allow each square metre of radiating area to dissipate 672 watts of heat at most.
+Active radiators spend extra energy to raise their temperature above that of the coolant.
+<br><br>
+Active radiators consist of an ion-beam-printed peltier cell, on one side given a black, highly emissive coating, and on the other side lined with coolant channels.
+Given the quality of the peltier cells produced at Finespun, they can normally create a 100 kelvin temperature difference, which brings the radiating surface up to 430 kelvin, allowing it to dissipate 1938 watts of heat.
+This requires extra power as any heatpump does - Finespun's peltier cells at this temperature and temperature difference provide COP of 4, meaning that the 1938 watts of heat being pushed to one side require 485 watts of power from the peltier cell, which eats a little bit of the performance.
+Since 485 watts of heat that the radiator is dissipating are actually just waste heat from the peltier cell itself, the actual cooling provided is 1453 watts per square metre, still more than double as much as a passive radiator.
+<!430K/(430K−330K) = 4.3>
+<br><br>
+All in all this active radiator sized 1 square metre can act as a passive radiator to dissipate up to 672 watts of heat, but can also be fed an additional 485 watts of power to increase total cooling (accounting for its own waste heat) up to 1453 watts.
+</article>
+-->
 
 </html>
