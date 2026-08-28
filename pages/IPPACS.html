@@ -47,6 +47,7 @@ A map of the solar system, including the gravitational potentials, is baked into
 </article>
 
 <h3>communication protocols</h3>
+<article class="warning">Needs rewrite : split this up into 3 sections that separately tackle filesharing, realtime communication and physical communication protocols</article>
 <article>
 IPPACS packages all data into file-like containers addressed by either the hash of their contents, or a public key and the fitting cryptographic signatures.
 This is mostly a result of the system having originally been designed exclusively for file sharing and not realtime communication, and having ended up used in this way merely as a result of faster and faster computers allowing the computational overhead to become unnoticeable to people who took note of the extreme reliability of the system and decided to use it for realtime communication.
@@ -85,5 +86,38 @@ bits per second that can be achieved with commonly available hardware and the IP
   <li><b>electrical conductor communication</b>: 1e9 bits/s (125MB/s) at or below 1km. The electrical conductor in question could also be carrying useful quantities of DC or low frequency AC electricity at the same time as the signal without interfering with the data transmission, so IPPACS can be easily integrated into power grids as a method of communication between power grid devices. The bandwidth will be divided between all the devices attempting to use the same continuous conductor for communication.</li>
   <li><b>sonic data transmission</b>: 2e5 bits/s (25kB/s) at 1km in water. Bandwidth will be divided between devices trying to communicate since sonic data transmission is so notorious for interfering with one another.</li>
 </ul>
+
+<hr>
+
+<h1>File sharing</h1>
+<article>
+Files on the IPPACS network are identified by 512-bit <a href="UID.html">UID</a>s, typically encoded in base62 like for example "<span id="example_ippacs_uid" onclick="reroll_example_ippacs_uid()">vx2xcED34puKC9ZUny1cWyAa8FLSVDtOivehsIhjtJR7Onlw2Wvc1neFEmeSONFUyArjApWpteJC0i6W5SG8KF</span>".
+<br><br>
+The UID might either directly be a hash of the file, in which case that file is retrieved from any node which knows it, or it might be a hash of a descriptor containing a public key, in which case the swarm will attempt to return the newest file signed with that key.
+</article>
+
+<script>
+
+function reroll_example_ippacs_uid(){
+  number_to_encode = Math.random() * Math.pow(2,512);
+  
+  digit = 85;
+  encoded_number = "";
+  
+  digits_library = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+  
+  while(digit >= 0){
+    multiple = Math.floor(number_to_encode / Math.pow(62,digit));
+    
+    encoded_number += digits_library[multiple];
+    
+    number_to_encode -= Math.pow(62,digit) * multiple;
+    digit -= 1;
+  }
+  
+  document.getElementById('example_ippacs_uid').innerHTML = encoded_number;
+}
+
+</script>
 
 </html>

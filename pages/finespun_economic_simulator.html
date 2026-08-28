@@ -140,6 +140,14 @@ seconds (game time)
   <tr><td>solar tiles</td><td id="solar_tiles">0</td></tr>
 </table>
 
+<table class="styled left">
+  <tbody id="growth_table">
+  <tr><th colspan=4>Growth history</th></tr>
+  <tr><td>time</td><td>solar arrays</td><td>power generation</td><td>kardashev level</td></tr>
+  <tr><td>17 000 000 000</td><td>1</td><td>250kW</td><td>-0.060</td></tr>
+  </tbody>
+</table>
+
 <hr>
 
 <table class="styled left">
@@ -847,11 +855,16 @@ function wait_seconds(s){
   E = document.getElementById("energy_J").innerHTML * 1;
   C = document.getElementById("concentrated_solar_arrays").innerHTML * 1;
   T = Math.floor(document.getElementById("epoch_time").innerHTML.replace(/\s/g, '') * 1);
+  T_start = T;
   T += s;
   E += C * 250E+3 * s; //250kW from each array
   document.getElementById("energy_J").innerHTML = E;
   document.getElementById("epoch_time").innerHTML = T.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
   document.getElementById("time_passed").innerHTML = (T - start_timestamp).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  
+  if(T_start < (T - (T % 250e6))){
+    document.getElementById("growth_table").innerHTML += '<tr><td>'+T.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")+'</td><td>'+C.toString()+'</td><td>'+(C*250).toString()+'kW</td><td>'+((Math.log10(C*250e3)-6)/10).toFixed(3)+'</td></tr>';
+  }
   
   removeCompletedOrders(T);
   calculate_statistics();
