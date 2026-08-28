@@ -25,3 +25,5 @@ images/*.stl
 images/*.xcf
 
 **ignorethis**
+
+extracted_older_files/**
