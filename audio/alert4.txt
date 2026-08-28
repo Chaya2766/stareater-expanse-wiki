@@ -1,0 +1,8 @@
+0.1s sawtooth 330Hz
+0.1s sawtooth 660Hz
+0.1s sawtooth 330Hz
+0.1s sawtooth 660Hz
+0.6s silence
+play twice
+
+NOTE: sawtooth pitch transition is done by first generating 0.6s sawtooth 330Hz, then speeding up 0.2s sections to become 0.1s at twice the frequency. This is done to make sure the phase of the tone stays continuous, which avoids strange clicking noises at the transition.
