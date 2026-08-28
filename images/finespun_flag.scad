@@ -15,12 +15,18 @@ module recursive_crystal(l=100,s=0.75,n=3){
     }
 }
 
-color("#FFF"){
-for(angle=[0,120,240]){
-    rotate(angle){
-        recursive_crystal(100,0.8,7);
+module finespun_symbol(size=140){
+    scale(size/140){
+        color("#FFF"){
+            for(angle=[0,120,240]){
+                rotate(angle){
+                    recursive_crystal(100,0.8,7);
+                }
+            }
+        }
     }
 }
-}
+
+finespun_symbol();
 
 //openscad finespun_flag.scad -o finespun_flag.png --imgsize=1000,1000 --colorscheme=Starnight --projection=o --camera=0,20,475,0,20,0
