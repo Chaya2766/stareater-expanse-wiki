@@ -19,6 +19,46 @@ Most of the industrial processes are executed on a small scale, using machines t
 
 <hr>
 
+<h1>Observed performance</h1>
+
+<table class="styled left">
+  <tr><th colspan="4">Growth history</th></tr>
+  <tr><td>time passed</td><td>solar arrays</td><td>power generation</td><td>kardashev</td></tr>
+  <tr><td>0</td><td>1</td><td>250kW</td><td>-0.060</td></tr>
+  <tr><td>250 000 000</td><td>2</td><td>500.000kW</td><td>-0.030</td></tr>
+  <tr><td>500 000 000</td><td>5</td><td>1.250MW</td><td>0.010</td></tr>
+  <tr><td>750 000 000</td><td>16</td><td>4.000MW</td><td>0.060</td></tr>
+  <tr><td>1 000 000 000</td><td>52</td><td>13.000MW</td><td>0.111</td></tr>
+  <tr><td>1 250 000 000</td><td>167</td><td>41.750MW</td><td>0.162</td></tr>
+  <tr><td>1 500 000 000</td><td>540</td><td>135.000MW</td><td>0.213</td></tr>
+  <tr><td>1 750 000 000</td><td>1761</td><td>440.250MW</td><td>0.264</td></tr>
+  <tr><td>2 000 000 000</td><td>5766</td><td>1.442GW</td><td>0.316</td></tr>
+  <tr><td>2 250 000 000</td><td>14257</td><td>3.564GW</td><td>0.355</td></tr>
+  <tr><td>2 500 000 000</td><td>25414</td><td>6.354GW</td><td>0.380</td></tr>
+  <tr><td>2 750 000 000</td><td>39282</td><td>9.820GW</td><td>0.399</td></tr>
+  <tr><td>3 000 000 000</td><td>55700</td><td>13.925GW</td><td>0.414</td></tr>
+  <tr><td>3 250 000 000</td><td>80214</td><td>20.053GW</td><td>0.430</td></tr>
+  <tr><td>3 500 000 000</td><td>107503</td><td>26.876GW</td><td>0.443</td></tr>
+  <tr><td>3 750 000 000</td><td>135966</td><td>33.992GW</td><td>0.453</td></tr>
+  <tr><td>4 000 000 000</td><td>165213</td><td>41.303GW</td><td>0.462</td></tr>
+</table>
+
+<article>
+Finespun Tech Tree notably suffers from a negative economy of scale - efficiency of the system drops as settlements get bigger.
+Growth typically peaks out after the settlement reaches kardashev 0.1 level then continues to stay optimal up to 0.35, and drops significantly past that point.
+There is some uncertaintly in whether this drop is caused by the system itself, or if it comes from the fact that this is roughly the point where enough power production is achieved for administrator Felicity to be activated and placed in charge of further development, but the usual explanation is that the performance is tanked by the growth of complexity (ie. the very thing the finespun tech tree was designed to avoid) that is required past that point.
+<br><br>
+A settlement which starts with a single concentrated solar array and a minimum amount of other equipment is expected to grow by 52× in the first gigasecond of its existence, then grow 110.88× in its second gigasecond, 9.66 times in the third gigasecond, 2.966× in the fourth gigasecond, and after that roughly doubles every gigasecond, corresponding to a growth rate of 2.2% annually, a bit below solar system's average 2.23% energy production growth over the third millenium.
+<br><br>
+Although this is quite a small growth rate after the initial burst, it should be noted that this describes a scenario which would be the very worst case for most of civilized space, as this is what happens to these settlements when they have absolutely no trade or contact with the civilization at large.
+<br><br>
+<span class="meta">Note: as of 1 788 000 000 the specified gigasecondly growth rates are the actual conclusion from running the <a href="finespun_economic_simulator.html">Finespun Economic Simulator</a> on autoplay with 1Ms turn length.
+My hypothesis for why the growth rate tanks so hard after kardashev 0.35 is probably just that my autoplay algorithm severely overproduces infrastructure every time it detects that there is too little of it, and somehow as the settlement grows, that overproduction starts to account for larger fractions of the total available energy and material.
+Alternatively it might be the fact that there is no way to make more ion beam printers, but the weird thing is that the decrease in growth starts long before the printers start being the problem.</span>
+</article>
+
+<hr>
+
 <h2>Low Temperature Electrolysis of mixed metal oxides</h2>
 <img class="styled right" src="../images/ftt_lte_refinery.webp"></img>
 <article>

@@ -143,7 +143,7 @@ seconds (game time)
 <table class="styled left">
   <tbody id="growth_table">
   <tr><th colspan=4>Growth history</th></tr>
-  <tr><td>time</td><td>solar arrays</td><td>power generation</td><td>kardashev level</td></tr>
+  <tr><td>time</td><td>solar arrays</td><td>power generation</td><td>kardashev</td></tr>
   <tr><td>17 000 000 000</td><td>1</td><td>250kW</td><td>-0.060</td></tr>
   </tbody>
 </table>
@@ -356,7 +356,7 @@ function autoplay_action(){
     return try_max_separate_regolith();
   }
   
-  if(build_concentrated_solar_array(1)){
+  if(try_max_build_concentrated_solar_arrays()){
     return true;
   } else if(tiles < 8000){
     if(try_max_print_solar_tile()) {
@@ -374,7 +374,7 @@ function autoplay_action(){
   if(tiles >= 8000 && energy > 1e9 && total_kamacite < 611000){
     if(try_max_electrolyze_regolith()){
       return true;
-    } else if(build_LTE_refinery(1)){
+    } else if(try_max_build_LTE_refinery()){
       return true;
     }
   }
@@ -385,8 +385,8 @@ function autoplay_action(){
   //I made it so that it will try to build additional LTE refineries if the thing above fails
   
   //on another note
-  //maybe somewhere here should check if the number of concentrated solar arrays is sufficient to switch to separating raw regolith and do that instead after like, say, 1000 solar arrays?
-  //or maybe after reaching finespun's growth target of 400 000 solar arrays
+  //print civic-2 chips if the number of chips is less than the number of ion beam printers
+  //the cost of ion beam printers is not yet set but I imagine that they would require at least one civic-2 chip each
   
   if(kamacite_bake > 1){
     if(try_max_separate_kamacite_bake()){
@@ -396,20 +396,21 @@ function autoplay_action(){
     if(try_max_bake_kamacite()) {
       return true;
     } else if(kamacite_ovens == 0 && kamacite > 1000 & energy > 1e11){//this set of conditions severely overbuilds ovens but not so badly that I feel the need to fix it
-      if(build_kamacite_oven(1)){
+      if(try_max_build_kamacite_oven()){
         return true;
       }
     } else if(try_max_electrolyze_regolith()){
         return true;
     } else if(energy > 1e11){
-      if(build_LTE_refinery(1)){
+      if(try_max_build_LTE_refinery()){
         return true;
       }
     }
   }
   
   //I should rethink if building infrastructure as a response to excessive energy in the way I do below is actually a good idea, including it in the functions above might be better
-  if(energy > 1e12){/*
+  //added "and false" to completely disable this if statement, because commenting it out would not work due to how I already commented out parts of it
+  if(energy > 1e12 && false){/*
     if(kamacite_ovens == 0){
       if(build_kamacite_oven(1)){
         return true;
@@ -534,6 +535,49 @@ function try_max_separate_regolith(){
   } else {
     return false;
   }
+}
+
+function try_max_build_LTE_refinery(zeros=6){
+  for( var i = zeros; i>=0; i-- ){
+    number = Math.floor(Math.pow(10,i));
+    if(build_LTE_refinery(number)){
+      return true;
+    }
+  }
+  return false;
+}
+
+function try_max_build_kamacite_oven(zeros=6){
+  for( var i = zeros; i>=0; i-- ){
+    number = Math.floor(Math.pow(10,i));
+    if(build_kamacite_oven(number)){
+      return true;
+    }
+  }
+  return false;
+}
+
+function try_max_build_concentrated_solar_arrays(zeros=6){
+  for( var i = zeros; i>=0; i-- ){
+    number = Math.floor(Math.pow(10,i));
+    if(build_concentrated_solar_array(number)){
+      return true;
+    }
+  }
+  return false;
+}
+
+function add_metric_prefix(number,precision=0){
+  decreased_number = number;
+  prefix = 0;
+  prefixes=['','k','M','G','T','P'];
+  
+  while(decreased_number >= 1000){
+    decreased_number /= 1000;
+    prefix += 1;
+  }
+  
+  return decreased_number.toFixed(precision) + prefixes[prefix];
 }
 
 function electrolyze_regolith(m){//m is the number of refineries used, it will use maximum if m is -1, each takes 100kg
@@ -863,7 +907,7 @@ function wait_seconds(s){
   document.getElementById("time_passed").innerHTML = (T - start_timestamp).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
   
   if(T_start < (T - (T % 250e6))){
-    document.getElementById("growth_table").innerHTML += '<tr><td>'+T.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")+'</td><td>'+C.toString()+'</td><td>'+(C*250).toString()+'kW</td><td>'+((Math.log10(C*250e3)-6)/10).toFixed(3)+'</td></tr>';
+    document.getElementById("growth_table").innerHTML += '<tr><td>'+T.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")+'</td><td>'+C.toString()+'</td><td>'+add_metric_prefix(C*250e3,precision=3).toString()+'W</td><td>'+((Math.log10(C*250e3)-6)/10).toFixed(3)+'</td></tr>';
   }
   
   removeCompletedOrders(T);

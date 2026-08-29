@@ -44,4 +44,4 @@ $vpr=[90,0,90];//this one to be used without sol cross
 $vpd=80;
 $vpt=[0,0,9];
 
-//openscad finespun_farview_flag.scad -o finespun_farview_flag.png --imgsize=1000,500 --colorscheme=Starnight --projection=o && cwebp -lossless finespun_farview_flag.png -o finespun_farview_flag.webp && rm finespun_farview_flag.png
+//openscad finespun_farview_flag.scad -o finespun_farview_flag.png --imgsize=1000,707 --colorscheme=Starnight --projection=o && cwebp -lossless finespun_farview_flag.png -o finespun_farview_flag.webp && rm finespun_farview_flag.png
