@@ -46,6 +46,8 @@ A trick borrowed by the GPS system that IPPACS also uses, is that whenever a nod
 A map of the solar system, including the gravitational potentials, is baked into IPPACS software, allowing these hints to be traced back to actual satellite locations by just simulating the trajectory and time dilation based on the received data.
 </article>
 
+<!--
+<div class="WIP">
 <h3>communication protocols</h3>
 <article class="warning">Needs rewrite : split this up into 3 sections that separately tackle filesharing, realtime communication and physical communication protocols</article>
 <article>
@@ -72,28 +74,50 @@ The priority of which files get transferred first is decided by their size as we
 In practice this means that if someone wants a file to propagate across the network faster, they can easily do so at the cost of spending extra computing power.
 This creates competition in areas where demand for bandwidth is much larger than the available network througput, as people will perform more computation to ensure their most important messages are transferred first.
 </article>
-
-<h3>bandwidth with different communication media</h3>
-<article>
-bits per second that can be achieved with commonly available hardware and the IPPACS protocols at various distances.
-</article>
-<ul>
-  <li><b>Fiber-optic connection</b>: 4e14 bits/s (50TB/s) per fiber at up to 50km distance.</li>
-  <li><b>short-range Laser communication</b>: 2e11 bits/s (25GB/s) per discernable beam at ranges up to 1000km. Potentially enables surface-orbit communication but presence of a dense atmosphere or certain atmospheric conditions might make it ineffective.</li>
-  <li><b>long-range Laser communication</b>: 8e6 bits/s (1MB/s) per discernable beam at ranges around 2.25e11 metres (&approx; 750 lightseconds). The "discernable" requirement becomes significant here as even a swarm of satelites around an entire planet might be too close together to appear as separate beam sources at such huge distances.</li>
-  <li><b>short-range Radio communication</b>: 1e10 bits/s (1.25GB/s) at ranges around 10 metres. Bandwidth decreases with each device trying to communicate in the same area at the same time, since it is difficult to isolate radio signals at such distances.</li>
-  <li><b>long-range Radio communication</b>: 2e8 bits/s (25MB/s) at ranges around 10km, 2e7bits/s (2.5MB/s) at 100km, 2e6 bits/s (250kB/s) at 1000km. Potentially good surface-orbit communication option when laser comms not available, as it is much less vulnerable to being blocked by bad atmospheric conditions.</li>
-  <li><b>electrical conductor communication</b>: 1e9 bits/s (125MB/s) at or below 1km. The electrical conductor in question could also be carrying useful quantities of DC or low frequency AC electricity at the same time as the signal without interfering with the data transmission, so IPPACS can be easily integrated into power grids as a method of communication between power grid devices. The bandwidth will be divided between all the devices attempting to use the same continuous conductor for communication.</li>
-  <li><b>sonic data transmission</b>: 2e5 bits/s (25kB/s) at 1km in water. Bandwidth will be divided between devices trying to communicate since sonic data transmission is so notorious for interfering with one another.</li>
-</ul>
-
-<hr>
+</div>
+-->
 
 <h1>File sharing</h1>
 <article>
 Files on the IPPACS network are identified by 512-bit <a href="UID.html">UID</a>s, typically encoded in base62 like for example "<span id="example_ippacs_uid" onclick="reroll_example_ippacs_uid()">vx2xcED34puKC9ZUny1cWyAa8FLSVDtOivehsIhjtJR7Onlw2Wvc1neFEmeSONFUyArjApWpteJC0i6W5SG8KF</span>".
 <br><br>
-The UID might either directly be a hash of the file, in which case that file is retrieved from any node which knows it, or it might be a hash of a descriptor containing a public key, in which case the swarm will attempt to return the newest file signed with that key.
+The UID might either directly be a <span class="tip" tip="Hash can be thought of as a sort of checksum. Any string of bits can be put through a hashing algorithm to produce a hash. The same string of bits will always result in the same hash. There is no known way to convert a hash back into the original string of bits, except trying all possible strings of bits until you get one that results in that hash.">hash</span> of the file, in which case that file is retrieved from any node which knows it, or it might be a hash of a descriptor containing a public key, in which case the swarm will attempt to return the newest file signed with that key.
+<br><br>
+IPPACS nodes store any file they had to handle in their cache in case it gets requested again.
+The cache stays as full as possible and files are only removed from it if there is not enough space to add the newest one.
+When a new file needs to be added to cache, and there is not enough free space for it, the node will remove from its cache the file that had been least recently used.
+Whenever a request comes in that references a given file, that file's "last used" time is updated to the present.
+<br><br>
+In case of files identified by a public key instead of directly by the file's hash, the IPPACS nodes will slowly discover from their neighbors when there is a new version of the file by reaching out to random nodes they know have this file and asking for the timestamp of the newest version, and if the timestamp is newer than the one they have, they will swap the one they have cached for the new one.
+</article>
+
+<h1>Realtime communication</h1>
+<article>
+IPPACS realtime communication interacts with its location and timekeeping function.
+The nodes generally have a complete map of where the other nodes are, and how their location will change in the future.
+<br><br>
+IPPACS data packets contain 5 important fields:
+<br>
+1. Sender ID<br>
+2. Recipient ID<br>
+3. Time of sending<br>
+4. Payment nonce<br>
+5. Data
+<br><br>
+Sender and recipient IDs are the UIDs of IPPACS nodes - since IPPACS nodes already keep track of each other, knowing the ID of the node which should receive the data packet immediately lets them known what physical direction and which next node the packet should be passed to.
+<!If location is used instead, this field specified a 4-dimensional coordinate (3 coordinates space + timestamp) for the data packet to be delivered to, and the packet will be delivered to the IPPACS node which is closest to that point.>
+<br><br>
+The "payment nonce" serves purely to enable prioritizing messages in times of high load.
+Weight of the package is calculated as the packet size multiplied by its hash multiplied by the square of its age, and the packet's priority is the inverse of its weight, so packages with less weight get sent first.
+<br><br>
+For example a packet with a total of 12080 bits and hash "wtMpGzOw3ATbsTeJiTwdVrR1UOFEddfFigtTKYZ3FBZcaXm5QNUDOfxv7xS64WTUf1NxdEpfoJEkXpi44ejnqC", sent 1000 seconds ago will have weight of about 1.605e164.
+The weight can be decreased by brute force trying different payment nonces to make the hash smaller, for example if that message had a hash "0000aDWwcaKHvijadh7NCCx0UfraXo2trVvohV94WIkCpUSEzaMYEb4M6W8JOUduqqnCOM6uk7yAL2dBCPYPp2" then its weight would drop to 6.679e156, but after 10 000 000 seconds it would weigh 6.679e164, which is more than the packet with no payment at all.
+In case of competition (eg. there is not enough bandwidth, or one of the messages has to be dropped from memory), the second package would win because it has smaller weight, as long as it is not too old.
+<br><br>
+This mechanism ensures that critically important messages will be prioritized and still reach their destination even if the local IPPACS network is overloaded, and simultaineously allows the system to clear old high-priority packages since they get weighted down more over time.
+The system works in a post office manner, with nodes holding onto messages that had not been delivered yet and trying to pass them to the recipient node until either they succeed, or until the message's weight grows so much that it is dropped from memory in favor of newer messages.
+<br><br>
+As a rule of thumb, brute forcing a hash that is 100× smaller will allow the message to stay high priority for 10× longer time, eg. a message with two zeros at the start of its hash and age of 100 seconds will have similar weight to a message with three zeros and 1000 seconds age.
 </article>
 
 <script>
@@ -119,5 +143,19 @@ function reroll_example_ippacs_uid(){
 }
 
 </script>
+
+<h3>bandwidth with different communication media</h3>
+<article>
+bits per second that can be achieved with commonly available hardware and the IPPACS protocols at various distances.
+</article>
+<ul>
+  <li><b>Fiber-optic connection</b>: 4e14 bits/s (50TB/s) per fiber at up to 50km distance.</li>
+  <li><b>short-range Laser communication</b>: 2e11 bits/s (25GB/s) per discernable beam at ranges up to 1000km. Potentially enables surface-orbit communication but presence of a dense atmosphere or certain atmospheric conditions might make it ineffective.</li>
+  <li><b>long-range Laser communication</b>: 8e6 bits/s (1MB/s) per discernable beam at ranges around 2.25e11 metres (&approx; 750 lightseconds). The "discernable" requirement becomes significant here as even a swarm of satelites around an entire planet might be too close together to appear as separate beam sources at such huge distances.</li>
+  <li><b>short-range Radio communication</b>: 1e10 bits/s (1.25GB/s) at ranges around 10 metres. Bandwidth decreases with each device trying to communicate in the same area at the same time, since it is difficult to isolate radio signals at such distances.</li>
+  <li><b>long-range Radio communication</b>: 2e8 bits/s (25MB/s) at ranges around 10km, 2e7bits/s (2.5MB/s) at 100km, 2e6 bits/s (250kB/s) at 1000km. Potentially good surface-orbit communication option when laser comms not available, as it is much less vulnerable to being blocked by bad atmospheric conditions.</li>
+  <li><b>electrical conductor communication</b>: 1e9 bits/s (125MB/s) at or below 1km. The electrical conductor in question could also be carrying useful quantities of DC or low frequency AC electricity at the same time as the signal without interfering with the data transmission, so IPPACS can be easily integrated into power grids as a method of communication between power grid devices. The bandwidth will be divided between all the devices attempting to use the same continuous conductor for communication.</li>
+  <li><b>sonic data transmission</b>: 2e5 bits/s (25kB/s) at 1km in water. Bandwidth will be divided between devices trying to communicate since sonic data transmission is so notorious for interfering with one another.</li>
+</ul>
 
 </html>
