@@ -103,9 +103,12 @@ module USB_E(){
 
 //roundbox();
 //rounded_corner();
-scale(0.025){
+scale(0.0091*1.75*1.4){
+    //at scale 0.0091 it is exactly 4mm wide and 2.2mm thick
+    //multiplying by 1.75 makes it nearly the intended original spec of 7×5×3.5mm, in reality more like 7×5×3.85mm
+    //multiplying by 2 again makes it 14×10×7.7mm
     USB_E();
 }
 
 $vpr=[40,0,$t*180];
-$vpd=50;
+$vpd=35*1.4;
