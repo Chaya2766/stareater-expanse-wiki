@@ -12,6 +12,7 @@
 <article class="basics">
 <br>
 Together with the specification, there is a set of custom units for Finespun, used primarily as a thought experiment, and very occasionally applied in casual use, but discouraged for any serious engineering uses in favor of just using SI units.
+For the sake of common daily use, ox and °W do prove much more convenient than atm and °C
 </article>
 
 <hr>
@@ -28,9 +29,7 @@ The less dense atmosphere means greatly diminished role of convection in heat tr
 Water evaporates much more easily in such low pressure, which greatly enhances drying and may cause discomfort to baseline humans, requiring increased water intake to offset the quicker moisture loss.
 <br><br>
 Water in this environment boils when heated to 333K, 60°C, 140°F, 100°W.
-Common recommendations for temperatures to cook meat safely call for temperatures between 63°C (105°W) and 72°C (120°W), which means that meat cannot be safely cooked in this environment, except by cooking it to the point where all the water had evaporated and then some more, or cooking it in a pressurized container.
-<br>
-If meat is cooked to the correct temperature in this environment without extra pressure, it will first have to evaporate away all of its water, turning it into jerky.
+(todo: show this explicitly using the Clausius-Clapeyron equation)
 </article>
 
 <hr>
@@ -40,18 +39,19 @@ If meat is cooked to the correct temperature in this environment without extra p
 <h2>Oxybar</h2>
 <article>
 Oxybar, shortened ox, unit of pressure.
-1 ox is equal to 0.209 bar or 20.9kPa.
+1 ox is equal to 0.21 bar or 21kPa.
+<!todo: consider if I should move it back up to 1 ox = 21 kPa so that water actually boils at exactly 60°C. Also air is in more precision 20.95% oxygen by molar fraction so really it should be 20.95kPa>
 <br><br>
 It is the pressure at which an atmosphere of pure oxygen is sufficient for human breathing, and also the partial pressure of oxygen in standard terran air.
-Terran air contains 20.9% oxygen by molar fraction, as such 1 bar of terran air contains 1 ox of oxygen partial pressure.
+Terran air contains 20.95% oxygen by molar fraction, as such 1 bar of terran air contains very close to 1 ox of oxygen partial pressure.
 <br>
-There are records dating back to the 21st century of gregorian epoch of humans surviving for 2 years in an environment with only 0.475 bar of absolute pressure <sup>[<a href="https://en.wikipedia.org/wiki/Effects_of_high_altitude_on_humans">wikipedia</a>]</sup> which translates to 0.475 ox of oxygen partial pressure, as such 0.5 ox is considered a rule of thumb limit for permanent habitability.
+There are records dating back to the 21st century of gregorian epoch of humans surviving for 2 years in an environment with only 0.475 bar of absolute pressure <sup>[<a href="https://en.wikipedia.org/wiki/Effects_of_high_altitude_on_humans">wikipedia</a>]</sup> which translates to 0.474 ox of oxygen partial pressure, as such 0.5 ox is considered a rule of thumb limit for permanent habitability.
 <br>
-At 0.383 ox of oxygen partial pressure a baseline human will have difficulty sleeping, and digesting food is extremely difficult, as such 0.4 ox is considered a rule of thumb limit for temporary habitability.
+At 0.381 ox of oxygen partial pressure a baseline human will have difficulty sleeping, and digesting food is extremely difficult, as such 0.4 ox is considered a rule of thumb limit for temporary habitability.
 <br>
-The absolute pressure in earth's "climber's death zone" is 0.356 bar, meaning 0.356 ox of oxygen partial pressure - at or below that oxygen pressure no amount of acclimatization can allow a baseline human to survive.
+The absolute pressure in earth's "climber's death zone" is 0.356 bar, meaning 0.355 ox of oxygen partial pressure - at or below that oxygen pressure no amount of acclimatization can allow a baseline human to survive.
 <br>
-At 0.299 ox absolute pressure (6.25kPa) the boiling point of water drops enough to be boiled by human body temperature <sup>[<a href="https://en.wikipedia.org/wiki/Armstrong_limit">wikipedia</a>]</sup>, as such 0.3 ox is considered a rule of thumb limit for short exposure survivability.
+At 0.298 ox absolute pressure (6.25kPa) the boiling point of water drops enough to be boiled by human body temperature <sup>[<a href="https://en.wikipedia.org/wiki/Armstrong_limit">wikipedia</a>]</sup>, as such 0.3 ox is considered a rule of thumb limit for short exposure survivability.
 </article>
 
 <h2>Waterboil (placeholder name)</h2>
@@ -76,6 +76,20 @@ Converting between °C and °W is easily done by just multiplying or dividing by
 Since all of these are above the boiling point, the meat will first dry out completely before it can reach the recommended temperature.
 <br>
 Absolute zero is at -455.25°W.
+</article>
+
+<hr>
+
+<h1>Cooking</h1>
+<article>
+Common recommendations for temperatures to cook meat safely call for temperatures between 63°C (105°W) and 72°C (120°W), which means that meat cannot be safely cooked in this environment, except by cooking it to the point where all the water had evaporated and then some more, or cooking it in a pressurized container.
+<br>
+If meat is cooked to the correct temperature in this environment without extra pressure, it will first have to evaporate away all of its water, turning it into jerky.
+</article>
+
+<h1>Water evaporation and humidity</h1>
+<article>
+todo
 </article>
 
 </html>
