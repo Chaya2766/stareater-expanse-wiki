@@ -1,0 +1,160 @@
+\documentclass[a4paper]{article}
+\usepackage[margin=3cm]{geometry}
+\usepackage{graphicx}
+\usepackage{qrcode}
+
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=cyan,
+	hyperindex=true,
+	linktocpage=true,%makes the page number be the link in the index
+}
+\usepackage{listings}
+\lstset{
+	basicstyle=\tiny\ttfamily,
+	columns=fullflexible,
+	keepspaces=true,
+	breaklines=true,
+	frame=single,
+	showstringspaces=true,
+	tabsize=4,
+	showspaces=true,
+	showtabs=true,
+}
+
+\renewcommand{\arraystretch}{1.2} %adds a bit of margin to table cells
+\renewcommand{\thefootnote}{[\arabic{footnote}]} %makes footnotes look wikipedia-style
+
+\title{Finespun standard environment}
+
+\author{Chaya2766}
+
+\date{last updated \today}
+
+\begin{document}
+	\sffamily
+	\hyphenchar\font=-1
+	\sloppy
+	
+	\maketitle
+	
+	\begin{center}
+		\qrcode[height=2cm]{https://chaya2766.github.io/stareater-expanse-wiki/}
+	\end{center}
+	
+	\textbf{
+		\sloppy
+		\hyphenchar\font=-1
+		}
+	
+	\vfill
+	
+	\begin{abstract}
+		Finespun settlements opt to use a pure oxygen to deliver similar oxygen availability as terran sea level atmosphere.
+		
+		\medskip
+		
+		The environment is specified as 0.21 bar of pure oxygen and ambient temperature of 290 kelvin.
+		
+		\medskip
+		
+		This document goes over some of the details of this environment and its possible effects on people and daily activities.
+	\end{abstract}
+	
+	\vfill
+	
+	\begin{quote}
+		\begin{center}
+			\textbf{DISCLAIMER AND WARNING}
+		\end{center}
+		
+		This is not a scientific paper or engineering advice.
+		This document is only intended as creative world‑building and has not been peer‑reviewed or approved for any practical application.
+		Use of these ideas in real‑world designs or other serious application is entirely at the reader’s discretion and risk.
+	\end{quote}
+	
+	%\noindent \rule{\linewidth}{1pt}
+	\vfill
+	
+	\tableofcontents
+	
+	\pagebreak
+	
+	\section{Water boiling point (\& custom temperature units)}
+	
+	The following comes from the "Clausius-Clapeyron relation" which can provide the boiling point of a substance to any pressure given a known boiling point at a known pressure.
+	
+	$$ \ln\left(\frac{P_1}{P_0}\right) = \frac{L}{R \cdot (\frac{1}{T_0} - \frac{1}{T_1}) } $$
+	
+	$$ T_1 = \frac{1}{\frac{1}{T_0} - \ln\left(\frac{P_1}{P_0}\right) \cdot \frac{R}{L}} $$
+	
+	where:
+	
+	\begin{itemize}
+		\item $T_0$ is the original observed boiling point
+		
+		\item $P_0$ is the original pressure at which the original boiling point occurred
+		
+		\item $P_1$ is the desired pressure
+		
+		\item $T_1$ is the boiling point of the substance at the desired pressure
+		
+		\item $L$ is the molar enthalpy of vaporization of the substance
+		
+		\item $R$ is the ideal gas constant ($\approx$8.314462618 J/(K*mol))
+	\end{itemize}
+	
+	\begin{center}
+		For water the known values are as follows:
+		
+		\begin{tabular}{c | c | c }
+			$T_0$ & $P_0$ & $L$ \\\hline
+			373.15 K & 101 325 Pa & 40 660 J/mol
+		\end{tabular}
+	\end{center}
+	
+	The desired environment has a pressure of 0.21 bar (21kPa), which will be the $P_1$ to plug into the equation:
+	
+	$$ T_1 = \frac{1}{\frac{1}{373.15 K} - \ln\left(\frac{21 000 pa}{101 325 Pa}\right) \cdot \frac{8.314462618 J/(K*mol)}{40 660 J/mol}} = 333.1432084 K$$
+	
+	Finespun's 0.21 bar atmosphere causes water to boil at 333.143K $\approx$ 59.993$^o$C $\approx$ 139.988$^o$F
+	
+	\bigskip
+	
+	\begin{center}
+		\rule{0.8\linewidth}{1pt}
+		
+		\textbf{custom temperature unit}
+	\end{center}
+	
+	A new temperature should be defined which would be convenient for everyday use, Finespun's equivalent of celcius which sets 0 at the freezing point and 100 at the boiling point.
+	It will be defined in terms of degrees kelvin.
+	
+	$$ (273.15K - a) \cdot b = 0^oW , (333.143K - a) \cdot b = 10^oW $$
+	
+	To make these equations work, a = 273.15K, b = 1.666861134 $\frac{^oW}{K}$.
+	
+	As such, any temperature expressed in kelvin can be converted into this new custom unit as such:
+	
+	$$ w = (k - 273.15K) \cdot 1.666861134 \frac{^oW}{K} $$
+	
+	where:
+	
+	\begin{itemize}
+		\item $w$ is the temperature in $^oW$
+		
+		\item $k$ is the temperature in degrees kelvin
+	\end{itemize}
+	
+	\bigskip
+    
+    From $^oC$ to $^oW$ the conversion is closely approximated by dividing by 0.6$\frac{^oC}{^oW}$
+    
+	\pagebreak
+	
+	\section{todo}
+	
+\end{document}
