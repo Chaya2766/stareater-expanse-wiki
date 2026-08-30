@@ -2,7 +2,7 @@
  <link rel="stylesheet" href="../index.css"></link>
 </head>
 <html class="background2" id="page">
-<article class="warning">this warning lets the reader know something important about the page. If this sentence is still here on a page different than the testpage.html then I forgot to change it while making a new page.</article>
+
 <a style="float: right;" target="_blank" href="../index.html?page=pages/finespun_standard_environment.html">link to this page</a>
 
 <h1>Finespun standard environment</h1>
@@ -12,14 +12,16 @@
 <article class="basics">
 <br>
 Together with the specification, there is a set of custom units for Finespun, used primarily as a thought experiment, and very occasionally applied in casual use, but discouraged for any serious engineering uses in favor of just using SI units.
-For the sake of common daily use, ox and °W do prove much more convenient than atm and °C
+For the sake of common daily use, ox and °W do prove much more convenient than atm and °C.
+<br><br>
+<span class="meta">Math document is available <a href="../documents/finespun_standard_environment/finespun_standard_environment.pdf">here</a>.</span>
 </article>
 
 <hr>
 
 <h1>Environment and consequences</h1>
 <article>
-Finespun standard environment is that of <b>20.9 kilopascals</b> absolute pressure of pure oxygen and <b>290 kelvin</b> absolute temperature (16.85°C/62.33°F).
+Finespun standard environment is that of <b>21 kilopascals</b> absolute pressure of pure oxygen and <b>290 kelvin</b> absolute temperature (16.85°C/62.33°F).
 These are occasionally described in custom units as 1 ox of pressure and 28°W temperature.
 <br><br>
 This environment provides the exact required amount of oxygen for a human to breathe, but none of the other atmospheric gasses.
@@ -75,8 +77,46 @@ Converting between °C and °W is easily done by just multiplying or dividing by
 105°W is the minimum recommended safe cooking temperature for pork, 120°W for beef, and 124°W for poultry.
 Since all of these are above the boiling point, the meat will first dry out completely before it can reach the recommended temperature.
 <br>
-Absolute zero is at -455.25°W.
+Absolute zero is at -455.25°W, but the custom unit loses its usefulness that far outside of its 0 to 100 range.
 </article>
+
+<br>
+<input id="kelvin_input" type="number" oninput="FromKelvin()" size=4></input> K
+<input id="waterboil_input" type="number"  oninput="FromWaterboil()"  size=4 style="margin-left: 30px;"></input> °W
+<input id="celsius_input" type="number"  oninput="FromCelsius()"  size=4 style="margin-left: 30px;"></input> °C
+<input id="farenheit_input" type="number"  oninput="FromFarenheit()"  size=4 style="margin-left: 30px;"></input> °F
+
+<script>
+
+function FromKelvin(){
+  kelvin = document.getElementById('kelvin_input').value * 1.0;
+  document.getElementById('waterboil_input').value = ((kelvin - 273.15) * 1.666861134).toFixed(2);
+  document.getElementById('celsius_input').value = (kelvin - 273.15).toFixed(2);
+  document.getElementById('farenheit_input').value = ((kelvin - 255.3722222) * 1.79999996).toFixed(2);
+}
+
+function FromWaterboil(){
+  kelvin = (document.getElementById('waterboil_input').value/1.666861134) + 273.15;
+  document.getElementById('kelvin_input').value = kelvin.toFixed(2);
+  document.getElementById('celsius_input').value = (kelvin - 273.15).toFixed(2);
+  document.getElementById('farenheit_input').value = ((kelvin - 255.3722222) * 1.79999996).toFixed(2);
+}
+
+function FromCelsius(){
+  kelvin = document.getElementById('celsius_input').value*1 + 273.15;
+  document.getElementById('kelvin_input').value = kelvin.toFixed(2);
+  document.getElementById('waterboil_input').value = ((kelvin - 273.15) * 1.666861134).toFixed(2);
+  document.getElementById('farenheit_input').value = ((kelvin - 255.3722222) * 1.79999996).toFixed(2);
+}
+
+function FromFarenheit(){
+  kelvin = (document.getElementById('farenheit_input').value/1.79999996) + 255.3722222;
+  document.getElementById('kelvin_input').value = kelvin.toFixed(2);
+  document.getElementById('waterboil_input').value = ((kelvin - 273.15) * 1.666861134).toFixed(2);
+  document.getElementById('celsius_input').value = (kelvin - 273.15).toFixed(2);
+}
+
+</script>
 
 <hr>
 
