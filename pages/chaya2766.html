@@ -46,8 +46,25 @@ If you did get here through a link in my description, feel free to mention that 
 <h1>other miscellaneous information</h1>
 <article>
 By now I've spent roughly <span id="time_used">[lifetime percentage passed]</span>% of my statistically expected lifespan, and should still be alive for about <span id="time_left" style="white-space: nowrap;">[time_left]</span> seconds.
-<br><br>
-Remind me to update this if the timer is negative and I'm still alive.
+<br>
+
+<div style="margin: 0 auto; width: calc(80vw + 102px);">
+  <span>0.00%</span>
+  <div style="width: 80vw; height: 12px; display: inline-block; border: 1px solid white">
+  <div id="loadingbar_absolute" style="background-color: #0F0; width: 0%; height: 100%;"></div>
+  </div>
+  <span>100%</span>
+</div>
+
+<div style="margin: 0 auto; width: calc(80vw + 102px);">
+  <span id="text_this_thousandth">XX.X%</span>
+  <div style="width: 80vw; height: 12px; display: inline-block; border: 1px solid white">
+  <div id="loadingbar_thousandth" style="background-color: #0F0; width: 0%; height: 100%;"></div>
+  </div>
+  <span id="text_next_thousandth">XX.X%</span>
+</div>
+
+Remind me to update this if the timer is negative and I'm still alive, or if the completion bars broke.
 </article>
 
 <script>
@@ -59,6 +76,19 @@ function DeathClock(){
   document.getElementById("time_left").innerHTML = seconds_left.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
   time_used = (time_now - birth_time)/(death_time - birth_time);
   document.getElementById("time_used").innerHTML = (100*time_used).toFixed(1).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  
+  //min used so the bars don't break after I'm dead
+  document.getElementById("loadingbar_absolute").style.width = Math.min(100*time_used,100).toString() + "%";
+  
+  this_thousandth = (Math.floor(time_used * 1000)/10).toFixed(1);
+  document.getElementById("text_this_thousandth").innerHTML = this_thousandth + "%";
+  console.log(this_thousandth);
+  
+  next_thousandth = (Math.ceil(time_used * 1000)/10).toFixed(1);
+  document.getElementById("text_next_thousandth").innerHTML = next_thousandth + "%";
+  
+  thousandth_progress = (time_used * 1000) % 1;
+  document.getElementById("loadingbar_thousandth").style.width = (100*thousandth_progress).toString() + "%";
 }
 setInterval(DeathClock, 1000);
 </script>
