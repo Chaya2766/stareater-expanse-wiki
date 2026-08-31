@@ -19,11 +19,12 @@ For the sake of common daily use, ox and °W do prove much more convenient than 
 
 <hr>
 
-<h1>Environment and consequences</h1>
+<h1>Environment specifications</h1>
 <article>
-Finespun standard environment is that of <b>21 kilopascals</b> absolute pressure of pure oxygen and <b>290 kelvin</b> absolute temperature (16.85°C/62.33°F).
-These are occasionally described in custom units as 1 ox of pressure and 28°W temperature.
-<br><br>
+Atmosphere: <b>21 kilopascals</b> absolute pressure, 100% oxygen.<br>
+Temperature: <b>290 kelvin</b> absolute temperature.<br>
+Gravity: <b>2m/s<sup>2</sup></b> centrifugal acceleration.<br>
+<br>
 This environment provides the exact required amount of oxygen for a human to breathe, but none of the other atmospheric gasses.
 <br>
 The less dense atmosphere means greatly diminished role of convection in heat transfer, as such heat transfer by radiation and conduction dominates.
@@ -31,7 +32,6 @@ The less dense atmosphere means greatly diminished role of convection in heat tr
 Water evaporates much more easily in such low pressure, which greatly enhances drying and may cause discomfort to baseline humans, requiring increased water intake to offset the quicker moisture loss.
 <br><br>
 Water in this environment boils when heated to 333K, 60°C, 140°F, 100°W.
-(todo: show this explicitly using the Clausius-Clapeyron equation)
 </article>
 
 <hr>
@@ -54,7 +54,39 @@ At 0.381 ox of oxygen partial pressure a baseline human will have difficulty sle
 The absolute pressure in earth's "climber's death zone" is 0.356 bar, meaning 0.355 ox of oxygen partial pressure - at or below that oxygen pressure no amount of acclimatization can allow a baseline human to survive.
 <br>
 At 0.298 ox absolute pressure (6.25kPa) the boiling point of water drops enough to be boiled by human body temperature <sup>[<a href="https://en.wikipedia.org/wiki/Armstrong_limit">wikipedia</a>]</sup>, as such 0.3 ox is considered a rule of thumb limit for short exposure survivability.
+<br><br>
+At a pressure of <input id="ox_input" type="number" value="1" oninput="CalcBoiling(source='ox')" size=3></input> ox (= <input id="bar_input" type="number" value="0.21" oninput="CalcBoiling(source='bar')" size=3></input> bar) water would boil at <span id="boiling_point_kelvin">333.15</span> kelvin (<span id="boiling_point_celsius">333.15</span> °C, <span id="boiling_point_farenheit">333.15</span> °F, <span id="boiling_point_waterboil">333.15</span> °W)
 </article>
+
+<script>
+
+function CalcBoiling(source){
+  original_pressure = 101325;//pascals
+  original_boiling = 373.15;//kelvin
+  if(source == "bar"){
+  desired_pressure = document.getElementById('bar_input').value * 100000;//convert into pascals
+  document.getElementById('ox_input').value = (desired_pressure / 21e3).toFixed(2);
+  }
+  if(source == "ox"){
+  desired_pressure = document.getElementById('ox_input').value * 21000;//convert into pascals
+  document.getElementById('bar_input').value = (desired_pressure / 100e3).toFixed(2);
+  }
+  
+  //ideal gas constant
+  R = 8.31446261;//joules per kelvin-mole
+  
+  //water's enthalpy of vaporization
+  L = 40660;//joules per mole
+  
+  boiling_point = 1/( (1/original_boiling) - Math.log(desired_pressure/original_pressure) * (R/L) );//Clausius-Clapeyron relatio
+  
+  document.getElementById('boiling_point_kelvin').innerHTML = boiling_point.toFixed(2);
+  document.getElementById('boiling_point_celsius').innerHTML = (boiling_point - 273.15).toFixed(2);
+  document.getElementById('boiling_point_farenheit').innerHTML = ((boiling_point - 255.3722222) * 1.79999996).toFixed(2);
+  document.getElementById('boiling_point_waterboil').innerHTML = ((boiling_point - 273.15) * 1.666861134).toFixed(2);
+}
+
+</script>
 
 <h2>Waterboil (placeholder name)</h2>
 <article>
@@ -131,5 +163,26 @@ If meat is cooked to the correct temperature in this environment without extra p
 <article>
 todo
 </article>
+
+<h1>Falling</h1>
+<article>
+An object falling from <input id="height_input" type="number" value="1" oninput="CalcFall()" size=4></input> metres in a gravity of <input id="acceleration_input" type="number" value="2" oninput="CalcFall()" size=4></input> m/s<sup>2</sup> will take <span id="fall_time">1</span> seconds to fall and hit the ground at <span id="fall_velocity">2</span> m/s.
+<br>
+For daily purposes this means that in 2m/s<sup>2</sup> a fall only becomes <span class="tip" tip="Assuming that old terran OSHA regulations apply and scale with velocity at which person hits the ground, fall protection is required when final velocity exceeds 5m/s.">dangerous</span> to a typical baseline human above roughly 6.25 metres, and the average human jump velocity of 2.82m/s translates to 2 metres of jump height and 2.82s of airtime.
+<br><br>
+A well-trained baseline might be able to "tuck and roll" to avoid damage from falls as large as 25 metres.
+</article>
+
+
+<script>
+
+function CalcFall(){
+  acceleration = document.getElementById('acceleration_input').value * 1.0;
+  height = document.getElementById('height_input').value * 1.0;
+  document.getElementById('fall_time').innerHTML = Math.sqrt(2 * height / acceleration).toFixed(2);
+  document.getElementById('fall_velocity').innerHTML = Math.sqrt(2 * height * acceleration).toFixed(2);
+}
+
+</script>
 
 </html>
