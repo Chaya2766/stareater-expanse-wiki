@@ -168,9 +168,7 @@ todo
 <article>
 An object falling from <input id="height_input" type="number" value="1" oninput="CalcFall()" size=4></input> metres in a gravity of <input id="acceleration_input" type="number" value="2" oninput="CalcFall()" size=4></input> m/s<sup>2</sup> will take <span id="fall_time">1</span> seconds to fall and hit the ground at <span id="fall_velocity">2</span> m/s.
 <br>
-For daily purposes this means that in 2m/s<sup>2</sup> a fall only becomes <span class="tip" tip="Assuming that old terran OSHA regulations apply and scale with velocity at which person hits the ground, fall protection is required when final velocity exceeds 5m/s.">dangerous</span> to a typical baseline human above roughly 6.25 metres, and the average human jump velocity of 2.82m/s translates to 2 metres of jump height and 2.82s of airtime.
-<br><br>
-A well-trained baseline might be able to "tuck and roll" to avoid damage from falls as large as 25 metres.
+For daily purposes this means that in <span id="acceleration_text">2</span>m/s<sup>2</sup> a fall only becomes <span class="tip" tip="Assuming that old terran OSHA regulations apply and scale with velocity at which person hits the ground, fall protection is required when final velocity exceeds 4.9m/s.">dangerous</span> to a typical baseline human above roughly <span id="danger_fall_distance_text">6</span> metres, and a <span class="tip" tip="The average human jump velocity is 2.82m/s from what I could find.">jump velocity</span> of <input id="jump_vel_input" type="number" value="2.82" oninput="CalcFall()" size=4></input>m/s translates to <span id="jump_height">2</span> metres of jump height and <span id="jump_airtime">2.82</span>s of airtime.
 </article>
 
 
@@ -178,9 +176,22 @@ A well-trained baseline might be able to "tuck and roll" to avoid damage from fa
 
 function CalcFall(){
   acceleration = document.getElementById('acceleration_input').value * 1.0;
+  document.getElementById('acceleration_text').innerHTML = acceleration.toFixed(2);
   height = document.getElementById('height_input').value * 1.0;
   document.getElementById('fall_time').innerHTML = Math.sqrt(2 * height / acceleration).toFixed(2);
   document.getElementById('fall_velocity').innerHTML = Math.sqrt(2 * height * acceleration).toFixed(2);
+  
+  //distance that an object needs to fall to achieve 4.9m/s velocity
+  max_safe_velocity = 4.9;//m/s
+  danger_fall_distance = Math.pow(max_safe_velocity,2)/(2*acceleration);
+  document.getElementById('danger_fall_distance_text').innerHTML = danger_fall_distance.toFixed(2);
+  
+  //jump height and airtime calc
+  jump_vel = document.getElementById('jump_vel_input').value * 1.0;
+  jump_height = Math.pow(jump_vel,2)/(2*acceleration);
+  document.getElementById('jump_height').innerHTML = jump_height.toFixed(2);
+  jump_airtime = 2*Math.sqrt(2 * jump_height / acceleration);
+  document.getElementById('jump_airtime').innerHTML = jump_airtime.toFixed(2);
 }
 
 </script>
