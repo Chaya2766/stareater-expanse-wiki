@@ -23,7 +23,7 @@ For the sake of common daily use, ox and °W do prove much more convenient than 
 <article>
 Atmosphere: <b>21 kilopascals</b> absolute pressure, 100% oxygen.<br>
 Temperature: <b>290 kelvin</b> absolute temperature.<br>
-Gravity: <b>2m/s<sup>2</sup></b> centrifugal acceleration.<br>
+Gravity: <b>4m/s<sup>2</sup></b> centrifugal acceleration.<br>
 <br>
 This environment provides the exact required amount of oxygen for a human to breathe, but none of the other atmospheric gasses.
 <br>
@@ -166,9 +166,9 @@ todo
 
 <h1>Falling</h1>
 <article>
-An object falling from <input id="height_input" type="number" value="1" oninput="CalcFall()" size=4></input> metres in a gravity of <input id="acceleration_input" type="number" value="2" oninput="CalcFall()" size=4></input> m/s<sup>2</sup> will take <span id="fall_time">1</span> seconds to fall and hit the ground at <span id="fall_velocity">2</span> m/s.
+An object falling from <input id="height_input" type="number" value="1" oninput="CalcFall()" size=4></input> metres in a gravity of <input id="acceleration_input" type="number" value="4" oninput="CalcFall()" size=4></input> m/s<sup>2</sup> will take <span id="fall_time">0.71</span> seconds to fall and hit the ground at <span id="fall_velocity">2.83</span> m/s.
 <br>
-For daily purposes this means that in <span id="acceleration_text">2</span>m/s<sup>2</sup> a fall only becomes <span class="tip" tip="Assuming that old terran OSHA regulations apply and scale with velocity at which person hits the ground, fall protection is required when final velocity exceeds 4.9m/s.">dangerous</span> to a typical baseline human above roughly <span id="danger_fall_distance_text">6</span> metres, and a <span class="tip" tip="The average human jump velocity is 2.82m/s from what I could find.">jump velocity</span> of <input id="jump_vel_input" type="number" value="2.82" oninput="CalcFall()" size=4></input>m/s translates to <span id="jump_height">2</span> metres of jump height and <span id="jump_airtime">2.82</span>s of airtime.
+For daily purposes this means that in <span id="acceleration_text">4</span>m/s<sup>2</sup> a fall only becomes <span class="tip" tip="Assuming that old terran OSHA regulations apply and scale with velocity at which person hits the ground, fall protection is required when final velocity exceeds 4.9m/s.">dangerous</span> to a typical baseline human above roughly <span id="danger_fall_distance_text">3</span> metres, and a <span class="tip" tip="The average human jump velocity is 2.82m/s from what I could find.">jump velocity</span> of <input id="jump_vel_input" type="number" value="2.82" oninput="CalcFall()" size=4></input>m/s translates to <span id="jump_height">1</span> metres of jump height and <span id="jump_airtime">1.41</span>s of airtime.
 </article>
 
 
