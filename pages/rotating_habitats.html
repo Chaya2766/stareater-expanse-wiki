@@ -133,6 +133,10 @@ The illustration used for this page shows a habitat that provides interior light
   <td class="tip" tip="the number of times that the stress in the habitat would have to increase above what is already caused by its own rotation before it breaks - if the safety factor of a habitat is 3, that would mean the stress that it experiences from its own rotation and rated atmospheric pressure is 3 times less than what is required to break it">Safety factor</td>
   <td id="table_hab_safety_factor">-</td>
 </tr>
+<tr>
+  <td><span class="tip" tip="Because the habitat is spinning and 'up' points towards the axis of rotation, vertical movement results in apparent sideways acceleration, because things closer to the axis of rotation move slower, and things further away faster. To apply this parameter say for example it says '0.25 Hz', that means if you move one metre down, you gain apparent 0.25 m/s of velocity sideways. See fictitious forces section on the rotating habitats page for detailed explanation.">Coriolis force strength</span></td>
+  <td id="table_hab_coriolis_strength">-</td>
+</tr>
 <!--
 <tr>
   <td class="tip" tip="the amount of added mass (eg. cargo, people, buidlings, other infrastructure) that can be added to the habitat before it breaks">Internal carrying capacity</td>
@@ -252,6 +256,8 @@ function table_calc(){
   hull_thickness = aerial_density / material_density;
   document.getElementById("table_hab_hull_thickness").innerHTML = hull_thickness.toFixed(5) + " m";
   
+  coriolis_strength = (2 * Math.PI) / time;
+  document.getElementById("table_hab_coriolis_strength").innerHTML = coriolis_strength.toFixed(5) + " Hz";
 }
 </script>
 
@@ -261,13 +267,20 @@ function table_calc(){
 
 <img src="../images/coriolis_danger_sign.webp" class="right" style="max-height: 200px;"></img>
 
-<article>Aside from the centrifugal force, other forces can make movement around the habitat difficult. The coriolis force can lead to accidents on staircases, as a person who is moving towards or away from the axis of rotation of the habitat will have to match the new tangential velocity of the environment, as parts of the habitat farther away from the axis of rotation move proportionally faster.
+<article>Aside from the centrifugal force, other forces can make movement around the habitat difficult.
+The coriolis force can lead to accidents on staircases, as a person who is moving towards or away from the axis of rotation of the habitat will have to match the new tangential velocity of the environment, as parts of the habitat farther away from the axis of rotation move proportionally faster.
+The strength of this effect could be expressed simply as a "coriolis force strength" constant, which is multiplied with the vertical distance traveled to get the change in apparent velocity.
 <br><br>
-In example of a 200 metre radius habitat rotating once every 28.099 seconds, a staircase with 20cm tall steps has a different velocity at every step (about 4.472cm/s difference) which a person walking down the stairs would feel as a force they have to counteract. You can imagine that, if the staircase is poorly positioned and the force is pointing away from the stairs, this small shove can cause a person to miss a step, trip, and consequently experience even more fictitious force, turning what would have otherwise been a small stumble into a long fall all the way down the stairs. If the stairs were positioned the other way around, that same force might have actually helped and stopped the person from falling.
+As an example, in a 200 metre radius habitat rotating once every 28.375 seconds to produce 9.807 m/s<sup>2M/sup> (1.000g ) of gravity, the coriolis force strength constant would be 0.22143 Hz.
+This means that any object which falls 1 metre down in that habitat will appear to gain 0.22143 m/s of sideways velocity.
+<br><br>
+Consider walking down a staircase with 20cm tall steps: when putting your foot down to the next step down you would feel it accelerate 4.4286 cm/s to the side, because the next step is further from the axis of rotation of the habitat, and thus is moving faster.
+You can imagine that, if the staircase is poorly positioned and the force is pointing away from the stairs, this small force could cause a person to miss a step, trip, and consequently experience even more fictitious force, turning what would have otherwise been a small stumble into a long fall all the way down the stairs. If the stairs were positioned the other way around, that same force might have actually helped and stopped the person from falling.
 <br><br>
 Similarly in an elevator a person will experience a constant sideways force proportional to how quickly the elevator is moving, which would feel as if the gravity is suddenly angled, so providing handles to brace oneself against it would be a good consideration.
+Following that same example, if the elevator is moving upwards at 10 m/s, and the habitat's coriolis force strength constant is 0.22143 Hz, then anyone inside the elevator would be feeling an apparent extra 2.2143 m/s^2 of acceleration to the side.
 <br><br>
-Lastly, this same force could aid the <b>sense of direction</b>, as a person would be easily able to tell their orientation in relation to the direction of the habitat's spin, potentially making spinwards and anti-spinwards very useful terms in the same way that east and west are.
+This same force could aid the <b>sense of direction</b>, as a person would be easily able to tell their orientation in relation to the direction of the habitat's spin, potentially making spinwards and anti-spinwards very useful terms in the same way that east and west are.
 <br><br>
 The animation below just shows how objects following their own inertia (red straight line trajectory) are made to appear like they are falling towards the floor (parabolic-ish green line trajectory) by the rotation of a habitat.
 </article>
