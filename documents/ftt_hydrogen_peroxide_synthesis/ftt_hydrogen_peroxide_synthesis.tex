@@ -1,0 +1,275 @@
+\documentclass[a4paper]{article}
+\usepackage[margin=3cm]{geometry}
+\usepackage{graphicx}
+\usepackage{qrcode}
+
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=cyan,
+	hyperindex=true,
+	linktocpage=true,%makes the page number be the link in the index
+}
+\usepackage{listings}
+\lstset{
+	basicstyle=\tiny\ttfamily,
+	columns=fullflexible,
+	keepspaces=true,
+	breaklines=true,
+	frame=single,
+	showstringspaces=true,
+	tabsize=4,
+	showspaces=true,
+	showtabs=true,
+}
+
+\renewcommand{\arraystretch}{1.2} %adds a bit of margin to table cells
+\renewcommand{\thefootnote}{[\arabic{footnote}]} %makes footnotes look wikipedia-style
+
+\title{Felicity tech tree:\\Hydrogen Peroxide Synthesis}
+
+\author{Chaya2766}
+
+\date{last updated \today}
+
+\begin{document}
+	\sffamily
+	\hyphenchar\font=-1
+	\sloppy
+	
+	\maketitle
+	
+	\begin{center}
+		\qrcode[height=2cm]{https://chaya2766.github.io/stareater-expanse-wiki/}
+	\end{center}
+	
+	\textbf{
+		\sloppy
+		\hyphenchar\font=-1
+		}
+	
+	\vfill
+	
+	\begin{abstract}
+		Patent WO2010134717A2 details a method of hydrogen peroxide production that appears simple enough to be incorporated into felicity's tech tree.
+		This document describes how the process would be used by the in-universe characters and presents calculations I used to determine the costs and yields of using it.
+	\end{abstract}
+	
+	\vfill
+	
+	\begin{quote}
+		\begin{center}
+			\textbf{DISCLAIMER AND WARNING}
+		\end{center}
+		
+		This is not a scientific paper or engineering advice.
+		This document is only intended as creative world‑building and has not been peer‑reviewed or approved for any practical application.
+		Use of these ideas in real‑world designs or other serious application is entirely at the reader’s discretion and risk.
+	\end{quote}
+	
+	%\noindent \rule{\linewidth}{1pt}
+	\vfill
+	
+	\tableofcontents
+	
+	\pagebreak
+	
+	\section{Hydrogen peroxide synthesizer description}
+	
+	{
+		\small reference:
+		
+		\href{https://patentimages.storage.googleapis.com/13/4d/99/dfbb875f401486/WO2010134717A2.pdf}{patent WO2010134717A2 "Electrolytic synthesis of hydrogen peroxide directly from water and application thereof"}
+	}
+	
+	\medskip
+	
+	Since water ice is very common in space beyond the water-relevant habitable zone, it is very tempting to find a way to use it as fuel. This machine conducts electrolysis of water in a very specific way to produce Hydrogen Peroxide, which works well as a monopropellant and can be stored much denser in the fuel tanks than pure Hydrogen and Oxygen.
+	
+	\medskip
+	
+	The production process requires water and electricity for the reaction: $ \mathsf{ 2H_2O \rightarrow H_2O_2 + H_2 } $
+	
+	\medskip
+	
+	The setup uses 2 electrodes, similar to standard electrolysis, but the voltage between the electrodes switches between positive 2.2 volts and negative 1.7 volts, flipping the polarity of the electrodes every 2.5 seconds.
+	
+	\medskip
+	
+	The key process here is that small bubbles of oxygen which had formed on what used to be the anode end up located on the cathode once the polarity flips, and promptly undergo a reduction reaction with the water due to the voltage applied, producing hydrogen peroxide.
+	
+	\medskip
+	
+	With the 3d printed electrodes being very porous, a high concentration of hydrogen peroxide accumulates in the pores, and can be gradually pumped away through the middle of the electrode without mixing with the rest of the water.
+	
+	%\medskip
+	
+	%The process also produces waste \textbf{hydrogen}, which can also be used as a \textbf{bipropellant} together with oxygen to reasonably achieve \textbf{specific impulses around 350s / 3400Ns/kg}.
+	
+	\medskip
+	
+	This enrichment step is continued for 38.5 hours to reach a 10\% concentration of hydrogen peroxide, during which the machine consumes 990 watts continuously, and then a vacuum distillation is conducted across another 38.5 hours to increase the concentration as much as possible (assumed to 100\% anhydrous hydrogen peroxide), during which the machine consumes a bit less than 13.2kW of power continuously.
+	
+	\bigskip
+	
+	The final yield of the machine is 85kg of 100\% concentrated hydrogen peroxide, 5kg of hydrogen gas and 810kg of leftover water after 77 hours (bit more than 3 days), consuming 900kg of water and roughly 2GJ of electrical energy in the process.
+	
+	%\medskip
+	
+	%Since the two steps are separate, the electrolysis chamber could be refilled while the distillation is happening and begin enriching the next batch right away, bumping up the power use to just over 14.2kW but effectively halving the time the machine takes to process one batch of water into hydrogen peroxide. The waste water that was not converted into hydrogen peroxide can also be recycled so in continuous production all that is really needed is every 38.5h refill the 90kg of water that was converted and remove the 85kg of hydrogen peroxide and 5kg of hydrogen that was produced.
+	
+	%Since the electrolysis chamber is also used as a condensation chamber during the distillation step, I assume the machine cannot be doing both distillation and electrolysis at the same time. The exact reason for this had not been considered in depth, at least for now.
+	
+	\noindent\rule{\linewidth}{0.5pt}
+	
+	\begin{center}
+		pure hydrogen peroxide facts:
+		
+		\medskip
+		
+		\begin{tabular}{r | l}
+			Specific energy: & 2.7MJ/kg (\href{https://en.wikipedia.org/wiki/Energy_density_Extended_Reference_Table}{s}) \\\hline
+			Energy density: & 3.8MJ/L (\href{https://en.wikipedia.org/wiki/Energy_density_Extended_Reference_Table}{s}) \\\hline
+			Density: & 1.45kg/L (\href{https://en.wikipedia.org/wiki/Hydrogen_peroxide}{s}) \\ \hline
+			Specific Impulse as rocket fuel: & 1600$\frac{N \cdot s}{kg}$ (\href{https://en.wikipedia.org/wiki/Hydrogen_peroxide#Propellant}{s})
+		\end{tabular}
+	\end{center}
+	
+	\pagebreak
+	
+	\twocolumn[\section{numerical details}]
+	\footnotesize
+	
+	\begin{center}
+		\textbf{math for the peroxide hydrogen synthesizer}
+	\end{center}
+	
+	patent WO2010134717A2, on 11th page, 60th square bracket marking, mentions that applying 220mW of power over 5 hours to the water, the concentration of hydrogen peroxide (by mass) in the water can be increased to 1.3\%, but it also mentions that right at the electrode, within it's pores, the concentration ends up being 4\% to 10\% by mass.
+	
+	\medskip
+	
+	I chose to interpret it such that by slowly pumping the water away through the electrode at maximum concentration, it is possible to convert all of the water into 10\% hydrogen peroxide solution, further assumed to mean that 10\% of the water by mass is converted into hydrogen peroxide, which while not accurate due to the loss of mass due to generation of excess hydrogen, should not significantly change the outcome, while also allowing the mass of individual products to be easily calculated.
+	
+	\medskip
+	
+	10\% achieved this way is 7.7 times more than the 1.3\% achieved in all of the water so logically the process should take that much longer: 38.5h
+	
+	\medskip
+	
+	\noindent\hrule
+	
+	\begin{center}
+		\textbf{power consumption}
+	\end{center}
+	
+	\medskip
+	
+	I wish for the input of the device to be 900kg of water (to avoid infinite decimal places later on). If 200ml of water takes 220mW for the process then 900L of water takes 990 watts.
+	
+	$$ \frac{220mW}{200ml} \cdot 900L = 1.1W/L \cdot 900L = 990W $$
+	
+	Across the 38.5 hours that the process requires, 38115Wh (137.214 MJ) of energy is consumed.
+	
+	\medskip
+	
+	\noindent\hrule
+	
+	\begin{center}
+		\textbf{product masses}
+	\end{center}
+	
+	$$ \mathsf{ 2H_2O \rightarrow H_2O_2 + H_2 } $$
+	
+	2 moles of water turn into 1 mole of hydrogen peroxide and 2 moles of hydrogen
+	
+	here are the molar masses of the molecules:
+	
+	\begin{itemize}
+		\item $\mathsf{H_2}$ : 2 grams/mol
+		
+		\item $\mathsf{H_2O}$ 18 grams/mol
+		
+		\item $\mathsf{H_2O_2}$ 34 grams/mol
+	\end{itemize}
+	
+	in that case, 36 grams of water turns into 34 grams of hydrogen peroxide and 2 grams of hydrogen.
+	
+	\medskip
+	
+	The process is meant to take input of 900kg water, and 10\% is converted into hydrogen peroxide: 90kg of water.
+	
+	\medskip
+	
+	in that case, 90kg of water turns into 85kg of hydrogen peroxide and 5kg of hydrogen.
+	
+	$$ 90kg \cdot \frac{34g}{36g} = 85kg \ ;\ 90kg \cdot \frac{2g}{36g} = 5kg $$
+	
+	The resulting batch is 895kg of 10\% hydrogen peroxide solution, due to hydrogen escaping.
+	
+	\pagebreak
+	
+	\begin{center}
+		\textbf{distillation energy use}
+	\end{center}
+	
+	The \href{https://en.wikipedia.org/wiki/Enthalpy_of_vaporization}{Enthalpy of vaporization} of water is \textbf{2257kJ/kg}. Vacuum distillation is used so the water does not need to be significantly heated.
+	
+	\medskip
+	
+	An 100\% concentration is desired, which given that one batch contains 85kg $\mathsf{H_2O_2}$ means the end result should be just 85kg of $\mathsf{H_2O_2}$ and no water.
+	
+	%$$ \frac{85kg}{0.85} = 100kg\ ;\ 100kg-85kg = 15kg $$
+	
+	\medskip
+	
+	Before distillation, the solution mass is 895kg, of which 85kg is hydrogen peroxide, meaning that 810kg of it is water. %Since after distillation only 15kg of water should remain, 795kg of water must be evaporated. 795kg of water would take 1.8GJ of energy to evaporate.
+	Evaporating 810kg of water would take 1.83GJ.
+	
+	$$ 810kg \cdot 2257kJ/kg = 1\ 828\ 170\ 000 J$$
+	
+	If this were to happen across 38.5 hours just like the electrolysis part of the process, then it would add nearly 13.2kW to the power use of the machine.
+	
+	$$ \frac{1\ 828\ 170\ 000 J}{38.5h} = 13\ 190.25974 W $$
+	
+	\medskip
+	
+	\noindent\hrule
+	
+	\begin{center}
+		\textbf{continuous production}
+	\end{center}
+	
+	As decided, the machine takes an input of 900kg of water and electrolyzes it for 38.5 hours to produce a low concentration solution of hydrogen peroxide. It then boils the water off under vacuum for another 38.5 hours to produce 85kg of 100\% hydrogen peroxide.
+	
+	\medskip
+	
+	The electrolysis pulls 990 watts for 38.5 hours, consuming 137.214MJ of energy, distillation then pulls 13.2 kilowatts for another 38.5 hours, consuming 1794.316MJ of energy.
+	
+	\medskip
+	
+	The totals add up to 77 hours and 1966.734 MJ.
+	
+	\medskip
+	
+	Under those assumptions the machine produces 85kg of propellant for every 77 hours of time and 1966.734 MJ of energy spent on production.
+	
+	$$ \frac{85kg}{77h} \approx 26.5kg/day \approx 1104g/h \approx 306.64mg/s$$
+	
+	$$ \frac{85kg}{1966.734 MJ} \approx 43.219kg/GJ$$
+	
+	\medskip
+	
+	%Now for injecting losses, let's just round the energy use to 2GJ, that makes the number nice, giving a 50kg/GJ result, coresponding to roughly 97.338\% efficiency.
+	
+	%\medskip
+	
+	%Under those assumptions, the machine produces 100kg of fuel every 139 hourss and consumes 2GJ in the process, averaging 3996.8 watts in power consumption.
+	
+	Both phases could run at the same time, resulting in the machine pulling 14.2kW
+	
+	\normalsize
+	\onecolumn
+	
+\end{document}
