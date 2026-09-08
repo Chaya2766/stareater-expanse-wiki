@@ -542,6 +542,39 @@ table.gallery td {
  float: left;
 }
 
+textarea.styled{
+  background-color: #8884;
+  border: none;
+  color: white;
+}
+
+input.styled{
+  background-color: #8884;
+  border: 1px solid #666;
+  color: white;
+  border-radius: 4px;
+}
+input.styled.right{
+  float: right;
+}
+input.styled.left{
+  float: left;
+}
+input.styled.center{
+  margin: 0 auto;
+}
+
+input[type="button"]:hover.styled{
+  background-color: #AAA4;
+  border: 1px solid #444;
+  color: white;
+}
+input[type="button"]:active.styled{
+  background-color: #4448;
+  border: 1px solid #000;
+  color: #AAA;
+}
+
 .darkquote{
  color: #8AF6;
  font-style: italic;

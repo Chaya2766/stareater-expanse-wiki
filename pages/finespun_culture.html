@@ -1,0 +1,251 @@
+<head>
+ <link rel="stylesheet" href="../index.css"></link>
+</head>
+<html class="background2">
+<a style="float: right;" target="_blank" href="../index.html?page=pages/finespun_culture.html">link to this page</a>
+
+<h1>Finespun Culture</h1>
+<hr>
+<img src="../images/finespun_flag.webp" class="basics"></img>
+<article class="basics">
+Finespun culture is derived mainly from <a href="felicity.html">Felicity</a> and the <a href="UEIA.html">UEIA</a> workers that the settlement relies on.
+<br><br>
+Although technically Finespun settlements are open to small numbers of temporary visitors, the experience is not very accomodating.
+</article>
+<hr>
+
+<h1 id="timekeeping">timekeeping</h1>
+<div id="calendar_small" style="float: left; margin: 10px; border: 1px solid white;"></div>
+<article>
+The local standard of timekeeping is fundamentally tied to <a href="unix_time.html">Unix Time</a>, and dates are written as just the current epoch time with digits spaced in groups of three.
+For most purposes, to specify when something will happen, when a task should be done, or leaving a leaving a mark of when something was done, the unix timestamp is the only date format that should be used.
+The habitat does actually make some use of <a href="finespun_calendar.html">its own custom calendar</a> regardless of that fact, which spans an entire gigasecond.
+<br><br>
+<b>unit task</b> = 1 kilosecond (= 16 minutes and 40 seconds).
+<br>
+Work tasks and schedules are not usually divided more finely than this.
+<br>
+<b>short cycle</b> = 100 kiloseconds (= 27 hours, 46 minutes and 40 seconds).
+<br>
+This is what is locally considered a single day. (one of the small boxes on the right)
+<br>
+<b>medium cycle</b> = 1 megasecond (&approx; 11.574 terran days) = exactly 10 local days.
+<br>
+This is what is locally considered a week. (the longer horizontal boxes with dotted border)
+<br>
+<b>long cycle</b> = 10 megaseconds (&approx; 3.8 gregorian months) = 10 local weeks = 100 local days.
+<br>
+This is what is locally considered a month, and is considered a good amount of time for completing one minor project.
+<br>
+<b>gigasecond</b> (&approx; 31.688 terran years) = 100 long cycles = 1000 local weeks = 10 000 local days.
+<br>
+This is treated as the equivalent of a year and considered a good amount of time for completing a major project.
+<br><br>
+A notable oddity of the finespun calendar is starting the count of days at 0 instead of 1, which means that there is a 0th day of the week, 0th week of the month and a 0th month of the year.
+The reason for this is to make the unix timestamp trivially readable as a calendar date - coloured parts of the timestamp <magenta>16</magenta> <u><red>78</red><green>5</green> <orange>0</orange></u><cyan>83 980</cyan> correspond to <magenta>the gigasecond</magenta>, <red>number of the long cycle in the gigasecond</red>, <green>number of the week in the long cycle</green>, <orange>day of the week</orange> and <cyan>time of day</cyan> or alternatively just <u>day of the year</u>.
+<br>
+That example timestamp would correspond to time 83 980th second of the 0th day of the 5th week of the 78th long cycle of the 16th gigasecond.
+<br><br>
+The 0th day of each week is considered a backup day - it is the day everyone gets for their own use, mainly for things like making backups of important data and/or their minds, running parity checks, equalizing charge levels in their remote body's batteries, etc.
+Felicity's idea of the backup day is a way to ensure that no more than a week of work can be lost at a time, thus it is done first at the beginning of each week, saving all new experiences, updated hardware designs, any changes to protocols that run the settlement, and the minds of the people living within, so that if anything catastrophic should happen later in the week, anyone participating will have at most lost that week of work and/or life.
+<br><br>
+Visitors are not expected to follow this convention, and it is generally suggested to follow a 90-kilosecond day cycle (equal exactly to 25 hours) which tends to be more comfortable for humans and other animals aligned with the terran day-night cycle length (the abundance of artificial lighting at finespun habitats tend to slightly delay the onset of sleep in humans and other animals, thus 25 hours actually ends up feeling more natural to follow than the standard 24 hours).
+Since all timekeeping is based on the unix epoch timestamp, any custom cycle length can be tracked by simply applying it as a modulo to the timestamp to get current time of day ( timestamp % cycle_length = current_time ) which many digital clocks can be easily configured to follow.
+<script>
+
+function build_small_calendar(){
+  document.getElementById('calendar_small').innerHTML = '<article style="text-align: center; font-size: 200%;">local time: <span id="finespun_local_time">[time]</span></article>';
+  today = Math.floor((Date.now() / 1000) / 100000) % 10000;
+  weeknow = Math.floor(today/10);
+  monthnow = Math.floor(weeknow/10);
+  document.getElementById('calendar_small').innerHTML += '<div class="monthcell" id="monthnow_'+monthnow.toString()+'"><article class="month_header">long cycle '+monthnow.toString()+'</article></div>';
+
+  week = monthnow * 10;
+
+  while(week < 10 + (monthnow * 10)){
+    month = Math.floor(week/10);
+    //console.log('week',week,'month',month);
+    document.getElementById('monthnow_'+month.toString()).innerHTML += '<div class="weekcell" id="weeknow_'+week.toString()+'"></div>';
+    week += 1;
+  }
+
+  day = monthnow * 100;
+
+  while(day < 100 + (monthnow * 100)){
+    week = Math.floor(day/10);
+    //console.log('week',week,'month',month,'day',day);
+    document.getElementById('weeknow_'+week.toString()).innerHTML += '<div class="daycell" id="daynow_'+day.toString()+'">'+(day % 100).toString()+'</div>';
+    day += 1;
+  }
+
+  document.getElementById('daynow_'+today.toString()).classList.add("green_bg");
+  //document.getElementById('monthnow_'+monthnow.toString()).style.margin = "10px";
+  //document.getElementById('monthnow_'+monthnow.toString()).style.float = "left";
+}
+
+function FinespunClock(){
+  timenow = Math.floor(Date.now() / 1000) % 100000;
+  if(timenow == 0){
+    build_small_calendar();
+  }
+  document.getElementById("finespun_local_time").innerHTML = timenow.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+}
+setInterval(FinespunClock, 1000);
+
+build_small_calendar();
+</script>
+
+</article>
+
+<hr>
+<h1>Communication standards</h1>
+
+<article>
+The adopted audible environmental alert consists of a sinewave tone held constant at 500Hz for 0.25 seconds, then raised in frequency by one whole octave (up to 1000Hz) across 0.5 seconds, and then held constant at 1000Hz for 0.75 seconds, followed by 3 seconds of silence, repeated as long as the environmental emergency is present.
+A pure sample is provided below, as well as a recording of its use in a different unrelated habitat which adopted the same signal.
+</article>
+<table class="styled centered">
+  <tr><td>alert noise sample</td><td>example case recording</td></tr>
+  <tr><td>
+  <audio controls>
+    <source src="../audio/alert1.ogg" type="audio/ogg">
+    Your browser does not support the audio element.
+  </audio>
+  </td><td>
+  <audio controls>
+    <source src="../audio/alert1_example_recording.ogg" type="audio/ogg">
+    Your browser does not support the audio element.
+  </audio></td></tr>
+
+</table>
+
+<article>
+Task assignment uses a particular format shown below.
+This is used for both workers and visitors, a core of this system being the idea that as thinking beings, the recipients of such task specification cards will be able to inference implicit details based on being told why something is being done and the context around it, which would be very hard to explain explicitly.
+</article>
+
+<table class="styled centered">
+<tr><th colspan=2>
+<input type="text" placeholder="Task name" class="styled left" style="width: 300px;" id="TRCC_task_name"></input>
+<input type="button" value="solidify" class="styled right" id="TRCC_button_solidify" onclick="TRCC_solidify();"></input>
+<input type="button" value="time now" class="styled right" id="TRCC_button_time_now" onclick="TRCC_time_now();"></input>
+<input type="text" placeholder="unix timestamp" class="styled right" id="TRCC_timestamp"></input>
+</th></tr>
+
+<tr><th>Task</th>
+<th>Reason</th></tr>
+<tr><td><textarea class="styled" style="width:300px; height:300px;" id="TRCC_task">
+precise description of the task, eg.:
+- where to go
+- what to do
+- when to do it
+- how to do it
+</textarea></td>
+<td><textarea class="styled" style="width:300px; height:300px;" id="TRCC_reason">
+bigger picture:
+- why the task is important
+- what will happen if you succeed
+- what will happen if you fail
+
+Explaining why something is being done has a tendency to convey a lot of important information about how it should be done and what to do in case of unexpected events or circumstances
+</textarea></td></tr>
+
+<tr><th>Coordination</th>
+<th>Context</th></tr>
+<tr><td><textarea class="styled" style="width:300px; height:300px;" id="TRCC_coordination">
+- who to report to with success, failure, progress or problems
+- how to maintain contact
+- what to do if you cannot make contact
+
+Communication about tasks has an excessively large effect on the overall quality of work and ensuring it can happen is critical enough and hard enough to deserve its own field. Others must know what you're going to do even when they cannot see or contact you
+</textarea></td>
+<td><textarea class="styled" style="width:300px; height:300px;" id="TRCC_context">
+the basics and the obvious:
+- who you are working for
+- who you are and why you've been selected
+- free card for any other information you want to provide
+- even if something sounds too obvious, just write enough here to fill the field
+
+Intelligent agents tend to organize chaotically, and often end up with strange gaps in their knowledge and especially can miss information that is so obvious that nobody bothers to mention it explicitly, so providing even random semi-relevant scraps of information will stop these gaps from accumulating to the point of failure
+</textarea></td></tr>
+</table>
+
+<script>
+
+function TRCC_time_now(){
+  document.getElementById("TRCC_timestamp").value = "| created at " + Math.floor(Date.now() / 1000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+}
+
+function TRCC_solidify(){
+  document.getElementById("TRCC_button_solidify").remove();
+  document.getElementById("TRCC_button_time_now").remove();
+  
+  if(!document.getElementById("TRCC_timestamp").value){
+    TRCC_time_now();
+  }
+  timestamp = document.getElementById("TRCC_timestamp").value;
+  replacement = document.createElement("small");
+  replacement.innerHTML = timestamp;
+  replacement.style.float = "right";
+  document.getElementById("TRCC_timestamp").replaceWith(replacement);
+  
+  if(!document.getElementById("TRCC_task_name").value){
+    document.getElementById("TRCC_task_name").value = "no task name given";
+  }
+  task_name = document.getElementById("TRCC_task_name").value;
+  replacement = document.createElement("article");
+  replacement.innerHTML = task_name;
+  replacement.style.float = "left";
+  document.getElementById("TRCC_task_name").replaceWith(replacement);
+  
+  if(!document.getElementById("TRCC_task").value){
+    document.getElementById("TRCC_task").value = "no task specification given";
+  }
+  task = document.getElementById("TRCC_task").value.replaceAll("\n","<br>");
+  replacement = document.createElement("article");
+  replacement.innerHTML = task;
+  replacement.style.width = "300px";
+  replacement.style.fontSize = "small";
+  document.getElementById("TRCC_task").replaceWith(replacement);
+  
+  if(!document.getElementById("TRCC_reason").value){
+    document.getElementById("TRCC_reason").value = "no reason for the task given";
+  }
+  reason = document.getElementById("TRCC_reason").value.replaceAll("\n","<br>");
+  replacement = document.createElement("article");
+  replacement.innerHTML = reason;
+  replacement.style.width = "300px";
+  replacement.style.fontSize = "small";
+  document.getElementById("TRCC_reason").replaceWith(replacement);
+  
+  if(!document.getElementById("TRCC_coordination").value){
+    document.getElementById("TRCC_coordination").value = "no communication details given for the task";
+  }
+  coordination = document.getElementById("TRCC_coordination").value.replaceAll("\n","<br>");
+  replacement = document.createElement("article");
+  replacement.innerHTML = coordination;
+  replacement.style.width = "300px";
+  replacement.style.fontSize = "small";
+  document.getElementById("TRCC_coordination").replaceWith(replacement);
+  
+  if(!document.getElementById("TRCC_context").value){
+    document.getElementById("TRCC_context").value = "no context given for the task";
+  }
+  context = document.getElementById("TRCC_context").value.replaceAll("\n","<br>");
+  replacement = document.createElement("article");
+  replacement.innerHTML = context;
+  replacement.style.width = "300px";
+  replacement.style.fontSize = "small";
+  document.getElementById("TRCC_context").replaceWith(replacement);
+}
+
+</script>
+
+<h1 class="division">relevant pages</h1>
+
+<div class="card">
+ <img src="../images/finespun_settlement.webp"></img>
+ <a target="IM" href="finespun.html">Finespun</a>
+</div>
+
+</html>
