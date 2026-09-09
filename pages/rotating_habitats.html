@@ -38,7 +38,7 @@ The illustration used for this page shows a habitat that provides interior light
 <input type="number" id="hab_acceleration" value="9.80665" oninput="autocalc()"></input>
 <span> m/s<sup>2</sup></span>
 <br><br>
-<article>Once the choices above are set, tune the length, cap type and material choices:</article>
+<article>Once the choices above are set, tune the length, <span tip="note about cap types: length is measured from tip to tip, which means that if you use hemispherical caps you are sacrificing some living area because the ends of the habitat are curved and so don't provide a flat floor. If you use circular caps, the length of the floor is the same as length of the whole habitat.">cap type</span> and material choices:</article>
 <input type="radio" id="hemispherical_caps" name="caps" checked="true" onchange="autocalc()"></input><span style="margin-right: 50px;">Hemispherical caps</span> <input type="radio" id="circular_caps" name="caps" onchange="autocalc()"></input><span class="tip" tip="WARNING: the calculator will not tell you if circular caps are a valid choice for a given habitat. All it does is make the caps use less material and not contribute to internal volume. If you want to be sure, you should manually verify that flat end caps are a viable choice given the habitat's size, wall thickness and internal pressure and structure by applying plate bending equations. In general, flat circular caps will tend to bend outwards, and need to be thick enough or braced somehow, or else pressurizing the habitat might bend them into the shape of hemispherical endcaps, severely damaging them in the process.">Circular caps</span>
 <br>
 <span> Habitat length: </span>
@@ -209,9 +209,6 @@ function table_calc(){
   length = document.getElementById("hab_length").value;
   document.getElementById("table_hab_length").innerHTML = length + " m";
   
-  useable_area = 2*Math.PI*radius*length;
-  document.getElementById("table_hab_useable_area").innerHTML = useable_area.toFixed(digits) + " m<sup>2</sup>";
-  
   caps_type = document.querySelector('input[name="caps"]:checked').id;
   if(caps_type == "circular_caps"){
     caps_area = 2*Math.PI*radius*radius;
@@ -220,7 +217,11 @@ function table_calc(){
   if(caps_type == "hemispherical_caps"){
     caps_area = 4*Math.PI*radius*radius;
     caps_volume = (4/3)*Math.PI*radius*radius*radius;
+    length -= 2*radius;
   }
+  
+  useable_area = 2*Math.PI*radius*length;
+  document.getElementById("table_hab_useable_area").innerHTML = useable_area.toFixed(digits) + " m<sup>2</sup>";
   
   hab_volume = (Math.PI*radius*radius*length) + caps_volume;
   document.getElementById("table_hab_volume").innerHTML = hab_volume.toFixed(digits) + " m<sup>3</sup>";
@@ -271,7 +272,7 @@ function table_calc(){
 The coriolis force can lead to accidents on staircases, as a person who is moving towards or away from the axis of rotation of the habitat will have to match the new tangential velocity of the environment, as parts of the habitat farther away from the axis of rotation move proportionally faster.
 The strength of this effect could be expressed simply as a "coriolis force strength" constant, which is multiplied with the vertical distance traveled to get the change in apparent velocity.
 <br><br>
-As an example, in a 200 metre radius habitat rotating once every 28.375 seconds to produce 9.807 m/s<sup>2M/sup> (1.000g ) of gravity, the coriolis force strength constant would be 0.22143 Hz.
+As an example, in a 200 metre radius habitat rotating once every 28.375 seconds to produce 9.807 m/s<sup>2M</sup> (1.000g ) of gravity, the coriolis force strength constant would be 0.22143 Hz.
 This means that any object which falls 1 metre down in that habitat will appear to gain 0.22143 m/s of sideways velocity.
 <br><br>
 Consider walking down a staircase with 20cm tall steps: when putting your foot down to the next step down you would feel it accelerate 4.4286 cm/s to the side, because the next step is further from the axis of rotation of the habitat, and thus is moving faster.
