@@ -8,9 +8,9 @@ module pillship(){
             color([0.4,0.4,0.4])translate([0,0,100]){sphere(50);}
         }
         union(){
-            color([0.4,0.4,0.4])sphere(49);
-            color([0.4,0.4,0.4])cylinder(h=100,r=49);
-            color([0.4,0.4,0.4])translate([0,0,100]){sphere(49);}
+            color([0.4,0.4,0.4])sphere(49.9);
+            color([0.4,0.4,0.4])cylinder(h=100,r=49.9);
+            color([0.4,0.4,0.4])translate([0,0,100]){sphere(49.9);}
             //holes for hangars
             for(i=[90:90:360]){
                 rotate([0,0,i]){
@@ -35,7 +35,7 @@ module pillship(){
                     translate([0,0,100]){sphere(49.5);}
                 }
             }
-            translate([0,0,-50]){cylinder(r=7,h=200);}
+            translate([0,0,-50]){cylinder(r=7.9,h=200);}
         }
     }
     //central structure end
@@ -44,10 +44,10 @@ module pillship(){
     color([0.4,0.4,0.4]){
         for(i=[90:90:360]){
             rotate([0,0,i]){
-                translate([23,0,-25]){
+                translate([23,0,-26]){
                     difference(){
                         sphere(15);
-                        sphere(14);
+                        sphere(14.9);
                     }
                     translate([-15/sqrt(2),0,15/sqrt(2)]){
                         rotate([0,-45,0])cylinder(r=0.5,h=7.5);}
@@ -66,7 +66,7 @@ module pillship(){
                 translate([33,0,-7]){
                     difference(){
                         sphere(15);
-                        sphere(14);
+                        sphere(14.9);
                     }
                     translate([-15/sqrt(2),0,-15/sqrt(2)]){
                         rotate([0,-135,0])cylinder(r=0.5,h=21.5);}
@@ -84,10 +84,10 @@ module pillship(){
     color([0.4,0.4,0.4]){
         for(i=[90:90:360]){
             rotate([0,0,i]){
-                translate([23,0,125]){
+                translate([23,0,126]){
                     difference(){
                         sphere(15);
-                        sphere(14);
+                        sphere(14.9);
                     }
                     translate([-15/sqrt(2),0,15/sqrt(2)]){
                         rotate([0,-45,0])cylinder(r=0.5,h=7.5);}
@@ -106,7 +106,7 @@ module pillship(){
                 translate([33,0,107]){
                     difference(){
                         sphere(15);
-                        sphere(14);
+                        sphere(14.9);
                     }
                     translate([-15/sqrt(2),0,15/sqrt(2)]){
                         rotate([0,-45,0])cylinder(r=0.5,h=21.5);}
@@ -180,19 +180,20 @@ module pillship(){
     color([0.5,0.5,0.5]){
         difference(){
             translate([0,0,125])cylinder(r=50,h=15);
-            cylinder(r=49,h=300);
+            cylinder(r=49.9,h=300);
         }
         difference(){
             translate([0,0,-40])cylinder(r=50,h=15);
-            cylinder(r=49,h=300,center=true);
+            cylinder(r=49.9,h=300,center=true);
         }
     }
 }
 
 difference(){
     pillship();
-    translate([-100,0,0])cube([200,500,500],true);
+    translate([100,0,0])cube([300*$t,500,500],true);
 }
 $vpt=[0,0,50];
-$vpr=[90+45*sin($t*360),0,360*$t];
+//$vpr=[90+45*sin(2*$t*360),0,360*$t];
+$vpr=[60,0,45+(90*$t)];
 $vpd=800;
