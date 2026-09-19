@@ -884,3 +884,10 @@ truth:after, .truth:after{
   vertical-align: top;
   font-size: 50%;
 }
+
+name:before{
+  content: "<";
+}
+name:after{
+  content: ">";
+}
