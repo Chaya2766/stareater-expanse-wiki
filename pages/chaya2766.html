@@ -65,6 +65,17 @@ By now I've spent roughly <span id="time_used">[lifetime percentage passed]</spa
 </div>
 
 Remind me to update this if the timer is negative and I'm still alive, or if the completion bars broke.
+<br>
+They update in real time by the way, you might be able to spot the lower one move forward by a pixel once or twice an hour.
+<br><br>
+I also donate some of my spare computing power to the Folding@Home as part of the Orion's Arm Universe Project team.
+You can see my stats <a href="https://stats.foldingathome.org/donor/id/795359096">here</a>.
+<small>(warning: that page is mostly bright white, but does have dark mode available in top right)</small>
+
+<!iframe style="border: 1px solid black; width: 400px; height: 400px; float: left; margin: 6px; filter: invert(0.95) hue-rotate(180deg);" src="https://stats.foldingathome.org/donor/id/795359096">
+<!/iframe>
+<!iframe style="border: 1px solid black; width: 400px; height: 400px; float: left; margin: 6px; filter: invert(0.95) hue-rotate(180deg);" src="https://stats.foldingathome.org/team/1068461">
+<!/iframe>
 </article>
 
 <script>
@@ -75,14 +86,14 @@ function DeathClock(){
   seconds_left = death_time - time_now;
   document.getElementById("time_left").innerHTML = seconds_left.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
   time_used = (time_now - birth_time)/(death_time - birth_time);
-  document.getElementById("time_used").innerHTML = (100*time_used).toFixed(1).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  //document.getElementById("time_used").innerHTML = (100*time_used).toFixed(1).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");//old version of the next line
+  document.getElementById("time_used").innerHTML = (Math.floor(1000*time_used)/10).toFixed(1).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
   
   //min used so the bars don't break after I'm dead
   document.getElementById("loadingbar_absolute").style.width = Math.min(100*time_used,100).toString() + "%";
   
   this_thousandth = (Math.floor(time_used * 1000)/10).toFixed(1);
   document.getElementById("text_this_thousandth").innerHTML = this_thousandth + "%";
-  console.log(this_thousandth);
   
   next_thousandth = (Math.ceil(time_used * 1000)/10).toFixed(1);
   document.getElementById("text_next_thousandth").innerHTML = next_thousandth + "%";
