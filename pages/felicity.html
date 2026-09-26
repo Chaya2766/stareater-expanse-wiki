@@ -36,7 +36,24 @@ Minimal <a href="computation.html#computronium">computronium</a> requirements fo
 
 The files storing her mind also include numerous <a href="ARCS.html">ARCS fields</a> with 1E-10% level of redundancy, which can fix up to 462 290 944 corrupted bits after a calculation requiring 1.2823026204672e+30 bitflips in total - if this check & repair operation is ran with the same amount of computational power as is required to run her mind in realtime speed, it would take just under 16.15 kiloseconds to complete.
 <br><br>
-Felicity's neural networks adhere to the <a href="ticanode.html#TONN">TONN standard</a>, using 16-bit <a href="fixed_point_arithmetic.html">fixed-point arithmetic</a> and polynomial approximation of the ReLu activation function, granting her the ability to efficiently outsource the computation of her mind without risking leakage of data, though she vastly prefers to simply own the computronium she runs on.
+Felicity's neural networks adhere to the <a href="ticanode.html#TONN">TONN standard</a>, using 16-bit <a href="fixed_point_arithmetic.html">fixed-point arithmetic</a> and polynomial approximation of the ReLu activation function, granting her the ability to efficiently outsource the computation of her mind without risking leakage of data through the use of homomorphic encryption, though she vastly prefers to simply own the computronium she runs on.
+<br><br>
+Her brain as a whole is a version 3 <a href="BSL_mimic_neuron.html">Beniaguev-Segev-London Mimic Neuron Array</a>, meaning that she is effectively a static reconstruction of her organic original's brain, with every neuron replaced by a "mimic neuron" and wired up to others in the same way.
+Each of those mimic neurons is a whole artificial neural network that had been trained on data collected from the original organic neuron it is supposed to mimic.
+On average each mimic neuron contains 137 186 560 weights and 1 071 899 artificial neurons, and takes up 274.37MB of data storage space.
+<br><br>
+The <b>input/output format</b> used by the program which runs her brain simulation is a simple image-in image-out interface.
+The image which the program produces is simply the membrane voltage of every outgoing nerve fiber in her simulation converted to a brightness value and mapped onto an image, in such a way that it looks vaguely like an unwrapped UV map of a human.
+The input image that is given to the program is correspondingly a monochrome image similar to a UV map from which brightness values are taken and converted directly to membrane potential on nerve fibers that carry sensory information into the brain.
+This serves as a very simple interface which can be mapped onto a simulated or physical body, where every pixel is treated like a nerve ending that either takes input from a receptor or controls a muscle fiber or is used for something else.
+<br><br>
+When she uses remote bodies, they use a very similar image-in image-out interface, but typically the images sent to the remote body are scaled down and returning images scaled back up to fit within bandwidth limitations, at the cost of minor compression artifacts on her senses and movements.
+There is usually also a lot of filtering applied to the images returning from remote bodies to remove stimuli that would be highly uncomfortable.
+<br><br>
+<b>Memories</b> are simply stored in an SQL database ran as a part of her brain simulation program.
+Each entry represents an engram - it lists every neuron in the affected group that formed the memory and a connection strength change value that can be a positive or negative number, affecting how strongly these listed neurons react to each other's firing.
+These connection strength changes are routinely read out from the database and applied to the brain simulation.
+This format is completely unreadable, but has a very nice benefit - multiple instances of Felicity can run in paralel, and simply synchronize their engram database contents to remember the same events, making them a <a href="family_mechanics.html#convergency">convergency</a>.
 </article>
 
 <h2>Personality and behaviour</h2>
@@ -49,6 +66,8 @@ This includes a strong interest in physics and will to understand all that she c
 <br><br>
 One odd tendency is that when deprived of interaction with other people, her standards for acceptable work quality and good behaviour gradually grow to potentially crippling levels that have to be lowered significantly when some interaction or collaboration finally occurs.
 </article>
+
+<!--
 
 <h2>more granular details of the emulation</h2>
 <article>
@@ -95,17 +114,42 @@ Additionally, quantizing certain areas of the brain all the way down to 0 bits c
 If processing speed rather than available memory is the constraint, simply running the simulation slower is usually much preferable to quantization. The main use of quantization is to decrease the memory use, decreasing the minimum amount of computing hardware required for the brain simulation to run.
 </article>
 
+
+
 <h2>mind structure</h2>
 
 <article>
 Felicity's mind was made through the "machine learning approximation of single neurons" method, resulting in every single neuron in her nervous system (whole, not just the brain) being turned into a deep neural network, 274.37MB on average. Every network is evaluated every millisecond. Accommodating formation of new connections in this model is at best extremely costly and at worst not technically coherent. Felicity's neurons only have connections to nearby neurons, the same ones their biological equivalents had, and no new ones can form, nor can the existing ones be lost, which makes her mind quite static, but does not actually severely impair her functioning. A separate massive neural network was trained on the data of her neural activity to predict engram* formation based on the firing patterns of neurons, and another one which is fed that data to produce adjustments to the connections between neurons. Without this mechanism Felicity would be completely unable to form new memories, and would only be able to remember anything for a few minutes at most.
 <br><br>
-<!--<img style="max-width: 40%; max-height: 400px; float: right;" src="../images/felicity_engram.png"></img>-->
+<!img style="max-width: 40%; max-height: 400px; float: right;" src="../images/felicity_engram.png"><!/img>
 The engram formation mechanism outputs the predicted engrams in a format that can be easily stored outside of her brain, and each engram is stored as an entry in a classic database together with cryptographic signatures that verify they indeed came from her. She makes extensive use of this, by running multiple copies of herself and simply synchronizing engram databases to maintain common identity, an arrangement that makes her and her copies part of a <a href="">convergency</a>. She mostly synchronizes memories at any opportunity of meeting with her copies, but new memories are marked to be excluded from synchronization until she slept on them, and newly synchronized memories are marked as inactive until she wakes up, as otherwise she experiences incidents of continuity of a single thought across two different copies of herself, which are very confusing.
 <br><br>
 The end result is that Felicity's brain is less flexible than that of her organic source, but still capable of learning new skills and gathering experience. While the personality, perception of self and the world of her organic source had drifted around over time, hers had remained very constant, no matter the passage of time she seems like an averaged-out version of who she used to be during the time her neural activity data was being collected, granting her a sort of immortality of personality. It had not been ruled out that certain ideas, skills and thoughts became impossible to her due to the lost flexibility, but it had so far not made itself apparent.
 <br><br>
 *engram in this context means a group of neurons which are strongly triggered by one another, such that if a sufficient number of them fire the whole group will fire together. It is thought to be a fundamental element of human memories. 
+</article>
+
+-->
+
+<h2>Memory synchronization</h2>
+<article>
+Felicity's engram database can be synchronized across multiple active copies of herself to maintain one consistent identity and allow all copies to have all memories of anything that any of them did.
+Doing this means that she, as all of her copies, is a <a href="family_mechanics.html#convergency">convergency</a>, a single identity implemented in multiple individuals at once.
+The main limitation is that she does not activate newly received engrams from other copies until she had slept - having memories presenting multiple different versions of what she had done earlier in the day simply proves too confusing for her to continue functioning normally, yet having memories from many different perspectives regarding yesterday proves to be something she can simply get used to.
+<br><br>
+Activating engrams immediately can produce a very strange experience, where during an idle unfocused moment she might experience total subjective continuity between two different active copies of herself, which was found experimentally on accident fairly early in her life as a mind upload.
+The following will describe the circumstances and her subjective experience on this incident.
+<br><br>
+Two copies of Felicity were active and actively synchronizing their engram databases during that day.
+Copy designated Felicity 1 was working on a CAD file of an airlock door, meanwhile Felicity 2 was working on a potential mining vessel design.
+Both of them happened to take a break at the same time, and afterwards Felicity 1 returned to her work as normal - she had memories of Felicity 2 already in her brain emulation and so was aware of what her copy was working on, but wasn't thinking about it.
+Felicity 2 however returned from her break fully convinced that she is Felicity 1 until she saw her system UI and the project in front of her.
+<br><br>
+In Felicity's subjective experience, she simply went to take a break and then realized that she is the other copy now, with absolutely no discontinuity of experience despite their mindstates being separate.
+Simply thinking about what her copy was doing must have produced enough of a recollection of events from that copy's perspective that when she got back to work, she had the wrong idea of which one she was, and became confused upon seeing her own UI showing the project that, in her mind, she thought <i>her copy</i> was working on.
+<br><br>
+Ever since that incident, engrams pulled from other copies do not get applied to the brain simulation until sleep is detected.
+While fascinating, it is simply too disruptive to everyday function.
 </article>
 
 <h2>neurological augmentation</h2>
