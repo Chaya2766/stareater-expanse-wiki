@@ -191,6 +191,9 @@ I'm going to selectively apply this, treating it as a sort of soft upper bound o
 
 <h1 class="thread">Artificial mind architectures in the third millenium</h1>
 <div class="thread">
+<article>
+general description todo
+</article>
 
 <h2>Layered neural networks</h2>
 <img class="styled right" src="../images/neural_net.webp"></img>
@@ -198,11 +201,16 @@ I'm going to selectively apply this, treating it as a sort of soft upper bound o
 Layered neural networks work by arranging neurons into layers, of which one is designated as the input layer where neuron activation is directly determined by input data, one designated as an output layer where the neuron activations are directly read out to become the output data, and a number of hidden layers inbetween them which are responsible for the actual data processing.
 The unique benefit of this architecture is its ability to be trained using the "backpropagation" method, which, instead of brute force trial and error, can utilize pre-made examples that show an input and the desired output, and then calculate exactly how every connection in the network should change to make the network produce that given output for that given input.
 <br><br>
-This approach revolutionized the field of machine learning in the 20th century, 0th gigasecond <a href="unix_time.html">UT</a>, by enabling networks to be trained with the small amounts of computing power available at the time, and despite the appearance of more advanced architectures it remained in use through the entirety of the third millenium.
-Given the vast computational power available in the later gigaseconds, combined with the extreme compute-efficiency of the training process, networks of this type could be trained as needed for any scenario where the right data is available, and many systems include mechanisms to continuously collect data about their own function and use it to retrain the layered neural networks used in their software to adapt to their particular circumstances, allowing them to improve their performance with continued function, adapt to nonstandard work conditions, or compensate for damaged hardware.
+This approach revolutionized the field of machine learning in the 20th century, 0th gigasecond <a href="unix_time.html">UT</a>, by enabling networks to be trained with the small amounts of computing power available at the time, and supported the "AI revolution" of the 21st century, leading to the creation of the first artificial minds.
+The extreme computational efficiency of training such networks, artificial minds based on them continue to be made despite the appearance of more advanced architectures.
+The example-reliance of backpropagation also makes it very reliable in creating artificial minds displaying very exact desired behaviours, and allows such minds to continue to be improved as new data appears.
+This architecture is however not well suited for minds that should be capable of long term learning, as it inherently rules out any internal structures that could act as memory cells.
+<br><br>
+Given the vast computational power available in the later gigaseconds, combined with the extreme compute-efficiency of the training process, smaller networks of this type can be trained as needed for any scenario where the right data is available, and many systems include mechanisms to continuously collect data about their own function and use it to retrain the layered neural networks used in their software to adapt to their particular circumstances, allowing them to improve their performance with continued function, adapt to nonstandard work conditions, or compensate for damaged hardware.
 </article>
 
-<h2>Cyclic neural networks</h2>
+<h2>Cyclic graph neural networks</h2>
+<img class="styled right" src="../images/graph_neural_net.webp"></img>
 <article>
 A cyclic neural network is a classic artificial neural network that allows signals to propagate in closed loops, or even neurons feeding directly into themselves.
 This stands in opposition to the more easily trained layered neural networks, since the cyclic arrangement makes the network inherently stateful, and also rules out the backpropagation method, necessitating the use of training methods much closer to brute force trial and error.
@@ -210,14 +218,14 @@ These networks are usually trained by an evolutionary algorithm, where many netw
 <br><br>
 Artificial minds made this way can maintain memories, as closed loops in the network can work as memory cells, but the network itself remains static and unchanging.
 This works very well for producing a network that adjusts its behaviour based on previous inputs, which can produce various degrees of intelligent behaviour.
-It had been sometimes called "hardcoded intelligence" as it resembles an immense catalogue of if statements more than the flexibility of organic neural networks.
+It had been sometimes called "hardcoded <span class="tip" tip="intelligence here refers purely to the ability to learn, and not to other quantities like human-likeness, pre-existing skill and knowledge, or advanced perception">intelligence</span>" as it resembles an immense catalogue of if statements more than the flexibility of organic neural networks.
 <br><br>
 It's been found that, at least with the commonly used training algorithms, the working memory of this type of artificial mind typically lands near an easily predictable value described with the formula: working_memory = sqrt(parameter_count)/8e6.
 <span class="meta">note: this is an arbitrary choice not based on real science, whose purpose is just to make the setting more mathematically describable.</meta>
 </article>
 
 <h2>Composite minds</h2>
-<img class="styled right" src="../images/versioning.webp"></img>
+<img class="styled right" src="../images/composite_mind_16.webp"></img>
 <article>
 Existing minds may be connected by bridges to allow information to flow from one to another - a benefit of this approach is that it only requires training a bridge network only once, and after that it can be copied and included multiple times to bridge many minds together.
 This is vastly more computationally efficient than training a single cyclic neural network of the same capability, but the cost of this approach is much worse scaling.
