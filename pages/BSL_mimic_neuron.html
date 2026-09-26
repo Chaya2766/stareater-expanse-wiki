@@ -17,13 +17,151 @@ BSL mimic neurons are neuron models using neural networks to mimic the spiking b
 
 <hr>
 
+<h3>important vocabulary</h3>
+<article><b>Engram:</b> a group of neurons that had become relatively sensitive to each other.
+When several neurons that are part of one engram fire at once, they might cause the whole rest of the group to fire.
+Engrams are thought to be a significant building block of human memories. <span class="meta">If you don't know much about engrams, I highly recommend the video <a href="https://www.youtube.com/embed/X5trRLX7PQY">"Building Blocks of Memory in the Brain" by Artem Kirsanov</a></span>
+<br>
+<b>Artificial neuron:</b> for clarity throughout this article the term 'artificial neuron' should refer to the simple neurons in artificial neural networks, not the recreation of a real biological neuron.
+<br>
+<b>Mimic neuron:</b> for clarity throughout this article the term 'mimic neuron' should refer to the simulation model that mimics the behavior of a real biological neuron.
+<br>
+<b>Parameter and Weight:</b> a parameter or a weight is a number assigned to a connection between artificial neurons that dictates how strongly that connection affects the artificial neuron which uses it.
+<hr>
+</article>
+
+<h1>structure of mimic neurons</h1>
+<img src="../images/mimic_neuron_example.png" style="border: 1px solid white; max-height: 400px; max-width: 50%; float: right;"></img>
+<article>
+<span class="meta">I've written a document <a href="../documents/mind_uploading_through_machine_learning/mind_uploading_through_machine_learning.pdf">here</a> which explains this in more detail.</span>
+<br>
+The image on the right depicts a single mimic neuron, which itself contains 46 artificial neurons and 168 parameters.
+<br><br>
+This mimic neuron is an entire artificial neural network trained to behave like a biological neuron in terms of spiking and membrane potential.
+<br><br>
+The part market as "input stream" is a series of artificial neurons that act like a buffer.
+They store a history of the inputs that the mimic neuron received.
+When the next input comes in, the activation of each artificial neuron in the input stream is moved over to the neuron above and the first artificial neuron in the input stream is given the new activation.
+This allows the mimic neuron to have a memory and react to receiving multiple spikes in quick succession like a real organic neuron would.
+The whole input stream corresponds to one synapse of the organic neuron after which the mimic neuron was made.
+In this example model the input stream size is only 4 artificial neurons, so the whole mimic neuron only has access to 4 milliseconds of input data coming to it from other mimic neurons.
+Real mimic neurons would have input streams that hold onto 100 to 200 milliseconds of past inputs, and close to 7000 input streams in total as that's roughly how many synapses each organic human neuron has.
+<br><br>
+The main body of the mimic neuron simply corresponds to the main body of the organic neuron it was made to mimic.
+It allows the complex spiking behaviour of organic neurons to be approximated.
+<br><br>
+The outputs provide membrane potential of the neuron, which contains the voltage spikes corresponding to neuron firing.
+This output of the mimic neuron will be piped into the input streams of other mimic neurons, creating connections much like those of the organic neurons in the human brain.
+<br><br>
+A second artificial neuron is usually present in the output layer of the mimic neuron, signaling whether or not the neuron is currently receptive to engram formation, ie. trying to grow its connections with nearby neurons.
+<br><br>
+The image only illustrates the difference between the two, as well as the structure of the mimic neuron.
+The number of artificial neurons in this mimic neuron is purposefully unreasonably small so that they can actually be seen, a real mimic neuron that is sufficient to do its job in a brain emulation would have a vastly larger number of artificial neurons.
+<br class="division"><br>
+Below you can see a visualization of an actual neuron, with body containing 7 layers of 128 neurons each, input streams 205 milliseconds long, and 200 total input streams.
+A particularly isolated neuron with only 200 synapses was picked out for this visualization, as with the usual 7000 synapses visualized the block of input streams would be so large that you would barely be able to see the main body at this resolution.
+This mimic neuron contains 41898 artificial neurons and 5 346 560 parameters
+</article>
+<a href="../images/mimic_neuron_real_200.png"><img class="centered" src="../images/mimic_neuron_real_200_small.png" style="border: 1px solid white; max-height: 90vh; max-width: 90%;"></img></a>
+
+<hr>
+
+<h3>Beniaguev-Segev-London Mimic Neuron Array</h3>
+<article>
+The BSL Mimic Neuron Array protocol for digital brain reconstruction relies first and foremost on the electrical activity of neurons, and allows formation of engrams to enable long-term memory.
+This standard describes the structure of the reconstructed mind, the process of gathering the necessary data to create it, the machine learning parameters to be used in creation of the mimic neurons, and digital body models that interface with the reconstructed mind.
+<br><br>
+The core of this digital brain reconstruction protocol is training deep neural networks to behave like neurons - these are referred to as mimic neurons, since they mimic the electrical activity (membrane potential and discharge) of actual biological neurons.
+These mimic neurons are connected to each other in a way that recreates the map of connections of the organic brain.
+<br><br>
+Version 1 of the protocol focused exclusively and only on these aspects, but the reconstructed minds made in that manner were missing important neuropsychological mechanisms despite being largely functional.
+In BSLMNAv1 the data about neuron membrane potential and spiking is used directly to train deep neural networks which behave like individual biological neurons, which in turn are linked together into the same structures as neurons in the original brain.
+<br>
+The significant failures of this method were the following:
+<ol>
+  <li>
+  Near-complete loss of sleep cycle regulation - among other important variables, melatonin concentration was not simulated at all.
+  This among other consequences led to difficulty forming memories, which are strengthened during particular phases of sleep.
+  </li>
+  <li>
+  Loss of long-lasting emotional responses - BSLMNAv1 reconstructed minds relied entirely on the electrical activity, which provides adequate response but has no inertia and as such can be fully lost within as little as &approx;30 seconds of the emotionally significant stimulus being removed.
+  This led to occasional difficulties in social contact, and many reconstructed minds reported distress at this and the opinion that this constituted losing a significant part of themselves.
+  </li>
+  <li>
+  Phantom pains were sometimes experienced by the reconstructed minds and required extensive fine-tuning of the body models.
+  When the digital body model which interfaces with the simulated brain does not behave as expected, the brain may become confused and think that limbs are being starved of blood flow or twisted into unnatural positions, resulting in psychogenic pain.
+  </li>
+  <li>
+  Neuroplasticity is limited to engram formation - the set of skills that the original mind had can be expanded but personality will remain largely static over long time.
+  Only connections which changed during the data collection phase (when the mind is still in an organic brain) will be able to change in the reconstructed mind, thus necessitating a very long data collection period, and a diverse set of circumstances to be experienced by the organic mind during that period.
+  </li>
+</ol>
+Version 2 of the protocol accounts for concentrations of signaling chemicals in the cerebrospinal fluid, which become additional variables given to each mimic neuron as an input.
+This fixed the issues of sleep regulation and medium-term emotional responses, leading to reconstructed minds which report only small subjective differences from the original but do not produce significant externally observable differences.
+<br>
+Issues which still remain:
+<ol>
+  <li>
+  Phantom pains are still sometimes experienced by BSLMNAv2 reconstructed minds.
+  </li>
+  <li>
+  Neuroplasticity is still limited, and requires the original to have exercised it during the data collection period for it to functionally appear in the reconstructed mind.
+  </li>
+</ol>
+For BSLMNAv2 it appears that collecting more data from the organic mind reliably results in a better reconstruction, with diminishing returns.
+<br><br>
+BSLMNAv3 is largely the same as BSLMNAv2, with small changes and additions that are meant to enable continuous improvement of an existing reconstructed mind using new data from the original mind.
+This version explicitly proposes that the original mind and the reconstructed mind should exist in functional form at the same time.
+</article>
+
+<hr>
+
+<h3>Hardware and surgery</h3>
+<article>
+Gathering the data necessary for training all the mimic neurons is done by implanting every single neuron in the body with a probe that transmits the information to the outside through a physical wire.
+The probes are usually in the form of a microscopic probe head capable of navigating through the brain, attached to a wire made from multiple carbon nanotubes (and possibly boron nitride nanotubes).
+This is exactly the same as some of the very high end direct neural interfaces, but applied to the whole brain as well as every significant nerve.
+Although <span class="tip" tip="To put it in context imagine that there is a facility mass-producing these probes at the incredibly low cost of 1$ for one whole probe, which includes multiple perfect carbon nanotubes and boron nitride nanotubes that are over 10cm in length each, as well as a nanotech submarine just a few micrometres across. You'd be paying about 86 billion dollars for that if dollars were still in use. In practice, you'll probably be paying a bit more.">expensive</span>, the use of nanotubes is practically unavoidable because using anything bigger as the wire would literally add too much volume to the brain to be safe if you tried weaving 86 billion strands of it between the neurons.
+<br><br>
+These probes will usually be implanted across a very large number of surgeries, starting with a relatively small number of probes embedded into nerves outside of the brain to make sure no undesirable reaction will occur.
+Each surgery can be expected to take a few hours as the probes <span class="tip" tip="Probably somewhere in the range of 1&micro;m/s to 10&micro;m/s - it is a blessing of human neurology that vast majority of the brain's neurons are located in the outermost few millimetres of brain tissue, so only a small fraction of the probes will have to go all the way in deep inside the brain.">very slowly</span> swim through the brain, avoiding neurons and their delicate dendrites.
+The probes are guided by external computers, with the probe leads being used to transmit control signals and power to the probe tips.
+The process at the same time generates a rough map of where each neuron in the brain is from sensor data of the probe tips, but it is not precise enough to determine every neuron connection and its type - these will have to be approximated from the data collected during probe implantation.
+<br><br>
+With about 1 million probes being implanted each kilosecond, plus a few longer stretches where the probes actually have to go in deep inside the brain, the patient can be expected to spend about 9 megaseconds in the operating rig - it should be noted that in principle you could do this in one go, but usually people opt to keep functioning in their daily life, splitting up the process across 300 to 400 separate surgeries performed during sleep, extending the process to about 30Ms total.
+<br><br>
+Alongside the probes, a storage device will also be implanted, from which the patient will have to regularly dump data onto external storage (since the probes will be producing ML training data at around 172TB/s) but that is a relatively trivial part of the process.
+</article>
+
+<hr>
+
+<h3 class="thread">possible complications</h3>
+<div class="thread">
+
+<article>
+<b>1. Misgeneralization:</b> The machine learning approach had shown that persistent patterns present in the neurological activity of the organic brain will be reflected in the neurological activity of the upload, potentially even if their causes are removed.
+<br><br>
+The most common example of this is the persistent feeling of carrying something, stemming from certain aspiring uploads opting to collect their neurological activity in external storage devices which they had to carry around.
+In some cases, due to the fact that there was no data collected during times when the person was not carrying a data storage device with them, the neuron models ended up misgeneralizing in such a way that the activity corresponding to carrying items continued to be present in the final brain model even despite no such task being carried out.
+<br><br>
+Many more patterns that can embed themselves in the data in such a way, so it is critical to ensure that the collected data is diverse, corresponding to many different activities, sensations and states of mind.
+It is common to record one's surroundings to match the neurological data with, and then filter the data before constructing the final brain model.
+<br><br>
+Updating an existing, already running brain model without killing the upload is a much more involved effort than simply doing a good job the first time, but it is possible. The already-trained neuron emulation networks can be put back into training, using the expanded dataset, and their function is likely to correct itself, but it carries some risk of memory loss.
+If a neuron undergoes too much change, the memories it took part in encoding may no longer be retrievable, or may become distorted, so when correcting misgeneralization it is necessary to make the corrections in small steps, which shift the function of neurons slightly, with a lot of time inbetween for the upload to recall and re-form the memories into engrams involving the modified neurons.
+<br><br>
+A fairly reliable way to prevent any significant misgeneralization is to go adventuring for diverse experiences and build the dataset over multiple years to ensure diversity in data, and make the collection of neurological data as seamless as possible to allow oneself to live life as normal in the mean time.
+</article>
+
+</div>
+
+<!--
 
 <h1>Benefits of the method</h1>
 <article>
 todo
 </article>
 
-<!--
 <h1>Structure types</h1>
 <article>
 <b>1. block</b> - this is the simplest, most automatable, and most inefficient structure to use.
