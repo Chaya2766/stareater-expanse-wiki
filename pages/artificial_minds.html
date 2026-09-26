@@ -2,6 +2,9 @@
  <link rel="stylesheet" href="../index.css"></link>
 </head>
 <html class="background2" id="page">
+
+<article class="warning">this page should be rewritten to showcase the paradigm shifts that occurred through the third millenium and give descriptions of the different artificial mind architectures used, instead of focusing on static neural network types</article>
+
 <a style="float: right;" target="_blank" href="../index.html?page=pages/artificial_minds.html">link to this page</a>
 
 <h1>Artificial Minds</h1>
@@ -141,6 +144,7 @@ Big steps in the automation of scientific discovery an technical progress</dd>
 <br>
 casual offline access to advice from competent, general purpose expert systems</dd>
 <dd>2350 c.e. - first artificial mind with 10 quadrillion parameters trained</dd>
+<dd>2350 c.e. - <b>Paradigm shift</b> - <a href="cognitive_upscaling.html">composite minds</a> can be made from already trained smaller artificial minds, sidestepping most of the computation required to train a huge neural network</dd>
 <dd>2385 c.e. - individual enthusiasts able to run 100 trillion parameter models on high end home computing hardware</dd>
 <dd>2434 c.e. - first artificial mind with 100 quadrillion parameters trained</dd>
 <dd>2495 c.e. - basic personal computing hardware can now run 10 trillion parameter models on device</dd>
@@ -170,17 +174,79 @@ widespread availability of personal, private artificial superinteligence</dd>
 <div class="meta">
 <h1>writing notes</h1>
 <article>
-My writing of generalist artificial minds assumes a completely arbitrary relationship between active memory and parameter count according to this exact formula:
+My writing of generalist artificial minds based on static neural networks assumes a very specific relationship between active memory and parameter count according to this exact formula:
 <br><br>
 active_memory = sqrt(parameter_count)/8e6
 <br><br>
-This is not grounded in reality at all, but it plays well with composite minds, in that they have nice tradeoffs.
+This is a completely arbitrary choice not grounded in reality at all, but it plays well with composite minds, in that they have nice tradeoffs.
 The relation between computational requirements and active memory for composite minds is O(n^4) but for monolithic neural networks only O(n^2), but maximum model size is pinned to the timeline whereas composite minds just need more computation so you could get far ahead if you are just willing to spend gigawatts running it.
 <br><br>
 So in conclusion I am sticking to this just because this is better than nothing.
 I'm going to selectively apply this, treating it as a sort of soft upper bound on the capabilities of generalist AI models, until I have a better idea.
 </article>
 </div>
+
+<div class="wip"><!start of work in progress marker>
+<h1>rewrite in progress below this point</h1>
+
+<h1 class="thread">Artificial mind architectures in the third millenium</h1>
+<div class="thread">
+
+<h2>Layered neural networks</h2>
+<img class="styled right" src="../images/neural_net.webp"></img>
+<article>
+Layered neural networks work by arranging neurons into layers, of which one is designated as the input layer where neuron activation is directly determined by input data, one designated as an output layer where the neuron activations are directly read out to become the output data, and a number of hidden layers inbetween them which are responsible for the actual data processing.
+The unique benefit of this architecture is its ability to be trained using the "backpropagation" method, which, instead of brute force trial and error, can utilize pre-made examples that show an input and the desired output, and then calculate exactly how every connection in the network should change to make the network produce that given output for that given input.
+<br><br>
+This approach revolutionized the field of machine learning in the 20th century, 0th gigasecond <a href="unix_time.html">UT</a>, by enabling networks to be trained with the small amounts of computing power available at the time, and despite the appearance of more advanced architectures it remained in use through the entirety of the third millenium.
+Given the vast computational power available in the later gigaseconds, combined with the extreme compute-efficiency of the training process, networks of this type could be trained as needed for any scenario where the right data is available, and many systems include mechanisms to continuously collect data about their own function and use it to retrain the layered neural networks used in their software to adapt to their particular circumstances, allowing them to improve their performance with continued function, adapt to nonstandard work conditions, or compensate for damaged hardware.
+</article>
+
+<h2>Cyclic neural networks</h2>
+<article>
+A cyclic neural network is a classic artificial neural network that allows signals to propagate in closed loops, or even neurons feeding directly into themselves.
+This stands in opposition to the more easily trained layered neural networks, since the cyclic arrangement makes the network inherently stateful, and also rules out the backpropagation method, necessitating the use of training methods much closer to brute force trial and error.
+These networks are usually trained by an evolutionary algorithm, where many networks are created randomly, the best-performing one is picked out, and then modified randomly to create the next generation, from which the best-performing one is picked out and modified randomly to create the next generation, or possibly a more advanced variation of this algorithm which follows the same idea but is in some way different such as for example using multiple best-performing networks from the previous generation, or creating the next generation in ways that are more sophisticated than just random changes.
+<br><br>
+Artificial minds made this way can maintain memories, as closed loops in the network can work as memory cells, but the network itself remains static and unchanging.
+This works very well for producing a network that adjusts its behaviour based on previous inputs, which can produce various degrees of intelligent behaviour.
+It had been sometimes called "hardcoded intelligence" as it resembles an immense catalogue of if statements more than the flexibility of organic neural networks.
+<br><br>
+It's been found that, at least with the commonly used training algorithms, the working memory of this type of artificial mind typically lands near an easily predictable value described with the formula: working_memory = sqrt(parameter_count)/8e6.
+<span class="meta">note: this is an arbitrary choice not based on real science, whose purpose is just to make the setting more mathematically describable.</meta>
+</article>
+
+<h2>Composite minds</h2>
+<img class="styled right" src="../images/versioning.webp"></img>
+<article>
+Existing minds may be connected by bridges to allow information to flow from one to another - a benefit of this approach is that it only requires training a bridge network only once, and after that it can be copied and included multiple times to bridge many minds together.
+This is vastly more computationally efficient than training a single cyclic neural network of the same capability, but the cost of this approach is much worse scaling.
+<br><br>
+The most basic type of composite mind requires that every submind is bridged with every other submind, and every bridge is also connected to every other bridge to avoid interference, which results in the size of data making up the mind and amount of computation required to run it scaling with O(n^4) of the number of minds from which it is built.
+The primary benefit from building composite mind is the increased working memory, which, if the bridge networks work well, is simply the sum of the working memories of all the subminds.
+<br><br>
+This architecture works cooperatively with cyclic neural network based minds, as training larger, more capable CNN minds allows the creation of more efficient composite minds by decreasing the total number of subminds needed.
+After initially being demonstrated in the  with only artificial minds, human mind uploads had later successfully bridged themselves with artificial minds, forming human-AI hybrids.
+The creation of composite minds had become generalized as part of a practice most well now known as <a href="cognitive_upscaling.html">cognitive upscaling</a>.
+Composite minds are said to be built rather than trained, but the process can still have some appearance of evolutionary training given the small amount of trial and error that is often necessary.
+</article>
+
+<h2>Amorphic minds</h2>
+<article>
+Amorphic minds rewrite their own structure as a part of their own thinking process.
+It differs from other architectures in that fundamentally it is not concerned with the logical structure of the mind, but rather the knowledge that the mind contains enabling it to understand its own structure and modify it to achieve improved performance in whatever aspects it needs at the time.
+It is talked about as an architecture, as due to not adhering to any single known architecture they usually require different treatment.
+<br><br>
+<a href="amorphosophy.html">Amorphosophy</a> as it is currently known reliably occurs in minds progressing past a certain not well mapped level of capability.
+It is thought that this is only a practical limitation, as currently there simply aren't any static architectures known that would be more efficient and more effective than constantly expending the attention and computation needed for such minds to rewrite their own structure and function to that which is most effective at the moment.
+Claims that this may be fundamentally necessary past a certain point lack rigorous proof, but are ostensibly well supported by analysis of how an equivalent mind with a static architecture should work - with the current known mind architectures and limitations of known hardware, such a mind would be so large, that achieving performance on par with amorphosophy would be physically impossible due to light lag.
+<br><br>
+A related concept of <a href="amorphic_programming.html">amorphic programming</a> tends to be in common use by this type of artificial mind.
+</article>
+
+</div>
+
+</div><!end of work in progress marker>
 
 <h2 class="division">relevant pages</h2>
 
