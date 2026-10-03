@@ -239,7 +239,7 @@ function recalculate_table(){
     c3_need = c3_mem_need;
     c4_need = c4_mem_need;
     c5_need = c5_mem_need;
-    document.getElementById("processing").innerHTML = "underclock";
+    document.getElementById("processing").innerHTML = "<span class=\"tip\" tip=\"how many times slower the process is forced to run as a result of not having enough flip rate capacity. An underclock of 5 for example would mean that takes five seconds of real time to compute one second worth of whatever is running on the chips.\" >underclock</span>";
   } else {
     c2_need = Math.max(c2_flip_need,c2_mem_need);
     c3_need = Math.max(c3_flip_need,c3_mem_need);

@@ -181,6 +181,15 @@ img.pixelated{
  image-rendering: crisp-edges;
 }
 
+img.styled.inverted{
+  border: 1px solid black;
+  filter: invert(1);
+}
+img.styled.light-inverted{
+  border: 1px solid black;
+  filter: invert(1) hue-rotate(180deg);
+}
+
 img.revealable{
  /*transition-duration: 5s;*/
 }

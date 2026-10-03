@@ -34,6 +34,13 @@ Minimal <a href="computation.html#computronium">computronium</a> requirements fo
   <tr><td>Civic-4 chip</td><td id="num_c4">770 500</td><td id="pow_use_c4">2.541MW</td><td id="vol_c4">0.07705m<sup>3</sup> ≈ (425.5mm)<sup>3</sup></td><td id="flip_use_c4">32.98%</td><td id="mem_use_c4">100.00%</td></tr>
 </table>
 
+<table class="styled" style="margin: 10 auto;">
+  <tbody><tr><th colspan="6"><a href="civic_chips.html">civic chip</a> requirements (memory-constrained) | <span id="table_mem_req">4.623e+20</span> bits, <span id="table_flip_req">7.940e+25</span> bits/s</th></tr>
+  <tr><td></td><td>number needed</td><td>power draw</td><td>bare substrate volume</td><td id="processing"><span class="tip" tip="how many times slower the process is forced to run as a result of not having enough flip rate capacity. An underclock of 5 for example would mean that takes five seconds of real time to compute one second worth of whatever is running on the chips.">underclock</span></td><td>memory used</td></tr>
+  <tr><td>Civic-2 chip</td><td id="num_c2">462 300</td><td id="pow_use_c2">4.623MW</td><td id="vol_c2">0.0462300m<sup>3</sup> ≈ (358.9mm)<sup>3</sup></td><td id="flip_use_c2">3435</td><td id="mem_use_c2">100.00%</td></tr>
+  <tr><td>Civic-3 chip</td><td id="num_c3">462 300</td><td id="pow_use_c3">4.623MW</td><td id="vol_c3">0.0462300m<sup>3</sup> ≈ (358.9mm)<sup>3</sup></td><td id="flip_use_c3">21.47</td><td id="mem_use_c3">100.00%</td></tr>
+</tbody></table>
+
 The files storing her mind also include numerous <a href="ARCS.html">ARCS fields</a> with 1E-10% level of redundancy, which can fix up to 462 290 944 corrupted bits after a calculation requiring 1.2823026204672e+30 bitflips in total - if this check & repair operation is ran with the same amount of computational power as is required to run her mind in realtime speed, it would take just under 16.15 kiloseconds to complete.
 <br><br>
 Felicity's neural networks adhere to the <a href="ticanode.html#TONN">TONN standard</a>, using 16-bit <a href="fixed_point_arithmetic.html">fixed-point arithmetic</a> and polynomial approximation of the ReLu activation function, granting her the ability to efficiently outsource the computation of her mind without risking leakage of data through the use of homomorphic encryption, though she vastly prefers to simply own the computronium she runs on.

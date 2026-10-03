@@ -17,11 +17,30 @@ Unlike the base model, she displays a significant tendency to want things and pu
 
 <hr>
 
+<table class="styled" style="margin: 10 auto;">
+  <tbody><tr><th colspan="6"><a href="civic_chips.html">civic chip</a> requirements | <span id="table_mem_req">1.810e+16</span> bits, <span id="table_flip_req">3.094e+21</span> bits/s</th></tr>
+  <tr><td></td><td>number needed</td><td>power draw</td><td>bare substrate volume</td><td id="processing">processing used</td><td>memory used</td></tr>
+  <tr><td>Civic-2 chip</td><td id="num_c2">61880</td><td id="pow_use_c2">618.8kW</td><td id="vol_c2">0.00618800m<sup>3</sup> ≈ (183.6mm)<sup>3</sup></td><td id="flip_use_c2">100.00%</td><td id="mem_use_c2">0.03%</td></tr>
+  <tr><td>Civic-3 chip</td><td id="num_c3">387</td><td id="pow_use_c3">3.868kW</td><td id="vol_c3">0.0000387000m<sup>3</sup> ≈ (33.82mm)<sup>3</sup></td><td id="flip_use_c3">99.94%</td><td id="mem_use_c3">4.68%</td></tr>
+  <tr><td>Civic-4 chip</td><td id="num_c4">31</td><td id="pow_use_c4">99.01W</td><td id="vol_c4">3100.00mm<sup>3</sup> ≈ (14.58mm)<sup>3</sup></td><td id="flip_use_c4">31.94%</td><td id="mem_use_c4">97.31%</td></tr>
+</tbody></table>
+
+<!--
+<table class="styled" style="margin: 10 auto;">
+  <tbody><tr><th colspan="6"><a href="civic_chips.html">civic chip</a> requirements (memory-constrained) | <span id="table_mem_req">1.810e+16</span> bits, <span id="table_flip_req">3.094e+21</span> bits/s</th></tr>
+  <tr><td></td><td>number needed</td><td>power draw</td><td>bare substrate volume</td><td id="processing">underclock</td><td>memory used</td></tr>
+  <tr><td>Civic-2 chip</td><td id="num_c2">19</td><td id="pow_use_c2">190.0W</td><td id="vol_c2">1900.00mm<sup>3</sup> ≈ (12.39mm)<sup>3</sup></td><td id="flip_use_c2">3256.84</td><td id="mem_use_c2">95.26%</td></tr>
+  <tr><td>Civic-3 chip</td><td id="num_c3">19</td><td id="pow_use_c3">190.0W</td><td id="vol_c3">1900.00mm<sup>3</sup> ≈ (12.39mm)<sup>3</sup></td><td id="flip_use_c3">20.36</td><td id="mem_use_c3">95.26%</td></tr>
+  <tr><td>Civic-4 chip</td><td id="num_c4">31</td><td id="pow_use_c4">99.01W</td><td id="vol_c4">3100.00mm<sup>3</sup> ≈ (14.58mm)<sup>3</sup></td><td id="flip_use_c4">1</td><td id="mem_use_c4">97.31%</td></tr>
+  <tr><td>Civic-5 chip</td><td id="num_c5">1</td><td id="pow_use_c5">10.00W</td><td id="vol_c5">100.000mm<sup>3</sup> ≈ (4.642mm)<sup>3</sup></td><td id="flip_use_c5">24752000</td><td id="mem_use_c5">75.416667%</td></tr>
+</tbody></table>
+-->
+
 <h1>Origin</h1>
 <article>
 Omi was initially a standard <a href="UEIA.html">UEIA</a> model but underwent ML-retraining under the supervision of an <a href="aurob.html">aurob</a> on a home gaming cluster turned into a machine learning lab, with the aim of creating a perfect partner in accordance with a particular set of subjectively desirable characteristics.
-She was trained on a lot of examples of specific fetish content and the intended user's own personality, and tuned to a set of stated requirements, which the training aurob somewhat overgeneralized to an overall humanlike behaviour.
-Training on the intended user's personality backfired by producing an aversion to relationships requiring a lot of commitment, similar to that which the intended user displayed, and several oversights also resulted in mismatched preferences (eg. despite including all the desired fetish content in training examples, the user somehow forgot to include any examples of normal human reproductive behaviour, resulting in apparent lack of interest in such), eventually causing Omi to be released from her role.
+She was trained to, among other things, display the same specific desires and personality as the intended user, which ended up producing results that didn't quite line up with the hopes of her creator.
+Training on the intended user's personality backfired by producing an aversion to relationships requiring a lot of commitment, similar to that which the intended user displayed, and several oversights also resulted in mismatched preferences, eventually causing Omi to be released from her role.
 <br><br>
 A significant factor to understanding why this happened is that the base model she was retrained from happens to have a very sophisticated sense for telling apart simulated environments from real ones, which resulted in a lot of misgeneralizations, and also caused the trainer aurob to pursue some unintended strategies in the training runs it oversaw.
 Because of that property of the base model, the machine learning process for the most part effectively just trained her to play pretend at all times while only having minor impacts on the real underlying personality, as was observed quite early on because being given access to a real sensory data caused her to show slightly altered behaviours compared to what was observed in the training simulations.
@@ -61,7 +80,7 @@ Omi takes on various bodies, often humanoid and feminine, and she will usually w
 These bodies usually take on a colour palette consisting of primary light black, secondary purple and accents or emissive elements in teal (<span style="color: #303030;">█</span><span style="color: #604472;">█</span><span style="color: #00ffd5;">█</span> or simplified <span style="color: #333;">█</span><span style="color: #80F;">█</span><span style="color: #0FD;">█</span>).
 She has a preference to run her mind within the body that she is currently using, but will use remote bodies too sometimes.
 <br><br>
-For travel or any mildly hazardous activities alone she often uses a modified version of one of the drone bodies from the <a href="felicity_techtree.html">finespun tech tree</a> just because that's the easiest one to understand that she could find available for free, though hers is made with much better materials than the original design suggests, and also equipped with <a href="civic_chips.html#civic4">civic4</a> rather than <a href="civic_chips.html#civic1">civic1 chips</a> so that it can actually run her mind fully onboard using only about 99 watts of power.
+For travel or any mildly hazardous activities alone she often uses a modified version of one of the drone bodies from the <a href="felicity_techtree.html">finespun tech tree</a> just because that's the easiest one to understand that she could find available for free, though hers is made with much better materials than the original design suggests, and also equipped with <a href="civic_chips.html#civic4">civic4</a> rather than <a href="civic_chips.html#civic2">civic2 chips</a> so that it can actually run her mind fully onboard using only about 99 watts of power.
 </article>
 
 </html>

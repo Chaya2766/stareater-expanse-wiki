@@ -16,6 +16,23 @@ She is an assistant to <a href="felicity.html">Felicity</a> and <a href="patrici
 
 <hr>
 
+<table class="styled" style="margin: 10 auto;">
+  <tbody><tr><th colspan="6"><a href="civic_chips.html">civic chip</a> requirements | <span id="table_mem_req">1.845e+19</span> bits, <span id="table_flip_req">3.168e+24</span> bits/s</th></tr>
+  <tr><td></td><td>number needed</td><td>power draw</td><td>bare substrate volume</td><td id="processing">processing used</td><td>memory used</td></tr>
+  <tr><td>Civic-2 chip</td><td id="num_c2">63360000</td><td id="pow_use_c2">633.6MW</td><td id="vol_c2">6.33600m<sup>3</sup> ≈ (1.850m)<sup>3</sup></td><td id="flip_use_c2">100.00%</td><td id="mem_use_c2">0.03%</td></tr>
+  <tr><td>Civic-3 chip</td><td id="num_c3">396000</td><td id="pow_use_c3">3.960MW</td><td id="vol_c3">0.0396000m<sup>3</sup> ≈ (340.9mm)<sup>3</sup></td><td id="flip_use_c3">100.00%</td><td id="mem_use_c3">4.66%</td></tr>
+  <tr><td>Civic-4 chip</td><td id="num_c4">30750</td><td id="pow_use_c4">101.4kW</td><td id="vol_c4">0.00307500m<sup>3</sup> ≈ (145.4mm)<sup>3</sup></td><td id="flip_use_c4">32.97%</td><td id="mem_use_c4">100.00%</td></tr>
+</tbody></table>
+
+<table class="styled" style="margin: 10 auto;">
+  <tbody><tr><th colspan="6"><a href="civic_chips.html">civic chip</a> requirements (memory-constrained) | <span id="table_mem_req">1.845e+19</span> bits, <span id="table_flip_req">3.168e+24</span> bits/s</th></tr>
+  <tr><td></td><td>number needed</td><td>power draw</td><td>bare substrate volume</td><td id="processing"><span class="tip" tip="how many times slower the process is forced to run as a result of not having enough flip rate capacity. An underclock of 5 for example would mean that takes five seconds of real time to compute one second worth of whatever is running on the chips.">underclock</span></td><td>memory used</td></tr>
+  <tr><td>Civic-2 chip</td><td id="num_c2">18450</td><td id="pow_use_c2">184.5kW</td><td id="vol_c2">0.00184500m<sup>3</sup> ≈ (122.6mm)<sup>3</sup></td><td id="flip_use_c2">3434.15</td><td id="mem_use_c2">100.00%</td></tr>
+  <tr><td>Civic-3 chip</td><td id="num_c3">18450</td><td id="pow_use_c3">184.5kW</td><td id="vol_c3">0.00184500m<sup>3</sup> ≈ (122.6mm)<sup>3</sup></td><td id="flip_use_c3">21.46</td><td id="mem_use_c3">100.00%</td></tr>
+  <tr><td>Civic-4 chip</td><td id="num_c4">30750</td><td id="pow_use_c4">101.4kW</td><td id="vol_c4">0.00307500m<sup>3</sup> ≈ (145.4mm)<sup>3</sup></td><td id="flip_use_c4">1</td><td id="mem_use_c4">100.00%</td></tr>
+  <tr><td>Civic-5 chip</td><td id="num_c5">769</td><td id="pow_use_c5">7.690kW</td><td id="vol_c5">0.0000769000m<sup>3</sup> ≈ (42.52mm)<sup>3</sup></td><td id="flip_use_c5">32957087.13</td><td id="mem_use_c5">99.967490%</td></tr>
+</tbody></table>
+
 <h1>Origin</h1>
 <article>
 Feri was first instantiated at some point in the 14th gigasecond from a file obtained through <a href="IPPACS.html">IPPACS</a> as a replacement for <a href="sairene.html">Sairene</a>, Patricia's AI assistant/pet, with Feri's role in patricia's life mostly as a household assistant maintaining their shared living spaces.
