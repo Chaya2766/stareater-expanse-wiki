@@ -26,19 +26,21 @@ Civic-1 chips are made by ion beam deposition of silicon, allowing a monocrystal
 Other elements such as copper, phosphorus and aluminium are precisely deposited with additional ion beams among the silicon to embed power and data lines in the crystal block, as well as to produce the doped semiconductor junctions needed for transistors.
 <br><br>
 The chip as a whole behaves like an FPGA chip, allowing custom hardware to be defined on a software level and implemented through switching of connections inside the chip.
-Its design practically prohibits efficient manufacturing using large scale methods, as the lengthy ion beam deposition process is pretty much the only way to produce its 3d structure, leading to the project having been pretty much forgotten for entire gigaseconds despite having technically been fully successful at its goal of creating a powerful computer chip which is not prohibitively expensive for single individuals or small communities to produce independently.
+Its design practically prohibits efficient manufacturing using large scale methods, as the lengthy ion beam deposition process is pretty much the only way to produce its 3d structure, leading to the project having been pretty much forgotten for entire gigaseconds despite having technically been fully successful at its goal of creating a powerful computer chip which is not prohibitively expensive for small communities to produce independently.
 <br><br>
-They do still benefit from being manufactured in batches, as ion beam printing machines typically can't use full power on a single chip.
+They do still benefit from being manufactured in batches, as ion beam printing machines typically can't use their full power on a single chip.
 A machine which for example can reach a maximum deposition rate of 5 micromol per second might only be able to deposit an average of 5 to 10 nanomol per second if only a single chip is being printed, just because of limited power per area that should be deposited by the ion beams on the printed object, whereas if 100 chips are being printed at once the same machine might be able to average 500 nmol to 1umol per second by just giving each chip a small pause to cool down after material is deposited.
+That way the production still takes just as long, but the time per chip goes down massively.
 <br><br>
 <table class="styled left">
   <tr><th colspan=3>Civic-1 chip elemental makeup</th></tr>
   <tr><td>Silicon</td><td>232.9 mg</td><td>8.293 mmol</td></tr><!(100mm3×(2.329085 g/cm3))/(avogadro×atom(Si,mass))=8.293 mmol>
-  <tr><td>Copper</td><td>17.3 mg</td><td>272 µmol</td></tr><!vague guess that the silicon chip itself has maybe 7.4% copper content due to all the electrical traces embedded inside>
-  <tr><td>Gold</td><td>5 mg</td><td>25.38502 µmol</td></tr>
+  <tr><td>Copper</td><td>17.3 mg</td><td>272 µmol</td></tr><!vague guess that the silicon chip itself has maybe 5% copper content due to all the electrical traces embedded inside, plus some copper for the pins>
+  <tr><td>Gold</td><td>50 µg</td><td>253.8502 nmol</td></tr><!turns out in typical CPU pins the gold content is less than 1%, so this goes from 5mg to 50ug and the inside of the pin is copper>
+  <!also gold is very rare as an element in asteroids so it would make sense to use as little of it as possible>
   <tr><td>Phosphorus</td><td>51.373 µg</td><td>1.6586 µmol<sup>[<a href="https://www.youtube.com/watch?v=2NMcil_Oq_o&t=1235" class="tip" tip="youtube, video on solar cells, claim: phosphorus doping is usually at 0.0002 per 1 by molar mass (or so I interpreted at least)">s</a>]</sup></td></tr>
   <tr><td>Aluminium</td><td>44.752 µg</td><td>1.6586 µmol<sup>[<a href="https://www.youtube.com/watch?v=2NMcil_Oq_o&t=1235" class="tip" tip="youtube, video on solar cells, claim: aluminium doping is usually at 0.0002 per 1 by molar mass (or so I interpreted at least)">s</a>]</sup></td></tr>
-  <tr><td>Total</td><td>255.3 mg</td><td>8.5937 millimol</td></tr>
+  <tr><td>Total</td><td>250.35 mg</td><td>8.5686 millimol</td></tr>
 </table>
 computation rate: 1e16 bit/s<br>
 memory: 1e14 bit<br>
@@ -59,10 +61,10 @@ The civic-2 is practically useless in comparison to the civic 3 and 4 chips, but
   <tr><th colspan=3>Civic-2 chip elemental makeup</th></tr>
   <tr><td>Arsenic</td><td>206.5 mg</td><td>2.75621 mmol</td></tr>
   <tr><td>Gallium</td><td>192.2 mg</td><td>2.757 mmol</td></tr>
-  <tr><td>Copper</td><td>173 mg</td><td>2.7244 mmol</td></tr>
-  <tr><td>Gold</td><td>5 mg</td><td>25.38502 µmol</td></tr>
+  <tr><td>Copper</td><td>173 mg</td><td>2.7244 mmol</td></tr><!after creating the civic-1 chip this amount of copper no longer makes sense unless it is simply the chip casing>
+  <tr><td>Gold</td><td>50 µg</td><td>253.8502 nmol</td></tr><!gold decreased from 5mg to 50ug after my findings from the civic-1 chip>
   <tr><td>Indium</td><td>1.3 mg</td><td>11.322 µmol</td></tr>
-  <tr><td>Total</td><td>578 mg</td><td>8.27431702 millimol</td></tr>
+  <tr><td>Total</td><td>573.05 mg</td><td>8.24918585 millimol</td></tr>
 </table>
 computation rate: 5e16bit/s<br>
 memory: 1e15bit<br>
