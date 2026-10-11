@@ -22,11 +22,27 @@ The project notably also produced a lot of user interfaces for programming the c
 
 <h1 id="civic1">Civic 1 <span class="warning">work in progress</span></h1>
 <article>
-Civic 1 is planned to be written based on nanoscale vacuum tube technology, making it potentially manufacturable locally like the civic-2 chip as well as very resilient to cosmic radiation.
+Civic-1 chips are made by ion beam deposition of silicon, allowing a monocrystaline silicon block to be slowly grown as low energy ions hit the surface and arrange themselves into the crystal latice.
+Other elements such as copper, phosphorus and aluminium are precisely deposited with additional ion beams among the silicon to embed power and data lines in the crystal block, as well as to produce the doped semiconductor junctions needed for transistors.
 <br><br>
-computation rate: X<br>
-memory: X<br>
-efficiency: X<br>
+The chip as a whole behaves like an FPGA chip, allowing custom hardware to be defined on a software level and implemented through switching of connections inside the chip.
+Its design practically prohibits efficient manufacturing using large scale methods, as the lengthy ion beam deposition process is pretty much the only way to produce its 3d structure, leading to the project having been pretty much forgotten for entire gigaseconds despite having technically been fully successful at its goal of creating a powerful computer chip which is not prohibitively expensive for single individuals or small communities to produce independently.
+<br><br>
+They do still benefit from being manufactured in batches, as ion beam printing machines typically can't use full power on a single chip.
+A machine which for example can reach a maximum deposition rate of 5 micromol per second might only be able to deposit an average of 5 to 10 nanomol per second if only a single chip is being printed, just because of limited power per area that should be deposited by the ion beams on the printed object, whereas if 100 chips are being printed at once the same machine might be able to average 500 nmol to 1umol per second by just giving each chip a small pause to cool down after material is deposited.
+<br><br>
+<table class="styled left">
+  <tr><th colspan=3>Civic-1 chip elemental makeup</th></tr>
+  <tr><td>Silicon</td><td>232.9 mg</td><td>8.293 mmol</td></tr><!(100mm3×(2.329085 g/cm3))/(avogadro×atom(Si,mass))=8.293 mmol>
+  <tr><td>Copper</td><td>17.3 mg</td><td>272 µmol</td></tr><!vague guess that the silicon chip itself has maybe 7.4% copper content due to all the electrical traces embedded inside>
+  <tr><td>Gold</td><td>5 mg</td><td>25.38502 µmol</td></tr>
+  <tr><td>Phosphorus</td><td>51.373 µg</td><td>1.6586 µmol<sup>[<a href="https://www.youtube.com/watch?v=2NMcil_Oq_o&t=1235" class="tip" tip="youtube, video on solar cells, claim: phosphorus doping is usually at 0.0002 per 1 by molar mass (or so I interpreted at least)">s</a>]</sup></td></tr>
+  <tr><td>Aluminium</td><td>44.752 µg</td><td>1.6586 µmol<sup>[<a href="https://www.youtube.com/watch?v=2NMcil_Oq_o&t=1235" class="tip" tip="youtube, video on solar cells, claim: aluminium doping is usually at 0.0002 per 1 by molar mass (or so I interpreted at least)">s</a>]</sup></td></tr>
+  <tr><td>Total</td><td>255.3 mg</td><td>8.5937 millimol</td></tr>
+</table>
+computation rate: 1e16 bit/s<br>
+memory: 1e14 bit<br>
+efficiency: 1e-15J/bit <sup>[<a href="https://arxiv.org/pdf/2312.08595" class="tip" tip="Table 1, 'Switching a CMOS gate', 1fJ fits in listed range">s</a>]</sup><br>
 max. power consumption: 10W
 </article>
 
@@ -37,7 +53,7 @@ max. power consumption: 10W
 <article>
 Civic 2 relies on indium arsenide tunneling field effect transistors, and can be easily produced through ion beam printing, requiring only materials that are easily extracted through low temperature electrolysis.
 <br><br>
-The civic-2 is practically useless in comparison to the civic 3 and 4 chips, but it maintains its own niche thanks to the possibility manufacturing it at truly small scale with relatively cheap equipment.
+The civic-2 is practically useless in comparison to the civic 3 and 4 chips, but it maintains its own niche thanks to the possibility manufacturing it at truly small scale with relatively cheap equipment while also being much more energy-efficient than the civic-1 chip.
 <br><br>
 <table class="styled left">
   <tr><th colspan=3>Civic-2 chip elemental makeup</th></tr>
@@ -146,6 +162,7 @@ memory: <input type="number" value="1.81e16" id="mem_req" oninput="recalculate_t
 <table class="styled" style="margin: 10 auto;">
   <tr><th colspan=6><a href="civic_chips.html">civic chip</a> requirements | <span id="table_mem_req"></span> bits, <span id="table_flip_req"></span> bits/s</th></tr>
   <tr><td></td><td>number needed</td><td>power draw</td><td>bare substrate volume</td><td id="processing">processing used</td><td>memory used</td></tr>
+  <tr><td>Civic-1 chip</td><td id="num_c1">x</td><td id="pow_use_c1">x</td><td id="vol_c1">x m<sup>3</sup></td><td id="flip_use_c1">x%</td><td id="mem_use_c1">x%</td></tr>
   <tr><td>Civic-2 chip</td><td id="num_c2">4472</td><td id="pow_use_c2">44.72kW</td><td id="vol_c2">447.2cm<sup>3</sup></td><td id="flip_use_c2">100%</td><td id="mem_use_c2">0.405%</td></tr>
   <tr><td>Civic-3 chip</td><td id="num_c3">28</td><td id="pow_use_c3">279.5W</td><td id="vol_c3">2.8cm<sup>3</sup><td id="flip_use_c3">64.34%</td><td id="mem_use_c3">99.82%</td></tr>
   <tr><td>Civic-4 chip</td><td id="num_c4">31</td><td id="pow_use_c4">7.1552W</td><td id="vol_c4">3.1cm<sup>3</sup><td id="flip_use_c4">2.3%</td><td id="mem_use_c4">96.85%</td></tr>
@@ -219,28 +236,33 @@ function recalculate_table(){
   memory_focus = document.getElementById("mem_focus").checked;
   console.log("recalculating table based on flip rate "+mem_req+"bits and flip rate "+flip_req+"bits/s, memory focus "+memory_focus);
   
+  c1_mem = 1e14;    c1_flip = 1e16;     c1_eff = 1e-15;
   c2_mem = 1e15;    c2_flip = 5e16;     c2_eff = 2e-16;
   c3_mem = 1e15;    c3_flip = 8e18;     c3_eff = 1.25e-18;
   c4_mem = 6e14;    c4_flip = 3.125e20; c4_eff = 3.2e-20;
   c5_mem = 2.4e16;  c5_flip = 1.25e14;  c5_eff = 8e-14;
   
+  c1_flip_need = Math.ceil(flip_req/c1_flip);
   c2_flip_need = Math.ceil(flip_req/c2_flip);
   c3_flip_need = Math.ceil(flip_req/c3_flip);
   c4_flip_need = Math.ceil(flip_req/c4_flip);
   c5_flip_need = Math.ceil(flip_req/c5_flip);
   
+  c1_mem_need = Math.ceil(mem_req/c1_mem);
   c2_mem_need = Math.ceil(mem_req/c2_mem);
   c3_mem_need = Math.ceil(mem_req/c3_mem);
   c4_mem_need = Math.ceil(mem_req/c4_mem);
   c5_mem_need = Math.ceil(mem_req/c5_mem);
   
   if(memory_focus == true){
+    c1_need = c1_mem_need;
     c2_need = c2_mem_need;
     c3_need = c3_mem_need;
     c4_need = c4_mem_need;
     c5_need = c5_mem_need;
     document.getElementById("processing").innerHTML = "<span class=\"tip\" tip=\"how many times slower the process is forced to run as a result of not having enough flip rate capacity. An underclock of 5 for example would mean that takes five seconds of real time to compute one second worth of whatever is running on the chips.\" >underclock</span>";
   } else {
+    c1_need = Math.max(c1_flip_need,c1_mem_need);
     c2_need = Math.max(c2_flip_need,c2_mem_need);
     c3_need = Math.max(c3_flip_need,c3_mem_need);
     c4_need = Math.max(c4_flip_need,c4_mem_need);
@@ -248,15 +270,24 @@ function recalculate_table(){
     document.getElementById("processing").innerHTML = "processing used";
   }
   
-  document.getElementById("num_c2").innerHTML = c2_need;
-  document.getElementById("num_c3").innerHTML = c3_need;
-  document.getElementById("num_c4").innerHTML = c4_need;
-  document.getElementById("num_c5").innerHTML = c5_need;
+  document.getElementById("num_c1").innerHTML = c1_need.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  document.getElementById("num_c2").innerHTML = c2_need.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  document.getElementById("num_c3").innerHTML = c3_need.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  document.getElementById("num_c4").innerHTML = c4_need.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  document.getElementById("num_c5").innerHTML = c5_need.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
   
+  c1_flip_available = c1_need * c1_flip;  c1_mem_available = c1_need * c1_mem;
   c2_flip_available = c2_need * c2_flip;  c2_mem_available = c2_need * c2_mem;
   c3_flip_available = c3_need * c3_flip;  c3_mem_available = c3_need * c3_mem;
   c4_flip_available = c4_need * c4_flip;  c4_mem_available = c4_need * c4_mem;
   c5_flip_available = c5_need * c5_flip;  c5_mem_available = c5_need * c5_mem;
+  
+  c1_flip_use = Math.min(1,flip_req/c1_flip_available); c1_mem_use = mem_req/c1_mem_available;
+  document.getElementById("flip_use_c1").innerHTML = (c1_flip_use*100).toFixed(2) + "%";
+  document.getElementById("mem_use_c1").innerHTML = (c1_mem_use*100).toFixed(2) + "%";
+  document.getElementById("vol_c1").innerHTML = VolumeToMetric((c1_need * 1e-7),6) + "m<sup>3</sup> &approx; ("+toMetric(Math.pow(c1_need * 1e-7,1/3),4)+"m)<sup>3</sup>";
+  document.getElementById("pow_use_c1").innerHTML = toMetric((c1_flip_use * c1_flip_available * c1_eff),4) + "W";
+  if(memory_focus == true){document.getElementById("flip_use_c1").innerHTML = Math.max(1,(flip_req/c1_flip_available).toFixed(2));}
   
   c2_flip_use = Math.min(1,flip_req/c2_flip_available); c2_mem_use = mem_req/c2_mem_available;
   document.getElementById("flip_use_c2").innerHTML = (c2_flip_use*100).toFixed(2) + "%";
