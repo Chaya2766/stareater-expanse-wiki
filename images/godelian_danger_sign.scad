@@ -7,7 +7,7 @@ module shoggoth(r=5,n=3){
     scale(r/5){
         step=1/10;
         for(a=[0,120,240]){
-            for(i=[0:step:1]){
+            for(i=[step:step:1]){
                 hull(){
                     rotate([0,0,a+90*i]){
                         translate([i*5,0,0]){
