@@ -36,8 +36,41 @@ They also are effective at allowing sairene to plug a charging cable into her ow
 A set of 3 cameras and a solid state lidar sensor provide sairene with information about what objects there are in her field of vision and where they are.
 Due to being a text-to-text model she cannot actually see anything and has to rely on written descriptions produced by image analysis software, but will occasionally manually parse the point cloud data returned by the lidar sensor when she gets confused.
 <br><br>
-On the outside the entire body is covered with plates meant to dampen any impacts, and all in total it masses 2.7kg.
+On the outside the entire body is covered with plates meant to dampen any impacts, and all in total it masses 2.7kg, including a 0.5kg aluminium-ion battery pack providing 1.8MJ of energy storage.
 </article>
 <img class="styled center" src="../images/sairene_full.webp"></img>
+
+<hr>
+
+<h1>Software characteristics</h1>
+<article>
+Sairene is fundamentally just a vector transformer model in an agentic harness, running Cleo 7.5 with roughly 1.1 trillion parameters (2<sup>40</sup> exactly), quantized down to 8 bits, in a body with enough computing power for transforming 32 vectors per second.
+<!apparently transformer models require 2 calculations on each parameter so 2×2^40×668bit × 32Hz>
+
+<table class="styled" style="margin: 10 auto;">
+  <tbody><tr><th colspan="6"><a href="civic_chips.html">civic chip</a> requirements | <span id="table_mem_req">1.100e+12</span> bits, <span id="table_flip_req">4.700e+16</span> bits/s</th></tr>
+  <tr><td></td><td>number needed</td><td>power draw</td><td>bare substrate volume</td><td id="processing">processing used</td><td>memory used</td></tr>
+  <tr><td>Civic-1 chip</td><td id="num_c1">5</td><td id="pow_use_c1">47.00W</td><td id="vol_c1">500.000mm<sup>3</sup> ≈ (7.937mm)<sup>3</sup></td><td id="flip_use_c1">94.00%</td><td id="mem_use_c1">0.22%</td></tr>
+  <tr><td>Civic-2 chip</td><td id="num_c2">1</td><td id="pow_use_c2">9.400W</td><td id="vol_c2">100.000mm<sup>3</sup> ≈ (4.642mm)<sup>3</sup></td><td id="flip_use_c2">94.00%</td><td id="mem_use_c2">0.11%</td></tr>
+  <tr><td>Civic-3 chip</td><td id="num_c3">1</td><td id="pow_use_c3">58.75mW</td><td id="vol_c3">100.000mm<sup>3</sup> ≈ (4.642mm)<sup>3</sup></td><td id="flip_use_c3">0.59%</td><td id="mem_use_c3">0.11%</td></tr>
+  <tr><td>Civic-4 chip</td><td id="num_c4">1</td><td id="pow_use_c4">1.504mW</td><td id="vol_c4">100.000mm<sup>3</sup> ≈ (4.642mm)<sup>3</sup></td><td id="flip_use_c4">0.02%</td><td id="mem_use_c4">0.18%</td></tr>
+  <tr><td>Civic-5 chip</td><td id="num_c5">376</td><td id="pow_use_c5">3.760kW</td><td id="vol_c5">0.0000376000m<sup>3</sup> ≈ (33.50mm)<sup>3</sup></td><td id="flip_use_c5">100.00%</td><td id="mem_use_c5">0.000012%</td></tr>
+</tbody></table>
+
+For good performance she should instead use Cleo 7.5 in full 16 bit weight resolution and throughput of 200 vectors per second, which raises the computational requirements to 1.76e13 bits of memory and 1.209e18 bit flips per second:
+
+<table class="styled" style="margin: 10 auto;">
+  <tbody><tr><th colspan="6"><a href="civic_chips.html">civic chip</a> requirements | <span id="table_mem_req">1.760e+13</span> bits, <span id="table_flip_req">1.209e+18</span> bits/s</th></tr>
+  <tr><td></td><td>number needed</td><td>power draw</td><td>bare substrate volume</td><td id="processing">processing used</td><td>memory used</td></tr>
+  <tr><td>Civic-1 chip</td><td id="num_c1">121</td><td id="pow_use_c1">1.209kW</td><td id="vol_c1">12100.0mm<sup>3</sup> ≈ (22.96mm)<sup>3</sup></td><td id="flip_use_c1">99.92%</td><td id="mem_use_c1">0.15%</td></tr>
+  <tr><td>Civic-2 chip</td><td id="num_c2">25</td><td id="pow_use_c2">241.8W</td><td id="vol_c2">2500.00mm<sup>3</sup> ≈ (13.57mm)<sup>3</sup></td><td id="flip_use_c2">96.72%</td><td id="mem_use_c2">0.07%</td></tr>
+  <tr><td>Civic-3 chip</td><td id="num_c3">1</td><td id="pow_use_c3">1.511W</td><td id="vol_c3">100.000mm<sup>3</sup> ≈ (4.642mm)<sup>3</sup></td><td id="flip_use_c3">15.11%</td><td id="mem_use_c3">1.76%</td></tr>
+  <tr><td>Civic-4 chip</td><td id="num_c4">1</td><td id="pow_use_c4">38.69mW</td><td id="vol_c4">100.000mm<sup>3</sup> ≈ (4.642mm)<sup>3</sup></td><td id="flip_use_c4">0.39%</td><td id="mem_use_c4">2.93%</td></tr>
+  <tr><td>Civic-5 chip</td><td id="num_c5">9 672</td><td id="pow_use_c5">96.72kW</td><td id="vol_c5">0.000967200m<sup>3</sup> ≈ (98.89mm)<sup>3</sup></td><td id="flip_use_c5">100.00%</td><td id="mem_use_c5">0.000008%</td></tr>
+</tbody></table>
+
+Her output is simply returned as text.
+
+</article>
 
 </html>
