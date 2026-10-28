@@ -31,6 +31,15 @@
 " onkeypress="if(event.key === 'Enter') go_to_page()">
 </input>
 
+<input id="colour_inverter" type="button" class="styled" value="click to invert main view for PDF reading" style="
+    position: fixed;
+    top: 28px;
+    right: 130px;
+    z-index: 1000;
+    width: max(min(calc(100vw - 700px), 300px), 100px);
+" onclick='if(document.getElementById("IM").style.filter){document.getElementById("IM").style.removeProperty("filter")}else{document.getElementById("IM").style.setProperty("filter","invert(1)")}'>
+</input>
+
 <div class="navbox">
 <div class="first_navbar strangelet">
  <a href="pages/home.html" target="IM" class="nava">home</a>
